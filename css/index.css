@@ -13964,12 +13964,30 @@ a#toPageButton {
   border-radius: 4px;
 }
 blockquote {
-  border: var(--style-border-always);
-  background-color: var(--anzhiyu-secondbg);
+  position: relative;
+  border: none;
+  border-left: 2px solid var(--anzhiyu-main);
   color: var(--anzhiyu-secondtext);
-  border-radius: 8px;
-  margin: 1rem 0;
-  padding: 0.5rem 0.8rem;
+  font-style: normal;
+  background: transparent;
+  padding: 24px 0 16px 12px;
+  margin: 24px 0 36px;
+  line-height: 1.6;
+  text-indent: 0;
+}
+blockquote blockquote {
+  padding-right: 0;
+}
+blockquote:before {
+  content: '“';
+  position: absolute;
+  left: 12px;
+  top: 0;
+  color: var(--anzhiyu-main);
+  font-size: 2em;
+  font-family: Arial, serif;
+  line-height: 1em;
+  font-weight: 700;
 }
 #article-container {
   word-wrap: break-word;
