@@ -14022,28 +14022,17 @@ a#toPageButton {
 blockquote {
   position: relative;
   border: none;
-  border-left: 2px solid var(--anzhiyu-main);
+  border-left: 5px solid var(--anzhiyu-main);
   color: var(--anzhiyu-secondtext);
   font-style: normal;
   background: transparent;
-  padding: 32px 0 16px 12px;
+  padding: 12px 0 12px 12px;
   margin: 24px 0 36px;
   line-height: 1.6;
   text-indent: 0;
 }
 blockquote blockquote {
   padding-right: 0;
-}
-blockquote:before {
-  content: '“';
-  position: absolute;
-  left: 12px;
-  top: 0;
-  color: var(--anzhiyu-main);
-  font-size: 2em;
-  font-family: Arial, serif;
-  line-height: 1em;
-  font-weight: 700;
 }
 #article-container {
   word-wrap: break-word;
