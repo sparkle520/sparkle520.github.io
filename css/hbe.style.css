@@ -145,7 +145,7 @@
 	width: 100%;
 	position: absolute;
 	text-align: left;
-	padding: 0;
+	padding: 0.5em 0;
 	pointer-events: none;
 	font-size: 1em;
 }
@@ -171,7 +171,7 @@
 .hbe-input-label-default::after {
 	height: 2px;
 	background: var(--anzhiyu-main);
-	top: 100%;
+	top: 90%;
 	-webkit-transition: opacity 0.2s;
 	transition: opacity 0.2s;
 }
@@ -213,7 +213,7 @@
 
 .hbe-input-field-default:focus + .hbe-input-label-default .hbe-input-label-content-default,
 .hbe-input--filled .hbe-input-label-default .hbe-input-label-content-default {
-	color: var(--anzhiyu-main);
+	color: #555555;
 	-webkit-transform: translate3d(0, 2.1em, 0) scale3d(0.65, 0.65, 1);
 	transform: translate3d(0, 2.1em, 0) scale3d(0.65, 0.65, 1);
 }
@@ -393,7 +393,7 @@
 	left: 0;
 	height: 100%;
 	width: 100%;
-	color: var(--anzhiyu-main);
+	color: #666666;
 	padding: 0.25em 0;
 	letter-spacing: 1px;
 	font-size: 1em;
@@ -414,7 +414,7 @@
 .hbe-input-field-flip:focus + .hbe-input-field-flip,
 .input--filled .hbe-input-field-flip {
 	background-color: transparent;
-	border-color: var(--anzhiyu-main);
+	border-color: #666666;
 }
 /* flip theme }}} */
 
