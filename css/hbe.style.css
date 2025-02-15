@@ -79,56 +79,45 @@
 	left: 0;
 	fill: none;
 }
-
-/* hbe button in post page */
 .hbe-button {
-  width: 130px;
-  height: 40px;
-  background: linear-gradient(to bottom, #4eb5e5 0%,#389ed5 100%); /* W3C */
-  border: none;
-  border-radius: 5px;
-  position: relative;
-  border-bottom: 4px solid #2b8bc6;
-  color: #fbfbfb;
-  font-weight: 600;
-  font-family: 'Open Sans', sans-serif;
-  text-shadow: 1px 1px 1px rgba(0,0,0,.4);
-  font-size: 15px;
-  text-align: left;
-  text-indent: 5px;
-  box-shadow: 0px 3px 0px 0px rgba(0,0,0,.2);
-  cursor: pointer;
-
-  display: block;
+	display: block;
   margin: 0 auto;
-  margin-bottom: 20px;
-}
+	background-color: var(--anzhiyu-main);
+	padding: 14px 40px;
+	color: #fff;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	cursor: pointer;
+	border-radius: 10px;
+	border: 2px dashed var(--anzhiyu-main);
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+	transition: .4s;
+   }
+   
+   .hbe-button span:last-child {
+	display: none;
+   }
+   
+   .hbe-button:hover {
+	transition: .4s;
+	border: 2px dashed var(--anzhiyu-main);
+	background-color: #fff;
+	color: var(--anzhiyu-main);
+   }
+   
+   .hbe-button:active {
+	background-color: color-mix(in srgb,var(--anzhiyu-main)  20%, white);
+   }
+   
+/* hbe button in post page */
 
-.hbe-button:active {
-  box-shadow: 0px 2px 0px 0px rgba(0,0,0,.2);
-  top: 1px;
-}
-
-.hbe-button:after {
-  content: "";
-  width: 0;
-  height: 0;
-  display: block;
-  border-top: 20px solid #187dbc;
-  border-bottom: 20px solid #187dbc;
-  border-left: 16px solid transparent;
-  border-right: 20px solid #187dbc;
-  position: absolute;
-  opacity: 0.6;
-  right: 0;
-  top: 0;
-  border-radius: 0 5px 5px 0;
-}
 /* hbe button in post page */
 
 /* default theme {{{ */
 .hbe-input-default {
 	overflow: hidden;
+	display: flex;
+	margin: auto;
 }
 
 .hbe-input-field-default {
@@ -145,7 +134,7 @@
 	width: 100%;
 	position: absolute;
 	text-align: left;
-	padding: 0.5em 0;
+	padding: 0.1em 0;
 	pointer-events: none;
 	font-size: 1em;
 }
@@ -747,3 +736,51 @@
 	transform: translate3d(0, 2em, 0) scale3d(0.655, 0.655, 1);
 }
 /* shrink theme }}} */
+/* From www.lingdaima.com */
+.heb-btn {
+	font-family: inherit;
+	display: inline-block;
+	width: 6em;
+	height: 2.6em;
+	line-height: 2.5em;
+	margin: 0px;
+	position: relative;
+	overflow: hidden;
+	border: 2px solid var(--anzhiyu-main);
+	transition: color .5s;
+	z-index: 1;
+	font-size: 17px;
+	border-radius: 6px;
+	font-weight: 500;
+	color: var(--anzhiyu-main);
+   }
+   
+   .heb-btn:before {
+	content: "";
+	position: absolute;
+	z-index: -1;
+	background: var(--anzhiyu-main);
+	height: 150px;
+	width: 200px;
+	border-radius: 50%;
+   }
+   
+   .heb-btn:hover {
+	color: #fff;
+   }
+   
+   .heb-btn:before {
+	top: 100%;
+	left: 100%;
+	transition: all .7s;
+   }
+   
+   .heb-btn:hover:before {
+	top: -30px;
+	left: -30px;
+   }
+   
+   .heb-btn:active:before {
+	background: color-mix(in srgb,var(--anzhiyu-main)  50%, white);
+	transition: background 0s;
+   }
