@@ -14025,10 +14025,11 @@ blockquote {
   border-left: 3px solid var(--anzhiyu-main);
   color: var(--anzhiyu-secondtext);
   font-style: normal;
-  background: transparent;
+  background: var(--anzhiyu-post-blockquote-bg);
   padding: 12px 0 12px 12px;
   margin: 24px 0 36px;
   line-height: 1.6;
+  border-radius: 12px;
   text-indent: 0;
 }
 blockquote blockquote {
@@ -16182,7 +16183,7 @@ li.card-category-list-item {
   background-color: var(--anzhiyu-card-bg);
   color: var(--anzhiyu-lighttext);
   font-weight: 700;
-  font-size: 20px;
+  font-size: 18px;
 }
 [data-theme="dark"].toc .toc-item.active .toc-link .toc-text {
   color: var(--anzhiyu-white);
@@ -16200,6 +16201,7 @@ li.card-category-list-item {
   border-radius: 12px;
   color: var(--anzhiyu-secondtext);
   cursor: default;
+  font-size: 16px;
 }
 #aside-content #card-toc .toc-content .toc-link:not(.active) span {
   opacity: 0.6;
@@ -21101,7 +21103,7 @@ body[data-type="album"] #page .page-title {
 }
 
 #album .card-album:hover > .card:not(:hover) .card_cover {
-  filter: brightness(0.5) saturate(0.9) contrast(1.2) blur(20px);
+  filter: brightness(0.5) saturate(0.9) contrast(1.2) blur(0px);
 }
 
 #album .card__content {
