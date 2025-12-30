@@ -1,0 +1,1470 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>408-操作系统-1-计算机系统概述 | SPARKLE</title><meta name="keywords" content="操作系统,408"><meta name="author" content="sparkle520"><meta name="copyright" content="sparkle520"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="408-操作系统-1-计算机系统概述"><meta name="application-name" content="408-操作系统-1-计算机系统概述"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="408-操作系统-1-计算机系统概述"><meta property="og:url" content="http://example.com/2025/12/22/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F1/index.html"><meta property="og:site_name" content="SPARKLE"><meta property="og:description" content="第1章 计算机系统概述 1.1 操作系统的基本概念 1.1.1 操作系统的概念 操作系统 ( Operating System, OS ) 是指控制和管理整个计算机系统的硬件和软件资源，并合理地组织调度计算机的工作和资源的分配，以提供给用户和其他软件方便的接口和环境，它是计算机系统中最基本的"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://pic1.imgdb.cn/item/69492a76c154427986d991c5.png"><meta property="article:author" content="sparkle520"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://pic1.imgdb.cn/item/69492a76c154427986d991c5.png"><meta name="description" content="第1章 计算机系统概述 1.1 操作系统的基本概念 1.1.1 操作系统的概念 操作系统 ( Operating System, OS ) 是指控制和管理整个计算机系统的硬件和软件资源，并合理地组织调度计算机的工作和资源的分配，以提供给用户和其他软件方便的接口和环境，它是计算机系统中最基本的"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2025/12/22/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F1/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: 'https://sparkle521.xyz',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":4000,"accessToken":"","mailMd5":""},
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: {"mode":"api","api":"https://img2color-go.vercel.app/api?img=","cover_change":true},
+  authorStatus: {"skills":["(❤ ω ❤)"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: sparkle520","link":"链接: ","source":"来源: SPARKLE","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#883ced","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'SPARKLE',
+  title: '408-操作系统-1-计算机系统概述',
+  postAI: '',
+  pageFillDescription: '第1章 计算机系统概述, 1.1 操作系统的基本概念, 1.1.1 操作系统的概念, 1.1.2 操作系统的功能和目标, 1.1.3 操作系统的特征, 1.2 操作系统的发展历程, 1.2.3 分时操作系统, 1.2.4 实时操作系统, 1.2.6 个人计算机操作系统, 1.3 操作系统的运行环境, 1.3.1 处理器运行模式, 1.3.2 中断和异常的概念, 1.3.3 系统调用, 1.4 操作系统结构, 1.4.1 分层结构, 1.4.2 模块化结构, 1.4.4 微内核 ( Microkernel ), 1.4.6 外核 ( Exokernel ), 1.4.7 结构对比速查, 1.5 操作系统引导 (Boot), 1.5.1 详细引导过程, 1.6 虚拟机 (Virtual Machine), 1.6.1 虚拟机的基本概念, 1.6.2 两类虚拟机管理程序对比, 1.6.3 核心对比表, 1.7 综合应用题解析, 题目 01, 题目 02第章计算机系统概述操作系统的基本概念操作系统的概念操作系统是指控制和管理整个计算机系统的硬件和软件资源并合理地组织调度计算机的工作和资源的分配以提供给用户和其他软件方便的接口和环境它是计算机系统中最基本的系统软件操作系统的功能和目标作为计算机系统资源的管理者处理机管理进程控制进程调度等存储器管理内存分配地址映射内存保护与共享内存扩充文件管理文件存储空间的管理目录管理文件读写管理和保护设备管理缓冲管理设备分配设备处理作为用户与计算机硬件系统之间的接口命令接口联机命令接口交互式脱机命令接口批处理程序接口由一组系统调用组成图形用户接口作为扩充机器没有任何软件支持的计算机称为裸机覆盖在硬件之上将裸机改造成功能更强使用更方便的虚拟机操作系统的特征并发两个或多个事件在同一时间间隔内发生微观上交替执行宏观上同时执行区别并行指两个或多个事件在同一时刻同时发生共享系统中的资源可供内存中多个并发执行的进程共同使用互斥共享一段时间内只允许一个进程访问如打印机同时共享一段时间内允许多个进程同时访问如磁盘文件虚拟把一个物理上的实体变为若干个逻辑上的对应物如虚拟处理器虚拟内存时分复用如虚拟处理器空分复用如虚拟存储器异步在多道程序环境下进程的执行不是一贯到底而是走走停停以不可预知的速度向前推进操作系统的发展历程手工操作阶段此阶段无操作系统特点用户独占全机等待人工操作缺点人机速度矛盾利用率极低批处理阶段操作系统开始出现单道批处理系统引入脱机输入输出技术由监督程序控制特点自动性磁带上的一批作业能自动地逐个运行而无需人工干预顺序性磁带上的各道作业是按顺序进入内存各道作业的完成顺序与他们进入内存的顺序在正常情况下是完全一致的单道性内存中仅有一道程序运行即监督程序每次从磁带上只调入一道程序进入内存运行当该程序完成或发生异常时才换入其后继程序进入内存运行缺点和设备无法并行工作资源利用率仍低多道批处理系统操作系统正式诞生特点多道计算机内存中同时存放多道相互独立的程序宏观上并行同时进入系统的多道程序都处于运行过程中即它们先后开始了各自的运行但都未运行完毕微观上串行内存中的多道程序轮流占有交替执行优点资源利用率高系统吞吐量大缺点用户响应时间长无交互能力最大缺点单道批处理多道批处理对比表特性单道批处理系统多道批处理系统内存驻留仅有一道程序同时存放多道程序运行方式顺序执行串行宏观并行微观串行利用率低等待时空闲高时切换其他作业吞吐量低高硬件要求较低较高需内存保护中断等主要缺点资源浪费严重无交互能力分时操作系统概念多个用户通过终端同时使用计算机按时间片轮流服务特点同时性多路性多个用户宏观上同时使用交互性用户能与系统进行人机对话独立性用户之间互不干扰及时性用户请求能在短时间内得到响应优点解决了人机交互问题缺点不能优先处理紧急任务实时操作系统概念系统能及时响应外部事件在规定时间内完成处理特点及时性可靠性分类硬实时必须在绝对严格的截止时间内完成如导弹控制自动驾驶软实时偶尔错过截止时间影响不大如订票系统视频点播网络操作系统和分布式计算机系统网络集中式控制实现网络资源共享和通信分布式系统中若干台计算机相互协作无主次之分具有分布性和并行性个人计算机操作系统如等服务于个人用户本节小结三种基本操作系统对比类型交互性及时性可靠性资源利用率主要优点主要缺点多道批处理无差较好高吞吐量大资源利用率高无交互能力分时强较好较好较高提供人机交互不能优先处理紧急任务实时弱强高一般及时响应可靠性高资源利用率稍低操作系统的运行环境处理器运行模式执行两种不同性质的程序操作系统内核程序和用户自编程序内核态管态核心态运行内核程序可以执行特权指令拥有最高权限可访问所有资源用户态目态运行用户程序只能执行非特权指令注从用户态切换到内核态通常通过中断访管指令实现注特权指令指不允许用户直接使用的指令如指令置中断指令只能在内核态下执行非特权指令指允许用户直接使用的指令如算术运算访管指令在用户态和内核态下都能执行操作系统内核的核心功能时钟管理操作系统的心脏功能计时提供系统时间进程切换通过时钟中断实现时间片轮转中断机制操作系统的各项功能如进程调度都需要依靠中断机制实现中断是用户态切换到内核态的唯一途径原语处于操作系统的最底层是特殊的程序特点具有原子性即执行过程一气呵成不可中断用途进程通信资源管理如操作系统控制的数据结构及处理操作系统通过管理各种数据结构来管理资源进程管理进程控制块存储器管理内存分配表设备管理设备控制块中断和异常的概念中断是操作系统夺回控制权的唯一途径中断和异常的分类内中断异常来源内部与当前执行的指令有关分类陷入有意而为之的异常如系统调用故障由错误引起但可能被修复如缺页故障修复后重新执行该指令终止由致命错误引起无法修复如整数除硬件故障终止当前程序外中断中断来源外部与当前执行指令无关分类可屏蔽中断可以选择不响应如普通请求不可屏蔽中断必须立即响应如电源掉电硬件故障中断的处理过程中断请求硬件完成中断响应硬件完成在指令执行周期结束时扫描中断请求检查中断屏蔽寄存器针对可屏蔽中断关中断保护现场不被打断保存断点和程序状态字根据中断向量号查询中断向量表找到中断服务程序的入口地址中断处理操作系统完成保存现场通用寄存器等执行中断服务程序恢复现场中断返回操作系统完成执行中断返回指令如恢复和回到原来的断点继续执行系统调用概念提供给应用程序使用的接口程序接口执行过程用户程序执行陷入指令切换到内核态执行系统调用处理程序返回用户态功能分类设备管理完成设备的请求释放启动等功能文件管理完成文件的读写创建删除等功能进程控制完成进程的创建撤销阻塞唤醒等功能进程通信完成进程之间的消息传递信号传递等功能内存管理完成内存的分配回收等功能操作系统结构分层结构思想将按功能自底向上划分为若干层上层只依赖下层提供的接口优点结构清晰易于维护与验证安全性好边界清晰缺点层次过多会引入调用开销性能受影响跨层需求实现复杂用户应用程序命令接口系统调用接口内核服务进程内存文件网络设备驱动硬件模块化结构思想将功能拆分为相对独立的模块进程管理内存管理文件系统设备驱动网络栈等通过清晰接口进行交互优点可插拔可扩展易调试便于驱动文件系统以模块方式动态加载缺点接口设计要求高模块耦合不当会影响可靠性与性能宏内核思想几乎所有内核服务调度内存文件系统网络驱动都运行在内核态优点性能高调用成本低数据共享方便实现成熟生态丰富缺点可靠性与安全性相对较弱代码庞大维护复杂驱动缺陷可能导致系统崩溃典型传统内核态调度器内存管理文件系统网络栈进程通信设备驱动用户态应用系统调用硬件微内核思想仅将最小必需功能进程线程调度基本内存管理中断处理保留在内核态其他服务文件系统网络驱动以用户态服务器进程运行通过消息传递交互优点可靠性安全性高故障隔离良好易移植易裁剪适合嵌入式高可靠领域缺点性能开销较大频繁的上下文切换实现复杂用户态驱动需良好隔离策略典型概念验证内核态微内核调度基本内存中断用户态文件系统服务网络服务设备驱动服务应用程序系统调用消息硬件混合混合内核思想在微内核思想基础上为性能考虑将部分关键服务文件系统驱动网络图形置于内核态其余在用户态优点在性能与可靠性间取得折中兼顾生态与可维护性缺点设计复杂边界选择需平衡内核膨胀风险仍在典型外核思想内核只做资源分配与保护不做高级抽象高级抽象由用户态库提供优点灵活性与可定制性最高可按应用优化抽象潜在性能最优缺点开发复杂度高生态缺乏应用需承担更多系统职责典型研究原型结构对比速查结构内核内容可靠性性能扩展性典型系统分层按层次划分服务中中高教学早期系统模块化模块按接口协作中高高现代通用做法宏内核几乎所有服务在内核态中高中微内核极小内核用户态服务器高中低高混合内核关键服务在内核态其余用户态高高高外核资源分配不做抽象中高最高操作系统引导操作系统引导是指计算机通电启动后从硬件初始化到操作系统内核加载运行的过程电源开启复位初始化自检初始化读取主引导记录读取分区引导记录加载启动管理器加载内核系统初始化用户登录详细引导过程复位与初始化电源通电处于实模式寄存器被置为特定值指令指针指向固件入口地址通常是自检与启动加电自检检查内存显卡键盘等硬件是否正常初始化硬件创建中断向量表等读取启动设备按照设置的启动顺序如硬盘光驱寻找带有引导记录的设备加载主引导记录将启动磁盘的号扇区字节读入内存处结构引导程序字节检查分区表寻找活动分区磁盘分区表字节描述磁盘分区情况结束标志字节控制权移交给中的引导程序加载分区引导记录根据分区表找到活动分区读取活动分区的第一个扇区即分区引导记录或卷引导记录到内存控制权移交给加载启动管理器负责找到并加载根目录下的启动管理器如的的注对于的通常分为中磁盘文件加载操作系统内核启动管理器根据配置文件如显示多操作系统选择菜单用户选择后加载对应的内核文件如到内存转入保护模式位或长模式位控制权移交给内核系统初始化内核初始化各子系统内存进程设备驱动启动系统服务如启动登录进程等待用户登录注现代计算机常用取代传统的直接识别分区中的启动文件不再依赖引导代码启动速度更快安全性更高虚拟机虚拟机的基本概念利用虚拟化技术将一台物理机器抽象为多台逻辑机器每个逻辑机器可以运行独立的操作系统互不干扰第一类裸金属架构硬件虚拟机管理程序第二类寄居架构硬件宿主操作系统软件如两类虚拟机管理程序对比第一类虚拟机管理程序裸金属架构位置直接运行在物理硬件之上角色充当操作系统的角色直接管理硬件资源特点性能高无开销支持特权指令的虚拟化只有虚拟机管理程序运行在内核态也就是它自己运行在用户态但认为自己在内核态需捕获模拟典型例子第二类虚拟机管理程序寄居架构位置运行在宿主操作系统之上作为应用程序存在角色依赖进行硬件资源管理特点性能较低多了一层灵活性高易于安装典型例子核心对比表特性第一类第二类运行基础直接在硬件上在上硬件资源管理直接管理依赖性能高低可迁移性差依赖硬件好依赖主要应用企业级数据中心云平台个人开发测试桌面虚拟化拓展容器如不模拟硬件而是共享内核比虚拟机更轻量级启动更快毫秒级隔离性弱于虚拟机综合应用题解析题目题目描述有两个程序和程序设备甲设备乙程序设备甲设备乙设备乙问题单道程序环境下先执行再执行利用率是多少多道程序环境下利用率是多少查看答案单道程序环境下先后程序执行过程甲乙总时间占用时间程序执行过程甲乙乙总时间占用时间统计总运行时间总时间利用率多道程序环境下并发执行假设同时开始或的第一步可与的第一步并行时间段设备甲设备乙说明用用甲并行需这里先跑用甲继续跑完剩等待用用乙并行用需乙先跑空闲继续跑完剩乙需乙等待用最后用乙最后统计程序全部结束时间忙碌时间段总计利用率题目题目描述进程计算打印再计算打印结束进程计算输入再计算结束先得到运行问题运行后有无空闲等待计算利用率进程有无等待何时进程有无等待何时查看答案甘特图分析时间打印机用输入设备用状态说明运行等待请求打印释放获得空闲请求输入释放仍在打印无进程可跑打印结束申请获得仍在输入输入结束申请但正在运行非抢占等待再次请求打印释放获得同时结束解答有无空闲等待有时间段在期间在打印在输入无进程需要利用率总时间忙碌时间利用率进程有无等待无每次完成后都能立即获得时空闲时释放去打印进程有无等待有第一次等待等待释放第二次等待输入完成请求但尚未执行完需等待释放',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-12-25 10:50:37',
+  postMainColor: '#22D3EE',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.min.css"><meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/sparkle520?tab=repositories" title="github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="github"/><span class="back-menu-item-text">github</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">SPARKLE</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AOP/" style="font-size: 1.05rem;">AOP<sup>1</sup></a><a href="/tags/Deep-Learning/" style="font-size: 1.05rem;">Deep Learning<sup>1</sup></a><a href="/tags/IoC/" style="font-size: 1.05rem;">IoC<sup>1</sup></a><a href="/tags/JSR303/" style="font-size: 1.05rem;">JSR303<sup>1</sup></a><a href="/tags/Matplotlib/" style="font-size: 1.05rem;">Matplotlib<sup>3</sup></a><a href="/tags/c/" style="font-size: 1.05rem;">c#<sup>2</sup></a><a href="/tags/java/" style="font-size: 1.05rem;">java<sup>4</sup></a><a href="/tags/npc%E5%88%86%E6%9E%90%E6%B3%95/" style="font-size: 1.05rem;">npc分析法<sup>1</sup></a><a href="/tags/python/" style="font-size: 1.05rem;">python<sup>5</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 1.05rem;">事务<sup>1</sup></a><a href="/tags/%E4%BA%8C%E6%AC%A1%E5%9E%8B/" style="font-size: 1.05rem;">二次型<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E3%80%82/" style="font-size: 1.05rem;">你的名字。<sup>3</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字同名小说<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%A4%96%E4%BC%A0%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字外传小说<sup>1</sup></a><a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size: 1.05rem;">写作<sup>4</sup></a><a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 1.05rem;">包管理<sup>1</sup></a><a href="/tags/%E5%8D%B7%E7%A7%AF%E5%85%AC%E5%BC%8F/" style="font-size: 1.05rem;">卷积公式<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90/" style="font-size: 1.05rem;">天气之子<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">天气之子同名小说<sup>1</sup></a><a href="/tags/%E5%AE%9A%E7%A7%AF%E5%88%86/" style="font-size: 1.05rem;">定积分<sup>1</sup></a><a href="/tags/%E5%AF%BC%E6%95%B0%E4%B8%8E%E5%BE%AE%E5%88%86/" style="font-size: 1.05rem;">导数与微分<sup>1</sup></a><a href="/tags/%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">小说<sup>3</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" style="font-size: 1.05rem;">数据校验<sup>1</sup></a><a href="/tags/%E6%9E%81%E9%99%90/" style="font-size: 1.05rem;">极限<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 1.05rem;">概率论<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 1.05rem;">概率论与数理统计<sup>7</sup></a><a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 1.05rem;">汇编<sup>9</sup></a><a href="/tags/%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80/" style="font-size: 1.05rem;">泰勒展开<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%80%BC/" style="font-size: 1.05rem;">特征值<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F/" style="font-size: 1.05rem;">特征向量<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" style="font-size: 1.05rem;">网络层<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 1.05rem;">英语<sup>2</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E5%90%AC%E5%8A%9B/" style="font-size: 1.05rem;">英语听力<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">英语语法<sup>11</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95%EF%BC%8C%E5%80%92%E8%A3%85%E7%BB%93%E6%9E%84%EF%BC%8C%E8%AF%AD%E6%B3%95%E8%BF%9B%E9%98%B6/" style="font-size: 1.05rem;">英语语法，倒装结构，语法进阶<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1.05rem;">计算机组成原理<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.05rem;">计算机网络<sup>1</sup></a><a href="/tags/%E8%AF%8D%E6%A0%B9%E8%AF%8D%E7%BC%80/" style="font-size: 1.05rem;">词根词缀<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">高等代数<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" style="font-size: 1.05rem;">高等数学<sup>8</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/12/"><span class="card-archive-list-date">十二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">17</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/11/"><span class="card-archive-list-date">十一月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/10/"><span class="card-archive-list-date">十月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/09/"><span class="card-archive-list-date">九月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/08/"><span class="card-archive-list-date">八月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/07/"><span class="card-archive-list-date">七月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/06/"><span class="card-archive-list-date">六月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/03/"><span class="card-archive-list-date">三月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">8</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url">计算机</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>操作系统</span></a><a class="article-meta__tags" href="/tags/408/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>408</span></a></span></div></div><h1 class="post-title" itemprop="name headline">408-操作系统-1-计算机系统概述</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2025-12-22T15:00:27.000Z" title="发表于 2025-12-22 23:00:27">2025-12-22</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2025-12-25T02:50:37.498Z" title="更新于 2025-12-25 10:50:37">2025-12-25</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">5.8k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>20分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="408-操作系统-1-计算机系统概述"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为系守镇"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>系守镇</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2025/12/22/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F1/#post-comment" tabindex="-1"><span id="twikoo-count"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://pic1.imgdb.cn/item/69492a76c154427986d991c5.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2025/12/22/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F1/"><header><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url">计算机</a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" tabindex="-1" itemprop="url">操作系统</a><a href="/tags/408/" tabindex="-1" itemprop="url">408</a><h1 id="CrawlerTitle" itemprop="name headline">408-操作系统-1-计算机系统概述</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">sparkle520</span><time itemprop="dateCreated datePublished" datetime="2025-12-22T15:00:27.000Z" title="发表于 2025-12-22 23:00:27">2025-12-22</time><time itemprop="dateCreated datePublished" datetime="2025-12-25T02:50:37.498Z" title="更新于 2025-12-25 10:50:37">2025-12-25</time></header><h1 id="第1章-计算机系统概述">第1章 计算机系统概述</h1>
+<h2 id="操作系统的基本概念">1.1 操作系统的基本概念</h2>
+<h3 id="操作系统的概念">1.1.1 操作系统的概念</h3>
+<p>操作系统 ( Operating System, OS )
+是指控制和管理整个计算机系统的硬件和软件资源，并合理地组织调度计算机的工作和资源的分配，以提供给用户和其他软件方便的接口和环境，它是计算机系统中最基本的
+<strong>系统软件</strong>.</p>
+<h3 id="操作系统的功能和目标">1.1.2 操作系统的功能和目标</h3>
+<ol type="1">
+<li><strong>作为计算机系统资源的管理者</strong> :
+<ul>
+<li><strong>处理机管理</strong> : 进程控制、进程调度等.</li>
+<li><strong>存储器管理</strong> :
+内存分配、地址映射、内存保护与共享、内存扩充.</li>
+<li><strong>文件管理</strong> :
+文件存储空间的管理、目录管理、文件读写管理和保护.</li>
+<li><strong>设备管理</strong> : 缓冲管理、设备分配、设备处理.</li>
+</ul></li>
+<li><strong>作为用户与计算机硬件系统之间的接口</strong> :
+<ul>
+<li><strong>命令接口</strong> : 联机命令接口 ( 交互式 ) 、脱机命令接口 (
+批处理 ) .</li>
+<li><strong>程序接口</strong> : 由一组 <strong>系统调用</strong> (
+System Call ) 组成.</li>
+<li><strong>图形用户接口 ( GUI ) </strong>.</li>
+</ul></li>
+<li><strong>作为扩充机器</strong> :
+<ul>
+<li>没有任何软件支持的计算机称为 <strong>裸机</strong>.</li>
+<li>OS 覆盖在硬件之上，将裸机改造成功能更强、使用更方便的
+<strong>虚拟机</strong> ( Virtual Machine ) .</li>
+</ul></li>
+</ol>
+<h3 id="操作系统的特征">1.1.3 操作系统的特征</h3>
+<ol type="1">
+<li><strong>并发 ( Concurrency ) </strong> :
+两个或多个事件在同一时间间隔内发生 ( 微观上交替执行，宏观上同时执行 ) .
+<ul>
+<li><em>区别</em> : <strong>并行 ( Parallelism ) </strong>
+指两个或多个事件在同一时刻同时发生.</li>
+</ul></li>
+<li><strong>共享 ( Sharing ) </strong> :
+系统中的资源可供内存中多个并发执行的进程共同使用.
+<ul>
+<li><strong>互斥共享</strong> : 一段时间内只允许一个进程访问 ( 如打印机
+) .</li>
+<li><strong>同时共享</strong> : 一段时间内允许多个进程 "同时" 访问 (
+如磁盘文件 ) .</li>
+</ul></li>
+<li><strong>虚拟 ( Virtualization ) </strong> :
+把一个物理上的实体变为若干个逻辑上的对应物 ( 如虚拟处理器、虚拟内存 ) .
+<ul>
+<li><strong>时分复用</strong> ( 如虚拟处理器 ) .</li>
+<li><strong>空分复用</strong> ( 如虚拟存储器 ) .</li>
+</ul></li>
+<li><strong>异步 ( Asynchrony ) </strong> :
+在多道程序环境下，进程的执行不是一贯到底，而是走走停停，以不可预知的速度向前推进.</li>
+</ol>
+<h2 id="操作系统的发展历程">1.2 操作系统的发展历程</h2>
+<h3 id="手工操作阶段-此阶段无操作系统">1.2.1 手工操作阶段 (
+此阶段无操作系统 )</h3>
+<ul>
+<li><strong>特点</strong> : 用户独占全机、CPU 等待人工操作.</li>
+<li><strong>缺点</strong> : <strong>人机速度矛盾</strong> ( CPU
+利用率极低 ) .</li>
+</ul>
+<h3 id="批处理阶段-操作系统开始出现">1.2.2 批处理阶段 ( 操作系统开始出现
+)</h3>
+<ol type="1">
+<li><strong>单道批处理系统</strong> :
+<ul>
+<li><strong>引入脱机输入/输出技术</strong> ( Off-Line I/O ) ，由监督程序
+( Monitor ) 控制.</li>
+<li><strong>特点</strong> :
+<ul>
+<li><strong>自动性</strong> :
+磁带上的一批作业能自动地逐个运行，而无需人工干预.</li>
+<li><strong>顺序性</strong> :
+磁带上的各道作业是按顺序进入内存，各道作业的完成顺序与他们进入内存的顺序在正常情况下是完全一致的.</li>
+<li><strong>单道性</strong> :
+内存中仅有一道程序运行，即监督程序每次从磁带上只调入一道程序进入内存运行，当该程序完成或发生异常时，才换入其后继程序进入内存运行.</li>
+</ul></li>
+<li><strong>缺点</strong> : CPU 和 I/O
+设备无法并行工作，资源利用率仍低.</li>
+</ul></li>
+<li><strong>多道批处理系统</strong> ( 操作系统正式诞生 ) :
+<ul>
+<li><strong>特点</strong> :
+<ul>
+<li><strong>多道</strong> : 计算机内存中同时存放多道相互独立的程序.</li>
+<li><strong>宏观上并行</strong> :
+同时进入系统的多道程序都处于运行过程中，即它们先后开始了各自的运行，但都未运行完毕.</li>
+<li><strong>微观上串行</strong> : 内存中的多道程序轮流占有 CPU
+，交替执行.</li>
+</ul></li>
+<li><strong>优点</strong> : 资源利用率高、系统吞吐量大.</li>
+<li><strong>缺点</strong> : 用户响应时间长，<strong>无交互能力</strong>
+( 最大缺点 ) .</li>
+</ul></li>
+<li><strong>单道批处理 vs 多道批处理对比表</strong> :</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">特性</th>
+<th style="text-align: left;">单道批处理系统</th>
+<th style="text-align: left;">多道批处理系统</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>内存驻留</strong></td>
+<td style="text-align: left;">仅有一道程序</td>
+<td style="text-align: left;">同时存放多道程序</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>运行方式</strong></td>
+<td style="text-align: left;">顺序执行 (串行)</td>
+<td style="text-align: left;">宏观并行，微观串行</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CPU利用率</strong></td>
+<td style="text-align: left;">低 (等待I/O时空闲)</td>
+<td style="text-align: left;">高 (I/O时切换其他作业)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>吞吐量</strong></td>
+<td style="text-align: left;">低</td>
+<td style="text-align: left;">高</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>硬件要求</strong></td>
+<td style="text-align: left;">较低</td>
+<td style="text-align: left;">较高 (需内存保护、中断等)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>主要缺点</strong></td>
+<td style="text-align: left;">资源浪费严重</td>
+<td style="text-align: left;">无交互能力</td>
+</tr>
+</tbody>
+</table>
+<h3 id="分时操作系统">1.2.3 分时操作系统</h3>
+<ul>
+<li><strong>概念</strong> : 多个用户通过终端同时使用计算机，CPU 按
+<strong>时间片</strong> 轮流服务.</li>
+<li><strong>特点</strong> :
+<ul>
+<li><strong>同时性</strong> ( 多路性 ) : 多个用户宏观上同时使用.</li>
+<li><strong>交互性</strong> : 用户能与系统进行人机对话.</li>
+<li><strong>独立性</strong> : 用户之间互不干扰.</li>
+<li><strong>及时性</strong> : 用户请求能在短时间内得到响应.</li>
+</ul></li>
+<li><strong>优点</strong> : 解决了人机交互问题.</li>
+<li><strong>缺点</strong> : 不能优先处理紧急任务.</li>
+</ul>
+<h3 id="实时操作系统">1.2.4 实时操作系统</h3>
+<ul>
+<li><strong>概念</strong> :
+系统能及时响应外部事件，在规定时间内完成处理.</li>
+<li><strong>特点</strong> :
+<strong>及时性</strong>、<strong>可靠性</strong>.</li>
+<li><strong>分类</strong> :
+<ul>
+<li><strong>硬实时</strong> : 必须在绝对严格的截止时间内完成 (
+如导弹控制、自动驾驶 ) .</li>
+<li><strong>软实时</strong> : 偶尔错过截止时间影响不大 (
+如订票系统、视频点播 ) .</li>
+</ul></li>
+</ul>
+<h3 id="网络操作系统和分布式计算机系统">1.2.5
+网络操作系统和分布式计算机系统</h3>
+<ul>
+<li><strong>网络 OS</strong> : 集中式控制，实现网络资源共享和通信.</li>
+<li><strong>分布式 OS</strong> :
+系统中若干台计算机相互协作，<strong>无主次之分</strong>，具有
+<strong>分布性</strong> 和 <strong>并行性</strong>.</li>
+</ul>
+<h3 id="个人计算机操作系统">1.2.6 个人计算机操作系统</h3>
+<ul>
+<li>如 Windows, macOS, Linux 等，服务于个人用户.</li>
+</ul>
+<h3 id="本节小结-三种基本操作系统对比">1.2.7 <em>本节小结 :
+三种基本操作系统对比</em></h3>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">类型</th>
+<th style="text-align: left;">交互性</th>
+<th style="text-align: left;">及时性</th>
+<th style="text-align: left;">可靠性</th>
+<th style="text-align: left;">资源利用率</th>
+<th style="text-align: left;">主要优点</th>
+<th style="text-align: left;">主要缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>多道批处理</strong></td>
+<td style="text-align: left;">无</td>
+<td style="text-align: left;">差</td>
+<td style="text-align: left;">较好</td>
+<td style="text-align: left;"><strong>高</strong></td>
+<td style="text-align: left;">吞吐量大，资源利用率高</td>
+<td style="text-align: left;">无交互能力</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>分时 OS</strong></td>
+<td style="text-align: left;"><strong>强</strong></td>
+<td style="text-align: left;">较好</td>
+<td style="text-align: left;">较好</td>
+<td style="text-align: left;">较高</td>
+<td style="text-align: left;">提供人机交互</td>
+<td style="text-align: left;">不能优先处理紧急任务</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>实时 OS</strong></td>
+<td style="text-align: left;">弱</td>
+<td style="text-align: left;"><strong>强</strong></td>
+<td style="text-align: left;"><strong>高</strong></td>
+<td style="text-align: left;">一般</td>
+<td style="text-align: left;">及时响应，可靠性高</td>
+<td style="text-align: left;">资源利用率稍低</td>
+</tr>
+</tbody>
+</table>
+<h2 id="操作系统的运行环境">1.3 操作系统的运行环境</h2>
+<h3 id="处理器运行模式">1.3.1 处理器运行模式</h3>
+<p>CPU 执行两种不同性质的程序 : <strong>操作系统内核程序</strong> 和
+<strong>用户自编程序</strong>.</p>
+<ol type="1">
+<li><strong>内核态 ( Kernel Mode / 管态 / 核心态 ) </strong> :
+<ul>
+<li>运行内核程序，可以执行 <strong>特权指令</strong>.</li>
+<li>拥有最高权限，可访问所有资源.</li>
+</ul></li>
+<li><strong>用户态 ( User Mode / 目态 ) </strong> :
+<ul>
+<li>运行用户程序，只能执行 <strong>非特权指令</strong>.</li>
+<li><em>注</em> : 从用户态切换到内核态通常通过 <strong>中断 (
+Trap/访管指令 ) </strong> 实现.</li>
+</ul></li>
+</ol>
+<blockquote>
+<p><strong>•● 注 ●•</strong></p>
+<ul>
+<li><strong>特权指令</strong> : 指不允许用户直接使用的指令，如 I/O
+指令、置中断指令，<strong>只能在内核态</strong> 下执行.</li>
+<li><strong>非特权指令</strong> :
+指允许用户直接使用的指令，如算术运算、访管指令，在
+<strong>用户态和内核态</strong> 下都能执行.</li>
+</ul>
+</blockquote>
+<p><strong>操作系统内核的核心功能</strong> :</p>
+<ol type="1">
+<li><strong>时钟管理</strong> :
+<ul>
+<li>操作系统的 "心脏".</li>
+<li>功能 : <strong>计时</strong> ( 提供系统时间 )
+、<strong>进程切换</strong> ( 通过时钟中断实现时间片轮转 ) .</li>
+</ul></li>
+<li><strong>中断机制</strong> :
+<ul>
+<li>操作系统的各项功能 ( 如 I/O 、进程调度 )
+都需要依靠中断机制实现.</li>
+<li>中断是用户态切换到内核态的 <strong>唯一途径</strong>.</li>
+</ul></li>
+<li><strong>原语 ( Primitive ) </strong> :
+<ul>
+<li>处于操作系统的最底层，是特殊的程序.</li>
+<li><strong>特点</strong> : 具有 <strong>原子性</strong> ( Atomic )
+，即执行过程 <strong>一气呵成，不可中断</strong>.</li>
+<li><strong>用途</strong> : 进程通信、资源管理 ( 如 P/V 操作 ) .</li>
+</ul></li>
+<li><strong>系统控制的数据结构及处理</strong> :
+<ul>
+<li>操作系统通过管理各种数据结构来管理资源.</li>
+<li><strong>进程管理</strong> : 进程控制块 ( PCB ) .</li>
+<li><strong>存储器管理</strong> : 内存分配表.</li>
+<li><strong>设备管理</strong> : 设备控制块 ( DCB ) .</li>
+</ul></li>
+</ol>
+<h3 id="中断和异常的概念">1.3.2 中断和异常的概念</h3>
+<p>中断是操作系统夺回 CPU 控制权的唯一途径.</p>
+<ol type="1">
+<li><p><strong>中断和异常的分类</strong> :</p>
+<ul>
+<li><strong>内中断 ( 异常 / Exception ) </strong> :
+<ul>
+<li><strong>来源</strong> : CPU 内部，与当前执行的指令有关.</li>
+<li><strong>分类</strong> :
+<ul>
+<li><strong>陷入 ( Trap ) </strong> : <strong>有意而为之</strong>
+的异常，如系统调用.</li>
+<li><strong>故障 ( Fault ) </strong> : 由错误引起，但
+<strong>可能被修复</strong>. 如缺页故障 ( 修复后重新执行该指令 ) .</li>
+<li><strong>终止 ( Abort ) </strong> :
+由致命错误引起，<strong>无法修复</strong>. 如整数除 0 、硬件故障 (
+终止当前程序 ) .</li>
+</ul></li>
+</ul></li>
+<li><strong>外中断 ( 中断 / Interrupt ) </strong> :
+<ul>
+<li><strong>来源</strong> : CPU 外部，与当前执行指令无关.</li>
+<li><strong>分类</strong> :
+<ul>
+<li><strong>可屏蔽中断 ( INTR ) </strong> : CPU 可以选择不响应 ( 如普通
+I/O 请求 ) .</li>
+<li><strong>不可屏蔽中断 ( NMI ) </strong> : CPU 必须立即响应 (
+如电源掉电、硬件故障 ) .</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><p><strong>中断的处理过程</strong> :</p>
+<ul>
+<li><strong>Step 1 : 中断请求</strong> ( 硬件完成 ) .</li>
+<li><strong>Step 2 : 中断响应</strong> ( 硬件完成 ) :
+<ul>
+<li>CPU 在指令执行周期结束时扫描中断请求.</li>
+<li>检查中断屏蔽寄存器 ( 针对可屏蔽中断 ) .</li>
+<li>关中断 ( 保护现场不被打断 ) .</li>
+<li>保存断点 ( PC ) 和程序状态字 ( PSW ) .</li>
+<li>根据中断向量号，查询 <strong>中断向量表</strong>，找到
+<strong>中断服务程序 ( ISR ) </strong> 的入口地址.</li>
+</ul></li>
+<li><strong>Step 3 : 中断处理</strong> ( 操作系统完成 ) :
+<ul>
+<li>保存现场 ( 通用寄存器等 ) .</li>
+<li>执行中断服务程序.</li>
+<li>恢复现场.</li>
+</ul></li>
+<li><strong>Step 4 : 中断返回</strong> ( 操作系统完成 ) :
+<ul>
+<li>执行中断返回指令 ( 如 IRET ) ，恢复 PC 和 PSW.</li>
+<li>CPU 回到原来的断点继续执行.</li>
+</ul></li>
+</ul></li>
+</ol>
+<h3 id="系统调用">1.3.3 系统调用</h3>
+<ul>
+<li><strong>概念</strong> : OS 提供给应用程序使用的接口 ( 程序接口 )
+.</li>
+<li><strong>执行过程</strong> : 用户程序执行 <strong>陷入指令 ( Trap )
+</strong> <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="2.262ex" height="1.181ex" role="img" focusable="false" viewBox="0 -511 1000 522"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="2192" d="M56 237T56 250T70 270H835Q719 357 692 493Q692 494 692 496T691 499Q691 511 708 511H711Q720 511 723 510T729 506T732 497T735 481T743 456Q765 389 816 336T935 261Q944 258 944 250Q944 244 939 241T915 231T877 212Q836 186 806 152T761 85T740 35T732 4Q730 -6 727 -8T711 -11Q691 -11 691 0Q691 7 696 25Q728 151 835 230H70Q56 237 56 250Z"></path></g></g></g></svg></mjx-container></span> CPU 切换到内核态
+<span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="2.262ex" height="1.181ex" role="img" focusable="false" viewBox="0 -511 1000 522"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="2192" d="M56 237T56 250T70 270H835Q719 357 692 493Q692 494 692 496T691 499Q691 511 708 511H711Q720 511 723 510T729 506T732 497T735 481T743 456Q765 389 816 336T935 261Q944 258 944 250Q944 244 939 241T915 231T877 212Q836 186 806 152T761 85T740 35T732 4Q730 -6 727 -8T711 -11Q691 -11 691 0Q691 7 696 25Q728 151 835 230H70Q56 237 56 250Z"></path></g></g></g></svg></mjx-container></span> 执行系统调用处理程序 <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="2.262ex" height="1.181ex" role="img" focusable="false" viewBox="0 -511 1000 522"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="2192" d="M56 237T56 250T70 270H835Q719 357 692 493Q692 494 692 496T691 499Q691 511 708 511H711Q720 511 723 510T729 506T732 497T735 481T743 456Q765 389 816 336T935 261Q944 258 944 250Q944 244 939 241T915 231T877 212Q836 186 806 152T761 85T740 35T732 4Q730 -6 727 -8T711 -11Q691 -11 691 0Q691 7 696 25Q728 151 835 230H70Q56 237 56 250Z"></path></g></g></g></svg></mjx-container></span> 返回用户态.</li>
+<li><strong>功能分类</strong> :
+<ol type="1">
+<li><strong>设备管理</strong> : 完成设备的请求/释放、启动等功能.</li>
+<li><strong>文件管理</strong> : 完成文件的读/写、创建/删除等功能.</li>
+<li><strong>进程控制</strong> :
+完成进程的创建/撤销、阻塞/唤醒等功能.</li>
+<li><strong>进程通信</strong> :
+完成进程之间的消息传递/信号传递等功能.</li>
+<li><strong>内存管理</strong> : 完成内存的分配/回收等功能.</li>
+</ol></li>
+</ul>
+<h2 id="操作系统结构">1.4 操作系统结构</h2>
+<h3 id="分层结构">1.4.1 分层结构</h3>
+<ul>
+<li><strong>思想</strong> : 将 OS
+按功能自底向上划分为若干层，<strong>上层只依赖下层</strong>
+提供的接口.</li>
+<li><strong>优点</strong> : 结构清晰、易于维护与验证、安全性好 (
+边界清晰 ).</li>
+<li><strong>缺点</strong> : 层次过多会引入 <strong>调用开销</strong>
+，性能受影响；跨层需求实现复杂.</li>
+</ul>
+<div class="mermaid-wrap"><pre class="mermaid-src" hidden="">
+  flowchart TB
+    classDef default fill:#F1F5F9,stroke:#334155,stroke-width:2px,color:#1E293B,rx:5,ry:5;
+    classDef user fill:#E0F2FE,stroke:#0284C7,stroke-width:2px,color:#0369A1;
+    classDef kernel fill:#22D3EE,stroke:#0E7490,stroke-width:2px,color:#FFFFFF;
+    classDef hw fill:#94A3B8,stroke:#475569,stroke-width:2px,color:#FFFFFF;
+
+    U[用户/应用程序]:::user --&gt; IF[命令/GUI接口]
+    IF --&gt; SCI[系统调用接口]
+    SCI --&gt; KS["内核服务&lt;br/&gt;(进程/内存/文件/网络)"]:::kernel
+    KS --&gt; DD[设备驱动]:::kernel
+    DD --&gt; HW[硬件]:::hw
+  </pre></div>
+<h3 id="模块化结构">1.4.2 模块化结构</h3>
+<ul>
+<li><strong>思想</strong> : 将 OS 功能拆分为相对独立的
+<strong>模块</strong> ( 进程管理、内存管理、文件系统、设备驱动、网络栈等
+) ，通过 <strong>清晰接口</strong> 进行交互.</li>
+<li><strong>优点</strong> : 可插拔、可扩展、易调试；便于驱动/文件系统以
+<strong>模块</strong> 方式动态加载.</li>
+<li><strong>缺点</strong> :
+接口设计要求高；模块耦合不当会影响可靠性与性能.</li>
+</ul>
+<h3 id="宏内核-monolithic-kernel">1.4.3 宏内核 ( Monolithic Kernel
+)</h3>
+<ul>
+<li><strong>思想</strong> : <strong>几乎所有内核服务</strong> (
+调度、内存、文件系统、网络、驱动、IPC ) 都运行在
+<strong>内核态</strong>.</li>
+<li><strong>优点</strong> : <strong>性能高</strong> (
+调用成本低、数据共享方便 ) ，实现成熟、生态丰富.</li>
+<li><strong>缺点</strong> : <strong>可靠性与安全性</strong>
+相对较弱；代码庞大、维护复杂，驱动缺陷可能导致系统崩溃.</li>
+<li><strong>典型</strong> : Linux, BSD, 传统 UNIX.</li>
+</ul>
+<div class="mermaid-wrap"><pre class="mermaid-src" hidden="">
+  flowchart TB
+    classDef default fill:#F1F5F9,stroke:#334155,stroke-width:2px,color:#1E293B,rx:5,ry:5;
+    classDef user fill:#E0F2FE,stroke:#0284C7,stroke-width:2px,color:#0369A1;
+    classDef kernel fill:#22D3EE,stroke:#0E7490,stroke-width:2px,color:#FFFFFF;
+    classDef hw fill:#94A3B8,stroke:#475569,stroke-width:2px,color:#FFFFFF;
+
+    subgraph Kernel[内核态]
+      direction TB
+      Sched[调度器]:::kernel
+      MM[内存管理]:::kernel
+      VFS[VFS/文件系统]:::kernel
+      Net[网络栈]:::kernel
+      IPC[进程通信]:::kernel
+      Drivers[设备驱动]:::kernel
+    end
+    Apps[用户态应用]:::user --&gt;|系统调用| Kernel
+    Kernel --&gt; HW[硬件]:::hw
+
+    style Kernel fill:#ECFEFF,stroke:#22D3EE,stroke-width:2px,color:#0E7490
+  </pre></div>
+<h3 id="微内核-microkernel">1.4.4 微内核 ( Microkernel )</h3>
+<ul>
+<li><strong>思想</strong> : 仅将 <strong>最小必需功能</strong> (
+进程/线程调度、<strong>IPC</strong>、基本内存管理、中断处理 ) 保留在
+<strong>内核态</strong> ，其他服务 ( 文件系统、网络、驱动 ) 以
+<strong>用户态服务器进程</strong> 运行，通过 <strong>消息传递</strong>
+交互.</li>
+<li><strong>优点</strong> : <strong>可靠性/安全性高</strong> (
+故障隔离良好 ) ，易移植、易裁剪；适合嵌入式/高可靠领域.</li>
+<li><strong>缺点</strong> : <strong>性能开销</strong> 较大 ( 频繁的
+IPC/上下文切换 ) ，实现复杂；用户态驱动需良好隔离策略.</li>
+<li><strong>典型</strong> : Minix, QNX, L4, HURD (概念验证).</li>
+</ul>
+<div class="mermaid-wrap"><pre class="mermaid-src" hidden="">
+  flowchart TB
+    classDef default fill:#F1F5F9,stroke:#334155,stroke-width:2px,color:#1E293B,rx:5,ry:5;
+    classDef user fill:#E0F2FE,stroke:#0284C7,stroke-width:2px,color:#0369A1;
+    classDef kernel fill:#22D3EE,stroke:#0E7490,stroke-width:2px,color:#FFFFFF;
+    classDef service fill:#F472B6,stroke:#BE185D,stroke-width:2px,color:#FFFFFF;
+    classDef hw fill:#94A3B8,stroke:#475569,stroke-width:2px,color:#FFFFFF;
+
+    subgraph KernelSpace["内核态"]
+      MK["微内核: 调度/IPC/基本内存/中断"]:::kernel
+    end
+    subgraph UserSpace["用户态"]
+      FS["文件系统服务"]:::service
+      NET["网络服务"]:::service
+      DRV["设备驱动服务"]:::service
+      APP["应用程序"]:::user
+    end
+    APP --&gt;|"系统调用-&gt;消息"| MK
+    MK --&gt; FS
+    MK --&gt; NET
+    MK --&gt; DRV
+    FS --&gt; MK
+    NET --&gt; MK
+    DRV --&gt; MK
+    MK --&gt; HW["硬件"]:::hw
+    DRV --&gt; HW
+
+    style KernelSpace fill:#ECFEFF,stroke:#22D3EE,stroke-width:2px,color:#0E7490
+    style UserSpace fill:#F8FAFC,stroke:#94A3B8,stroke-width:2px,stroke-dasharray: 5 5,color:#475569
+  </pre></div>
+<h3 id="混合混合内核-hybrid-kernel">1.4.5 混合/混合内核 ( Hybrid Kernel
+)</h3>
+<ul>
+<li><strong>思想</strong> : 在 <strong>微内核思想</strong>
+基础上，为性能考虑将部分关键服务 ( 文件系统/驱动/网络/图形 ) 置于
+<strong>内核态</strong> ，其余在用户态.</li>
+<li><strong>优点</strong> : 在 <strong>性能</strong> 与
+<strong>可靠性</strong> 间取得折中；兼顾生态与可维护性.</li>
+<li><strong>缺点</strong> :
+设计复杂，边界选择需平衡；内核膨胀风险仍在.</li>
+<li><strong>典型</strong> : Windows NT、macOS (XNU: Mach +
+BSD)、iOS.</li>
+</ul>
+<h3 id="外核-exokernel">1.4.6 外核 ( Exokernel )</h3>
+<ul>
+<li><strong>思想</strong> : 内核只做 <strong>资源分配与保护</strong>
+，不做高级抽象；高级抽象由 <strong>用户态库 ( LibOS ) </strong>
+提供.</li>
+<li><strong>优点</strong> : <strong>灵活性与可定制性最高</strong>
+，可按应用优化抽象；潜在 <strong>性能最优</strong>.</li>
+<li><strong>缺点</strong> :
+开发复杂度高、生态缺乏；应用需承担更多系统职责.</li>
+<li><strong>典型</strong> : MIT Exokernel/ExOS (研究原型).</li>
+</ul>
+<h3 id="结构对比速查">1.4.7 结构对比速查</h3>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">结构</th>
+<th style="text-align: left;">内核内容</th>
+<th style="text-align: left;">可靠性</th>
+<th style="text-align: left;">性能</th>
+<th style="text-align: left;">扩展性</th>
+<th style="text-align: left;">典型系统</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>分层</strong></td>
+<td style="text-align: left;">按层次划分服务</td>
+<td style="text-align: left;">中</td>
+<td style="text-align: left;">中</td>
+<td style="text-align: left;">高</td>
+<td style="text-align: left;">教学/早期系统</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>模块化</strong></td>
+<td style="text-align: left;">模块按接口协作</td>
+<td style="text-align: left;">中</td>
+<td style="text-align: left;">高</td>
+<td style="text-align: left;">高</td>
+<td style="text-align: left;">现代通用做法</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>宏内核</strong></td>
+<td style="text-align: left;">几乎所有服务在内核态</td>
+<td style="text-align: left;">中</td>
+<td style="text-align: left;">高</td>
+<td style="text-align: left;">中</td>
+<td style="text-align: left;">Linux, BSD</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>微内核</strong></td>
+<td style="text-align: left;">极小内核 + 用户态服务器</td>
+<td style="text-align: left;">高</td>
+<td style="text-align: left;">中/低</td>
+<td style="text-align: left;">高</td>
+<td style="text-align: left;">Minix, QNX</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>混合内核</strong></td>
+<td style="text-align: left;">关键服务在内核态，其余用户态</td>
+<td style="text-align: left;">高</td>
+<td style="text-align: left;">高</td>
+<td style="text-align: left;">高</td>
+<td style="text-align: left;">Windows NT, XNU</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>外核</strong></td>
+<td style="text-align: left;">资源分配不做抽象</td>
+<td style="text-align: left;">中</td>
+<td style="text-align: left;">高</td>
+<td style="text-align: left;">最高</td>
+<td style="text-align: left;">ExOS</td>
+</tr>
+</tbody>
+</table>
+<h2 id="操作系统引导-boot">1.5 操作系统引导 (Boot)</h2>
+<p>操作系统引导是指计算机通电启动后，从硬件初始化到操作系统内核加载运行的过程.</p>
+<div class="mermaid-wrap"><pre class="mermaid-src" hidden="">
+  flowchart TD
+    classDef default fill:#F1F5F9,stroke:#334155,stroke-width:2px,color:#1E293B,rx:5,ry:5;
+    classDef start fill:#22C55E,stroke:#15803D,stroke-width:2px,color:#FFFFFF;
+    classDef fw fill:#F59E0B,stroke:#B45309,stroke-width:2px,color:#FFFFFF;
+    classDef disk fill:#3B82F6,stroke:#1D4ED8,stroke-width:2px,color:#FFFFFF;
+    classDef kernel fill:#22D3EE,stroke:#0E7490,stroke-width:2px,color:#FFFFFF;
+
+    Start((电源开启)):::start --&gt; CPU["① CPU复位/初始化"]
+    CPU --&gt; BIOS["② BIOS/UEFI&lt;br/&gt;自检 &amp; 初始化"]:::fw
+    BIOS --&gt; MBR["③ 读取 MBR&lt;br/&gt;(主引导记录)"]:::disk
+    MBR --&gt; PBR["④ 读取 PBR&lt;br/&gt;(分区引导记录)"]:::disk
+    PBR --&gt; BL["⑤ 加载启动管理器&lt;br/&gt;(Bootloader)"]:::disk
+    BL --&gt; Kernel["⑥ 加载 OS 内核"]:::kernel
+    Kernel --&gt; Init["⑦ 系统初始化&lt;br/&gt;用户登录"]:::kernel
+  </pre></div>
+<h3 id="详细引导过程">1.5.1 详细引导过程</h3>
+<ol type="1">
+<li><strong>CPU 复位与初始化 (CPU Reset)</strong> :
+<ul>
+<li>电源通电，CPU 处于实模式.</li>
+<li>寄存器被置为特定值，指令指针 (CS:IP) 指向 <strong>BIOS
+固件入口地址</strong> ( 通常是 <code>FFFF0H</code> ) .</li>
+</ul></li>
+<li><strong>BIOS 自检与启动 (BIOS POST &amp; Boot Sequence)</strong> :
+<ul>
+<li><strong>POST (Power-On Self-Test)</strong> :
+加电自检，检查内存、显卡、键盘等硬件是否正常.</li>
+<li><strong>初始化硬件</strong> : 创建中断向量表等.</li>
+<li><strong>读取启动设备</strong> : 按照 BIOS 设置的启动顺序 ( 如 USB
+-&gt; 硬盘 -&gt; 光驱 ) 寻找带有 <strong>引导记录</strong> 的设备.</li>
+</ul></li>
+<li><strong>加载主引导记录 (Load MBR)</strong> :
+<ul>
+<li>BIOS 将启动磁盘的 <strong>0 号扇区</strong> ( MBR, 512 字节 )
+读入内存 <code>7C00H</code> 处.</li>
+<li><strong>MBR 结构</strong> :
+<ul>
+<li><strong>引导程序</strong> ( 446 字节 ) :
+检查分区表，寻找活动分区.</li>
+<li><strong>磁盘分区表 ( DPT ) </strong> ( 64 字节 ) :
+描述磁盘分区情况.</li>
+<li><strong>结束标志</strong> ( 2 字节 ) : <code>55 AA</code>.</li>
+</ul></li>
+<li>CPU 控制权移交给 MBR 中的引导程序.</li>
+</ul></li>
+<li><strong>加载分区引导记录 (Load PBR / VBR)</strong> :
+<ul>
+<li>MBR 根据分区表找到 <strong>活动分区 ( Active Partition )
+</strong>.</li>
+<li>读取活动分区的第一个扇区，即 <strong>分区引导记录 ( PBR ) </strong>
+或 <strong>卷引导记录 ( VBR ) </strong> 到内存.</li>
+<li>控制权移交给 PBR.</li>
+</ul></li>
+<li><strong>加载启动管理器 (Load Bootloader)</strong> :
+<ul>
+<li>PBR 负责找到并加载根目录下的 <strong>启动管理器</strong> ( 如
+Windows 的 <code>BOOTMGR</code>, Linux 的 <code>GRUB</code> ) .</li>
+<li><em>注</em> : 对于 Linux 的 GRUB，通常分为 Stage 1 ( MBR 中 ) ,
+Stage 1.5, Stage 2 ( 磁盘文件 ) .</li>
+</ul></li>
+<li><strong>加载操作系统内核 (Load Kernel)</strong> :
+<ul>
+<li>启动管理器根据配置文件 ( 如 <code>bcd</code>, <code>grub.cfg</code>
+) 显示多操作系统选择菜单.</li>
+<li>用户选择后，加载对应的 <strong>内核文件</strong> ( 如
+<code>ntoskrnl.exe</code>, <code>vmlinuz</code> ) 到内存.</li>
+<li>CPU 转入保护模式 ( 32位 ) 或 长模式 ( 64位 )
+，控制权移交给内核.</li>
+</ul></li>
+<li><strong>系统初始化</strong> :
+<ul>
+<li>内核初始化各子系统 ( 内存、进程、设备驱动 ) .</li>
+<li>启动系统服务 ( 如 <code>systemd</code>, <code>svchost</code> )
+.</li>
+<li>启动登录进程 ( <code>login</code>, <code>winlogon</code> )
+，等待用户登录.</li>
+</ul></li>
+</ol>
+<blockquote>
+<p><strong>•● 注 ●•</strong></p>
+<p>现代计算机常用 <strong>UEFI + GPT</strong> 取代传统的 <strong>BIOS +
+MBR</strong>. * <strong>UEFI</strong> 直接识别 FAT 分区中的启动文件
+(<code>.efi</code>) ，不再依赖 MBR 引导代码，启动速度更快，安全性更高 (
+Secure Boot ).</p>
+</blockquote>
+<h2 id="虚拟机-virtual-machine">1.6 虚拟机 (Virtual Machine)</h2>
+<h3 id="虚拟机的基本概念">1.6.1 虚拟机的基本概念</h3>
+<p>利用 <strong>虚拟化技术 (Virtualization)</strong> ，将一台物理机器
+(Host) 抽象为多台逻辑机器 (Guest).
+每个逻辑机器可以运行独立的操作系统，互不干扰.</p>
+<div class="mermaid-wrap"><pre class="mermaid-src" hidden="">
+  flowchart TB
+    classDef default fill:#F1F5F9,stroke:#334155,stroke-width:2px,color:#1E293B,rx:5,ry:5;
+    classDef hw fill:#94A3B8,stroke:#475569,stroke-width:2px,color:#FFFFFF;
+    classDef vm fill:#22D3EE,stroke:#0E7490,stroke-width:2px,color:#FFFFFF;
+    classDef vmm fill:#F472B6,stroke:#BE185D,stroke-width:2px,color:#FFFFFF;
+    classDef host fill:#8B5CF6,stroke:#5B21B6,stroke-width:2px,color:#FFFFFF;
+    classDef guest fill:#E0F2FE,stroke:#0284C7,stroke-width:2px,color:#0369A1;
+
+    subgraph Type1["第一类: 裸金属架构 (Type 1)"]
+        direction BT
+        HW1["硬件 (Hardware)"]:::hw
+        VMM1["虚拟机管理程序&lt;br/&gt;(Hypervisor)"]:::vmm
+        VM1_1["VM1&lt;br/&gt;(Guest OS + Apps)"]:::guest
+        VM1_2["VM2&lt;br/&gt;(Guest OS + Apps)"]:::guest
+        
+        HW1 --&gt; VMM1
+        VMM1 --&gt; VM1_1
+        VMM1 --&gt; VM1_2
+    end
+
+    subgraph Type2["第二类: 寄居架构 (Type 2)"]
+        direction BT
+        HW2["硬件 (Hardware)"]:::hw
+        HostOS["宿主操作系统&lt;br/&gt;(Host OS)"]:::host
+        VMM2["VMM 软件&lt;br/&gt;(如 VMware)"]:::vmm
+        VM2_1["VM1&lt;br/&gt;(Guest OS + Apps)"]:::guest
+        VM2_2["VM2&lt;br/&gt;(Guest OS + Apps)"]:::guest
+
+        HW2 --&gt; HostOS
+        HostOS --&gt; VMM2
+        VMM2 --&gt; VM2_1
+        VMM2 --&gt; VM2_2
+    end
+    
+    style Type1 fill:#F0FDFA,stroke:#2DD4BF,stroke-width:2px,color:#0F766E
+    style Type2 fill:#FDF4FF,stroke:#E879F9,stroke-width:2px,color:#A21CAF
+  </pre></div>
+<h3 id="两类虚拟机管理程序对比">1.6.2 两类虚拟机管理程序对比</h3>
+<ol type="1">
+<li><strong>第一类虚拟机管理程序 ( Type 1 Hypervisor / 裸金属架构 )
+</strong> :
+<ul>
+<li><strong>位置</strong> : 直接运行在物理硬件之上.</li>
+<li><strong>角色</strong> : 充当操作系统的角色，直接管理硬件资源.</li>
+<li><strong>特点</strong> : <strong>性能高</strong> ( 无 Host OS 开销 )
+，支持 <strong>特权指令</strong> 的虚拟化.</li>
+<li><strong>只有</strong> 虚拟机管理程序运行在 <strong>内核态</strong> (
+也就是它自己 ) ，Guest OS 运行在 <strong>用户态</strong> (
+但认为自己在内核态，需 VMM 捕获模拟 ) .</li>
+<li><strong>典型例子</strong> : VMware ESXi, Xen, Microsoft
+Hyper-V.</li>
+</ul></li>
+<li><strong>第二类虚拟机管理程序 ( Type 2 Hypervisor / 寄居架构 )
+</strong> :
+<ul>
+<li><strong>位置</strong> : 运行在 <strong>宿主操作系统 ( Host OS )
+</strong> 之上，作为应用程序存在.</li>
+<li><strong>角色</strong> : 依赖 Host OS 进行硬件资源管理.</li>
+<li><strong>特点</strong> : <strong>性能较低</strong> ( 多了一层 Host OS
+) ，灵活性高，易于安装.</li>
+<li><strong>典型例子</strong> : VMware Workstation, Oracle
+VirtualBox.</li>
+</ul></li>
+</ol>
+<h3 id="核心对比表">1.6.3 核心对比表</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">特性</th>
+<th style="text-align: left;">第一类 ( Type 1 )</th>
+<th style="text-align: left;">第二类 ( Type 2 )</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>运行基础</strong></td>
+<td style="text-align: left;">直接在硬件上</td>
+<td style="text-align: left;">在 Host OS 上</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>硬件资源管理</strong></td>
+<td style="text-align: left;">VMM 直接管理</td>
+<td style="text-align: left;">依赖 Host OS</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>性能</strong></td>
+<td style="text-align: left;"><strong>高</strong></td>
+<td style="text-align: left;"><strong>低</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>可迁移性</strong></td>
+<td style="text-align: left;">差 ( 依赖硬件 )</td>
+<td style="text-align: left;">好 ( 依赖 Host OS )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>主要应用</strong></td>
+<td style="text-align: left;">企业级数据中心、云平台</td>
+<td style="text-align: left;">个人开发测试、桌面虚拟化</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>•● 拓展 ●•</strong></p>
+<p><strong>容器 (Container)</strong> : 如 Docker.</p>
+<ul>
+<li><p>不模拟硬件，而是 <strong>共享 Host OS 内核</strong>.</p></li>
+<li><p>比虚拟机更轻量级，启动更快 ( 毫秒级 ) .</p></li>
+<li><p>隔离性弱于虚拟机.</p></li>
+</ul>
+</blockquote>
+<h2 id="综合应用题解析">1.7 综合应用题解析</h2>
+<h3 id="题目-01">题目 01</h3>
+<p><strong>题目描述</strong> : 有两个程序 A 和 B. 程序 A : CPU 10s -&gt;
+设备甲 5s -&gt; CPU 5s -&gt; 设备乙 10s -&gt; CPU 10s 程序 B : 设备甲
+10s -&gt; CPU 10s -&gt; 设备乙 5s -&gt; CPU 5s -&gt; 设备乙 10s</p>
+<p><strong>问题</strong> : 1. 单道程序环境下，先执行 A 再执行 B，CPU
+利用率是多少？ 2. 多道程序环境下，CPU 利用率是多少？</p>
+<details class="folding-tag"><summary> 查看答案 </summary>
+              <div class="content">
+              <p><strong>1. 单道程序环境下 (先 A 后 B)</strong></p><ul><li><strong>程序 A 执行过程</strong> :<ul><li>CPU (10s) + 甲 (5s) + CPU (5s) + 乙 (10s) + CPU (10s)</li><li>总时间 <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.345ex;" xmlns="http://www.w3.org/2000/svg" width="32.179ex" height="1.877ex" role="img" focusable="false" viewBox="0 -677 14223.2 829.7"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="mi" transform="translate(617,-152.7) scale(0.707)"><path data-c="1D434" d="M208 74Q208 50 254 46Q272 46 272 35Q272 34 270 22Q267 8 264 4T251 0Q249 0 239 0T205 1T141 2Q70 2 50 0H42Q35 7 35 11Q37 38 48 46H62Q132 49 164 96Q170 102 345 401T523 704Q530 716 547 716H555H572Q578 707 578 706L606 383Q634 60 636 57Q641 46 701 46Q726 46 726 36Q726 34 723 22Q720 7 718 4T704 0Q701 0 690 0T651 1T578 2Q484 2 455 0H443Q437 6 437 9T439 27Q443 40 445 43L449 46H469Q523 49 533 63L521 213H283L249 155Q208 86 208 74ZM516 260Q516 271 504 416T490 562L463 519Q447 492 400 412L310 260L413 259Q516 259 516 260Z"></path></g></g><g data-mml-node="mo" transform="translate(1475.1,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(2530.9,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mo" transform="translate(3753.1,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mn" transform="translate(4753.3,0)"><path data-c="35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z"></path></g><g data-mml-node="mo" transform="translate(5475.6,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mn" transform="translate(6475.8,0)"><path data-c="35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z"></path></g><g data-mml-node="mo" transform="translate(7198,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mn" transform="translate(8198.2,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mo" transform="translate(9420.4,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mn" transform="translate(10420.7,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mo" transform="translate(11698.4,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(12754.2,0)"><path data-c="34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mi" transform="translate(13754.2,0)"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g></g></g></svg></mjx-container></span></li><li>CPU 占用时间 <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.656ex;" xmlns="http://www.w3.org/2000/svg" width="25.962ex" height="2.163ex" role="img" focusable="false" viewBox="0 -666 11475.2 955.9"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D461" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"></path></g><g data-mml-node="TeXAtom" transform="translate(394,-152.7) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D434" d="M208 74Q208 50 254 46Q272 46 272 35Q272 34 270 22Q267 8 264 4T251 0Q249 0 239 0T205 1T141 2Q70 2 50 0H42Q35 7 35 11Q37 38 48 46H62Q132 49 164 96Q170 102 345 401T523 704Q530 716 547 716H555H572Q578 707 578 706L606 383Q634 60 636 57Q641 46 701 46Q726 46 726 36Q726 34 723 22Q720 7 718 4T704 0Q701 0 690 0T651 1T578 2Q484 2 455 0H443Q437 6 437 9T439 27Q443 40 445 43L449 46H469Q523 49 533 63L521 213H283L249 155Q208 86 208 74ZM516 260Q516 271 504 416T490 562L463 519Q447 492 400 412L310 260L413 259Q516 259 516 260Z"></path></g><g data-mml-node="mi" transform="translate(750,0)"><path data-c="5F" d="M0 -62V-25H499V-62H0Z"></path></g><g data-mml-node="mi" transform="translate(1250,0)"><path data-c="1D450" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"></path></g><g data-mml-node="mi" transform="translate(1683,0)"><path data-c="1D45D" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"></path></g><g data-mml-node="mi" transform="translate(2186,0)"><path data-c="1D462" d="M21 287Q21 295 30 318T55 370T99 420T158 442Q204 442 227 417T250 358Q250 340 216 246T182 105Q182 62 196 45T238 27T291 44T328 78L339 95Q341 99 377 247Q407 367 413 387T427 416Q444 431 463 431Q480 431 488 421T496 402L420 84Q419 79 419 68Q419 43 426 35T447 26Q469 29 482 57T512 145Q514 153 532 153Q551 153 551 144Q550 139 549 130T540 98T523 55T498 17T462 -8Q454 -10 438 -10Q372 -10 347 46Q345 45 336 36T318 21T296 6T267 -6T233 -11Q189 -11 155 7Q103 38 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g></g></g><g data-mml-node="mo" transform="translate(2672,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(3727.8,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mo" transform="translate(4950,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mn" transform="translate(5950.2,0)"><path data-c="35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z"></path></g><g data-mml-node="mo" transform="translate(6672.4,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mn" transform="translate(7672.6,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mo" transform="translate(8950.4,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(10006.2,0)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path><path data-c="35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z" transform="translate(500,0)"></path></g><g data-mml-node="mi" transform="translate(11006.2,0)"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g></g></g></svg></mjx-container></span></li></ul></li><li><strong>程序 B 执行过程</strong> :<ul><li>甲 (10s) + CPU (10s) + 乙 (5s) + CPU (5s) + 乙 (10s)</li><li>总时间 <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.339ex;" xmlns="http://www.w3.org/2000/svg" width="32.194ex" height="1.871ex" role="img" focusable="false" viewBox="0 -677 14229.6 827"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="mi" transform="translate(617,-150) scale(0.707)"><path data-c="1D435" d="M231 637Q204 637 199 638T194 649Q194 676 205 682Q206 683 335 683Q594 683 608 681Q671 671 713 636T756 544Q756 480 698 429T565 360L555 357Q619 348 660 311T702 219Q702 146 630 78T453 1Q446 0 242 0Q42 0 39 2Q35 5 35 10Q35 17 37 24Q42 43 47 45Q51 46 62 46H68Q95 46 128 49Q142 52 147 61Q150 65 219 339T288 628Q288 635 231 637ZM649 544Q649 574 634 600T585 634Q578 636 493 637Q473 637 451 637T416 636H403Q388 635 384 626Q382 622 352 506Q352 503 351 500L320 374H401Q482 374 494 376Q554 386 601 434T649 544ZM595 229Q595 273 572 302T512 336Q506 337 429 337Q311 337 310 336Q310 334 293 263T258 122L240 52Q240 48 252 48T333 46Q422 46 429 47Q491 54 543 105T595 229Z"></path></g></g><g data-mml-node="mo" transform="translate(1481.5,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(2537.2,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mo" transform="translate(3759.5,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mn" transform="translate(4759.7,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mo" transform="translate(5981.9,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mn" transform="translate(6982.1,0)"><path data-c="35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z"></path></g><g data-mml-node="mo" transform="translate(7704.4,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mn" transform="translate(8704.6,0)"><path data-c="35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z"></path></g><g data-mml-node="mo" transform="translate(9426.8,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mn" transform="translate(10427,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mo" transform="translate(11704.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(12760.6,0)"><path data-c="34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mi" transform="translate(13760.6,0)"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g></g></g></svg></mjx-container></span></li><li>CPU 占用时间 <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.65ex;" xmlns="http://www.w3.org/2000/svg" width="20.948ex" height="2.157ex" role="img" focusable="false" viewBox="0 -666 9259.1 953.2"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D461" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"></path></g><g data-mml-node="TeXAtom" transform="translate(394,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D435" d="M231 637Q204 637 199 638T194 649Q194 676 205 682Q206 683 335 683Q594 683 608 681Q671 671 713 636T756 544Q756 480 698 429T565 360L555 357Q619 348 660 311T702 219Q702 146 630 78T453 1Q446 0 242 0Q42 0 39 2Q35 5 35 10Q35 17 37 24Q42 43 47 45Q51 46 62 46H68Q95 46 128 49Q142 52 147 61Q150 65 219 339T288 628Q288 635 231 637ZM649 544Q649 574 634 600T585 634Q578 636 493 637Q473 637 451 637T416 636H403Q388 635 384 626Q382 622 352 506Q352 503 351 500L320 374H401Q482 374 494 376Q554 386 601 434T649 544ZM595 229Q595 273 572 302T512 336Q506 337 429 337Q311 337 310 336Q310 334 293 263T258 122L240 52Q240 48 252 48T333 46Q422 46 429 47Q491 54 543 105T595 229Z"></path></g><g data-mml-node="mi" transform="translate(759,0)"><path data-c="5F" d="M0 -62V-25H499V-62H0Z"></path></g><g data-mml-node="mi" transform="translate(1259,0)"><path data-c="1D450" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"></path></g><g data-mml-node="mi" transform="translate(1692,0)"><path data-c="1D45D" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"></path></g><g data-mml-node="mi" transform="translate(2195,0)"><path data-c="1D462" d="M21 287Q21 295 30 318T55 370T99 420T158 442Q204 442 227 417T250 358Q250 340 216 246T182 105Q182 62 196 45T238 27T291 44T328 78L339 95Q341 99 377 247Q407 367 413 387T427 416Q444 431 463 431Q480 431 488 421T496 402L420 84Q419 79 419 68Q419 43 426 35T447 26Q469 29 482 57T512 145Q514 153 532 153Q551 153 551 144Q550 139 549 130T540 98T523 55T498 17T462 -8Q454 -10 438 -10Q372 -10 347 46Q345 45 336 36T318 21T296 6T267 -6T233 -11Q189 -11 155 7Q103 38 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g></g></g><g data-mml-node="mo" transform="translate(2678.3,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(3734.1,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mo" transform="translate(4956.3,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mn" transform="translate(5956.6,0)"><path data-c="35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z"></path></g><g data-mml-node="mo" transform="translate(6734.3,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(7790.1,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z" transform="translate(500,0)"></path></g><g data-mml-node="mi" transform="translate(8790.1,0)"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g></g></g></svg></mjx-container></span></li></ul></li><li><strong>统计</strong> :<ul><li>总运行时间 <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.345ex;" xmlns="http://www.w3.org/2000/svg" width="31.578ex" height="1.877ex" role="img" focusable="false" viewBox="0 -677 13957.6 829.7"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="mo" transform="translate(981.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="msub" transform="translate(2037.6,0)"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="mi" transform="translate(617,-152.7) scale(0.707)"><path data-c="1D434" d="M208 74Q208 50 254 46Q272 46 272 35Q272 34 270 22Q267 8 264 4T251 0Q249 0 239 0T205 1T141 2Q70 2 50 0H42Q35 7 35 11Q37 38 48 46H62Q132 49 164 96Q170 102 345 401T523 704Q530 716 547 716H555H572Q578 707 578 706L606 383Q634 60 636 57Q641 46 701 46Q726 46 726 36Q726 34 723 22Q720 7 718 4T704 0Q701 0 690 0T651 1T578 2Q484 2 455 0H443Q437 6 437 9T439 27Q443 40 445 43L449 46H469Q523 49 533 63L521 213H283L249 155Q208 86 208 74ZM516 260Q516 271 504 416T490 562L463 519Q447 492 400 412L310 260L413 259Q516 259 516 260Z"></path></g></g><g data-mml-node="mo" transform="translate(3457.1,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="msub" transform="translate(4457.3,0)"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="mi" transform="translate(617,-150) scale(0.707)"><path data-c="1D435" d="M231 637Q204 637 199 638T194 649Q194 676 205 682Q206 683 335 683Q594 683 608 681Q671 671 713 636T756 544Q756 480 698 429T565 360L555 357Q619 348 660 311T702 219Q702 146 630 78T453 1Q446 0 242 0Q42 0 39 2Q35 5 35 10Q35 17 37 24Q42 43 47 45Q51 46 62 46H68Q95 46 128 49Q142 52 147 61Q150 65 219 339T288 628Q288 635 231 637ZM649 544Q649 574 634 600T585 634Q578 636 493 637Q473 637 451 637T416 636H403Q388 635 384 626Q382 622 352 506Q352 503 351 500L320 374H401Q482 374 494 376Q554 386 601 434T649 544ZM595 229Q595 273 572 302T512 336Q506 337 429 337Q311 337 310 336Q310 334 293 263T258 122L240 52Q240 48 252 48T333 46Q422 46 429 47Q491 54 543 105T595 229Z"></path></g></g><g data-mml-node="mo" transform="translate(5938.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(6994.6,0)"><path data-c="34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mi" transform="translate(7994.6,0)"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g><g data-mml-node="mo" transform="translate(8685.8,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mn" transform="translate(9686,0)"><path data-c="34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mi" transform="translate(10686,0)"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g><g data-mml-node="mo" transform="translate(11432.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(12488.6,0)"><path data-c="38" d="M70 417T70 494T124 618T248 666Q319 666 374 624T429 515Q429 485 418 459T392 417T361 389T335 371T324 363L338 354Q352 344 366 334T382 323Q457 264 457 174Q457 95 399 37T249 -22Q159 -22 101 29T43 155Q43 263 172 335L154 348Q133 361 127 368Q70 417 70 494ZM286 386L292 390Q298 394 301 396T311 403T323 413T334 425T345 438T355 454T364 471T369 491T371 513Q371 556 342 586T275 624Q268 625 242 625Q201 625 165 599T128 534Q128 511 141 492T167 463T217 431Q224 426 228 424L286 386ZM250 21Q308 21 350 55T392 137Q392 154 387 169T375 194T353 216T330 234T301 253T274 270Q260 279 244 289T218 306L210 311Q204 311 181 294T133 239T107 157Q107 98 150 60T250 21Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mi" transform="translate(13488.6,0)"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g></g></g></svg></mjx-container></span></li><li>总 CPU 时间 <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.65ex;" xmlns="http://www.w3.org/2000/svg" width="22.187ex" height="2.181ex" role="img" focusable="false" viewBox="0 -677 9806.9 964.2"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D461" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"></path></g><g data-mml-node="TeXAtom" transform="translate(394,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D450" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"></path></g><g data-mml-node="mi" transform="translate(433,0)"><path data-c="1D45D" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"></path></g><g data-mml-node="mi" transform="translate(936,0)"><path data-c="1D462" d="M21 287Q21 295 30 318T55 370T99 420T158 442Q204 442 227 417T250 358Q250 340 216 246T182 105Q182 62 196 45T238 27T291 44T328 78L339 95Q341 99 377 247Q407 367 413 387T427 416Q444 431 463 431Q480 431 488 421T496 402L420 84Q419 79 419 68Q419 43 426 35T447 26Q469 29 482 57T512 145Q514 153 532 153Q551 153 551 144Q550 139 549 130T540 98T523 55T498 17T462 -8Q454 -10 438 -10Q372 -10 347 46Q345 45 336 36T318 21T296 6T267 -6T233 -11Q189 -11 155 7Q103 38 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g></g></g><g data-mml-node="mo" transform="translate(1788.1,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(2843.9,0)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path><path data-c="35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z" transform="translate(500,0)"></path></g><g data-mml-node="mi" transform="translate(3843.9,0)"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g><g data-mml-node="mo" transform="translate(4535.1,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mn" transform="translate(5535.3,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z" transform="translate(500,0)"></path></g><g data-mml-node="mi" transform="translate(6535.3,0)"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g><g data-mml-node="mo" transform="translate(7282.1,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(8337.9,0)"><path data-c="34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mi" transform="translate(9337.9,0)"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g></g></g></svg></mjx-container></span></li><li><strong>CPU 利用率</strong> = <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="14.942ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 6604.6 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mn"><path data-c="34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mi" transform="translate(1000,0)"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(1469,0)"><g data-mml-node="mo"><path data-c="2F" d="M423 750Q432 750 438 744T444 730Q444 725 271 248T92 -240Q85 -250 75 -250Q68 -250 62 -245T56 -231Q56 -221 230 257T407 740Q411 750 423 750Z"></path></g></g><g data-mml-node="mn" transform="translate(1969,0)"><path data-c="38" d="M70 417T70 494T124 618T248 666Q319 666 374 624T429 515Q429 485 418 459T392 417T361 389T335 371T324 363L338 354Q352 344 366 334T382 323Q457 264 457 174Q457 95 399 37T249 -22Q159 -22 101 29T43 155Q43 263 172 335L154 348Q133 361 127 368Q70 417 70 494ZM286 386L292 390Q298 394 301 396T311 403T323 413T334 425T345 438T355 454T364 471T369 491T371 513Q371 556 342 586T275 624Q268 625 242 625Q201 625 165 599T128 534Q128 511 141 492T167 463T217 431Q224 426 228 424L286 386ZM250 21Q308 21 350 55T392 137Q392 154 387 169T375 194T353 216T330 234T301 253T274 270Q260 279 244 289T218 306L210 311Q204 311 181 294T133 239T107 157Q107 98 150 60T250 21Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mi" transform="translate(2969,0)"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g><g data-mml-node="mo" transform="translate(3715.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(4771.6,0)"><path data-c="35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mi" transform="translate(5771.6,0)"><path data-c="25" d="M465 605Q428 605 394 614T340 632T319 641Q332 608 332 548Q332 458 293 403T202 347Q145 347 101 402T56 548Q56 637 101 693T202 750Q241 750 272 719Q359 642 464 642Q580 642 650 732Q662 748 668 749Q670 750 673 750Q682 750 688 743T693 726Q178 -47 170 -52Q166 -56 160 -56Q147 -56 142 -45Q137 -36 142 -27Q143 -24 363 304Q469 462 525 546T581 630Q528 605 465 605ZM207 385Q235 385 263 427T292 548Q292 617 267 664T200 712Q193 712 186 709T167 698T147 668T134 615Q132 595 132 548V527Q132 436 165 403Q183 385 203 385H207ZM500 146Q500 234 544 290T647 347Q699 347 737 292T776 146T737 0T646 -56Q590 -56 545 0T500 146ZM651 -18Q679 -18 707 24T736 146Q736 215 711 262T644 309Q637 309 630 306T611 295T591 265T578 212Q577 200 577 146V124Q577 -18 647 -18H651Z"></path></g></g></g></svg></mjx-container></span></li></ul></li></ul><p><strong>2. 多道程序环境下 (并发执行)</strong></p><p>假设 A、B 同时开始 (或 B 的第一步 I/O 可与 A 的第一步 CPU 并行) :</p><table><colgroup><col style="width: 20%"><col style="width: 20%"><col style="width: 20%"><col style="width: 20%"><col style="width: 20%"></colgroup><thead><tr><th style="text-align: left;">时间段 (s)</th><th style="text-align: left;">CPU</th><th style="text-align: left;">设备甲</th><th style="text-align: left;">设备乙</th><th style="text-align: left;">说明</th></tr></thead><tbody><tr><td style="text-align: left;"><strong>0 ~ 10</strong></td><td style="text-align: left;"><strong>A (10s)</strong></td><td style="text-align: left;"><strong>B (10s)</strong></td><td style="text-align: left;">-</td><td style="text-align: left;">A 用 CPU，B 用甲，并行</td></tr><tr><td style="text-align: left;"><strong>10 ~ 15</strong></td><td style="text-align: left;"><strong>B (5s)</strong></td><td style="text-align: left;"><strong>A (5s)</strong></td><td style="text-align: left;">-</td><td style="text-align: left;">B 需 10s CPU，这里先跑 5s；A 用甲</td></tr><tr><td style="text-align: left;"><strong>15 ~ 20</strong></td><td style="text-align: left;"><strong>B (5s)</strong></td><td style="text-align: left;">-</td><td style="text-align: left;">-</td><td style="text-align: left;">B 继续跑完剩 5s CPU；A 等待 CPU</td></tr><tr><td style="text-align: left;"><strong>20 ~ 25</strong></td><td style="text-align: left;"><strong>A (5s)</strong></td><td style="text-align: left;">-</td><td style="text-align: left;"><strong>B (5s)</strong></td><td style="text-align: left;">A 用 CPU；B 用乙，并行</td></tr><tr><td style="text-align: left;"><strong>25 ~ 30</strong></td><td style="text-align: left;"><strong>B (5s)</strong></td><td style="text-align: left;">-</td><td style="text-align: left;"><strong>A (5s)</strong></td><td style="text-align: left;">B 用 CPU；A 需 10s 乙，先跑 5s</td></tr><tr><td style="text-align: left;"><strong>30 ~ 35</strong></td><td style="text-align: left;">空闲</td><td style="text-align: left;">-</td><td style="text-align: left;"><strong>A (5s)</strong></td><td style="text-align: left;">A 继续跑完剩 5s 乙；B 需乙，等待</td></tr><tr><td style="text-align: left;"><strong>35 ~ 45</strong></td><td style="text-align: left;"><strong>A (10s)</strong></td><td style="text-align: left;">-</td><td style="text-align: left;"><strong>B (10s)</strong></td><td style="text-align: left;">A 用 CPU (最后 10s)；B 用乙 (最后10s)</td></tr></tbody></table><ul><li><strong>统计</strong> :<ul><li>程序全部结束时间 : 45s</li><li>CPU 忙碌时间段 : 0~20s (20s), 20~30s (10s), 35~45s (10s) <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="2.262ex" height="1.181ex" role="img" focusable="false" viewBox="0 -511 1000 522"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="2192" d="M56 237T56 250T70 270H835Q719 357 692 493Q692 494 692 496T691 499Q691 511 708 511H711Q720 511 723 510T729 506T732 497T735 481T743 456Q765 389 816 336T935 261Q944 258 944 250Q944 244 939 241T915 231T877 212Q836 186 806 152T761 85T740 35T732 4Q730 -6 727 -8T711 -11Q691 -11 691 0Q691 7 696 25Q728 151 835 230H70Q56 237 56 250Z"></path></g></g></g></svg></mjx-container></span> 总计 40s</li><li><strong>CPU 利用率</strong> = <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="16.703ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 7382.6 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mn"><path data-c="34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mi" transform="translate(1000,0)"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(1469,0)"><g data-mml-node="mo"><path data-c="2F" d="M423 750Q432 750 438 744T444 730Q444 725 271 248T92 -240Q85 -250 75 -250Q68 -250 62 -245T56 -231Q56 -221 230 257T407 740Q411 750 423 750Z"></path></g></g><g data-mml-node="mn" transform="translate(1969,0)"><path data-c="34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"></path><path data-c="35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z" transform="translate(500,0)"></path></g><g data-mml-node="mi" transform="translate(2969,0)"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g><g data-mml-node="mo" transform="translate(3715.8,0)"><path data-c="2248" d="M55 319Q55 360 72 393T114 444T163 472T205 482Q207 482 213 482T223 483Q262 483 296 468T393 413L443 381Q502 346 553 346Q609 346 649 375T694 454Q694 465 698 474T708 483Q722 483 722 452Q722 386 675 338T555 289Q514 289 468 310T388 357T308 404T224 426Q164 426 125 393T83 318Q81 289 69 289Q55 289 55 319ZM55 85Q55 126 72 159T114 210T163 238T205 248Q207 248 213 248T223 249Q262 249 296 234T393 179L443 147Q502 112 553 112Q609 112 649 141T694 220Q694 249 708 249T722 217Q722 153 675 104T555 55Q514 55 468 76T388 123T308 170T224 192Q164 192 125 159T83 84Q80 55 69 55Q55 55 55 85Z"></path></g><g data-mml-node="mn" transform="translate(4771.6,0)"><path data-c="38" d="M70 417T70 494T124 618T248 666Q319 666 374 624T429 515Q429 485 418 459T392 417T361 389T335 371T324 363L338 354Q352 344 366 334T382 323Q457 264 457 174Q457 95 399 37T249 -22Q159 -22 101 29T43 155Q43 263 172 335L154 348Q133 361 127 368Q70 417 70 494ZM286 386L292 390Q298 394 301 396T311 403T323 413T334 425T345 438T355 454T364 471T369 491T371 513Q371 556 342 586T275 624Q268 625 242 625Q201 625 165 599T128 534Q128 511 141 492T167 463T217 431Q224 426 228 424L286 386ZM250 21Q308 21 350 55T392 137Q392 154 387 169T375 194T353 216T330 234T301 253T274 270Q260 279 244 289T218 306L210 311Q204 311 181 294T133 239T107 157Q107 98 150 60T250 21Z"></path><path data-c="38" d="M70 417T70 494T124 618T248 666Q319 666 374 624T429 515Q429 485 418 459T392 417T361 389T335 371T324 363L338 354Q352 344 366 334T382 323Q457 264 457 174Q457 95 399 37T249 -22Q159 -22 101 29T43 155Q43 263 172 335L154 348Q133 361 127 368Q70 417 70 494ZM286 386L292 390Q298 394 301 396T311 403T323 413T334 425T345 438T355 454T364 471T369 491T371 513Q371 556 342 586T275 624Q268 625 242 625Q201 625 165 599T128 534Q128 511 141 492T167 463T217 431Q224 426 228 424L286 386ZM250 21Q308 21 350 55T392 137Q392 154 387 169T375 194T353 216T330 234T301 253T274 270Q260 279 244 289T218 306L210 311Q204 311 181 294T133 239T107 157Q107 98 150 60T250 21Z" transform="translate(500,0)"></path><path data-c="2E" d="M78 60Q78 84 95 102T138 120Q162 120 180 104T199 61Q199 36 182 18T139 0T96 17T78 60Z" transform="translate(1000,0)"></path><path data-c="39" d="M352 287Q304 211 232 211Q154 211 104 270T44 396Q42 412 42 436V444Q42 537 111 606Q171 666 243 666Q245 666 249 666T257 665H261Q273 665 286 663T323 651T370 619T413 560Q456 472 456 334Q456 194 396 97Q361 41 312 10T208 -22Q147 -22 108 7T68 93T121 149Q143 149 158 135T173 96Q173 78 164 65T148 49T135 44L131 43Q131 41 138 37T164 27T206 22H212Q272 22 313 86Q352 142 352 280V287ZM244 248Q292 248 321 297T351 430Q351 508 343 542Q341 552 337 562T323 588T293 615T246 625Q208 625 181 598Q160 576 154 546T147 441Q147 358 152 329T172 282Q197 248 244 248Z" transform="translate(1278,0)"></path></g><g data-mml-node="mi" transform="translate(6549.6,0)"><path data-c="25" d="M465 605Q428 605 394 614T340 632T319 641Q332 608 332 548Q332 458 293 403T202 347Q145 347 101 402T56 548Q56 637 101 693T202 750Q241 750 272 719Q359 642 464 642Q580 642 650 732Q662 748 668 749Q670 750 673 750Q682 750 688 743T693 726Q178 -47 170 -52Q166 -56 160 -56Q147 -56 142 -45Q137 -36 142 -27Q143 -24 363 304Q469 462 525 546T581 630Q528 605 465 605ZM207 385Q235 385 263 427T292 548Q292 617 267 664T200 712Q193 712 186 709T167 698T147 668T134 615Q132 595 132 548V527Q132 436 165 403Q183 385 203 385H207ZM500 146Q500 234 544 290T647 347Q699 347 737 292T776 146T737 0T646 -56Q590 -56 545 0T500 146ZM651 -18Q679 -18 707 24T736 146Q736 215 711 262T644 309Q637 309 630 306T611 295T591 265T578 212Q577 200 577 146V124Q577 -18 647 -18H651Z"></path></g></g></g></svg></mjx-container></span></li></ul></li></ul>
+              </div>
+            </details>
+<h3 id="题目-02">题目 02</h3>
+<p><strong>题目描述</strong> : 进程 A : 计算 50ms -&gt; 打印 100ms -&gt;
+再计算 50ms -&gt; 打印 100ms -&gt; 结束 进程 B : 计算 50ms -&gt; 输入
+80ms -&gt; 再计算 100ms -&gt; 结束 A 先得到 CPU 运行.</p>
+<p><strong>问题</strong> : 1. 运行后 CPU 有无空闲等待？计算 CPU 利用率.
+2. 进程 A 有无等待？何时？ 3. 进程 B 有无等待？何时？</p>
+<details class="folding-tag"><summary> 查看答案 </summary>
+              <div class="content">
+              <p><strong>甘特图分析</strong></p><table><colgroup><col style="width: 20%"><col style="width: 20%"><col style="width: 20%"><col style="width: 20%"><col style="width: 20%"></colgroup><thead><tr><th style="text-align: left;">时间 (ms)</th><th style="text-align: left;">CPU</th><th style="text-align: left;">打印机 (A用)</th><th style="text-align: left;">输入设备 (B用)</th><th style="text-align: left;">状态说明</th></tr></thead><tbody><tr><td style="text-align: left;"><strong>0 ~ 50</strong></td><td style="text-align: left;"><strong>A (50)</strong></td><td style="text-align: left;">-</td><td style="text-align: left;">-</td><td style="text-align: left;">A 运行，B 等待 CPU</td></tr><tr><td style="text-align: left;"><strong>50 ~ 100</strong></td><td style="text-align: left;"><strong>B (50)</strong></td><td style="text-align: left;"><strong>A (50)</strong></td><td style="text-align: left;">-</td><td style="text-align: left;">A 请求打印释放 CPU，B 获得 CPU</td></tr><tr><td style="text-align: left;"><strong>100 ~ 150</strong></td><td style="text-align: left;"><strong>空闲</strong></td><td style="text-align: left;"><strong>A (50)</strong></td><td style="text-align: left;"><strong>B (50)</strong></td><td style="text-align: left;">B 请求输入释放 CPU；A 仍在打印；CPU无进程可跑</td></tr><tr><td style="text-align: left;"><strong>150 ~ 180</strong></td><td style="text-align: left;"><strong>A (30)</strong></td><td style="text-align: left;">-</td><td style="text-align: left;"><strong>B (30)</strong></td><td style="text-align: left;">A 打印结束申请 CPU，获得 CPU；B仍在输入</td></tr><tr><td style="text-align: left;"><strong>180 ~ 200</strong></td><td style="text-align: left;"><strong>A (20)</strong></td><td style="text-align: left;">-</td><td style="text-align: left;">-</td><td style="text-align: left;">B 输入结束申请 CPU，但 A 正在运行(非抢占)，B 等待</td></tr><tr><td style="text-align: left;"><strong>200 ~ 300</strong></td><td style="text-align: left;"><strong>B (100)</strong></td><td style="text-align: left;"><strong>A (100)</strong></td><td style="text-align: left;">-</td><td style="text-align: left;">A 再次请求打印释放 CPU，B 获得 CPU</td></tr><tr><td style="text-align: left;"><strong>300</strong></td><td style="text-align: left;">-</td><td style="text-align: left;">-</td><td style="text-align: left;">-</td><td style="text-align: left;">A、B 同时结束</td></tr></tbody></table><p><strong>解答</strong> :</p><ol type="1"><li><strong>CPU 有无空闲等待？</strong><ul><li><strong>有</strong>.</li><li><strong>时间段</strong> : 在 <strong>100ms ~ 150ms</strong> 期间，A在打印，B 在输入，无进程需要 CPU.</li><li><strong>CPU 利用率</strong> :<ul><li>总时间 = 300ms</li><li>CPU 忙碌时间 = 50(A) + 50(B) + 50(A) + 100(B) = 250ms</li><li>利用率 = <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="16.843ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 7444.6 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path><path data-c="35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z" transform="translate(500,0)"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(1000,0)"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(1500,0)"><g data-mml-node="mo"><path data-c="2F" d="M423 750Q432 750 438 744T444 730Q444 725 271 248T92 -240Q85 -250 75 -250Q68 -250 62 -245T56 -231Q56 -221 230 257T407 740Q411 750 423 750Z"></path></g></g><g data-mml-node="mn" transform="translate(2000,0)"><path data-c="33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(1000,0)"></path></g><g data-mml-node="mo" transform="translate(3777.8,0)"><path data-c="2248" d="M55 319Q55 360 72 393T114 444T163 472T205 482Q207 482 213 482T223 483Q262 483 296 468T393 413L443 381Q502 346 553 346Q609 346 649 375T694 454Q694 465 698 474T708 483Q722 483 722 452Q722 386 675 338T555 289Q514 289 468 310T388 357T308 404T224 426Q164 426 125 393T83 318Q81 289 69 289Q55 289 55 319ZM55 85Q55 126 72 159T114 210T163 238T205 248Q207 248 213 248T223 249Q262 249 296 234T393 179L443 147Q502 112 553 112Q609 112 649 141T694 220Q694 249 708 249T722 217Q722 153 675 104T555 55Q514 55 468 76T388 123T308 170T224 192Q164 192 125 159T83 84Q80 55 69 55Q55 55 55 85Z"></path></g><g data-mml-node="mn" transform="translate(4833.6,0)"><path data-c="38" d="M70 417T70 494T124 618T248 666Q319 666 374 624T429 515Q429 485 418 459T392 417T361 389T335 371T324 363L338 354Q352 344 366 334T382 323Q457 264 457 174Q457 95 399 37T249 -22Q159 -22 101 29T43 155Q43 263 172 335L154 348Q133 361 127 368Q70 417 70 494ZM286 386L292 390Q298 394 301 396T311 403T323 413T334 425T345 438T355 454T364 471T369 491T371 513Q371 556 342 586T275 624Q268 625 242 625Q201 625 165 599T128 534Q128 511 141 492T167 463T217 431Q224 426 228 424L286 386ZM250 21Q308 21 350 55T392 137Q392 154 387 169T375 194T353 216T330 234T301 253T274 270Q260 279 244 289T218 306L210 311Q204 311 181 294T133 239T107 157Q107 98 150 60T250 21Z"></path><path data-c="33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z" transform="translate(500,0)"></path><path data-c="2E" d="M78 60Q78 84 95 102T138 120Q162 120 180 104T199 61Q199 36 182 18T139 0T96 17T78 60Z" transform="translate(1000,0)"></path><path data-c="33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z" transform="translate(1278,0)"></path></g><g data-mml-node="mi" transform="translate(6611.6,0)"><path data-c="25" d="M465 605Q428 605 394 614T340 632T319 641Q332 608 332 548Q332 458 293 403T202 347Q145 347 101 402T56 548Q56 637 101 693T202 750Q241 750 272 719Q359 642 464 642Q580 642 650 732Q662 748 668 749Q670 750 673 750Q682 750 688 743T693 726Q178 -47 170 -52Q166 -56 160 -56Q147 -56 142 -45Q137 -36 142 -27Q143 -24 363 304Q469 462 525 546T581 630Q528 605 465 605ZM207 385Q235 385 263 427T292 548Q292 617 267 664T200 712Q193 712 186 709T167 698T147 668T134 615Q132 595 132 548V527Q132 436 165 403Q183 385 203 385H207ZM500 146Q500 234 544 290T647 347Q699 347 737 292T776 146T737 0T646 -56Q590 -56 545 0T500 146ZM651 -18Q679 -18 707 24T736 146Q736 215 711 262T644 309Q637 309 630 306T611 295T591 265T578 212Q577 200 577 146V124Q577 -18 647 -18H651Z"></path></g></g></g></svg></mjx-container></span></li></ul></li></ul></li><li><strong>进程 A 有无等待？</strong><ul><li><strong>无</strong>.</li><li>A 每次 I/O 完成后都能立即获得 CPU (150ms 时 CPU 空闲；200ms 时释放CPU 去打印).</li></ul></li><li><strong>进程 B 有无等待？</strong><ul><li><strong>有</strong>.</li><li><strong>第一次等待</strong> : <strong>0 ~ 50ms</strong> (等待 A 释放CPU).</li><li><strong>第二次等待</strong> : <strong>180 ~ 200ms</strong> (B输入完成请求 CPU，但 A 尚未执行完，需等待 A 释放).</li></ul></li></ol>
+              </div>
+            </details>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">sparkle520</div><div class="post-copyright__author_desc">我一直都在寻找着什么</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="http://example.com/2025/12/22/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F1/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('http://example.com/2025/12/22/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F1/')">408-操作系统-1-计算机系统概述</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="http://example.com/2025/12/22/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F1/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=408-操作系统-1-计算机系统概述&amp;url=http://example.com/2025/12/22/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F1/&amp;pic=https://pic1.imgdb.cn/item/69492a76c154427986d991c5.png" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">SPARKLE</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>操作系统<span class="tagsPageCount">5</span></a><a class="post-meta__box__tags" href="/tags/408/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>408<span class="tagsPageCount">5</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://pic1.imgdb.cn/item/694c121e26657af64c6d8a6d.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2025/12/20/%E6%B1%87%E7%BC%969/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/693ecba3696670b0b659cfae.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">汇编-9-BIOS和DOS中断</div></div></a></div><div class="next-post pull-right"><a href="/2025/12/23/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F2/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492ebfc154427986d9c262.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">408-操作系统-2-进程与线程</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2025/12/23/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F2/" title="408-操作系统-2-进程与线程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492ebfc154427986d9c262.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-23</div><div class="title">408-操作系统-2-进程与线程</div></div></a></div><div><a href="/2025/12/25/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F3/" title="408-操作系统-3-内存管理"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492cd6c154427986d9b19e.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-25</div><div class="title">408-操作系统-3-内存管理</div></div></a></div><div><a href="/2025/12/25/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F4/" title="408-操作系统-4-文件管理"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/6951243ca0c391c56de5e622.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-25</div><div class="title">408-操作系统-4-文件管理</div></div></a></div><div><a href="/2025/12/26/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F5/" title="408-操作系统-5-输入&#x2F;输出管理"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492e4cc154427986d9be8f.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-26</div><div class="title">408-操作系统-5-输入&#x2F;输出管理</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/671cfe2fd29ded1a8c5ffb0b.png" alt="status"/></div></div><div class="author-info__description">不管你在<strong style="color:white">这个世界</strong>的哪个地方，我一定<strong style="color:white">会</strong>，再次去<strong style="color:white">见</strong>你的!</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">sparkle520</h1><div class="author-info__desc">我一直都在寻找着什么</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/sparkle520" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/34882250" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">Hello World! 欢迎来到我的博客~</div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://pic.imgdb.cn/item/66c487f1d9c307b7e9ba5c7a.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://pic.imgdb.cn/item/66c487ebd9c307b7e9ba5725.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC1%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">第1章 计算机系统概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 操作系统的基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1.1 操作系统的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%8A%9F%E8%83%BD%E5%92%8C%E7%9B%AE%E6%A0%87"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.1.2 操作系统的功能和目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%89%B9%E5%BE%81"><span class="toc-number">1.1.3.</span> <span class="toc-text">1.1.3 操作系统的特征</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 操作系统的发展历程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%B7%A5%E6%93%8D%E4%BD%9C%E9%98%B6%E6%AE%B5-%E6%AD%A4%E9%98%B6%E6%AE%B5%E6%97%A0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.2.1 手工操作阶段 (
+此阶段无操作系统 )</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%B9%E5%A4%84%E7%90%86%E9%98%B6%E6%AE%B5-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%A7%8B%E5%87%BA%E7%8E%B0"><span class="toc-number">1.2.2.</span> <span class="toc-text">1.2.2 批处理阶段 ( 操作系统开始出现
+)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.2.3.</span> <span class="toc-text">1.2.3 分时操作系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.2.4.</span> <span class="toc-text">1.2.4 实时操作系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.2.5.</span> <span class="toc-text">1.2.5
+网络操作系统和分布式计算机系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AA%E4%BA%BA%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.2.6.</span> <span class="toc-text">1.2.6 个人计算机操作系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E8%8A%82%E5%B0%8F%E7%BB%93-%E4%B8%89%E7%A7%8D%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%B9%E6%AF%94"><span class="toc-number">1.2.7.</span> <span class="toc-text">1.2.7 本节小结 :
+三种基本操作系统对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 操作系统的运行环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.1.</span> <span class="toc-text">1.3.1 处理器运行模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E5%92%8C%E5%BC%82%E5%B8%B8%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">1.3.2.</span> <span class="toc-text">1.3.2 中断和异常的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">1.3.3.</span> <span class="toc-text">1.3.3 系统调用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84"><span class="toc-number">1.4.</span> <span class="toc-text">1.4 操作系统结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84"><span class="toc-number">1.4.1.</span> <span class="toc-text">1.4.1 分层结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96%E7%BB%93%E6%9E%84"><span class="toc-number">1.4.2.</span> <span class="toc-text">1.4.2 模块化结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8F%E5%86%85%E6%A0%B8-monolithic-kernel"><span class="toc-number">1.4.3.</span> <span class="toc-text">1.4.3 宏内核 ( Monolithic Kernel
+)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AE%E5%86%85%E6%A0%B8-microkernel"><span class="toc-number">1.4.4.</span> <span class="toc-text">1.4.4 微内核 ( Microkernel )</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B7%E5%90%88%E6%B7%B7%E5%90%88%E5%86%85%E6%A0%B8-hybrid-kernel"><span class="toc-number">1.4.5.</span> <span class="toc-text">1.4.5 混合&#x2F;混合内核 ( Hybrid Kernel
+)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%96%E6%A0%B8-exokernel"><span class="toc-number">1.4.6.</span> <span class="toc-text">1.4.6 外核 ( Exokernel )</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E5%AF%B9%E6%AF%94%E9%80%9F%E6%9F%A5"><span class="toc-number">1.4.7.</span> <span class="toc-text">1.4.7 结构对比速查</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%BC%95%E5%AF%BC-boot"><span class="toc-number">1.5.</span> <span class="toc-text">1.5 操作系统引导 (Boot)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%A6%E7%BB%86%E5%BC%95%E5%AF%BC%E8%BF%87%E7%A8%8B"><span class="toc-number">1.5.1.</span> <span class="toc-text">1.5.1 详细引导过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA-virtual-machine"><span class="toc-number">1.6.</span> <span class="toc-text">1.6 虚拟机 (Virtual Machine)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.6.1.</span> <span class="toc-text">1.6.1 虚拟机的基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E7%B1%BB%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AE%A1%E7%90%86%E7%A8%8B%E5%BA%8F%E5%AF%B9%E6%AF%94"><span class="toc-number">1.6.2.</span> <span class="toc-text">1.6.2 两类虚拟机管理程序对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%AF%B9%E6%AF%94%E8%A1%A8"><span class="toc-number">1.6.3.</span> <span class="toc-text">1.6.3 核心对比表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8%E9%A2%98%E8%A7%A3%E6%9E%90"><span class="toc-number">1.7.</span> <span class="toc-text">1.7 综合应用题解析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-01"><span class="toc-number">1.7.1.</span> <span class="toc-text">题目 01</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-02"><span class="toc-number">1.7.2.</span> <span class="toc-text">题目 02</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/12/29/%E6%B5%81%E7%A8%8B%E5%9B%BE/" title="Mermaid 流程图 ( Flowchart ) 绘制指南"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/694c121e26657af64c6d8a6d.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Mermaid 流程图 ( Flowchart ) 绘制指南"/></a><div class="content"><a class="title" href="/2025/12/29/%E6%B5%81%E7%A8%8B%E5%9B%BE/" title="Mermaid 流程图 ( Flowchart ) 绘制指南">Mermaid 流程图 ( Flowchart ) 绘制指南</a><time datetime="2025-12-29T15:00:27.000Z" title="发表于 2025-12-29 23:00:27">2025-12-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/12/29/%E7%94%98%E7%89%B9%E5%9B%BE/" title="Mermaid 甘特图 ( Gantt Diagram )  绘制指南"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/694c06e626657af64c6d7b33.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Mermaid 甘特图 ( Gantt Diagram )  绘制指南"/></a><div class="content"><a class="title" href="/2025/12/29/%E7%94%98%E7%89%B9%E5%9B%BE/" title="Mermaid 甘特图 ( Gantt Diagram )  绘制指南">Mermaid 甘特图 ( Gantt Diagram )  绘制指南</a><time datetime="2025-12-29T15:00:27.000Z" title="发表于 2025-12-29 23:00:27">2025-12-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/12/29/%E6%97%B6%E5%BA%8F%E5%9B%BE/" title="Mermaid 时序图 ( Sequence Diagram ) 绘制指南"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/694ce28fe1fec22f27d62e42.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Mermaid 时序图 ( Sequence Diagram ) 绘制指南"/></a><div class="content"><a class="title" href="/2025/12/29/%E6%97%B6%E5%BA%8F%E5%9B%BE/" title="Mermaid 时序图 ( Sequence Diagram ) 绘制指南">Mermaid 时序图 ( Sequence Diagram ) 绘制指南</a><time datetime="2025-12-29T15:00:27.000Z" title="发表于 2025-12-29 23:00:27">2025-12-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/12/26/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F5/" title="408-操作系统-5-输入/输出管理"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492e4cc154427986d9be8f.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-操作系统-5-输入/输出管理"/></a><div class="content"><a class="title" href="/2025/12/26/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F5/" title="408-操作系统-5-输入/输出管理">408-操作系统-5-输入/输出管理</a><time datetime="2025-12-26T15:00:27.000Z" title="发表于 2025-12-26 23:00:27">2025-12-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/12/25/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F4/" title="408-操作系统-4-文件管理"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/6951243ca0c391c56de5e622.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-操作系统-4-文件管理"/></a><div class="content"><a class="title" href="/2025/12/25/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F4/" title="408-操作系统-4-文件管理">408-操作系统-4-文件管理</a><time datetime="2025-12-25T15:00:27.000Z" title="发表于 2025-12-25 23:00:27">2025-12-25</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  if (true) { 
+    window.typed = new Typed("#footer-type-tips", {
+      strings: ["只要记住你的名字&#44; 不管你在世界的哪个地方&#44; 我一定&#44; 会去见你 !"],
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50
+    })
+  } else {
+    document.getElementById("footer-type-tips").innerHTML = '只要记住你的名字&#44; 不管你在世界的哪个地方&#44; 我一定&#44; 会去见你 !'
+  }
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.cbd.int/typed.js@2.1.0/dist/typed.umd.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/sparkle520" title="sparkle">sparkle</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">77</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">51</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">7</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/sparkle520?tab=repositories" title="github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="github"/><span class="back-menu-item-text">github</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AOP/" style="font-size: 0.88rem;">AOP<sup>1</sup></a><a href="/tags/Deep-Learning/" style="font-size: 0.88rem;">Deep Learning<sup>1</sup></a><a href="/tags/IoC/" style="font-size: 0.88rem;">IoC<sup>1</sup></a><a href="/tags/JSR303/" style="font-size: 0.88rem;">JSR303<sup>1</sup></a><a href="/tags/Matplotlib/" style="font-size: 0.88rem;">Matplotlib<sup>3</sup></a><a href="/tags/c/" style="font-size: 0.88rem;">c#<sup>2</sup></a><a href="/tags/java/" style="font-size: 0.88rem;">java<sup>4</sup></a><a href="/tags/npc%E5%88%86%E6%9E%90%E6%B3%95/" style="font-size: 0.88rem;">npc分析法<sup>1</sup></a><a href="/tags/python/" style="font-size: 0.88rem;">python<sup>5</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 0.88rem;">事务<sup>1</sup></a><a href="/tags/%E4%BA%8C%E6%AC%A1%E5%9E%8B/" style="font-size: 0.88rem;">二次型<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E3%80%82/" style="font-size: 0.88rem;">你的名字。<sup>3</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">你的名字同名小说<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%A4%96%E4%BC%A0%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">你的名字外传小说<sup>1</sup></a><a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size: 0.88rem;">写作<sup>4</sup></a><a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 0.88rem;">包管理<sup>1</sup></a><a href="/tags/%E5%8D%B7%E7%A7%AF%E5%85%AC%E5%BC%8F/" style="font-size: 0.88rem;">卷积公式<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90/" style="font-size: 0.88rem;">天气之子<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">天气之子同名小说<sup>1</sup></a><a href="/tags/%E5%AE%9A%E7%A7%AF%E5%88%86/" style="font-size: 0.88rem;">定积分<sup>1</sup></a><a href="/tags/%E5%AF%BC%E6%95%B0%E4%B8%8E%E5%BE%AE%E5%88%86/" style="font-size: 0.88rem;">导数与微分<sup>1</sup></a><a href="/tags/%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">小说<sup>3</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" style="font-size: 0.88rem;">数据校验<sup>1</sup></a><a href="/tags/%E6%9E%81%E9%99%90/" style="font-size: 0.88rem;">极限<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 0.88rem;">概率论<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 0.88rem;">概率论与数理统计<sup>7</sup></a><a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 0.88rem;">汇编<sup>9</sup></a><a href="/tags/%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80/" style="font-size: 0.88rem;">泰勒展开<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%80%BC/" style="font-size: 0.88rem;">特征值<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F/" style="font-size: 0.88rem;">特征向量<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" style="font-size: 0.88rem;">网络层<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 0.88rem;">英语<sup>2</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E5%90%AC%E5%8A%9B/" style="font-size: 0.88rem;">英语听力<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95/" style="font-size: 0.88rem;">英语语法<sup>11</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95%EF%BC%8C%E5%80%92%E8%A3%85%E7%BB%93%E6%9E%84%EF%BC%8C%E8%AF%AD%E6%B3%95%E8%BF%9B%E9%98%B6/" style="font-size: 0.88rem;">英语语法，倒装结构，语法进阶<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 0.88rem;">计算机组成原理<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 0.88rem;">计算机网络<sup>1</sup></a><a href="/tags/%E8%AF%8D%E6%A0%B9%E8%AF%8D%E7%BC%80/" style="font-size: 0.88rem;">词根词缀<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/" style="font-size: 0.88rem;">高等代数<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" style="font-size: 0.88rem;">高等数学<sup>8</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script async src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.cbd.int/mathjax@3.2.2/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(() => {
+  const runMermaid = () => {
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'base'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      // Use 'base' theme to avoid default styles overriding custom CSS, allowing full control via custom.css
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\', \'themeVariables\': { \'fontSize\': \'16px\', \'fontFamily\': \'"trebuchet ms",verdana,arial,sans-serif\' }}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      // Check if mermaid is defined
+      if (typeof mermaid === 'undefined') {
+         console.error('Mermaid library not loaded')
+         return
+      }
+
+      try {
+        const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+        const renderV10 = () => {
+          renderFn.then(({svg}) => {
+            // Ensure the SVG has the 'mermaid' class for consistent CSS targeting
+            svg = svg.replace(/<svg/, '<svg class="mermaid"')
+            
+            // Add rx/ry to all task elements (including those with other classes like active, crit, done)
+            // Using a broader regex to capture any class starting with "task"
+            svg = svg.replace(/class="task([^"]*)"/g, 'class="task$1" rx="4" ry="4"')
+            svg = svg.replace(/class="note([^"]*)"/g, 'class="note$1" rx="8" ry="8"')
+            
+            mermaidSrc.insertAdjacentHTML('afterend', svg)
+          }).catch(err => {
+            console.error('Mermaid render error:', err)
+          })
+        }
+
+        const renderV9 = svg => {
+          // Ensure the SVG has the 'mermaid' class for consistent CSS targeting
+          svg = svg.replace(/<svg/, '<svg class="mermaid"')
+          
+          svg = svg.replace(/class="task([^"]*)"/g, 'class="task$1" rx="4" ry="4"')
+          svg = svg.replace(/class="note([^"]*)"/g, 'class="note$1" rx="8" ry="8"')
+          
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        }
+
+        typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+      } catch (e) {
+        console.error('Mermaid execution error:', e)
+      }
+    })
+  }
+
+  const loadMermaid = () => {
+    if (typeof mermaid !== 'undefined' || window.loadMermaid) {
+      runMermaid()
+    } else {
+      getScript('https://cdn.cbd.int/mermaid@11.4.1/dist/mermaid.min.js')
+        .then(() => {
+          window.loadMermaid = true
+          runMermaid()
+        })
+        .catch(err => console.error('Failed to load mermaid:', err))
+    }
+  }
+
+  const initMermaid = () => {
+    if (typeof anzhiyu !== 'undefined') {
+      anzhiyu.addGlobalFn('themeChange', runMermaid, 'mermaid')
+    } else if (window.anzhiyu) {
+      window.anzhiyu.addGlobalFn('themeChange', runMermaid, 'mermaid')
+    }
+    loadMermaid()
+    window.addEventListener('pjax:complete', runMermaid)
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMermaid)
+  } else {
+    // Delay slightly to ensure other scripts might have initialized
+    setTimeout(initMermaid, 0)
+  }
+})()</script><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://sparkle521.xyz',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://cdn.cbd.int/twikoo@1.6.25/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://sparkle521.xyz',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"><script async src="/js/anzhiyu/comment_barrage.js"></script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://sparkle521.xyz',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.cbd.int/twikoo@1.6.25/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script async data-pjax src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.1/bubble/bubble.js"></script><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><div><canvas id="snow" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999;pointer-events:none"></canvas></div><script>const notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));</script><script async type="text/javascript" src="https://cdn.jsdelivr.net/gh/Candinya/Kratos-Rebirth@latest/source/js/snow.min.js"></script><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
