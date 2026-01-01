@@ -811,6 +811,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "--anzhiyu-theme-op-deep",
         getComputedStyle(document.documentElement).getPropertyValue("--anzhiyu-main") + "dd"
       );
+      document.documentElement.style.removeProperty("--anzhiyu-main-light");
     }
   };
 
@@ -1239,6 +1240,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "--anzhiyu-theme-op-deep",
         getComputedStyle(document.documentElement).getPropertyValue("--anzhiyu-main") + "dd"
       );
+      document.documentElement.style.removeProperty("--anzhiyu-main-light");
 
       return;
     }
@@ -1248,7 +1250,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (GLOBAL_CONFIG_SITE.postMainColor) {
         let value = GLOBAL_CONFIG_SITE.postMainColor;
         if (getContrastYIQ(value) === "light") {
-          value = LightenDarkenColor(colorHex(value), -40);
+          value = LightenDarkenColor(colorHex(value), 0);
         }
 
         root.style.setProperty("--anzhiyu-bar-background", value);
@@ -1265,6 +1267,10 @@ document.addEventListener("DOMContentLoaded", function () {
           document.documentElement.style.setProperty(
             "--anzhiyu-theme-op-deep",
             getComputedStyle(document.documentElement).getPropertyValue("--anzhiyu-main") + "dd"
+          );
+          document.documentElement.style.setProperty(
+            "--anzhiyu-main-light",
+            LightenDarkenColor(colorHex(value), 35)
           );
         }
       } else {
@@ -1303,6 +1309,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 "--anzhiyu-theme-op-deep",
                 getComputedStyle(document.documentElement).getPropertyValue("--anzhiyu-main") + "dd"
               );
+              document.documentElement.style.setProperty(
+                "--anzhiyu-main-light",
+                LightenDarkenColor(colorHex(value), 25)
+              );
             }
           } else {
             if (GLOBAL_CONFIG.mainTone.mode == "both") {
@@ -1332,6 +1342,10 @@ document.addEventListener("DOMContentLoaded", function () {
                       "--anzhiyu-theme-op-deep",
                       getComputedStyle(document.documentElement).getPropertyValue("--anzhiyu-main") + "dd"
                     );
+                    document.documentElement.style.setProperty(
+                      "--anzhiyu-main-light",
+                      LightenDarkenColor(colorHex(value), 25)
+                    );
                   }
                 } else {
                   root.style.setProperty("--anzhiyu-bar-background", fallbackValue);
@@ -1339,6 +1353,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     anzhiyu.initThemeColor();
                   });
                   document.documentElement.style.setProperty("--anzhiyu-main", fallbackValue);
+                  document.documentElement.style.removeProperty("--anzhiyu-main-light");
                 }
               } catch {
                 root.style.setProperty("--anzhiyu-bar-background", fallbackValue);
@@ -1346,6 +1361,7 @@ document.addEventListener("DOMContentLoaded", function () {
                   anzhiyu.initThemeColor();
                 });
                 document.documentElement.style.setProperty("--anzhiyu-main", fallbackValue);
+                document.documentElement.style.removeProperty("--anzhiyu-main-light");
               }
             } else {
               root.style.setProperty("--anzhiyu-bar-background", fallbackValue);
@@ -1353,6 +1369,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 anzhiyu.initThemeColor();
               });
               document.documentElement.style.setProperty("--anzhiyu-main", fallbackValue);
+              document.documentElement.style.removeProperty("--anzhiyu-main-light");
             }
           }
         } catch (err) {
@@ -1362,6 +1379,7 @@ document.addEventListener("DOMContentLoaded", function () {
             anzhiyu.initThemeColor();
           });
           document.documentElement.style.setProperty("--anzhiyu-main", fallbackValue);
+          document.documentElement.style.removeProperty("--anzhiyu-main-light");
         }
       }
     }
