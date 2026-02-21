@@ -1,0 +1,2834 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>408-计算机组成原理-3-存储系统 | SPARKLE</title><meta name="keywords" content="408,计算机组成原理"><meta name="author" content="sparkle520"><meta name="copyright" content="sparkle520"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="408-计算机组成原理-3-存储系统"><meta name="application-name" content="408-计算机组成原理-3-存储系统"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="408-计算机组成原理-3-存储系统"><meta property="og:url" content="http://example.com/2026/01/14/%E8%AE%A1%E7%BB%843/index.html"><meta property="og:site_name" content="SPARKLE"><meta property="og:description" content="第3章 存储系统 3.1 存储器概述 3.1.1 存储器的分类 存储器是计算机系统中的记忆设备，用于存放程序和数据. 1. 按存储介质分类  半导体存储器 : 体积小、功耗低、存取时间短. 如 RAM, ROM, Flash.  易失性 : 断电后数据丢失 ( TTL, MOS )"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://pic1.imgdb.cn/item/69677a4999f37a647f58e412.png"><meta property="article:author" content="sparkle520"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://pic1.imgdb.cn/item/69677a4999f37a647f58e412.png"><meta name="description" content="第3章 存储系统 3.1 存储器概述 3.1.1 存储器的分类 存储器是计算机系统中的记忆设备，用于存放程序和数据. 1. 按存储介质分类  半导体存储器 : 体积小、功耗低、存取时间短. 如 RAM, ROM, Flash.  易失性 : 断电后数据丢失 ( TTL, MOS )"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2026/01/14/%E8%AE%A1%E7%BB%843/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: 'https://sparkle521.xyz',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":4000,"accessToken":"","mailMd5":""},
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: {"mode":"api","api":"https://img2color-go.vercel.app/api?img=","cover_change":true},
+  authorStatus: {"skills":["(❤ ω ❤)"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: sparkle520","link":"链接: ","source":"来源: SPARKLE","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#883ced","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'SPARKLE',
+  title: '408-计算机组成原理-3-存储系统',
+  postAI: '',
+  pageFillDescription: '第3章 存储系统, 3.1 存储器概述, 3.1.1 存储器的分类, 1. 按存储介质分类, 2. 按存取方式分类, 3. 按在计算机中的作用分类, 3.1.2 存储器的性能指标, 关键时间参数, 3.1.3 多级层次的存储系统, 3.2 主存储器, 3.2.1 SRAM芯片和DRAM芯片, 3.2.1.1 SRAM存储器, 3.2.1.2 DRAM存储器, 3.2.2 只读存储器, 3.2.3 主存储器的基本组成, 1. 核心组件详解, 2. 主存的工作流程, 3. 存储芯片引脚数的计算, 1. 核心公式与扩展方式, 2. 示例详解 ( 附连接示意图 ), 3. 解题与连接步骤总结, 3.2.5 多模块存储器, 1. 单体多字存储器, 2. 多体并行存储器 ( 核心 ), 3.3 主存储器与 CPU 的连接, 3.3.1 连接原理, 3.3.2 主存容量的扩展, 扩展方式总结对比, 3.3.3 存储芯片的地址分配和片选, 1. 线选法 ( Linear Selection ), 3.4 外部存储器, 3.4.1 磁盘存储器 ( Disk ), 1. 磁盘驱动器的组成与结构, 2. 性能指标 ( 计算题核心 ), 3. 磁盘阵列 ( RAID ), 3.4.2 固态硬盘 ( SSD ), 1. 核心部件, 2. 存储单元类型, 3. 读写特性, 4. SSD vs HDD 对比, 3.5 高速缓冲存储器 ( Cache ), 3.5.1 程序访问的局部性原理, 3.5.2 Cache 的基本工作原理, 1. 核心概念, 2. 读写流程 ( 概览 ), 3. 性能指标, 3.5.3 Cache 和主存的映射方式, 3.5.4 Cache 中主存块的替换算法, 1. 常见替换算法, (1) 随机算法 ( RAND Random ), 3.5.5 Cache 的一致性问题, 1. 写命中 ( Write Hit ), 2. 写不命中 ( Write Miss ), 3.6 虚拟存储器, 3.6.1 虚拟存储器的基本概念, 3.6.2 页式虚拟存储器, 1. 基本原理, 2. TLB ( 快表 ), 3. 访问过程 ( 重点 ), 3.6.3 段式虚拟存储器, 3.6.4 段页式虚拟存储器, 3.6.5 虚拟存储器与 Cache 的比较, 3.8 常见问题和易混淆知识点第章存储系统存储器概述存储器的分类存储器是计算机系统中的记忆设备用于存放程序和数据按存储介质分类半导体存储器体积小功耗低存取时间短如易失性断电后数据丢失非易失性断电后数据保持磁表面存储器容量大价格低存取速度慢如磁盘磁带光存储器激光读写如按存取方式分类随机存取存储器存取时间与物理位置无关只读存储器只能读不能写或只能偶尔写支持随机存取串行访问存储器存取时间与物理位置有关顺序存取存储器如磁带直接存取存储器如磁盘寻道旋转按在计算机中的作用分类主存储器存放当前急需执行的程序和数据辅助存储器存放暂时不用的程序和数据磁盘固态硬盘高速缓冲存储器位于和主存之间存放正在执行的程序段和数据存储器的性能指标核心指标三要素存储容量存储位元总数存储单元个数存储字长单位成本每位价格总成本总容量存储速度数据传输率数据的宽度存储周期关键时间参数存取时间从启动一次存储器操作到完成该操作所经历的时间读出时间写入时间存取周期存储器进行一次完整的读写操作所需的全部时间包含恢复时间恢复注意存取周期通常大于存取时间因为任何存储器在读写操作后都需要一段恢复时间如的预充电主存带宽单位时间内存储器存取的信息量为数据宽度即字长多级层次的存储系统为了解决存储容量速度价格之间的矛盾现代计算机采用多级存储层次结构节点定义寄存器高速缓存主存储器辅助存储器连接关系样式定义应用样式主存层次解决和主存速度不匹配的问题硬件自动完成对程序员透明主存辅存层次解决存储系统容量问题软硬件协同构成虚拟存储器主存储器芯片和芯片存储器即静态随机存取存储器图解内部结构上图展示了技术的典型截面结构它是构建和现代的基础图中左侧为右侧为衬底与阱整个芯片建立在型硅衬底上阱为了制造需要在衬底上形成一个型区域阱晶体管就主要坐在这个阱里晶体管左侧结构在衬底上制作两个高浓度的型扩散区作为源极和漏极导通条件当栅极加高电平时衬底中的电子被吸引到栅极下方形成型导电沟道源漏导通特性传输低电平效果好电子迁移率高速度快晶体管右侧结构在阱中制作两个高浓度的型扩散区作为源极和漏极导通条件当栅极加低电平时阱中的空穴被吸引到栅极下方形成型导电沟道源漏导通特性传输高电平效果好互补工作将和的栅极连在一起作为输入漏极连在一起作为输出就构成了反相器输入高导通截止输出低输入低截止导通输出高这种互补结构使得静态功耗极低只有开关瞬间有电流存储元采用双稳态触发器个管存储信息工作原理只要电源不切断触发器就能保持其状态或不需要刷新特点速度快存取周期短接近速度集成度低每个存储元需个管子占用面积大功耗大触发器工作时持续耗电成本高应用主要用作高速缓冲存储器读写同时送行列地址非破坏性读出存储器即动态随机存取存储器存储元利用栅极电容个管个电容存储电荷工作原理电容有电荷为无电荷为由于电容存在漏电现象电荷会逐渐消失因此需要定时刷新以保持数据特点集成度高结构简单便于高密度集成成本低速度较慢充放电需要时间且刷新占用时间应用主要用作主存内存条的刷新需每隔一定时间刷新周期通常为对所有存储单元进行一次读取并重写刷新单位以行为单位每次刷新一行刷新本质读出数据破坏性读出重新写入再生集中刷新分散刷新异步刷新原理在周期内利用一段固定的时间集中对所有行进行刷新过程前段时间正常读写工作后段时间停止读写逐行刷新此时无法访问存储器称为死区或死时间优点读写操作不受刷新干扰速度快缺点存在长时间的死区影响实时性原理将存储系统的存取周期定义为读写刷新过程每次读写操作完成后紧接着刷新一行优点没有死区缺点存取周期加长系统变慢最常用原理将刷新操作均匀分散在整个周期内过程若有行则每隔刷新一行刷新一行的时间很短死区也很短优点结合了前两者的优点死区短且不明显影响存取速度计算刷新间隔刷新周期行数的地址复用技术容量通常很大地址线很多为了减少芯片引脚数降低封装成本通常采用地址复用技术行地址和列地址通过同一组地址线分两次送入先送行地址配合信号再送列地址配合信号代价地址线减半但存取速度变慢需两次传输核心考点与读写时序为什么的行数通常列数刷新开销刷新是以行为单位的行数越少刷新所有行所需的时间越短对系统性能的影响越小地址复用为了配合地址复用通常将地址位平均分配给行列若无法平均则行地址位数列地址位数的读写时序简述预充电行有效列有效数据传输恢复先于必须先选中行再选中列地址线复用先送行地址再送列地址读周期送行地址行选通锁存行地址送列地址列选通锁存列地址读出数据数据输出恢复期现代技术拓展同步动态随机存储器与总线时钟同步传统的是异步的通过命令而不是单纯的电平信号控制突发传输提供一个起始地址可以连续读取后续多个单元的数据配合行填充无需每次都送地址在时钟的上升沿和下降沿都能传输数据带宽翻倍与核心区别与选型特性静态动态存储原理双稳态触发器电容充放电每位晶体管数个个数据保持通电即保持静态需定时刷新动态是否需要刷新不需要需要访问速度极快较慢集成度低高静态功耗中漏电极低动态功耗低中成本贵便宜典型容量几十级典型用途寄存器文件主存内存条稳定性好静态噪声容限大送列地址同时送行列地址分两次送地址线复用只读存储器在计算机系统中主要用于存放系统程序掩膜厂家生产时写入无法修改一次性可编程用户只能写一次可擦除紫外线擦除电擦除闪存电可擦除速度快集成度高盘固态硬盘基于的大容量存储设备主存储器的基本组成主存芯片不仅包含存储数据的存储体还包括外围电路译码驱动控制它们共同协作完成数据的存储和检索外部信号地址总线数据总线控制总线内部组件存储芯片内部结构地址译码器存储体存储矩阵读写电路控制逻辑内部连接行列选择线内部数据线控制信号使能信号外部连接样式核心组件详解组件功能描述关键点存储体由大量存储元构成的阵列管电容或触发器地址译码器将地址信号转换为选通信号单译码线选双译码重合选控制电路控制数据流向进行信号放大整形包含读写放大器和数据缓冲控制逻辑接收的控制命令读写片选产生内部时序信号单译码双译码单译码位地址线产生根选通线适合小容量芯片双译码将地址分为两组分别译码产生根线适合大容量芯片显著减少选通线数量主存的工作流程主存的读写操作是由发出的控制信号和地址信号驱动的读操作流程送地址将地址送入地址总线发命令发出读命令和片选信号译码选中地址译码器选中特定的存储单元读出数据存储单元的数据被读出经读写放大器放大送总线数据送入数据总线供读取写操作流程送地址将地址送入地址总线送数据将数据送入数据总线发命令发出写命令和片选信号译码选中地址译码器选中特定的存储单元写入数据数据经电路写入选中的存储单元存储芯片引脚数的计算对于一个容量为位个单元字长位的芯片地址线数据线控制电源线通常包括至少根总引脚数或更多特例地址复用芯片为减少引脚采用地址复用技术行列地址分时复用地址引脚数增加信号行选通和列选通总引脚数地址线减半但增加了控制线示例详解存储芯片引脚数计算例芯片无地址复用已知某芯片容量为位求该芯片的地址线数据线及最少引脚总数地址线容量单元根数据线字长位根引脚总数最少控制电源线根根例芯片地址复用已知某芯片容量为位求该芯片的地址引脚数据引脚及相关控制信号地址引脚容量单元原需地址线根复用后行列地址分时传输根数据引脚字长位根控制信号的变化增加行选通和列选通代替原来的片选总引脚数控制电源存储器容量扩展与芯片数量计算当单片存储芯片的容量无法满足设计要求时需要将多片芯片连接起来组成更大的存储器主要有三种扩展方式位扩展字扩展和字位同时扩展核心公式与扩展方式总芯片数设计总容量单片容量设计字数设计字长单片字数单片字长扩展方式目的连接特点芯片数量计算位扩展增加字长位数地址线并联数据线分段片选线并联设计字长单片字长字扩展增加字数容量地址线低位并联数据线并联片选线高位译码设计字数单片字数同时扩展增加字长和字数结合上述两种方式位扩展数字扩展数示例详解附连接示意图例位扩展增加字长题目用位芯片组成位存储器分析字数不变字长位翻倍计算位位片连接方式地址线片芯片并联同时接收相同地址数据线芯片接低位芯片接高位片选线片芯片并联同时工作外部信号地址总线数据总线片选信号芯片芯片芯片连接例字扩展增加容量题目用位芯片组成位存储器分析字长位不变字数翻倍计算位位片连接方式数据线片芯片并联分时传输数据地址线作为片内地址并联到片芯片片选线最高位地址作为片选信号选中芯片选中芯片外部信号地址总线地址总线数据总线芯片芯片芯片逻辑非门译码器连接例字位同时扩展综合考点题目用位芯片组成位存储器分析位扩展位需片并联组成组字扩展需组计算总芯片数位位片连接方式分组将片芯片分为组每组片数据线每组内的片分别连接地址线低位并联到所有芯片片内地址高位接译码器产生个片选信号分别控制组芯片外部信号地址地址数据译码器译码器存储组片芯片位扩展片芯片位扩展片芯片位扩展片芯片位扩展连接解题与连接步骤总结计算芯片数利用公式设计总容量单片容量确定扩展方式仅字长增加位扩展仅字数增加字扩展均增加同时扩展连接地址线低位地址片内地址并联连接到所有芯片的地址引脚高位地址片选地址位扩展不需要额外片选逻辑此时高位通常为或直接由系统片选控制字扩展同时扩展连接到译码器或逻辑电路生成片选信号控制不同组连接数据线位扩展不同芯片接数据总线的不同位段如字扩展所有芯片并联接整个数据总线分时工作连接控制线读写控制并联到所有芯片易错点提示位扩展时地址线必须完全相同地连接到每一片芯片片选信号也连接在一起同时工作只有数据线是分段的字扩展时数据线连接是相同的区别在于片选信号不同确保同一时刻只有一组芯片工作地址分配务必分清哪些是片内地址直接连芯片哪些是片选地址连译码器多模块存储器随着速度的提升主存速度成为系统瓶颈多模块存储器是一种空间并行技术通过同时访问多个存储模块来提高主存带宽单体多字存储器一个存储体但每个存储单元存储个字总线宽度也扩展为个字一次读取一行个字优点带宽提高倍缺点只有指令和数据连续存放时才有效若遇到跳转指令取出的个字中可能只有一个有用多体并行存储器核心由多块独立的存储体模块组成每个模块有独立的读写控制电路高位交叉编址低位交叉编址顺序方式原理模块号地址高位块内地址地址低位类似于扩容第一个模块填满后才填第二个模块特点某个模块被存取时其他模块不工作无法提高带宽主要用于容量扩展各模块串行工作交叉方式原理模块号地址低位块内地址地址高位类似于发牌连续地址分布在不同模块中模映射特点连续地址分布在不同模块中可以实现流水线存取显著提高带宽流水线存取原理设模块数存取周期总线传输周期每隔时间启动下一个模块实现重叠访问路低位交叉编址流水线读取模块启动与存取模块启动与存取模块启动与存取模块启动与存取性能公式重要连续存取个字所需时间第一个字需后续每个字仅需带宽字长最佳模块数保证流水线不中断主存储器与的连接连接原理通过三组总线与主存储器相连数据总线双向位数决定了存储字长地址总线单向位数决定了寻址范围控制总线读写控制低写高读访存请求信号常与译码器使能端配合主存容量的扩展当单片存储芯片的容量或字长不满足系统要求时需要进行扩展位扩展字扩展字位同时扩展位扩展增加字长场景芯片字长不足如用位芯片组成位存储器连接方法地址线控制线所有芯片并联同时工作数据线分摊如芯片接芯片接片选信号所有芯片接同一个片选信号信号源地址线片选芯片组存储器芯片芯片数据线数据数据连接关系字扩展增加容量场景芯片地址空间不足如用位芯片组成位存储器连接方法数据线所有芯片并联地址线低位并联作为片内地址地址线高位连接译码器产生片选信号分别控制不同芯片轮流工作信号源低位地址高位地址译码控制译码器芯片组存储器芯片芯片数据线数据线连接关系字位同时扩展场景字长和容量都不够方法先进行位扩展形成组再对组进行字扩展示例用位芯片组成位存储器总芯片数片分组每片进行位扩展构成一组共组译码组需要根高位地址线使用译码器控制信号数据总线译码器芯片芯片芯片芯片数据线连接位扩展片选信号字扩展扩展方式总结对比特性位扩展字扩展字位同时扩展目的增加字长数据位增加存储容量存储单元数同时增加字长和容量数据线连接分摊各芯片接不同位并联接相同位分组后分摊地址线连接并联全接低位并联高位用于译码低位并联高位用于译码片选信号同时选中连在一起轮流选中接译码器输出组内同时组间轮流工作方式所有芯片同时读写某一时刻仅有一个芯片工作某一时刻仅有一组芯片工作存储芯片的地址分配和片选访问存储器时需要通过片选信号激活特定的芯片常见的片选方法有线选法和译码片选法线选法直接用高位地址线连接芯片的端原理每根高位地址线控制一个芯片例如选中芯片选中芯片优点电路简单不需要译码器缺点地址空间不连续存在大量空洞地址线利用率低根线只能选个芯片不能同时选中多个芯片地址位不能同时为否则冲突译码片选法主流使用译码器如对高位地址进行译码产生片选信号原理根高位地址线经过译码产生个片选信号优点地址空间连续地址线利用率高根线可选个芯片无地址冲突常用译码器译码器详解是实现译码片选的核心元件输入端接高位地址线为最高位输出端接芯片端低电平有效使能端高电平有效低电平有效关键应用必须三个使能端同时满足译码器才工作通常将访存请求接在或上确保只有在访存时才产生片选信号防止误操作地址分配示例假设使用位芯片组成位存储器起始地址为片内地址根片选地址片需要根高位线接译码器地址范围芯片芯片芯片芯片存储器与的连接综合应用经典解题步骤计算芯片数量芯片数设计容量芯片容量确定连线逻辑地址线低位连接芯片地址引脚片内寻址数据线若位扩展分组连接高低位数据线若无位扩展并联连接片选信号高位地址剩余的高位地址线译码器芯片读写控制芯片画图验证注意使能信号的连接外部存储器外部存储器辅存具有容量大价格低掉电不丢失的特点但速度较慢磁盘存储器磁盘是最常见的串行访问存储设备非随机访问磁盘驱动器的组成与结构磁盘驱动器是主机进行数据存储和交换的设备由机械部件和电子部件组成核心部件磁头读取写入数据每个盘面对应一个磁头磁臂带动磁头做径向运动寻道盘片存储介质安装在主轴上高速旋转主轴带动盘片旋转旋转延迟物理存储单元磁道盘片表面的一系列同心圆扇区磁道被划分成的若干弧段是磁盘读写的最小单位常见或柱面所有盘片相同半径磁道的集合寻址方式早期物理寻址方式地址格式为柱面号盘面号扇区号访问顺序优先访问同一柱面减少寻道其次是同一盘面电子切换极快最后是扇区现代逻辑寻址方式磁盘控制器将物理地址映射为线性逻辑块号只需操作磁盘结构盘片盘面磁道扇区寻址过程移动磁头寻道旋转盘片定位扇区读写数据传输节点样式子图样式性能指标计算题核心存储容量容量磁头数磁道数扇区数扇区字节数注意非格式化容量格式化容量平均存取时间寻道时间磁头移动到目标磁道的时间最耗时约几旋转延迟扇区转到磁头下方的时间平均取转半圈的时间传输时间读写数据本身的时间读写字节数每道字节数数据传输率转速每道容量例题存取时间计算假设磁盘转速为转分平均寻道时间为每道有个扇区每个扇区求读取一个扇区的平均时间转速转秒旋转一周平均旋转延迟传输时间可忽略平均时间磁盘阵列利用多个廉价磁盘组合成一个大容量高可靠的逻辑磁盘条带化镜像分布式奇偶校验原理数据分块并行写入多个磁盘优点读写速度最快理论翻倍缺点无冗余任一坏盘则数据全丢应用对速度要求高但对数据安全要求不高的场景原理数据写入主盘时同时镜像备份到副盘优点可靠性最高冗余缺点空间利用率仅成本高应用存放重要数据如系统盘数据库原理数据和奇偶校验信息交叉分布在所有磁盘上优点兼顾了速度并行和可靠性允许坏一块盘空间利用率应用通用性最强最常见的企业级方案固态硬盘基于闪存技术已逐渐取代机械硬盘核心部件部件功能闪存芯片核心存储介质数据掉电不丢失主控芯片大脑负责逻辑地址映射磨损均衡垃圾回收缓存可选暂存数据提高读写性能存储单元类型类型描述速度寿命价格单层单元最快最长万次最贵多层单元较快较长万次较贵三层单元慢短次便宜四层单元最慢最短次最便宜读写特性读快写慢随机读取速度极快以页读写以块擦除写入前必须先擦除擦除单位比读写单位大寿命限制每个存储单元的擦写次数是有限的核心技术详解磨损均衡由于闪存块的擦写次数有限控制器需要保证所有块的擦写次数大致相同动态磨损均衡写入数据时优先选择擦写次数少的块但对于长期不修改的冷数据其占用的块擦写次数会远低于其他块导致不均匀静态磨损均衡更加先进控制器会定期将冷数据搬移到擦写次数多的块中腾出擦写次数少的块给热数据使用这样能最大程度延长寿命指令通知哪些数据已删除逻辑删除主控可在空闲时提前进行垃圾回收和擦除避免下次写入时才进行擦除带来的写惩罚从而保持写入性能对比特性固态硬盘机械硬盘原理电信号存储磁记录机械运动速度极快随机读写强慢受限于寻道噪音功耗无噪音低功耗有噪音功耗较高抗震性强差磁头易划伤盘片数据恢复困难相对容易高速缓冲存储器程序访问的局部性原理时间局部性最近访问过的指令数据很可能再次被访问如循环堆栈空间局部性某个单元被访问其附近的单元很可能被访问如数组顺序指令的基本工作原理高速缓冲存储器位于和主存之间用于解决速度与主存速度不匹配的问题它对程序员是透明的即程序员无法直接操控核心概念行块与主存交换数据的基本单位每个行包含有效位脏位回写法用替换控制位标记和数据命中欲访问的信息已在中缺失欲访问的信息不在中需访问主存读写流程概览发出读请求命中直接从读数据结束访问主存将新块调入读取数据送性能指标设为命中次数为访问主存次数未命中为存取时间为主存存取时间通常是的倍命中率平均访问时间注也有公式记为访问效率越接近越好不可能超过和主存的映射方式由于容量远小于主存需通过某种规则将主存块映射到中主存地址通常被解析为标记索引块内偏移全相联映射直接映射组相联映射规则主存块可以放在的任意位置映射公式无任意位置地址结构标记块内地址位位硬件实现访问时需将主存地址的与中所有行的进行比较并行比较器特点灵活性最高冲突概率最低只有满时才冲突比较器电路最复杂成本高适合小容量规则主存块只能放在的特定位置映射公式行号主存块号行数地址结构标记行号块内地址位位位硬件实现仅需比较次先通过找到特定行再比对特点电路简单速度最快冲突概率最高即使没满特定行被占也需替换规则主存块可以放在特定组内的任意位置映射公式组号主存块号组数地址结构标记组号块内地址位位位硬件实现先找到组再在组内进行全相联比较路组相联需个比较器特点全相联与直接映射的折中路组相联即每组有行时退化为直接映射行数时退化为全相联例题详解地址位宽计算已知条件主存容量物理地址总位宽位容量块大小块内偏移位计算总行数行数容量块大小行不同映射方式下的地址划分映射方式组数索引位标记位地址结构直接映射组即行数路组相联组路组相联组全相联组无需索引核心公式总结位数总地址位宽位宽位宽位宽组数位宽块大小中主存块的替换算法当空间已满且有新的主存块需要调入时需要选择一个旧的块进行替换注直接映射方式无需替换算法因为每个主存块只能映射到唯一的行若被占则直接替换常见替换算法随机算法原理随机地选取一个行进行替换优点硬件实现最简单缺点完全没有利用程序的局部性原理命中率较低先进先出算法原理选择最早调入的行进行替换实现建立一个队列或使用计数器记录进入顺序优点实现容易开销小缺点未考虑局部性最早调入的可能经常被访问可能会出现异常容量增大命中率反而下降最近最久未使用算法原理选择最近最长时间未被访问的行基于局部性原理过去很久没用未来也很久不用实现需要硬件支持计数器或栈来记录行最后一次访问时间优点命中率高最优秀常用性能最接近最佳置换算法缺点硬件实现困难成本高每次访问都要更新记录示例序列行数满访历史访问逆序最久未用淘汰最不经常使用算法原理淘汰访问次数最少的行实现每行设置一个计数器访问一次缺点容易导致过期的高频数据长期占据历史包袱例如启动时用了很多次的初始化代码之后不再用但计数器很大很难被淘汰算法的硬件实现计数器法以路组相联为例每行需配置位计数器计数器含义代表最近刚刚使用代表最久未使用操作规则情况命中命中行计数器清其他行原值小于命中行原值的计数器否则不变目的把命中行提到最新比它新的那些行相对变旧了一级情况未命中且满被淘汰行选择计数器为的行进行替换新入行计数器置其他行计数器全部目的新行是最新的其他所有行都变旧了一级注随着路数的增加精确的硬件成本会急剧上升实际多采用近似算法如的一致性问题当写时如何保证主存数据一致写命中全写法同时写入和主存简单但访存次数多写缓冲可优化回写法只写脏位标记被替换时才写回主存速度快但控制复杂写不命中写分配法调入再写入通常配合回写法非写分配法直接写主存不调入通常配合全写法虚拟存储器请参照本站操作系统内存管理中的内容虚拟存储器的基本概念利用辅存硬盘充当主存给用户提供一个比实际物理内存大得多的逻辑地址空间本质上是将主存辅存两级存储体系管理起来对上层程序屏蔽物理细节核心逻辑地址虚地址物理地址实地址的转换由硬件自动完成特征多次性作业无需一次性全部装入内存分多次调入对换性内存中暂不用的数据换出到辅存需要时再换入虚拟性逻辑容量远大于物理容量受限于地址线宽度和辅存大小页式虚拟存储器基本原理分页将逻辑地址空间划分为固定大小的页物理内存划分为同样大小的页框页表记录逻辑页号物理页框号的映射表常驻内存页表项包含物理页号有效位访问位脏位地址结构逻辑地址页号页内偏移物理地址页框号页内偏移快表定义页表的高速缓存存放在或专门的硬件中用于加速地址变换原理利用局部性原理存储最近使用的页表项全相联组相联通常采用全相联或组相联映射以提高命中率访问过程重点发出逻辑地址查命中得到物理地址未命中查页表有效更新得到物理地址无效缺页缺页中断接管从磁盘调页可能涉及页面置换更新页表查命中获取数据未命中访问主存示例逻辑地址物理地址二进制拆分详解已知逻辑地址位页面大小需位表示页内偏移页表映射逻辑页号物理页框号将逻辑地址转换为物理地址二进制拆分页号位页内偏移位地址变换提取页号查页表找到第号页表项读出物理页框号拼接将物理页框号与原偏移量拼接合成物理地址物理地址页框号偏移量重组二进制转十六进制验证计算逻辑地址物理地址性能计算有效访问时间有效访问时间是衡量虚拟存储器性能的核心指标符号定义访问一次主存的时间通常级缺页率缺页损失时间包含磁盘中断处理更新页表通常级计算公式考虑缺页注由于只要稍大如就会急剧增加导致系统抖动加入后假设无缺页设命中率为查时间为注时需先查页表次得到物理地址再访问数据次共多级页表为了解决页表过大且需连续存放的问题单级页表可能占用几十连续内存引入多级页表原理将页表再分页顶级页表常驻内存二级页表按需调入地址结构级为例逻辑地址一级页号二级页号页内偏移访存次数级页表需访问内存次不含缺点访存次数增加必须配合使用段式虚拟存储器分段按程序逻辑结构代码段数据段堆栈段分配空间段长可变地址结构段号段内偏移优点逻辑清晰方便编程和编译器实现易于保护共享可以按段设置读写权限缺点产生外部碎片段长不固定内存分配困难段页式虚拟存储器原理先将程序分段再将每个段分页地址结构段号段内页号页内偏移特点结合了段式的易共享保护和页式的无外部碎片三次访存第一次查段表第二次查页表第三次访问物理目标即使有也要多次查找虚拟存储器与的比较比较项目主存主存辅存目的提高速度解决主存速度差异扩大容量解决内存容量不足数据单位块页透明性对所有人透明纯硬件对应用层透明硬件未命中处理硬件自动完成等待主存缺页中断调度进程挂起映射方式直接全相联组相联全相联页表机制一致性写回写直达写回磁盘代价太大常见问题和易混淆知识点行与主存块大小相同是数据交换的基本单位命中与命中命中此时页一定在内存但数据不一定在命中数据一定在内存页表一定有效可能没命中但概率极低刷新与重写刷新是指定时补充电荷防止丢失重写是读出破坏性数据后的恢复破坏性读出',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-02-21 12:39:05',
+  postMainColor: '#42AE78',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.min.css"><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/sparkle520?tab=repositories" title="github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="github"/><span class="back-menu-item-text">github</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">SPARKLE</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/408/" style="font-size: 1.05rem;">408<sup>10</sup></a><a href="/tags/AOP/" style="font-size: 1.05rem;">AOP<sup>1</sup></a><a href="/tags/Deep-Learning/" style="font-size: 1.05rem;">Deep Learning<sup>1</sup></a><a href="/tags/IoC/" style="font-size: 1.05rem;">IoC<sup>1</sup></a><a href="/tags/JSR303/" style="font-size: 1.05rem;">JSR303<sup>1</sup></a><a href="/tags/Matplotlib/" style="font-size: 1.05rem;">Matplotlib<sup>3</sup></a><a href="/tags/c/" style="font-size: 1.05rem;">c#<sup>2</sup></a><a href="/tags/java/" style="font-size: 1.05rem;">java<sup>4</sup></a><a href="/tags/npc%E5%88%86%E6%9E%90%E6%B3%95/" style="font-size: 1.05rem;">npc分析法<sup>1</sup></a><a href="/tags/python/" style="font-size: 1.05rem;">python<sup>5</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 1.05rem;">事务<sup>1</sup></a><a href="/tags/%E4%BA%8C%E6%AC%A1%E5%9E%8B/" style="font-size: 1.05rem;">二次型<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E3%80%82/" style="font-size: 1.05rem;">你的名字。<sup>3</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字同名小说<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%A4%96%E4%BC%A0%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字外传小说<sup>1</sup></a><a href="/tags/%E5%80%92%E8%A3%85%E7%BB%93%E6%9E%84/" style="font-size: 1.05rem;">倒装结构<sup>1</sup></a><a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size: 1.05rem;">写作<sup>4</sup></a><a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 1.05rem;">包管理<sup>1</sup></a><a href="/tags/%E5%8D%B7%E7%A7%AF%E5%85%AC%E5%BC%8F/" style="font-size: 1.05rem;">卷积公式<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90/" style="font-size: 1.05rem;">天气之子<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">天气之子同名小说<sup>1</sup></a><a href="/tags/%E5%AE%9A%E7%A7%AF%E5%88%86/" style="font-size: 1.05rem;">定积分<sup>1</sup></a><a href="/tags/%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">小说<sup>3</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">操作系统<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" style="font-size: 1.05rem;">数据校验<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 1.05rem;">概率论<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 1.05rem;">概率论与数理统计<sup>7</sup></a><a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 1.05rem;">汇编<sup>9</sup></a><a href="/tags/%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80/" style="font-size: 1.05rem;">泰勒展开<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%80%BC/" style="font-size: 1.05rem;">特征值<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F/" style="font-size: 1.05rem;">特征向量<sup>1</sup></a><a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">线性代数<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E5%90%AC%E5%8A%9B/" style="font-size: 1.05rem;">英语听力<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">英语语法<sup>16</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1.05rem;">计算机组成原理<sup>6</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.05rem;">计算机网络<sup>1</sup></a><a href="/tags/%E8%AF%8D%E6%A0%B9%E8%AF%8D%E7%BC%80/" style="font-size: 1.05rem;">词根词缀<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">高等代数<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" style="font-size: 1.05rem;">高等数学<sup>9</sup></a><a href="/tags/%E9%AB%98%E9%A2%91%E8%AF%8D%E7%BB%84/" style="font-size: 1.05rem;">高频词组<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/02/"><span class="card-archive-list-date">二月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/01/"><span class="card-archive-list-date">一月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/12/"><span class="card-archive-list-date">十二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">15</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/11/"><span class="card-archive-list-date">十一月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/10/"><span class="card-archive-list-date">十月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/09/"><span class="card-archive-list-date">九月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/08/"><span class="card-archive-list-date">八月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/07/"><span class="card-archive-list-date">七月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url">计算机</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/408/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>408</span></a><a class="article-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>计算机组成原理</span></a></span></div></div><h1 class="post-title" itemprop="name headline">408-计算机组成原理-3-存储系统</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-01-14T15:00:27.000Z" title="发表于 2026-01-14 23:00:27">2026-01-14</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-02-21T04:39:05.207Z" title="更新于 2026-02-21 12:39:05">2026-02-21</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">13.3k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>50分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="408-计算机组成原理-3-存储系统"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为系守镇"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>系守镇</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2026/01/14/%E8%AE%A1%E7%BB%843/#post-comment" tabindex="-1"><span id="twikoo-count"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://pic1.imgdb.cn/item/69677a4999f37a647f58e412.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2026/01/14/%E8%AE%A1%E7%BB%843/"><header><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url">计算机</a><a href="/tags/408/" tabindex="-1" itemprop="url">408</a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" tabindex="-1" itemprop="url">计算机组成原理</a><h1 id="CrawlerTitle" itemprop="name headline">408-计算机组成原理-3-存储系统</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">sparkle520</span><time itemprop="dateCreated datePublished" datetime="2026-01-14T15:00:27.000Z" title="发表于 2026-01-14 23:00:27">2026-01-14</time><time itemprop="dateCreated datePublished" datetime="2026-02-21T04:39:05.207Z" title="更新于 2026-02-21 12:39:05">2026-02-21</time></header><h1 id="第3章-存储系统">第3章 存储系统</h1>
+<h2 id="存储器概述">3.1 存储器概述</h2>
+<h3 id="存储器的分类">3.1.1 存储器的分类</h3>
+<p>存储器是计算机系统中的记忆设备，用于存放程序和数据.</p>
+<h4 id="按存储介质分类">1. 按存储介质分类</h4>
+<ul>
+<li><strong>半导体存储器</strong> : 体积小、功耗低、存取时间短. 如 RAM,
+ROM, Flash.
+<ul>
+<li><strong>易失性</strong> : 断电后数据丢失 ( TTL, MOS ).</li>
+<li><strong>非易失性</strong> : 断电后数据保持 ( ROM, Flash ).</li>
+</ul></li>
+<li><strong>磁表面存储器</strong> : 容量大、价格低、存取速度慢. 如
+磁盘、磁带.</li>
+<li><strong>光存储器</strong> : 激光读写. 如 CD, DVD.</li>
+</ul>
+<h4 id="按存取方式分类">2. 按存取方式分类</h4>
+<ul>
+<li><strong>随机存取存储器 ( RAM )</strong> : 存取时间与物理位置无关 (
+Random Access ).</li>
+<li><strong>只读存储器 ( ROM )</strong> : 只能读不能写 ( 或只能偶尔写
+)，支持随机存取.</li>
+<li><strong>串行访问存储器</strong> : 存取时间与物理位置有关.
+<ul>
+<li><strong>顺序存取存储器 ( SAM )</strong> : 如磁带.</li>
+<li><strong>直接存取存储器 ( DAM )</strong> : 如磁盘 ( 寻道+旋转 ).</li>
+</ul></li>
+</ul>
+<h4 id="按在计算机中的作用分类">3. 按在计算机中的作用分类</h4>
+<ul>
+<li><strong>主存储器 ( Main Memory )</strong> : 存放 CPU
+当前急需执行的程序和数据.</li>
+<li><strong>辅助存储器 ( Auxiliary Memory )</strong> :
+存放暂时不用的程序和数据 ( 磁盘、固态硬盘 ).</li>
+<li><strong>高速缓冲存储器 ( Cache )</strong> : 位于 CPU
+和主存之间，存放正在执行的程序段和数据.</li>
+</ul>
+<h3 id="存储器的性能指标">3.1.2 存储器的性能指标</h3>
+<div class="note sparkle simple"><p><strong>核心指标三要素</strong></p>
+<ol type="1">
+<li><strong>存储容量</strong> : 存储位元总数 = 存储单元个数 <span
+class="math inline">\(\times\)</span> 存储字长.</li>
+<li><strong>单位成本</strong> : 每位价格 = 总成本 / 总容量.</li>
+<li><strong>存储速度</strong> : 数据传输率 = 数据的宽度 / 存储周期.</li>
+</ol>
+</div>
+<h4 id="关键时间参数">关键时间参数</h4>
+<ul>
+<li><strong>存取时间 ( Access Time, <span
+class="math inline">\(T_A\)</span> )</strong> :
+从启动一次存储器操作到完成该操作所经历的时间 ( 读出时间 / 写入时间
+).</li>
+<li><strong>存取周期 ( Cycle Time, <span
+class="math inline">\(T_C\)</span> )</strong> :
+存储器进行一次完整的读写操作所需的全部时间 ( 包含恢复时间 ).</li>
+</ul>
+<p><span class="math display">\[ T_C = T_A + T_{恢复} \]</span></p>
+<div class="note sparkle simple"><p><strong>注意</strong></p>
+<p>存取周期 <span class="math inline">\(T_C\)</span> 通常大于存取时间
+<span
+class="math inline">\(T_A\)</span>，因为任何存储器在读写操作后都需要一段恢复时间
+( 如 DRAM 的预充电 ).</p>
+</div>
+<ul>
+<li><strong>主存带宽 ( Bandwidth, <span
+class="math inline">\(B_m\)</span> )</strong> :
+单位时间内存储器存取的信息量. <span class="math display">\[ B_m = W /
+T_C \]</span> ( <span class="math inline">\(W\)</span>
+为数据宽度，即字长 )</li>
+</ul>
+<h3 id="多级层次的存储系统">3.1.3 多级层次的存储系统</h3>
+<p>为了解决 <strong>存储容量、速度、价格</strong>
+之间的矛盾，现代计算机采用多级存储层次结构.</p>
+<div class="mermaid-wrap"><pre class="mermaid-src" hidden>
+  %%{init: {&#39;flowchart&#39;: {&#39;curve&#39;: &#39;basis&#39;}, &#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;primaryColor&#39;: &#39;#fff&#39;, &#39;lineColor&#39;: &#39;#94a3b8&#39;, &#39;fontFamily&#39;: &#39;sans-serif&#39; }}}%%
+graph BT
+    %% 节点定义
+    L1[寄存器 Register]
+    L2[高速缓存 Cache]
+    L3[主存储器 Main Memory]
+    L4[辅助存储器 Disk&#x2F;SSD]
+
+    %% 连接关系
+    L1 --&gt; L2
+    L2 --&gt; L3
+    L3 --&gt; L4
+
+    %% 样式定义
+    classDef fast fill:#fee2e2,stroke:#ef4444,stroke-width:2px,color:#991b1b,rx:5,ry:5;
+    classDef cache fill:#fff7ed,stroke:#f97316,stroke-width:2px,color:#9a3412,rx:5,ry:5;
+    classDef mem fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0369a1,rx:5,ry:5;
+    classDef disk fill:#f1f5f9,stroke:#64748b,stroke-width:2px,color:#334155,rx:5,ry:5;
+
+    %% 应用样式
+    class L1 fast
+    class L2 cache
+    class L3 mem
+    class L4 disk
+  </pre></div>
+<ul>
+<li><strong>Cache - 主存层次</strong> : 解决 CPU 和主存
+<strong>速度</strong> 不匹配的问题 ( 硬件自动完成，对程序员透明 ).</li>
+<li><strong>主存 - 辅存层次</strong> : 解决存储系统
+<strong>容量</strong> 问题 ( 软硬件协同，构成虚拟存储器 ).</li>
+</ul>
+<hr />
+<h2 id="主存储器">3.2 主存储器</h2>
+<h3 id="sram芯片和dram芯片">3.2.1 SRAM芯片和DRAM芯片</h3>
+<h4 id="sram存储器">3.2.1.1 SRAM存储器</h4>
+<p><strong>SRAM ( Static Random Access Memory )</strong>
+即静态随机存取存储器.</p>
+<p><img style="width:700px" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69983d68bb93d236450b624e.png"/></p>
+<div class="note sparkle simple"><p><strong>图解 CMOS 内部结构 ( NMOS + PMOS )</strong></p>
+<p>上图展示了 <strong>CMOS ( Complementary MOS )</strong>
+技术的典型截面结构，它是构建 SRAM 和现代 CPU 的基础. 图中左侧为
+NMOS，右侧为 PMOS.</p>
+<ol type="1">
+<li><strong>衬底与阱 ( Substrate &amp; Well )</strong> :
+<ul>
+<li><strong>P-Substrate</strong> : 整个芯片建立在 P 型硅衬底上.</li>
+<li><strong>N-Well ( N 阱 )</strong> : 为了制造 PMOS，需要在 P
+衬底上形成一个 N 型区域 ( N 阱 ). PMOS 晶体管就主要“坐”在这个 N
+阱里.</li>
+</ul></li>
+<li><strong>NMOS 晶体管 ( 左侧 )</strong> :
+<ul>
+<li><strong>结构</strong> : 在 P 衬底上制作两个高浓度的 <strong>N
+型扩散区</strong> ( Green N ) 作为 <strong>源极 ( Source )</strong> 和
+<strong>漏极 ( Drain )</strong>.</li>
+<li><strong>导通条件</strong> : 当栅极 ( Gate ) 加
+<strong>高电平</strong> 时，P 衬底中的电子被吸引到栅极下方，形成
+<strong>N 型导电沟道</strong>，源漏导通.</li>
+<li><strong>特性</strong> : 传输低电平 ( 0 )
+效果好，电子迁移率高，速度快.</li>
+</ul></li>
+<li><strong>PMOS 晶体管 ( 右侧 )</strong> :
+<ul>
+<li><strong>结构</strong> : 在 N 阱中制作两个高浓度的 <strong>P
+型扩散区</strong> ( Orange P ) 作为 <strong>源极</strong> 和
+<strong>漏极</strong>.</li>
+<li><strong>导通条件</strong> : 当栅极加 <strong>低电平</strong> 时，N
+阱中的空穴被吸引到栅极下方，形成 <strong>P
+型导电沟道</strong>，源漏导通.</li>
+<li><strong>特性</strong> : 传输高电平 ( 1 ) 效果好.</li>
+</ul></li>
+<li><strong>互补工作 ( Complementary )</strong> :
+<ul>
+<li>将 NMOS 和 PMOS 的栅极连在一起作为
+<strong>输入</strong>，漏极连在一起作为 <strong>输出</strong>，就构成了
+<strong>CMOS 反相器</strong>.</li>
+<li><strong>输入高</strong> <span class="math inline">\(\to\)</span>
+NMOS 导通，PMOS 截止 <span class="math inline">\(\to\)</span>
+输出低.</li>
+<li><strong>输入低</strong> <span class="math inline">\(\to\)</span>
+NMOS 截止，PMOS 导通 <span class="math inline">\(\to\)</span>
+输出高.</li>
+<li>这种互补结构使得静态功耗极低 ( 只有开关瞬间有电流 ).</li>
+</ul></li>
+</ol>
+</div>
+<iframe src="/html/sram_structure.html" width="100%" height="1100px" frameborder="0">
+</iframe>
+<ul>
+<li><strong>存储元</strong> : 采用 <strong>双稳态触发器</strong> ( 6 个
+MOS 管 ) 存储信息.</li>
+<li><strong>工作原理</strong> : 只要电源不切断，触发器就能保持其状态 ( 0
+或 1 )，<strong>不需要刷新</strong>.</li>
+<li><strong>特点</strong> :
+<ul>
+<li><strong>速度快</strong> : 存取周期短，接近 CPU 速度.</li>
+<li><strong>集成度低</strong> : 每个存储元需 6 个管子，占用面积大.</li>
+<li><strong>功耗大</strong> : 触发器工作时持续耗电.</li>
+<li><strong>成本高</strong>.</li>
+</ul></li>
+<li><strong>应用</strong> : 主要用作 <strong>Cache</strong> (
+高速缓冲存储器 ).</li>
+<li><strong>读写</strong> :
+同时送行列地址，<strong>非破坏性读出</strong>.</li>
+</ul>
+<h4 id="dram存储器">3.2.1.2 DRAM存储器</h4>
+<p><strong>DRAM ( Dynamic Random Access Memory )</strong>
+即动态随机存取存储器.</p>
+<iframe src="/html/dram_structure.html" width="100%" height="1100px" frameborder="0">
+</iframe>
+<ul>
+<li><strong>存储元</strong> : 利用 <strong>栅极电容</strong> ( 1 个 MOS
+管 + 1 个电容 ) 存储电荷.</li>
+<li><strong>工作原理</strong> :
+<ul>
+<li>电容有电荷为 1，无电荷为 0.</li>
+<li>由于电容存在 <strong>漏电</strong>
+现象，电荷会逐渐消失，因此需要定时 <strong>刷新</strong> ( Refresh )
+以保持数据.</li>
+</ul></li>
+<li><strong>特点</strong> :
+<ul>
+<li><strong>集成度高</strong> : 结构简单 ( 1T1C )，便于高密度集成.</li>
+<li><strong>成本低</strong>.</li>
+<li><strong>速度较慢</strong> : 充放电需要时间，且刷新占用时间.</li>
+</ul></li>
+<li><strong>应用</strong> : 主要用作 <strong>主存</strong> ( 内存条
+).</li>
+</ul>
+<p><strong>1. DRAM 的刷新 ( Refresh )</strong></p>
+<p>DRAM 需每隔一定时间 ( <strong>刷新周期</strong>，通常为 2ms )
+对所有存储单元进行一次“读取并重写”.</p>
+<ul>
+<li><strong>刷新单位</strong> : 以 <strong>行</strong>
+为单位，每次刷新一行.</li>
+<li><strong>刷新本质</strong> : 读出数据 ( 破坏性读出 ) + 重新写入 (
+再生 ).</li>
+</ul>
+<div class="tabs" id="dram刷新方式"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="dram刷新方式-1">集中刷新</button><button type="button" class="tab " data-href="dram刷新方式-2">分散刷新</button><button type="button" class="tab " data-href="dram刷新方式-3">异步刷新</button></ul><div class="tab-contents"><div class="tab-item-content active" id="dram刷新方式-1"><p><strong>Concentrated Refresh</strong></p>
+<ul>
+<li><strong>原理</strong> : 在 2ms
+周期内，利用一段固定的时间，<strong>集中</strong> 对所有行进行刷新.</li>
+<li><strong>过程</strong> :
+<ul>
+<li>前段时间 : 正常读写 ( 工作 ).</li>
+<li>后段时间 : 停止读写，逐行刷新 ( 此时 CPU 无法访问存储器，称为
+<strong>“死区”</strong> 或 <strong>“死时间”</strong> ).</li>
+</ul></li>
+<li><strong>优点</strong> : 读写操作不受刷新干扰，速度快.</li>
+<li><strong>缺点</strong> : 存在长时间的死区，影响实时性.</li>
+</ul></div><div class="tab-item-content" id="dram刷新方式-2"><p><strong>Distributed Refresh</strong></p>
+<ul>
+<li><strong>原理</strong> : 将存储系统的存取周期定义为 <span
+class="math inline">\(T_C = t_m \text{(读写)} + t_r
+\text{(刷新)}\)</span>.</li>
+<li><strong>过程</strong> : 每次读写操作完成后，紧接着刷新一行.</li>
+<li><strong>优点</strong> : <strong>没有死区</strong>.</li>
+<li><strong>缺点</strong> : 存取周期加长，系统变慢.</li>
+</ul></div><div class="tab-item-content" id="dram刷新方式-3"><p><strong>Asynchronous Refresh</strong> ( <strong>最常用</strong> )</p>
+<ul>
+<li><strong>原理</strong> : 将刷新操作 <strong>均匀分散</strong> 在整个
+2ms 周期内.</li>
+<li><strong>过程</strong> : 若有 128 行，则每隔 <span
+class="math inline">\(2ms / 128 \approx 15.6 \mu s\)</span> 刷新一行.
+刷新一行的时间很短，死区也很短.</li>
+<li><strong>优点</strong> :
+结合了前两者的优点，<strong>死区短</strong>，且不明显影响存取速度.</li>
+<li><strong>计算</strong> :
+<ul>
+<li>刷新间隔 = 刷新周期 / 行数.</li>
+</ul></li>
+</ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<p><strong>2. DRAM 的地址复用技术</strong></p>
+<div class="note sparkle simple"><p>DRAM 容量通常很大，地址线很多. 为了 <strong>减少芯片引脚数</strong> (
+降低封装成本 )，DRAM 通常采用 <strong>地址复用</strong> 技术 :</p>
+<ul>
+<li>行地址和列地址通过 <strong>同一组地址线</strong> 分两次送入.</li>
+<li>先送行地址 ( 配合 <span
+class="math inline">\(\overline{RAS}\)</span> 信号 )，再送列地址 ( 配合
+<span class="math inline">\(\overline{CAS}\)</span> 信号 ).</li>
+<li><strong>代价</strong> : 地址线减半，但存取速度变慢 ( 需两次传输
+).</li>
+</ul>
+</div>
+<p><strong>3. 核心考点与读写时序</strong></p>
+<div class="note info simple"><p><strong>为什么 DRAM 的行数通常 <span
+class="math inline">\(\le\)</span> 列数 ?</strong></p>
+<ul>
+<li><strong>刷新开销</strong> : DRAM 刷新是以 <strong>行</strong>
+为单位的. 行数越少，刷新所有行所需的时间越短，对系统性能的影响越小.</li>
+<li><strong>地址复用</strong> :
+为了配合地址复用，通常将地址位平均分配给行/列 ( <span
+class="math inline">\(N/2\)</span> ). 若无法平均，则 <strong>行地址位数
+<span class="math inline">\(\le\)</span> 列地址位数</strong>.</li>
+</ul>
+<p><strong>DRAM 的读写时序 ( 简述 )</strong> <span
+class="math display">\[ \text{预充电} \to \text{行有效} (\overline{RAS})
+\to \text{列有效} (\overline{CAS}) \to \text{数据传输} \to \text{恢复}
+\]</span></p>
+<ul>
+<li><strong><span class="math inline">\(\overline{RAS}\)</span> 先于
+<span class="math inline">\(\overline{CAS}\)</span></strong> :
+必须先选中行，再选中列.</li>
+<li><strong>地址线复用</strong> : 先送行地址，再送列地址.</li>
+</ul>
+</div>
+<div class="mermaid-wrap"><pre class="mermaid-src" hidden>
+  %%{init: {&#39;sequence&#39;: {&#39;theme&#39;: &#39;base&#39;, &#39;fontFamily&#39;: &#39;sans-serif&#39;}}}%%
+sequenceDiagram
+    participant CPU
+    participant DRAM
+    
+    Note over CPU, DRAM: DRAM 读周期 ( Read Cycle )
+    
+    CPU-&gt;&gt;DRAM: 1. 送行地址 ( Row Addr )
+    CPU-&gt;&gt;DRAM: 2. 行选通 ( RAS &#x3D; 0 )
+    
+    Note right of DRAM: 锁存行地址
+    
+    CPU-&gt;&gt;DRAM: 3. 送列地址 ( Col Addr )
+    CPU-&gt;&gt;DRAM: 4. 列选通 ( CAS &#x3D; 0 )
+    
+    Note right of DRAM: 锁存列地址 &amp; 读出数据
+    
+    DRAM--&gt;&gt;CPU: 5. 数据输出 ( Data Out )
+    
+    Note over CPU, DRAM: 恢复期 ( Precharge )
+  </pre></div>
+<p><strong>4. 现代 DRAM 技术 ( 拓展 )</strong></p>
+<ul>
+<li><strong>SDRAM ( Synchronous DRAM )</strong> : <strong>同步</strong>
+动态随机存储器.
+<ul>
+<li>与 CPU 总线时钟同步 ( 传统的 DRAM 是异步的 ).</li>
+<li>通过 <strong>命令</strong> ( Command )
+而不是单纯的电平信号控制.</li>
+</ul></li>
+<li><strong>Burst Mode ( 突发传输 )</strong> :
+<ul>
+<li>提供一个起始地址，可以 <strong>连续读取</strong> 后续多个单元的数据
+( 配合 Cache 行填充 ).</li>
+<li>无需每次都送地址.</li>
+</ul></li>
+<li><strong>DDR ( Double Data Rate )</strong> :
+<ul>
+<li>在时钟的 <strong>上升沿</strong> 和 <strong>下降沿</strong>
+都能传输数据，带宽翻倍.</li>
+</ul></li>
+</ul>
+<h4 id="sram-与-dram-核心区别与选型">3.2.1.3 SRAM 与 DRAM
+核心区别与选型</h4>
+<style>
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.9em; font-family: monospace; }
+.tag.good { background: #dcfce7; color: #16a34a; }
+.tag.bad { background: #fee2e2; color: #dc2626; }
+.tag.mid { background: #fef9c3; color: #a16207; }
+</style>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">特性</th>
+<th style="text-align: left;">SRAM ( 静态 RAM )</th>
+<th style="text-align: left;">DRAM ( 动态 RAM )</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>存储原理</strong></td>
+<td style="text-align: left;">双稳态触发器 ( 6T )</td>
+<td style="text-align: left;">电容充放电 ( 1T1C )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>每位晶体管数</strong></td>
+<td style="text-align: left;"><span class="tag bad">6 个</span></td>
+<td style="text-align: left;"><span class="tag good">1 个</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>数据保持</strong></td>
+<td style="text-align: left;"><span class="tag good">通电即保持 ( 静态
+)</span></td>
+<td style="text-align: left;"><span class="tag bad">需定时刷新 ( 动态
+)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>是否需要刷新</strong></td>
+<td style="text-align: left;"><span class="tag good">不需要</span></td>
+<td style="text-align: left;"><span class="tag bad">需要 ( ~64ms
+)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>访问速度</strong></td>
+<td style="text-align: left;"><span class="tag good">极快 ( &lt;1ns
+)</span></td>
+<td style="text-align: left;"><span class="tag mid">较慢 ( ~50ns
+)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>集成度</strong></td>
+<td style="text-align: left;"><span class="tag bad">低</span></td>
+<td style="text-align: left;"><span class="tag good">高</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>静态功耗</strong></td>
+<td style="text-align: left;"><span class="tag mid">中 ( 漏电
+)</span></td>
+<td style="text-align: left;"><span class="tag good">极低</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>动态功耗</strong></td>
+<td style="text-align: left;"><span class="tag good">低 ( CMOS
+)</span></td>
+<td style="text-align: left;"><span class="tag mid">中</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>成本</strong></td>
+<td style="text-align: left;"><span class="tag bad">贵</span></td>
+<td style="text-align: left;"><span class="tag good">便宜</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>典型容量</strong></td>
+<td style="text-align: left;">KB～几十MB</td>
+<td style="text-align: left;">GB 级</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>典型用途</strong></td>
+<td style="text-align: left;">Cache、寄存器文件</td>
+<td style="text-align: left;">主存 ( 内存条 )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SNM 稳定性</strong></td>
+<td style="text-align: left;"><span class="tag good">好 ( 静态噪声容限大
+)</span></td>
+<td style="text-align: left;">—</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>送列地址</strong></td>
+<td style="text-align: left;">同时送行列地址</td>
+<td style="text-align: left;">分两次送 ( 地址线复用 )</td>
+</tr>
+</tbody>
+</table>
+<h3 id="只读存储器">3.2.2 只读存储器</h3>
+<p>ROM 在计算机系统中主要用于存放系统程序 ( BIOS ).</p>
+<ol type="1">
+<li><strong>MROM ( Mask ROM )</strong> : 掩膜
+ROM，厂家生产时写入，无法修改.</li>
+<li><strong>PROM ( Programmable ROM )</strong> : 一次性可编程
+ROM，用户只能写一次.</li>
+<li><strong>EPROM ( Erasable PROM )</strong> : 可擦除 ROM.
+<ul>
+<li>UVEPROM : 紫外线擦除.</li>
+<li>EEPROM : 电擦除.</li>
+</ul></li>
+<li><strong>Flash Memory ( 闪存 )</strong> : 电可擦除，速度快，集成度高
+( U盘, SSD ).</li>
+<li><strong>SSD ( 固态硬盘 )</strong> : 基于 Flash Memory
+的大容量存储设备.</li>
+</ol>
+<h3 id="主存储器的基本组成">3.2.3 主存储器的基本组成</h3>
+<p>主存芯片不仅包含存储数据的 <strong>存储体</strong>，还包括
+<strong>外围电路</strong> ( 译码、驱动、控制 ).
+它们共同协作，完成数据的存储和检索.</p>
+<div class="mermaid-wrap"><pre class="mermaid-src" hidden>
+  %%{init: {&#39;flowchart&#39;: {&#39;curve&#39;: &#39;basis&#39;}, &#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;primaryColor&#39;: &#39;#fff&#39;, &#39;lineColor&#39;: &#39;#94a3b8&#39;, &#39;fontFamily&#39;: &#39;sans-serif&#39; }}}%%
+graph TB
+    %% 外部信号
+    Addr[地址总线 Address Bus]
+    Data[数据总线 Data Bus]
+    Ctrl[控制总线 Control Bus]
+
+    %% 内部组件
+    subgraph Chip [&quot;存储芯片内部结构 Internal Structure&quot;]
+        direction TB
+        
+        Decoder[&quot;地址译码器\n( Decoder )&quot;]
+        Matrix[&quot;存储体 ( 存储矩阵 )\n( Memory Matrix )&quot;]
+        IO[&quot;读写电路 ( I&#x2F;O Circuit )\n( Sense Amp &#x2F; Driver )&quot;]
+        Logic[&quot;控制逻辑\n( Control Logic )&quot;]
+        
+        %% 内部连接
+        Decoder --&gt;|&quot;行&#x2F;列选择线&quot;| Matrix
+        Matrix &lt;--&gt;|&quot;内部数据线&quot;| IO
+        Logic --&gt;|&quot;控制信号&quot;| IO
+        Logic --&gt;|&quot;使能信号&quot;| Decoder
+    end
+
+    %% 外部连接
+    Addr --&gt; Decoder
+    IO &lt;--&gt; Data
+    Ctrl --&gt; Logic
+
+    %% 样式
+    classDef bus fill:#f8fafc,stroke:#94a3b8,stroke-width:1px,color:#475569,stroke-dasharray: 5 5;
+    classDef comp fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0369a1;
+    classDef core fill:#fff7ed,stroke:#f97316,stroke-width:2px,color:#9a3412;
+
+    class Addr,Data,Ctrl bus
+    class Decoder,IO,Logic comp
+    class Matrix core
+  </pre></div>
+<h4 id="核心组件详解">1. 核心组件详解</h4>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">组件</th>
+<th style="text-align: left;">功能描述</th>
+<th style="text-align: left;">关键点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>存储体</strong> ( Memory Matrix
+)</td>
+<td style="text-align: left;">由大量 <strong>存储元</strong> ( 0/1 )
+构成的阵列.</td>
+<td style="text-align: left;"><strong>MOS管 + 电容</strong> ( DRAM ) 或
+<strong>触发器</strong> ( SRAM ).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>地址译码器</strong> ( Decoder
+)</td>
+<td style="text-align: left;">将 <strong>地址信号</strong> 转换为
+<strong>选通信号</strong>.</td>
+<td style="text-align: left;"><strong>单译码</strong> ( 线选 ) vs
+<strong>双译码</strong> ( 重合选 ).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>I/O 控制电路</strong></td>
+<td style="text-align: left;">控制数据流向，进行信号放大/整形.</td>
+<td style="text-align: left;">包含 <strong>读写放大器</strong> 和
+<strong>数据缓冲</strong>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>控制逻辑</strong></td>
+<td style="text-align: left;">接收 CPU 的控制命令 ( 读/写/片选 ).</td>
+<td style="text-align: left;">产生内部时序信号.</td>
+</tr>
+</tbody>
+</table>
+<div class="note info simple"><p><strong>单译码 vs 双译码</strong></p>
+<ul>
+<li><strong>单译码 ( 1D )</strong> : <span
+class="math inline">\(N\)</span> 位地址线产生 <span
+class="math inline">\(2^N\)</span> 根选通线. 适合
+<strong>小容量</strong> 芯片.</li>
+<li><strong>双译码 ( 2D )</strong> : 将地址分为 <span
+class="math inline">\(X, Y\)</span> 两组，分别译码产生 <span
+class="math inline">\(2^{N/2}\)</span> 根线. 适合
+<strong>大容量</strong> 芯片 ( 显著减少选通线数量 ).</li>
+</ul>
+</div>
+<h4 id="主存的工作流程">2. 主存的工作流程</h4>
+<p>主存的读写操作是由 CPU 发出的控制信号和地址信号驱动的.</p>
+<p><strong>读操作流程 ( Read )</strong> :</p>
+<ol type="1">
+<li><strong>送地址</strong> : CPU 将地址送入
+<strong>地址总线</strong>.</li>
+<li><strong>发命令</strong> : CPU 发出 <strong>读命令</strong> ( <span
+class="math inline">\(\overline{WE}=1\)</span> ) 和
+<strong>片选信号</strong> ( <span
+class="math inline">\(\overline{CS}=0\)</span> ).</li>
+<li><strong>译码选中</strong> : 地址译码器选中特定的存储单元.</li>
+<li><strong>读出数据</strong> : 存储单元的数据被读出，经
+<strong>读写放大器</strong> 放大.</li>
+<li><strong>送总线</strong> : 数据送入 <strong>数据总线</strong>，供 CPU
+读取.</li>
+</ol>
+<p><strong>写操作流程 ( Write )</strong> :</p>
+<ol type="1">
+<li><strong>送地址</strong> : CPU 将地址送入
+<strong>地址总线</strong>.</li>
+<li><strong>送数据</strong> : CPU 将数据送入
+<strong>数据总线</strong>.</li>
+<li><strong>发命令</strong> : CPU 发出 <strong>写命令</strong> ( <span
+class="math inline">\(\overline{WE}=0\)</span> ) 和
+<strong>片选信号</strong> ( <span
+class="math inline">\(\overline{CS}=0\)</span> ).</li>
+<li><strong>译码选中</strong> : 地址译码器选中特定的存储单元.</li>
+<li><strong>写入数据</strong> : 数据经 I/O 电路写入选中的存储单元.</li>
+</ol>
+<h4 id="存储芯片引脚数的计算">3. 存储芯片引脚数的计算</h4>
+<p>对于一个容量为 <span class="math inline">\(M \times N\)</span> 位 (
+<span class="math inline">\(M\)</span> 个单元，字长 <span
+class="math inline">\(N\)</span> 位 ) 的芯片 :</p>
+<ul>
+<li><strong>地址线 ( A )</strong> : <span class="math inline">\(\lceil
+\log_2 M \rceil\)</span>.</li>
+<li><strong>数据线 ( D )</strong> : <span
+class="math inline">\(N\)</span>.</li>
+<li><strong>控制/电源线</strong> : 通常包括 <span
+class="math inline">\(\overline{CS}, \overline{WE}, V_{CC}, GND\)</span>
+( 至少 4 根 ).</li>
+<li><strong>总引脚数</strong> = <span class="math inline">\(A + D +
+4\)</span> ( 或更多 ).</li>
+</ul>
+<div class="note sparkle simple"><p><strong>DRAM 特例 : 地址复用</strong></p>
+<p>DRAM 芯片为减少引脚，采用 <strong>地址复用</strong> 技术 (
+行/列地址分时复用 ).</p>
+<ul>
+<li><strong>地址引脚数</strong> : <span class="math inline">\(\lceil
+\frac{1}{2} \log_2 M \rceil\)</span>.</li>
+<li><strong>增加信号</strong> : <span
+class="math inline">\(\overline{RAS}\)</span> ( 行选通 ) 和 <span
+class="math inline">\(\overline{CAS}\)</span> ( 列选通 ).</li>
+<li><strong>总引脚数</strong> : 地址线减半，但增加了控制线.</li>
+</ul>
+</div>
+<div class="note info simple"><p><strong>示例详解 : 存储芯片引脚数计算</strong></p>
+<p><strong>例 1 : SRAM 芯片 ( 无地址复用 )</strong> 已知 : 某 SRAM
+芯片容量为 <strong><span class="math inline">\(4\text{K} \times
+8\)</span> 位</strong>. 求 : 该芯片的地址线、数据线及最少引脚总数.</p>
+<ol type="1">
+<li><strong>地址线 ( A )</strong> :
+<ul>
+<li>容量 <span class="math inline">\(4\text{K} = 2^{12}\)</span>
+单元.</li>
+<li><span class="math inline">\(\therefore A = \log_2(2^{12}) =
+\mathbf{12}\)</span> 根.</li>
+</ul></li>
+<li><strong>数据线 ( D )</strong> :
+<ul>
+<li>字长 8 位.</li>
+<li><span class="math inline">\(\therefore D = \mathbf{8}\)</span>
+根.</li>
+</ul></li>
+<li><strong>引脚总数</strong> :
+<ul>
+<li>最少控制/电源线 : <span class="math inline">\(\overline{CS},
+\overline{WE}, V_{CC}, GND\)</span> ( 4根 ).</li>
+<li>Total = <span class="math inline">\(A + D + 4 = 12 + 8 + 4 =
+\mathbf{24}\)</span> 根.</li>
+</ul></li>
+</ol>
+<p><strong>例 2 : DRAM 芯片 ( 地址复用 )</strong> 已知 : 某 DRAM
+芯片容量为 <strong><span class="math inline">\(4\text{M} \times
+8\)</span> 位</strong>. 求 :
+该芯片的地址引脚、数据引脚及相关控制信号.</p>
+<ol type="1">
+<li><strong>地址引脚</strong> :
+<ul>
+<li>容量 <span class="math inline">\(4\text{M} = 2^{22}\)</span>
+单元.</li>
+<li>原需地址线 22 根.</li>
+<li><strong>复用后</strong> : 行列地址分时传输 <span
+class="math inline">\(\to\)</span> <span class="math inline">\(22 / 2 =
+\mathbf{11}\)</span> 根.</li>
+</ul></li>
+<li><strong>数据引脚</strong> :
+<ul>
+<li>字长 8 位 <span class="math inline">\(\to\)</span> <span
+class="math inline">\(\mathbf{8}\)</span> 根.</li>
+</ul></li>
+<li><strong>控制信号的变化</strong> :
+<ul>
+<li>增加 <strong><span
+class="math inline">\(\overline{RAS}\)</span></strong> ( 行选通 ) 和
+<strong><span class="math inline">\(\overline{CAS}\)</span></strong> (
+列选通 ) 代替原来的片选.</li>
+<li>( 总引脚数 = <span class="math inline">\(11 + 8 +
+\text{控制/电源}\)</span> ).</li>
+</ul></li>
+</ol>
+</div>
+<h3 id="存储器容量扩展与芯片数量计算">3.2.4
+存储器容量扩展与芯片数量计算</h3>
+<p>当单片存储芯片的容量无法满足设计要求时，需要将多片芯片连接起来组成更大的存储器.
+主要有三种扩展方式：<strong>位扩展</strong>、<strong>字扩展</strong> 和
+<strong>字位同时扩展</strong>.</p>
+<h4 id="核心公式与扩展方式">1. 核心公式与扩展方式</h4>
+<p><span class="math display">\[ \text{总芯片数} =
+\frac{\text{设计总容量}}{\text{单片容量}} = \frac{\text{设计字数} \times
+\text{设计字长}}{\text{单片字数} \times \text{单片字长}} \]</span></p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">扩展方式</th>
+<th style="text-align: left;">目的</th>
+<th style="text-align: left;">连接特点</th>
+<th style="text-align: left;">芯片数量计算</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>位扩展</strong></td>
+<td style="text-align: left;">增加<strong>字长</strong> (位数)</td>
+<td
+style="text-align: left;">地址线<strong>并联</strong>，数据线<strong>分段</strong>，片选线<strong>并联</strong></td>
+<td style="text-align: left;"><span
+class="math inline">\(\frac{\text{设计字长}}{\text{单片字长}}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>字扩展</strong></td>
+<td style="text-align: left;">增加<strong>字数</strong> (容量)</td>
+<td
+style="text-align: left;">地址线(低位)<strong>并联</strong>，数据线<strong>并联</strong>，片选线(高位)<strong>译码</strong></td>
+<td style="text-align: left;"><span
+class="math inline">\(\frac{\text{设计字数}}{\text{单片字数}}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>同时扩展</strong></td>
+<td style="text-align: left;">增加字长和字数</td>
+<td style="text-align: left;">结合上述两种方式</td>
+<td style="text-align: left;"><span
+class="math inline">\(\text{位扩展数} \times
+\text{字扩展数}\)</span></td>
+</tr>
+</tbody>
+</table>
+<h4 id="示例详解-附连接示意图">2. 示例详解 ( 附连接示意图 )</h4>
+<div class="note info simple"><p><strong>例 1 : 位扩展 ( 增加字长 )</strong></p>
+<ul>
+<li><strong>题目</strong> : 用 <strong><span
+class="math inline">\(1\text{K} \times 4\)</span> 位</strong> 芯片组成
+<strong><span class="math inline">\(1\text{K} \times 8\)</span>
+位</strong> 存储器.</li>
+<li><strong>分析</strong> : 字数 <span
+class="math inline">\(1\text{K}\)</span> 不变，字长 <span
+class="math inline">\(4 \to 8\)</span> 位 ( 翻倍 ).</li>
+<li><strong>计算</strong> : <span class="math display">\[
+\frac{1\text{K} \times 8\text{位}}{1\text{K} \times 4\text{位}} =
+\mathbf{2} \text{ 片} \]</span></li>
+<li><strong>连接方式</strong> :
+<ul>
+<li><strong>地址线 (<span class="math inline">\(A_0 \sim
+A_9\)</span>)</strong> : 2 片芯片 <strong>并联</strong> (
+同时接收相同地址 ).</li>
+<li><strong>数据线 (<span class="math inline">\(D_0 \sim
+D_7\)</span>)</strong> : 芯片 1 接低 4 位 (<span
+class="math inline">\(D_0 \sim D_3\)</span>)，芯片 2 接高 4 位 (<span
+class="math inline">\(D_4 \sim D_7\)</span>).</li>
+<li><strong>片选线 (<span
+class="math inline">\(\overline{CS}\)</span>)</strong> : 2 片芯片
+<strong>并联</strong> ( 同时工作 ).</li>
+</ul></li>
+</ul>
+<div class="mermaid-wrap">
+<pre class="mermaid-src" hidden>
+  %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;lineColor&#39;: &#39;#64748b&#39;, &#39;fontFamily&#39;: &#39;arial&#39;, &#39;fontSize&#39;: &#39;16px&#39; }}}%%
+flowchart TB
+    classDef default fill:#F1F5F9,stroke:#334155,stroke-width:2px,color:#1E293B,rx:5,ry:5;
+    classDef proc fill:#E0F2FE,stroke:#0284C7,stroke-width:2px,color:#0369A1,rx:5,ry:5;
+    classDef code fill:#22D3EE,stroke:#0E7490,stroke-width:2px,color:#FFFFFF,rx:5,ry:5;
+    classDef data fill:#F59E0B,stroke:#B45309,stroke-width:2px,color:#FFFFFF,rx:5,ry:5;
+    classDef phys fill:#94A3B8,stroke:#475569,stroke-width:2px,color:#FFFFFF,rx:5,ry:5;
+
+    %% 外部信号
+    Addr[地址总线 A0-A9]:::phys
+    Data[数据总线 D0-D7]:::data
+    CS[片选信号 CS]:::phys
+
+    %% 芯片
+    subgraph Chips
+        direction LR
+        Chip1[芯片 1 : 1K×4]:::proc
+        Chip2[芯片 2 : 1K×4]:::proc
+    end
+
+    %% 连接
+    Addr --&gt; Chip1 &amp; Chip2
+    CS --&gt; Chip1 &amp; Chip2
+    Chip1 &lt;--&gt;|D0-D3| Data
+    Chip2 &lt;--&gt;|D4-D7| Data
+  </pre>
+</div>
+</div>
+<div class="note info simple"><p><strong>例 2 : 字扩展 ( 增加容量 )</strong></p>
+<ul>
+<li><strong>题目</strong> : 用 <strong><span
+class="math inline">\(1\text{K} \times 8\)</span> 位</strong> 芯片组成
+<strong><span class="math inline">\(2\text{K} \times 8\)</span>
+位</strong> 存储器.</li>
+<li><strong>分析</strong> : 字长 8 位不变，字数 <span
+class="math inline">\(1\text{K} \to 2\text{K}\)</span> ( 翻倍 ).</li>
+<li><strong>计算</strong> : <span class="math display">\[
+\frac{2\text{K} \times 8\text{位}}{1\text{K} \times 8\text{位}} =
+\mathbf{2} \text{ 片} \]</span></li>
+<li><strong>连接方式</strong> :
+<ul>
+<li><strong>数据线 (<span class="math inline">\(D_0 \sim
+D_7\)</span>)</strong> : 2 片芯片 <strong>并联</strong> ( 分时传输数据
+).</li>
+<li><strong>地址线 (<span class="math inline">\(A_0 \sim
+A_9\)</span>)</strong> : 作为<strong>片内地址</strong>，并联到 2
+片芯片.</li>
+<li><strong>片选线 (<span
+class="math inline">\(\overline{CS}\)</span>)</strong> : 最高位地址
+<strong><span class="math inline">\(A_{10}\)</span></strong>
+作为<strong>片选信号</strong>.
+<ul>
+<li><span class="math inline">\(A_{10}=0\)</span> 选中芯片 1 ( 0~1K-1
+).</li>
+<li><span class="math inline">\(A_{10}=1\)</span> 选中芯片 2 ( 1K~2K-1
+).</li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="mermaid-wrap">
+<pre class="mermaid-src" hidden>
+  %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;lineColor&#39;: &#39;#64748b&#39;, &#39;fontFamily&#39;: &#39;arial&#39;, &#39;fontSize&#39;: &#39;16px&#39; }}}%%
+flowchart TB
+    classDef default fill:#F1F5F9,stroke:#334155,stroke-width:2px,color:#1E293B,rx:5,ry:5;
+    classDef proc fill:#E0F2FE,stroke:#0284C7,stroke-width:2px,color:#0369A1,rx:5,ry:5;
+    classDef code fill:#22D3EE,stroke:#0E7490,stroke-width:2px,color:#FFFFFF,rx:5,ry:5;
+    classDef data fill:#F59E0B,stroke:#B45309,stroke-width:2px,color:#FFFFFF,rx:5,ry:5;
+    classDef phys fill:#94A3B8,stroke:#475569,stroke-width:2px,color:#FFFFFF,rx:5,ry:5;
+
+    %% 外部信号
+    AddrLow[地址总线 A0-A9]:::phys
+    AddrHigh[地址总线 A10]:::phys
+    Data[数据总线 D0-D7]:::data
+
+    %% 芯片
+    subgraph Chips
+        direction TB
+        Chip1[芯片 1 : 1K×8]:::proc
+        Chip2[芯片 2 : 1K×8]:::proc
+    end
+
+    %% 逻辑
+    Inv[非门 &#x2F; 译码器]:::code
+
+    %% 连接
+    AddrLow --&gt; Chip1 &amp; Chip2
+    Data &lt;--&gt; Chip1 &amp; Chip2
+    
+    AddrHigh --&quot;0&quot;--&gt; Chip1
+    AddrHigh --&quot;1&quot;--&gt; Inv --&gt; Chip2
+  </pre>
+</div>
+</div>
+<div class="note info simple"><p><strong>例 3 : 字位同时扩展 ( 综合考点 )</strong></p>
+<ul>
+<li><strong>题目</strong> : 用 <strong><span
+class="math inline">\(16\text{K} \times 8\)</span> 位</strong> 芯片组成
+<strong><span class="math inline">\(64\text{K} \times 32\)</span>
+位</strong> 存储器.</li>
+<li><strong>分析</strong> :
+<ul>
+<li><strong>位扩展</strong> : <span class="math inline">\(8 \to
+32\)</span> 位，需 <span class="math inline">\(32/8 = 4\)</span> 片并联
+( 组成 1 组 ).</li>
+<li><strong>字扩展</strong> : <span class="math inline">\(16\text{K} \to
+64\text{K}\)</span>，需 <span class="math inline">\(64/16 = 4\)</span>
+组.</li>
+</ul></li>
+<li><strong>计算</strong> : <span class="math display">\[
+\text{总芯片数} = \frac{64\text{K} \times 32\text{位}}{16\text{K} \times
+8\text{位}} = 4 \times 4 = \mathbf{16} \text{ 片} \]</span></li>
+<li><strong>连接方式</strong> :
+<ul>
+<li><strong>分组</strong> : 将 16 片芯片分为 <strong>4 组</strong>，每组
+4 片.</li>
+<li><strong>数据线</strong> : 每组内的 4 片分别连接 <span
+class="math inline">\(D_{0-7}, D_{8-15}, D_{16-23},
+D_{24-31}\)</span>.</li>
+<li><strong>地址线</strong> :
+<ul>
+<li><strong>低 14 位 (<span class="math inline">\(A_0 \sim
+A_{13}\)</span>)</strong> : 并联到所有芯片 ( 片内地址 <span
+class="math inline">\(2^{14}=16\text{K}\)</span> ).</li>
+<li><strong>高 2 位 (<span class="math inline">\(A_{15},
+A_{14}\)</span>)</strong> : 接 <strong>2-4 译码器</strong>，产生 4
+个片选信号 (<span class="math inline">\(\overline{CS_0} \sim
+\overline{CS_3}\)</span>)，分别控制 4 组芯片.</li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="mermaid-wrap">
+<pre class="mermaid-src" hidden>
+  %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;lineColor&#39;: &#39;#64748b&#39;, &#39;fontFamily&#39;: &#39;arial&#39;, &#39;fontSize&#39;: &#39;16px&#39; }}}%%
+flowchart TB
+    classDef default fill:#F1F5F9,stroke:#334155,stroke-width:2px,color:#1E293B,rx:5,ry:5;
+    classDef proc fill:#E0F2FE,stroke:#0284C7,stroke-width:2px,color:#0369A1,rx:5,ry:5;
+    classDef code fill:#22D3EE,stroke:#0E7490,stroke-width:2px,color:#FFFFFF,rx:5,ry:5;
+    classDef data fill:#F59E0B,stroke:#B45309,stroke-width:2px,color:#FFFFFF,rx:5,ry:5;
+    classDef phys fill:#94A3B8,stroke:#475569,stroke-width:2px,color:#FFFFFF,rx:5,ry:5;
+
+    %% 外部信号
+    AddrLow[地址 A0-A13]:::phys
+    AddrHigh[地址 A14-A15]:::phys
+    Data[数据 D0-D31]:::data
+
+    %% 译码器
+    Decoder[2-4 译码器]:::code
+    AddrHigh --&gt; Decoder
+
+    %% 存储组
+    subgraph Group0 [Group 0 : 0-16K]
+        direction LR
+        G0_Chips[4片芯片位扩展]:::proc
+    end
+    
+    subgraph Group1 [Group 1 : 16K-32K]
+        direction LR
+        G1_Chips[4片芯片位扩展]:::proc
+    end
+
+    subgraph Group2 [Group 2 : 32K-48K]
+        direction LR
+        G2_Chips[4片芯片位扩展]:::proc
+    end
+
+    subgraph Group3 [Group 3 : 48K-64K]
+        direction LR
+        G3_Chips[4片芯片位扩展]:::proc
+    end
+
+    %% 连接
+    AddrLow --&gt; Group0 &amp; Group1 &amp; Group2 &amp; Group3
+    Data &lt;--&gt; Group0 &amp; Group1 &amp; Group2 &amp; Group3
+    
+    Decoder --&quot;CS0&quot;--&gt; Group0
+    Decoder --&quot;CS1&quot;--&gt; Group1
+    Decoder --&quot;CS2&quot;--&gt; Group2
+    Decoder --&quot;CS3&quot;--&gt; Group3
+  </pre>
+</div>
+</div>
+<h4 id="解题与连接步骤总结">3. 解题与连接步骤总结</h4>
+<ol type="1">
+<li><strong>计算芯片数</strong> :
+<ul>
+<li>利用公式 <span class="math inline">\(N = \text{设计总容量} /
+\text{单片容量}\)</span>.</li>
+</ul></li>
+<li><strong>确定扩展方式</strong> :
+<ul>
+<li>仅字长增加 <span class="math inline">\(\to\)</span>
+<strong>位扩展</strong>.</li>
+<li>仅字数增加 <span class="math inline">\(\to\)</span>
+<strong>字扩展</strong>.</li>
+<li>均增加 <span class="math inline">\(\to\)</span>
+<strong>同时扩展</strong>.</li>
+</ul></li>
+<li><strong>连接地址线</strong> :
+<ul>
+<li><strong>低位地址</strong> ( 片内地址 ) :
+并联连接到所有芯片的地址引脚.</li>
+<li><strong>高位地址</strong> ( 片选地址 ) :
+<ul>
+<li><strong>位扩展</strong> : 不需要额外片选逻辑 ( 此时高位通常为
+0，或直接由系统片选控制 ).</li>
+<li><strong>字扩展/同时扩展</strong> :
+连接到译码器或逻辑电路，生成片选信号 (<span
+class="math inline">\(\overline{CS}\)</span>) 控制不同组.</li>
+</ul></li>
+</ul></li>
+<li><strong>连接数据线</strong> :
+<ul>
+<li><strong>位扩展</strong> : 不同芯片接数据总线的不同位段 ( 如 <span
+class="math inline">\(D_0 \sim D_3\)</span>, <span
+class="math inline">\(D_4 \sim D_7\)</span> ).</li>
+<li><strong>字扩展</strong> : 所有芯片并联接整个数据总线 ( 分时工作
+).</li>
+</ul></li>
+<li><strong>连接控制线</strong> :
+<ul>
+<li>读写控制 (<span
+class="math inline">\(\text{R}/\overline{\text{W}}\)</span>)
+并联到所有芯片.</li>
+</ul></li>
+</ol>
+<div class="note warning simple"><p><strong>易错点提示</strong></p>
+<ul>
+<li><strong>位扩展时</strong> :
+地址线必须<strong>完全相同</strong>地连接到每一片芯片，片选信号也连接在一起
+( 同时工作 )，只有数据线是分段的.</li>
+<li><strong>字扩展时</strong> :
+数据线连接是相同的，区别在于<strong>片选信号</strong>不同，确保同一时刻只有一组芯片工作.</li>
+<li><strong>地址分配</strong> : 务必分清哪些是 <strong>片内地址</strong>
+( 直接连芯片 )，哪些是 <strong>片选地址</strong> ( 连译码器 ).</li>
+</ul>
+</div>
+<h3 id="多模块存储器">3.2.5 多模块存储器</h3>
+<p>随着 CPU 速度的提升，主存速度成为系统瓶颈.
+<strong>多模块存储器</strong> 是一种 <strong>空间并行</strong>
+技术，通过同时访问多个存储模块来提高主存带宽.</p>
+<h4 id="单体多字存储器">1. 单体多字存储器</h4>
+<p>一个存储体，但每个存储单元存储 <span class="math inline">\(m\)</span>
+个字. 总线宽度也扩展为 <span class="math inline">\(m\)</span> 个字.
+一次读取一行 ( <span class="math inline">\(m\)</span> 个字 ).</p>
+<ul>
+<li><strong>优点</strong> : 带宽提高 <span
+class="math inline">\(m\)</span> 倍.</li>
+<li><strong>缺点</strong> : 只有指令和数据 <strong>连续存放</strong>
+时才有效. 若遇到跳转指令，取出的 <span class="math inline">\(m\)</span>
+个字中可能只有一个有用.</li>
+</ul>
+<h4 id="多体并行存储器-核心">2. 多体并行存储器 ( 核心 )</h4>
+<p>由多块 <strong>独立</strong> 的存储体 ( 模块 )
+组成，每个模块有独立的读写控制电路.</p>
+<div class="tabs" id="多体并行"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="多体并行-1">高位交叉编址</button><button type="button" class="tab " data-href="多体并行-2">低位交叉编址</button></ul><div class="tab-contents"><div class="tab-item-content active" id="多体并行-1"><p><strong>顺序方式 ( Sequential Interleaving )</strong></p>
+<ul>
+<li><strong>原理</strong> :
+<ul>
+<li><strong>模块号 = 地址高位</strong></li>
+<li><strong>块内地址 = 地址低位</strong></li>
+<li>类似于 “扩容”，第一个模块填满后，才填第二个模块.</li>
+</ul></li>
+<li><strong>特点</strong> :
+<ul>
+<li>某个模块被存取时，其他模块不工作.</li>
+<li><strong>无法提高带宽</strong>，主要用于容量扩展.</li>
+<li>各模块串行工作.</li>
+</ul></li>
+</ul></div><div class="tab-item-content" id="多体并行-2"><p><strong>交叉方式 ( Low-order Interleaving )</strong></p>
+<ul>
+<li><strong>原理</strong> :
+<ul>
+<li><strong>模块号 = 地址低位</strong></li>
+<li><strong>块内地址 = 地址高位</strong></li>
+<li>类似于 “发牌”，连续地址分布在不同模块中 ( 模 <span
+class="math inline">\(m\)</span> 映射 ).</li>
+</ul></li>
+<li><strong>特点</strong> :
+<ul>
+<li>连续地址分布在不同模块中.</li>
+<li>可以实现 <strong>流水线存取</strong>，显著提高带宽.</li>
+</ul></li>
+</ul>
+<p><strong>流水线存取原理</strong> : 设模块数 <span
+class="math inline">\(m=4\)</span>，存取周期 <span
+class="math inline">\(T\)</span>，总线传输周期 <span
+class="math inline">\(r\)</span> ( <span class="math inline">\(T = m
+\times r\)</span> ). CPU 每隔 <span class="math inline">\(r\)</span>
+时间启动下一个模块，实现重叠访问.</p>
+<div class="mermaid-wrap">
+<pre class="mermaid-src" hidden>
+  gantt
+    dateFormat s
+    axisFormat %S
+    title 4路低位交叉编址流水线读取
+    
+    section 模块0
+    启动与存取   :active, m0, 0, 4
+    section 模块1
+    启动与存取   :active, m1, 1, 5
+    section 模块2
+    启动与存取   :active, m2, 2, 6
+    section 模块3
+    启动与存取   :active, m3, 3, 7
+  </pre>
+</div>
+<p><strong>性能公式 ( 重要 )</strong> :</p>
+<ul>
+<li><strong>连续存取 <span class="math inline">\(m\)</span>
+个字所需时间</strong> : <span class="math display">\[ t = T + (m-1)r
+\]</span> ( 第一个字需 <span
+class="math inline">\(T\)</span>，后续每个字仅需 <span
+class="math inline">\(r\)</span> )</li>
+<li><strong>带宽 ( W )</strong> : <span class="math display">\[ W =
+\frac{m \times \text{字长}}{T + (m-1)r} \]</span></li>
+<li><strong>最佳模块数</strong> : <span class="math display">\[ m \ge
+T/r \]</span> ( 保证流水线不中断 )</li>
+</ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<hr />
+<h2 id="主存储器与-cpu-的连接">3.3 主存储器与 CPU 的连接</h2>
+<h3 id="连接原理">3.3.1 连接原理</h3>
+<p>CPU 通过 <strong>三组总线</strong> 与主存储器相连.</p>
+<ul>
+<li><strong>数据总线 ( Data Bus )</strong> : 双向，位数 <span
+class="math inline">\(N\)</span> 决定了 <strong>存储字长</strong>.</li>
+<li><strong>地址总线 ( Address Bus )</strong> : 单向 ( CPU <span
+class="math inline">\(\rightarrow\)</span> Memory )，位数 <span
+class="math inline">\(M\)</span> 决定了 <strong>寻址范围</strong> (
+<span class="math inline">\(2^M\)</span> ).</li>
+<li><strong>控制总线 ( Control Bus )</strong> :
+<ul>
+<li><strong><span class="math inline">\(\overline{WE}\)</span> ( Write
+Enable )</strong> : 读/写控制 ( 低写高读 ).</li>
+<li><strong><span class="math inline">\(\overline{MREQ}\)</span> (
+Memory Request )</strong> : 访存请求信号，常与译码器使能端配合.</li>
+</ul></li>
+</ul>
+<h3 id="主存容量的扩展">3.3.2 主存容量的扩展</h3>
+<p>当单片存储芯片的容量或字长不满足系统要求时，需要进行扩展.</p>
+<div class="tabs" id="扩展方式"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="扩展方式-1">位扩展</button><button type="button" class="tab " data-href="扩展方式-2">字扩展</button><button type="button" class="tab " data-href="扩展方式-3">字位同时扩展</button></ul><div class="tab-contents"><div class="tab-item-content active" id="扩展方式-1"><p><strong>位扩展 ( 增加字长 )</strong></p>
+<ul>
+<li><strong>场景</strong> : 芯片 <strong>字长</strong> 不足 ( 如用 <span
+class="math inline">\(1\text{K} \times 4\text{位}\)</span> 芯片组成
+<span class="math inline">\(1\text{K} \times 8\text{位}\)</span> 存储器
+).</li>
+<li><strong>连接方法</strong> :
+<ul>
+<li><strong>地址线、控制线</strong> : 所有芯片 <strong>并联</strong> (
+同时工作 ).</li>
+<li><strong>数据线</strong> : <strong>分摊</strong> ( 如芯片A接 <span
+class="math inline">\(D_0 \sim D_3\)</span>，芯片B接 <span
+class="math inline">\(D_4 \sim D_7\)</span> ).</li>
+<li><strong>片选信号</strong> : 所有芯片 <strong>接同一个</strong>
+片选信号.</li>
+</ul></li>
+</ul>
+<div class="mermaid-wrap">
+<pre class="mermaid-src" hidden>
+  %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;lineColor&#39;: &#39;#64748b&#39;, &#39;fontFamily&#39;: &#39;arial&#39;, &#39;fontSize&#39;: &#39;16px&#39; }}}%%
+flowchart TB
+    classDef default fill:#F1F5F9,stroke:#334155,stroke-width:2px,color:#1E293B,rx:5,ry:5;
+    classDef proc fill:#E0F2FE,stroke:#0284C7,stroke-width:2px,color:#0369A1,rx:5,ry:5;
+    classDef code fill:#22D3EE,stroke:#0E7490,stroke-width:2px,color:#FFFFFF,rx:5,ry:5;
+    classDef data fill:#F59E0B,stroke:#B45309,stroke-width:2px,color:#FFFFFF,rx:5,ry:5;
+    classDef phys fill:#94A3B8,stroke:#475569,stroke-width:2px,color:#FFFFFF,rx:5,ry:5;
+
+    %% 信号源
+    addr[地址线 A0-A9]:::phys
+    cs[片选 CS]:::phys
+    
+    %% 芯片组
+    subgraph Mem [&quot;存储器 1K x 8&quot;]
+        direction LR
+        chip1[芯片1&lt;br&#x2F;&gt;1K x 4]:::proc
+        chip2[芯片2&lt;br&#x2F;&gt;1K x 4]:::proc
+    end
+    
+    %% 数据线
+    d1[数据 D0-D3]:::data
+    d2[数据 D4-D7]:::data
+
+    %% 连接关系
+    addr --&gt; chip1
+    addr --&gt; chip2
+    cs --&gt; chip1
+    cs --&gt; chip2
+    
+    chip1 &lt;--&gt; d1
+    chip2 &lt;--&gt; d2
+  </pre>
+</div></div><div class="tab-item-content" id="扩展方式-2"><p><strong>字扩展 ( 增加容量 )</strong></p>
+<ul>
+<li><strong>场景</strong> : 芯片 <strong>地址空间</strong> 不足 ( 如用
+<span class="math inline">\(1\text{K} \times 8\text{位}\)</span>
+芯片组成 <span class="math inline">\(2\text{K} \times
+8\text{位}\)</span> 存储器 ).</li>
+<li><strong>连接方法</strong> :
+<ul>
+<li><strong>数据线</strong> : 所有芯片 <strong>并联</strong>.</li>
+<li><strong>地址线 ( 低位 )</strong> :
+<strong>并联</strong>，作为片内地址.</li>
+<li><strong>地址线 ( 高位 )</strong> : 连接
+<strong>译码器</strong>，产生片选信号，分别控制不同芯片 (
+<strong>轮流工作</strong> ).</li>
+</ul></li>
+</ul>
+<div class="mermaid-wrap">
+<pre class="mermaid-src" hidden>
+  %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;lineColor&#39;: &#39;#64748b&#39;, &#39;fontFamily&#39;: &#39;arial&#39;, &#39;fontSize&#39;: &#39;16px&#39; }}}%%
+flowchart TB
+    classDef default fill:#F1F5F9,stroke:#334155,stroke-width:2px,color:#1E293B,rx:5,ry:5;
+    classDef proc fill:#E0F2FE,stroke:#0284C7,stroke-width:2px,color:#0369A1,rx:5,ry:5;
+    classDef code fill:#22D3EE,stroke:#0E7490,stroke-width:2px,color:#FFFFFF,rx:5,ry:5;
+    classDef data fill:#F59E0B,stroke:#B45309,stroke-width:2px,color:#FFFFFF,rx:5,ry:5;
+    classDef phys fill:#94A3B8,stroke:#475569,stroke-width:2px,color:#FFFFFF,rx:5,ry:5;
+
+    %% 信号源
+    addr_low[低位地址 A0-A9]:::phys
+    addr_high[高位地址 A10]:::phys
+    
+    %% 译码控制
+    decoder[译码器&lt;br&#x2F;&gt;1-2 Decoder]:::code
+    
+    %% 芯片组
+    subgraph Mem [&quot;存储器 2K x 8&quot;]
+        direction TB
+        chip1[芯片1&lt;br&#x2F;&gt;0K-1K]:::proc
+        chip2[芯片2&lt;br&#x2F;&gt;1K-2K]:::proc
+    end
+    
+    %% 数据线
+    data[数据线 D0-D7]:::data
+
+    %% 连接关系
+    addr_low --&gt; chip1
+    addr_low --&gt; chip2
+    
+    addr_high --&gt; decoder
+    decoder --&gt;|CS0| chip1
+    decoder --&gt;|CS1| chip2
+    
+    chip1 &lt;--&gt; data
+    chip2 &lt;--&gt; data
+  </pre>
+</div></div><div class="tab-item-content" id="扩展方式-3"><p><strong>字位同时扩展</strong></p>
+<ul>
+<li><strong>场景</strong> : 字长和容量都不够.</li>
+<li><strong>方法</strong> : 先进行 <strong>位扩展</strong> 形成
+“组”，再对 “组” 进行 <strong>字扩展</strong>.</li>
+<li><strong>示例</strong> : 用 <span class="math inline">\(1\text{K}
+\times 4\text{位}\)</span> 芯片组成 <span
+class="math inline">\(4\text{K} \times 8\text{位}\)</span> 存储器.
+<ul>
+<li><strong>总芯片数</strong> : <span class="math inline">\((4\text{K}
+\times 8) / (1\text{K} \times 4) = 8\)</span> 片.</li>
+<li><strong>分组</strong> : 每 2 片进行 <strong>位扩展</strong> 构成一组
+( <span class="math inline">\(1\text{K} \times 8\)</span> )，共 4
+组.</li>
+<li><strong>译码</strong> : 4 组需要 2 根高位地址线，使用 <strong>2-4
+译码器</strong> 控制.</li>
+</ul></li>
+</ul>
+<div class="mermaid-wrap">
+<pre class="mermaid-src" hidden>
+  %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;lineColor&#39;: &#39;#64748b&#39;, &#39;fontFamily&#39;: &#39;arial&#39;, &#39;fontSize&#39;: &#39;16px&#39; }}}%%
+flowchart TB
+    classDef default fill:#F1F5F9,stroke:#334155,stroke-width:2px,color:#1E293B,rx:5,ry:5;
+    classDef proc fill:#E0F2FE,stroke:#0284C7,stroke-width:2px,color:#0369A1,rx:5,ry:5;
+    classDef code fill:#22D3EE,stroke:#0E7490,stroke-width:2px,color:#FFFFFF,rx:5,ry:5;
+    classDef data fill:#F59E0B,stroke:#B45309,stroke-width:2px,color:#FFFFFF,rx:5,ry:5;
+    classDef phys fill:#94A3B8,stroke:#475569,stroke-width:2px,color:#FFFFFF,rx:5,ry:5;
+
+    %% 信号
+    Data[数据总线 D0-D7]:::data
+    Decoder[译码器]:::code
+
+    subgraph Group0 [&quot;Group 0 ( 0K-1K )&quot;]
+        direction LR
+        g0_chip1[芯片1&lt;br&#x2F;&gt;1Kx4]:::proc
+        g0_chip2[芯片2&lt;br&#x2F;&gt;1Kx4]:::proc
+    end
+    
+    subgraph Group1 [&quot;Group 1 ( 1K-2K )&quot;]
+        direction LR
+        g1_chip1[芯片3&lt;br&#x2F;&gt;1Kx4]:::proc
+        g1_chip2[芯片4&lt;br&#x2F;&gt;1Kx4]:::proc
+    end
+
+    %% 数据线连接 (位扩展)
+    Data --- g0_chip1 &amp; g1_chip1
+    Data --- g0_chip2 &amp; g1_chip2
+    
+    %% 片选信号 (字扩展)
+    Decoder --&gt;|CS0| Group0
+    Decoder --&gt;|CS1| Group1
+  </pre>
+</div></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h4 id="扩展方式总结对比">扩展方式总结对比</h4>
+<table>
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">特性</th>
+<th style="text-align: left;">位扩展</th>
+<th style="text-align: left;">字扩展</th>
+<th style="text-align: left;">字位同时扩展</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>目的</strong></td>
+<td style="text-align: left;">增加 <strong>字长</strong> ( 数据位 )</td>
+<td style="text-align: left;">增加 <strong>存储容量</strong> (
+存储单元数 )</td>
+<td style="text-align: left;">同时增加字长和容量</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>数据线连接</strong></td>
+<td style="text-align: left;"><strong>分摊</strong> ( 各芯片接不同位
+)</td>
+<td style="text-align: left;"><strong>并联</strong> ( 接相同位 )</td>
+<td style="text-align: left;">分组后分摊</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>地址线连接</strong></td>
+<td style="text-align: left;"><strong>并联</strong> ( 全接 )</td>
+<td
+style="text-align: left;">低位并联，<strong>高位用于译码</strong></td>
+<td style="text-align: left;">低位并联，高位用于译码</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>片选信号</strong></td>
+<td style="text-align: left;"><strong>同时选中</strong> ( CS 连在一起
+)</td>
+<td style="text-align: left;"><strong>轮流选中</strong> ( CS
+接译码器输出 )</td>
+<td style="text-align: left;">组内同时，组间轮流</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>工作方式</strong></td>
+<td style="text-align: left;">所有芯片同时读写</td>
+<td style="text-align: left;">某一时刻仅有一个芯片工作</td>
+<td style="text-align: left;">某一时刻仅有一组芯片工作</td>
+</tr>
+</tbody>
+</table>
+<h3 id="存储芯片的地址分配和片选">3.3.3 存储芯片的地址分配和片选</h3>
+<p>CPU 访问存储器时，需要通过 <strong>片选信号 ( Chip Select )</strong>
+激活特定的芯片. 常见的片选方法有 <strong>线选法</strong> 和
+<strong>译码片选法</strong>.</p>
+<h4 id="线选法-linear-selection">1. 线选法 ( Linear Selection )</h4>
+<p>直接用 <strong>高位地址线</strong> 连接芯片的 <span
+class="math inline">\(\overline{CS}\)</span> 端.</p>
+<ul>
+<li><strong>原理</strong> : 每根高位地址线控制一个芯片. 例如 <span
+class="math inline">\(A_{14}\)</span> 选中芯片1，<span
+class="math inline">\(A_{15}\)</span> 选中芯片2.</li>
+<li><strong>优点</strong> : 电路简单，不需要译码器.</li>
+<li><strong>缺点</strong> :
+<ul>
+<li><strong>地址空间不连续</strong> ( 存在大量空洞 ).</li>
+<li>地址线利用率低 ( <span class="math inline">\(n\)</span> 根线只能选
+<span class="math inline">\(n\)</span> 个芯片 ).</li>
+<li>不能同时选中多个芯片 ( 地址位不能同时为0，否则冲突 ).</li>
+</ul></li>
+</ul>
+<h4 id="译码片选法-decoding-selection---主流">2. 译码片选法 ( Decoding
+Selection ) - <strong>主流</strong></h4>
+<p>使用 <strong>译码器</strong> ( 如 74LS138 )
+对高位地址进行译码，产生片选信号.</p>
+<ul>
+<li><strong>原理</strong> : <span class="math inline">\(n\)</span>
+根高位地址线经过译码，产生 <span class="math inline">\(2^n\)</span>
+个片选信号.</li>
+<li><strong>优点</strong> :
+<ul>
+<li><strong>地址空间连续</strong>.</li>
+<li>地址线利用率高 ( <span class="math inline">\(n\)</span> 根线可选
+<span class="math inline">\(2^n\)</span> 个芯片 ).</li>
+<li>无地址冲突.</li>
+</ul></li>
+</ul>
+<div class="note sparkle simple"><p><strong>常用译码器 : 74LS138 ( 3-8 译码器 ) 详解</strong></p>
+<p>74LS138 是实现译码片选的核心元件.</p>
+<ul>
+<li><strong>输入端</strong> : <span class="math inline">\(A, B,
+C\)</span> ( 接高位地址线，C为最高位 ).</li>
+<li><strong>输出端</strong> : <span class="math inline">\(\overline{Y_0}
+\sim \overline{Y_7}\)</span> ( 接芯片 <span
+class="math inline">\(\overline{CS}\)</span>
+端，<strong>低电平有效</strong> ).</li>
+<li><strong>使能端</strong> :
+<ul>
+<li><span class="math inline">\(G_1\)</span> ( 高电平有效 )</li>
+<li><span class="math inline">\(\overline{G_{2A}},
+\overline{G_{2B}}\)</span> ( 低电平有效 )</li>
+<li><strong>关键应用</strong> : 必须三个使能端 <strong>同时满足</strong>
+( <span class="math inline">\(G_1=1, \overline{G_{2A}}=0,
+\overline{G_{2B}}=0\)</span> )，译码器才工作. 通常将 <span
+class="math inline">\(\overline{MREQ}\)</span> ( 访存请求 ) 接在 <span
+class="math inline">\(\overline{G_{2A}}\)</span> 或 <span
+class="math inline">\(\overline{G_{2B}}\)</span>
+上，确保只有在访存时才产生片选信号，防止误操作.</li>
+</ul></li>
+</ul>
+</div>
+<p><strong>地址分配示例</strong> : 假设使用 <span
+class="math inline">\(2\text{K} \times 8\)</span> 位芯片组成 <span
+class="math inline">\(8\text{K} \times 8\)</span> 位存储器，起始地址为
+0.</p>
+<ul>
+<li><strong>片内地址</strong> : <span class="math inline">\(2\text{K}
+\rightarrow 11\)</span> 根 (<span class="math inline">\(A_0 \sim
+A_{10}\)</span>).</li>
+<li><strong>片选地址</strong> : <span class="math inline">\(8\text{K} /
+2\text{K} = 4\)</span> 片 <span
+class="math inline">\(\rightarrow\)</span> 需要 2 根高位线 (<span
+class="math inline">\(A_{11}, A_{12}\)</span>) 接 2-4 译码器.</li>
+<li><strong>地址范围</strong> :
+<ul>
+<li>芯片0 : <code>00</code> … <span
+class="math inline">\(\rightarrow\)</span>
+<code>0000H ~ 07FFH</code></li>
+<li>芯片1 : <code>01</code> … <span
+class="math inline">\(\rightarrow\)</span>
+<code>0800H ~ 0FFFH</code></li>
+<li>芯片2 : <code>10</code> … <span
+class="math inline">\(\rightarrow\)</span>
+<code>1000H ~ 17FFH</code></li>
+<li>芯片3 : <code>11</code> … <span
+class="math inline">\(\rightarrow\)</span>
+<code>1800H ~ 1FFFH</code></li>
+</ul></li>
+</ul>
+<h3 id="存储器与-cpu-的连接-综合应用">3.3.4 存储器与 CPU 的连接 (
+综合应用 )</h3>
+<p><strong>经典解题步骤</strong> :</p>
+<ol type="1">
+<li><strong>计算芯片数量</strong> : <span class="math display">\[
+\text{芯片数} = \frac{\text{设计容量}}{\text{芯片容量}} \]</span></li>
+<li><strong>确定连线逻辑</strong> :
+<ul>
+<li><strong>地址线 ( 低位 )</strong> : 连接芯片地址引脚 ( 片内寻址
+).</li>
+<li><strong>数据线</strong> :
+<ul>
+<li>若位扩展 : 分组连接高/低位数据线.</li>
+<li>若无位扩展 : 并联连接.</li>
+</ul></li>
+<li><strong>片选信号 ( 高位地址 )</strong> :
+<ul>
+<li>剩余的高位地址线 <span class="math inline">\(\rightarrow\)</span>
+译码器 <span class="math inline">\(\rightarrow\)</span> 芯片 <span
+class="math inline">\(\overline{CS}\)</span>.</li>
+</ul></li>
+<li><strong>读写控制</strong> : CPU <span
+class="math inline">\(\overline{WE}\)</span> <span
+class="math inline">\(\rightarrow\)</span> 芯片 <span
+class="math inline">\(\overline{WE}\)</span>.</li>
+</ul></li>
+<li><strong>画图/验证</strong> : 注意 <strong>使能信号</strong>
+的连接.</li>
+</ol>
+<hr />
+<h2 id="外部存储器">3.4 外部存储器</h2>
+<p>外部存储器 ( 辅存 )
+具有容量大、价格低、掉电不丢失的特点，但速度较慢.</p>
+<h3 id="磁盘存储器-disk">3.4.1 磁盘存储器 ( Disk )</h3>
+<p>磁盘是最常见的 <strong>串行访问</strong> 存储设备 ( 非随机访问 ).</p>
+<h4 id="磁盘驱动器的组成与结构">1. 磁盘驱动器的组成与结构</h4>
+<p><strong>磁盘驱动器 ( Disk Drive )</strong>
+是主机进行数据存储和交换的设备，由 <strong>机械部件</strong> 和
+<strong>电子部件</strong> 组成.</p>
+<ul>
+<li><strong>核心部件</strong>
+<ul>
+<li><strong>磁头 ( Head )</strong> :
+读取/写入数据，每个盘面对应一个磁头.</li>
+<li><strong>磁臂 ( Actuator Arm )</strong> : 带动磁头做径向运动 (
+<strong>寻道</strong> ).</li>
+<li><strong>盘片 ( Platter )</strong> :
+存储介质，安装在主轴上高速旋转.</li>
+<li><strong>主轴 ( Spindle )</strong> : 带动盘片旋转 (
+<strong>旋转延迟</strong> ).</li>
+</ul></li>
+<li><strong>物理存储单元</strong>
+<ul>
+<li><strong>磁道 ( Track )</strong> : 盘片表面的一系列同心圆.</li>
+<li><strong>扇区 ( Sector )</strong> : 磁道被划分成的若干弧段，是磁盘
+<strong>读写的最小单位</strong> ( 常见 512B 或 4KB ).</li>
+<li><strong>柱面 ( Cylinder )</strong> : 所有盘片
+<strong>相同半径</strong> 磁道的集合.</li>
+</ul></li>
+</ul>
+<div class="note info simple"><p><strong>寻址方式 ( CHS vs LBA )</strong></p>
+<ul>
+<li><strong>CHS ( Cylinder-Head-Sector )</strong> : 早期物理寻址方式.
+地址格式为 <strong>&lt;柱面号, 盘面号, 扇区号&gt;</strong>.
+<ul>
+<li><strong>访问顺序</strong> : 优先访问同一 <strong>柱面</strong> (
+减少寻道 )，其次是同一 <strong>盘面</strong> ( 电子切换，极快 )，最后是
+<strong>扇区</strong>.</li>
+</ul></li>
+<li><strong>LBA ( Logical Block Address )</strong> : 现代逻辑寻址方式.
+磁盘控制器将物理地址映射为线性逻辑块号 ( 0, 1, 2… )，OS 只需操作
+LBA.</li>
+</ul>
+</div>
+<div class="mermaid-wrap"><pre class="mermaid-src" hidden>
+  %%{init: {&#39;flowchart&#39;: {&#39;curve&#39;: &#39;basis&#39;}, &#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;primaryColor&#39;: &#39;#fff&#39;, &#39;lineColor&#39;: &#39;#94a3b8&#39;, &#39;fontFamily&#39;: &#39;sans-serif&#39; }}}%%
+graph LR
+    subgraph Disk [&quot;磁盘结构&quot;]
+        direction TB
+        Platter[&quot;盘片&quot;] --- Surface[&quot;盘面&quot;]
+        Surface --- Track[&quot;磁道&quot;]
+        Track --- Sector[&quot;扇区&quot;]
+    end
+    
+    subgraph Access [&quot;寻址过程&quot;]
+        direction TB
+        Step1[&quot;1. 移动磁头\n(寻道)&quot;] --&gt; Step2[&quot;2. 旋转盘片\n(定位扇区)&quot;]
+        Step2 --&gt; Step3[&quot;3. 读写数据\n(传输)&quot;]
+    end
+    
+    Disk --&gt; Access
+    
+    %% 节点样式
+    classDef default fill:#fff,stroke:#cbd5e1,rx:5,ry:5;
+    classDef step fill:#e0f2fe,stroke:#38bdf8,stroke-width:2px;
+    
+    class Step1,Step2,Step3 step
+    
+    %% 子图样式
+    style Disk fill:#f8fafc,stroke:#94a3b8,stroke-dasharray: 5 5
+    style Access fill:#fff7ed,stroke:#fb923c,stroke-dasharray: 5 5
+  </pre></div>
+<h4 id="性能指标-计算题核心">2. 性能指标 ( 计算题核心 )</h4>
+<ul>
+<li><p><strong>存储容量</strong> : <span class="math display">\[
+\text{容量} = \text{磁头数} \times \text{磁道数} \times \text{扇区数}
+\times \text{扇区字节数} \]</span> <em>( 注意 : 非格式化容量 &gt;
+格式化容量 )</em></p></li>
+<li><p><strong>平均存取时间 ( <span class="math inline">\(T_a\)</span>
+)</strong> : <span class="math display">\[ T_a = T_s + \frac{1}{2r} +
+T_t \]</span></p>
+<ul>
+<li><strong>寻道时间 ( <span class="math inline">\(T_s\)</span>
+)</strong> : 磁头移动到目标磁道的时间 ( <strong>最耗时</strong>，约几ms
+).</li>
+<li><strong>旋转延迟 ( <span class="math inline">\(1/2r\)</span>
+)</strong> : 扇区转到磁头下方的时间. 平均取 <strong>转半圈</strong>
+的时间.</li>
+<li><strong>传输时间 ( <span class="math inline">\(T_t\)</span>
+)</strong> : 读写数据本身的时间. <span class="math inline">\(T_t =
+\frac{D}{r \times N}\)</span> ( <span class="math inline">\(D\)</span>:
+读写字节数, <span class="math inline">\(N\)</span>: 每道字节数 ).</li>
+</ul></li>
+<li><p><strong>数据传输率 ( <span class="math inline">\(D_r\)</span>
+)</strong> : <span class="math display">\[ D_r = r \times N \]</span>
+<em>( <span class="math inline">\(r\)</span>: 转速, <span
+class="math inline">\(N\)</span>: 每道容量 )</em></p></li>
+</ul>
+<div class="note sparkle simple"><p><strong>例题 : 存取时间计算</strong> 假设磁盘转速为 7200
+转/分，平均寻道时间为 8ms，每道有 500 个扇区，每个扇区 512B.
+求读取一个扇区的平均时间.</p>
+<ol type="1">
+<li><strong>转速</strong> : <span class="math inline">\(r = 7200/60 =
+120\)</span> 转/秒，旋转一周 <span class="math inline">\(1/120 \approx
+8.33ms\)</span>.</li>
+<li><strong>平均旋转延迟</strong> : <span class="math inline">\(1/2r =
+8.33 / 2 \approx 4.17ms\)</span>.</li>
+<li><strong>传输时间</strong> : <span class="math inline">\(T_t =
+\frac{1}{120 \times 500} \approx 0.017ms\)</span> ( 可忽略 ).</li>
+<li><strong>平均时间</strong> : <span class="math inline">\(T_a = 8 +
+4.17 + 0.017 \approx 12.19ms\)</span>.</li>
+</ol>
+</div>
+<h4 id="磁盘阵列-raid">3. 磁盘阵列 ( RAID )</h4>
+<p>利用多个廉价磁盘组合成一个大容量、高可靠的逻辑磁盘.</p>
+<div class="tabs" id="raid级别"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="raid级别-1">RAID 0 (条带化)</button><button type="button" class="tab " data-href="raid级别-2">RAID 1 (镜像)</button><button type="button" class="tab " data-href="raid级别-3">RAID 5 (分布式奇偶校验)</button></ul><div class="tab-contents"><div class="tab-item-content active" id="raid级别-1"><p><strong>RAID 0 : Striping</strong></p>
+<ul>
+<li><strong>原理</strong> : 数据分块，<strong>并行</strong>
+写入多个磁盘.</li>
+<li><strong>优点</strong> : 读写速度最快 ( 理论翻倍 ).</li>
+<li><strong>缺点</strong> :
+<strong>无冗余</strong>，任一坏盘则数据全丢.</li>
+<li><strong>应用</strong> :
+对速度要求高，但对数据安全要求不高的场景.</li>
+</ul></div><div class="tab-item-content" id="raid级别-2"><p><strong>RAID 1 : Mirroring</strong></p>
+<ul>
+<li><strong>原理</strong> : 数据写入主盘时，同时 <strong>镜像</strong>
+备份到副盘.</li>
+<li><strong>优点</strong> : 可靠性最高 ( 100% 冗余 ).</li>
+<li><strong>缺点</strong> : 空间利用率仅 50%，成本高.</li>
+<li><strong>应用</strong> : 存放重要数据 ( 如系统盘、数据库 ).</li>
+</ul></div><div class="tab-item-content" id="raid级别-3"><p><strong>RAID 5 : Striping with Parity</strong></p>
+<ul>
+<li><strong>原理</strong> : 数据和 <strong>奇偶校验信息</strong>
+交叉分布在所有磁盘上.</li>
+<li><strong>优点</strong> : 兼顾了速度 ( 并行 ) 和可靠性 ( 允许坏一块盘
+).</li>
+<li><strong>空间利用率</strong> : <span
+class="math inline">\((N-1)/N\)</span>.</li>
+<li><strong>应用</strong> : 通用性最强，最常见的企业级方案.</li>
+</ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="固态硬盘-ssd">3.4.2 固态硬盘 ( SSD )</h3>
+<p>SSD 基于闪存 ( Flash Memory ) 技术，已逐渐取代机械硬盘.</p>
+<h4 id="核心部件">1. 核心部件</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">部件</th>
+<th style="text-align: left;">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>闪存芯片</strong></td>
+<td style="text-align: left;">核心存储介质 ( NAND Flash
+)，数据掉电不丢失.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>主控芯片</strong></td>
+<td
+style="text-align: left;">“大脑”，负责逻辑地址映射、磨损均衡、垃圾回收.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>DRAM缓存</strong></td>
+<td style="text-align: left;">( 可选 ) 暂存数据，提高读写性能.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="存储单元类型">2. 存储单元类型</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">类型</th>
+<th style="text-align: left;">描述</th>
+<th style="text-align: left;">速度</th>
+<th style="text-align: left;">寿命</th>
+<th style="text-align: left;">价格</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>SLC</strong></td>
+<td style="text-align: left;">1 bit/cell，单层单元</td>
+<td style="text-align: left;">最快</td>
+<td style="text-align: left;">最长 ( 10 万次 )</td>
+<td style="text-align: left;">最贵</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>MLC</strong></td>
+<td style="text-align: left;">2 bits/cell，多层单元</td>
+<td style="text-align: left;">较快</td>
+<td style="text-align: left;">较长 ( 1 万次 )</td>
+<td style="text-align: left;">较贵</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TLC</strong></td>
+<td style="text-align: left;">3 bits/cell，三层单元</td>
+<td style="text-align: left;">慢</td>
+<td style="text-align: left;">短 ( 3000 次 )</td>
+<td style="text-align: left;">便宜</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>QLC</strong></td>
+<td style="text-align: left;">4 bits/cell，四层单元</td>
+<td style="text-align: left;">最慢</td>
+<td style="text-align: left;">最短 ( 1000 次 )</td>
+<td style="text-align: left;">最便宜</td>
+</tr>
+</tbody>
+</table>
+<h4 id="读写特性">3. 读写特性</h4>
+<ul>
+<li><strong>读快写慢</strong> : 随机读取速度极快.</li>
+<li><strong>以”页”读写，以”块”擦除</strong> :
+<ul>
+<li>写入前必须先 <strong>擦除</strong> ( Erase ).</li>
+<li>擦除单位 ( Block ) 比读写单位 ( Page ) 大.</li>
+</ul></li>
+<li><strong>寿命限制</strong> : 每个存储单元的擦写次数是有限的.</li>
+</ul>
+<div class="note sparkle simple"><p><strong>核心技术详解</strong></p>
+<ol type="1">
+<li><strong>磨损均衡 ( Wear Leveling )</strong>
+由于闪存块的擦写次数有限，控制器需要保证所有块的擦写次数大致相同.
+<ul>
+<li><strong>动态磨损均衡 ( Dynamic )</strong> :
+写入数据时，优先选择擦写次数少的块. 但对于长期不修改的 <strong>冷数据 (
+Cold Data )</strong>，其占用的块擦写次数会远低于其他块，导致不均匀.</li>
+<li><strong>静态磨损均衡 ( Static )</strong> : 更加先进. 控制器会定期将
+<strong>冷数据</strong> 搬移到擦写次数多的块中，腾出擦写次数少的块给
+<strong>热数据 ( Hot Data )</strong> 使用. 这样能最大程度延长寿命.</li>
+</ul></li>
+<li><strong>TRIM 指令</strong> OS 通知 SSD 哪些数据已删除 ( 逻辑删除
+)，SSD 主控可在空闲时提前进行 <strong>垃圾回收 ( Garbage Collection
+)</strong> 和擦除，避免下次写入时才进行擦除带来的 <strong>“写惩罚” (
+Write Penalty )</strong>，从而保持写入性能.</li>
+</ol>
+</div>
+<h4 id="ssd-vs-hdd-对比">4. SSD vs HDD 对比</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">特性</th>
+<th style="text-align: left;">固态硬盘 ( SSD )</th>
+<th style="text-align: left;">机械硬盘 ( HDD )</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>原理</strong></td>
+<td style="text-align: left;">电信号存储 ( Flash )</td>
+<td style="text-align: left;">磁记录，机械运动</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>速度</strong></td>
+<td style="text-align: left;">极快 ( 随机读写强 )</td>
+<td style="text-align: left;">慢 ( 受限于寻道 )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>噪音/功耗</strong></td>
+<td style="text-align: left;">无噪音，低功耗</td>
+<td style="text-align: left;">有噪音，功耗较高</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>抗震性</strong></td>
+<td style="text-align: left;">强</td>
+<td style="text-align: left;">差 ( 磁头易划伤盘片 )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>数据恢复</strong></td>
+<td style="text-align: left;">困难</td>
+<td style="text-align: left;">相对容易</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="高速缓冲存储器-cache">3.5 高速缓冲存储器 ( Cache )</h2>
+<h3 id="程序访问的局部性原理">3.5.1 程序访问的局部性原理</h3>
+<ul>
+<li><strong>时间局部性</strong> : 最近访问过的指令/数据很可能再次被访问
+( 如 循环、堆栈 ).</li>
+<li><strong>空间局部性</strong> :
+某个单元被访问，其附近的单元很可能被访问 ( 如 数组、顺序指令 ).</li>
+</ul>
+<h3 id="cache-的基本工作原理">3.5.2 Cache 的基本工作原理</h3>
+<p>Cache ( 高速缓冲存储器 ) 位于 CPU 和主存之间，用于解决 CPU
+速度与主存速度不匹配的问题. 它对程序员是 <strong>透明</strong> 的 (
+即程序员无法直接操控 ).</p>
+<h4 id="核心概念">1. 核心概念</h4>
+<ul>
+<li><strong>Cache 行 ( Line ) / 块 ( Block )</strong> : Cache
+与主存交换数据的基本单位.
+<ul>
+<li>每个 Cache 行包含 : <strong>有效位 ( Valid )</strong>、<strong>脏位
+( Dirty, 回写法用 )</strong>、<strong>替换控制位</strong>、<strong>标记
+( Tag )</strong> 和 <strong>数据 ( Data )</strong>.</li>
+</ul></li>
+<li><strong>命中 ( Hit )</strong> : CPU 欲访问的信息已在 Cache 中.</li>
+<li><strong>缺失 ( Miss )</strong> : CPU 欲访问的信息不在 Cache
+中，需访问主存.</li>
+</ul>
+<h4 id="读写流程-概览">2. 读写流程 ( 概览 )</h4>
+<div class="mermaid-wrap"><pre class="mermaid-src" hidden>
+  %%{init: {&#39;flowchart&#39;: {&#39;curve&#39;: &#39;basis&#39;}, &#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;primaryColor&#39;: &#39;#fff&#39;, &#39;lineColor&#39;: &#39;#94a3b8&#39;, &#39;fontFamily&#39;: &#39;sans-serif&#39; }}}%%
+graph TD
+    Start(CPU 发出读请求) --&gt; Check{Cache 命中?};
+    
+    Check -- Yes --&gt; Hit[1. 直接从 Cache 读数据];
+    Hit --&gt; Finish(结束);
+    
+    Check -- No --&gt; Miss[2. 访问主存];
+    Miss --&gt; Load[3. 将新块调入 Cache];
+    Load --&gt; Read[4. 读取数据送 CPU];
+    Read --&gt; Finish;
+    
+    classDef default fill:#fff,stroke:#cbd5e1,rx:5,ry:5;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,stroke-width:2px;
+    classDef success fill:#dcfce7,stroke:#22c55e,stroke-width:2px;
+    classDef fail fill:#fee2e2,stroke:#ef4444,stroke-width:2px;
+    classDef start fill:#e0f2fe,stroke:#38bdf8,stroke-width:2px;
+
+    class Start start
+    class Check decision
+    class Hit success
+    class Miss fail
+  </pre></div>
+<h4 id="性能指标">3. 性能指标</h4>
+<p>设 <span class="math inline">\(N_c\)</span> 为 Cache 命中次数，<span
+class="math inline">\(N_m\)</span> 为访问主存次数 ( 未命中 ). <span
+class="math inline">\(t_c\)</span> 为 Cache 存取时间，<span
+class="math inline">\(t_m\)</span> 为主存存取时间 ( 通常 <span
+class="math inline">\(t_m\)</span> 是 <span
+class="math inline">\(t_c\)</span> 的 5~10 倍 ).</p>
+<ul>
+<li><strong>命中率 ( <span class="math inline">\(h\)</span> )</strong> :
+<span class="math display">\[ h = \frac{N_c}{N_c + N_m} \]</span></li>
+<li><strong>平均访问时间 ( <span class="math inline">\(T_a\)</span>
+)</strong> : <span class="math display">\[ T_a = h \times t_c + (1-h)
+\times t_m \]</span> <em>( 注 : 也有公式记为 $T_a = t_c + (1-h) $
+)</em></li>
+<li><strong>访问效率 ( <span class="math inline">\(e\)</span> )</strong>
+: <span class="math display">\[ e = \frac{t_c}{T_a} \times 100\%
+\]</span> <em>( <span class="math inline">\(e\)</span> 越接近 1
+越好，不可能超过 1 )</em></li>
+</ul>
+<h3 id="cache-和主存的映射方式">3.5.3 Cache 和主存的映射方式</h3>
+<p>由于 Cache 容量远小于主存，CPU 需通过某种规则将主存块映射到 Cache 中.
+主存地址通常被解析为：<strong>标记 ( Tag ) + 索引 ( Index ) + 块内偏移 (
+Offset )</strong>.</p>
+<div class="tabs" id="映射方式"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="映射方式-1">全相联映射</button><button type="button" class="tab " data-href="映射方式-2">直接映射</button><button type="button" class="tab " data-href="映射方式-3">组相联映射</button></ul><div class="tab-contents"><div class="tab-item-content active" id="映射方式-1"><p><strong>Fully Associative Mapping</strong></p>
+<ul>
+<li><p><strong>规则</strong> : 主存块可以放在 Cache 的
+<strong>任意</strong> 位置.</p></li>
+<li><p><strong>映射公式</strong> : 无 ( 任意位置 ).</p></li>
+<li><p><strong>地址结构</strong> :</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Tag ( 标记 )</th>
+<th style="text-align: center;">Offset ( 块内地址 )</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span class="math inline">\(M -
+w\)</span> 位</td>
+<td style="text-align: center;"><span class="math inline">\(w\)</span>
+位</td>
+</tr>
+</tbody>
+</table></li>
+<li><p><strong>硬件实现</strong> : 访问时需将主存地址的 Tag 与 Cache 中
+<strong>所有</strong> 行的 Tag 进行比较 ( 并行比较器 ).</p></li>
+<li><p><strong>特点</strong> :</p>
+<ul>
+<li>灵活性最高，冲突概率最低 ( 只有 Cache 满时才冲突 ).</li>
+<li>比较器电路最复杂，成本高，适合小容量 Cache.</li>
+</ul></li>
+</ul></div><div class="tab-item-content" id="映射方式-2"><p><strong>Direct Mapping</strong></p>
+<ul>
+<li><p><strong>规则</strong> : 主存块只能放在 Cache 的
+<strong>特定</strong> 位置.</p></li>
+<li><p><strong>映射公式</strong> : <span
+class="math inline">\(\text{Cache 行号} = \text{主存块号} \mod
+\text{Cache 行数}\)</span>.</p></li>
+<li><p><strong>地址结构</strong> :</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Tag ( 标记 )</th>
+<th style="text-align: center;">Index ( 行号 )</th>
+<th style="text-align: center;">Offset ( 块内地址 )</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span class="math inline">\(M - r -
+w\)</span> 位</td>
+<td style="text-align: center;"><span class="math inline">\(r\)</span>
+位</td>
+<td style="text-align: center;"><span class="math inline">\(w\)</span>
+位</td>
+</tr>
+</tbody>
+</table></li>
+<li><p><strong>硬件实现</strong> : 仅需比较 <strong>1</strong> 次 (
+先通过 Index 找到特定行，再比对 Tag ).</p></li>
+<li><p><strong>特点</strong> :</p>
+<ul>
+<li>电路简单，速度最快.</li>
+<li>冲突概率最高 ( 即使 Cache 没满，特定行被占也需替换 ).</li>
+</ul></li>
+</ul></div><div class="tab-item-content" id="映射方式-3"><p><strong>Set-Associative Mapping</strong></p>
+<ul>
+<li><p><strong>规则</strong> : 主存块可以放在 <strong>特定组</strong>
+内的 <strong>任意</strong> 位置.</p></li>
+<li><p><strong>映射公式</strong> : <span
+class="math inline">\(\text{Cache 组号} = \text{主存块号} \mod
+\text{Cache 组数}\)</span>.</p></li>
+<li><p><strong>地址结构</strong> :</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Tag ( 标记 )</th>
+<th style="text-align: center;">Set ( 组号 )</th>
+<th style="text-align: center;">Offset ( 块内地址 )</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span class="math inline">\(M - s -
+w\)</span> 位</td>
+<td style="text-align: center;"><span class="math inline">\(s\)</span>
+位</td>
+<td style="text-align: center;"><span class="math inline">\(w\)</span>
+位</td>
+</tr>
+</tbody>
+</table></li>
+<li><p><strong>硬件实现</strong> : 先找到组，再在组内进行全相联比较 (
+<span class="math inline">\(N\)</span> 路组相联需 <span
+class="math inline">\(N\)</span> 个比较器 ).</p></li>
+<li><p><strong>特点</strong> : 全相联与直接映射的折中. <span
+class="math inline">\(N\)</span> 路组相联即每组有 <span
+class="math inline">\(N\)</span> 行.</p>
+<ul>
+<li><span class="math inline">\(N=1\)</span> 时退化为直接映射.</li>
+<li><span class="math inline">\(N=\)</span> Cache行数
+时退化为全相联.</li>
+</ul></li>
+</ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<div class="note sparkle simple"><p><strong>例题详解 : Cache 地址位宽计算</strong></p>
+<p><strong>已知条件</strong> :</p>
+<ul>
+<li><strong>主存容量</strong> : 16MB = <span
+class="math inline">\(2^{24}\)</span> B <span
+class="math inline">\(\to\)</span> <strong>物理地址总位宽 = 24
+位</strong>.</li>
+<li><strong>Cache 容量</strong> : 8KB = <span
+class="math inline">\(2^{13}\)</span> B.</li>
+<li><strong>块大小 (Block Size)</strong> : 64B = <span
+class="math inline">\(2^6\)</span> B <span
+class="math inline">\(\to\)</span> <strong>块内偏移 ( Offset ) = 6
+位</strong>.</li>
+</ul>
+<p><strong>1. 计算 Cache 总行数</strong> <span class="math display">\[
+\text{Cache 行数} = \frac{\text{Cache 容量}}{\text{块大小}} =
+\frac{8\text{KB}}{64\text{B}} = \frac{2^{13}}{2^6} = 128 \text{ 行}
+\]</span></p>
+<p><strong>2. 不同映射方式下的地址划分</strong></p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">映射方式</th>
+<th style="text-align: left;">组数 ( Sets )</th>
+<th style="text-align: left;">索引位 ( Index/Set )</th>
+<th style="text-align: left;">标记位 ( Tag )</th>
+<th style="text-align: left;">地址结构 ( Tag | Index | Offset )</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>直接映射</strong></td>
+<td style="text-align: left;"><span class="math inline">\(128\)</span>
+组 ( 即行数 )</td>
+<td style="text-align: left;"><span class="math inline">\(\log_2 128 =
+\mathbf{7}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(24 - 7 - 6 =
+\mathbf{11}\)</span></td>
+<td style="text-align: left;"><strong>11</strong> | <strong>7</strong> |
+<strong>6</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>2 路组相联</strong></td>
+<td style="text-align: left;"><span class="math inline">\(128 / 2 =
+64\)</span> 组</td>
+<td style="text-align: left;"><span class="math inline">\(\log_2 64 =
+\mathbf{6}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(24 - 6 - 6 =
+\mathbf{12}\)</span></td>
+<td style="text-align: left;"><strong>12</strong> | <strong>6</strong> |
+<strong>6</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>4 路组相联</strong></td>
+<td style="text-align: left;"><span class="math inline">\(128 / 4 =
+32\)</span> 组</td>
+<td style="text-align: left;"><span class="math inline">\(\log_2 32 =
+\mathbf{5}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(24 - 5 - 6 =
+\mathbf{13}\)</span></td>
+<td style="text-align: left;"><strong>13</strong> | <strong>5</strong> |
+<strong>6</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>全相联</strong></td>
+<td style="text-align: left;"><span class="math inline">\(1\)</span>
+组</td>
+<td style="text-align: left;"><strong>0</strong> ( 无需索引 )</td>
+<td style="text-align: left;"><span class="math inline">\(24 - 6 =
+\mathbf{18}\)</span></td>
+<td style="text-align: left;"><strong>18</strong> | <strong>-</strong> |
+<strong>6</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>核心公式总结</strong> :</p>
+<ul>
+<li><strong>Tag 位数</strong> = 总地址位宽 - Index 位宽 - Offset
+位宽</li>
+<li><strong>Index 位宽</strong> = <span class="math inline">\(\log_2(\
+\text{Cache 组数}\ )\)</span></li>
+<li><strong>Offset 位宽</strong> = <span class="math inline">\(\log_2(\
+\text{块大小}\ )\)</span></li>
+</ul>
+</div>
+<h3 id="cache-中主存块的替换算法">3.5.4 Cache 中主存块的替换算法</h3>
+<p>当 Cache 空间已满且有新的主存块需要调入时，需要选择一个旧的 Cache
+块进行替换. <em>( 注：<strong>直接映射</strong>
+方式无需替换算法，因为每个主存块只能映射到唯一的 Cache
+行，若被占则直接替换. )</em></p>
+<h4 id="常见替换算法">1. 常见替换算法</h4>
+<h4 id="随机算法-rand-random">(1) 随机算法 ( RAND, Random )</h4>
+<ul>
+<li><strong>原理</strong> : 随机地选取一个 Cache 行进行替换.</li>
+<li><strong>优点</strong> : 硬件实现 <strong>最简单</strong>.</li>
+<li><strong>缺点</strong> : 完全没有利用程序的
+<strong>局部性原理</strong>，命中率较低.</li>
+</ul>
+<h4 id="先进先出算法-fifo-first-in-first-out">(2) 先进先出算法 ( FIFO,
+First In First Out )</h4>
+<ul>
+<li><strong>原理</strong> : 选择 <strong>最早调入</strong> Cache
+的行进行替换.</li>
+<li><strong>实现</strong> : 建立一个 FIFO
+队列或使用计数器记录进入顺序.</li>
+<li><strong>优点</strong> : 实现容易，开销小.</li>
+<li><strong>缺点</strong> : 未考虑局部性 ( 最早调入的可能经常被访问 ).
+可能会出现 <strong>Belady 异常</strong> ( 容量增大命中率反而下降 ).</li>
+</ul>
+<h4 id="最近最久未使用算法-lru-least-recently-used">(3)
+最近最久未使用算法 ( LRU, Least Recently Used )</h4>
+<ul>
+<li><strong>原理</strong> : 选择 <strong>最近最长时间未被访问</strong>
+的 Cache 行. ( 基于局部性原理 : 过去很久没用 <span
+class="math inline">\(\approx\)</span> 未来也很久不用 ).</li>
+<li><strong>实现</strong> : 需要 <strong>硬件支持</strong> ( 计数器 或
+栈 ) 来记录 Cache 行最后一次访问时间.</li>
+<li><strong>优点</strong> :
+命中率高，<strong>最优秀/常用</strong>，性能最接近 OPT ( 最佳置换算法
+).</li>
+<li><strong>缺点</strong> : 硬件实现困难，<strong>成本高</strong> (
+每次访问都要更新记录 ).</li>
+<li><strong>示例</strong> :
+<ul>
+<li>序列 : <code>1, 2, 3, 4, 1, 2</code>，Cache 行数 : 3.</li>
+<li>… <code>[1, 2, 3]</code> ( 满 ) <span
+class="math inline">\(\to\)</span> 访 4.</li>
+<li>历史访问 : <code>... 3, 2, 1</code> ( 逆序 ).</li>
+<li>1 最久未用 <span class="math inline">\(\to\)</span> 淘汰 1 <span
+class="math inline">\(\to\)</span> <code>[4, 2, 3]</code>.</li>
+</ul></li>
+</ul>
+<h4 id="最不经常使用算法-lfu-least-frequently-used">(4) 最不经常使用算法
+( LFU, Least Frequently Used )</h4>
+<ul>
+<li><strong>原理</strong> : 淘汰 <strong>访问次数最少</strong> 的 Cache
+行.</li>
+<li><strong>实现</strong> : 每行设置一个计数器，访问一次 +1.</li>
+<li><strong>缺点</strong> : 容易导致过期的 “高频” 数据长期占据 Cache (
+<strong>历史包袱</strong> ).
+例如启动时用了很多次的初始化代码，之后不再用，但计数器很大，很难被淘汰.</li>
+</ul>
+<h4 id="lru-算法的硬件实现-计数器法">3. LRU 算法的硬件实现 ( 计数器法
+)</h4>
+<p>以 <strong>4路组相联</strong> 为例，每行需配置 <strong>2位</strong>
+计数器 ( 0~3 ).</p>
+<ul>
+<li><strong>计数器含义</strong> : 0 代表 <strong>最近刚刚使用</strong> (
+MRU )，3 代表 <strong>最久未使用</strong> ( LRU ).</li>
+</ul>
+<p><strong>操作规则</strong> :</p>
+<ul>
+<li><strong>情况 1 : 命中 ( Hit )</strong>
+<ul>
+<li><strong>命中行</strong> : 计数器清 <strong>0</strong>.</li>
+<li><strong>其他行</strong> : 原值 <strong>小于</strong>
+命中行原值的，计数器 <strong>+1</strong>；否则不变.</li>
+<li><em>( 目的 : 把命中行提到 “最新”，比它 “新” 的那些行相对 “变旧”
+了一级. )</em></li>
+</ul></li>
+<li><strong>情况 2 : 未命中 ( Miss ) 且 满 ( Full )</strong>
+<ul>
+<li><strong>被淘汰行</strong> : 选择计数器为 <strong>3</strong>
+的行进行替换.</li>
+<li><strong>新入行</strong> : 计数器置 <strong>0</strong>.</li>
+<li><strong>其他行</strong> : 计数器全部 <strong>+1</strong>.</li>
+<li><em>( 目的 : 新行是 “最新” 的，其他所有行都 “变旧” 了一级.
+)</em></li>
+</ul></li>
+</ul>
+<p><em>( 注 : 随着路数 N 的增加，精确 LRU
+的硬件成本会急剧上升，实际多采用近似算法如 <strong>Pseudo-LRU</strong>.
+)</em></p>
+<h3 id="cache-的一致性问题">3.5.5 Cache 的一致性问题</h3>
+<p>当 CPU 写 Cache 时，如何保证主存数据一致?</p>
+<h4 id="写命中-write-hit">1. 写命中 ( Write Hit )</h4>
+<ul>
+<li><strong>全写法 ( Write-through )</strong> : 同时写入 Cache 和主存.
+简单，但访存次数多，写缓冲 ( Write Buffer ) 可优化.</li>
+<li><strong>回写法 ( Write-back )</strong> : 只写 Cache，脏位 ( Dirty
+Bit ) 标记. 被替换时才写回主存. 速度快，但控制复杂.</li>
+</ul>
+<h4 id="写不命中-write-miss">2. 写不命中 ( Write Miss )</h4>
+<ul>
+<li><strong>写分配法 ( Write-allocate )</strong> : 调入 Cache，再写入.
+通常配合 <strong>回写法</strong>.</li>
+<li><strong>非写分配法 ( No-write-allocate )</strong> :
+直接写主存，不调入 Cache. 通常配合 <strong>全写法</strong>.</li>
+</ul>
+<hr />
+<h2 id="虚拟存储器">3.6 虚拟存储器</h2>
+<blockquote>
+<p>3.6 请参照本站 <a
+target="_blank" rel="noopener" href="https://sparkle520.xyz/2025/12/25/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F3/">408-操作系统-3-内存管理</a>
+中的内容.</p>
+</blockquote>
+<h3 id="虚拟存储器的基本概念">3.6.1 虚拟存储器的基本概念</h3>
+<p>利用辅存 ( 硬盘 ) 充当主存，给用户提供一个比实际物理内存大得多的
+<strong>逻辑地址空间</strong>. 本质上是将 <strong>[主存, 辅存]</strong>
+两级存储体系管理起来，对上层程序屏蔽物理细节.</p>
+<ul>
+<li><strong>核心</strong> : 逻辑地址 ( 虚地址 ) <span
+class="math inline">\(\to\)</span> 物理地址 ( 实地址 ) 的转换 ( 由
+<strong>MMU</strong> 硬件自动完成 ).</li>
+<li><strong>特征</strong> :
+<ol type="1">
+<li><strong>多次性</strong> :
+作业无需一次性全部装入内存，分多次调入.</li>
+<li><strong>对换性</strong> :
+内存中暂不用的数据换出到辅存，需要时再换入.</li>
+<li><strong>虚拟性</strong> : 逻辑容量远大于物理容量 ( 受限于 CPU
+地址线宽度和辅存大小 ).</li>
+</ol></li>
+</ul>
+<h3 id="页式虚拟存储器">3.6.2 页式虚拟存储器</h3>
+<h4 id="基本原理">1. 基本原理</h4>
+<ul>
+<li><strong>分页</strong> : 将逻辑地址空间划分为固定大小的 <strong>页 (
+Page )</strong>，物理内存划分为同样大小的 <strong>页框 ( Page Frame
+)</strong>.</li>
+<li><strong>页表 ( Page Table )</strong> : 记录 <strong>逻辑页号 <span
+class="math inline">\(\to\)</span> 物理页框号</strong>
+的映射表，常驻内存.
+<ul>
+<li><strong>页表项 ( PTE )</strong> 包含 :
+<strong>物理页号</strong>、<strong>有效位 ( P )</strong>、<strong>访问位
+( A )</strong>、<strong>脏位 ( D )</strong>.</li>
+</ul></li>
+<li><strong>地址结构</strong> : <span class="math display">\[
+\text{逻辑地址} = \text{页号 ( VPN )} + \text{页内偏移 ( Offset )}
+\]</span> <span class="math display">\[ \text{物理地址} = \text{页框号 (
+PPN )} + \text{页内偏移 ( Offset )} \]</span></li>
+</ul>
+<h4 id="tlb-快表">2. TLB ( 快表 )</h4>
+<ul>
+<li><strong>定义</strong> : 页表的高速缓存 ( 存放在 Cache 或专门的硬件中
+)，用于加速地址变换.</li>
+<li><strong>原理</strong> : 利用局部性原理，存储最近使用的页表项.</li>
+<li><strong>全相联 / 组相联</strong> : TLB 通常采用
+<strong>全相联</strong> 或 <strong>组相联</strong>
+映射，以提高命中率.</li>
+</ul>
+<h4 id="访问过程-重点">3. 访问过程 ( 重点 )</h4>
+<div class="mermaid-wrap"><pre class="mermaid-src" hidden>
+  %%{init: {&#39;flowchart&#39;: {&#39;curve&#39;: &#39;basis&#39;}, &#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;primaryColor&#39;: &#39;#fff&#39;, &#39;lineColor&#39;: &#39;#94a3b8&#39;, &#39;fontFamily&#39;: &#39;sans-serif&#39; }}}%%
+graph TD
+    Start(&quot;CPU 发出逻辑地址&quot;) --&gt; TLB{查 TLB};
+    
+    TLB -- 命中 --&gt; GetPA[&quot;得到物理地址&quot;];
+    TLB -- 未命中 --&gt; PageTable{查页表};
+    
+    PageTable -- 有效 --&gt; UpdateTLB[&quot;1. 更新 TLB\n2. 得到物理地址&quot;];
+    UpdateTLB --&gt; GetPA;
+    
+    PageTable -- &quot;无效 (缺页)&quot; --&gt; Fault[&quot;缺页中断\n( OS 接管 )&quot;];
+    Fault --&gt; Swap[&quot;从磁盘调页\n( 可能涉及页面置换 )&quot;];
+    Swap --&gt; UpdateTable[&quot;更新页表&quot;];
+    UpdateTable --&gt; Start;
+    
+    GetPA --&gt; Cache{查 Cache};
+    Cache -- 命中 --&gt; Data[&quot;获取数据&quot;];
+    Cache -- 未命中 --&gt; Mem[&quot;访问主存&quot;];
+    Mem --&gt; Data;
+    
+    classDef default fill:#fff,stroke:#cbd5e1,rx:5,ry:5;
+    classDef decision fill:#fef3c7,stroke:#f59e0b,stroke-width:2px;
+    classDef process fill:#dcfce7,stroke:#22c55e,stroke-width:2px;
+    classDef interrupt fill:#fee2e2,stroke:#ef4444,stroke-width:2px;
+
+    class TLB,PageTable,Cache decision
+    class GetPA,UpdateTLB,UpdateTable,Data,Mem process
+    class Fault,Swap interrupt
+  </pre></div>
+<div class="note info simple"><p><strong>示例 : 逻辑地址 → 物理地址 ( 二进制拆分详解 )</strong></p>
+<p>已知 :</p>
+<ul>
+<li><strong>逻辑地址</strong> : 16 位 ( 0 ~ 65535 )</li>
+<li><strong>页面大小</strong> : 1KB = <span
+class="math inline">\(2^{10}\)</span> B ( 需 10 位表示页内偏移 )</li>
+<li><strong>页表映射</strong> : 逻辑页号 <strong>14</strong> <span
+class="math inline">\(\to\)</span> 物理页框号 <strong>41</strong></li>
+</ul>
+<p>将逻辑地址 <strong>0x3A5C</strong> 转换为物理地址 :</p>
+<ol type="1">
+<li><p><strong>二进制拆分</strong> : <span class="math display">\[
+\text{0x3A5C} = \underbrace{0011 \ 10}_{\text{页号 P (6位)}} \
+\underbrace{10 \ 0101 \ 1100}_{\text{页内偏移 W (10位)}}
+\]</span></p></li>
+<li><p><strong>地址变换</strong> :</p>
+<ul>
+<li><strong>提取页号</strong> : <code>001110</code> = <span
+class="math inline">\(14_{10}\)</span></li>
+<li><strong>查页表</strong> : 找到第 14 号页表项，读出物理页框号
+<strong>41</strong> ( <span class="math inline">\(101001_2\)</span>
+)</li>
+<li><strong>拼接</strong> : 将物理页框号与原偏移量拼接</li>
+</ul></li>
+<li><p><strong>合成物理地址</strong> : <span class="math display">\[
+\text{物理地址} = \underbrace{1010 \ 01}_{\text{页框号 (41)}} \
+\underbrace{10 \ 0101 \ 1100}_{\text{偏移量}} \]</span></p>
+<ul>
+<li><strong>重组二进制</strong> : <code>1010 0110 0101 1100</code></li>
+<li><strong>转十六进制</strong> : <strong>0xA65C</strong></li>
+</ul></li>
+</ol>
+<p><strong>验证计算</strong> :</p>
+<ul>
+<li>逻辑地址 : <span class="math inline">\(14 \times 1024 + 604 =
+14940\)</span> ( 0x3A5C )</li>
+<li>物理地址 : <span class="math inline">\(41 \times 1024 + 604 =
+42588\)</span> ( 0xA65C )</li>
+</ul>
+</div>
+<h4 id="性能计算-有效访问时间-eat">4. 性能计算 : 有效访问时间 ( EAT
+)</h4>
+<p><strong>有效访问时间 ( EAT, Effective Access Time )</strong>
+是衡量虚拟存储器性能的核心指标.</p>
+<ul>
+<li><p><strong>符号定义</strong> :</p>
+<ul>
+<li><span class="math inline">\(t_m\)</span> : 访问一次主存的时间 ( 通常
+ns 级 ).</li>
+<li><span class="math inline">\(p\)</span> : <strong>缺页率</strong> (
+Page Fault Rate, <span class="math inline">\(0 \le p \le 1\)</span>
+).</li>
+<li><span class="math inline">\(t_{loss}\)</span> :
+<strong>缺页损失时间</strong> ( 包含 磁盘 I/O + 中断处理 + 更新页表,
+通常 ms 级 ).</li>
+</ul></li>
+<li><p><strong>计算公式 ( 考虑缺页 )</strong> : <span
+class="math display">\[ EAT = (1 - p) \times t_m + p \times t_{loss}
+\]</span> <em>( 注 : 由于 <span class="math inline">\(t_{loss} \gg
+t_m\)</span>，只要 <span class="math inline">\(p\)</span> 稍大 ( 如
+<span class="math inline">\(10^{-3}\)</span> )，EAT
+就会急剧增加，导致系统 <strong>抖动 ( Thrashing )</strong>.
+)</em></p></li>
+<li><p><strong>加入 TLB 后 ( 假设无缺页 )</strong> : 设 TLB 命中率为
+<span class="math inline">\(H\)</span>，查 TLB 时间为 <span
+class="math inline">\(t_{tlb}\)</span>. <span class="math display">\[
+EAT = H \times (t_{tlb} + t_m) + (1-H) \times (t_{tlb} + 2t_m) \]</span>
+<em>( 注 : TLB Miss 时，需先查页表 ( 1次 <span
+class="math inline">\(t_m\)</span> ) 得到物理地址，再访问数据 ( 1次
+<span class="math inline">\(t_m\)</span> )，共 <span
+class="math inline">\(2t_m\)</span>. )</em></p></li>
+</ul>
+<h4 id="多级页表-multi-level-page-table">5. 多级页表 ( Multi-level Page
+Table )</h4>
+<p>为了解决 <strong>页表过大且需连续存放</strong> 的问题 (
+单级页表可能占用几十MB连续内存 )，引入多级页表.</p>
+<ul>
+<li><strong>原理</strong> : 将页表再分页. (
+顶级页表常驻内存，二级页表按需调入 ).</li>
+<li><strong>地址结构 ( 2级为例 )</strong> : <span
+class="math display">\[ \text{逻辑地址} = \text{一级页号 ( P1 )} +
+\text{二级页号 ( P2 )} + \text{页内偏移 ( Offset )} \]</span></li>
+<li><strong>访存次数</strong> : <span class="math inline">\(N\)</span>
+级页表需访问内存 <strong><span class="math inline">\(N +
+1\)</span></strong> 次 ( 不含 TLB ).</li>
+<li><strong>缺点</strong> : 访存次数增加，必须配合 TLB 使用.</li>
+</ul>
+<h3 id="段式虚拟存储器">3.6.3 段式虚拟存储器</h3>
+<ul>
+<li><strong>分段</strong> : 按程序逻辑结构 ( 代码段、数据段、堆栈段 )
+分配空间，段长 <strong>可变</strong>.</li>
+<li><strong>地址结构</strong> : 段号 + 段内偏移.</li>
+<li><strong>优点</strong> :
+<ul>
+<li><strong>逻辑清晰</strong> : 方便编程和编译器实现.</li>
+<li><strong>易于保护/共享</strong> : 可以按段设置读写权限.</li>
+</ul></li>
+<li><strong>缺点</strong> : 产生 <strong>外部碎片</strong> (
+段长不固定，内存分配困难 ).</li>
+</ul>
+<h3 id="段页式虚拟存储器">3.6.4 段页式虚拟存储器</h3>
+<ul>
+<li><strong>原理</strong> : 先将程序 <strong>分段</strong>，再将每个段
+<strong>分页</strong>.</li>
+<li><strong>地址结构</strong> : <strong>段号 + 段内页号 +
+页内偏移</strong>.</li>
+<li><strong>特点</strong> :
+<ul>
+<li>结合了段式的 <strong>易共享/保护</strong> 和页式的
+<strong>无外部碎片</strong>.</li>
+<li><strong>三次访存</strong> : 第一次查段表 <span
+class="math inline">\(\to\)</span> 第二次查页表 <span
+class="math inline">\(\to\)</span> 第三次访问物理目标. ( 即使有 TLB
+也要多次查找 ).</li>
+</ul></li>
+</ul>
+<h3 id="虚拟存储器与-cache-的比较">3.6.5 虚拟存储器与 Cache 的比较</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">比较项目</th>
+<th style="text-align: center;">Cache - 主存</th>
+<th style="text-align: center;">主存 - 辅存 ( VM )</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>目的</strong></td>
+<td style="text-align: center;">提高 <strong>速度</strong> ( 解决
+CPU-主存 速度差异 )</td>
+<td style="text-align: center;">扩大 <strong>容量</strong> ( 解决
+内存容量不足 )</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>数据单位</strong></td>
+<td style="text-align: center;">块 ( Block / Line )</td>
+<td style="text-align: center;">页 ( Page )</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>透明性</strong></td>
+<td style="text-align: center;">对 <strong>所有人</strong> 透明 ( 纯硬件
+)</td>
+<td style="text-align: center;">对 <strong>应用层</strong> 透明 ( OS +
+硬件 )</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>未命中处理</strong></td>
+<td style="text-align: center;">硬件自动完成 ( 等待主存 )</td>
+<td style="text-align: center;"><strong>缺页中断</strong> ( OS
+调度，进程挂起 )</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>映射方式</strong></td>
+<td style="text-align: center;">直接、全相联、组相联</td>
+<td style="text-align: center;"><strong>全相联</strong> ( 页表机制
+)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>一致性</strong></td>
+<td style="text-align: center;">写回 / 写直达</td>
+<td style="text-align: center;"><strong>写回</strong> ( 磁盘 I/O
+代价太大 )</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="常见问题和易混淆知识点">3.8 常见问题和易混淆知识点</h2>
+<ol type="1">
+<li><strong>Cache 行与主存块</strong> :
+大小相同，是数据交换的基本单位.</li>
+<li><strong>TLB 命中与 Cache 命中</strong> :
+<ul>
+<li>TLB 命中 <span class="math inline">\(\to\)</span> 此时页一定在内存
+<span class="math inline">\(\to\)</span> 但数据不一定在 Cache.</li>
+<li>Cache 命中 <span class="math inline">\(\to\)</span> 数据一定在内存
+<span class="math inline">\(\to\)</span> 页表一定有效 ( TLB
+可能没命中，但概率极低 ).</li>
+</ul></li>
+<li><strong>DRAM 刷新与重写</strong> :
+<ul>
+<li>刷新是指定时补充电荷 ( 防止丢失 ).</li>
+<li>重写是读出破坏性数据后的恢复 ( 破坏性读出 ).</li>
+</ul></li>
+</ol>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">sparkle520</div><div class="post-copyright__author_desc">我一直都在寻找着什么</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="http://example.com/2026/01/14/%E8%AE%A1%E7%BB%843/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('http://example.com/2026/01/14/%E8%AE%A1%E7%BB%843/')">408-计算机组成原理-3-存储系统</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="http://example.com/2026/01/14/%E8%AE%A1%E7%BB%843/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=408-计算机组成原理-3-存储系统&amp;url=http://example.com/2026/01/14/%E8%AE%A1%E7%BB%843/&amp;pic=https://pic1.imgdb.cn/item/69677a4999f37a647f58e412.png" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">SPARKLE</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/408/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>408<span class="tagsPageCount">10</span></a><a class="post-meta__box__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>计算机组成原理<span class="tagsPageCount">6</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://pic1.imgdb.cn/item/6996f0a1d2628f800ee0f993.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/01/12/%E8%8B%B1%E8%AF%AD%E4%BB%8E%E5%8F%A5%E7%AE%80%E5%8C%96/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/6964b36351d5e4e5d5707e53.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">英语从句简化</div></div></a></div><div class="next-post pull-right"><a href="/2026/01/26/%E8%AE%A1%E7%BB%844/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69872ac742b1cbeca1f88f3a.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">408-计算机组成原理-4-指令系统</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2025/12/31/%E8%AE%A1%E7%BB%841/" title="408-计算机组成原理-1-计算机系统概述"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/6954ea8a8801094e3ab4fd8b.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-31</div><div class="title">408-计算机组成原理-1-计算机系统概述</div></div></a></div><div><a href="/2026/01/26/%E8%AE%A1%E7%BB%845/" title="408-计算机组成原理-5-中央处理器"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69872af342b1cbeca1f88f3d.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-01-26</div><div class="title">408-计算机组成原理-5-中央处理器</div></div></a></div><div><a href="/2026/01/07/%E8%AE%A1%E7%BB%842/" title="408-计算机组成原理-2-数据的表示和运算"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/695e4a10c1cee4b048c4e0a1.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-01-07</div><div class="title">408-计算机组成原理-2-数据的表示和运算</div></div></a></div><div><a href="/2026/01/26/%E8%AE%A1%E7%BB%844/" title="408-计算机组成原理-4-指令系统"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69872ac742b1cbeca1f88f3a.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-01-26</div><div class="title">408-计算机组成原理-4-指令系统</div></div></a></div><div><a href="/2025/12/22/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F1/" title="408-操作系统-1-计算机系统概述"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492a76c154427986d991c5.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-22</div><div class="title">408-操作系统-1-计算机系统概述</div></div></a></div><div><a href="/2025/12/25/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F3/" title="408-操作系统-3-内存管理"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492cd6c154427986d9b19e.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-25</div><div class="title">408-操作系统-3-内存管理</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/671cfe2fd29ded1a8c5ffb0b.png" alt="status"/></div></div><div class="author-info__description">不管你在<strong style="color:white">这个世界</strong>的哪个地方，我一定<strong style="color:white">会</strong>，再次去<strong style="color:white">见</strong>你的!</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">sparkle520</h1><div class="author-info__desc">我一直都在寻找着什么</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/sparkle520" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/34882250" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">Hello World! 欢迎来到我的博客~</div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://pic.imgdb.cn/item/66c487f1d9c307b7e9ba5c7a.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://pic.imgdb.cn/item/66c487ebd9c307b7e9ba5725.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC3%E7%AB%A0-%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.</span> <span class="toc-text">第3章 存储系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%99%A8%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">3.1 存储器概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%99%A8%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.1.</span> <span class="toc-text">3.1.1 存储器的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89%E5%AD%98%E5%82%A8%E4%BB%8B%E8%B4%A8%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">1. 按存储介质分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89%E5%AD%98%E5%8F%96%E6%96%B9%E5%BC%8F%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">2. 按存取方式分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89%E5%9C%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">3. 按在计算机中的作用分类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%99%A8%E7%9A%84%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87"><span class="toc-number">1.1.2.</span> <span class="toc-text">3.1.2 存储器的性能指标</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E6%97%B6%E9%97%B4%E5%8F%82%E6%95%B0"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">关键时间参数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%BA%A7%E5%B1%82%E6%AC%A1%E7%9A%84%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.1.3.</span> <span class="toc-text">3.1.3 多级层次的存储系统</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-number">1.2.</span> <span class="toc-text">3.2 主存储器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sram%E8%8A%AF%E7%89%87%E5%92%8Cdram%E8%8A%AF%E7%89%87"><span class="toc-number">1.2.1.</span> <span class="toc-text">3.2.1 SRAM芯片和DRAM芯片</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#sram%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">3.2.1.1 SRAM存储器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dram%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">3.2.1.2 DRAM存储器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sram-%E4%B8%8E-dram-%E6%A0%B8%E5%BF%83%E5%8C%BA%E5%88%AB%E4%B8%8E%E9%80%89%E5%9E%8B"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">3.2.1.3 SRAM 与 DRAM
+核心区别与选型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AA%E8%AF%BB%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-number">1.2.2.</span> <span class="toc-text">3.2.2 只读存储器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E5%AD%98%E5%82%A8%E5%99%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90"><span class="toc-number">1.2.3.</span> <span class="toc-text">3.2.3 主存储器的基本组成</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">1. 核心组件详解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E5%AD%98%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">2. 主存的工作流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E8%8A%AF%E7%89%87%E5%BC%95%E8%84%9A%E6%95%B0%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="toc-number">1.2.3.3.</span> <span class="toc-text">3. 存储芯片引脚数的计算</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%99%A8%E5%AE%B9%E9%87%8F%E6%89%A9%E5%B1%95%E4%B8%8E%E8%8A%AF%E7%89%87%E6%95%B0%E9%87%8F%E8%AE%A1%E7%AE%97"><span class="toc-number">1.2.4.</span> <span class="toc-text">3.2.4
+存储器容量扩展与芯片数量计算</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%85%AC%E5%BC%8F%E4%B8%8E%E6%89%A9%E5%B1%95%E6%96%B9%E5%BC%8F"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">1. 核心公式与扩展方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E8%AF%A6%E8%A7%A3-%E9%99%84%E8%BF%9E%E6%8E%A5%E7%A4%BA%E6%84%8F%E5%9B%BE"><span class="toc-number">1.2.4.2.</span> <span class="toc-text">2. 示例详解 ( 附连接示意图 )</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98%E4%B8%8E%E8%BF%9E%E6%8E%A5%E6%AD%A5%E9%AA%A4%E6%80%BB%E7%BB%93"><span class="toc-number">1.2.4.3.</span> <span class="toc-text">3. 解题与连接步骤总结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E6%A8%A1%E5%9D%97%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-number">1.2.5.</span> <span class="toc-text">3.2.5 多模块存储器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E4%BD%93%E5%A4%9A%E5%AD%97%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-number">1.2.5.1.</span> <span class="toc-text">1. 单体多字存储器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E4%BD%93%E5%B9%B6%E8%A1%8C%E5%AD%98%E5%82%A8%E5%99%A8-%E6%A0%B8%E5%BF%83"><span class="toc-number">1.2.5.2.</span> <span class="toc-text">2. 多体并行存储器 ( 核心 )</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E5%AD%98%E5%82%A8%E5%99%A8%E4%B8%8E-cpu-%E7%9A%84%E8%BF%9E%E6%8E%A5"><span class="toc-number">1.3.</span> <span class="toc-text">3.3 主存储器与 CPU 的连接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E5%8E%9F%E7%90%86"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.3.1 连接原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E5%AD%98%E5%AE%B9%E9%87%8F%E7%9A%84%E6%89%A9%E5%B1%95"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.3.2 主存容量的扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E6%96%B9%E5%BC%8F%E6%80%BB%E7%BB%93%E5%AF%B9%E6%AF%94"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">扩展方式总结对比</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E8%8A%AF%E7%89%87%E7%9A%84%E5%9C%B0%E5%9D%80%E5%88%86%E9%85%8D%E5%92%8C%E7%89%87%E9%80%89"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.3.3 存储芯片的地址分配和片选</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E9%80%89%E6%B3%95-linear-selection"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">1. 线选法 ( Linear Selection )</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%91%E7%A0%81%E7%89%87%E9%80%89%E6%B3%95-decoding-selection---%E4%B8%BB%E6%B5%81"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">2. 译码片选法 ( Decoding
+Selection ) - 主流</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%99%A8%E4%B8%8E-cpu-%E7%9A%84%E8%BF%9E%E6%8E%A5-%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8"><span class="toc-number">1.3.4.</span> <span class="toc-text">3.3.4 存储器与 CPU 的连接 (
+综合应用 )</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%96%E9%83%A8%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-number">1.4.</span> <span class="toc-text">3.4 外部存储器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E5%AD%98%E5%82%A8%E5%99%A8-disk"><span class="toc-number">1.4.1.</span> <span class="toc-text">3.4.1 磁盘存储器 ( Disk )</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E9%A9%B1%E5%8A%A8%E5%99%A8%E7%9A%84%E7%BB%84%E6%88%90%E4%B8%8E%E7%BB%93%E6%9E%84"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">1. 磁盘驱动器的组成与结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87-%E8%AE%A1%E7%AE%97%E9%A2%98%E6%A0%B8%E5%BF%83"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">2. 性能指标 ( 计算题核心 )</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E9%98%B5%E5%88%97-raid"><span class="toc-number">1.4.1.3.</span> <span class="toc-text">3. 磁盘阵列 ( RAID )</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BA%E6%80%81%E7%A1%AC%E7%9B%98-ssd"><span class="toc-number">1.4.2.</span> <span class="toc-text">3.4.2 固态硬盘 ( SSD )</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E9%83%A8%E4%BB%B6"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">1. 核心部件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%8D%95%E5%85%83%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">2. 存储单元类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%BB%E5%86%99%E7%89%B9%E6%80%A7"><span class="toc-number">1.4.2.3.</span> <span class="toc-text">3. 读写特性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ssd-vs-hdd-%E5%AF%B9%E6%AF%94"><span class="toc-number">1.4.2.4.</span> <span class="toc-text">4. SSD vs HDD 对比</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E9%80%9F%E7%BC%93%E5%86%B2%E5%AD%98%E5%82%A8%E5%99%A8-cache"><span class="toc-number">1.5.</span> <span class="toc-text">3.5 高速缓冲存储器 ( Cache )</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E8%AE%BF%E9%97%AE%E7%9A%84%E5%B1%80%E9%83%A8%E6%80%A7%E5%8E%9F%E7%90%86"><span class="toc-number">1.5.1.</span> <span class="toc-text">3.5.1 程序访问的局部性原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cache-%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">1.5.2.</span> <span class="toc-text">3.5.2 Cache 的基本工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">1. 核心概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%BB%E5%86%99%E6%B5%81%E7%A8%8B-%E6%A6%82%E8%A7%88"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">2. 读写流程 ( 概览 )</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87"><span class="toc-number">1.5.2.3.</span> <span class="toc-text">3. 性能指标</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cache-%E5%92%8C%E4%B8%BB%E5%AD%98%E7%9A%84%E6%98%A0%E5%B0%84%E6%96%B9%E5%BC%8F"><span class="toc-number">1.5.3.</span> <span class="toc-text">3.5.3 Cache 和主存的映射方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cache-%E4%B8%AD%E4%B8%BB%E5%AD%98%E5%9D%97%E7%9A%84%E6%9B%BF%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="toc-number">1.5.4.</span> <span class="toc-text">3.5.4 Cache 中主存块的替换算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E6%9B%BF%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="toc-number">1.5.4.1.</span> <span class="toc-text">1. 常见替换算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95-rand-random"><span class="toc-number">1.5.4.2.</span> <span class="toc-text">(1) 随机算法 ( RAND, Random )</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%88%E8%BF%9B%E5%85%88%E5%87%BA%E7%AE%97%E6%B3%95-fifo-first-in-first-out"><span class="toc-number">1.5.4.3.</span> <span class="toc-text">(2) 先进先出算法 ( FIFO,
+First In First Out )</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E8%BF%91%E6%9C%80%E4%B9%85%E6%9C%AA%E4%BD%BF%E7%94%A8%E7%AE%97%E6%B3%95-lru-least-recently-used"><span class="toc-number">1.5.4.4.</span> <span class="toc-text">(3)
+最近最久未使用算法 ( LRU, Least Recently Used )</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E4%B8%8D%E7%BB%8F%E5%B8%B8%E4%BD%BF%E7%94%A8%E7%AE%97%E6%B3%95-lfu-least-frequently-used"><span class="toc-number">1.5.4.5.</span> <span class="toc-text">(4) 最不经常使用算法
+( LFU, Least Frequently Used )</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#lru-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A1%AC%E4%BB%B6%E5%AE%9E%E7%8E%B0-%E8%AE%A1%E6%95%B0%E5%99%A8%E6%B3%95"><span class="toc-number">1.5.4.6.</span> <span class="toc-text">3. LRU 算法的硬件实现 ( 计数器法
+)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cache-%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98"><span class="toc-number">1.5.5.</span> <span class="toc-text">3.5.5 Cache 的一致性问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%99%E5%91%BD%E4%B8%AD-write-hit"><span class="toc-number">1.5.5.1.</span> <span class="toc-text">1. 写命中 ( Write Hit )</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%99%E4%B8%8D%E5%91%BD%E4%B8%AD-write-miss"><span class="toc-number">1.5.5.2.</span> <span class="toc-text">2. 写不命中 ( Write Miss )</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-number">1.6.</span> <span class="toc-text">3.6 虚拟存储器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8%E5%99%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.6.1.</span> <span class="toc-text">3.6.1 虚拟存储器的基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B5%E5%BC%8F%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-number">1.6.2.</span> <span class="toc-text">3.6.2 页式虚拟存储器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-number">1.6.2.1.</span> <span class="toc-text">1. 基本原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#tlb-%E5%BF%AB%E8%A1%A8"><span class="toc-number">1.6.2.2.</span> <span class="toc-text">2. TLB ( 快表 )</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E8%BF%87%E7%A8%8B-%E9%87%8D%E7%82%B9"><span class="toc-number">1.6.2.3.</span> <span class="toc-text">3. 访问过程 ( 重点 )</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97-%E6%9C%89%E6%95%88%E8%AE%BF%E9%97%AE%E6%97%B6%E9%97%B4-eat"><span class="toc-number">1.6.2.4.</span> <span class="toc-text">4. 性能计算 : 有效访问时间 ( EAT
+)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E7%BA%A7%E9%A1%B5%E8%A1%A8-multi-level-page-table"><span class="toc-number">1.6.2.5.</span> <span class="toc-text">5. 多级页表 ( Multi-level Page
+Table )</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AE%B5%E5%BC%8F%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-number">1.6.3.</span> <span class="toc-text">3.6.3 段式虚拟存储器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AE%B5%E9%A1%B5%E5%BC%8F%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-number">1.6.4.</span> <span class="toc-text">3.6.4 段页式虚拟存储器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8%E5%99%A8%E4%B8%8E-cache-%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-number">1.6.5.</span> <span class="toc-text">3.6.5 虚拟存储器与 Cache 的比较</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%92%8C%E6%98%93%E6%B7%B7%E6%B7%86%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">1.7.</span> <span class="toc-text">3.8 常见问题和易混淆知识点</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/02/19/%E9%AB%98%E6%95%B0-%E9%AB%98%E9%98%B6%E5%AF%BC%E6%95%B0%E6%B1%82%E8%A7%A3/" title="高等数学-难点-高阶导数求解"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/6996f0a1d2628f800ee0f993.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="高等数学-难点-高阶导数求解"/></a><div class="content"><a class="title" href="/2026/02/19/%E9%AB%98%E6%95%B0-%E9%AB%98%E9%98%B6%E5%AF%BC%E6%95%B0%E6%B1%82%E8%A7%A3/" title="高等数学-难点-高阶导数求解">高等数学-难点-高阶导数求解</a><time datetime="2026-02-19T12:00:27.000Z" title="发表于 2026-02-19 20:00:27">2026-02-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/01/26/%E8%AE%A1%E7%BB%845/" title="408-计算机组成原理-5-中央处理器"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69872af342b1cbeca1f88f3d.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-计算机组成原理-5-中央处理器"/></a><div class="content"><a class="title" href="/2026/01/26/%E8%AE%A1%E7%BB%845/" title="408-计算机组成原理-5-中央处理器">408-计算机组成原理-5-中央处理器</a><time datetime="2026-01-26T15:00:27.000Z" title="发表于 2026-01-26 23:00:27">2026-01-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/01/26/%E8%AE%A1%E7%BB%844/" title="408-计算机组成原理-4-指令系统"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69872ac742b1cbeca1f88f3a.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-计算机组成原理-4-指令系统"/></a><div class="content"><a class="title" href="/2026/01/26/%E8%AE%A1%E7%BB%844/" title="408-计算机组成原理-4-指令系统">408-计算机组成原理-4-指令系统</a><time datetime="2026-01-26T15:00:27.000Z" title="发表于 2026-01-26 23:00:27">2026-01-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/01/14/%E8%AE%A1%E7%BB%843/" title="408-计算机组成原理-3-存储系统"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69677a4999f37a647f58e412.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-计算机组成原理-3-存储系统"/></a><div class="content"><a class="title" href="/2026/01/14/%E8%AE%A1%E7%BB%843/" title="408-计算机组成原理-3-存储系统">408-计算机组成原理-3-存储系统</a><time datetime="2026-01-14T15:00:27.000Z" title="发表于 2026-01-14 23:00:27">2026-01-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/01/12/%E8%8B%B1%E8%AF%AD%E4%BB%8E%E5%8F%A5%E7%AE%80%E5%8C%96/" title="英语从句简化"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/6964b36351d5e4e5d5707e53.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="英语从句简化"/></a><div class="content"><a class="title" href="/2026/01/12/%E8%8B%B1%E8%AF%AD%E4%BB%8E%E5%8F%A5%E7%AE%80%E5%8C%96/" title="英语从句简化">英语从句简化</a><time datetime="2026-01-12T15:00:27.000Z" title="发表于 2026-01-12 23:00:27">2026-01-12</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  if (true) { 
+    window.typed = new Typed("#footer-type-tips", {
+      strings: ["只要记住你的名字&#44; 不管你在世界的哪个地方&#44; 我一定&#44; 会去见你 !"],
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50
+    })
+  } else {
+    document.getElementById("footer-type-tips").innerHTML = '只要记住你的名字&#44; 不管你在世界的哪个地方&#44; 我一定&#44; 会去见你 !'
+  }
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.cbd.int/typed.js@2.1.0/dist/typed.umd.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/sparkle520" title="sparkle">sparkle</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">82</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">47</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">6</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/sparkle520?tab=repositories" title="github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="github"/><span class="back-menu-item-text">github</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/408/" style="font-size: 0.88rem;">408<sup>10</sup></a><a href="/tags/AOP/" style="font-size: 0.88rem;">AOP<sup>1</sup></a><a href="/tags/Deep-Learning/" style="font-size: 0.88rem;">Deep Learning<sup>1</sup></a><a href="/tags/IoC/" style="font-size: 0.88rem;">IoC<sup>1</sup></a><a href="/tags/JSR303/" style="font-size: 0.88rem;">JSR303<sup>1</sup></a><a href="/tags/Matplotlib/" style="font-size: 0.88rem;">Matplotlib<sup>3</sup></a><a href="/tags/c/" style="font-size: 0.88rem;">c#<sup>2</sup></a><a href="/tags/java/" style="font-size: 0.88rem;">java<sup>4</sup></a><a href="/tags/npc%E5%88%86%E6%9E%90%E6%B3%95/" style="font-size: 0.88rem;">npc分析法<sup>1</sup></a><a href="/tags/python/" style="font-size: 0.88rem;">python<sup>5</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 0.88rem;">事务<sup>1</sup></a><a href="/tags/%E4%BA%8C%E6%AC%A1%E5%9E%8B/" style="font-size: 0.88rem;">二次型<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E3%80%82/" style="font-size: 0.88rem;">你的名字。<sup>3</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">你的名字同名小说<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%A4%96%E4%BC%A0%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">你的名字外传小说<sup>1</sup></a><a href="/tags/%E5%80%92%E8%A3%85%E7%BB%93%E6%9E%84/" style="font-size: 0.88rem;">倒装结构<sup>1</sup></a><a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size: 0.88rem;">写作<sup>4</sup></a><a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 0.88rem;">包管理<sup>1</sup></a><a href="/tags/%E5%8D%B7%E7%A7%AF%E5%85%AC%E5%BC%8F/" style="font-size: 0.88rem;">卷积公式<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90/" style="font-size: 0.88rem;">天气之子<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">天气之子同名小说<sup>1</sup></a><a href="/tags/%E5%AE%9A%E7%A7%AF%E5%88%86/" style="font-size: 0.88rem;">定积分<sup>1</sup></a><a href="/tags/%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">小说<sup>3</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 0.88rem;">操作系统<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" style="font-size: 0.88rem;">数据校验<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 0.88rem;">概率论<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 0.88rem;">概率论与数理统计<sup>7</sup></a><a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 0.88rem;">汇编<sup>9</sup></a><a href="/tags/%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80/" style="font-size: 0.88rem;">泰勒展开<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%80%BC/" style="font-size: 0.88rem;">特征值<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F/" style="font-size: 0.88rem;">特征向量<sup>1</sup></a><a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 0.88rem;">线性代数<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E5%90%AC%E5%8A%9B/" style="font-size: 0.88rem;">英语听力<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95/" style="font-size: 0.88rem;">英语语法<sup>16</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 0.88rem;">计算机组成原理<sup>6</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 0.88rem;">计算机网络<sup>1</sup></a><a href="/tags/%E8%AF%8D%E6%A0%B9%E8%AF%8D%E7%BC%80/" style="font-size: 0.88rem;">词根词缀<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/" style="font-size: 0.88rem;">高等代数<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" style="font-size: 0.88rem;">高等数学<sup>9</sup></a><a href="/tags/%E9%AB%98%E9%A2%91%E8%AF%8D%E7%BB%84/" style="font-size: 0.88rem;">高频词组<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script async src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.cbd.int/mathjax@3.2.2/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.cbd.int/mermaid@10.9.1/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  anzhiyu.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://sparkle521.xyz',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://cdn.cbd.int/twikoo@1.6.25/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://sparkle521.xyz',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"><script async src="/js/anzhiyu/comment_barrage.js"></script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://sparkle521.xyz',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.cbd.int/twikoo@1.6.25/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script async data-pjax src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.1/bubble/bubble.js"></script><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><div><canvas id="snow" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999;pointer-events:none"></canvas></div><script>const notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));</script><script async type="text/javascript" src="https://cdn.jsdelivr.net/gh/Candinya/Kratos-Rebirth@latest/source/js/snow.min.js"></script><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

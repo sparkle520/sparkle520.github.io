@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DRAM 内部结构图解</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: transparent;
+    --panel: #f8fafc;
+    --border: #cbd5e1;
+    --accent: #0284c7;
+    --accent2: #ea580c;
+    --accent3: #7c3aed;
+    --green: #16a34a;
+    --yellow: #b45309;
+    --text: #1e293b;
+    --muted: #64748b;
+    --wire: #94a3b8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: transparent;
+    color: var(--text);
+    font-family: 'Noto Sans SC', sans-serif;
+    overflow: auto;
+    scrollbar-width: none;
+  }
+
+  body::before { display: none; }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  header .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    opacity: 1;
+  }
+
+  header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 6vw, 72px);
+    letter-spacing: 6px;
+    background: linear-gradient(135deg, #f97316 0%, #ec4899 60%, #b91c1c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+
+  header p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 10px;
+    letter-spacing: 1px;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 4px;
+    background: #f1f5f9;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 6px;
+    margin-bottom: 30px;
+    overflow-x: auto;
+  }
+
+  .tab {
+    flex: 1;
+    min-width: 120px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .tab.active {
+    background: white;
+    color: var(--accent);
+    border: 1px solid #bae6fd;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  }
+
+  .tab:hover:not(.active) { color: var(--text); background: rgba(0,0,0,0.04); }
+
+  .panel { display: none; }
+  .panel.active { display: block; animation: fadeIn 0.3s ease; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  }
+
+  .card-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-title::before {
+    content: '';
+    width: 3px;
+    height: 16px;
+    background: var(--accent);
+    border-radius: 2px;
+    display: block;
+  }
+
+  .dram-overview {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 700px) { .dram-overview { grid-template-columns: 1fr; } }
+
+  .svg-wrapper {
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+  }
+
+  svg text { font-family: 'JetBrains Mono', monospace; }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+  }
+
+  .ops-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 700px) { .ops-grid { grid-template-columns: 1fr; } }
+
+  .op-card {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: border-color 0.2s;
+    cursor: pointer;
+  }
+
+  .op-card:hover { border-color: var(--accent); }
+  .op-card.read:hover { border-color: var(--green); }
+  .op-card.write:hover { border-color: var(--accent2); }
+  .op-card.refresh:hover { border-color: #7c3aed; }
+
+  .op-icon { font-size: 28px; margin-bottom: 12px; }
+
+  .op-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .op-title.read { color: var(--green); }
+  .op-title.write { color: var(--accent2); }
+  .op-title.refresh { color: #7c3aed; }
+
+  .op-steps { list-style: none; }
+  .op-steps li {
+    font-size: 12px;
+    color: var(--muted);
+    padding: 4px 0;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    gap: 8px;
+  }
+  .op-steps li:last-child { border-bottom: none; }
+  .op-steps li .step-num {
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    min-width: 18px;
+    margin-top: 1px;
+  }
+
+  .array-diagram {
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .compare-table th, .compare-table td {
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .compare-table th {
+    background: #eff6ff;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .compare-table td:first-child {
+    color: var(--text);
+    font-weight: 500;
+    text-align: left;
+  }
+
+  .compare-table tr:nth-child(even) td { background: #f8fafc; }
+
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .tag.good { background: #dcfce7; color: #16a34a; }
+  .tag.bad  { background: #fee2e2; color: #dc2626; }
+  .tag.mid  { background: #fef9c3; color: #a16207; }
+
+  .sim-container {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 20px;
+  }
+
+  @media (max-width: 800px) { .sim-container { grid-template-columns: 1fr; } }
+
+  .sim-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .ctrl-group label {
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .ctrl-row { display: flex; gap: 8px; }
+
+  .ctrl-btn {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .ctrl-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .ctrl-btn.selected { background: #eff6ff; border-color: var(--accent); color: var(--accent); }
+
+  .signal-display {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+
+  .signal-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid #e2e8f0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+
+  .signal-row:last-child { border-bottom: none; }
+  .signal-name { color: var(--muted); }
+
+  .signal-val {
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+  .signal-val.hi  { background: #dcfce7; color: #16a34a; }
+  .signal-val.lo  { background: #dbeafe; color: #1d4ed8; }
+  .signal-val.x   { background: #ede9fe; color: #7c3aed; }
+  .signal-val.chg { background: #fef9c3; color: #a16207; }
+
+  .state-box {
+    margin-top: 12px;
+    padding: 14px;
+    background: #eff6ff;
+    border: 1px solid #bae6fd;
+    border-radius: 8px;
+    font-size: 12px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .state-box strong { color: var(--accent); }
+
+  .glow {
+    -webkit-filter: drop-shadow(0 0 6px currentColor);
+    filter: drop-shadow(0 0 6px currentColor);
+  }
+
+  @keyframes pulse-cap {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+  .pulsing { animation: pulse-cap 1.4s ease-in-out infinite; }
+
+  @keyframes charge-anim {
+    0%   { height: 0px;  y: 52px; fill: #dbeafe; }
+    100% { height: 24px; y: 28px; fill: #2563eb; }
+  }
+
+  html { background: transparent; }
+  ::-webkit-scrollbar { display: none; }
+  * { scrollbar-width: none; -ms-overflow-style: none; }
+  .tabs, .array-diagram { overflow-x: auto; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="label">计算机组成原理 · 存储器</div>
+    <h1>DRAM 内部结构</h1>
+    <p>Dynamic Random Access Memory — 动态随机存取存储器</p>
+  </header>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('cell')">⚡ 1T1C 存储单元</button>
+    <button class="tab" onclick="showTab('ops')">🔄 读写刷新</button>
+    <button class="tab" onclick="showTab('array')">🗂️ 存储阵列</button>
+    <button class="tab" onclick="showTab('sim')">🎛️ 交互模拟</button>
+    <button class="tab" onclick="showTab('compare')">📊 存储器层次结构</button>
+  </div>
+
+  <!-- ══════════════════════ PANEL 1: 1T1C CELL ══════════════════════ -->
+  <div id="panel-cell" class="panel active">
+    <div class="dram-overview">
+      <div>
+        <div class="card">
+          <div class="card-title">1T1C DRAM 单元电路图</div>
+          <div class="svg-wrapper">
+            <svg width="360" height="320" viewBox="0 0 360 320">
+
+              <!-- BL vertical -->
+              <line x1="180" y1="10" x2="180" y2="80" stroke="#4ade80" stroke-width="2"/>
+              <text x="192" y="22" fill="#4ade80" font-size="10" font-weight="bold">BL ( 位线 ) </text>
+
+              <!-- WL horizontal -->
+              <line x1="30" y1="110" x2="310" y2="110" stroke="#ffd700" stroke-width="2"/>
+              <text x="316" y="114" fill="#ffd700" font-size="10" font-weight="bold">WL</text>
+
+              <!-- Access Transistor (NMOS) -->
+              <rect x="150" y="80" width="60" height="60" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+              <text x="180" y="106" fill="#1d4ed8" font-size="10" text-anchor="middle" font-weight="bold">T</text>
+              <text x="180" y="120" fill="#2563eb" font-size="8" text-anchor="middle">NMOS</text>
+              <text x="180" y="132" fill="#64748b" font-size="7" text-anchor="middle">访问管</text>
+
+              <!-- WL gate connection -->
+              <line x1="150" y1="110" x2="30" y2="110" stroke="#ffd700" stroke-width="2"/>
+              <line x1="210" y1="110" x2="310" y2="110" stroke="#ffd700" stroke-width="2"/>
+
+              <!-- Node between T and C -->
+              <line x1="180" y1="140" x2="180" y2="175" stroke="#0284c7" stroke-width="2"/>
+              <circle cx="180" cy="155" r="5" fill="#0284c7"/>
+
+              <!-- Capacitor symbol -->
+              <!-- Top plate -->
+              <line x1="120" y1="175" x2="240" y2="175" stroke="#0284c7" stroke-width="3" stroke-linecap="round"/>
+              <!-- Gap -->
+              <rect x="120" y="178" width="120" height="14" fill="none"/>
+              <!-- Dielectric label -->
+              <text x="180" y="189" fill="#94a3b8" font-size="8" text-anchor="middle">— — — — — —</text>
+              <!-- Bottom plate -->
+              <line x1="120" y1="193" x2="240" y2="193" stroke="#475569" stroke-width="3" stroke-linecap="round"/>
+
+              <!-- Capacitor label -->
+              <text x="252" y="186" fill="#0284c7" font-size="12" font-weight="bold">C</text>
+              <text x="252" y="198" fill="#64748b" font-size="8">存储电容</text>
+
+              <!-- Charge indicator inside capacitor -->
+              <rect id="cap-charge" x="130" y="178" width="100" height="14" rx="2" fill="#bfdbfe" opacity="0.6"/>
+              <text id="cap-label" x="180" y="189" fill="#1d4ed8" font-size="8" text-anchor="middle" font-weight="bold">Q = 1 ( 已充电 ) </text>
+
+              <!-- GND -->
+              <line x1="180" y1="193" x2="180" y2="230" stroke="#475569" stroke-width="2"/>
+              <!-- GND symbol -->
+              <line x1="155" y1="230" x2="205" y2="230" stroke="#475569" stroke-width="2"/>
+              <line x1="162" y1="237" x2="198" y2="237" stroke="#475569" stroke-width="1.5"/>
+              <line x1="169" y1="244" x2="191" y2="244" stroke="#475569" stroke-width="1"/>
+              <text x="180" y="262" fill="#64748b" font-size="10" text-anchor="middle">GND</text>
+
+              <!-- Leakage arrow -->
+              <path d="M245,185 Q280,185 280,230 L265,218 M280,230 L295,218" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4,2"/>
+              <text x="290" y="200" fill="#ef4444" font-size="8">漏电</text>
+              <text x="290" y="212" fill="#ef4444" font-size="7">↓需刷新</text>
+
+              <!-- VDD label top -->
+              <text x="180" y="8" fill="#ff6b35" font-size="9" text-anchor="middle">▼ 预充电 VDD/2</text>
+
+              <!-- Annotations -->
+              <text x="180" y="290" fill="#94a3b8" font-size="9" text-anchor="middle">1 个晶体管 + 1 个电容 = 1bit 存储</text>
+              <text x="180" y="305" fill="#94a3b8" font-size="8" text-anchor="middle">充电 → 逻辑 1 ｜ 放电 → 逻辑 0</text>
+            </svg>
+          </div>
+          <div class="legend">
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#2563eb"></div><span>NMOS 访问管 T</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#0284c7"></div><span>存储电容 C</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#ffd700"></div><span>WL 字线</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#4ade80"></div><span>BL 位线</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#ef4444"></div><span>漏电 ( 需刷新 ) </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <div class="card-title">各部件功能说明</div>
+          <div style="display:flex;flex-direction:column;gap:10px;font-size:13px;">
+            <div style="padding:12px;background:#f1f5f9;border-radius:8px;border-left:3px solid #2563eb">
+              <div style="color:#2563eb;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px">T — NMOS 访问管</div>
+              <div style="color:#475569;line-height:1.6">受 WL ( 字线 ) 控制. WL=1 时导通，连接存储电容 C 与位线 BL，允许读写操作. </div>
+            </div>
+            <div style="padding:12px;background:#f1f5f9;border-radius:8px;border-left:3px solid #0284c7">
+              <div style="color:#0284c7;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px">C — 存储电容</div>
+              <div style="color:#475569;line-height:1.6">利用电容充放电存储数据. 充电 ( 高压 ) = 逻辑 <strong style="color:#1e293b">1</strong>，放电 ( 低压 ) = 逻辑 <strong style="color:#1e293b">0</strong>. </div>
+            </div>
+            <div style="padding:12px;background:#f1f5f9;border-radius:8px;border-left:3px solid #ef4444">
+              <div style="color:#ef4444;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px">漏电问题 ( 核心缺陷 ) </div>
+              <div style="color:#475569;line-height:1.6">电容会持续漏电，约 <strong style="color:#1e293b">64ms</strong> 后数据丢失，因此必须周期性 <strong style="color:#1e293b">刷新 ( Refresh ) </strong>，这是 DRAM 名称中 <em>Dynamic</em> 的含义. </div>
+            </div>
+            <div style="padding:12px;background:#f1f5f9;border-radius:8px;border-left:3px solid #16a34a">
+              <div style="color:#16a34a;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px">优势 : 极高集成度</div>
+              <div style="color:#475569;line-height:1.6">每个单元仅需 <strong style="color:#1e293b">1T1C</strong>，面积远小于 SRAM 的 6T，因此能以更低成本实现 <strong style="color:#1e293b">GB 级</strong> 容量. </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">关键信号线</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;">
+            <div style="padding:10px;background:#f1f5f9;border-radius:8px;text-align:center">
+              <div style="color:#ffd700;font-size:16px;margin-bottom:4px">WL</div>
+              <div style="color:#475569">字线 Word Line</div>
+              <div style="color:#64748b;font-size:11px;margin-top:4px">行选择 / 开启访问管</div>
+            </div>
+            <div style="padding:10px;background:#f1f5f9;border-radius:8px;text-align:center">
+              <div style="color:#4ade80;font-size:16px;margin-bottom:4px">BL / BL̄</div>
+              <div style="color:#475569">位线 Bit Line</div>
+              <div style="color:#64748b;font-size:11px;margin-top:4px">预充电至 VDD/2</div>
+            </div>
+            <div style="padding:10px;background:#f1f5f9;border-radius:8px;text-align:center">
+              <div style="color:#0284c7;font-size:16px;margin-bottom:4px">C</div>
+              <div style="color:#475569">存储电容</div>
+              <div style="color:#64748b;font-size:11px;margin-top:4px">充放电存储 0/1</div>
+            </div>
+            <div style="padding:10px;background:#f1f5f9;border-radius:8px;text-align:center">
+              <div style="color:#ef4444;font-size:16px;margin-bottom:4px">REF</div>
+              <div style="color:#475569">刷新信号</div>
+              <div style="color:#64748b;font-size:11px;margin-top:4px">~64ms 周期刷新</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════ PANEL 2: OPERATIONS ══════════════════════ -->
+  <div id="panel-ops" class="panel">
+    <div class="card">
+      <div class="card-title">三种工作状态详解</div>
+      <div class="ops-grid">
+        <div class="op-card read">
+          <div class="op-icon">📖</div>
+          <div class="op-title read">读操作 ( Read )</div>
+          <ul class="op-steps">
+            <li><span class="step-num">①</span>预充电 : BL 充至 VDD/2 ( 参考电压 ) </li>
+            <li><span class="step-num">②</span>WL 拉高，访问管 T 导通</li>
+            <li><span class="step-num">③</span>电容 C 与 BL 发生电荷共享，BL 电压微小变化</li>
+            <li><span class="step-num">④</span>灵敏放大器 SA 检测 BL 偏移方向并放大</li>
+            <li><span class="step-num">⑤</span>SA 同时将数据<strong>回写</strong>到电容 ( 读操作具破坏性 ) </li>
+            <li><span class="step-num">⚠</span>读后必须刷新，否则数据丢失</li>
+          </ul>
+        </div>
+        <div class="op-card write">
+          <div class="op-icon">✏️</div>
+          <div class="op-title write">写操作 ( Write )</div>
+          <ul class="op-steps">
+            <li><span class="step-num">①</span>写驱动器将 BL 强制拉至 VDD 或 GND</li>
+            <li><span class="step-num">②</span>WL 拉高，访问管 T 导通</li>
+            <li><span class="step-num">③</span>电容 C 被充电 ( 写 1 ) 或放电 ( 写 0 ) </li>
+            <li><span class="step-num">④</span>WL 拉低，T 截止，数据存于电容</li>
+            <li><span class="step-num">⚠</span>写入后数据仍会漏电，需定期刷新</li>
+          </ul>
+        </div>
+        <div class="op-card refresh">
+          <div class="op-icon">🔄</div>
+          <div class="op-title refresh">刷新操作 ( Refresh )</div>
+          <ul class="op-steps">
+            <li><span class="step-num">①</span>内存控制器定期发出 REFRESH 命令</li>
+            <li><span class="step-num">②</span>依次激活每一行 WL</li>
+            <li><span class="step-num">③</span>SA 读取并放大电容电荷</li>
+            <li><span class="step-num">④</span>SA 将满电平回写至电容，补充漏失电荷</li>
+            <li><span class="step-num">周期</span>典型刷新周期 64ms，刷新所有行</li>
+            <li><span class="step-num">⚠</span>刷新期间内存无法响应其他访问请求</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">信号时序示意</div>
+      <div style="background:#f1f5f9;border-radius:12px;padding:20px;overflow-x:auto">
+        <svg width="700" height="220" viewBox="0 0 700 220" style="min-width:600px">
+          <!-- Time axis -->
+          <line x1="60" y1="200" x2="680" y2="200" stroke="#cbd5e1" stroke-width="1.5"/>
+          <text x="690" y="204" fill="#64748b" font-size="10">t</text>
+
+          <!-- Phase labels -->
+          <text x="95"  y="15" fill="#94a3b8" font-size="10" text-anchor="middle">预充电</text>
+          <text x="215" y="15" fill="#16a34a" font-size="10" text-anchor="middle">读操作</text>
+          <text x="390" y="15" fill="#ea580c" font-size="10" text-anchor="middle">写操作</text>
+          <text x="570" y="15" fill="#7c3aed" font-size="10" text-anchor="middle">刷新</text>
+
+          <!-- Dividers -->
+          <line x1="145" y1="10" x2="145" y2="195" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="300" y1="10" x2="300" y2="195" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="480" y1="10" x2="480" y2="195" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3,3"/>
+
+          <!-- WL -->
+          <text x="55" y="42" fill="#ffd700" font-size="10" text-anchor="end">WL</text>
+          <polyline points="60,48 145,48 145,28 300,28 300,48 480,28 480,48 570,28 570,48 680,48" fill="none" stroke="#ffd700" stroke-width="2"/>
+
+          <!-- BL -->
+          <text x="55" y="82" fill="#4ade80" font-size="10" text-anchor="end">BL</text>
+          <polyline points="60,78 95,78 145,68 165,60 180,75 300,75 315,55 390,55 480,75 510,60 570,60 680,75" fill="none" stroke="#4ade80" stroke-width="2"/>
+          <!-- pre-charge indicator -->
+          <text x="95" y="62" fill="#94a3b8" font-size="8" text-anchor="middle">VDD/2</text>
+
+          <!-- Cap voltage -->
+          <text x="55" y="122" fill="#0284c7" font-size="10" text-anchor="end">Vc</text>
+          <polyline points="60,118 145,118 180,118 300,118 315,105 390,105 480,118 510,105 570,105 600,110 640,115 680,118" fill="none" stroke="#0284c7" stroke-width="2"/>
+
+          <!-- SA output -->
+          <text x="55" y="162" fill="#7c3aed" font-size="10" text-anchor="end">SA out</text>
+          <polyline points="60,165 165,165 185,145 300,145 315,145 390,145 480,165 510,145 570,145 680,145" fill="none" stroke="#7c3aed" stroke-width="2"/>
+
+          <!-- Annotations -->
+          <text x="222" y="196" fill="#16a34a" font-size="9" text-anchor="middle">电荷共享→SA放大→回写</text>
+          <text x="390" y="196" fill="#ea580c" font-size="9" text-anchor="middle">强制充/放电</text>
+          <text x="575" y="196" fill="#7c3aed" font-size="9" text-anchor="middle">补充漏失电荷</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">破坏性读取原理</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:13px;">
+        <div style="padding:16px;background:#f1f5f9;border-radius:10px;border-left:3px solid #ef4444">
+          <div style="color:#ef4444;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:8px">⚠ 为什么读操作有破坏性？</div>
+          <div style="color:#475569;line-height:1.7">
+            读取时电容 C 与位线 BL 发生 <strong style="color:#1e293b">电荷共享</strong> : <br>
+            Vc_new = ( C·Vc + CBL·VDDⅡ ) / ( C + CBL )<br><br>
+            电容电压被拉向 VDD/2，原有数据 <strong style="color:#ef4444">被破坏</strong>，必须由 SA 重新写回. 
+          </div>
+        </div>
+        <div style="padding:16px;background:#f1f5f9;border-radius:10px;border-left:3px solid #0284c7">
+          <div style="color:#0284c7;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:8px">SA 灵敏放大器的作用</div>
+          <div style="color:#475569;line-height:1.7">
+            SA 检测 BL 偏离 VDD/2 的方向 : <br>
+            • BL &gt; VDD/2 → 判为 <strong style="color:#16a34a">1</strong>，将 BL 拉至 VDD<br>
+            • BL &lt; VDD/2 → 判为 <strong style="color:#ef4444">0</strong>，将 BL 拉至 GND<br><br>
+            放大后再通过 WL 回写到电容，完成数据恢复. 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════ PANEL 3: ARRAY ══════════════════════ -->
+  <div id="panel-array" class="panel">
+    <div class="card">
+      <div class="card-title">DRAM 存储阵列结构</div>
+      <div class="array-diagram">
+        <svg width="700" height="420" viewBox="0 0 700 420" style="min-width:600px; background: radial-gradient(circle at 50% 50%, #ffffff 0%, #f8fafc 100%); border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+          <defs>
+            <filter id="glow-amber">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <style>
+              .wl-pulse { animation: wlpulse 2s infinite ease-in-out; }
+              @keyframes wlpulse {
+                0%,100% { stroke-opacity:0.7; stroke-width:2; }
+                50% { stroke-opacity:1; stroke-width:3.5; filter:drop-shadow(0 0 5px #f59e0b); }
+              }
+            </style>
+          </defs>
+
+          <text x="20" y="20" fill="#64748b" font-size="11" font-weight="600" style="font-family:sans-serif">行地址 → 行译码器 → 字线 WL</text>
+          <text x="20" y="410" fill="#64748b" font-size="11" font-weight="600" style="font-family:sans-serif">列地址 → 列译码器 → 位线 BL/BL̄ → 灵敏放大器 SA → 列选择器</text>
+
+          <!-- BL columns -->
+          <line x1="155" y1="40" x2="155" y2="355" stroke="#4ade80" stroke-width="1.5" opacity="0.4"/>
+          <line x1="185" y1="40" x2="185" y2="355" stroke="#4ade80" stroke-width="1.5" opacity="0.4"/>
+          <text x="160" y="38" fill="#4ade80" font-size="9" text-anchor="middle" font-weight="bold">BL₀</text>
+          <text x="190" y="38" fill="#4ade80" font-size="9" text-anchor="middle" font-weight="bold">BL̄₀</text>
+
+          <line x1="305" y1="40" x2="305" y2="355" stroke="#4ade80" stroke-width="1.5" opacity="0.4"/>
+          <line x1="335" y1="40" x2="335" y2="355" stroke="#4ade80" stroke-width="1.5" opacity="0.4"/>
+          <text x="310" y="38" fill="#4ade80" font-size="9" text-anchor="middle" font-weight="bold">BL₁</text>
+          <text x="340" y="38" fill="#4ade80" font-size="9" text-anchor="middle" font-weight="bold">BL̄₁</text>
+
+          <line x1="455" y1="40" x2="455" y2="355" stroke="#4ade80" stroke-width="1.5" opacity="0.4"/>
+          <line x1="485" y1="40" x2="485" y2="355" stroke="#4ade80" stroke-width="1.5" opacity="0.4"/>
+          <text x="460" y="38" fill="#4ade80" font-size="9" text-anchor="middle" font-weight="bold">BL₂</text>
+          <text x="490" y="38" fill="#4ade80" font-size="9" text-anchor="middle" font-weight="bold">BL̄₂</text>
+
+          <line x1="600" y1="40" x2="600" y2="355" stroke="#4ade80" stroke-width="1.5" opacity="0.4"/>
+          <line x1="630" y1="40" x2="630" y2="355" stroke="#4ade80" stroke-width="1.5" opacity="0.4"/>
+          <text x="605" y="38" fill="#4ade80" font-size="9" text-anchor="middle" font-weight="bold">BL₃</text>
+          <text x="635" y="38" fill="#4ade80" font-size="9" text-anchor="middle" font-weight="bold">BL̄₃</text>
+
+          <!-- WL rows -->
+          <line x1="60" y1="100" x2="660" y2="100" stroke="#cbd5e1" stroke-width="1.5" opacity="0.5"/>
+          <text x="55" y="104" fill="#94a3b8" font-size="10" text-anchor="end">WL₀</text>
+
+          <line x1="60" y1="200" x2="660" y2="200" stroke="#f59e0b" stroke-width="2.5" class="wl-pulse"/>
+          <text x="55" y="204" fill="#f59e0b" font-size="11" text-anchor="end" font-weight="bold">WL₁</text>
+
+          <line x1="60" y1="300" x2="660" y2="300" stroke="#cbd5e1" stroke-width="1.5" opacity="0.5"/>
+          <text x="55" y="304" fill="#94a3b8" font-size="10" text-anchor="end">WL₂</text>
+
+          <!-- 1T1C cell symbol: small rect (T) + capacitor plates (C) -->
+          <!-- Helper macro via repetition -->
+          <!-- Row 0 cells -->
+          <g opacity="0.7">
+            <rect x="133" y="84" width="44" height="32" rx="5" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="155" y="97" fill="#94a3b8" font-size="7" text-anchor="middle">T</text>
+            <line x1="140" y1="103" x2="170" y2="103" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="140" y1="108" x2="170" y2="108" stroke="#94a3b8" stroke-width="1.5"/>
+
+            <rect x="283" y="84" width="44" height="32" rx="5" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="305" y="97" fill="#94a3b8" font-size="7" text-anchor="middle">T</text>
+            <line x1="290" y1="103" x2="320" y2="103" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="290" y1="108" x2="320" y2="108" stroke="#94a3b8" stroke-width="1.5"/>
+
+            <rect x="433" y="84" width="44" height="32" rx="5" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="455" y="97" fill="#94a3b8" font-size="7" text-anchor="middle">T</text>
+            <line x1="440" y1="103" x2="470" y2="103" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="440" y1="108" x2="470" y2="108" stroke="#94a3b8" stroke-width="1.5"/>
+
+            <rect x="578" y="84" width="44" height="32" rx="5" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="600" y="97" fill="#94a3b8" font-size="7" text-anchor="middle">T</text>
+            <line x1="585" y1="103" x2="615" y2="103" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="585" y1="108" x2="615" y2="108" stroke="#94a3b8" stroke-width="1.5"/>
+          </g>
+
+          <!-- Row 1 cells (selected, highlighted) -->
+          <rect x="133" y="184" width="44" height="32" rx="5" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5" filter="url(#glow-amber)"/>
+          <text x="155" y="197" fill="#2563eb" font-size="7" text-anchor="middle" font-weight="bold">T ★</text>
+          <line x1="140" y1="203" x2="170" y2="203" stroke="#2563eb" stroke-width="2"/>
+          <line x1="140" y1="208" x2="170" y2="208" stroke="#2563eb" stroke-width="2"/>
+
+          <rect x="283" y="184" width="44" height="32" rx="5" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5" filter="url(#glow-amber)"/>
+          <text x="305" y="197" fill="#2563eb" font-size="7" text-anchor="middle" font-weight="bold">T ★</text>
+          <line x1="290" y1="203" x2="320" y2="203" stroke="#2563eb" stroke-width="2"/>
+          <line x1="290" y1="208" x2="320" y2="208" stroke="#2563eb" stroke-width="2"/>
+
+          <rect x="433" y="184" width="44" height="32" rx="5" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5" filter="url(#glow-amber)"/>
+          <text x="455" y="197" fill="#2563eb" font-size="7" text-anchor="middle" font-weight="bold">T ★</text>
+          <line x1="440" y1="203" x2="470" y2="203" stroke="#2563eb" stroke-width="2"/>
+          <line x1="440" y1="208" x2="470" y2="208" stroke="#2563eb" stroke-width="2"/>
+
+          <rect x="578" y="184" width="44" height="32" rx="5" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5" filter="url(#glow-amber)"/>
+          <text x="600" y="197" fill="#2563eb" font-size="7" text-anchor="middle" font-weight="bold">T ★</text>
+          <line x1="585" y1="203" x2="615" y2="203" stroke="#2563eb" stroke-width="2"/>
+          <line x1="585" y1="208" x2="615" y2="208" stroke="#2563eb" stroke-width="2"/>
+
+          <!-- Row 2 cells -->
+          <g opacity="0.7">
+            <rect x="133" y="284" width="44" height="32" rx="5" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="155" y="297" fill="#94a3b8" font-size="7" text-anchor="middle">T</text>
+            <line x1="140" y1="303" x2="170" y2="303" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="140" y1="308" x2="170" y2="308" stroke="#94a3b8" stroke-width="1.5"/>
+
+            <rect x="283" y="284" width="44" height="32" rx="5" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="305" y="297" fill="#94a3b8" font-size="7" text-anchor="middle">T</text>
+            <line x1="290" y1="303" x2="320" y2="303" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="290" y1="308" x2="320" y2="308" stroke="#94a3b8" stroke-width="1.5"/>
+
+            <rect x="433" y="284" width="44" height="32" rx="5" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="455" y="297" fill="#94a3b8" font-size="7" text-anchor="middle">T</text>
+            <line x1="440" y1="303" x2="470" y2="303" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="440" y1="308" x2="470" y2="308" stroke="#94a3b8" stroke-width="1.5"/>
+
+            <rect x="578" y="284" width="44" height="32" rx="5" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="600" y="297" fill="#94a3b8" font-size="7" text-anchor="middle">T</text>
+            <line x1="585" y1="303" x2="615" y2="303" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="585" y1="308" x2="615" y2="308" stroke="#94a3b8" stroke-width="1.5"/>
+          </g>
+
+          <text x="370" y="176" fill="#f59e0b" font-size="10" text-anchor="middle" font-weight="bold">← WL₁ 选中，整行同时激活 →</text>
+
+          <!-- SA row -->
+          <rect x="133" y="355" width="44" height="20" rx="4" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+          <text x="155" y="369" fill="#15803d" font-size="8" text-anchor="middle" font-weight="bold">SA₀</text>
+          <rect x="283" y="355" width="44" height="20" rx="4" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+          <text x="305" y="369" fill="#15803d" font-size="8" text-anchor="middle" font-weight="bold">SA₁</text>
+          <rect x="433" y="355" width="44" height="20" rx="4" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+          <text x="455" y="369" fill="#15803d" font-size="8" text-anchor="middle" font-weight="bold">SA₂</text>
+          <rect x="578" y="355" width="44" height="20" rx="4" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+          <text x="600" y="369" fill="#15803d" font-size="8" text-anchor="middle" font-weight="bold">SA₃</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">地址复用与 RAS/CAS 时序</div>
+      <div style="display:flex; gap:16px; align-items:stretch; font-size:12px; margin-bottom:20px;">
+        <div style="flex:1; padding:20px 10px; background:linear-gradient(145deg,#fff,#f8fafc); border-radius:12px; text-align:center; border:1px solid #e2e8f0; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05); transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+          <div style="font-size:28px;margin-bottom:12px">📍</div>
+          <div style="color:#0284c7;font-weight:700;font-size:14px;margin-bottom:4px">地址复用</div>
+          <div style="color:#64748b;font-size:11px">行列地址共用同一引脚<br>节省封装面积</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#cbd5e1">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+        <div style="flex:1; padding:20px 10px; background:linear-gradient(145deg,#fff,#f8fafc); border-radius:12px; text-align:center; border:1px solid #e2e8f0; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05); transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+          <div style="font-size:28px;margin-bottom:12px">⬇️</div>
+          <div style="color:#f59e0b;font-weight:700;font-size:14px;margin-bottom:4px">RAS↓ 行选通</div>
+          <div style="color:#64748b;font-size:11px">Row Address Strobe<br>锁存行地址，激活 WL</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#cbd5e1">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+        <div style="flex:1; padding:20px 10px; background:linear-gradient(145deg,#fff,#f8fafc); border-radius:12px; text-align:center; border:1px solid #e2e8f0; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05); transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+          <div style="font-size:28px;margin-bottom:12px">⬇️</div>
+          <div style="color:#16a34a;font-weight:700;font-size:14px;margin-bottom:4px">CAS↓ 列选通</div>
+          <div style="color:#64748b;font-size:11px">Column Address Strobe<br>锁存列地址，选择 BL</div>
+        </div>
+      </div>
+      <div style="padding:16px 20px;background:#f8fafc;border-radius:8px;border-left:4px solid #0284c7;font-size:13px;color:#475569;line-height:1.6;">
+        <div style="font-weight:700;color:#1e293b;margin-bottom:4px;display:flex;align-items:center;gap:6px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          地址复用原理
+        </div>
+        DRAM 通过<strong style="color:#f59e0b"> RAS↓ ( 行选通 ) </strong>和<strong style="color:#16a34a"> CAS↓ ( 列选通 ) </strong>两个控制信号，分两次复用同一组地址引脚，先传行地址激活整行，再传列地址选定具体单元，节省了大量引脚，是 DRAM 高密度设计的关键技术之一. 
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════ PANEL 4: SIMULATION ══════════════════════ -->
+  <div id="panel-sim" class="panel">
+    <div class="card">
+      <div class="card-title">交互状态模拟</div>
+      <div class="sim-container">
+        <div>
+          <div class="svg-wrapper" style="min-height:320px">
+            <svg id="sim-svg" width="360" height="300" viewBox="0 0 360 300">
+              <!-- BL -->
+              <line x1="180" y1="10" x2="180" y2="60" stroke="#4ade80" stroke-width="2"/>
+              <text x="230" y="22" fill="#4ade80" font-size="9">BL ( 位线 ) </text>
+
+              <!-- WL -->
+              <line id="sim-wl-left" x1="10" y1="95" x2="145" y2="95" stroke="#ffd700" stroke-width="1.5"/>
+              <line id="sim-wl-right" x1="215" y1="95" x2="340" y2="95" stroke="#4b5563" stroke-width="1.5"/>
+              <text x="355" y="99" fill="#ffd700" font-size="9">WL</text>
+              <circle id="sim-wl-dot" cx="10" cy="95" r="4" fill="#ffd700"/>
+
+              <!-- Transistor T -->
+              <rect id="sim-t" x="148" y="60" width="64" height="56" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+              <text x="180" y="84" fill="#1d4ed8" font-size="11" text-anchor="middle" font-weight="bold">T</text>
+              <text x="180" y="98" fill="#2563eb" font-size="8" text-anchor="middle">NMOS</text>
+              <text x="180" y="110" fill="#64748b" font-size="7" text-anchor="middle">访问管</text>
+
+              <!-- Wire T to C -->
+              <line x1="180" y1="116" x2="180" y2="148" stroke="#0284c7" stroke-width="2"/>
+              <circle cx="180" cy="132" r="4" fill="#0284c7"/>
+
+              <!-- Capacitor -->
+              <!-- Top plate -->
+              <line x1="110" y1="148" x2="250" y2="148" stroke="#0284c7" stroke-width="3" stroke-linecap="round"/>
+              <!-- Charge fill -->
+              <rect id="cap-fill" x="111" y="152" width="138" height="18" rx="2" fill="#bfdbfe" opacity="0.7"/>
+              <text id="cap-text" x="180" y="165" fill="#1d4ed8" font-size="9" text-anchor="middle" font-weight="bold">已充电 → 逻辑 1</text>
+              <!-- Bottom plate -->
+              <line x1="110" y1="172" x2="250" y2="172" stroke="#475569" stroke-width="3" stroke-linecap="round"/>
+
+              <!-- C label -->
+              <text x="260" y="162" fill="#0284c7" font-size="14" font-weight="bold">C</text>
+
+              <!-- GND -->
+              <line x1="180" y1="172" x2="180" y2="205" stroke="#475569" stroke-width="2"/>
+              <line x1="158" y1="205" x2="202" y2="205" stroke="#475569" stroke-width="2"/>
+              <line x1="164" y1="211" x2="196" y2="211" stroke="#475569" stroke-width="1.5"/>
+              <line x1="170" y1="217" x2="190" y2="217" stroke="#475569" stroke-width="1"/>
+              <text x="180" y="232" fill="#64748b" font-size="9" text-anchor="middle">GND</text>
+
+              <!-- Leakage indicator -->
+              <path id="leak-arrow" d="M258,162 Q295,162 295,210" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4,2" opacity="0.8"/>
+              <text id="leak-text" x="300" y="185" fill="#ef4444" font-size="8">漏电↓</text>
+
+              <!-- SA box -->
+              <rect id="sim-sa" x="60" y="245" width="240" height="30" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+              <text id="sim-sa-text" x="180" y="265" fill="#94a3b8" font-size="10" text-anchor="middle">灵敏放大器 SA ( 待机 ) </text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="sim-controls">
+          <div class="ctrl-group">
+            <label>操作模式</label>
+            <div class="ctrl-row">
+              <button class="ctrl-btn selected" id="btn-idle" onclick="setMode('idle')">💤 待机</button>
+              <button class="ctrl-btn" id="btn-read" onclick="setMode('read')">📖 读</button>
+              <button class="ctrl-btn" id="btn-write" onclick="setMode('write')">✏️ 写</button>
+            </div>
+            <div class="ctrl-row" style="margin-top:8px">
+              <button class="ctrl-btn" id="btn-refresh" onclick="setMode('refresh')" style="flex:2">🔄 刷新</button>
+            </div>
+          </div>
+
+          <div class="ctrl-group" id="write-data-group" style="display:none">
+            <label>写入数据</label>
+            <div class="ctrl-row">
+              <button class="ctrl-btn" id="btn-d0" onclick="setWriteData(0)">写入 0</button>
+              <button class="ctrl-btn selected" id="btn-d1" onclick="setWriteData(1)">写入 1</button>
+            </div>
+          </div>
+
+          <div class="signal-display">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#94a3b8;margin-bottom:8px;letter-spacing:2px">SIGNAL STATE</div>
+            <div class="signal-row">
+              <span class="signal-name">WL</span>
+              <span class="signal-val lo" id="sig-wl">LO</span>
+            </div>
+            <div class="signal-row">
+              <span class="signal-name">BL</span>
+              <span class="signal-val x" id="sig-bl">VDD/2</span>
+            </div>
+            <div class="signal-row">
+              <span class="signal-name">Vc ( 电容 ) </span>
+              <span class="signal-val hi" id="sig-vc">HI</span>
+            </div>
+            <div class="signal-row">
+              <span class="signal-name">T ( 访问管 ) </span>
+              <span class="signal-val lo" id="sig-t">OFF</span>
+            </div>
+            <div class="signal-row">
+              <span class="signal-name">SA</span>
+              <span class="signal-val x" id="sig-sa">待机</span>
+            </div>
+            <div class="signal-row">
+              <span class="signal-name">Data</span>
+              <span class="signal-val hi" id="sig-data">1</span>
+            </div>
+          </div>
+
+          <div class="state-box" id="state-desc">
+            <strong>待机状态 : </strong>WL=0，访问管 T 截止，数据存储于电容 C 中. 电容持续漏电，需在约 64ms 内刷新，否则数据丢失. 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════ PANEL 5: COMPARE ══════════════════════ -->
+  <div id="panel-compare" class="panel">
+    <div class="card">
+      <div class="card-title">存储器层次结构中的 DRAM</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:180px;padding:10px;background:rgba(255,107,53,0.12);border:1px solid #ff6b35;border-radius:8px;text-align:center;">
+            <div style="color:#ff6b35;font-weight:600;font-size:13px">寄存器</div>
+            <div style="color:#64748b;font-size:11px">~几十个 × 几十bit</div>
+          </div>
+          <div style="color:#64748b;font-size:11px">最快 (&lt;0.3ns) ｜ 最贵 ｜ 1 cycle</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:260px;padding:10px;background:rgba(2,132,199,0.08);border:1px solid #0284c7;border-radius:8px;text-align:center;">
+            <div style="color:#0284c7;font-weight:600;font-size:13px">L1/L2/L3 Cache ( SRAM ) </div>
+            <div style="color:#64748b;font-size:11px">KB～几十 MB ｜ 4～40 cycle</div>
+          </div>
+          <div style="color:#64748b;font-size:11px">1～20ns</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:380px;padding:10px;background:rgba(124,58,237,0.1);border:2px solid #7c3aed;border-radius:8px;text-align:center;">
+            <div style="color:#7c3aed;font-weight:700;font-size:14px">👉 主存 DRAM ( DDR5 ) </div>
+            <div style="color:#64748b;font-size:11px">8GB～512GB ｜ 200+ cycle</div>
+          </div>
+          <div style="color:#64748b;font-size:11px">50～100ns ｜ 需刷新</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:460px;padding:10px;background:rgba(100,116,139,0.08);border:1px solid #94a3b8;border-radius:8px;text-align:center;">
+            <div style="color:#94a3b8;font-weight:600;font-size:13px">磁盘 / SSD</div>
+            <div style="color:#64748b;font-size:11px">TB 级 ｜ 数百～数万 cycle</div>
+          </div>
+          <div style="color:#64748b;font-size:11px">μs～ms 级</div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px;padding:14px;background:#fef9c3;border:1px solid #fde047;border-radius:8px;font-size:12px;color:#713f12;line-height:1.7;">
+        💡 <strong>DRAM 的核心地位 : </strong>主存是 CPU 与外存之间的桥梁. 现代 DDR5 DRAM 通过双倍数据率、Bank 并行、突发传输等技术，在保持高密度低成本的同时大幅提升带宽，峰值可达 <strong>64 GB/s</strong> 以上. 
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showTab(name) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ── SIMULATION ──
+let simMode = 'idle';
+let writeData = 1;
+let storedData = 1;
+
+function setVal(id, val, cls) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.textContent = val;
+  el.className = 'signal-val ' + (cls || 'x');
+}
+
+function updateSim() {
+  const wlLeft  = document.getElementById('sim-wl-left');
+  const wlRight = document.getElementById('sim-wl-right');
+  const wlDot   = document.getElementById('sim-wl-dot');
+  const simT    = document.getElementById('sim-t');
+  const capFill = document.getElementById('cap-fill');
+  const capText = document.getElementById('cap-text');
+  const saBox   = document.getElementById('sim-sa');
+  const saText  = document.getElementById('sim-sa-text');
+  const leak    = document.getElementById('leak-arrow');
+  const leakTxt = document.getElementById('leak-text');
+  const desc    = document.getElementById('state-desc');
+
+  const wlON  = () => { wlLeft.style.stroke='#ffd700'; wlRight.style.stroke='#ffd700'; wlDot.style.fill='#ffd700'; };
+  const wlOFF = () => { wlLeft.style.stroke='#ffd700'; wlRight.style.stroke='#4b5563'; wlDot.style.fill='#4b5563'; };
+
+  document.getElementById('write-data-group').style.display = 'none';
+
+  if (simMode === 'idle') {
+    wlOFF();
+    simT.style.opacity = '0.5';
+    capFill.style.fill = storedData ? '#bfdbfe' : '#f1f5f9';
+    capText.textContent = storedData ? '已充电 → 逻辑 1' : '已放电 → 逻辑 0';
+    capText.style.fill = storedData ? '#1d4ed8' : '#94a3b8';
+    leak.style.opacity = '0.8';
+    leakTxt.style.opacity = '1';
+    saBox.style.background = '#f1f5f9'; saBox.style.borderColor = '#cbd5e1';
+    saText.textContent = '灵敏放大器 SA ( 待机 ) '; saText.style.fill = '#94a3b8';
+    setVal('sig-wl','LO','lo'); setVal('sig-bl','VDD/2','x');
+    setVal('sig-vc', storedData?'HI':'LO', storedData?'hi':'lo');
+    setVal('sig-t','OFF','lo'); setVal('sig-sa','待机','x');
+    setVal('sig-data', storedData, storedData?'hi':'lo');
+    desc.innerHTML = `<strong>待机状态 : </strong>WL=0，访问管 T 截止，数据 <strong>${storedData}</strong> 存于电容. 电容持续漏电，需在 64ms 内刷新. `;
+
+  } else if (simMode === 'read') {
+    wlON();
+    simT.style.opacity = '1';
+    capFill.style.fill = '#fef9c3';
+    capText.textContent = '电荷共享中…偏向' + (storedData ? 'VDD' : 'GND');
+    capText.style.fill = '#a16207';
+    leak.style.opacity = '0.3';
+    leakTxt.style.opacity = '0.3';
+    saBox.style.background = '#dcfce7'; saBox.style.borderColor = '#22c55e';
+    saText.textContent = `SA 检测 BL 偏移 → 判为 ${storedData}，回写电容`;
+    saText.style.fill = '#15803d';
+    setVal('sig-wl','HI','hi');
+    setVal('sig-bl', storedData ? '↑偏高' : '↓偏低', 'chg');
+    setVal('sig-vc','共享中','chg'); setVal('sig-t','ON','hi');
+    setVal('sig-sa','放大+回写','hi'); setVal('sig-data', storedData, storedData?'hi':'lo');
+    desc.innerHTML = `<strong>读操作 : </strong>WL=1，T 导通，电容与 BL 电荷共享，BL 微偏向 ${storedData?'VDD':'GND'}. SA 放大后判为 <strong>${storedData}</strong>，并回写电容恢复数据 ( 破坏性读取 ) . `;
+
+  } else if (simMode === 'write') {
+    document.getElementById('write-data-group').style.display = 'block';
+    storedData = writeData;
+    wlON();
+    simT.style.opacity = '1';
+    capFill.style.fill = writeData ? '#bfdbfe' : '#f1f5f9';
+    capText.textContent = writeData ? '充电中 → 写入 1' : '放电中 → 写入 0';
+    capText.style.fill = writeData ? '#1d4ed8' : '#64748b';
+    leak.style.opacity = '0.3';
+    leakTxt.style.opacity = '0.3';
+    saBox.style.background = '#fff7ed'; saBox.style.borderColor = '#fb923c';
+    saText.textContent = `写驱动器强制 BL = ${writeData ? 'VDD' : 'GND'}`;
+    saText.style.fill = '#c2410c';
+    setVal('sig-wl','HI','hi');
+    setVal('sig-bl', writeData?'VDD':'GND', writeData?'hi':'lo');
+    setVal('sig-vc', writeData?'充电↑':'放电↓','chg');
+    setVal('sig-t','ON','hi'); setVal('sig-sa','写驱动','chg');
+    setVal('sig-data', writeData, writeData?'hi':'lo');
+    desc.innerHTML = `<strong>写操作 : </strong>WL=1，T 导通，BL 被强制拉至 ${writeData?'VDD':'GND'}，电容${writeData?'充电 ( 写 1 ) ':'放电 ( 写 0 ) '}. WL 拉低后数据 <strong>${writeData}</strong> 锁存于电容. `;
+
+  } else if (simMode === 'refresh') {
+    wlON();
+    simT.style.opacity = '1';
+    capFill.style.fill = storedData ? '#bfdbfe' : '#f1f5f9';
+    capText.textContent = storedData ? '刷新 : 补充电荷→1' : '刷新 : 维持放电→0';
+    capText.style.fill = storedData ? '#1d4ed8' : '#64748b';
+    leak.style.opacity = '0.15';
+    leakTxt.style.opacity = '0.15';
+    saBox.style.background = '#ede9fe'; saBox.style.borderColor = '#7c3aed';
+    saText.textContent = 'SA 读取并回写，补充漏失电荷';
+    saText.style.fill = '#6d28d9';
+    setVal('sig-wl','HI','hi'); setVal('sig-bl','VDD/2','x');
+    setVal('sig-vc', storedData?'补充↑':'维持↓','chg');
+    setVal('sig-t','ON','hi'); setVal('sig-sa','刷新中','chg');
+    setVal('sig-data', storedData, storedData?'hi':'lo');
+    desc.innerHTML = `<strong>刷新操作 : </strong>控制器激活 WL，SA 读取电容电荷并放大，再回写补充漏失电荷，数据 <strong>${storedData}</strong> 得到恢复. 整个过程约需 64ms 遍历所有行. `;
+  }
+}
+
+function setMode(mode) {
+  simMode = mode;
+  ['idle','read','write','refresh'].forEach(m => {
+    const btn = document.getElementById('btn-' + m);
+    if (btn) btn.classList.toggle('selected', m === mode);
+  });
+  updateSim();
+}
+
+function setWriteData(d) {
+  writeData = d;
+  document.getElementById('btn-d0').classList.toggle('selected', d === 0);
+  document.getElementById('btn-d1').classList.toggle('selected', d === 1);
+  updateSim();
+}
+
+updateSim();
+</script>
+</body>
+</html>

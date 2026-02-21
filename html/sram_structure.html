@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SRAM 内部结构图解</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: transparent;
+    --panel: #f8fafc;
+    --border: #cbd5e1;
+    --accent: #0284c7;
+    --accent2: #ea580c;
+    --accent3: #7c3aed;
+    --green: #16a34a;
+    --yellow: #b45309;
+    --text: #1e293b;
+    --muted: #64748b;
+    --nmos: #1e40af;
+    --pmos: #7c2d12;
+    --wire: #94a3b8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: transparent;
+    color: var(--text);
+    font-family: 'Noto Sans SC', sans-serif;
+    overflow: auto;
+    scrollbar-width: none;
+  }
+
+  /* 去掉网格背景 */
+  body::before { display: none; }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  header .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    opacity: 1;
+  }
+
+  header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 6vw, 72px);
+    letter-spacing: 6px;
+    background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 60%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+
+  header p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 10px;
+    letter-spacing: 1px;
+  }
+
+  /* ── TAB NAV ── */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    background: #f1f5f9;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 6px;
+    margin-bottom: 30px;
+    overflow-x: auto;
+  }
+
+  .tab {
+    flex: 1;
+    min-width: 120px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .tab.active {
+    background: white;
+    color: var(--accent);
+    border: 1px solid #bae6fd;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  }
+
+  .tab:hover:not(.active) { color: var(--text); background: rgba(0,0,0,0.04); }
+
+  .panel { display: none; }
+  .panel.active { display: block; animation: fadeIn 0.3s ease; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── CARD ── */
+  .card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  }
+
+  .card-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-title::before {
+    content: '';
+    width: 3px;
+    height: 16px;
+    background: var(--accent);
+    border-radius: 2px;
+    display: block;
+  }
+
+  /* ── OVERVIEW LAYOUT ── */
+  .sram-overview {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 700px) { .sram-overview { grid-template-columns: 1fr; } }
+
+  /* ── 6T CELL SVG DIAGRAM ── */
+  .svg-wrapper {
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+  }
+
+  svg text { font-family: 'JetBrains Mono', monospace; }
+
+  /* ── TRANSISTOR LEGEND ── */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+  }
+
+  /* ── OPERATION STEPS ── */
+  .ops-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 700px) { .ops-grid { grid-template-columns: 1fr; } }
+
+  .op-card {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: border-color 0.2s;
+    cursor: pointer;
+  }
+
+  .op-card:hover { border-color: var(--accent); }
+  .op-card.read:hover { border-color: var(--green); }
+  .op-card.write:hover { border-color: var(--accent2); }
+  .op-card.hold:hover { border-color: var(--yellow); }
+
+  .op-icon { font-size: 28px; margin-bottom: 12px; }
+
+  .op-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .op-title.read { color: var(--green); }
+  .op-title.write { color: var(--accent2); }
+  .op-title.hold { color: var(--yellow); }
+
+  .op-steps { list-style: none; }
+  .op-steps li {
+    font-size: 12px;
+    color: var(--muted);
+    padding: 4px 0;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    gap: 8px;
+  }
+  .op-steps li:last-child { border-bottom: none; }
+  .op-steps li .step-num {
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    min-width: 18px;
+    margin-top: 1px;
+  }
+
+  /* ── ARRAY STRUCTURE ── */
+  .array-diagram {
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+
+  /* ── COMPARE TABLE ── */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .compare-table th, .compare-table td {
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .compare-table th {
+    background: #eff6ff;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .compare-table td:first-child {
+    color: var(--text);
+    font-weight: 500;
+    text-align: left;
+  }
+
+  .compare-table tr:nth-child(even) td { background: #f8fafc; }
+
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .tag.good { background: #dcfce7; color: #16a34a; }
+  .tag.bad { background: #fee2e2; color: #dc2626; }
+  .tag.mid { background: #fef9c3; color: #a16207; }
+
+  /* ── INTERACTIVE SIMULATION ── */
+  .sim-container {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 20px;
+  }
+
+  @media (max-width: 800px) { .sim-container { grid-template-columns: 1fr; } }
+
+  .sim-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .ctrl-group label {
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .ctrl-row {
+    display: flex;
+    gap: 8px;
+  }
+
+  .ctrl-btn {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .ctrl-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .ctrl-btn.selected { background: #eff6ff; border-color: var(--accent); color: var(--accent); }
+
+  .signal-display {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+
+  .signal-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid #e2e8f0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+
+  .signal-row:last-child { border-bottom: none; }
+
+  .signal-name { color: var(--muted); }
+  .signal-val {
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+  .signal-val.hi { background: #dcfce7; color: #16a34a; }
+  .signal-val.lo { background: #dbeafe; color: #1d4ed8; }
+  .signal-val.x  { background: #ede9fe; color: #7c3aed; }
+
+  .state-box {
+    margin-top: 12px;
+    padding: 14px;
+    background: #eff6ff;
+    border: 1px solid #bae6fd;
+    border-radius: 8px;
+    font-size: 12px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .state-box strong { color: var(--accent); }
+
+  /* ── GLOWING ELEMENTS ── */
+  .glow { 
+    -webkit-filter: drop-shadow(0 0 6px currentColor);
+    filter: drop-shadow(0 0 6px currentColor);
+    z-index: 10;
+  }
+
+  /* pulse animation for active nodes */
+  @keyframes pulse-green {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .pulsing { animation: pulse-green 1.2s ease-in-out infinite; }
+
+  /* 隐藏所有滚动条 */
+  html { background: transparent; }
+  ::-webkit-scrollbar { display: none; }
+  * { scrollbar-width: none; -ms-overflow-style: none; }
+  .tabs, .array-diagram { overflow-x: auto; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="label">计算机组成原理 · 存储器</div>
+    <h1>SRAM 内部结构</h1>
+    <p>Static Random Access Memory — 静态随机存取存储器</p>
+  </header>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('cell')">📐 6T 存储单元</button>
+    <button class="tab" onclick="showTab('ops')">⚡ 读写操作</button>
+    <button class="tab" onclick="showTab('array')">🗂️ 存储阵列</button>
+    <button class="tab" onclick="showTab('sim')">🎛️ 交互模拟</button>
+    <button class="tab" onclick="showTab('compare')">📊 存储器层次结构位置</button>
+  </div>
+
+  <!-- ═══════════════════════════════ PANEL 1: 6T CELL ═══════════════════════════════ -->
+  <div id="panel-cell" class="panel active">
+    <div class="sram-overview">
+      <div>
+        <div class="card">
+          <div class="card-title">6T SRAM 单元电路图</div>
+          <div class="svg-wrapper">
+            <!-- 6T SRAM Cell SVG -->
+            <svg width="360" height="320" viewBox="0 0 360 320">
+              <defs>
+                <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="#64748b"/>
+                </marker>
+              </defs>
+
+              <!-- VDD rail -->
+              <line x1="40" y1="30" x2="320" y2="30" stroke="#ff6b35" stroke-width="2"/>
+              <text x="10" y="35" fill="#ff6b35" font-size="11" font-weight="bold">VDD</text>
+
+              <!-- GND rail -->
+              <line x1="40" y1="290" x2="320" y2="290" stroke="#64748b" stroke-width="2"/>
+              <text x="10" y="295" fill="#64748b" font-size="11">GND</text>
+
+              <!-- ── LEFT INVERTER ── -->
+              <!-- M5 (PMOS, pull-up) -->
+              <rect x="90" y="45" width="30" height="50" rx="4" fill="#7c2d12" stroke="#f97316" stroke-width="1.5"/>
+              <text x="105" y="65" fill="#fed7aa" font-size="9" text-anchor="middle">M5</text>
+              <text x="105" y="78" fill="#fb923c" font-size="8" text-anchor="middle">PMOS</text>
+              <!-- M5 connections -->
+              <line x1="105" y1="30" x2="105" y2="45" stroke="#f97316" stroke-width="1.5"/>
+              <line x1="105" y1="95" x2="105" y2="130" stroke="#60a5fa" stroke-width="1.5"/>
+
+              <!-- M1 (NMOS, pull-down) -->
+              <rect x="90" y="175" width="30" height="50" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+              <text x="105" y="195" fill="#1d4ed8" font-size="9" text-anchor="middle">M1</text>
+              <text x="105" y="208" fill="#60a5fa" font-size="8" text-anchor="middle">NMOS</text>
+              <!-- M1 connections -->
+              <line x1="105" y1="225" x2="105" y2="290" stroke="#64748b" stroke-width="1.5"/>
+
+              <!-- Node Q (left) -->
+              <line x1="105" y1="130" x2="105" y2="175" stroke="#00d4ff" stroke-width="2"/>
+
+              <!-- ── RIGHT INVERTER ── -->
+              <!-- M6 (PMOS) -->
+              <rect x="240" y="45" width="30" height="50" rx="4" fill="#7c2d12" stroke="#f97316" stroke-width="1.5"/>
+              <text x="255" y="65" fill="#fed7aa" font-size="9" text-anchor="middle">M6</text>
+              <text x="255" y="78" fill="#fb923c" font-size="8" text-anchor="middle">PMOS</text>
+              <line x1="255" y1="30" x2="255" y2="45" stroke="#f97316" stroke-width="1.5"/>
+              <line x1="255" y1="95" x2="255" y2="130" stroke="#a78bfa" stroke-width="1.5"/>
+
+              <!-- M2 (NMOS) -->
+              <rect x="240" y="175" width="30" height="50" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+              <text x="255" y="195" fill="#1d4ed8" font-size="9" text-anchor="middle">M2</text>
+              <text x="255" y="208" fill="#60a5fa" font-size="8" text-anchor="middle">NMOS</text>
+              <line x1="255" y1="225" x2="255" y2="290" stroke="#64748b" stroke-width="1.5"/>
+
+              <!-- Node Q̄ (right) -->
+              <line x1="255" y1="130" x2="255" y2="175" stroke="#7c3aed" stroke-width="2"/>
+
+              <!-- Cross-coupled wires (Feedback Loop) -->
+              <!-- Q (Blue) drives Right Inverter (M6/M2) -->
+              <path d="M105,140 L215,140" fill="none" stroke="#00d4ff" stroke-width="1.5"/>
+              <line x1="215" y1="70" x2="215" y2="200" stroke="#00d4ff" stroke-width="1.5"/>
+              <line x1="215" y1="70" x2="236" y2="70" stroke="#00d4ff" stroke-width="1.5"/>
+              <line x1="215" y1="200" x2="236" y2="200" stroke="#00d4ff" stroke-width="1.5"/>
+              <!-- Gate Plates for M6/M2 -->
+              <line x1="236" y1="45" x2="236" y2="95" stroke="#00d4ff" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="236" y1="175" x2="236" y2="225" stroke="#00d4ff" stroke-width="2.5" stroke-linecap="round"/>
+
+              <!-- Q̄ (Purple) drives Left Inverter (M5/M1) -->
+              <path d="M255,140 L145,140" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
+              <line x1="145" y1="70" x2="145" y2="200" stroke="#7c3aed" stroke-width="1.5"/>
+              <line x1="145" y1="70" x2="124" y2="70" stroke="#7c3aed" stroke-width="1.5"/>
+              <line x1="145" y1="200" x2="124" y2="200" stroke="#7c3aed" stroke-width="1.5"/>
+              <!-- Gate Plates for M5/M1 -->
+              <line x1="124" y1="45" x2="124" y2="95" stroke="#7c3aed" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="124" y1="175" x2="124" y2="225" stroke="#7c3aed" stroke-width="2.5" stroke-linecap="round"/>
+
+              <!-- ── ACCESS TRANSISTORS ── -->
+              <!-- M3 (left access) -->
+              <rect x="30" y="125" width="30" height="50" rx="4" fill="#14532d" stroke="#22c55e" stroke-width="1.5"/>
+              <text x="45" y="145" fill="#bbf7d0" font-size="9" text-anchor="middle">M3</text>
+              <text x="45" y="158" fill="#4ade80" font-size="8" text-anchor="middle">NMOS</text>
+              <!-- M3 connections -->
+              <line x1="60" y1="150" x2="99" y2="150" stroke="#00d4ff" stroke-width="1.5"/>
+              <!-- BL (left) -->
+              <line x1="30" y1="150" x2="10" y2="150" stroke="#4ADE80" stroke-width="2"/>
+              <text x="4" y="147" fill="#4ADE80" font-size="9">BL</text>
+
+              <!-- M4 (right access) -->
+              <rect x="300" y="125" width="30" height="50" rx="4" fill="#14532d" stroke="#22c55e" stroke-width="1.5"/>
+              <text x="315" y="145" fill="#bbf7d0" font-size="9" text-anchor="middle">M4</text>
+              <text x="315" y="158" fill="#4ade80" font-size="8" text-anchor="middle">NMOS</text>
+              <!-- M4 connections -->
+              <line x1="300" y1="150" x2="261" y2="150" stroke="#7c3aed" stroke-width="1.5"/>
+              <!-- BL̄ (right) -->
+              <line x1="330" y1="150" x2="350" y2="150" stroke="#4ADE80" stroke-width="2"/>
+              <text x="340" y="147" fill="#4ADE80" font-size="9">BL̄</text>
+
+              <!-- WL (word line) — gate of M3 and M4 -->
+              <line x1="45" y1="125" x2="45" y2="105" stroke="#ffd700" stroke-width="1.5"/>
+              <line x1="45" y1="105" x2="315" y2="105" stroke="#ffd700" stroke-width="1.5"/>
+              <line x1="315" y1="105" x2="315" y2="125" stroke="#ffd700" stroke-width="1.5"/>
+              <text x="170" y="100" fill="#ffd700" font-size="10" text-anchor="middle" font-weight="bold">WL ( 字线 ) </text>
+
+              <!-- Labels -->
+              <text x="180" y="270" fill="#94a3b8" font-size="10" text-anchor="middle">─────── 交叉耦合反相器 ( 锁存器 ) ───────</text>
+
+              <!-- Floating Nodes (Top Layer) -->
+              <circle cx="105" cy="140" r="11" fill="#00d4ff" style="color: #00d4ff;" class="glow"/>
+              <text x="105" y="143" fill="#fff" font-size="10" font-weight="bold" text-anchor="middle">Q</text>
+              
+              <circle cx="255" cy="140" r="11" fill="#7c3aed" style="color: #7c3aed;" class="glow"/>
+              <text x="255" y="143" fill="#fff" font-size="10" font-weight="bold" text-anchor="middle">Q̄</text>
+            </svg>
+          </div>
+          <div class="legend">
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#f97316"></div><span>PMOS 上拉管 ( M5/M6 )</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#3b82f6"></div><span>NMOS 驱动管 ( M1/M2 )</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#22c55e"></div><span>NMOS 访问管 ( M3/M4 )</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#ffd700"></div><span>WL 字线</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#4ADE80"></div><span>BL/BL̄ 位线</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <div class="card-title">各管功能说明</div>
+          <div style="display:flex;flex-direction:column;gap:10px;font-size:13px;">
+            <div style="padding:12px;background:#f1f5f9;border-radius:8px;border-left:3px solid #f97316">
+              <div style="color:#f97316;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px">M5 / M6 — PMOS 上拉管</div>
+              <div style="color:#475569;line-height:1.6">与 NMOS 组成 CMOS 反相器，接 VDD，为存储节点提供高电平驱动能力. </div>
+            </div>
+            <div style="padding:12px;background:#f1f5f9;border-radius:8px;border-left:3px solid #3b82f6">
+              <div style="color:#60a5fa;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px">M1 / M2 — NMOS 驱动管</div>
+              <div style="color:#475569;line-height:1.6">与 PMOS 组成反相器，接 GND，为存储节点提供低电平驱动. 两对反相器 <strong style="color:#1e293b">交叉耦合</strong> 形成双稳态锁存器. </div>
+            </div>
+            <div style="padding:12px;background:#f1f5f9;border-radius:8px;border-left:3px solid #22c55e">
+              <div style="color:#4ade80;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px">M3 / M4 — NMOS 访问管 ( 传输管 ) </div>
+              <div style="color:#475569;line-height:1.6">受 <span style="color:#ffd700">WL ( 字线 ) </span> 控制. WL=1 时导通，连接存储节点与位线 ( BL/BL̄ ) ，允许读写操作. </div>
+            </div>
+            <div style="padding:12px;background:#f1f5f9;border-radius:8px;border-left:3px solid #00d4ff">
+              <div style="color:#00d4ff;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px">双稳态存储原理</div>
+              <div style="color:#475569;line-height:1.6">Q 和 Q̄ 互补. 若 Q=1 则 Q̄=0，反之亦然. 两种状态都能稳定维持，无需刷新，这就是 <strong style="color:#1e293b">SRAM</strong> 名称中 Static 的含义. </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">关键信号线</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;">
+            <div style="padding:10px;background:#f1f5f9;border-radius:8px;text-align:center">
+              <div style="color:#ffd700;font-size:16px;margin-bottom:4px">WL</div>
+              <div style="color:#475569">字线 Word Line</div>
+              <div style="color:#64748b;font-size:11px;margin-top:4px">行选择 / 开启访问管</div>
+            </div>
+            <div style="padding:10px;background:#f1f5f9;border-radius:8px;text-align:center">
+              <div style="color:#4ADE80;font-size:16px;margin-bottom:4px">BL / BL̄</div>
+              <div style="color:#475569">位线 Bit Line</div>
+              <div style="color:#64748b;font-size:11px;margin-top:4px">数据传输通道 ( 互补 ) </div>
+            </div>
+            <div style="padding:10px;background:#f1f5f9;border-radius:8px;text-align:center">
+              <div style="color:#00d4ff;font-size:16px;margin-bottom:4px">Q</div>
+              <div style="color:#475569">存储节点 ( 真 ) </div>
+              <div style="color:#64748b;font-size:11px;margin-top:4px">存储数据本身</div>
+            </div>
+            <div style="padding:10px;background:#f1f5f9;border-radius:8px;text-align:center">
+              <div style="color:#a78bfa;font-size:16px;margin-bottom:4px">Q̄</div>
+              <div style="color:#475569">存储节点 ( 补 ) </div>
+              <div style="color:#64748b;font-size:11px;margin-top:4px">与 Q 互补</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ PANEL 2: OPERATIONS ═══════════════════════════════ -->
+  <div id="panel-ops" class="panel">
+    <div class="card">
+      <div class="card-title">三种工作状态详解</div>
+      <div class="ops-grid">
+        <div class="op-card hold">
+          <div class="op-icon">🔒</div>
+          <div class="op-title hold">保持状态 ( Hold )</div>
+          <ul class="op-steps">
+            <li><span class="step-num">条件</span>WL = 0，访问管 M3/M4 断开</li>
+            <li><span class="step-num">①</span>两个反相器互锁，维持 Q 和 Q̄ 的互补状态</li>
+            <li><span class="step-num">②</span>只要 VDD 存在，数据永久保持</li>
+            <li><span class="step-num">③</span>无需刷新操作，功耗仅来自漏电流</li>
+          </ul>
+        </div>
+        <div class="op-card read">
+          <div class="op-icon">📖</div>
+          <div class="op-title read">读操作 ( Read )</div>
+          <ul class="op-steps">
+            <li><span class="step-num">①</span>预充电 : BL 和 BL̄ 均充至 VDD/2 或 VDD</li>
+            <li><span class="step-num">②</span>WL 拉高，M3/M4 导通</li>
+            <li><span class="step-num">③</span>存储节点对位线放电，产生差分电压 ΔV</li>
+            <li><span class="step-num">④</span>灵敏放大器 ( SA ) 检测 BL-BL̄ 差值并放大输出</li>
+            <li><span class="step-num">⚠</span>读扰动 : 需保证驱动管强于访问管 ( β比 ) </li>
+          </ul>
+        </div>
+        <div class="op-card write">
+          <div class="op-icon">✏️</div>
+          <div class="op-title write">写操作 ( Write )</div>
+          <ul class="op-steps">
+            <li><span class="step-num">①</span>写驱动器强制 BL / BL̄ 为互补电平</li>
+            <li><span class="step-num">②</span>WL 拉高，M3/M4 导通</li>
+            <li><span class="step-num">③</span>写驱动强行翻转存储节点 Q / Q̄</li>
+            <li><span class="step-num">④</span>WL 拉低，M3/M4 断开，新状态被锁存</li>
+            <li><span class="step-num">⚠</span>写裕量 : 需保证访问管比上拉管更强</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">信号时序示意</div>
+      <div style="background:#f1f5f9;border-radius:12px;padding:20px;overflow-x:auto">
+        <svg width="700" height="200" viewBox="0 0 700 200" style="min-width:600px">
+          <!-- Time axis -->
+          <line x1="60" y1="180" x2="680" y2="180" stroke="#cbd5e1" stroke-width="1.5"/>
+          <text x="690" y="184" fill="#64748b" font-size="10">t</text>
+
+          <!-- Phase labels -->
+          <text x="105" y="15" fill="#ffd700" font-size="10" text-anchor="middle">保持</text>
+          <text x="240" y="15" fill="#4ADE80" font-size="10" text-anchor="middle">读操作</text>
+          <text x="430" y="15" fill="#ff6b35" font-size="10" text-anchor="middle">写操作</text>
+          <text x="590" y="15" fill="#ffd700" font-size="10" text-anchor="middle">保持</text>
+
+          <!-- Phase dividers -->
+          <line x1="155" y1="10" x2="155" y2="175" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="330" y1="10" x2="330" y2="175" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="520" y1="10" x2="520" y2="175" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3,3"/>
+
+          <!-- WL signal -->
+          <text x="55" y="42" fill="#ffd700" font-size="10" text-anchor="end">WL</text>
+          <polyline points="60,45 155,45 155,28 330,28 330,45 520,28 520,45 680,45" fill="none" stroke="#ffd700" stroke-width="2"/>
+
+          <!-- BL signal -->
+          <text x="55" y="85" fill="#4ADE80" font-size="10" text-anchor="end">BL</text>
+          <polyline points="60,80 155,80 165,65 330,65 330,80 340,70 380,70 430,80 520,80 680,80" fill="none" stroke="#4ADE80" stroke-width="2"/>
+
+          <!-- BL_bar signal -->
+          <text x="55" y="120" fill="#4ade80" font-size="10" text-anchor="end">BL̄</text>
+          <polyline points="60,115 155,115 165,115 200,130 330,130 330,115 340,115 380,125 430,115 520,115 680,115" fill="none" stroke="#4ade80" stroke-width="2"/>
+
+          <!-- Q signal -->
+          <text x="55" y="160" fill="#00d4ff" font-size="10" text-anchor="end">Q</text>
+          <polyline points="60,155 330,155 430,155 430,140 520,140 680,140" fill="none" stroke="#00d4ff" stroke-width="2"/>
+
+          <!-- Annotations -->
+          <text x="242" y="175" fill="#4ADE80" font-size="9" text-anchor="middle">预充电→SA检测</text>
+          <text x="425" y="175" fill="#ff6b35" font-size="9" text-anchor="middle">强制翻转Q</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ PANEL 3: ARRAY ═══════════════════════════════ -->
+  <div id="panel-array" class="panel">
+    <div class="card">
+      <div class="card-title">SRAM 存储阵列结构</div>
+      <div class="array-diagram">
+        <svg width="700" height="400" viewBox="0 0 700 400" style="min-width:600px; background: radial-gradient(circle at 50% 50%, #ffffff 0%, #f8fafc 100%); border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+          <defs>
+            <filter id="glow-gold" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+            <filter id="glow-blue" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+            <style>
+              .pulse-active { animation: pulse 2s infinite ease-in-out; }
+              @keyframes pulse {
+                0% { stroke-opacity: 0.7; stroke-width: 2.5; filter: drop-shadow(0 0 2px #f59e0b); }
+                50% { stroke-opacity: 1; stroke-width: 4; filter: drop-shadow(0 0 6px #f59e0b); }
+                100% { stroke-opacity: 0.7; stroke-width: 2.5; filter: drop-shadow(0 0 2px #f59e0b); }
+              }
+              .cell-rect { transition: all 0.3s ease; }
+            </style>
+          </defs>
+
+          <!-- Row/Col labels -->
+          <text x="20" y="20" fill="#64748b" font-size="11" font-weight="600" style="font-family:sans-serif">行地址 → 行译码器 → 字线 WL</text>
+          <text x="20" y="390" fill="#64748b" font-size="11" font-weight="600" style="font-family:sans-serif">列地址 → 列译码器 → 位线 BL/BL̄ → 灵敏放大器</text>
+
+          <!-- Column lines (BL pairs) -->
+          <!-- col 0 -->
+          <line x1="150" y1="40" x2="150" y2="360" stroke="#4ade80" stroke-width="1.5" opacity="0.4"/>
+          <line x1="180" y1="40" x2="180" y2="360" stroke="#4ade80" stroke-width="1.5" opacity="0.4"/>
+          <text x="155" y="38" fill="#4ade80" font-size="9" text-anchor="middle" font-weight="bold">BL₀</text>
+          <text x="185" y="38" fill="#4ade80" font-size="9" text-anchor="middle" font-weight="bold">BL̄₀</text>
+
+          <!-- col 1 -->
+          <line x1="300" y1="40" x2="300" y2="360" stroke="#4ade80" stroke-width="1.5" opacity="0.4"/>
+          <line x1="330" y1="40" x2="330" y2="360" stroke="#4ade80" stroke-width="1.5" opacity="0.4"/>
+          <text x="305" y="38" fill="#4ade80" font-size="9" text-anchor="middle" font-weight="bold">BL₁</text>
+          <text x="335" y="38" fill="#4ade80" font-size="9" text-anchor="middle" font-weight="bold">BL̄₁</text>
+
+          <!-- col 2 -->
+          <line x1="450" y1="40" x2="450" y2="360" stroke="#4ade80" stroke-width="1.5" opacity="0.4"/>
+          <line x1="480" y1="40" x2="480" y2="360" stroke="#4ade80" stroke-width="1.5" opacity="0.4"/>
+          <text x="455" y="38" fill="#4ade80" font-size="9" text-anchor="middle" font-weight="bold">BL₂</text>
+          <text x="485" y="38" fill="#4ade80" font-size="9" text-anchor="middle" font-weight="bold">BL̄₂</text>
+
+          <!-- col 3 -->
+          <line x1="590" y1="40" x2="590" y2="360" stroke="#4ade80" stroke-width="1.5" opacity="0.4"/>
+          <line x1="620" y1="40" x2="620" y2="360" stroke="#4ade80" stroke-width="1.5" opacity="0.4"/>
+          <text x="595" y="38" fill="#4ade80" font-size="9" text-anchor="middle" font-weight="bold">BL₃</text>
+          <text x="625" y="38" fill="#4ade80" font-size="9" text-anchor="middle" font-weight="bold">BL̄₃</text>
+
+          <!-- Row lines (WL) and cells -->
+          <!-- Row 0 -->
+          <line x1="60" y1="100" x2="660" y2="100" stroke="#cbd5e1" stroke-width="1.5" opacity="0.5"/>
+          <text x="55" y="104" fill="#94a3b8" font-size="10" text-anchor="end">WL₀</text>
+
+          <!-- Row 1 -->
+          <line x1="60" y1="200" x2="660" y2="200" stroke="#f59e0b" stroke-width="2.5" class="pulse-active" stroke-linecap="round"/>
+          <text x="55" y="204" fill="#f59e0b" font-size="11" text-anchor="end" font-weight="bold">WL₁</text>
+
+          <!-- Row 2 -->
+          <line x1="60" y1="300" x2="660" y2="300" stroke="#cbd5e1" stroke-width="1.5" opacity="0.5"/>
+          <text x="55" y="304" fill="#94a3b8" font-size="10" text-anchor="end">WL₂</text>
+
+          <!-- CELLS: 3 rows x 4 cols = 12 cells -->
+          <!-- Row 0 -->
+          <rect x="128" y="82" width="64" height="36" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" class="cell-rect"/>
+          <text x="160" y="104" fill="#94a3b8" font-size="9" text-anchor="middle">6T Cell</text>
+
+          <rect x="278" y="82" width="64" height="36" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" class="cell-rect"/>
+          <text x="310" y="104" fill="#94a3b8" font-size="9" text-anchor="middle">6T Cell</text>
+
+          <rect x="428" y="82" width="64" height="36" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" class="cell-rect"/>
+          <text x="460" y="104" fill="#94a3b8" font-size="9" text-anchor="middle">6T Cell</text>
+
+          <rect x="568" y="82" width="64" height="36" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" class="cell-rect"/>
+          <text x="600" y="104" fill="#94a3b8" font-size="9" text-anchor="middle">6T Cell</text>
+
+          <!-- Row 1 (highlighted as selected) -->
+          <rect x="128" y="182" width="64" height="36" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="2.5" filter="url(#glow-blue)"/>
+          <text x="160" y="204" fill="#2563eb" font-size="9" text-anchor="middle" font-weight="bold">6T Cell ★</text>
+
+          <rect x="278" y="182" width="64" height="36" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="2.5" filter="url(#glow-blue)"/>
+          <text x="310" y="204" fill="#2563eb" font-size="9" text-anchor="middle" font-weight="bold">6T Cell ★</text>
+
+          <rect x="428" y="182" width="64" height="36" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="2.5" filter="url(#glow-blue)"/>
+          <text x="460" y="204" fill="#2563eb" font-size="9" text-anchor="middle" font-weight="bold">6T Cell ★</text>
+
+          <rect x="568" y="182" width="64" height="36" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="2.5" filter="url(#glow-blue)"/>
+          <text x="600" y="204" fill="#2563eb" font-size="9" text-anchor="middle" font-weight="bold">6T Cell ★</text>
+
+          <!-- Row 2 -->
+          <rect x="128" y="282" width="64" height="36" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" class="cell-rect"/>
+          <text x="160" y="304" fill="#94a3b8" font-size="9" text-anchor="middle">6T Cell</text>
+
+          <rect x="278" y="282" width="64" height="36" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" class="cell-rect"/>
+          <text x="310" y="304" fill="#94a3b8" font-size="9" text-anchor="middle">6T Cell</text>
+
+          <rect x="428" y="282" width="64" height="36" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" class="cell-rect"/>
+          <text x="460" y="304" fill="#94a3b8" font-size="9" text-anchor="middle">6T Cell</text>
+
+          <rect x="568" y="282" width="64" height="36" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" class="cell-rect"/>
+          <text x="600" y="304" fill="#94a3b8" font-size="9" text-anchor="middle">6T Cell</text>
+
+          <!-- Selected row label -->
+          <text x="370" y="175" fill="#f59e0b" font-size="10" text-anchor="middle" font-weight="bold">← WL₁ 选中，整行同时激活 →</text>
+
+          <!-- Sense Amplifiers bottom -->
+          <rect x="128" y="355" width="64" height="20" rx="4" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+          <text x="160" y="369" fill="#15803d" font-size="8" text-anchor="middle" font-weight="bold">SA₀</text>
+          <rect x="278" y="355" width="64" height="20" rx="4" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+          <text x="310" y="369" fill="#15803d" font-size="8" text-anchor="middle" font-weight="bold">SA₁</text>
+          <rect x="428" y="355" width="64" height="20" rx="4" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+          <text x="460" y="369" fill="#15803d" font-size="8" text-anchor="middle" font-weight="bold">SA₂</text>
+          <rect x="568" y="355" width="64" height="20" rx="4" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+          <text x="600" y="369" fill="#15803d" font-size="8" text-anchor="middle" font-weight="bold">SA₃</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">地址译码流程</div>
+      <div style="display:flex; gap:16px; align-items:stretch; font-size:12px; margin-bottom:20px;">
+        <!-- Step 1 -->
+        <div style="flex:1; padding:20px 10px; background:linear-gradient(145deg, #ffffff, #f8fafc); border-radius:12px; text-align:center; border:1px solid #e2e8f0; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05); transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+          <div style="font-size:28px; margin-bottom:12px; filter:drop-shadow(0 4px 6px rgba(167,139,250,0.25));">📥</div>
+          <div style="color:#7c3aed; font-weight:700; font-size:14px; margin-bottom:4px;">地址输入</div>
+          <div style="color:#94a3b8; font-size:11px; font-family:'JetBrains Mono', monospace; background:#f1f5f9; display:inline-block; padding:2px 6px; border-radius:4px;">A[n-1:0]</div>
+        </div>
+        
+        <!-- Arrow -->
+        <div style="display:flex; align-items:center; color:#cbd5e1;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+
+        <!-- Step 2 -->
+        <div style="flex:1; padding:20px 10px; background:linear-gradient(145deg, #ffffff, #f8fafc); border-radius:12px; text-align:center; border:1px solid #e2e8f0; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05); transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+          <div style="font-size:28px; margin-bottom:12px; filter:drop-shadow(0 4px 6px rgba(245,158,11,0.25));">🔀</div>
+          <div style="color:#d97706; font-weight:700; font-size:14px; margin-bottom:4px;">行译码器</div>
+          <div style="color:#64748b; font-size:11px;">高位地址 <span style="color:#cbd5e1">→</span> <span style="color:#d97706; font-weight:600">选 WL</span></div>
+        </div>
+
+        <!-- Arrow -->
+        <div style="display:flex; align-items:center; color:#cbd5e1;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+
+        <!-- Step 3 -->
+        <div style="flex:1; padding:20px 10px; background:linear-gradient(145deg, #ffffff, #f8fafc); border-radius:12px; text-align:center; border:1px solid #e2e8f0; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05); transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+          <div style="font-size:28px; margin-bottom:12px; filter:drop-shadow(0 4px 6px rgba(74,222,128,0.25));">⚡</div>
+          <div style="color:#16a34a; font-weight:700; font-size:14px; margin-bottom:4px;">列译码器</div>
+          <div style="color:#64748b; font-size:11px;">低位地址 <span style="color:#cbd5e1">→</span> <span style="color:#16a34a; font-weight:600">选 BL</span></div>
+        </div>
+      </div>
+
+      <div style="padding:16px 20px; background:#f8fafc; border-radius:8px; border-left:4px solid #3b82f6; font-size:13px; color:#475569; line-height:1.6; box-shadow: 0 1px 2px #3b82f60d;">
+        <div style="font-weight:700; color:#1e293b; margin-bottom:4px; display:flex; align-items:center; gap:6px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:#3b82f6"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          工作原理
+        </div>
+        访问某个单元时，<strong style="color:#d97706">行译码器</strong> 激活对应 WL（ 整行通电 ），<strong style="color:#16a34a">列译码器</strong> 将该行中目标列的 BL/BL̄ 连接到灵敏放大器（ SA ），SA 将微小差分电压放大为完整逻辑电平输出.
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ PANEL 4: SIMULATION ═══════════════════════════════ -->
+  <div id="panel-sim" class="panel">
+    <div class="card">
+      <div class="card-title">交互状态模拟</div>
+      <div class="sim-container">
+        <div>
+          <div class="svg-wrapper" style="min-height:300px">
+            <svg id="sim-svg" width="360" height="280" viewBox="0 0 360 280">
+              <!-- VDD -->
+              <line x1="40" y1="25" x2="320" y2="25" stroke="#ff6b35" stroke-width="2"/>
+              <text x="10" y="30" fill="#ff6b35" font-size="10" font-weight="bold">VDD</text>
+              <!-- GND -->
+              <line x1="40" y1="260" x2="320" y2="260" stroke="#94a3b8" stroke-width="2"/>
+              <text x="10" y="265" fill="#94a3b8" font-size="10">GND</text>
+
+              <!-- M5 -->
+              <rect x="88" y="38" width="30" height="44" rx="4" fill="#7c2d12" stroke="#f97316" stroke-width="1.5"/>
+              <text x="103" y="55" fill="#fed7aa" font-size="8" text-anchor="middle">M5</text>
+              <text x="103" y="66" fill="#fb923c" font-size="7" text-anchor="middle">PMOS</text>
+              <line x1="103" y1="25" x2="103" y2="38" stroke="#f97316" stroke-width="1.5"/>
+              <line x1="103" y1="82" x2="103" y2="110" stroke="#60a5fa" stroke-width="1.5"/>
+
+              <!-- M1 -->
+              <rect x="88" y="155" width="30" height="44" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+              <text x="103" y="172" fill="#1d4ed8" font-size="8" text-anchor="middle">M1</text>
+              <text x="103" y="183" fill="#60a5fa" font-size="7" text-anchor="middle">NMOS</text>
+              <line x1="103" y1="199" x2="103" y2="260" stroke="#94a3b8" stroke-width="1.5"/>
+
+              <!-- M6 -->
+              <rect x="242" y="38" width="30" height="44" rx="4" fill="#7c2d12" stroke="#f97316" stroke-width="1.5"/>
+              <text x="257" y="55" fill="#fed7aa" font-size="8" text-anchor="middle">M6</text>
+              <text x="257" y="66" fill="#fb923c" font-size="7" text-anchor="middle">PMOS</text>
+              <line x1="257" y1="25" x2="257" y2="38" stroke="#f97316" stroke-width="1.5"/>
+              <line x1="257" y1="82" x2="257" y2="110" stroke="#a78bfa" stroke-width="1.5"/>
+
+              <!-- M2 -->
+              <rect x="242" y="155" width="30" height="44" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+              <text x="257" y="172" fill="#1d4ed8" font-size="8" text-anchor="middle">M2</text>
+              <text x="257" y="183" fill="#60a5fa" font-size="7" text-anchor="middle">NMOS</text>
+              <line x1="257" y1="199" x2="257" y2="260" stroke="#94a3b8" stroke-width="1.5"/>
+
+              <!-- Cross-couple -->
+              <!-- Q (Blue) -> Right Gates (M6/M2) -->
+              <path d="M103,120 L220,120" fill="none" stroke="#00d4ff" stroke-width="1.5"/>
+              <line x1="220" y1="60" x2="220" y2="180" stroke="#00d4ff" stroke-width="1.5"/>
+              <line x1="220" y1="60" x2="238" y2="60" stroke="#00d4ff" stroke-width="1.5"/>
+              <line x1="220" y1="180" x2="238" y2="180" stroke="#00d4ff" stroke-width="1.5"/>
+              <!-- Gate Plates M6/M2 -->
+              <line x1="238" y1="38" x2="238" y2="82" stroke="#00d4ff" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="238" y1="155" x2="238" y2="199" stroke="#00d4ff" stroke-width="2.5" stroke-linecap="round"/>
+
+              <!-- Q̄ (Purple) -> Left Gates (M5/M1) -->
+              <path d="M257,120 L140,120" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
+              <line x1="140" y1="60" x2="140" y2="180" stroke="#7c3aed" stroke-width="1.5"/>
+              <line x1="140" y1="60" x2="122" y2="60" stroke="#7c3aed" stroke-width="1.5"/>
+              <line x1="140" y1="180" x2="122" y2="180" stroke="#7c3aed" stroke-width="1.5"/>
+              <!-- Gate Plates M5/M1 -->
+              <line x1="122" y1="38" x2="122" y2="82" stroke="#7c3aed" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="122" y1="155" x2="122" y2="199" stroke="#7c3aed" stroke-width="2.5" stroke-linecap="round"/>
+
+              <!-- M3 access -->
+              <rect id="sim-m3" x="28" y="104" width="30" height="44" rx="4" fill="#14532d" stroke="#22c55e" stroke-width="1.5"/>
+              <text x="43" y="121" fill="#bbf7d0" font-size="8" text-anchor="middle">M3</text>
+              <text x="43" y="132" fill="#4ade80" font-size="7" text-anchor="middle">NMOS</text>
+              <line x1="58" y1="126" x2="88" y2="120" stroke="#00d4ff" stroke-width="1.5"/>
+              <line x1="28" y1="126" x2="8" y2="126" stroke="#4ADE80" stroke-width="2"/>
+              <text x="4" y="124" fill="#4ADE80" font-size="8">BL</text>
+
+              <!-- M4 access -->
+              <rect id="sim-m4" x="302" y="104" width="30" height="44" rx="4" fill="#14532d" stroke="#22c55e" stroke-width="1.5"/>
+              <text x="317" y="121" fill="#bbf7d0" font-size="8" text-anchor="middle">M4</text>
+              <text x="317" y="132" fill="#4ade80" font-size="7" text-anchor="middle">NMOS</text>
+              <line x1="302" y1="126" x2="272" y2="120" stroke="#7c3aed" stroke-width="1.5"/>
+              <line x1="332" y1="126" x2="350" y2="126" stroke="#4ADE80" stroke-width="2"/>
+              <text x="340" y="124" fill="#4ADE80" font-size="8">BL̄</text>
+
+              <!-- WL -->
+              <line id="sim-wl" x1="43" y1="104" x2="43" y2="88" stroke="#ffd700" stroke-width="1.5"/>
+              <line id="sim-wl2" x1="43" y1="88" x2="317" y2="88" stroke="#ffd700" stroke-width="1.5"/>
+              <line id="sim-wl3" x1="317" y1="88" x2="317" y2="104" stroke="#ffd700" stroke-width="1.5"/>
+              <text x="180" y="85" fill="#ffd700" font-size="9" text-anchor="middle">WL</text>
+              <circle id="sim-wl-dot" cx="180" cy="88" r="4" fill="#ffd700"/>
+
+              <!-- Q node -->
+              <line x1="103" y1="110" x2="103" y2="155" stroke="#00d4ff" stroke-width="2"/>
+              <circle id="sim-q" cx="103" cy="120" r="11" fill="#00d4ff" style="color: #00d4ff;" class="glow"/>
+              <text x="80" y="124" fill="#00d4ff" font-size="10" font-weight="bold">Q</text>
+              <text id="sim-q-val" x="103" y="124" fill="#2563eb " font-size="10" text-anchor="middle" font-weight="bold">1</text>
+
+              <!-- Q̄ node -->
+              <line x1="257" y1="110" x2="257" y2="155" stroke="#7c3aed" stroke-width="2"/>
+              <circle id="sim-qb" cx="257" cy="120" r="11" fill="#7c3aed" style="color: #7c3aed;" class="glow"/>
+              <text x="270" y="124" fill="#a78bfa" font-size="10" font-weight="bold">Q̄</text>
+              <text id="sim-qb-val" x="257" y="124" fill="#fff" font-size="10" text-anchor="middle" font-weight="bold">0</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="sim-controls">
+          <div class="ctrl-group">
+            <label>操作模式</label>
+            <div class="ctrl-row">
+              <button class="ctrl-btn selected" id="btn-hold" onclick="setMode('hold')">🔒 保持</button>
+              <button class="ctrl-btn" id="btn-read" onclick="setMode('read')">📖 读</button>
+              <button class="ctrl-btn" id="btn-write" onclick="setMode('write')">✏️ 写</button>
+            </div>
+          </div>
+
+          <div class="ctrl-group" id="write-data-group" style="display:none">
+            <label>写入数据</label>
+            <div class="ctrl-row">
+              <button class="ctrl-btn" id="btn-d0" onclick="setWriteData(0)">写入 0</button>
+              <button class="ctrl-btn selected" id="btn-d1" onclick="setWriteData(1)">写入 1</button>
+            </div>
+          </div>
+
+          <div class="signal-display">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#94a3b8;margin-bottom:8px;letter-spacing:2px">SIGNAL STATE</div>
+            <div class="signal-row">
+              <span class="signal-name">WL</span>
+              <span class="signal-val" id="sig-wl">LO</span>
+            </div>
+            <div class="signal-row">
+              <span class="signal-name">BL</span>
+              <span class="signal-val" id="sig-bl">X</span>
+            </div>
+            <div class="signal-row">
+              <span class="signal-name">BL̄</span>
+              <span class="signal-val" id="sig-blb">X</span>
+            </div>
+            <div class="signal-row">
+              <span class="signal-name">Q</span>
+              <span class="signal-val" id="sig-q">HI</span>
+            </div>
+            <div class="signal-row">
+              <span class="signal-name">Q̄</span>
+              <span class="signal-val" id="sig-qb">LO</span>
+            </div>
+            <div class="signal-row">
+              <span class="signal-name">M3/M4</span>
+              <span class="signal-val" id="sig-acc">OFF</span>
+            </div>
+          </div>
+
+          <div class="state-box" id="state-desc">
+            <strong>保持状态 : </strong>WL=0，访问管断开，两个反相器互锁，Q=1, Q̄=0 的状态将一直保持，无需刷新. 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ PANEL 5: COMPARE ═══════════════════════════════ -->
+  <div id="panel-compare" class="panel">
+    <div class="card">
+      <div class="card-title">存储器层次结构中的 SRAM</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:180px;padding:10px;background:rgba(255,107,53,0.15);border:1px solid #ff6b35;border-radius:8px;text-align:center;">
+            <div style="color:#ff6b35;font-weight:600;font-size:13px">寄存器</div>
+            <div style="color:#64748b;font-size:11px">~几十个 × 几十bit</div>
+          </div>
+          <div style="color:#64748b;font-size:11px">最快 ( &lt;0.3ns ) ｜ 最贵 ｜ 访问1周期</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:220px;padding:10px;background:rgba(0,212,255,0.1);border:1px solid #00d4ff;border-radius:8px;text-align:center;">
+            <div style="color:#00d4ff;font-weight:600;font-size:13px">L1 Cache ( SRAM )</div>
+            <div style="color:#64748b;font-size:11px">32KB～64KB｜4 cycle</div>
+          </div>
+          <div style="color:#64748b;font-size:11px">约 1ns ｜ 每核独享</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:280px;padding:10px;background:rgba(0,212,255,0.07);border:1px solid #0e7490;border-radius:8px;text-align:center;">
+            <div style="color:#67e8f9;font-weight:600;font-size:13px">L2 Cache ( SRAM )</div>
+            <div style="color:#64748b;font-size:11px">256KB～1MB｜12 cycle</div>
+          </div>
+          <div style="color:#64748b;font-size:11px">约 3～5ns</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:340px;padding:10px;background:rgba(124,58,237,0.08);border:1px solid #6d28d9;border-radius:8px;text-align:center;">
+            <div style="color:#a78bfa;font-weight:600;font-size:13px">L3 Cache ( SRAM，共享 )</div>
+            <div style="color:#64748b;font-size:11px">8MB～64MB｜40 cycle</div>
+          </div>
+          <div style="color:#64748b;font-size:11px">约 10～20ns</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:400px;padding:10px;background:rgba(100,116,139,0.1);border:1px solid #475569;border-radius:8px;text-align:center;">
+            <div style="color:#475569;font-weight:600;font-size:13px">主存 DRAM</div>
+            <div style="color:#64748b;font-size:11px">8GB～512GB｜200+ cycle</div>
+          </div>
+          <div style="color:#64748b;font-size:11px">约 50～100ns</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+function showTab(name) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ── SIMULATION ──
+let simMode = 'hold';
+let writeData = 1;
+let storedQ = 1; // current stored value
+
+function setVal(id, val) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.textContent = val;
+  el.className = 'signal-val';
+  if (val === 'HI' || val === '1') el.classList.add('hi');
+  else if (val === 'LO' || val === '0') el.classList.add('lo');
+  else el.classList.add('x');
+}
+
+function updateSim() {
+  const svg = document.getElementById('sim-svg');
+  const q = document.getElementById('sim-q');
+  const qb = document.getElementById('sim-qb');
+  const qval = document.getElementById('sim-q-val');
+  const qbval = document.getElementById('sim-qb-val');
+  const m3 = document.getElementById('sim-m3');
+  const m4 = document.getElementById('sim-m4');
+  const wlDot = document.getElementById('sim-wl-dot');
+
+  if (simMode === 'hold') {
+    // WL off
+    document.getElementById('sim-wl').style.stroke = '#ffd700';
+    document.getElementById('sim-wl2').style.stroke = '#4b5563';
+    document.getElementById('sim-wl3').style.stroke = '#4b5563';
+    wlDot.style.fill = '#4b5563';
+    m3.setAttribute('opacity', '0.4'); m4.setAttribute('opacity', '0.4');
+
+    setVal('sig-wl', 'LO'); setVal('sig-bl', 'X'); setVal('sig-blb', 'X');
+    setVal('sig-acc', 'OFF');
+    setVal('sig-q', storedQ ? 'HI' : 'LO');
+    setVal('sig-qb', storedQ ? 'LO' : 'HI');
+    q.style.fill = storedQ ? '#00d4ff' : '#1e40af';
+    qb.style.fill = storedQ ? '#7c3aed' : '#a21caf';
+    qval.textContent = storedQ; qval.style.fill = storedQ ? '#000' : '#fff';
+    qbval.textContent = storedQ ? 0 : 1; qbval.style.fill = '#fff';
+    document.getElementById('write-data-group').style.display = 'none';
+    document.getElementById('state-desc').innerHTML = `<strong>保持状态 : </strong>WL=0，访问管 M3/M4 截止，两个反相器互锁，Q=${storedQ}, Q̄=${storedQ^1} 的状态持续保持，无需任何刷新操作. `;
+
+  } else if (simMode === 'read') {
+    document.getElementById('sim-wl').style.stroke = '#ffd700';
+    document.getElementById('sim-wl2').style.stroke = '#ffd700';
+    document.getElementById('sim-wl3').style.stroke = '#ffd700';
+    wlDot.style.fill = '#ffd700';
+    m3.setAttribute('opacity', '1'); m4.setAttribute('opacity', '1');
+    setVal('sig-wl', 'HI');
+    setVal('sig-bl', storedQ ? 'HI' : 'LO');
+    setVal('sig-blb', storedQ ? 'LO' : 'HI');
+    setVal('sig-acc', 'ON'); setVal('sig-q', storedQ ? 'HI' : 'LO'); setVal('sig-qb', storedQ ? 'LO' : 'HI');
+    q.style.fill = storedQ ? '#00d4ff' : '#1e40af';
+    qb.style.fill = storedQ ? '#7c3aed' : '#a21caf';
+    qval.textContent = storedQ; qval.style.fill = storedQ ? '#000' : '#fff';
+    qbval.textContent = storedQ^1; qbval.style.fill = '#fff';
+    document.getElementById('write-data-group').style.display = 'none';
+    document.getElementById('state-desc').innerHTML = `<strong>读操作 : </strong>WL=1，M3/M4 导通，存储节点 Q=${storedQ} 使 BL=${storedQ} 而 BL̄=${storedQ^1}，灵敏放大器检测差值，输出数据 = <strong style="color:#00d4ff">${storedQ}</strong>. Q 值未改变. `;
+
+  } else if (simMode === 'write') {
+    document.getElementById('sim-wl').style.stroke = '#ffd700';
+    document.getElementById('sim-wl2').style.stroke = '#ffd700';
+    document.getElementById('sim-wl3').style.stroke = '#ffd700';
+    wlDot.style.fill = '#ffd700';
+    m3.setAttribute('opacity', '1'); m4.setAttribute('opacity', '1');
+    storedQ = writeData;
+    setVal('sig-wl', 'HI');
+    setVal('sig-bl', writeData ? 'HI' : 'LO');
+    setVal('sig-blb', writeData ? 'LO' : 'HI');
+    setVal('sig-acc', 'ON'); setVal('sig-q', writeData ? 'HI' : 'LO'); setVal('sig-qb', writeData ? 'LO' : 'HI');
+    q.style.fill = writeData ? '#00d4ff' : '#1e40af';
+    qb.style.fill = writeData ? '#7c3aed' : '#a21caf';
+    qval.textContent = writeData; qval.style.fill = writeData ? '#000' : '#fff';
+    qbval.textContent = writeData^1; qbval.style.fill = '#fff';
+    document.getElementById('write-data-group').style.display = 'block';
+    document.getElementById('state-desc').innerHTML = `<strong>写操作 : </strong>WL=1，写驱动强制 BL=${writeData}, BL̄=${writeData^1}，通过 M3/M4 翻转存储节点，Q 被写为 <strong style="color:#ff6b35">${writeData}</strong>，Q̄=${writeData^1}. WL 拉低后新值锁存. `;
+  }
+}
+
+function setMode(mode) {
+  simMode = mode;
+  ['hold','read','write'].forEach(m => {
+    document.getElementById('btn-' + m).classList.toggle('selected', m === mode);
+  });
+  updateSim();
+}
+
+function setWriteData(d) {
+  writeData = d;
+  document.getElementById('btn-d0').classList.toggle('selected', d === 0);
+  document.getElementById('btn-d1').classList.toggle('selected', d === 1);
+  updateSim();
+}
+
+updateSim();
+</script>
+</body>
+</html>
