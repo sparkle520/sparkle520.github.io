@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>存储器内部结构图解</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{background:transparent;color:#1e293b;font-family:'Noto Sans SC',sans-serif;}
+body::before{display:none;}
+::-webkit-scrollbar{display:none;}
+*{scrollbar-width:none;-ms-overflow-style:none;}
+
+.wrap{max-width:1200px;margin:0 auto;padding:30px 20px;}
+
+header{text-align:center;margin-bottom:40px;}
+.label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:4px;color:#0284c7;text-transform:uppercase;margin-bottom:12px;}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,6vw,72px);letter-spacing:6px;line-height:1;
+   background:linear-gradient(135deg,#0284c7 0%,#7c3aed 55%,#ea580c 100%);
+   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+header p{color:#64748b;font-size:13px;margin-top:10px;letter-spacing:1px;}
+
+.tabs{display:flex;gap:4px;background:#f1f5f9;border:1px solid #cbd5e1;border-radius:12px;
+      padding:6px;margin-bottom:28px;overflow-x:auto;}
+.tab{flex:1;min-width:108px;padding:10px 14px;border-radius:8px;border:none;background:transparent;
+     color:#64748b;font-family:'Noto Sans SC',sans-serif;font-size:13px;cursor:pointer;
+     transition:all .2s;white-space:nowrap;text-align:center;}
+.tab.on{background:#fff;color:#0284c7;border:1px solid #bae6fd;box-shadow:0 1px 4px rgba(0,0,0,.08);}
+.tab:hover:not(.on){color:#1e293b;background:rgba(0,0,0,.04);}
+
+.pane{display:none;}
+.pane.on{display:block;animation:fi .3s ease;}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.card{background:#fff;border:1px solid #cbd5e1;border-radius:16px;padding:26px;margin-bottom:18px;
+      box-shadow:0 1px 6px rgba(0,0,0,.06);}
+.ct{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;color:#0284c7;
+    text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:8px;}
+.ct::before{content:'';width:3px;height:16px;background:#0284c7;border-radius:2px;}
+
+/* svg容器 — 关键：overflow-x:auto 不裁切 */
+.sw{background:#f8fafc;border-radius:12px;border:1px solid #cbd5e1;
+    padding:16px;overflow-x:auto;}
+.sw svg{display:block;flex-shrink:0;}
+svg text{font-family:'JetBrains Mono',monospace;}
+
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+@media(max-width:720px){.g2,.g3{grid-template-columns:1fr;}}
+
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:'JetBrains Mono',monospace;}
+.tg{background:#dcfce7;color:#16a34a;} .tb{background:#fee2e2;color:#dc2626;} .tm{background:#fef9c3;color:#a16207;}
+
+.sl{list-style:none;}
+.sl li{font-size:12px;color:#64748b;padding:5px 0;border-bottom:1px solid #e2e8f0;display:flex;gap:8px;line-height:1.6;}
+.sl li:last-child{border-bottom:none;}
+.sn{color:#0284c7;font-family:'JetBrains Mono',monospace;font-size:10px;min-width:22px;flex-shrink:0;margin-top:1px;}
+
+/* sim */
+.sr{display:flex;align-items:center;justify-content:space-between;padding:6px 0;
+    border-bottom:1px solid #e2e8f0;font-family:'JetBrains Mono',monospace;font-size:12px;}
+.sr:last-child{border-bottom:none;}
+.sn2{color:#64748b;}
+.sv{padding:2px 10px;border-radius:4px;font-weight:700;}
+.hi{background:#dcfce7;color:#16a34a;} .lo{background:#dbeafe;color:#1d4ed8;}
+.xx{background:#ede9fe;color:#7c3aed;} .ac{background:#fef9c3;color:#a16207;}
+
+.cb{padding:9px 14px;border-radius:8px;border:1px solid #cbd5e1;background:#fff;color:#64748b;
+    font-family:'JetBrains Mono',monospace;font-size:12px;cursor:pointer;transition:all .2s;}
+.cb:hover{border-color:#0284c7;color:#0284c7;}
+.cb.on{background:#eff6ff;border-color:#0284c7;color:#0284c7;}
+
+.sb{margin-top:12px;padding:14px;background:#eff6ff;border:1px solid #bae6fd;border-radius:8px;
+    font-size:12px;line-height:1.8;}
+.sb strong{color:#0284c7;}
+
+.ib{padding:12px;border-radius:8px;font-size:12px;color:#475569;line-height:1.7;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="label">计算机组成原理 · 存储器</div>
+  <h1>存储器内部结构</h1>
+  <p>Internal Organization of Memory — 芯片结构 · 读写时序 · 扩展方式 · 总线连接</p>
+</header>
+
+<div class="tabs">
+  <button class="tab on"  onclick="sw('chip',this)">🔬 芯片内部结构</button>
+  <button class="tab"     onclick="sw('timing',this)">⏱️ 读写时序</button>
+  <button class="tab"     onclick="sw('expand',this)">🔗 存储器扩展</button>
+  <button class="tab"     onclick="sw('bus',this)">🚌 总线连接</button>
+  <button class="tab"     onclick="sw('sim',this)">🎛️ 交互模拟</button>
+</div>
+
+<!-- ══════════════ PANEL 1 : 芯片内部结构 ══════════════ -->
+<div id="pane-chip" class="pane on">
+
+  <div class="card">
+    <div class="ct">存储芯片内部完整结构图</div>
+    <div class="sw">
+      <svg width="700" height="450" viewBox="0 0 700 450">
+        <defs>
+          <marker id="ma" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0L7,3.5L0,7Z" fill="#0284c7"/></marker>
+          <marker id="mg" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0L7,3.5L0,7Z" fill="#16a34a"/></marker>
+          <marker id="mo" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0L7,3.5L0,7Z" fill="#ea580c"/></marker>
+          <marker id="mp" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0L7,3.5L0,7Z" fill="#7c3aed"/></marker>
+        </defs>
+
+        <!-- 芯片外框 -->
+        <rect x="130" y="8" width="460" height="430" rx="14" fill="#f8fafc" stroke="#0284c7" stroke-width="2.5"/>
+        <text x="360" y="30" fill="#0284c7" font-size="12" text-anchor="middle" font-weight="bold">存储芯片（Memory Chip）</text>
+
+        <!-- MAR -->
+        <rect x="150" y="44" width="420" height="34" rx="7" fill="#fff7ed" stroke="#f97316" stroke-width="1.5"/>
+        <text x="360" y="58" fill="#c2410c" font-size="10" text-anchor="middle" font-weight="bold">地址寄存器（MAR）</text>
+        <text x="360" y="72" fill="#94a3b8" font-size="8" text-anchor="middle">锁存外部地址总线输入的地址码，保持稳定供内部译码</text>
+
+        <!-- 行译码器 -->
+        <rect x="150" y="90" width="92" height="210" rx="8" fill="#fef9c3" stroke="#f59e0b" stroke-width="1.5"/>
+        <text x="196" y="112" fill="#b45309" font-size="9" text-anchor="middle" font-weight="bold">行地址译码器</text>
+        <text x="196" y="126" fill="#64748b" font-size="7" text-anchor="middle">Row Decoder</text>
+        <!-- WL lines -->
+        <line x1="242" y1="136" x2="258" y2="136" stroke="#f59e0b" stroke-width="1.5"/>
+        <line x1="242" y1="161" x2="258" y2="161" stroke="#f59e0b" stroke-width="1.5"/>
+        <line x1="242" y1="186" x2="258" y2="186" stroke="#f59e0b" stroke-width="1.5"/>
+        <line x1="242" y1="211" x2="258" y2="211" stroke="#f59e0b" stroke-width="1.5"/>
+        <line x1="242" y1="236" x2="258" y2="236" stroke="#f59e0b" stroke-width="1.5"/>
+        <text x="248" y="132" fill="#f59e0b" font-size="7">WL₀</text>
+        <text x="248" y="157" fill="#f59e0b" font-size="7">WL₁</text>
+        <text x="248" y="182" fill="#f59e0b" font-size="7" font-weight="bold">WL₂★</text>
+        <text x="248" y="207" fill="#f59e0b" font-size="7">WL₃</text>
+        <text x="248" y="232" fill="#94a3b8" font-size="7">…</text>
+        <text x="196" y="272" fill="#b45309" font-size="8" text-anchor="middle">高位地址→选行</text>
+
+        <!-- 存储矩阵 -->
+        <rect x="258" y="90" width="254" height="210" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+        <text x="385" y="110" fill="#0369a1" font-size="10" text-anchor="middle" font-weight="bold">存储矩阵（Cell Array）</text>
+        <!-- 行0 -->
+        <rect x="268" y="120" width="32" height="20" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+        <rect x="306" y="120" width="32" height="20" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+        <rect x="344" y="120" width="32" height="20" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+        <rect x="382" y="120" width="32" height="20" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+        <rect x="420" y="120" width="32" height="20" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+        <!-- 行1 -->
+        <rect x="268" y="147" width="32" height="20" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+        <rect x="306" y="147" width="32" height="20" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+        <rect x="344" y="147" width="32" height="20" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+        <rect x="382" y="147" width="32" height="20" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+        <rect x="420" y="147" width="32" height="20" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+        <!-- 行2 选中 -->
+        <rect x="268" y="174" width="32" height="20" rx="3" fill="#fef9c3" stroke="#f59e0b" stroke-width="2"/>
+        <rect x="306" y="174" width="32" height="20" rx="3" fill="#fef9c3" stroke="#f59e0b" stroke-width="2"/>
+        <rect x="344" y="174" width="32" height="20" rx="3" fill="#fef9c3" stroke="#f59e0b" stroke-width="2.5"/>
+        <text x="360" y="189" fill="#b45309" font-size="9" text-anchor="middle" font-weight="bold">★</text>
+        <rect x="382" y="174" width="32" height="20" rx="3" fill="#fef9c3" stroke="#f59e0b" stroke-width="2"/>
+        <rect x="420" y="174" width="32" height="20" rx="3" fill="#fef9c3" stroke="#f59e0b" stroke-width="2"/>
+        <!-- 行3 -->
+        <rect x="268" y="201" width="32" height="20" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+        <rect x="306" y="201" width="32" height="20" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+        <rect x="344" y="201" width="32" height="20" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+        <rect x="382" y="201" width="32" height="20" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+        <rect x="420" y="201" width="32" height="20" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+        <!-- 行4 -->
+        <rect x="268" y="228" width="32" height="20" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+        <rect x="306" y="228" width="32" height="20" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+        <rect x="344" y="228" width="32" height="20" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+        <rect x="382" y="228" width="32" height="20" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+        <rect x="420" y="228" width="32" height="20" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+        <!-- BL 竖线 -->
+        <line x1="284" y1="90"  x2="284" y2="300" stroke="#4ade80" stroke-width="1.2" stroke-dasharray="3,2" opacity=".6"/>
+        <line x1="322" y1="90"  x2="322" y2="300" stroke="#4ade80" stroke-width="1.2" stroke-dasharray="3,2" opacity=".6"/>
+        <line x1="360" y1="90"  x2="360" y2="300" stroke="#4ade80" stroke-width="1.8" opacity=".9"/>
+        <line x1="398" y1="90"  x2="398" y2="300" stroke="#4ade80" stroke-width="1.2" stroke-dasharray="3,2" opacity=".6"/>
+        <line x1="436" y1="90"  x2="436" y2="300" stroke="#4ade80" stroke-width="1.2" stroke-dasharray="3,2" opacity=".6"/>
+        <text x="360" y="88" fill="#4ade80" font-size="7" text-anchor="middle">BL</text>
+        <!-- WL 横线 行2 -->
+        <line x1="258" y1="184" x2="512" y2="184" stroke="#f59e0b" stroke-width="1.5" opacity=".45"/>
+        <text x="385" y="272" fill="#0369a1" font-size="8" text-anchor="middle">m 行 × n 列，每单元 1 bit</text>
+
+        <!-- 列译码器 -->
+        <rect x="514" y="90" width="76" height="210" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5"/>
+        <text x="552" y="114" fill="#15803d" font-size="9" text-anchor="middle" font-weight="bold">列地址</text>
+        <text x="552" y="127" fill="#15803d" font-size="9" text-anchor="middle" font-weight="bold">译码器</text>
+        <text x="552" y="143" fill="#64748b" font-size="7" text-anchor="middle">Column</text>
+        <text x="552" y="153" fill="#64748b" font-size="7" text-anchor="middle">Decoder</text>
+        <text x="552" y="272" fill="#15803d" font-size="8" text-anchor="middle">低位地址→选列</text>
+        <line x1="512" y1="136" x2="514" y2="136" stroke="#4ade80" stroke-width="1.5"/>
+        <line x1="512" y1="161" x2="514" y2="161" stroke="#4ade80" stroke-width="1.5"/>
+        <line x1="512" y1="186" x2="514" y2="186" stroke="#4ade80" stroke-width="1.5"/>
+        <line x1="512" y1="211" x2="514" y2="211" stroke="#4ade80" stroke-width="1.5"/>
+        <line x1="512" y1="236" x2="514" y2="236" stroke="#4ade80" stroke-width="1.5"/>
+
+        <!-- 灵敏放大器 SA -->
+        <rect x="258" y="312" width="254" height="32" rx="7" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+        <text x="385" y="325" fill="#15803d" font-size="10" text-anchor="middle" font-weight="bold">灵敏放大器（Sense Amplifier）</text>
+        <text x="385" y="338" fill="#64748b" font-size="7.5" text-anchor="middle">差分检测 BL/BL̄ 微弱电压差，放大为完整逻辑电平</text>
+        <!-- 列译码→SA -->
+        <line x1="552" y1="300" x2="552" y2="328" stroke="#16a34a" stroke-width="1.5" marker-end="url(#mg)"/>
+
+        <!-- 读写控制 -->
+        <rect x="150" y="312" width="96" height="72" rx="7" fill="#fff7ed" stroke="#f97316" stroke-width="1.5"/>
+        <text x="198" y="330" fill="#c2410c" font-size="9" text-anchor="middle" font-weight="bold">读/写控制</text>
+        <text x="198" y="344" fill="#64748b" font-size="8" text-anchor="middle">CS̄  WĒ  OĒ</text>
+        <text x="198" y="358" fill="#64748b" font-size="8" text-anchor="middle">片选 / 读写使能</text>
+        <text x="198" y="372" fill="#64748b" font-size="8" text-anchor="middle">刷新逻辑 (DRAM)</text>
+
+        <!-- 数据缓冲器 MDR -->
+        <rect x="258" y="358" width="254" height="32" rx="7" fill="#fdf4ff" stroke="#a855f7" stroke-width="1.5"/>
+        <text x="385" y="371" fill="#7e22ce" font-size="10" text-anchor="middle" font-weight="bold">数据缓冲器（I/O Buffer / MDR）</text>
+        <text x="385" y="384" fill="#64748b" font-size="7.5" text-anchor="middle">读出数据暂存并驱动总线 / 接收写入数据</text>
+        <!-- SA→MDR -->
+        <line x1="385" y1="344" x2="385" y2="356" stroke="#16a34a" stroke-width="1.5" marker-end="url(#mg)"/>
+
+        <!-- 外部引脚 -->
+        <!-- A[n] -->
+        <line x1="40"  y1="61" x2="148" y2="61" stroke="#f59e0b" stroke-width="2" marker-end="url(#ma)"/>
+        <text x="34"   y="57" fill="#f59e0b" font-size="9" text-anchor="end" font-weight="bold">A[n-1:0]</text>
+        <text x="34"   y="69" fill="#94a3b8" font-size="7" text-anchor="end">地址总线</text>
+
+        <!-- D[m] -->
+        <line x1="385" y1="390" x2="385" y2="440" stroke="#7c3aed" stroke-width="2" marker-end="url(#mp)"/>
+        <text x="385" y="448" fill="#7e22ce" font-size="9" text-anchor="middle" font-weight="bold">D[m-1:0]  数据总线（双向）</text>
+
+        <!-- 控制 -->
+        <line x1="40"  y1="348" x2="148" y2="348" stroke="#ea580c" stroke-width="1.5" marker-end="url(#mo)"/>
+        <text x="34"   y="344" fill="#c2410c" font-size="9" text-anchor="end">CS̄  WĒ</text>
+        <text x="34"   y="356" fill="#94a3b8" font-size="7" text-anchor="end">控制信号</text>
+
+        <!-- REF -->
+        <line x1="40"  y1="374" x2="148" y2="374" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#mp)"/>
+        <text x="34"   y="370" fill="#6d28d9" font-size="9" text-anchor="end">REF</text>
+        <text x="34"   y="382" fill="#94a3b8" font-size="7" text-anchor="end">刷新(DRAM)</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ct">各模块功能详解</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div class="ib" style="border-left:3px solid #f59e0b;background:#fef9c3;">
+          <div style="color:#b45309;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px;">地址寄存器 MAR</div>
+          锁存 CPU 送来的地址码，保证整个存储周期内地址稳定，避免总线变化影响内部操作。
+        </div>
+        <div class="ib" style="border-left:3px solid #f59e0b;background:#f1f5f9;">
+          <div style="color:#b45309;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px;">行 / 列译码器</div>
+          将 n 位地址译为 2ⁿ 条选择线。<strong>行译码器</strong>激活 WL 选定行；<strong>列译码器</strong>选定 BL 列接入 SA。
+        </div>
+        <div class="ib" style="border-left:3px solid #2563eb;background:#f1f5f9;">
+          <div style="color:#1d4ed8;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px;">存储矩阵 Cell Array</div>
+          核心存储体。SRAM 用双稳态触发器（6T），DRAM 用电容（1T1C）。行激活整行，列选具体单元。
+        </div>
+        <div class="ib" style="border-left:3px solid #22c55e;background:#f1f5f9;">
+          <div style="color:#15803d;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px;">灵敏放大器 SA</div>
+          检测 BL 与 BL̄ 间微弱电压差（几十 mV），放大为完整 VDD/GND 电平。DRAM 读后还负责回写。
+        </div>
+        <div class="ib" style="border-left:3px solid #a855f7;background:#f1f5f9;">
+          <div style="color:#7e22ce;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px;">数据缓冲器 MDR / I/O Buffer</div>
+          读：暂存 SA 读出的数据并驱动数据总线。写：接收外部总线数据，准备写入存储矩阵。
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="ct">关键控制引脚</div>
+      <div style="display:flex;flex-direction:column;gap:8px;font-size:12px;margin-bottom:16px;">
+        <div style="padding:10px;background:#fff7ed;border-radius:8px;display:flex;gap:12px;align-items:center;">
+          <div style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#c2410c;font-size:18px;min-width:48px;">CS̄</div>
+          <div><div style="color:#1e293b;font-weight:600;">片选（Chip Select）</div><div style="color:#64748b;margin-top:2px;">低有效。仅 CS̄=0 时芯片工作；多片组合时由高位地址控制各片 CS̄。</div></div>
+        </div>
+        <div style="padding:10px;background:#eff6ff;border-radius:8px;display:flex;gap:12px;align-items:center;">
+          <div style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#0369a1;font-size:18px;min-width:48px;">WĒ</div>
+          <div><div style="color:#1e293b;font-weight:600;">写使能（Write Enable）</div><div style="color:#64748b;margin-top:2px;">WĒ=0 写操作，WĒ=1 读操作，决定数据流方向。</div></div>
+        </div>
+        <div style="padding:10px;background:#f0fdf4;border-radius:8px;display:flex;gap:12px;align-items:center;">
+          <div style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#15803d;font-size:18px;min-width:48px;">OĒ</div>
+          <div><div style="color:#1e293b;font-weight:600;">输出使能（Output Enable）</div><div style="color:#64748b;margin-top:2px;">OĒ=0 数据输出到总线；否则呈高阻抗（三态门断开）。</div></div>
+        </div>
+        <div style="padding:10px;background:#fdf4ff;border-radius:8px;display:flex;gap:12px;align-items:center;">
+          <div style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#7e22ce;font-size:18px;min-width:48px;">A[n]</div>
+          <div><div style="color:#1e293b;font-weight:600;">地址总线</div><div style="color:#64748b;margin-top:2px;">n 根寻址 2ⁿ 个单元。DRAM 行列复用，分两次传入（RAS↓/CAS↓）。</div></div>
+        </div>
+      </div>
+      <div style="padding:14px;background:#f8fafc;border-radius:10px;border-left:4px solid #0284c7;font-size:12px;color:#475569;line-height:1.8;">
+        <div style="color:#1e293b;font-weight:700;margin-bottom:6px;">📐 地址线与容量关系</div>
+        n 根地址线 + m 根数据线 →<br>
+        容量 = <code style="background:#eff6ff;padding:2px 6px;border-radius:4px;color:#0369a1;">2ⁿ × m bit</code><br>
+        例：14 根地址线 + 8 根数据线 → 2¹⁴ × 8 bit = <strong style="color:#0284c7;">16 KB</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ PANEL 2 : 读写时序 ══════════════ -->
+<div id="pane-timing" class="pane">
+  <div class="card">
+    <div class="ct">读操作时序图</div>
+    <div class="sw">
+      <svg width="680" height="228" viewBox="0 0 680 228">
+        <!-- 时间轴 -->
+        <line x1="60" y1="210" x2="668" y2="210" stroke="#cbd5e1" stroke-width="1.5"/>
+        <text x="674" y="214" fill="#64748b" font-size="10">t</text>
+        <!-- 分段线 -->
+        <line x1="150" y1="12" x2="150" y2="205" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="375" y1="12" x2="375" y2="205" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="545" y1="12" x2="545" y2="205" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="105" y="11" fill="#94a3b8" font-size="7.5" text-anchor="middle">地址建立</text>
+        <text x="262" y="11" fill="#16a34a"  font-size="7.5" text-anchor="middle">读取进行中</text>
+        <text x="460" y="11" fill="#0284c7"   font-size="7.5" text-anchor="middle">数据有效</text>
+        <text x="606" y="11" fill="#94a3b8"  font-size="7.5" text-anchor="middle">恢复</text>
+
+        <!-- CS̄ -->
+        <text x="54" y="39" fill="#c2410c" font-size="9" text-anchor="end">CS̄</text>
+        <polyline points="60,27 106,27 106,45 545,45 545,27 660,27" fill="none" stroke="#f97316" stroke-width="2"/>
+        <text x="325" y="38" fill="#f97316" font-size="7.5" text-anchor="middle">LOW — 芯片选中</text>
+
+        <!-- A[n] -->
+        <text x="54" y="73" fill="#b45309" font-size="9" text-anchor="end">A[n]</text>
+        <polyline points="60,77 100,77 110,61 545,61 555,77 660,77" fill="none" stroke="#f59e0b" stroke-width="2"/>
+        <text x="325" y="57" fill="#f59e0b" font-size="7.5" text-anchor="middle">地址稳定有效</text>
+        <line x1="106" y1="82" x2="150" y2="82" stroke="#94a3b8" stroke-width="1"/>
+        <line x1="106" y1="79" x2="106" y2="85" stroke="#94a3b8" stroke-width="1"/>
+        <line x1="150" y1="79" x2="150" y2="85" stroke="#94a3b8" stroke-width="1"/>
+        <text x="128" y="94" fill="#94a3b8" font-size="7" text-anchor="middle">tAS</text>
+
+        <!-- WĒ -->
+        <text x="54" y="112" fill="#0369a1" font-size="9" text-anchor="end">WĒ</text>
+        <polyline points="60,108 660,108" fill="none" stroke="#0284c7" stroke-width="2"/>
+        <text x="325" y="102" fill="#0284c7" font-size="7.5" text-anchor="middle">HIGH — 读操作</text>
+
+        <!-- OĒ -->
+        <text x="54" y="146" fill="#15803d" font-size="9" text-anchor="end">OĒ</text>
+        <polyline points="60,138 150,138 150,154 545,154 545,138 660,138" fill="none" stroke="#22c55e" stroke-width="2"/>
+        <text x="347" y="148" fill="#22c55e" font-size="7.5" text-anchor="middle">LOW — 输出使能</text>
+
+        <!-- D[m] -->
+        <text x="54" y="181" fill="#7e22ce" font-size="9" text-anchor="end">D[m]</text>
+        <polyline points="60,184 368,184 384,168 545,168 557,184 660,184" fill="none" stroke="#a855f7" stroke-width="2"/>
+        <text x="464" y="163" fill="#a855f7" font-size="7.5" text-anchor="middle">数据有效输出</text>
+
+        <!-- tACC -->
+        <line x1="150" y1="193" x2="384" y2="193" stroke="#ef4444" stroke-width="1.5"/>
+        <line x1="150" y1="190" x2="150" y2="196" stroke="#ef4444" stroke-width="1.5"/>
+        <line x1="384" y1="190" x2="384" y2="196" stroke="#ef4444" stroke-width="1.5"/>
+        <text x="267" y="205" fill="#ef4444" font-size="7.5" text-anchor="middle">tACC（地址访问时间）</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ct">写操作时序图</div>
+    <div class="sw">
+      <svg width="680" height="228" viewBox="0 0 680 228">
+        <line x1="60" y1="210" x2="668" y2="210" stroke="#cbd5e1" stroke-width="1.5"/>
+        <text x="674" y="214" fill="#64748b" font-size="10">t</text>
+        <line x1="148" y1="12" x2="148" y2="205" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="208" y1="12" x2="208" y2="205" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="500" y1="12" x2="500" y2="205" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="104" y="11" fill="#94a3b8" font-size="7.5" text-anchor="middle">地址建立</text>
+        <text x="354" y="11" fill="#ea580c"  font-size="7.5" text-anchor="middle">写入进行中</text>
+        <text x="580" y="11" fill="#94a3b8"  font-size="7.5" text-anchor="middle">恢复</text>
+
+        <!-- CS̄ -->
+        <text x="54" y="37" fill="#c2410c" font-size="9" text-anchor="end">CS̄</text>
+        <polyline points="60,25 106,25 106,43 500,43 500,25 660,25" fill="none" stroke="#f97316" stroke-width="2"/>
+        <text x="303" y="36" fill="#f97316" font-size="7.5" text-anchor="middle">LOW — 芯片选中</text>
+
+        <!-- A[n] -->
+        <text x="54" y="71" fill="#b45309" font-size="9" text-anchor="end">A[n]</text>
+        <polyline points="60,75 100,75 110,59 500,59 510,75 660,75" fill="none" stroke="#f59e0b" stroke-width="2"/>
+        <text x="303" y="55" fill="#f59e0b" font-size="7.5" text-anchor="middle">地址稳定</text>
+
+        <!-- WĒ -->
+        <text x="54" y="110" fill="#0369a1" font-size="9" text-anchor="end">WĒ</text>
+        <polyline points="60,102 203,102 203,120 500,120 500,102 660,102" fill="none" stroke="#0284c7" stroke-width="2"/>
+        <text x="351" y="113" fill="#0284c7" font-size="7.5" text-anchor="middle">LOW — 写操作</text>
+        <!-- tWP -->
+        <line x1="208" y1="128" x2="500" y2="128" stroke="#0284c7" stroke-width="1"/>
+        <line x1="208" y1="125" x2="208" y2="131" stroke="#0284c7" stroke-width="1"/>
+        <line x1="500" y1="125" x2="500" y2="131" stroke="#0284c7" stroke-width="1"/>
+        <text x="354" y="140" fill="#0284c7" font-size="7" text-anchor="middle">tWP（写脉冲宽度）</text>
+
+        <!-- D[m] -->
+        <text x="54" y="170" fill="#7e22ce" font-size="9" text-anchor="end">D[m]</text>
+        <polyline points="60,166 186,166 202,150 500,150 514,166 660,166" fill="none" stroke="#a855f7" stroke-width="2"/>
+        <text x="350" y="146" fill="#a855f7" font-size="7.5" text-anchor="middle">数据须提前建立，保持至 WĒ↑</text>
+        <!-- tDS / tDH -->
+        <line x1="202" y1="174" x2="208" y2="174" stroke="#ef4444" stroke-width="1.5"/>
+        <line x1="202" y1="171" x2="202" y2="177" stroke="#ef4444" stroke-width="1.5"/>
+        <line x1="208" y1="171" x2="208" y2="177" stroke="#ef4444" stroke-width="1.5"/>
+        <text x="205" y="186" fill="#ef4444" font-size="7" text-anchor="middle">tDS</text>
+        <line x1="500" y1="174" x2="514" y2="174" stroke="#ef4444" stroke-width="1.5"/>
+        <line x1="500" y1="171" x2="500" y2="177" stroke="#ef4444" stroke-width="1.5"/>
+        <line x1="514" y1="171" x2="514" y2="177" stroke="#ef4444" stroke-width="1.5"/>
+        <text x="507" y="186" fill="#ef4444" font-size="7" text-anchor="middle">tDH</text>
+
+        <text x="354" y="205" fill="#94a3b8" font-size="7" text-anchor="middle">tDS 建立时间：WĒ↓ 前数据需稳定；tDH 保持时间：WĒ↑ 后数据继续保持</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ct">关键时间参数</div>
+      <div style="display:flex;flex-direction:column;gap:8px;font-size:12px;">
+        <div style="padding:10px;background:#f1f5f9;border-radius:8px;display:flex;justify-content:space-between;align-items:center;">
+          <span><span style="font-family:'JetBrains Mono',monospace;color:#ef4444;font-weight:700;">tACC</span><span style="color:#475569;margin-left:8px;">地址访问时间</span></span>
+          <span style="color:#64748b;font-size:11px;">地址有效 → 数据稳定输出</span>
+        </div>
+        <div style="padding:10px;background:#f1f5f9;border-radius:8px;display:flex;justify-content:space-between;align-items:center;">
+          <span><span style="font-family:'JetBrains Mono',monospace;color:#f59e0b;font-weight:700;">tAS</span><span style="color:#475569;margin-left:8px;">地址建立时间</span></span>
+          <span style="color:#64748b;font-size:11px;">CS̄ 有效前地址需稳定的最短时间</span>
+        </div>
+        <div style="padding:10px;background:#f1f5f9;border-radius:8px;display:flex;justify-content:space-between;align-items:center;">
+          <span><span style="font-family:'JetBrains Mono',monospace;color:#0284c7;font-weight:700;">tWP</span><span style="color:#475569;margin-left:8px;">写脉冲宽度</span></span>
+          <span style="color:#64748b;font-size:11px;">WĒ 低电平维持的最短时间</span>
+        </div>
+        <div style="padding:10px;background:#f1f5f9;border-radius:8px;display:flex;justify-content:space-between;align-items:center;">
+          <span><span style="font-family:'JetBrains Mono',monospace;color:#a855f7;font-weight:700;">tDS / tDH</span><span style="color:#475569;margin-left:8px;">建立/保持时间</span></span>
+          <span style="color:#64748b;font-size:11px;">写入数据相对 WĒ 的时序要求</span>
+        </div>
+        <div style="padding:10px;background:#f1f5f9;border-radius:8px;display:flex;justify-content:space-between;align-items:center;">
+          <span><span style="font-family:'JetBrains Mono',monospace;color:#16a34a;font-weight:700;">tRC / tWC</span><span style="color:#475569;margin-left:8px;">读/写周期</span></span>
+          <span style="color:#64748b;font-size:11px;">完成一次读/写的最短总时间</span>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ct">存储周期 vs 存取时间</div>
+      <div class="sw" style="padding:14px;">
+        <svg width="330" height="108" viewBox="0 0 330 108">
+          <rect x="10"  y="18" width="154" height="28" rx="5" fill="#eff6ff" stroke="#0284c7" stroke-width="1.5"/>
+          <text x="87"  y="36" fill="#0369a1" font-size="10" text-anchor="middle" font-weight="bold">存取时间 tACC</text>
+          <rect x="168" y="18" width="76"  height="28" rx="5" fill="#fef9c3" stroke="#f59e0b" stroke-width="1.5"/>
+          <text x="206" y="36" fill="#b45309" font-size="9"  text-anchor="middle">恢复时间</text>
+          <line x1="10"  y1="56" x2="245" y2="56" stroke="#ef4444" stroke-width="2"/>
+          <line x1="10"  y1="52" x2="10"  y2="60" stroke="#ef4444" stroke-width="2"/>
+          <line x1="245" y1="52" x2="245" y2="60" stroke="#ef4444" stroke-width="2"/>
+          <text x="127" y="72" fill="#ef4444" font-size="10" text-anchor="middle" font-weight="bold">存储周期 tRC</text>
+          <text x="127" y="86" fill="#94a3b8" font-size="8"  text-anchor="middle">tRC = tACC + 恢复时间 ≥ tACC</text>
+          <text x="127" y="100" fill="#64748b" font-size="8"  text-anchor="middle">DRAM 恢复更长（需预充电）</text>
+        </svg>
+      </div>
+      <div style="margin-top:12px;padding:12px;background:#fff7ed;border-radius:8px;border-left:3px solid #f97316;font-size:12px;color:#475569;line-height:1.7;">
+        <strong style="color:#c2410c;">区分要点：</strong><br>
+        • <strong>存取时间</strong>：发出地址到数据稳定，反映读速度<br>
+        • <strong>存储周期</strong>：两次访问间最小间隔，含恢复阶段<br>
+        • DRAM 存储周期远大于存取时间
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ PANEL 3 : 存储器扩展 ══════════════ -->
+<div id="pane-expand" class="pane">
+
+  <!-- 位扩展 -->
+  <div class="card">
+    <div class="ct">位扩展 — 增加字长（数据位宽）</div>
+    <div class="sw">
+      <svg width="600" height="210" viewBox="0 0 600 210">
+        <!-- 说明文字：两行，中间空一行 -->
+        <text x="300" y="13" fill="#64748b" font-size="9" text-anchor="middle">例：4 片 1K×4bit → 1K×16bit</text>
+        <text x="300" y="35" fill="#64748b" font-size="9" text-anchor="middle">（地址线共享，数据线并联）</text>
+
+        <!-- 4 芯片 -->
+        <rect x="20"  y="44" width="108" height="88" rx="8" fill="#eff6ff" stroke="#0284c7" stroke-width="2"/>
+        <text x="74"  y="70" fill="#0369a1" font-size="9" text-anchor="middle" font-weight="bold">芯片 #0</text>
+        <text x="74"  y="84" fill="#64748b" font-size="8" text-anchor="middle">1K × 4bit</text>
+        <text x="74"  y="108" fill="#0284c7" font-size="10" text-anchor="middle" font-weight="bold">D[3:0]</text>
+
+        <rect x="158" y="44" width="108" height="88" rx="8" fill="#eff6ff" stroke="#0284c7" stroke-width="2"/>
+        <text x="212" y="70" fill="#0369a1" font-size="9" text-anchor="middle" font-weight="bold">芯片 #1</text>
+        <text x="212" y="84" fill="#64748b" font-size="8" text-anchor="middle">1K × 4bit</text>
+        <text x="212" y="108" fill="#0284c7" font-size="10" text-anchor="middle" font-weight="bold">D[7:4]</text>
+
+        <rect x="296" y="44" width="108" height="88" rx="8" fill="#eff6ff" stroke="#0284c7" stroke-width="2"/>
+        <text x="350" y="70" fill="#0369a1" font-size="9" text-anchor="middle" font-weight="bold">芯片 #2</text>
+        <text x="350" y="84" fill="#64748b" font-size="8" text-anchor="middle">1K × 4bit</text>
+        <text x="350" y="108" fill="#0284c7" font-size="10" text-anchor="middle" font-weight="bold">D[11:8]</text>
+
+        <rect x="434" y="44" width="108" height="88" rx="8" fill="#eff6ff" stroke="#0284c7" stroke-width="2"/>
+        <text x="488" y="70" fill="#0369a1" font-size="9" text-anchor="middle" font-weight="bold">芯片 #3</text>
+        <text x="488" y="84" fill="#64748b" font-size="8" text-anchor="middle">1K × 4bit</text>
+        <text x="488" y="108" fill="#0284c7" font-size="10" text-anchor="middle" font-weight="bold">D[15:12]</text>
+
+        <!-- A[9:0] 顶部共享横线 -->
+        <line x1="74"  y1="44" x2="74"  y2="36" stroke="#f59e0b" stroke-width="1.5"/>
+        <line x1="212" y1="44" x2="212" y2="36" stroke="#f59e0b" stroke-width="1.5"/>
+        <line x1="350" y1="44" x2="350" y2="36" stroke="#f59e0b" stroke-width="1.5"/>
+        <line x1="488" y1="44" x2="488" y2="36" stroke="#f59e0b" stroke-width="1.5"/>
+        <line x1="74"  y1="36" x2="488" y2="36" stroke="#f59e0b" stroke-width="2"/>
+        <text x="281" y="32" fill="#b45309" font-size="8" text-anchor="middle">A[9:0] 地址线共享（10 根）</text>
+
+        <!-- CS̄ 共享 -->
+        <line x1="74"  y1="132" x2="74"  y2="148" stroke="#f97316" stroke-width="1.5"/>
+        <line x1="212" y1="132" x2="212" y2="148" stroke="#f97316" stroke-width="1.5"/>
+        <line x1="350" y1="132" x2="350" y2="148" stroke="#f97316" stroke-width="1.5"/>
+        <line x1="488" y1="132" x2="488" y2="148" stroke="#f97316" stroke-width="1.5"/>
+        <line x1="74"  y1="148" x2="488" y2="148" stroke="#f97316" stroke-width="2"/>
+        <text x="281" y="161" fill="#c2410c" font-size="8" text-anchor="middle">CS̄ 并联（同时选中，同时工作）</text>
+
+        <!-- D[15:0] 数据线并联 -->
+        <line x1="74"  y1="132" x2="74"  y2="178" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <line x1="212" y1="132" x2="212" y2="178" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <line x1="350" y1="132" x2="350" y2="178" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <line x1="488" y1="132" x2="488" y2="178" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <line x1="74"  y1="178" x2="488" y2="178" stroke="#a855f7" stroke-width="2.5"/>
+        <text x="281" y="196" fill="#7e22ce" font-size="10" text-anchor="middle" font-weight="bold">D[15:0] — 数据线并联，组成 16bit 总线</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- 字扩展 -->
+  <div class="card">
+    <div class="ct">字扩展 — 增加地址空间（存储容量）</div>
+    <div class="sw">
+      <svg width="560" height="270" viewBox="0 0 560 270">
+        <text x="280" y="14" fill="#64748b" font-size="9" text-anchor="middle">例：4 片 1K×8bit → 4K×8bit（高位地址控制片选 CS̄）</text>
+
+        <!-- 输入 & 译码器 -->
+        <text x="8"   y="96"  fill="#b45309" font-size="8">A[11:10]</text>
+        <text x="8"   y="108" fill="#94a3b8" font-size="7">高位→译码</text>
+        <line x1="68" y1="96"  x2="84" y2="96"  stroke="#f59e0b" stroke-width="1.5"/>
+        <line x1="68" y1="108" x2="84" y2="108" stroke="#f59e0b" stroke-width="1.5"/>
+        <rect x="84"  y="78"  width="62" height="50" rx="6" fill="#fef9c3" stroke="#f59e0b" stroke-width="1.5"/>
+        <text x="115" y="99"  fill="#b45309" font-size="9" text-anchor="middle" font-weight="bold">2-4</text>
+        <text x="115" y="113" fill="#b45309" font-size="8" text-anchor="middle">译码器</text>
+
+        <!-- CS̄ 到各芯片 -->
+        <line x1="146" y1="87"  x2="188" y2="53"  stroke="#f97316" stroke-width="1.5"/>
+        <line x1="146" y1="97"  x2="188" y2="113" stroke="#f97316" stroke-width="1.5"/>
+        <line x1="146" y1="107" x2="188" y2="173" stroke="#f97316" stroke-width="1.5"/>
+        <line x1="146" y1="117" x2="188" y2="233" stroke="#f97316" stroke-width="1.5"/>
+        <text x="160" y="51"  fill="#c2410c" font-size="7">CS̄₀</text>
+        <text x="160" y="105" fill="#c2410c" font-size="7">CS̄₁</text>
+        <text x="160" y="163" fill="#c2410c" font-size="7">CS̄₂</text>
+        <text x="160" y="223" fill="#c2410c" font-size="7">CS̄₃</text>
+
+        <!-- 4 芯片竖排 -->
+        <rect x="188" y="28"  width="116" height="46" rx="7" fill="#eff6ff" stroke="#0284c7" stroke-width="2"/>
+        <text x="246" y="50"  fill="#0369a1" font-size="9" text-anchor="middle" font-weight="bold">芯片 #0</text>
+        <text x="246" y="64"  fill="#64748b" font-size="7" text-anchor="middle">0000H ～ 03FFH</text>
+
+        <rect x="188" y="88"  width="116" height="46" rx="7" fill="#eff6ff" stroke="#0284c7" stroke-width="2"/>
+        <text x="246" y="110" fill="#0369a1" font-size="9" text-anchor="middle" font-weight="bold">芯片 #1</text>
+        <text x="246" y="124" fill="#64748b" font-size="7" text-anchor="middle">0400H ～ 07FFH</text>
+
+        <rect x="188" y="148" width="116" height="46" rx="7" fill="#eff6ff" stroke="#0284c7" stroke-width="2"/>
+        <text x="246" y="170" fill="#0369a1" font-size="9" text-anchor="middle" font-weight="bold">芯片 #2</text>
+        <text x="246" y="184" fill="#64748b" font-size="7" text-anchor="middle">0800H ～ 0BFFH</text>
+
+        <rect x="188" y="208" width="116" height="46" rx="7" fill="#eff6ff" stroke="#0284c7" stroke-width="2"/>
+        <text x="246" y="230" fill="#0369a1" font-size="9" text-anchor="middle" font-weight="bold">芯片 #3</text>
+        <text x="246" y="244" fill="#64748b" font-size="7" text-anchor="middle">0C00H ～ 0FFFH</text>
+
+        <!-- A[9:0] 竖干线 + 标签框（完全内置） -->
+        <line x1="304" y1="51"  x2="352" y2="51"  stroke="#f59e0b" stroke-width="1.5"/>
+        <line x1="304" y1="111" x2="352" y2="111" stroke="#f59e0b" stroke-width="1.5"/>
+        <line x1="304" y1="171" x2="352" y2="171" stroke="#f59e0b" stroke-width="1.5"/>
+        <line x1="304" y1="231" x2="352" y2="231" stroke="#f59e0b" stroke-width="1.5"/>
+        <line x1="352" y1="51"  x2="352" y2="231" stroke="#f59e0b" stroke-width="2"/>
+        <line x1="352" y1="141" x2="380" y2="141" stroke="#f59e0b" stroke-width="2.5"/>
+        <rect x="380" y="124" width="168" height="34" rx="7" fill="#fef9c3" stroke="#f59e0b" stroke-width="1.5"/>
+        <text x="464" y="139" fill="#b45309" font-size="11" text-anchor="middle" font-weight="bold">A[9:0]</text>
+        <text x="464" y="152" fill="#b45309" font-size="8"  text-anchor="middle">低位地址共享（10 根）</text>
+
+        <!-- D[7:0] 竖干线 + 标签框（完全内置） -->
+        <line x1="304" y1="65"  x2="336" y2="65"  stroke="#a855f7" stroke-width="1.5"/>
+        <line x1="304" y1="125" x2="336" y2="125" stroke="#a855f7" stroke-width="1.5"/>
+        <line x1="304" y1="185" x2="336" y2="185" stroke="#a855f7" stroke-width="1.5"/>
+        <line x1="304" y1="245" x2="336" y2="245" stroke="#a855f7" stroke-width="1.5"/>
+        <line x1="336" y1="65"  x2="336" y2="245" stroke="#a855f7" stroke-width="2"/>
+        <line x1="336" y1="185" x2="380" y2="185" stroke="#a855f7" stroke-width="2.5"/>
+        <rect x="380" y="169" width="168" height="34" rx="7" fill="#fdf4ff" stroke="#a855f7" stroke-width="1.5"/>
+        <text x="464" y="184" fill="#7e22ce" font-size="11" text-anchor="middle" font-weight="bold">D[7:0]</text>
+        <text x="464" y="197" fill="#7e22ce" font-size="8"  text-anchor="middle">数据线共享（8 根）</text>
+
+        <text x="280" y="262" fill="#64748b" font-size="8" text-anchor="middle">每次仅一片 CS̄=LOW，其余高阻（Hi-Z），三态门隔离，互不干扰</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- 字位同时扩展 -->
+  <div class="card">
+    <div class="ct">字位同时扩展综合示例</div>
+    <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;">
+      <div style="flex:1;min-width:240px;padding:16px;background:#f1f5f9;border-radius:10px;">
+        <div style="color:#0369a1;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:10px;font-weight:700;">用 1K×4bit 芯片构建 4K×8bit 存储器</div>
+        <ul class="sl">
+          <li><span class="sn">①</span>位扩展：每组 2 片并联 → 每组 1K×8bit</li>
+          <li><span class="sn">②</span>字扩展：4 组串联（片选）→ 4K×8bit</li>
+          <li><span class="sn">③</span>共需 2×4 = <strong style="color:#0284c7;">8 片</strong>芯片</li>
+          <li><span class="sn">④</span>地址线：低 10 位寻址组内，高 2 位选组</li>
+          <li><span class="sn">⑤</span>数据线：8 根（2 片各出 4bit 并联）</li>
+        </ul>
+      </div>
+      <div style="flex:1;min-width:240px;display:flex;flex-direction:column;gap:10px;">
+        <div class="ib" style="background:#dcfce7;border-left:3px solid #16a34a;">
+          <div style="color:#15803d;font-weight:700;margin-bottom:4px;">位扩展要点</div>
+          地址线、CS̄、WĒ 并联共享；数据线各自独立拼接。所有芯片同时被选中同时工作。
+        </div>
+        <div class="ib" style="background:#eff6ff;border-left:3px solid #0284c7;">
+          <div style="color:#0369a1;font-weight:700;margin-bottom:4px;">字扩展要点</div>
+          低位地址、数据线、WĒ 共享；高位地址经译码器控制各片 CS̄，每次仅一片工作。
+        </div>
+        <div class="ib" style="background:#fdf4ff;border-left:3px solid #a855f7;">
+          <div style="color:#7e22ce;font-weight:700;margin-bottom:4px;">三态门的作用</div>
+          未被选中的芯片呈<strong>高阻抗（Hi-Z）</strong>，防止多片并接时互相驱动冲突，是总线复用的基础。
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ PANEL 4 : 总线连接 ══════════════ -->
+<div id="pane-bus" class="pane">
+  <div class="card">
+    <div class="ct">存储器与 CPU 总线连接全图</div>
+    <div class="sw">
+      <svg width="660" height="348" viewBox="0 0 660 348">
+        <defs>
+          <marker id="ba" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0L7,3.5L0,7Z" fill="#f59e0b"/></marker>
+          <marker id="bp" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0L7,3.5L0,7Z" fill="#a855f7"/></marker>
+          <marker id="bpr" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M7,0L0,3.5L7,7Z" fill="#a855f7"/></marker>
+          <marker id="bo" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0L7,3.5L0,7Z" fill="#ea580c"/></marker>
+        </defs>
+
+        <!-- CPU -->
+        <rect x="14" y="84" width="118" height="182" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+        <text x="73" y="110" fill="#c2410c" font-size="12" text-anchor="middle" font-weight="bold">CPU</text>
+        <text x="73" y="128" fill="#94a3b8" font-size="7.5" text-anchor="middle">程序计数器 PC</text>
+        <text x="73" y="142" fill="#94a3b8" font-size="7.5" text-anchor="middle">地址寄存器 MAR</text>
+        <text x="73" y="156" fill="#94a3b8" font-size="7.5" text-anchor="middle">数据寄存器 MDR</text>
+        <text x="73" y="170" fill="#94a3b8" font-size="7.5" text-anchor="middle">指令寄存器 IR</text>
+        <text x="73" y="184" fill="#94a3b8" font-size="7.5" text-anchor="middle">控制器 CU</text>
+        <text x="73" y="198" fill="#94a3b8" font-size="7.5" text-anchor="middle">运算器 ALU</text>
+        <text x="73" y="212" fill="#94a3b8" font-size="7.5" text-anchor="middle">寄存器组</text>
+        <text x="73" y="226" fill="#94a3b8" font-size="7.5" text-anchor="middle">Cache L1/L2</text>
+
+        <!-- 地址总线 -->
+        <rect x="176" y="112" width="320" height="26" rx="5" fill="#fef9c3" stroke="#f59e0b" stroke-width="2"/>
+        <text x="336" y="129" fill="#b45309" font-size="9.5" text-anchor="middle" font-weight="bold">地址总线（Address Bus）— 单向 →</text>
+        <line x1="132" y1="125" x2="174" y2="125" stroke="#f59e0b" stroke-width="2" marker-end="url(#ba)"/>
+
+        <!-- 数据总线 -->
+        <rect x="176" y="168" width="320" height="26" rx="5" fill="#fdf4ff" stroke="#a855f7" stroke-width="2"/>
+        <text x="336" y="185" fill="#7e22ce" font-size="9.5" text-anchor="middle" font-weight="bold">数据总线（Data Bus）— 双向 ↔</text>
+        <line x1="132" y1="181" x2="174" y2="181" stroke="#a855f7" stroke-width="2" marker-end="url(#bp)"/>
+        <line x1="176" y1="183" x2="134"  y2="183" stroke="#a855f7" stroke-width="1.5" marker-end="url(#bpr)"/>
+
+        <!-- 控制总线 -->
+        <rect x="176" y="224" width="320" height="26" rx="5" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
+        <text x="336" y="241" fill="#c2410c" font-size="9.5" text-anchor="middle" font-weight="bold">控制总线（Control Bus）— R/W̄ · CS̄ · CLK</text>
+        <line x1="132" y1="237" x2="174" y2="237" stroke="#ea580c" stroke-width="2" marker-end="url(#bo)"/>
+
+        <!-- ROM -->
+        <rect x="510" y="64"  width="136" height="84" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+        <text x="578" y="90"  fill="#15803d" font-size="10" text-anchor="middle" font-weight="bold">ROM</text>
+        <text x="578" y="104" fill="#64748b" font-size="7.5" text-anchor="middle">只读存储器</text>
+        <text x="578" y="118" fill="#64748b" font-size="7.5" text-anchor="middle">存 BIOS / 固件</text>
+        <text x="578" y="132" fill="#64748b" font-size="7.5" text-anchor="middle">非易失，掉电不丢</text>
+        <line x1="510" y1="125" x2="496" y2="125" stroke="#f59e0b" stroke-width="1.5"/>
+        <line x1="510" y1="106" x2="496" y2="106" stroke="#a855f7" stroke-width="1.5"/>
+        <line x1="510" y1="116" x2="496" y2="116" stroke="#f97316" stroke-width="1.5"/>
+
+        <!-- RAM -->
+        <rect x="510" y="170" width="136" height="84" rx="8" fill="#eff6ff" stroke="#0284c7" stroke-width="2"/>
+        <text x="578" y="196" fill="#0369a1" font-size="9.5" text-anchor="middle" font-weight="bold">RAM</text>
+        <text x="578" y="210" fill="#64748b" font-size="7.5" text-anchor="middle">随机读写存储器</text>
+        <text x="578" y="224" fill="#64748b" font-size="7.5" text-anchor="middle">Cache + 主存</text>
+        <text x="578" y="238" fill="#64748b" font-size="7.5" text-anchor="middle">易失，掉电丢失</text>
+        <line x1="510" y1="225" x2="496" y2="225" stroke="#f59e0b" stroke-width="1.5"/>
+        <line x1="510" y1="206" x2="496" y2="206" stroke="#a855f7" stroke-width="1.5"/>
+        <line x1="510" y1="216" x2="496" y2="216" stroke="#f97316" stroke-width="1.5"/>
+
+        <!-- 总线→存储器竖干线 -->
+        <line x1="496" y1="106" x2="496" y2="206" stroke="#a855f7" stroke-width="1" opacity=".35"/>
+        <line x1="497" y1="116" x2="497" y2="216" stroke="#f97316" stroke-width="1" opacity=".35"/>
+        <line x1="496" y1="125" x2="496" y2="225" stroke="#f59e0b" stroke-width="1" opacity=".35"/>
+
+        <!-- 地址空间分配 -->
+        <rect x="148" y="290" width="360" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+        <text x="328" y="308" fill="#64748b" font-size="8.5" text-anchor="middle" font-weight="bold">存储器地址空间分配（示意）</text>
+        <rect x="158" y="316" width="58"  height="14" rx="3" fill="#dcfce7" stroke="#22c55e" stroke-width="1"/>
+        <text x="187" y="327" fill="#15803d" font-size="7" text-anchor="middle">ROM 区</text>
+        <rect x="220" y="316" width="106" height="14" rx="3" fill="#eff6ff" stroke="#0284c7" stroke-width="1"/>
+        <text x="273" y="327" fill="#0369a1" font-size="7" text-anchor="middle">RAM 主存区</text>
+        <rect x="330" y="316" width="52"  height="14" rx="3" fill="#fef9c3" stroke="#f59e0b" stroke-width="1"/>
+        <text x="356" y="327" fill="#b45309" font-size="7" text-anchor="middle">I/O 映射</text>
+        <rect x="386" y="316" width="34"  height="14" rx="3" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="403" y="327" fill="#94a3b8" font-size="7" text-anchor="middle">保留</text>
+
+        <text x="73" y="330" fill="#64748b" font-size="7.5" text-anchor="middle">32bit→4GB</text>
+        <text x="73" y="344" fill="#0284c7" font-size="7.5" text-anchor="middle">64bit→16EB</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ct">三总线详解</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div class="ib" style="background:#fef9c3;border-left:3px solid #f59e0b;">
+          <div style="color:#b45309;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px;">地址总线 Address Bus</div>
+          <strong>单向</strong>（CPU→存储器）。宽度决定寻址空间：n 位 → 2ⁿ 地址单元。32 位→4GB，64 位→16EB。
+        </div>
+        <div class="ib" style="background:#fdf4ff;border-left:3px solid #a855f7;">
+          <div style="color:#7e22ce;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px;">数据总线 Data Bus</div>
+          <strong>双向</strong>（CPU↔存储器）。宽度决定每次传输量：8/16/32/64 bit。宽度越大带宽越高。
+        </div>
+        <div class="ib" style="background:#fff7ed;border-left:3px solid #f97316;">
+          <div style="color:#c2410c;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px;">控制总线 Control Bus</div>
+          传递读写控制（R/W̄）、片选（CS̄）、时钟（CLK）、中断（INT）等，各线方向不同。
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ct">ROM vs RAM 连接区别</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div class="ib" style="background:#f0fdf4;border-left:3px solid #22c55e;">
+          <div style="color:#15803d;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px;">ROM 连接特点</div>
+          <ul class="sl" style="margin-top:4px;">
+            <li><span class="sn">•</span>地址总线、数据总线均接入</li>
+            <li><span class="sn">•</span>WĒ 悬空或接高（只读）</li>
+            <li><span class="sn">•</span>映射到低地址，启动时 PC 指向此处</li>
+            <li><span class="sn">•</span>存 BIOS / 固件，掉电不丢</li>
+          </ul>
+        </div>
+        <div class="ib" style="background:#eff6ff;border-left:3px solid #0284c7;">
+          <div style="color:#0369a1;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px;">RAM 连接特点</div>
+          <ul class="sl" style="margin-top:4px;">
+            <li><span class="sn">•</span>地址、数据、控制总线全接</li>
+            <li><span class="sn">•</span>WĒ 由控制总线 R/W̄ 驱动</li>
+            <li><span class="sn">•</span>DRAM 还需刷新控制器（RAS/CAS）</li>
+            <li><span class="sn">•</span>掉电丢失，运行时存程序和数据</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ PANEL 5 : 交互模拟 ══════════════ -->
+<div id="pane-sim" class="pane">
+  <div class="card">
+    <div class="ct">存储器读写过程交互模拟</div>
+    <div style="display:grid;grid-template-columns:1fr 296px;gap:20px;">
+      <div>
+        <div class="sw" style="min-height:340px;">
+          <svg id="msv" width="370" height="340" viewBox="0 0 370 340">
+            <!-- CPU -->
+            <rect x="8" y="88" width="88" height="162" rx="8" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
+            <text x="52" y="112" fill="#c2410c" font-size="10" text-anchor="middle" font-weight="bold">CPU</text>
+            <text x="52" y="130" fill="#64748b" font-size="7.5" text-anchor="middle">MAR</text>
+            <rect x="16" y="136" width="72" height="17" rx="3" fill="#f1f5f9" stroke="#cbd5e1"/>
+            <text id="vmar" x="52" y="149" fill="#1e293b" font-size="9" text-anchor="middle" font-weight="bold">0x00A0</text>
+            <text x="52" y="172" fill="#64748b" font-size="7.5" text-anchor="middle">MDR</text>
+            <rect x="16" y="178" width="72" height="17" rx="3" fill="#f1f5f9" stroke="#cbd5e1"/>
+            <text id="vmdr" x="52" y="191" fill="#94a3b8" font-size="9" text-anchor="middle">—</text>
+            <text x="52" y="215" fill="#64748b" font-size="7.5" text-anchor="middle">R/W̄</text>
+            <rect id="vrwb" x="16" y="221" width="72" height="17" rx="3" fill="#fef9c3" stroke="#f59e0b"/>
+            <text id="vrw"  x="52" y="234" fill="#b45309" font-size="9" text-anchor="middle" font-weight="bold">IDLE</text>
+
+            <!-- 三总线 -->
+            <line id="lab" x1="96" y1="146" x2="196" y2="146" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round"/>
+            <text x="146" y="139" fill="#b45309" font-size="7" text-anchor="middle">地址总线</text>
+            <line id="ldb" x1="96" y1="188" x2="196" y2="188" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round"/>
+            <text x="146" y="181" fill="#7e22ce" font-size="7" text-anchor="middle">数据总线</text>
+            <line id="lcb" x1="96" y1="230" x2="196" y2="230" stroke="#e2e8f0" stroke-width="2" stroke-linecap="round"/>
+            <text x="146" y="223" fill="#c2410c" font-size="7" text-anchor="middle">控制总线</text>
+
+            <!-- 存储芯片 -->
+            <rect x="196" y="50" width="166" height="236" rx="10" fill="#eff6ff" stroke="#0284c7" stroke-width="2"/>
+            <text x="279" y="74" fill="#0369a1" font-size="10" text-anchor="middle" font-weight="bold">存储芯片</text>
+            <rect x="210" y="86" width="138" height="21" rx="4" fill="#fef9c3" stroke="#f59e0b" stroke-width="1.5"/>
+            <text x="279" y="101" fill="#b45309" font-size="8" text-anchor="middle">MAR — 锁存地址</text>
+            <rect x="210" y="118" width="58"  height="36" rx="4" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5"/>
+            <text x="239" y="135" fill="#15803d" font-size="7" text-anchor="middle">行译码</text>
+            <rect x="282" y="118" width="66"  height="36" rx="4" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5"/>
+            <text x="315" y="135" fill="#15803d" font-size="7" text-anchor="middle">列译码</text>
+            <rect x="210" y="168" width="138" height="46" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="279" y="188" fill="#0369a1" font-size="8" text-anchor="middle" font-weight="bold">存储矩阵</text>
+            <text id="vcell" x="279" y="204" fill="#1d4ed8" font-size="8" text-anchor="middle">…</text>
+            <rect x="210" y="226" width="138" height="19" rx="4" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+            <text id="vsa"  x="279" y="239" fill="#15803d" font-size="7.5" text-anchor="middle">SA — 灵敏放大器</text>
+            <rect x="210" y="258" width="138" height="19" rx="4" fill="#fdf4ff" stroke="#a855f7" stroke-width="1.5"/>
+            <text id="vbuf" x="279" y="271" fill="#7e22ce" font-size="7.5" text-anchor="middle">I/O Buffer</text>
+
+            <!-- 步骤框 -->
+            <rect x="8" y="264" width="168" height="68" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text id="vst"  x="92" y="284" fill="#1e293b" font-size="9" text-anchor="middle" font-weight="bold">等待操作…</text>
+            <text id="vsd1" x="92" y="300" fill="#64748b" font-size="8" text-anchor="middle">请选择操作模式</text>
+            <text id="vsd2" x="92" y="316" fill="#64748b" font-size="8" text-anchor="middle"></text>
+          </svg>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#64748b;letter-spacing:2px;margin-bottom:8px;">操作模式</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="cb on" id="bi" onclick="setOp('idle')">💤 待机</button>
+            <button class="cb"    id="br" onclick="setOp('read')">📖 读</button>
+            <button class="cb"    id="bw" onclick="setOp('write')">✏️ 写</button>
+          </div>
+        </div>
+
+        <div id="wdg" style="display:none;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#64748b;letter-spacing:2px;margin-bottom:6px;">写入数据</div>
+          <div style="display:flex;gap:8px;">
+            <button class="cb"    id="bw0" onclick="setWd('0xAB')">0xAB</button>
+            <button class="cb on" id="bw1" onclick="setWd('0x3F')">0x3F</button>
+            <button class="cb"    id="bw2" onclick="setWd('0xFF')">0xFF</button>
+          </div>
+        </div>
+
+        <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:10px;padding:14px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#94a3b8;margin-bottom:8px;letter-spacing:2px;">SIGNAL STATE</div>
+          <div class="sr"><span class="sn2">MAR（地址）</span><span class="sv xx" id="smar">0x00A0</span></div>
+          <div class="sr"><span class="sn2">MDR（数据）</span><span class="sv xx" id="smdr">—</span></div>
+          <div class="sr"><span class="sn2">R/W̄</span>        <span class="sv xx" id="srw">待机</span></div>
+          <div class="sr"><span class="sn2">CS̄</span>         <span class="sv lo" id="scs">HIGH</span></div>
+          <div class="sr"><span class="sn2">地址总线</span>   <span class="sv xx" id="sab">—</span></div>
+          <div class="sr"><span class="sn2">数据总线</span>   <span class="sv xx" id="sdb">—</span></div>
+          <div class="sr"><span class="sn2">SA 输出</span>    <span class="sv xx" id="ssa">—</span></div>
+        </div>
+
+        <div class="sb" id="opdesc">
+          <strong>待机：</strong>CPU 未发出访问请求，CS̄=HIGH，存储器不工作，三态门高阻，总线空闲。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ct">完整读写步骤分解</div>
+    <div class="g2">
+      <div>
+        <div style="color:#0369a1;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:10px;">📖 读操作（8步）</div>
+        <ul class="sl">
+          <li><span class="sn">①</span>CPU 将目标地址送入 MAR</li>
+          <li><span class="sn">②</span>MAR 将地址送上地址总线，CS̄=0，R/W̄=1</li>
+          <li><span class="sn">③</span>芯片 MAR 锁存总线地址</li>
+          <li><span class="sn">④</span>行译码器激活 WL，列译码器选定 BL</li>
+          <li><span class="sn">⑤</span>存储单元数据经 BL 流向灵敏放大器 SA</li>
+          <li><span class="sn">⑥</span>SA 放大差分信号，输出完整逻辑电平</li>
+          <li><span class="sn">⑦</span>数据经 I/O Buffer 驱动数据总线</li>
+          <li><span class="sn">⑧</span>CPU 从数据总线读入 MDR，完成读操作</li>
+        </ul>
+      </div>
+      <div>
+        <div style="color:#c2410c;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:10px;">✏️ 写操作（7步）</div>
+        <ul class="sl">
+          <li><span class="sn">①</span>CPU 将地址→MAR，数据→MDR，R/W̄=0</li>
+          <li><span class="sn">②</span>地址送总线，CS̄=0，WĒ=0</li>
+          <li><span class="sn">③</span>芯片锁存地址，译码选定目标单元</li>
+          <li><span class="sn">④</span>MDR 数据经总线送入芯片 Buffer</li>
+          <li><span class="sn">⑤</span>写驱动器强制 BL/BL̄ 为所需电平</li>
+          <li><span class="sn">⑥</span>数据写入存储单元（触发器翻转/电容充放电）</li>
+          <li><span class="sn">⑦</span>WĒ 回高，CS̄ 回高，写操作完成</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+/* Tab切换 */
+function sw(name,btn){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.getElementById('pane-'+name).classList.add('on');
+  btn.classList.add('on');
+}
+
+/* 模拟 */
+let op='idle', wd='0x3F';
+const MEM={'0x00A0':'0x7E','0x00A1':'0x3F','0x00A2':'0xAB'};
+
+function t(id,v){const e=document.getElementById(id);if(e)e.textContent=v;}
+function s(id,v,c){const e=document.getElementById(id);if(e){e.textContent=v;e.className='sv '+c;}}
+function bc(id,c){const e=document.getElementById(id);if(e)e.style.stroke=c;}
+
+function upd(){
+  const addr='0x00A0';
+  document.getElementById('wdg').style.display=op==='write'?'block':'none';
+  ['i','r','w'].forEach((x,i)=>{
+    const ids=['bi','br','bw'];
+    document.getElementById(ids[i]).classList.toggle('on',['idle','read','write'][i]===op);
+  });
+
+  if(op==='idle'){
+    t('vmar',addr);t('vmdr','—');t('vrw','IDLE');t('vcell','…');t('vsa','SA — 灵敏放大器');t('vbuf','I/O Buffer');
+    bc('lab','#e2e8f0');bc('ldb','#e2e8f0');bc('lcb','#e2e8f0');
+    s('smar',addr,'xx');s('smdr','—','xx');s('srw','待机','xx');s('scs','HIGH','lo');
+    s('sab','—','xx');s('sdb','—','xx');s('ssa','—','xx');
+    t('vst','待机状态');t('vsd1','CS̄=HIGH，芯片未被选中');t('vsd2','总线空闲，等待 CPU 请求');
+    document.getElementById('opdesc').innerHTML='<strong>待机：</strong>CPU 未发出访问请求，CS̄=HIGH，存储器不工作，三态门高阻，数据总线空闲。';
+
+  }else if(op==='read'){
+    const d=MEM[addr]||'0x??';
+    t('vmar',addr);t('vmdr',d);t('vrw','READ');t('vcell','→ '+d);t('vsa','SA 放大 → '+d);t('vbuf','输出: '+d);
+    bc('lab','#f59e0b');bc('ldb','#a855f7');bc('lcb','#f97316');
+    s('smar',addr,'ac');s('smdr',d,'hi');s('srw','READ(1)','hi');s('scs','LOW','hi');
+    s('sab',addr,'ac');s('sdb',d,'hi');s('ssa',d,'hi');
+    t('vst','读操作进行中');t('vsd1','地址 '+addr+' → 数据 '+d);t('vsd2','SA 放大 → Buffer → 数据总线');
+    document.getElementById('opdesc').innerHTML=`<strong>读操作：</strong>MAR 送出地址 <strong>${addr}</strong>，CS̄=LOW，R/W̄=HIGH。译码→SA放大→数据 <strong>${d}</strong> 经总线送入 MDR。`;
+
+  }else{
+    MEM[addr]=wd;
+    t('vmar',addr);t('vmdr',wd);t('vrw','WRITE');t('vcell','← '+wd);t('vsa','SA 回写');t('vbuf','接收: '+wd);
+    bc('lab','#f59e0b');bc('ldb','#a855f7');bc('lcb','#f97316');
+    s('smar',addr,'ac');s('smdr',wd,'ac');s('srw','WRITE(0)','lo');s('scs','LOW','hi');
+    s('sab',addr,'ac');s('sdb',wd,'ac');s('ssa','回写','ac');
+    t('vst','写操作进行中');t('vsd1','写入 '+wd+' → 地址 '+addr);t('vsd2','WĒ=LOW → 数据写入存储单元');
+    document.getElementById('opdesc').innerHTML=`<strong>写操作：</strong>MDR 数据 <strong>${wd}</strong> 经总线送入芯片，CS̄=LOW，WĒ=LOW，写驱动翻转单元，新值锁存于 <strong>${addr}</strong>。`;
+  }
+}
+
+function setOp(m){op=m;upd();}
+function setWd(d){
+  wd=d;
+  [['0xAB','bw0'],['0x3F','bw1'],['0xFF','bw2']].forEach(([v,id])=>
+    document.getElementById(id).classList.toggle('on',v===d));
+  upd();
+}
+upd();
+</script>
+</body>
+</html>
