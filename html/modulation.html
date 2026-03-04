@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>三种基本调制方式 + QAM</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {delimiters:[
+    {left:'$$',right:'$$',display:true},
+    {left:'$',right:'$',display:false}
+  ]})"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap');
+
+:root {
+  --text:       #1a202c;
+  --text-sub:   #4a5568;
+  --text-muted: #718096;
+  --border:     #e2e8f0;
+  --border-mid: #cbd5e0;
+  --surface:    rgba(255,255,255,0.88);
+  --tag-bg:     #f7fafc;
+
+  --ask: #d97706;   --ask-bg: #fffbeb;  --ask-border: #fcd34d;  --ask-faint: #fef3c7;
+  --fsk: #2563eb;   --fsk-bg: #eff6ff;  --fsk-border: #93c5fd;  --fsk-faint: #dbeafe;
+  --psk: #16a34a;   --psk-bg: #f0fdf4;  --psk-border: #86efac;  --psk-faint: #dcfce7;
+  --qam: #7c3aed;   --qam-bg: #f5f3ff;  --qam-border: #c4b5fd;  --qam-faint: #ede9fe;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: transparent;
+  color: var(--text);
+  font-family: 'Noto Sans SC', sans-serif;
+  padding: 28px 20px 36px;
+  max-width: 100%;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ── TITLE ── */
+.page-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  margin-bottom: 4px;
+}
+.page-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.67rem;
+  color: var(--text-muted);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+/* ── CARRIER FORMULA ── */
+.formula-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.formula-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.64rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+.formula-params {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.param-chip {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 2px 9px;
+  border-radius: 4px;
+  border: 1px solid;
+  white-space: nowrap;
+}
+.param-chip.A { background: var(--ask-faint); border-color: var(--ask-border); color: var(--ask); }
+.param-chip.f { background: var(--fsk-faint); border-color: var(--fsk-border); color: var(--fsk); }
+.param-chip.p { background: var(--psk-faint); border-color: var(--psk-border); color: var(--psk); }
+
+/* ── MOD TABLE ── */
+.mod-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface);
+  margin-bottom: 22px;
+  font-size: 0.82rem;
+}
+
+.mod-table thead th {
+  background: var(--tag-bg);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+.mod-table thead th:first-child { text-align: center; }
+
+.mod-table tbody tr { border-bottom: 1px solid var(--border); }
+.mod-table tbody tr:last-child { border-bottom: none; }
+.mod-table tbody tr:hover { background: #fafbfd; }
+
+.mod-table td {
+  padding: 11px 14px;
+  vertical-align: top;
+  color: var(--text-sub);
+  line-height: 1.55;
+}
+
+/* name cell */
+.mod-table td.name-cell {
+  text-align: center;
+  width: 68px;
+  padding: 11px 10px;
+}
+
+.mod-badge {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 6px;
+  border: 1px solid;
+  letter-spacing: 0.05em;
+}
+
+.mod-badge.ask { background: var(--ask-bg); border-color: var(--ask-border); color: var(--ask); }
+.mod-badge.fsk { background: var(--fsk-bg); border-color: var(--fsk-border); color: var(--fsk); }
+.mod-badge.psk { background: var(--psk-bg); border-color: var(--psk-border); color: var(--psk); }
+.mod-badge.qam { background: var(--qam-bg); border-color: var(--qam-border); color: var(--qam); }
+
+/* full name cell */
+.fullname {
+  font-size: 0.8rem;
+  color: var(--text);
+  font-weight: 500;
+}
+.fullname-en {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* param cell */
+.mod-table td.param-cell {
+  width: 90px;
+  text-align: center;
+}
+.param-pill {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 1px solid;
+}
+.param-pill.ask { background: var(--ask-faint); border-color: var(--ask-border); color: var(--ask); }
+.param-pill.fsk { background: var(--fsk-faint); border-color: var(--fsk-border); color: var(--fsk); }
+.param-pill.psk { background: var(--psk-faint); border-color: var(--psk-border); color: var(--psk); }
+.param-pill.qam { background: var(--qam-faint); border-color: var(--qam-border); color: var(--qam); }
+
+/* note tags inside table */
+.note-tag {
+  display: inline-block;
+  margin-top: 5px;
+  font-size: 0.64rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+.note-tag.blue { background: var(--fsk-faint); border-color: var(--fsk-border); color: var(--fsk); }
+.note-tag.purple { background: var(--qam-faint); border-color: var(--qam-border); color: var(--qam); }
+
+/* ── QAM DETAIL SECTION ── */
+.qam-section {
+  background: var(--surface);
+  border: 1px solid var(--qam-border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.qam-header {
+  background: var(--qam-faint);
+  padding: 11px 18px;
+  border-bottom: 1px solid var(--qam-border);
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.qam-header-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--qam);
+}
+
+.qam-header-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--qam);
+  opacity: 0.65;
+  letter-spacing: 0.08em;
+}
+
+.qam-body {
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.qam-desc {
+  font-size: 0.82rem;
+  color: var(--text-sub);
+  line-height: 1.65;
+}
+
+/* constellation preview */
+.constellation-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 520px) {
+  .constellation-row { grid-template-columns: 1fr; }
+}
+
+.const-card {
+  border: 1px solid var(--qam-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.const-head {
+  background: var(--qam-faint);
+  padding: 6px 12px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  border-bottom: 1px solid var(--qam-border);
+}
+
+.const-name {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--qam);
+}
+
+.const-bits {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--text-muted);
+}
+
+.const-body {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  background: white;
+}
+
+/* SVG constellation diagrams */
+svg.constellation {
+  width: 100%;
+  max-width: 120px;
+  height: 100px;
+}
+
+/* use tag row */
+.use-tag {
+  display: inline-block;
+  font-size: 0.64rem;
+  padding: 2px 9px;
+  border-radius: 4px;
+  border: 1px solid var(--qam-border);
+  background: var(--qam-faint);
+  color: var(--qam);
+  font-family: 'Noto Sans SC', sans-serif;
+  margin-top: 3px;
+}
+</style>
+</head>
+<body>
+
+<div class="page-title">三种基本调制方式 + QAM</div>
+<div class="page-sub">Analog Carrier Modulation Techniques</div>
+
+<!-- Carrier formula -->
+<div class="formula-bar">
+  <span class="formula-label">载波</span>
+  <span>$c(t) = A\cos(2\pi ft + \varphi)$</span>
+  <span class="formula-label" style="margin-left:6px">可调参数</span>
+  <div class="formula-params">
+    <span class="param-chip A">振幅 $A$</span>
+    <span class="param-chip f">频率 $f$</span>
+    <span class="param-chip p">相位 $\varphi$</span>
+  </div>
+</div>
+
+<!-- Modulation table -->
+<table class="mod-table">
+  <thead>
+    <tr>
+      <th>调制方式</th>
+      <th>全称</th>
+      <th style="text-align:center">改变参数</th>
+      <th>特点</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="name-cell"><span class="mod-badge ask">ASK</span></td>
+      <td>
+        <div class="fullname">幅移键控<span class="fullname-en">Amplitude Shift Keying</span></div>
+      </td>
+      <td class="param-cell"><span class="param-pill ask">振幅 $A$</span></td>
+      <td>抗噪性差，实现简单，存在载波功率浪费</td>
+    </tr>
+    <tr>
+      <td class="name-cell"><span class="mod-badge fsk">FSK</span></td>
+      <td>
+        <div class="fullname">频移键控<span class="fullname-en">Frequency Shift Keying</span></div>
+      </td>
+      <td class="param-cell"><span class="param-pill fsk">频率 $f$</span></td>
+      <td>
+        抗干扰性好，占用带宽较大
+        <br><span class="note-tag blue">早期电话调制解调器采用</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="name-cell"><span class="mod-badge psk">PSK</span></td>
+      <td>
+        <div class="fullname">相移键控<span class="fullname-en">Phase Shift Keying</span></div>
+      </td>
+      <td class="param-cell"><span class="param-pill psk">相位 $\varphi$</span></td>
+      <td>抗干扰性强，效率高，现代通信广泛使用</td>
+    </tr>
+    <tr>
+      <td class="name-cell"><span class="mod-badge qam">QAM</span></td>
+      <td>
+        <div class="fullname">正交幅度调制<span class="fullname-en">Quadrature Amplitude Modulation</span></div>
+      </td>
+      <td class="param-cell"><span class="param-pill qam">$A$ + $\varphi$</span></td>
+      <td>
+        频谱效率极高，同时携带振幅与相位信息
+        <br><span class="note-tag purple">有线电视 · ADSL · WiFi</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- QAM detail -->
+<div class="qam-section">
+  <div class="qam-header">
+    <span class="qam-header-title">QAM 详解</span>
+    <span class="qam-header-sub">Quadrature Amplitude Modulation</span>
+  </div>
+  <div class="qam-body">
+
+    <div class="qam-desc">
+      同时改变振幅和相位，在二维信号空间 ( 星座图 ) 中表示多个状态. 
+      点数越多，每个码元携带的比特数越大，频谱效率越高. 
+    </div>
+
+    <!-- Three constellation cards -->
+    <div class="constellation-row">
+
+      <!-- QAM-16 -->
+      <div class="const-card">
+        <div class="const-head">
+          <span class="const-name">QAM-16</span>
+          <span class="const-bits">4 bit / 码元</span>
+        </div>
+        <div class="const-body">
+          <svg class="constellation" viewBox="0 0 100 90">
+            <!-- axes -->
+            <line x1="50" y1="5" x2="50" y2="85" stroke="#e2e8f0" stroke-width="1"/>
+            <line x1="5" y1="45" x2="95" y2="45" stroke="#e2e8f0" stroke-width="1"/>
+            <!-- 4x4 grid of points -->
+            <g fill="#7c3aed">
+              <!-- row y=18 -->
+              <circle cx="22" cy="18" r="3.5"/><circle cx="38" cy="18" r="3.5"/>
+              <circle cx="62" cy="18" r="3.5"/><circle cx="78" cy="18" r="3.5"/>
+              <!-- row y=33 -->
+              <circle cx="22" cy="33" r="3.5"/><circle cx="38" cy="33" r="3.5"/>
+              <circle cx="62" cy="33" r="3.5"/><circle cx="78" cy="33" r="3.5"/>
+              <!-- row y=57 -->
+              <circle cx="22" cy="57" r="3.5"/><circle cx="38" cy="57" r="3.5"/>
+              <circle cx="62" cy="57" r="3.5"/><circle cx="78" cy="57" r="3.5"/>
+              <!-- row y=72 -->
+              <circle cx="22" cy="72" r="3.5"/><circle cx="38" cy="72" r="3.5"/>
+              <circle cx="62" cy="72" r="3.5"/><circle cx="78" cy="72" r="3.5"/>
+            </g>
+            <text x="50" y="96" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7" fill="#a0aec0">16 点</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- QAM-64 -->
+      <div class="const-card">
+        <div class="const-head">
+          <span class="const-name">QAM-64</span>
+          <span class="const-bits">6 bit / 码元</span>
+        </div>
+        <div class="const-body">
+          <svg class="constellation" viewBox="0 0 100 90">
+            <line x1="50" y1="5" x2="50" y2="85" stroke="#e2e8f0" stroke-width="1"/>
+            <line x1="5" y1="45" x2="95" y2="45" stroke="#e2e8f0" stroke-width="1"/>
+            <!-- 8x8 grid, compress into viewBox -->
+            <g fill="#7c3aed" opacity="0.85">
+              <!-- generate 8x8: xs=[11,23,35,47,59,71,83,95 scaled] ys same -->
+              <!-- use compact coords: step=12, start=10 -->
+              <circle cx="10" cy="10" r="2.4"/><circle cx="22" cy="10" r="2.4"/><circle cx="34" cy="10" r="2.4"/><circle cx="46" cy="10" r="2.4"/><circle cx="58" cy="10" r="2.4"/><circle cx="70" cy="10" r="2.4"/><circle cx="82" cy="10" r="2.4"/><circle cx="90" cy="10" r="2.4"/>
+              <circle cx="10" cy="21" r="2.4"/><circle cx="22" cy="21" r="2.4"/><circle cx="34" cy="21" r="2.4"/><circle cx="46" cy="21" r="2.4"/><circle cx="58" cy="21" r="2.4"/><circle cx="70" cy="21" r="2.4"/><circle cx="82" cy="21" r="2.4"/><circle cx="90" cy="21" r="2.4"/>
+              <circle cx="10" cy="32" r="2.4"/><circle cx="22" cy="32" r="2.4"/><circle cx="34" cy="32" r="2.4"/><circle cx="46" cy="32" r="2.4"/><circle cx="58" cy="32" r="2.4"/><circle cx="70" cy="32" r="2.4"/><circle cx="82" cy="32" r="2.4"/><circle cx="90" cy="32" r="2.4"/>
+              <circle cx="10" cy="43" r="2.4"/><circle cx="22" cy="43" r="2.4"/><circle cx="34" cy="43" r="2.4"/><circle cx="46" cy="43" r="2.4"/><circle cx="58" cy="43" r="2.4"/><circle cx="70" cy="43" r="2.4"/><circle cx="82" cy="43" r="2.4"/><circle cx="90" cy="43" r="2.4"/>
+              <circle cx="10" cy="54" r="2.4"/><circle cx="22" cy="54" r="2.4"/><circle cx="34" cy="54" r="2.4"/><circle cx="46" cy="54" r="2.4"/><circle cx="58" cy="54" r="2.4"/><circle cx="70" cy="54" r="2.4"/><circle cx="82" cy="54" r="2.4"/><circle cx="90" cy="54" r="2.4"/>
+              <circle cx="10" cy="65" r="2.4"/><circle cx="22" cy="65" r="2.4"/><circle cx="34" cy="65" r="2.4"/><circle cx="46" cy="65" r="2.4"/><circle cx="58" cy="65" r="2.4"/><circle cx="70" cy="65" r="2.4"/><circle cx="82" cy="65" r="2.4"/><circle cx="90" cy="65" r="2.4"/>
+              <circle cx="10" cy="76" r="2.4"/><circle cx="22" cy="76" r="2.4"/><circle cx="34" cy="76" r="2.4"/><circle cx="46" cy="76" r="2.4"/><circle cx="58" cy="76" r="2.4"/><circle cx="70" cy="76" r="2.4"/><circle cx="82" cy="76" r="2.4"/><circle cx="90" cy="76" r="2.4"/>
+              <circle cx="10" cy="84" r="2.4"/><circle cx="22" cy="84" r="2.4"/><circle cx="34" cy="84" r="2.4"/><circle cx="46" cy="84" r="2.4"/><circle cx="58" cy="84" r="2.4"/><circle cx="70" cy="84" r="2.4"/><circle cx="82" cy="84" r="2.4"/><circle cx="90" cy="84" r="2.4"/>
+            </g>
+            <text x="50" y="96" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7" fill="#a0aec0">64 点 · DOCSIS</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- QAM-1024 -->
+      <div class="const-card">
+        <div class="const-head">
+          <span class="const-name">QAM-1024</span>
+          <span class="const-bits">10 bit / 码元</span>
+        </div>
+        <div class="const-body">
+          <svg class="constellation" viewBox="0 0 100 90">
+            <line x1="50" y1="5" x2="50" y2="85" stroke="#e2e8f0" stroke-width="1"/>
+            <line x1="5" y1="45" x2="95" y2="45" stroke="#e2e8f0" stroke-width="1"/>
+            <!-- 32x32 → render as dense dot pattern using rects for performance -->
+            <g fill="#7c3aed" opacity="0.7">
+              <!-- simulate ~1024 points as a tight grid of tiny dots -->
+              <!-- step=2.9, start=4, 32 cols x 32 rows -->
+              <script>/* SVG does not run script, use static rects */</script>
+              <!-- We use a rect pattern to represent the dense constellation -->
+              <rect x="4" y="4" width="88" height="78" fill="none" stroke="#ede9fe" stroke-width="0.5" rx="2"/>
+              <!-- sample ~100 representative dots on a tight grid (32-step simulation) -->
+              <!-- col step ≈ 2.8, row step ≈ 2.4 -->
+              <!-- 32 cols: x = 4 + i*2.8 for i=0..31 -->
+              <!-- 32 rows: y = 4 + j*2.4 for j=0..31 -->
+              <!-- Draw all 1024 as 1px circles is feasible -->
+              <!-- row 0 y=4 -->
+              <circle cx="4"  cy="4"  r="1.1"/><circle cx="6.8" cy="4" r="1.1"/><circle cx="9.6" cy="4" r="1.1"/><circle cx="12.4" cy="4" r="1.1"/><circle cx="15.2" cy="4" r="1.1"/><circle cx="18" cy="4" r="1.1"/><circle cx="20.8" cy="4" r="1.1"/><circle cx="23.6" cy="4" r="1.1"/><circle cx="26.4" cy="4" r="1.1"/><circle cx="29.2" cy="4" r="1.1"/><circle cx="32" cy="4" r="1.1"/><circle cx="34.8" cy="4" r="1.1"/><circle cx="37.6" cy="4" r="1.1"/><circle cx="40.4" cy="4" r="1.1"/><circle cx="43.2" cy="4" r="1.1"/><circle cx="46" cy="4" r="1.1"/><circle cx="48.8" cy="4" r="1.1"/><circle cx="51.6" cy="4" r="1.1"/><circle cx="54.4" cy="4" r="1.1"/><circle cx="57.2" cy="4" r="1.1"/><circle cx="60" cy="4" r="1.1"/><circle cx="62.8" cy="4" r="1.1"/><circle cx="65.6" cy="4" r="1.1"/><circle cx="68.4" cy="4" r="1.1"/><circle cx="71.2" cy="4" r="1.1"/><circle cx="74" cy="4" r="1.1"/><circle cx="76.8" cy="4" r="1.1"/><circle cx="79.6" cy="4" r="1.1"/><circle cx="82.4" cy="4" r="1.1"/><circle cx="85.2" cy="4" r="1.1"/><circle cx="88" cy="4" r="1.1"/><circle cx="90.8" cy="4" r="1.1"/>
+              <!-- repeat pattern for all 32 rows using use elements won't work, inline each row -->
+              <!-- For brevity, use a JS-generated approach via foreignObject trick isn't possible. -->
+              <!-- Instead, draw every 4th row visually to show density, labeling it 1024 pts -->
+              <!-- rows at y= 4,6.5,9,11.5,14,16.5,19,21.5,24,26.5,29,31.5,34,36.5,39,41.5,44,46.5,49,51.5,54,56.5,59,61.5,64,66.5,69,71.5,74,76.5,79,81.5 -->
+              <circle cx="4"  cy="6.5"  r="1.1"/><circle cx="6.8" cy="6.5" r="1.1"/><circle cx="9.6" cy="6.5" r="1.1"/><circle cx="12.4" cy="6.5" r="1.1"/><circle cx="15.2" cy="6.5" r="1.1"/><circle cx="18" cy="6.5" r="1.1"/><circle cx="20.8" cy="6.5" r="1.1"/><circle cx="23.6" cy="6.5" r="1.1"/><circle cx="26.4" cy="6.5" r="1.1"/><circle cx="29.2" cy="6.5" r="1.1"/><circle cx="32" cy="6.5" r="1.1"/><circle cx="34.8" cy="6.5" r="1.1"/><circle cx="37.6" cy="6.5" r="1.1"/><circle cx="40.4" cy="6.5" r="1.1"/><circle cx="43.2" cy="6.5" r="1.1"/><circle cx="46" cy="6.5" r="1.1"/><circle cx="48.8" cy="6.5" r="1.1"/><circle cx="51.6" cy="6.5" r="1.1"/><circle cx="54.4" cy="6.5" r="1.1"/><circle cx="57.2" cy="6.5" r="1.1"/><circle cx="60" cy="6.5" r="1.1"/><circle cx="62.8" cy="6.5" r="1.1"/><circle cx="65.6" cy="6.5" r="1.1"/><circle cx="68.4" cy="6.5" r="1.1"/><circle cx="71.2" cy="6.5" r="1.1"/><circle cx="74" cy="6.5" r="1.1"/><circle cx="76.8" cy="6.5" r="1.1"/><circle cx="79.6" cy="6.5" r="1.1"/><circle cx="82.4" cy="6.5" r="1.1"/><circle cx="85.2" cy="6.5" r="1.1"/><circle cx="88" cy="6.5" r="1.1"/><circle cx="90.8" cy="6.5" r="1.1"/>
+              <circle cx="4"  cy="9"  r="1.1"/><circle cx="6.8" cy="9" r="1.1"/><circle cx="9.6" cy="9" r="1.1"/><circle cx="12.4" cy="9" r="1.1"/><circle cx="15.2" cy="9" r="1.1"/><circle cx="18" cy="9" r="1.1"/><circle cx="20.8" cy="9" r="1.1"/><circle cx="23.6" cy="9" r="1.1"/><circle cx="26.4" cy="9" r="1.1"/><circle cx="29.2" cy="9" r="1.1"/><circle cx="32" cy="9" r="1.1"/><circle cx="34.8" cy="9" r="1.1"/><circle cx="37.6" cy="9" r="1.1"/><circle cx="40.4" cy="9" r="1.1"/><circle cx="43.2" cy="9" r="1.1"/><circle cx="46" cy="9" r="1.1"/><circle cx="48.8" cy="9" r="1.1"/><circle cx="51.6" cy="9" r="1.1"/><circle cx="54.4" cy="9" r="1.1"/><circle cx="57.2" cy="9" r="1.1"/><circle cx="60" cy="9" r="1.1"/><circle cx="62.8" cy="9" r="1.1"/><circle cx="65.6" cy="9" r="1.1"/><circle cx="68.4" cy="9" r="1.1"/><circle cx="71.2" cy="9" r="1.1"/><circle cx="74" cy="9" r="1.1"/><circle cx="76.8" cy="9" r="1.1"/><circle cx="79.6" cy="9" r="1.1"/><circle cx="82.4" cy="9" r="1.1"/><circle cx="85.2" cy="9" r="1.1"/><circle cx="88" cy="9" r="1.1"/><circle cx="90.8" cy="9" r="1.1"/>
+              <circle cx="4"  cy="11.5"  r="1.1"/><circle cx="6.8" cy="11.5" r="1.1"/><circle cx="9.6" cy="11.5" r="1.1"/><circle cx="12.4" cy="11.5" r="1.1"/><circle cx="15.2" cy="11.5" r="1.1"/><circle cx="18" cy="11.5" r="1.1"/><circle cx="20.8" cy="11.5" r="1.1"/><circle cx="23.6" cy="11.5" r="1.1"/><circle cx="26.4" cy="11.5" r="1.1"/><circle cx="29.2" cy="11.5" r="1.1"/><circle cx="32" cy="11.5" r="1.1"/><circle cx="34.8" cy="11.5" r="1.1"/><circle cx="37.6" cy="11.5" r="1.1"/><circle cx="40.4" cy="11.5" r="1.1"/><circle cx="43.2" cy="11.5" r="1.1"/><circle cx="46" cy="11.5" r="1.1"/><circle cx="48.8" cy="11.5" r="1.1"/><circle cx="51.6" cy="11.5" r="1.1"/><circle cx="54.4" cy="11.5" r="1.1"/><circle cx="57.2" cy="11.5" r="1.1"/><circle cx="60" cy="11.5" r="1.1"/><circle cx="62.8" cy="11.5" r="1.1"/><circle cx="65.6" cy="11.5" r="1.1"/><circle cx="68.4" cy="11.5" r="1.1"/><circle cx="71.2" cy="11.5" r="1.1"/><circle cx="74" cy="11.5" r="1.1"/><circle cx="76.8" cy="11.5" r="1.1"/><circle cx="79.6" cy="11.5" r="1.1"/><circle cx="82.4" cy="11.5" r="1.1"/><circle cx="85.2" cy="11.5" r="1.1"/><circle cx="88" cy="11.5" r="1.1"/><circle cx="90.8" cy="11.5" r="1.1"/>
+              <circle cx="4"  cy="14"  r="1.1"/><circle cx="6.8" cy="14" r="1.1"/><circle cx="9.6" cy="14" r="1.1"/><circle cx="12.4" cy="14" r="1.1"/><circle cx="15.2" cy="14" r="1.1"/><circle cx="18" cy="14" r="1.1"/><circle cx="20.8" cy="14" r="1.1"/><circle cx="23.6" cy="14" r="1.1"/><circle cx="26.4" cy="14" r="1.1"/><circle cx="29.2" cy="14" r="1.1"/><circle cx="32" cy="14" r="1.1"/><circle cx="34.8" cy="14" r="1.1"/><circle cx="37.6" cy="14" r="1.1"/><circle cx="40.4" cy="14" r="1.1"/><circle cx="43.2" cy="14" r="1.1"/><circle cx="46" cy="14" r="1.1"/><circle cx="48.8" cy="14" r="1.1"/><circle cx="51.6" cy="14" r="1.1"/><circle cx="54.4" cy="14" r="1.1"/><circle cx="57.2" cy="14" r="1.1"/><circle cx="60" cy="14" r="1.1"/><circle cx="62.8" cy="14" r="1.1"/><circle cx="65.6" cy="14" r="1.1"/><circle cx="68.4" cy="14" r="1.1"/><circle cx="71.2" cy="14" r="1.1"/><circle cx="74" cy="14" r="1.1"/><circle cx="76.8" cy="14" r="1.1"/><circle cx="79.6" cy="14" r="1.1"/><circle cx="82.4" cy="14" r="1.1"/><circle cx="85.2" cy="14" r="1.1"/><circle cx="88" cy="14" r="1.1"/><circle cx="90.8" cy="14" r="1.1"/>
+              <circle cx="4"  cy="16.5"  r="1.1"/><circle cx="6.8" cy="16.5" r="1.1"/><circle cx="9.6" cy="16.5" r="1.1"/><circle cx="12.4" cy="16.5" r="1.1"/><circle cx="15.2" cy="16.5" r="1.1"/><circle cx="18" cy="16.5" r="1.1"/><circle cx="20.8" cy="16.5" r="1.1"/><circle cx="23.6" cy="16.5" r="1.1"/><circle cx="26.4" cy="16.5" r="1.1"/><circle cx="29.2" cy="16.5" r="1.1"/><circle cx="32" cy="16.5" r="1.1"/><circle cx="34.8" cy="16.5" r="1.1"/><circle cx="37.6" cy="16.5" r="1.1"/><circle cx="40.4" cy="16.5" r="1.1"/><circle cx="43.2" cy="16.5" r="1.1"/><circle cx="46" cy="16.5" r="1.1"/><circle cx="48.8" cy="16.5" r="1.1"/><circle cx="51.6" cy="16.5" r="1.1"/><circle cx="54.4" cy="16.5" r="1.1"/><circle cx="57.2" cy="16.5" r="1.1"/><circle cx="60" cy="16.5" r="1.1"/><circle cx="62.8" cy="16.5" r="1.1"/><circle cx="65.6" cy="16.5" r="1.1"/><circle cx="68.4" cy="16.5" r="1.1"/><circle cx="71.2" cy="16.5" r="1.1"/><circle cx="74" cy="16.5" r="1.1"/><circle cx="76.8" cy="16.5" r="1.1"/><circle cx="79.6" cy="16.5" r="1.1"/><circle cx="82.4" cy="16.5" r="1.1"/><circle cx="85.2" cy="16.5" r="1.1"/><circle cx="88" cy="16.5" r="1.1"/><circle cx="90.8" cy="16.5" r="1.1"/>
+              <circle cx="4"  cy="19"  r="1.1"/><circle cx="6.8" cy="19" r="1.1"/><circle cx="9.6" cy="19" r="1.1"/><circle cx="12.4" cy="19" r="1.1"/><circle cx="15.2" cy="19" r="1.1"/><circle cx="18" cy="19" r="1.1"/><circle cx="20.8" cy="19" r="1.1"/><circle cx="23.6" cy="19" r="1.1"/><circle cx="26.4" cy="19" r="1.1"/><circle cx="29.2" cy="19" r="1.1"/><circle cx="32" cy="19" r="1.1"/><circle cx="34.8" cy="19" r="1.1"/><circle cx="37.6" cy="19" r="1.1"/><circle cx="40.4" cy="19" r="1.1"/><circle cx="43.2" cy="19" r="1.1"/><circle cx="46" cy="19" r="1.1"/><circle cx="48.8" cy="19" r="1.1"/><circle cx="51.6" cy="19" r="1.1"/><circle cx="54.4" cy="19" r="1.1"/><circle cx="57.2" cy="19" r="1.1"/><circle cx="60" cy="19" r="1.1"/><circle cx="62.8" cy="19" r="1.1"/><circle cx="65.6" cy="19" r="1.1"/><circle cx="68.4" cy="19" r="1.1"/><circle cx="71.2" cy="19" r="1.1"/><circle cx="74" cy="19" r="1.1"/><circle cx="76.8" cy="19" r="1.1"/><circle cx="79.6" cy="19" r="1.1"/><circle cx="82.4" cy="19" r="1.1"/><circle cx="85.2" cy="19" r="1.1"/><circle cx="88" cy="19" r="1.1"/><circle cx="90.8" cy="19" r="1.1"/>
+              <circle cx="4"  cy="21.5"  r="1.1"/><circle cx="6.8" cy="21.5" r="1.1"/><circle cx="9.6" cy="21.5" r="1.1"/><circle cx="12.4" cy="21.5" r="1.1"/><circle cx="15.2" cy="21.5" r="1.1"/><circle cx="18" cy="21.5" r="1.1"/><circle cx="20.8" cy="21.5" r="1.1"/><circle cx="23.6" cy="21.5" r="1.1"/><circle cx="26.4" cy="21.5" r="1.1"/><circle cx="29.2" cy="21.5" r="1.1"/><circle cx="32" cy="21.5" r="1.1"/><circle cx="34.8" cy="21.5" r="1.1"/><circle cx="37.6" cy="21.5" r="1.1"/><circle cx="40.4" cy="21.5" r="1.1"/><circle cx="43.2" cy="21.5" r="1.1"/><circle cx="46" cy="21.5" r="1.1"/><circle cx="48.8" cy="21.5" r="1.1"/><circle cx="51.6" cy="21.5" r="1.1"/><circle cx="54.4" cy="21.5" r="1.1"/><circle cx="57.2" cy="21.5" r="1.1"/><circle cx="60" cy="21.5" r="1.1"/><circle cx="62.8" cy="21.5" r="1.1"/><circle cx="65.6" cy="21.5" r="1.1"/><circle cx="68.4" cy="21.5" r="1.1"/><circle cx="71.2" cy="21.5" r="1.1"/><circle cx="74" cy="21.5" r="1.1"/><circle cx="76.8" cy="21.5" r="1.1"/><circle cx="79.6" cy="21.5" r="1.1"/><circle cx="82.4" cy="21.5" r="1.1"/><circle cx="85.2" cy="21.5" r="1.1"/><circle cx="88" cy="21.5" r="1.1"/><circle cx="90.8" cy="21.5" r="1.1"/>
+              <circle cx="4"  cy="24"  r="1.1"/><circle cx="6.8" cy="24" r="1.1"/><circle cx="9.6" cy="24" r="1.1"/><circle cx="12.4" cy="24" r="1.1"/><circle cx="15.2" cy="24" r="1.1"/><circle cx="18" cy="24" r="1.1"/><circle cx="20.8" cy="24" r="1.1"/><circle cx="23.6" cy="24" r="1.1"/><circle cx="26.4" cy="24" r="1.1"/><circle cx="29.2" cy="24" r="1.1"/><circle cx="32" cy="24" r="1.1"/><circle cx="34.8" cy="24" r="1.1"/><circle cx="37.6" cy="24" r="1.1"/><circle cx="40.4" cy="24" r="1.1"/><circle cx="43.2" cy="24" r="1.1"/><circle cx="46" cy="24" r="1.1"/><circle cx="48.8" cy="24" r="1.1"/><circle cx="51.6" cy="24" r="1.1"/><circle cx="54.4" cy="24" r="1.1"/><circle cx="57.2" cy="24" r="1.1"/><circle cx="60" cy="24" r="1.1"/><circle cx="62.8" cy="24" r="1.1"/><circle cx="65.6" cy="24" r="1.1"/><circle cx="68.4" cy="24" r="1.1"/><circle cx="71.2" cy="24" r="1.1"/><circle cx="74" cy="24" r="1.1"/><circle cx="76.8" cy="24" r="1.1"/><circle cx="79.6" cy="24" r="1.1"/><circle cx="82.4" cy="24" r="1.1"/><circle cx="85.2" cy="24" r="1.1"/><circle cx="88" cy="24" r="1.1"/><circle cx="90.8" cy="24" r="1.1"/>
+              <circle cx="4"  cy="26.5"  r="1.1"/><circle cx="6.8" cy="26.5" r="1.1"/><circle cx="9.6" cy="26.5" r="1.1"/><circle cx="12.4" cy="26.5" r="1.1"/><circle cx="15.2" cy="26.5" r="1.1"/><circle cx="18" cy="26.5" r="1.1"/><circle cx="20.8" cy="26.5" r="1.1"/><circle cx="23.6" cy="26.5" r="1.1"/><circle cx="26.4" cy="26.5" r="1.1"/><circle cx="29.2" cy="26.5" r="1.1"/><circle cx="32" cy="26.5" r="1.1"/><circle cx="34.8" cy="26.5" r="1.1"/><circle cx="37.6" cy="26.5" r="1.1"/><circle cx="40.4" cy="26.5" r="1.1"/><circle cx="43.2" cy="26.5" r="1.1"/><circle cx="46" cy="26.5" r="1.1"/><circle cx="48.8" cy="26.5" r="1.1"/><circle cx="51.6" cy="26.5" r="1.1"/><circle cx="54.4" cy="26.5" r="1.1"/><circle cx="57.2" cy="26.5" r="1.1"/><circle cx="60" cy="26.5" r="1.1"/><circle cx="62.8" cy="26.5" r="1.1"/><circle cx="65.6" cy="26.5" r="1.1"/><circle cx="68.4" cy="26.5" r="1.1"/><circle cx="71.2" cy="26.5" r="1.1"/><circle cx="74" cy="26.5" r="1.1"/><circle cx="76.8" cy="26.5" r="1.1"/><circle cx="79.6" cy="26.5" r="1.1"/><circle cx="82.4" cy="26.5" r="1.1"/><circle cx="85.2" cy="26.5" r="1.1"/><circle cx="88" cy="26.5" r="1.1"/><circle cx="90.8" cy="26.5" r="1.1"/>
+              <circle cx="4"  cy="29"  r="1.1"/><circle cx="6.8" cy="29" r="1.1"/><circle cx="9.6" cy="29" r="1.1"/><circle cx="12.4" cy="29" r="1.1"/><circle cx="15.2" cy="29" r="1.1"/><circle cx="18" cy="29" r="1.1"/><circle cx="20.8" cy="29" r="1.1"/><circle cx="23.6" cy="29" r="1.1"/><circle cx="26.4" cy="29" r="1.1"/><circle cx="29.2" cy="29" r="1.1"/><circle cx="32" cy="29" r="1.1"/><circle cx="34.8" cy="29" r="1.1"/><circle cx="37.6" cy="29" r="1.1"/><circle cx="40.4" cy="29" r="1.1"/><circle cx="43.2" cy="29" r="1.1"/><circle cx="46" cy="29" r="1.1"/><circle cx="48.8" cy="29" r="1.1"/><circle cx="51.6" cy="29" r="1.1"/><circle cx="54.4" cy="29" r="1.1"/><circle cx="57.2" cy="29" r="1.1"/><circle cx="60" cy="29" r="1.1"/><circle cx="62.8" cy="29" r="1.1"/><circle cx="65.6" cy="29" r="1.1"/><circle cx="68.4" cy="29" r="1.1"/><circle cx="71.2" cy="29" r="1.1"/><circle cx="74" cy="29" r="1.1"/><circle cx="76.8" cy="29" r="1.1"/><circle cx="79.6" cy="29" r="1.1"/><circle cx="82.4" cy="29" r="1.1"/><circle cx="85.2" cy="29" r="1.1"/><circle cx="88" cy="29" r="1.1"/><circle cx="90.8" cy="29" r="1.1"/>
+              <circle cx="4"  cy="31.5"  r="1.1"/><circle cx="6.8" cy="31.5" r="1.1"/><circle cx="9.6" cy="31.5" r="1.1"/><circle cx="12.4" cy="31.5" r="1.1"/><circle cx="15.2" cy="31.5" r="1.1"/><circle cx="18" cy="31.5" r="1.1"/><circle cx="20.8" cy="31.5" r="1.1"/><circle cx="23.6" cy="31.5" r="1.1"/><circle cx="26.4" cy="31.5" r="1.1"/><circle cx="29.2" cy="31.5" r="1.1"/><circle cx="32" cy="31.5" r="1.1"/><circle cx="34.8" cy="31.5" r="1.1"/><circle cx="37.6" cy="31.5" r="1.1"/><circle cx="40.4" cy="31.5" r="1.1"/><circle cx="43.2" cy="31.5" r="1.1"/><circle cx="46" cy="31.5" r="1.1"/><circle cx="48.8" cy="31.5" r="1.1"/><circle cx="51.6" cy="31.5" r="1.1"/><circle cx="54.4" cy="31.5" r="1.1"/><circle cx="57.2" cy="31.5" r="1.1"/><circle cx="60" cy="31.5" r="1.1"/><circle cx="62.8" cy="31.5" r="1.1"/><circle cx="65.6" cy="31.5" r="1.1"/><circle cx="68.4" cy="31.5" r="1.1"/><circle cx="71.2" cy="31.5" r="1.1"/><circle cx="74" cy="31.5" r="1.1"/><circle cx="76.8" cy="31.5" r="1.1"/><circle cx="79.6" cy="31.5" r="1.1"/><circle cx="82.4" cy="31.5" r="1.1"/><circle cx="85.2" cy="31.5" r="1.1"/><circle cx="88" cy="31.5" r="1.1"/><circle cx="90.8" cy="31.5" r="1.1"/>
+              <circle cx="4"  cy="34"  r="1.1"/><circle cx="6.8" cy="34" r="1.1"/><circle cx="9.6" cy="34" r="1.1"/><circle cx="12.4" cy="34" r="1.1"/><circle cx="15.2" cy="34" r="1.1"/><circle cx="18" cy="34" r="1.1"/><circle cx="20.8" cy="34" r="1.1"/><circle cx="23.6" cy="34" r="1.1"/><circle cx="26.4" cy="34" r="1.1"/><circle cx="29.2" cy="34" r="1.1"/><circle cx="32" cy="34" r="1.1"/><circle cx="34.8" cy="34" r="1.1"/><circle cx="37.6" cy="34" r="1.1"/><circle cx="40.4" cy="34" r="1.1"/><circle cx="43.2" cy="34" r="1.1"/><circle cx="46" cy="34" r="1.1"/><circle cx="48.8" cy="34" r="1.1"/><circle cx="51.6" cy="34" r="1.1"/><circle cx="54.4" cy="34" r="1.1"/><circle cx="57.2" cy="34" r="1.1"/><circle cx="60" cy="34" r="1.1"/><circle cx="62.8" cy="34" r="1.1"/><circle cx="65.6" cy="34" r="1.1"/><circle cx="68.4" cy="34" r="1.1"/><circle cx="71.2" cy="34" r="1.1"/><circle cx="74" cy="34" r="1.1"/><circle cx="76.8" cy="34" r="1.1"/><circle cx="79.6" cy="34" r="1.1"/><circle cx="82.4" cy="34" r="1.1"/><circle cx="85.2" cy="34" r="1.1"/><circle cx="88" cy="34" r="1.1"/><circle cx="90.8" cy="34" r="1.1"/>
+              <circle cx="4"  cy="36.5"  r="1.1"/><circle cx="6.8" cy="36.5" r="1.1"/><circle cx="9.6" cy="36.5" r="1.1"/><circle cx="12.4" cy="36.5" r="1.1"/><circle cx="15.2" cy="36.5" r="1.1"/><circle cx="18" cy="36.5" r="1.1"/><circle cx="20.8" cy="36.5" r="1.1"/><circle cx="23.6" cy="36.5" r="1.1"/><circle cx="26.4" cy="36.5" r="1.1"/><circle cx="29.2" cy="36.5" r="1.1"/><circle cx="32" cy="36.5" r="1.1"/><circle cx="34.8" cy="36.5" r="1.1"/><circle cx="37.6" cy="36.5" r="1.1"/><circle cx="40.4" cy="36.5" r="1.1"/><circle cx="43.2" cy="36.5" r="1.1"/><circle cx="46" cy="36.5" r="1.1"/><circle cx="48.8" cy="36.5" r="1.1"/><circle cx="51.6" cy="36.5" r="1.1"/><circle cx="54.4" cy="36.5" r="1.1"/><circle cx="57.2" cy="36.5" r="1.1"/><circle cx="60" cy="36.5" r="1.1"/><circle cx="62.8" cy="36.5" r="1.1"/><circle cx="65.6" cy="36.5" r="1.1"/><circle cx="68.4" cy="36.5" r="1.1"/><circle cx="71.2" cy="36.5" r="1.1"/><circle cx="74" cy="36.5" r="1.1"/><circle cx="76.8" cy="36.5" r="1.1"/><circle cx="79.6" cy="36.5" r="1.1"/><circle cx="82.4" cy="36.5" r="1.1"/><circle cx="85.2" cy="36.5" r="1.1"/><circle cx="88" cy="36.5" r="1.1"/><circle cx="90.8" cy="36.5" r="1.1"/>
+              <circle cx="4"  cy="39"  r="1.1"/><circle cx="6.8" cy="39" r="1.1"/><circle cx="9.6" cy="39" r="1.1"/><circle cx="12.4" cy="39" r="1.1"/><circle cx="15.2" cy="39" r="1.1"/><circle cx="18" cy="39" r="1.1"/><circle cx="20.8" cy="39" r="1.1"/><circle cx="23.6" cy="39" r="1.1"/><circle cx="26.4" cy="39" r="1.1"/><circle cx="29.2" cy="39" r="1.1"/><circle cx="32" cy="39" r="1.1"/><circle cx="34.8" cy="39" r="1.1"/><circle cx="37.6" cy="39" r="1.1"/><circle cx="40.4" cy="39" r="1.1"/><circle cx="43.2" cy="39" r="1.1"/><circle cx="46" cy="39" r="1.1"/><circle cx="48.8" cy="39" r="1.1"/><circle cx="51.6" cy="39" r="1.1"/><circle cx="54.4" cy="39" r="1.1"/><circle cx="57.2" cy="39" r="1.1"/><circle cx="60" cy="39" r="1.1"/><circle cx="62.8" cy="39" r="1.1"/><circle cx="65.6" cy="39" r="1.1"/><circle cx="68.4" cy="39" r="1.1"/><circle cx="71.2" cy="39" r="1.1"/><circle cx="74" cy="39" r="1.1"/><circle cx="76.8" cy="39" r="1.1"/><circle cx="79.6" cy="39" r="1.1"/><circle cx="82.4" cy="39" r="1.1"/><circle cx="85.2" cy="39" r="1.1"/><circle cx="88" cy="39" r="1.1"/><circle cx="90.8" cy="39" r="1.1"/>
+              <circle cx="4"  cy="41.5"  r="1.1"/><circle cx="6.8" cy="41.5" r="1.1"/><circle cx="9.6" cy="41.5" r="1.1"/><circle cx="12.4" cy="41.5" r="1.1"/><circle cx="15.2" cy="41.5" r="1.1"/><circle cx="18" cy="41.5" r="1.1"/><circle cx="20.8" cy="41.5" r="1.1"/><circle cx="23.6" cy="41.5" r="1.1"/><circle cx="26.4" cy="41.5" r="1.1"/><circle cx="29.2" cy="41.5" r="1.1"/><circle cx="32" cy="41.5" r="1.1"/><circle cx="34.8" cy="41.5" r="1.1"/><circle cx="37.6" cy="41.5" r="1.1"/><circle cx="40.4" cy="41.5" r="1.1"/><circle cx="43.2" cy="41.5" r="1.1"/><circle cx="46" cy="41.5" r="1.1"/><circle cx="48.8" cy="41.5" r="1.1"/><circle cx="51.6" cy="41.5" r="1.1"/><circle cx="54.4" cy="41.5" r="1.1"/><circle cx="57.2" cy="41.5" r="1.1"/><circle cx="60" cy="41.5" r="1.1"/><circle cx="62.8" cy="41.5" r="1.1"/><circle cx="65.6" cy="41.5" r="1.1"/><circle cx="68.4" cy="41.5" r="1.1"/><circle cx="71.2" cy="41.5" r="1.1"/><circle cx="74" cy="41.5" r="1.1"/><circle cx="76.8" cy="41.5" r="1.1"/><circle cx="79.6" cy="41.5" r="1.1"/><circle cx="82.4" cy="41.5" r="1.1"/><circle cx="85.2" cy="41.5" r="1.1"/><circle cx="88" cy="41.5" r="1.1"/><circle cx="90.8" cy="41.5" r="1.1"/>
+              <circle cx="4"  cy="44"  r="1.1"/><circle cx="6.8" cy="44" r="1.1"/><circle cx="9.6" cy="44" r="1.1"/><circle cx="12.4" cy="44" r="1.1"/><circle cx="15.2" cy="44" r="1.1"/><circle cx="18" cy="44" r="1.1"/><circle cx="20.8" cy="44" r="1.1"/><circle cx="23.6" cy="44" r="1.1"/><circle cx="26.4" cy="44" r="1.1"/><circle cx="29.2" cy="44" r="1.1"/><circle cx="32" cy="44" r="1.1"/><circle cx="34.8" cy="44" r="1.1"/><circle cx="37.6" cy="44" r="1.1"/><circle cx="40.4" cy="44" r="1.1"/><circle cx="43.2" cy="44" r="1.1"/><circle cx="46" cy="44" r="1.1"/><circle cx="48.8" cy="44" r="1.1"/><circle cx="51.6" cy="44" r="1.1"/><circle cx="54.4" cy="44" r="1.1"/><circle cx="57.2" cy="44" r="1.1"/><circle cx="60" cy="44" r="1.1"/><circle cx="62.8" cy="44" r="1.1"/><circle cx="65.6" cy="44" r="1.1"/><circle cx="68.4" cy="44" r="1.1"/><circle cx="71.2" cy="44" r="1.1"/><circle cx="74" cy="44" r="1.1"/><circle cx="76.8" cy="44" r="1.1"/><circle cx="79.6" cy="44" r="1.1"/><circle cx="82.4" cy="44" r="1.1"/><circle cx="85.2" cy="44" r="1.1"/><circle cx="88" cy="44" r="1.1"/><circle cx="90.8" cy="44" r="1.1"/>
+              <circle cx="4"  cy="46.5"  r="1.1"/><circle cx="6.8" cy="46.5" r="1.1"/><circle cx="9.6" cy="46.5" r="1.1"/><circle cx="12.4" cy="46.5" r="1.1"/><circle cx="15.2" cy="46.5" r="1.1"/><circle cx="18" cy="46.5" r="1.1"/><circle cx="20.8" cy="46.5" r="1.1"/><circle cx="23.6" cy="46.5" r="1.1"/><circle cx="26.4" cy="46.5" r="1.1"/><circle cx="29.2" cy="46.5" r="1.1"/><circle cx="32" cy="46.5" r="1.1"/><circle cx="34.8" cy="46.5" r="1.1"/><circle cx="37.6" cy="46.5" r="1.1"/><circle cx="40.4" cy="46.5" r="1.1"/><circle cx="43.2" cy="46.5" r="1.1"/><circle cx="46" cy="46.5" r="1.1"/><circle cx="48.8" cy="46.5" r="1.1"/><circle cx="51.6" cy="46.5" r="1.1"/><circle cx="54.4" cy="46.5" r="1.1"/><circle cx="57.2" cy="46.5" r="1.1"/><circle cx="60" cy="46.5" r="1.1"/><circle cx="62.8" cy="46.5" r="1.1"/><circle cx="65.6" cy="46.5" r="1.1"/><circle cx="68.4" cy="46.5" r="1.1"/><circle cx="71.2" cy="46.5" r="1.1"/><circle cx="74" cy="46.5" r="1.1"/><circle cx="76.8" cy="46.5" r="1.1"/><circle cx="79.6" cy="46.5" r="1.1"/><circle cx="82.4" cy="46.5" r="1.1"/><circle cx="85.2" cy="46.5" r="1.1"/><circle cx="88" cy="46.5" r="1.1"/><circle cx="90.8" cy="46.5" r="1.1"/>
+              <circle cx="4"  cy="49"  r="1.1"/><circle cx="6.8" cy="49" r="1.1"/><circle cx="9.6" cy="49" r="1.1"/><circle cx="12.4" cy="49" r="1.1"/><circle cx="15.2" cy="49" r="1.1"/><circle cx="18" cy="49" r="1.1"/><circle cx="20.8" cy="49" r="1.1"/><circle cx="23.6" cy="49" r="1.1"/><circle cx="26.4" cy="49" r="1.1"/><circle cx="29.2" cy="49" r="1.1"/><circle cx="32" cy="49" r="1.1"/><circle cx="34.8" cy="49" r="1.1"/><circle cx="37.6" cy="49" r="1.1"/><circle cx="40.4" cy="49" r="1.1"/><circle cx="43.2" cy="49" r="1.1"/><circle cx="46" cy="49" r="1.1"/><circle cx="48.8" cy="49" r="1.1"/><circle cx="51.6" cy="49" r="1.1"/><circle cx="54.4" cy="49" r="1.1"/><circle cx="57.2" cy="49" r="1.1"/><circle cx="60" cy="49" r="1.1"/><circle cx="62.8" cy="49" r="1.1"/><circle cx="65.6" cy="49" r="1.1"/><circle cx="68.4" cy="49" r="1.1"/><circle cx="71.2" cy="49" r="1.1"/><circle cx="74" cy="49" r="1.1"/><circle cx="76.8" cy="49" r="1.1"/><circle cx="79.6" cy="49" r="1.1"/><circle cx="82.4" cy="49" r="1.1"/><circle cx="85.2" cy="49" r="1.1"/><circle cx="88" cy="49" r="1.1"/><circle cx="90.8" cy="49" r="1.1"/>
+              <circle cx="4"  cy="51.5"  r="1.1"/><circle cx="6.8" cy="51.5" r="1.1"/><circle cx="9.6" cy="51.5" r="1.1"/><circle cx="12.4" cy="51.5" r="1.1"/><circle cx="15.2" cy="51.5" r="1.1"/><circle cx="18" cy="51.5" r="1.1"/><circle cx="20.8" cy="51.5" r="1.1"/><circle cx="23.6" cy="51.5" r="1.1"/><circle cx="26.4" cy="51.5" r="1.1"/><circle cx="29.2" cy="51.5" r="1.1"/><circle cx="32" cy="51.5" r="1.1"/><circle cx="34.8" cy="51.5" r="1.1"/><circle cx="37.6" cy="51.5" r="1.1"/><circle cx="40.4" cy="51.5" r="1.1"/><circle cx="43.2" cy="51.5" r="1.1"/><circle cx="46" cy="51.5" r="1.1"/><circle cx="48.8" cy="51.5" r="1.1"/><circle cx="51.6" cy="51.5" r="1.1"/><circle cx="54.4" cy="51.5" r="1.1"/><circle cx="57.2" cy="51.5" r="1.1"/><circle cx="60" cy="51.5" r="1.1"/><circle cx="62.8" cy="51.5" r="1.1"/><circle cx="65.6" cy="51.5" r="1.1"/><circle cx="68.4" cy="51.5" r="1.1"/><circle cx="71.2" cy="51.5" r="1.1"/><circle cx="74" cy="51.5" r="1.1"/><circle cx="76.8" cy="51.5" r="1.1"/><circle cx="79.6" cy="51.5" r="1.1"/><circle cx="82.4" cy="51.5" r="1.1"/><circle cx="85.2" cy="51.5" r="1.1"/><circle cx="88" cy="51.5" r="1.1"/><circle cx="90.8" cy="51.5" r="1.1"/>
+              <circle cx="4"  cy="54"  r="1.1"/><circle cx="6.8" cy="54" r="1.1"/><circle cx="9.6" cy="54" r="1.1"/><circle cx="12.4" cy="54" r="1.1"/><circle cx="15.2" cy="54" r="1.1"/><circle cx="18" cy="54" r="1.1"/><circle cx="20.8" cy="54" r="1.1"/><circle cx="23.6" cy="54" r="1.1"/><circle cx="26.4" cy="54" r="1.1"/><circle cx="29.2" cy="54" r="1.1"/><circle cx="32" cy="54" r="1.1"/><circle cx="34.8" cy="54" r="1.1"/><circle cx="37.6" cy="54" r="1.1"/><circle cx="40.4" cy="54" r="1.1"/><circle cx="43.2" cy="54" r="1.1"/><circle cx="46" cy="54" r="1.1"/><circle cx="48.8" cy="54" r="1.1"/><circle cx="51.6" cy="54" r="1.1"/><circle cx="54.4" cy="54" r="1.1"/><circle cx="57.2" cy="54" r="1.1"/><circle cx="60" cy="54" r="1.1"/><circle cx="62.8" cy="54" r="1.1"/><circle cx="65.6" cy="54" r="1.1"/><circle cx="68.4" cy="54" r="1.1"/><circle cx="71.2" cy="54" r="1.1"/><circle cx="74" cy="54" r="1.1"/><circle cx="76.8" cy="54" r="1.1"/><circle cx="79.6" cy="54" r="1.1"/><circle cx="82.4" cy="54" r="1.1"/><circle cx="85.2" cy="54" r="1.1"/><circle cx="88" cy="54" r="1.1"/><circle cx="90.8" cy="54" r="1.1"/>
+              <circle cx="4"  cy="56.5"  r="1.1"/><circle cx="6.8" cy="56.5" r="1.1"/><circle cx="9.6" cy="56.5" r="1.1"/><circle cx="12.4" cy="56.5" r="1.1"/><circle cx="15.2" cy="56.5" r="1.1"/><circle cx="18" cy="56.5" r="1.1"/><circle cx="20.8" cy="56.5" r="1.1"/><circle cx="23.6" cy="56.5" r="1.1"/><circle cx="26.4" cy="56.5" r="1.1"/><circle cx="29.2" cy="56.5" r="1.1"/><circle cx="32" cy="56.5" r="1.1"/><circle cx="34.8" cy="56.5" r="1.1"/><circle cx="37.6" cy="56.5" r="1.1"/><circle cx="40.4" cy="56.5" r="1.1"/><circle cx="43.2" cy="56.5" r="1.1"/><circle cx="46" cy="56.5" r="1.1"/><circle cx="48.8" cy="56.5" r="1.1"/><circle cx="51.6" cy="56.5" r="1.1"/><circle cx="54.4" cy="56.5" r="1.1"/><circle cx="57.2" cy="56.5" r="1.1"/><circle cx="60" cy="56.5" r="1.1"/><circle cx="62.8" cy="56.5" r="1.1"/><circle cx="65.6" cy="56.5" r="1.1"/><circle cx="68.4" cy="56.5" r="1.1"/><circle cx="71.2" cy="56.5" r="1.1"/><circle cx="74" cy="56.5" r="1.1"/><circle cx="76.8" cy="56.5" r="1.1"/><circle cx="79.6" cy="56.5" r="1.1"/><circle cx="82.4" cy="56.5" r="1.1"/><circle cx="85.2" cy="56.5" r="1.1"/><circle cx="88" cy="56.5" r="1.1"/><circle cx="90.8" cy="56.5" r="1.1"/>
+              <circle cx="4"  cy="59"  r="1.1"/><circle cx="6.8" cy="59" r="1.1"/><circle cx="9.6" cy="59" r="1.1"/><circle cx="12.4" cy="59" r="1.1"/><circle cx="15.2" cy="59" r="1.1"/><circle cx="18" cy="59" r="1.1"/><circle cx="20.8" cy="59" r="1.1"/><circle cx="23.6" cy="59" r="1.1"/><circle cx="26.4" cy="59" r="1.1"/><circle cx="29.2" cy="59" r="1.1"/><circle cx="32" cy="59" r="1.1"/><circle cx="34.8" cy="59" r="1.1"/><circle cx="37.6" cy="59" r="1.1"/><circle cx="40.4" cy="59" r="1.1"/><circle cx="43.2" cy="59" r="1.1"/><circle cx="46" cy="59" r="1.1"/><circle cx="48.8" cy="59" r="1.1"/><circle cx="51.6" cy="59" r="1.1"/><circle cx="54.4" cy="59" r="1.1"/><circle cx="57.2" cy="59" r="1.1"/><circle cx="60" cy="59" r="1.1"/><circle cx="62.8" cy="59" r="1.1"/><circle cx="65.6" cy="59" r="1.1"/><circle cx="68.4" cy="59" r="1.1"/><circle cx="71.2" cy="59" r="1.1"/><circle cx="74" cy="59" r="1.1"/><circle cx="76.8" cy="59" r="1.1"/><circle cx="79.6" cy="59" r="1.1"/><circle cx="82.4" cy="59" r="1.1"/><circle cx="85.2" cy="59" r="1.1"/><circle cx="88" cy="59" r="1.1"/><circle cx="90.8" cy="59" r="1.1"/>
+              <circle cx="4"  cy="61.5"  r="1.1"/><circle cx="6.8" cy="61.5" r="1.1"/><circle cx="9.6" cy="61.5" r="1.1"/><circle cx="12.4" cy="61.5" r="1.1"/><circle cx="15.2" cy="61.5" r="1.1"/><circle cx="18" cy="61.5" r="1.1"/><circle cx="20.8" cy="61.5" r="1.1"/><circle cx="23.6" cy="61.5" r="1.1"/><circle cx="26.4" cy="61.5" r="1.1"/><circle cx="29.2" cy="61.5" r="1.1"/><circle cx="32" cy="61.5" r="1.1"/><circle cx="34.8" cy="61.5" r="1.1"/><circle cx="37.6" cy="61.5" r="1.1"/><circle cx="40.4" cy="61.5" r="1.1"/><circle cx="43.2" cy="61.5" r="1.1"/><circle cx="46" cy="61.5" r="1.1"/><circle cx="48.8" cy="61.5" r="1.1"/><circle cx="51.6" cy="61.5" r="1.1"/><circle cx="54.4" cy="61.5" r="1.1"/><circle cx="57.2" cy="61.5" r="1.1"/><circle cx="60" cy="61.5" r="1.1"/><circle cx="62.8" cy="61.5" r="1.1"/><circle cx="65.6" cy="61.5" r="1.1"/><circle cx="68.4" cy="61.5" r="1.1"/><circle cx="71.2" cy="61.5" r="1.1"/><circle cx="74" cy="61.5" r="1.1"/><circle cx="76.8" cy="61.5" r="1.1"/><circle cx="79.6" cy="61.5" r="1.1"/><circle cx="82.4" cy="61.5" r="1.1"/><circle cx="85.2" cy="61.5" r="1.1"/><circle cx="88" cy="61.5" r="1.1"/><circle cx="90.8" cy="61.5" r="1.1"/>
+              <circle cx="4"  cy="64"  r="1.1"/><circle cx="6.8" cy="64" r="1.1"/><circle cx="9.6" cy="64" r="1.1"/><circle cx="12.4" cy="64" r="1.1"/><circle cx="15.2" cy="64" r="1.1"/><circle cx="18" cy="64" r="1.1"/><circle cx="20.8" cy="64" r="1.1"/><circle cx="23.6" cy="64" r="1.1"/><circle cx="26.4" cy="64" r="1.1"/><circle cx="29.2" cy="64" r="1.1"/><circle cx="32" cy="64" r="1.1"/><circle cx="34.8" cy="64" r="1.1"/><circle cx="37.6" cy="64" r="1.1"/><circle cx="40.4" cy="64" r="1.1"/><circle cx="43.2" cy="64" r="1.1"/><circle cx="46" cy="64" r="1.1"/><circle cx="48.8" cy="64" r="1.1"/><circle cx="51.6" cy="64" r="1.1"/><circle cx="54.4" cy="64" r="1.1"/><circle cx="57.2" cy="64" r="1.1"/><circle cx="60" cy="64" r="1.1"/><circle cx="62.8" cy="64" r="1.1"/><circle cx="65.6" cy="64" r="1.1"/><circle cx="68.4" cy="64" r="1.1"/><circle cx="71.2" cy="64" r="1.1"/><circle cx="74" cy="64" r="1.1"/><circle cx="76.8" cy="64" r="1.1"/><circle cx="79.6" cy="64" r="1.1"/><circle cx="82.4" cy="64" r="1.1"/><circle cx="85.2" cy="64" r="1.1"/><circle cx="88" cy="64" r="1.1"/><circle cx="90.8" cy="64" r="1.1"/>
+              <circle cx="4"  cy="66.5"  r="1.1"/><circle cx="6.8" cy="66.5" r="1.1"/><circle cx="9.6" cy="66.5" r="1.1"/><circle cx="12.4" cy="66.5" r="1.1"/><circle cx="15.2" cy="66.5" r="1.1"/><circle cx="18" cy="66.5" r="1.1"/><circle cx="20.8" cy="66.5" r="1.1"/><circle cx="23.6" cy="66.5" r="1.1"/><circle cx="26.4" cy="66.5" r="1.1"/><circle cx="29.2" cy="66.5" r="1.1"/><circle cx="32" cy="66.5" r="1.1"/><circle cx="34.8" cy="66.5" r="1.1"/><circle cx="37.6" cy="66.5" r="1.1"/><circle cx="40.4" cy="66.5" r="1.1"/><circle cx="43.2" cy="66.5" r="1.1"/><circle cx="46" cy="66.5" r="1.1"/><circle cx="48.8" cy="66.5" r="1.1"/><circle cx="51.6" cy="66.5" r="1.1"/><circle cx="54.4" cy="66.5" r="1.1"/><circle cx="57.2" cy="66.5" r="1.1"/><circle cx="60" cy="66.5" r="1.1"/><circle cx="62.8" cy="66.5" r="1.1"/><circle cx="65.6" cy="66.5" r="1.1"/><circle cx="68.4" cy="66.5" r="1.1"/><circle cx="71.2" cy="66.5" r="1.1"/><circle cx="74" cy="66.5" r="1.1"/><circle cx="76.8" cy="66.5" r="1.1"/><circle cx="79.6" cy="66.5" r="1.1"/><circle cx="82.4" cy="66.5" r="1.1"/><circle cx="85.2" cy="66.5" r="1.1"/><circle cx="88" cy="66.5" r="1.1"/><circle cx="90.8" cy="66.5" r="1.1"/>
+              <circle cx="4"  cy="69"  r="1.1"/><circle cx="6.8" cy="69" r="1.1"/><circle cx="9.6" cy="69" r="1.1"/><circle cx="12.4" cy="69" r="1.1"/><circle cx="15.2" cy="69" r="1.1"/><circle cx="18" cy="69" r="1.1"/><circle cx="20.8" cy="69" r="1.1"/><circle cx="23.6" cy="69" r="1.1"/><circle cx="26.4" cy="69" r="1.1"/><circle cx="29.2" cy="69" r="1.1"/><circle cx="32" cy="69" r="1.1"/><circle cx="34.8" cy="69" r="1.1"/><circle cx="37.6" cy="69" r="1.1"/><circle cx="40.4" cy="69" r="1.1"/><circle cx="43.2" cy="69" r="1.1"/><circle cx="46" cy="69" r="1.1"/><circle cx="48.8" cy="69" r="1.1"/><circle cx="51.6" cy="69" r="1.1"/><circle cx="54.4" cy="69" r="1.1"/><circle cx="57.2" cy="69" r="1.1"/><circle cx="60" cy="69" r="1.1"/><circle cx="62.8" cy="69" r="1.1"/><circle cx="65.6" cy="69" r="1.1"/><circle cx="68.4" cy="69" r="1.1"/><circle cx="71.2" cy="69" r="1.1"/><circle cx="74" cy="69" r="1.1"/><circle cx="76.8" cy="69" r="1.1"/><circle cx="79.6" cy="69" r="1.1"/><circle cx="82.4" cy="69" r="1.1"/><circle cx="85.2" cy="69" r="1.1"/><circle cx="88" cy="69" r="1.1"/><circle cx="90.8" cy="69" r="1.1"/>
+              <circle cx="4"  cy="71.5"  r="1.1"/><circle cx="6.8" cy="71.5" r="1.1"/><circle cx="9.6" cy="71.5" r="1.1"/><circle cx="12.4" cy="71.5" r="1.1"/><circle cx="15.2" cy="71.5" r="1.1"/><circle cx="18" cy="71.5" r="1.1"/><circle cx="20.8" cy="71.5" r="1.1"/><circle cx="23.6" cy="71.5" r="1.1"/><circle cx="26.4" cy="71.5" r="1.1"/><circle cx="29.2" cy="71.5" r="1.1"/><circle cx="32" cy="71.5" r="1.1"/><circle cx="34.8" cy="71.5" r="1.1"/><circle cx="37.6" cy="71.5" r="1.1"/><circle cx="40.4" cy="71.5" r="1.1"/><circle cx="43.2" cy="71.5" r="1.1"/><circle cx="46" cy="71.5" r="1.1"/><circle cx="48.8" cy="71.5" r="1.1"/><circle cx="51.6" cy="71.5" r="1.1"/><circle cx="54.4" cy="71.5" r="1.1"/><circle cx="57.2" cy="71.5" r="1.1"/><circle cx="60" cy="71.5" r="1.1"/><circle cx="62.8" cy="71.5" r="1.1"/><circle cx="65.6" cy="71.5" r="1.1"/><circle cx="68.4" cy="71.5" r="1.1"/><circle cx="71.2" cy="71.5" r="1.1"/><circle cx="74" cy="71.5" r="1.1"/><circle cx="76.8" cy="71.5" r="1.1"/><circle cx="79.6" cy="71.5" r="1.1"/><circle cx="82.4" cy="71.5" r="1.1"/><circle cx="85.2" cy="71.5" r="1.1"/><circle cx="88" cy="71.5" r="1.1"/><circle cx="90.8" cy="71.5" r="1.1"/>
+              <circle cx="4"  cy="74"  r="1.1"/><circle cx="6.8" cy="74" r="1.1"/><circle cx="9.6" cy="74" r="1.1"/><circle cx="12.4" cy="74" r="1.1"/><circle cx="15.2" cy="74" r="1.1"/><circle cx="18" cy="74" r="1.1"/><circle cx="20.8" cy="74" r="1.1"/><circle cx="23.6" cy="74" r="1.1"/><circle cx="26.4" cy="74" r="1.1"/><circle cx="29.2" cy="74" r="1.1"/><circle cx="32" cy="74" r="1.1"/><circle cx="34.8" cy="74" r="1.1"/><circle cx="37.6" cy="74" r="1.1"/><circle cx="40.4" cy="74" r="1.1"/><circle cx="43.2" cy="74" r="1.1"/><circle cx="46" cy="74" r="1.1"/><circle cx="48.8" cy="74" r="1.1"/><circle cx="51.6" cy="74" r="1.1"/><circle cx="54.4" cy="74" r="1.1"/><circle cx="57.2" cy="74" r="1.1"/><circle cx="60" cy="74" r="1.1"/><circle cx="62.8" cy="74" r="1.1"/><circle cx="65.6" cy="74" r="1.1"/><circle cx="68.4" cy="74" r="1.1"/><circle cx="71.2" cy="74" r="1.1"/><circle cx="74" cy="74" r="1.1"/><circle cx="76.8" cy="74" r="1.1"/><circle cx="79.6" cy="74" r="1.1"/><circle cx="82.4" cy="74" r="1.1"/><circle cx="85.2" cy="74" r="1.1"/><circle cx="88" cy="74" r="1.1"/><circle cx="90.8" cy="74" r="1.1"/>
+              <circle cx="4"  cy="76.5"  r="1.1"/><circle cx="6.8" cy="76.5" r="1.1"/><circle cx="9.6" cy="76.5" r="1.1"/><circle cx="12.4" cy="76.5" r="1.1"/><circle cx="15.2" cy="76.5" r="1.1"/><circle cx="18" cy="76.5" r="1.1"/><circle cx="20.8" cy="76.5" r="1.1"/><circle cx="23.6" cy="76.5" r="1.1"/><circle cx="26.4" cy="76.5" r="1.1"/><circle cx="29.2" cy="76.5" r="1.1"/><circle cx="32" cy="76.5" r="1.1"/><circle cx="34.8" cy="76.5" r="1.1"/><circle cx="37.6" cy="76.5" r="1.1"/><circle cx="40.4" cy="76.5" r="1.1"/><circle cx="43.2" cy="76.5" r="1.1"/><circle cx="46" cy="76.5" r="1.1"/><circle cx="48.8" cy="76.5" r="1.1"/><circle cx="51.6" cy="76.5" r="1.1"/><circle cx="54.4" cy="76.5" r="1.1"/><circle cx="57.2" cy="76.5" r="1.1"/><circle cx="60" cy="76.5" r="1.1"/><circle cx="62.8" cy="76.5" r="1.1"/><circle cx="65.6" cy="76.5" r="1.1"/><circle cx="68.4" cy="76.5" r="1.1"/><circle cx="71.2" cy="76.5" r="1.1"/><circle cx="74" cy="76.5" r="1.1"/><circle cx="76.8" cy="76.5" r="1.1"/><circle cx="79.6" cy="76.5" r="1.1"/><circle cx="82.4" cy="76.5" r="1.1"/><circle cx="85.2" cy="76.5" r="1.1"/><circle cx="88" cy="76.5" r="1.1"/><circle cx="90.8" cy="76.5" r="1.1"/>
+              <circle cx="4"  cy="79"  r="1.1"/><circle cx="6.8" cy="79" r="1.1"/><circle cx="9.6" cy="79" r="1.1"/><circle cx="12.4" cy="79" r="1.1"/><circle cx="15.2" cy="79" r="1.1"/><circle cx="18" cy="79" r="1.1"/><circle cx="20.8" cy="79" r="1.1"/><circle cx="23.6" cy="79" r="1.1"/><circle cx="26.4" cy="79" r="1.1"/><circle cx="29.2" cy="79" r="1.1"/><circle cx="32" cy="79" r="1.1"/><circle cx="34.8" cy="79" r="1.1"/><circle cx="37.6" cy="79" r="1.1"/><circle cx="40.4" cy="79" r="1.1"/><circle cx="43.2" cy="79" r="1.1"/><circle cx="46" cy="79" r="1.1"/><circle cx="48.8" cy="79" r="1.1"/><circle cx="51.6" cy="79" r="1.1"/><circle cx="54.4" cy="79" r="1.1"/><circle cx="57.2" cy="79" r="1.1"/><circle cx="60" cy="79" r="1.1"/><circle cx="62.8" cy="79" r="1.1"/><circle cx="65.6" cy="79" r="1.1"/><circle cx="68.4" cy="79" r="1.1"/><circle cx="71.2" cy="79" r="1.1"/><circle cx="74" cy="79" r="1.1"/><circle cx="76.8" cy="79" r="1.1"/><circle cx="79.6" cy="79" r="1.1"/><circle cx="82.4" cy="79" r="1.1"/><circle cx="85.2" cy="79" r="1.1"/><circle cx="88" cy="79" r="1.1"/><circle cx="90.8" cy="79" r="1.1"/>
+              <circle cx="4"  cy="81.5"  r="1.1"/><circle cx="6.8" cy="81.5" r="1.1"/><circle cx="9.6" cy="81.5" r="1.1"/><circle cx="12.4" cy="81.5" r="1.1"/><circle cx="15.2" cy="81.5" r="1.1"/><circle cx="18" cy="81.5" r="1.1"/><circle cx="20.8" cy="81.5" r="1.1"/><circle cx="23.6" cy="81.5" r="1.1"/><circle cx="26.4" cy="81.5" r="1.1"/><circle cx="29.2" cy="81.5" r="1.1"/><circle cx="32" cy="81.5" r="1.1"/><circle cx="34.8" cy="81.5" r="1.1"/><circle cx="37.6" cy="81.5" r="1.1"/><circle cx="40.4" cy="81.5" r="1.1"/><circle cx="43.2" cy="81.5" r="1.1"/><circle cx="46" cy="81.5" r="1.1"/><circle cx="48.8" cy="81.5" r="1.1"/><circle cx="51.6" cy="81.5" r="1.1"/><circle cx="54.4" cy="81.5" r="1.1"/><circle cx="57.2" cy="81.5" r="1.1"/><circle cx="60" cy="81.5" r="1.1"/><circle cx="62.8" cy="81.5" r="1.1"/><circle cx="65.6" cy="81.5" r="1.1"/><circle cx="68.4" cy="81.5" r="1.1"/><circle cx="71.2" cy="81.5" r="1.1"/><circle cx="74" cy="81.5" r="1.1"/><circle cx="76.8" cy="81.5" r="1.1"/><circle cx="79.6" cy="81.5" r="1.1"/><circle cx="82.4" cy="81.5" r="1.1"/><circle cx="85.2" cy="81.5" r="1.1"/><circle cx="88" cy="81.5" r="1.1"/><circle cx="90.8" cy="81.5" r="1.1"/>
+            </g>
+            <text x="50" y="96" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7" fill="#a0aec0">1024 点 · WiFi 6</text>
+          </svg>
+        </div>
+      </div>
+
+    </div><!-- /constellation-row -->
+
+    <!-- application tags -->
+    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+      <span style="font-size:0.72rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;">应用场景</span>
+      <span class="use-tag">有线电视 DOCSIS (QAM-64/256)</span>
+      <span class="use-tag">ADSL 宽带</span>
+      <span class="use-tag">WiFi 6 · 802.11ax (QAM-1024)</span>
+    </div>
+
+  </div><!-- /qam-body -->
+</div><!-- /qam-section -->
+
+</body>
+</html>

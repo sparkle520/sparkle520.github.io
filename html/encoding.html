@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数字基带编码方式</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap');
+
+:root {
+  --text:        #1a202c;
+  --text-muted:  #718096;
+  --text-sub:    #4a5568;
+  --border:      #e2e8f0;
+  --border-mid:  #cbd5e0;
+  --tag-bg:      #edf2f7;
+  --pro-bg:      #f0fff4;
+  --pro-border:  #9ae6b4;
+  --pro-text:    #276749;
+  --con-bg:      #fff5f5;
+  --con-border:  #feb2b2;
+  --con-text:    #9b2c2c;
+  --use-bg:      #ebf8ff;
+  --use-border:  #90cdf4;
+  --use-text:    #2b6cb0;
+  --strong-color:     #63c599;
+  /* waveform colors per encoding */
+  --nrz-stroke:   #3182ce;
+  --rz-stroke:    #e53e3e;
+  --man-stroke:   #38a169;
+  --dman-stroke:  #d69e2e;
+  /* card accent bars */
+  --c1: #3182ce;
+  --c2: #e53e3e;
+  --c3: #38a169;
+  --c4: #d69e2e;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: transparent;
+  color: var(--text);
+  font-family: 'Noto Sans SC', sans-serif;
+  padding: 32px 20px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* ── PAGE TITLE ── */
+.page-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+  letter-spacing: 0.03em;
+}
+
+.page-subtitle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+/* ── BIT SEQUENCE HEADER ── */
+.bit-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 10px 14px;
+  background: var(--tag-bg);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  width: fit-content;
+}
+
+.bit-header-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+.bit-seq {
+  display: flex;
+  gap: 3px;
+}
+
+.bit {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.bit.one  { background: #ebf4ff; color: #2b6cb0; }
+.bit.zero { background: #fff5f5; color: #c53030; }
+
+/* ── CARDS GRID ── */
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 600px) {
+  .cards { grid-template-columns: 1fr; }
+}
+
+/* ── CARD ── */
+.card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(4px);
+}
+.card strong {
+  color: var(--strong-color);
+}
+.card-head {
+  padding: 14px 18px 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  position: relative;
+}
+
+.card-head::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  border-radius: 2px 0 0 2px;
+}
+
+.c1 .card-head::before { background: var(--c1); }
+.c2 .card-head::before { background: var(--c2); }
+.c3 .card-head::before { background: var(--c3); }
+.c4 .card-head::before { background: var(--c4); }
+
+.card-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.card-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.card-abbr {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+/* ── WAVEFORM ── */
+.waveform-wrap {
+  padding: 12px 18px 8px;
+  border-bottom: 1px solid var(--border);
+  background: #fafbfc;
+}
+
+svg.wave {
+  width: 100%;
+  height: 56px;
+  display: block;
+  overflow: visible;
+}
+
+/* bit tick marks */
+.tick-labels {
+  display: flex;
+  padding: 0 0 0 0;
+  margin-top: 2px;
+}
+
+.tick-cell {
+  flex: 1;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  color: var(--text-muted);
+}
+
+/* ── BODY ── */
+.card-body {
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rule {
+  font-size: 0.78rem;
+  color: var(--text-sub);
+  line-height: 1.6;
+}
+
+.tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.7rem;
+  padding: 3px 10px;
+  border-radius: 5px;
+  border: 1px solid;
+  line-height: 1.5;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+
+.tag.pro { background: var(--pro-bg); border-color: var(--pro-border); color: var(--pro-text); }
+.tag.con { background: var(--con-bg); border-color: var(--con-border); color: var(--con-text); }
+.tag.use { background: var(--use-bg); border-color: var(--use-border); color: var(--use-text); }
+
+.tag-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  font-weight: 600;
+  opacity: 0.7;
+  letter-spacing: 0.05em;
+}
+
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 2px 0;
+}
+</style>
+</head>
+<body>
+
+<div class="page-title">数字基带编码方式</div>
+<div class="page-subtitle">Digital Baseband Line Coding</div>
+
+<!-- bit sequence reference -->
+<div class="bit-header">
+  <span class="bit-header-label">示例比特串</span>
+  <div class="bit-seq">
+    <span class="bit one">1</span>
+    <span class="bit zero">0</span>
+    <span class="bit one">1</span>
+    <span class="bit one">1</span>
+    <span class="bit zero">0</span>
+    <span class="bit zero">0</span>
+    <span class="bit one">1</span>
+    <span class="bit zero">0</span>
+  </div>
+</div>
+
+<div class="cards">
+
+  <!-- ── NRZ ── -->
+  <div class="card c1">
+    <div class="card-head">
+      <span class="card-num">01 · NRZ</span>
+      <span class="card-title">不归零编码</span>
+      <span class="card-abbr">Non-Return-to-Zero</span>
+    </div>
+    <div class="waveform-wrap">
+      <!-- bits: 1 0 1 1 0 0 1 0 -->
+      <!-- H=high(1) L=low(0), each bit = 40px wide, total=320, height range: 8(H) to 44(L) -->
+      <svg class="wave" viewBox="0 0 320 56" preserveAspectRatio="none">
+        <!-- grid lines -->
+        <line x1="0" y1="14" x2="320" y2="14" stroke="#e2e8f0" stroke-width="0.5"/>
+        <line x1="0" y1="42" x2="320" y2="42" stroke="#e2e8f0" stroke-width="0.5"/>
+        <!-- bit separators -->
+        <line x1="40"  y1="4" x2="40"  y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <line x1="80"  y1="4" x2="80"  y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <line x1="120" y1="4" x2="120" y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <line x1="160" y1="4" x2="160" y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <line x1="200" y1="4" x2="200" y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <line x1="240" y1="4" x2="240" y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <line x1="280" y1="4" x2="280" y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <!-- waveform: 1=H(y=14) 0=L(y=42) -->
+        <!-- 1 -->
+        <polyline points="0,14 40,14" fill="none" stroke="#3182ce" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- 0: drop -->
+        <polyline points="40,14 40,42 80,42" fill="none" stroke="#3182ce" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- 1: rise -->
+        <polyline points="80,42 80,14 120,14" fill="none" stroke="#3182ce" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- 1: stay -->
+        <polyline points="120,14 160,14" fill="none" stroke="#3182ce" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- 0: drop -->
+        <polyline points="160,14 160,42 200,42" fill="none" stroke="#3182ce" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- 0: stay -->
+        <polyline points="200,42 240,42" fill="none" stroke="#3182ce" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- 1: rise -->
+        <polyline points="240,42 240,14 280,14" fill="none" stroke="#3182ce" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- 0: drop -->
+        <polyline points="280,14 280,42 320,42" fill="none" stroke="#3182ce" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- H/L labels -->
+        <text x="3" y="12" font-family="JetBrains Mono,monospace" font-size="8" fill="#3182ce" opacity="0.6">H</text>
+        <text x="3" y="50" font-family="JetBrains Mono,monospace" font-size="8" fill="#3182ce" opacity="0.6">L</text>
+      </svg>
+      <div class="tick-labels">
+        <span class="tick-cell">1</span><span class="tick-cell">0</span><span class="tick-cell">1</span>
+        <span class="tick-cell">1</span><span class="tick-cell">0</span><span class="tick-cell">0</span>
+        <span class="tick-cell">1</span><span class="tick-cell">0</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="rule">高电平表示 <strong>1</strong>，低电平表示 <strong>0</strong> ( 或相反 ) ; 信号电平在整个比特周期内保持不变. </div>
+      <div class="divider"></div>
+      <div class="tags-row">
+        <span class="tag con"><span class="tag-label">缺点</span>连续相同比特时缺乏时钟信息，位同步困难</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── RZ ── -->
+  <div class="card c2">
+    <div class="card-head">
+      <span class="card-num">02 · RZ</span>
+      <span class="card-title">归零编码</span>
+      <span class="card-abbr">Return-to-Zero</span>
+    </div>
+    <div class="waveform-wrap">
+      <!-- each bit = 40px; first half = signal, second half = zero(y=42) -->
+      <!-- 1=H first half; 0=L first half (or could be 0=L all, RZ classic: 1→H then 0, 0→0 all) -->
+      <!-- Classic RZ: 1 → high for first half, return to 0; 0 → low (or 0) for first half, return to 0 -->
+      <!-- Using: 1=high half then zero; 0=stays at zero all -->
+      <svg class="wave" viewBox="0 0 320 56" preserveAspectRatio="none">
+        <line x1="0" y1="14" x2="320" y2="14" stroke="#e2e8f0" stroke-width="0.5"/>
+        <line x1="0" y1="42" x2="320" y2="42" stroke="#e2e8f0" stroke-width="0.5"/>
+        <line x1="40"  y1="4" x2="40"  y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <line x1="80"  y1="4" x2="80"  y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <line x1="120" y1="4" x2="120" y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <line x1="160" y1="4" x2="160" y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <line x1="200" y1="4" x2="200" y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <line x1="240" y1="4" x2="240" y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <line x1="280" y1="4" x2="280" y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <!-- bit 1(1): 0→H, mid→0 -->
+        <polyline points="0,14 20,14 20,42 40,42" fill="none" stroke="#e53e3e" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- bit 2(0): stay 0 -->
+        <polyline points="40,42 80,42" fill="none" stroke="#e53e3e" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- bit 3(1) -->
+        <polyline points="80,42 80,14 100,14 100,42 120,42" fill="none" stroke="#e53e3e" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- bit 4(1) -->
+        <polyline points="120,42 120,14 140,14 140,42 160,42" fill="none" stroke="#e53e3e" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- bit 5(0) -->
+        <polyline points="160,42 200,42" fill="none" stroke="#e53e3e" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- bit 6(0) -->
+        <polyline points="200,42 240,42" fill="none" stroke="#e53e3e" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- bit 7(1) -->
+        <polyline points="240,42 240,14 260,14 260,42 280,42" fill="none" stroke="#e53e3e" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- bit 8(0) -->
+        <polyline points="280,42 320,42" fill="none" stroke="#e53e3e" stroke-width="2.2" stroke-linejoin="round"/>
+        <text x="3" y="12" font-family="JetBrains Mono,monospace" font-size="8" fill="#e53e3e" opacity="0.6">H</text>
+        <text x="3" y="50" font-family="JetBrains Mono,monospace" font-size="8" fill="#e53e3e" opacity="0.6">0</text>
+      </svg>
+      <div class="tick-labels">
+        <span class="tick-cell">1</span><span class="tick-cell">0</span><span class="tick-cell">1</span>
+        <span class="tick-cell">1</span><span class="tick-cell">0</span><span class="tick-cell">0</span>
+        <span class="tick-cell">1</span><span class="tick-cell">0</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="rule">每个比特的中间，信号 <strong>归回零电平</strong>; 每次归零本身即为时钟脉冲. </div>
+      <div class="divider"></div>
+      <div class="tags-row">
+        <span class="tag pro"><span class="tag-label">优点</span>自含时钟，同步性好</span>
+        <span class="tag con"><span class="tag-label">缺点</span>同等速率需更高带宽</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Manchester ── -->
+  <div class="card c3">
+    <div class="card-head">
+      <span class="card-num">03 · Manchester</span>
+      <span class="card-title">曼彻斯特编码</span>
+      <span class="card-abbr">Manchester Encoding · IEEE 802.3</span>
+    </div>
+    <div class="waveform-wrap">
+      <!-- each bit=40px, mid=20px; 1=H→L (fall at mid); 0=L→H (rise at mid) -->
+      <svg class="wave" viewBox="0 0 320 56" preserveAspectRatio="none">
+        <line x1="0" y1="14" x2="320" y2="14" stroke="#e2e8f0" stroke-width="0.5"/>
+        <line x1="0" y1="42" x2="320" y2="42" stroke="#e2e8f0" stroke-width="0.5"/>
+        <line x1="40"  y1="4" x2="40"  y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <line x1="80"  y1="4" x2="80"  y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <line x1="120" y1="4" x2="120" y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <line x1="160" y1="4" x2="160" y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <line x1="200" y1="4" x2="200" y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <line x1="240" y1="4" x2="240" y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <line x1="280" y1="4" x2="280" y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <!-- 1=H→L(fall), 0=L→H(rise) -->
+        <!-- bit1=1: H to mid, fall, L to end -->
+        <polyline points="0,14 20,14 20,42 40,42" fill="none" stroke="#38a169" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- bit2=0: L to mid, rise, H to end -->
+        <polyline points="40,42 60,42 60,14 80,14" fill="none" stroke="#38a169" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- bit3=1 -->
+        <polyline points="80,14 100,14 100,42 120,42" fill="none" stroke="#38a169" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- bit4=1 -->
+        <polyline points="120,14 140,14 140,42 160,42" fill="none" stroke="#38a169" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- bit5=0 -->
+        <polyline points="160,42 180,42 180,14 200,14" fill="none" stroke="#38a169" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- bit6=0 -->
+        <polyline points="200,42 220,42 220,14 240,14" fill="none" stroke="#38a169" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- bit7=1 -->
+        <polyline points="240,14 260,14 260,42 280,42" fill="none" stroke="#38a169" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- bit8=0 -->
+        <polyline points="280,42 300,42 300,14 320,14" fill="none" stroke="#38a169" stroke-width="2.2" stroke-linejoin="round"/>
+        <text x="3" y="12" font-family="JetBrains Mono,monospace" font-size="8" fill="#38a169" opacity="0.6">H</text>
+        <text x="3" y="50" font-family="JetBrains Mono,monospace" font-size="8" fill="#38a169" opacity="0.6">L</text>
+      </svg>
+      <div class="tick-labels">
+        <span class="tick-cell">1</span><span class="tick-cell">0</span><span class="tick-cell">1</span>
+        <span class="tick-cell">1</span><span class="tick-cell">0</span><span class="tick-cell">0</span>
+        <span class="tick-cell">1</span><span class="tick-cell">0</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="rule">每个比特 <strong>中间必有跳变</strong> : <strong>下降沿 → 1</strong>，<strong>上升沿 → 0</strong> ( IEEE 802.3 ). 跳变本身携带时钟. </div>
+      <div class="divider"></div>
+      <div class="tags-row">
+        <span class="tag pro"><span class="tag-label">优点</span>自含时钟，同步性好</span>
+        <span class="tag use"><span class="tag-label">应用</span>以太网 10 Mbps</span>
+        <span class="tag con"><span class="tag-label">缺点</span>编码效率 50%，带宽翻倍</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Differential Manchester ── -->
+  <div class="card c4">
+    <div class="card-head">
+      <span class="card-num">04 · Differential Manchester</span>
+      <span class="card-title">差分曼彻斯特编码</span>
+      <span class="card-abbr">Differential Manchester Encoding</span>
+    </div>
+    <div class="waveform-wrap">
+      <!--
+        Rules:
+        - Mid-bit: always a transition (clock)
+        - Bit boundary: transition → 0 ; no transition → 1
+        Bits: 1 0 1 1 0 0 1 0
+        Start at H. Each bit = 40px wide, mid = 20px.
+        
+        State machine (track level at start of each bit):
+        start_level = H
+        bit1=1: no boundary transition → starts H; mid fall H→L; end at L
+        bit2=0: boundary transition → flip to H; mid fall H→L; end at L
+        bit3=1: no boundary transition → stays L; mid rise L→H; end at H
+        bit4=1: no boundary transition → stays H; mid fall H→L; end at L
+        bit5=0: boundary transition → flip to H; mid fall H→L; end at L
+        bit6=0: boundary transition → flip to H; mid fall H→L; end at L  (wait, flip from L to H)
+        bit7=1: no boundary transition → stays L; mid rise L→H; end at H
+        bit8=0: boundary transition → flip to L; mid rise L→H; end at H
+        
+        Let me redo carefully. Current = level at END of previous bit = level entering next bit boundary.
+        
+        prev_end=H (assumed)
+        bit1=1: no boundary jump → level stays H at boundary; first half=H(14); mid: H→L; second half=L(42); end=L
+        bit2=0: boundary jump → flip from L→H; first half=H(14); mid: H→L; second half=L(42); end=L
+        bit3=1: no boundary jump → stays L; first half=L(42); mid: L→H; second half=H(14); end=H
+        bit4=1: no boundary jump → stays H; first half=H(14); mid: H→L; second half=L(42); end=L
+        bit5=0: boundary jump → flip from L→H; first half=H(14); mid: H→L; second half=L(42); end=L
+        bit6=0: boundary jump → flip from L→H; first half=H(14); mid: H→L; second half=L(42); end=L
+        bit7=1: no boundary jump → stays L; first half=L(42); mid: L→H; second half=H(14); end=H
+        bit8=0: boundary jump → flip from H→L; first half=L(42); mid: L→H; second half=H(14); end=H
+      -->
+      <svg class="wave" viewBox="0 0 320 56" preserveAspectRatio="none">
+        <line x1="0" y1="14" x2="320" y2="14" stroke="#e2e8f0" stroke-width="0.5"/>
+        <line x1="0" y1="42" x2="320" y2="42" stroke="#e2e8f0" stroke-width="0.5"/>
+        <line x1="40"  y1="4" x2="40"  y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <line x1="80"  y1="4" x2="80"  y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <line x1="120" y1="4" x2="120" y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <line x1="160" y1="4" x2="160" y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <line x1="200" y1="4" x2="200" y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <line x1="240" y1="4" x2="240" y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <line x1="280" y1="4" x2="280" y2="52" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="2,2"/>
+
+        <!-- bit1=1: H,H→L,L  (0→20=H, 20→40=L) -->
+        <polyline points="0,14 20,14 20,42 40,42" fill="none" stroke="#d69e2e" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- bit2=0: jump→H, H→L  (40→60=H, 60→80=L) -->
+        <polyline points="40,42 40,14 60,14 60,42 80,42" fill="none" stroke="#d69e2e" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- bit3=1: no jump stays L, L→H  (80→100=L, 100→120=H) -->
+        <polyline points="80,42 100,42 100,14 120,14" fill="none" stroke="#d69e2e" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- bit4=1: no jump stays H, H→L  (120→140=H, 140→160=L) -->
+        <polyline points="120,14 140,14 140,42 160,42" fill="none" stroke="#d69e2e" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- bit5=0: jump→H, H→L  (160→180=H, 180→200=L) -->
+        <polyline points="160,42 160,14 180,14 180,42 200,42" fill="none" stroke="#d69e2e" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- bit6=0: jump→H, H→L  (200→220=H, 220→240=L) -->
+        <polyline points="200,42 200,14 220,14 220,42 240,42" fill="none" stroke="#d69e2e" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- bit7=1: no jump stays L, L→H  (240→260=L, 260→280=H) -->
+        <polyline points="240,42 260,42 260,14 280,14" fill="none" stroke="#d69e2e" stroke-width="2.2" stroke-linejoin="round"/>
+        <!-- bit8=0: jump→L, L→H  (280→300=L, 300→320=H) -->
+        <polyline points="280,14 280,42 300,42 300,14 320,14" fill="none" stroke="#d69e2e" stroke-width="2.2" stroke-linejoin="round"/>
+
+        <text x="3" y="12" font-family="JetBrains Mono,monospace" font-size="8" fill="#d69e2e" opacity="0.6">H</text>
+        <text x="3" y="50" font-family="JetBrains Mono,monospace" font-size="8" fill="#d69e2e" opacity="0.6">L</text>
+      </svg>
+      <div class="tick-labels">
+        <span class="tick-cell">1</span><span class="tick-cell">0</span><span class="tick-cell">1</span>
+        <span class="tick-cell">1</span><span class="tick-cell">0</span><span class="tick-cell">0</span>
+        <span class="tick-cell">1</span><span class="tick-cell">0</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="rule">中间 <strong>始终跳变</strong> ( 时钟同步 ); 比特边界处 : <strong>有跳变 → 0</strong>，<strong>无跳变 → 1</strong>. 数据由相对变化决定. </div>
+      <div class="divider"></div>
+      <div class="tags-row">
+        <span class="tag pro"><span class="tag-label">优点</span>抗干扰性更强，不依赖绝对电平</span>
+        <span class="tag use"><span class="tag-label">应用</span>令牌环网 Token Ring</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

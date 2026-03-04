@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>集线器 · 工作原理与功能</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {delimiters:[
+    {left:'$$',right:'$$',display:true},
+    {left:'$',right:'$',display:false}
+  ]})"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap');
+
+:root {
+  --text:           #1a202c;
+  --text-sub:       #4a5568;
+  --text-muted:     #718096;
+  --border:         #e2e8f0;
+  --border-soft:    #edf2f7;
+  --surface:        rgba(255,255,255,0.9);
+  --accent:         #2b6cb0;
+  --accent-faint:   #ebf8ff;
+  --accent-border:  #90cdf4;
+  --warn:           #c05621;
+  --warn-faint:     #fffaf0;
+  --warn-border:    #fbd38d;
+  --red:            #9b2c2c;
+  --red-faint:      #fff5f5;
+  --red-border:     #feb2b2;
+  --green:          #276749;
+  --green-faint:    #f0fff4;
+  --green-border:   #9ae6b4;
+  --purple:         #553c9a;
+  --purple-faint:   #faf5ff;
+  --purple-border:  #d6bcfa;
+  --gray-faint:     #f7fafc;
+  --strong-color:     #63c599;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: transparent;
+  color: var(--text);
+  font-family: 'Noto Sans SC', sans-serif;
+  padding: 28px 20px 40px;
+  max-width: 100%;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* ── HEADER ── */
+.page-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.layer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 14px;
+  background: var(--accent-faint);
+  border: 1px solid var(--accent-border);
+  border-radius: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.67rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  margin-bottom: 22px;
+}
+
+.layer-badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ── SECTION LABEL ── */
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.61rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+/* ── FUNCTION BAR ── */
+.func-bar {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface);
+  margin-bottom: 14px;
+}
+
+.func-accent { width: 4px; background: var(--accent); flex-shrink: 0; }
+
+.func-body { padding: 13px 16px; flex: 1; }
+
+.func-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.59rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.func-text { font-size: 0.82rem; color: var(--text-sub); }
+.func-text strong { color: var(--strong-color); font-weight: 600; margin: 0 3px; }
+
+/* ── BROADCAST DIAGRAM ── */
+.diagram-wrap {
+  background: var(--gray-faint);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+}
+
+.diagram-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.59rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+svg.hub-diagram {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  height: 160px;
+}
+
+/* ── TRAITS GRID ── */
+.traits-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 0;
+}
+
+@media (max-width: 500px) {
+  .traits-grid { grid-template-columns: 1fr; }
+}
+
+.trait-card {
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.trait-head {
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--border-soft);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.57rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.trait-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.trait-card.red    .trait-head { background: var(--red-faint);    color: var(--red);    }
+.trait-card.red    .trait-dot  { background: var(--red);          }
+.trait-card.warn   .trait-head { background: var(--warn-faint);   color: var(--warn);   }
+.trait-card.warn   .trait-dot  { background: var(--warn);         }
+.trait-card.purple .trait-head { background: var(--purple-faint); color: var(--purple); }
+.trait-card.purple .trait-dot  { background: var(--purple);       }
+.trait-card.green  .trait-head { background: var(--green-faint);  color: var(--green);  }
+.trait-card.green  .trait-dot  { background: var(--green-border); }
+
+.trait-body {
+  padding: 10px 12px;
+  font-size: 0.78rem;
+  color: var(--text-sub);
+  line-height: 1.62;
+}
+
+.trait-body strong { color: var(--strong-color); font-weight: 600; margin: 0 3px; }
+
+.katex { font-size: 0.9em; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="page-title">集线器 ( Hub ) · 工作原理与功能</div>
+<div class="layer-badge">
+  <span class="layer-badge-dot"></span>
+  OSI 第一层 · 物理层 · Physical Layer · 多端口中继器
+</div>
+
+<!-- Function -->
+<div class="section-label">功能</div>
+<div class="func-bar">
+  <div class="func-accent"></div>
+  <div class="func-body">
+    <div class="func-tag">Core Function</div>
+    <div class="func-text">
+      将来自一个端口的信号 <strong>广播</strong> 到所有其他端口.
+      集线器本身不识别 MAC 地址, 对信号进行 <strong>再生整形</strong> 后向全部端口转发.
+    </div>
+  </div>
+</div>
+
+<!-- Broadcast diagram -->
+<div class="diagram-wrap">
+  <div class="diagram-title">广播传输示意 — 端口 A 发送, 所有其他端口均收到</div>
+  <svg class="hub-diagram" viewBox="0 0 420 180">
+    <!-- Hub center box -->
+    <rect x="170" y="60" width="80" height="40" rx="6"
+      fill="#ebf8ff" stroke="#90cdf4" stroke-width="1.5"/>
+    <text x="210" y="76" text-anchor="middle"
+      font-family="JetBrains Mono,monospace" font-size="9" font-weight="700" fill="#2b6cb0">HUB</text>
+    <text x="210" y="90" text-anchor="middle"
+      font-family="JetBrains Mono,monospace" font-size="7" fill="#4a90d9">物理层</text>
+
+    <!-- Lines from hub to devices -->
+    <!-- Left: A (sender) -->
+    <line x1="170" y1="80" x2="80" y2="80" stroke="#2b6cb0" stroke-width="1.8"/>
+    <!-- Top -->
+    <line x1="210" y1="60" x2="210" y2="15" stroke="#e2e8f0" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <!-- Top-right -->
+    <line x1="245" y1="65" x2="310" y2="25" stroke="#e2e8f0" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <!-- Right -->
+    <line x1="250" y1="80" x2="340" y2="80" stroke="#e2e8f0" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <!-- Bottom-right -->
+    <line x1="245" y1="95" x2="310" y2="135" stroke="#e2e8f0" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <!-- Bottom -->
+    <line x1="210" y1="100" x2="210" y2="145" stroke="#e2e8f0" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+    <!-- Arrowheads on broadcast lines (dashed) -->
+    <!-- top -->
+    <polygon points="210,12 206,20 214,20" fill="#cbd5e0"/>
+    <!-- top-right -->
+    <polygon points="313,23 304,26 308,34" fill="#cbd5e0"/>
+    <!-- right -->
+    <polygon points="343,80 335,76 335,84" fill="#cbd5e0"/>
+    <!-- bottom-right -->
+    <polygon points="313,137 304,130 312,126" fill="#cbd5e0"/>
+    <!-- bottom -->
+    <polygon points="210,148 206,140 214,140" fill="#cbd5e0"/>
+
+    <!-- Sender arrow (solid blue) -->
+    <polygon points="173,80 165,76 165,84" fill="#2b6cb0"/>
+
+    <!-- Device nodes -->
+    <!-- A - sender -->
+    <rect x="30" y="66" width="50" height="28" rx="5"
+      fill="#ebf8ff" stroke="#2b6cb0" stroke-width="1.5"/>
+    <text x="55" y="78" text-anchor="middle"
+      font-family="JetBrains Mono,monospace" font-size="8" font-weight="700" fill="#2b6cb0">Host A</text>
+    <text x="55" y="89" text-anchor="middle"
+      font-family="JetBrains Mono,monospace" font-size="7" fill="#4a90d9">发送方</text>
+
+    <!-- Top -->
+    <rect x="185" y="4" width="50" height="18" rx="4"
+      fill="#f7fafc" stroke="#cbd5e0" stroke-width="1"/>
+    <text x="210" y="16" text-anchor="middle"
+      font-family="JetBrains Mono,monospace" font-size="7.5" fill="#718096">Host B</text>
+
+    <!-- Top-right -->
+    <rect x="312" y="12" width="50" height="18" rx="4"
+      fill="#f7fafc" stroke="#cbd5e0" stroke-width="1"/>
+    <text x="337" y="24" text-anchor="middle"
+      font-family="JetBrains Mono,monospace" font-size="7.5" fill="#718096">Host C</text>
+
+    <!-- Right -->
+    <rect x="342" y="71" width="50" height="18" rx="4"
+      fill="#f7fafc" stroke="#cbd5e0" stroke-width="1"/>
+    <text x="367" y="83" text-anchor="middle"
+      font-family="JetBrains Mono,monospace" font-size="7.5" fill="#718096">Host D</text>
+
+    <!-- Bottom-right -->
+    <rect x="312" y="130" width="50" height="18" rx="4"
+      fill="#f7fafc" stroke="#cbd5e0" stroke-width="1"/>
+    <text x="337" y="142" text-anchor="middle"
+      font-family="JetBrains Mono,monospace" font-size="7.5" fill="#718096">Host E</text>
+
+    <!-- Bottom -->
+    <rect x="185" y="148" width="50" height="14" rx="4"
+      fill="#f7fafc" stroke="#cbd5e0" stroke-width="1"/>
+    <text x="210" y="158" text-anchor="middle"
+      font-family="JetBrains Mono,monospace" font-size="7.5" fill="#718096">Host F</text>
+
+    <!-- Legend -->
+    <line x1="30" y1="153" x2="50" y2="153" stroke="#2b6cb0" stroke-width="1.8"/>
+    <polygon points="53,153 47,150 47,156" fill="#2b6cb0"/>
+    <text x="57" y="157" font-family="JetBrains Mono,monospace" font-size="7" fill="#4a5568">信号源</text>
+    <line x1="90" y1="153" x2="110" y2="153" stroke="#cbd5e0" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <polygon points="113,153 107,150 107,156" fill="#cbd5e0"/>
+    <text x="117" y="157" font-family="JetBrains Mono,monospace" font-size="7" fill="#718096">广播转发</text>
+  </svg>
+</div>
+
+<!-- Traits -->
+<div class="section-label">工作特性</div>
+<div class="traits-grid">
+
+  <div class="trait-card red">
+    <div class="trait-head">
+      <span class="trait-dot"></span>广播式传输
+    </div>
+    <div class="trait-body">
+      任何端口收到信号, 立即向 <strong>所有其他端口</strong> 转发.
+      无 MAC 地址识别能力, 不做任何过滤.
+    </div>
+  </div>
+
+  <div class="trait-card warn">
+    <div class="trait-head">
+      <span class="trait-dot"></span>共享带宽
+    </div>
+    <div class="trait-body">
+      所有设备共享 <strong>同一冲突域和带宽</strong>.
+      若接入 $N$ 台主机, 每台平均可用带宽仅为 $\dfrac{1}{N}$.
+    </div>
+  </div>
+
+  <div class="trait-card purple">
+    <div class="trait-head">
+      <span class="trait-dot"></span>半双工 · CSMA/CD
+    </div>
+    <div class="trait-body">
+      同一时刻只允许 <strong>一台主机</strong> 发送数据.
+      采用 <strong>CSMA/CD</strong> 协议检测并解决冲突.
+    </div>
+  </div>
+
+  <div class="trait-card green">
+    <div class="trait-head">
+      <span class="trait-dot"></span>物理星型 · 逻辑总线型
+    </div>
+    <div class="trait-body">
+      外观为 <strong>星型拓扑</strong> ( 线缆汇聚到集线器 ),
+      逻辑上等价于 <strong>共享总线</strong>, 行为与总线型完全一致.
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

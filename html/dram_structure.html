@@ -1063,7 +1063,7 @@ function updateSim() {
     setVal('sig-bl', storedData ? '↑偏高' : '↓偏低', 'chg');
     setVal('sig-vc','共享中','chg'); setVal('sig-t','ON','hi');
     setVal('sig-sa','放大+回写','hi'); setVal('sig-data', storedData, storedData?'hi':'lo');
-    desc.innerHTML = `<strong>读操作 : </strong>WL=1，T 导通，电容与 BL 电荷共享，BL 微偏向 ${storedData?'VDD':'GND'}. SA 放大后判为 <strong>${storedData}</strong>，并回写电容恢复数据 ( 破坏性读取 ) . `;
+    desc.innerHTML = `<strong>读操作 : </strong>WL=1，T 导通，电容与 BL 电荷共享，BL 微偏向 ${storedData?'VDD':'GND'}. SA 放大后判为 <strong>${storedData}</strong>，并回写电容恢复数据 ( 破坏性读取 ). `;
 
   } else if (simMode === 'write') {
     document.getElementById('write-data-group').style.display = 'block';

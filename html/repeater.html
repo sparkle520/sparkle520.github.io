@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中继器 · 工作原理与功能</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap');
+
+:root {
+  --text:         #1a202c;
+  --text-sub:     #4a5568;
+  --text-muted:   #718096;
+  --border:       #e2e8f0;
+  --border-soft:  #edf2f7;
+  --surface:      rgba(255,255,255,0.9);
+  --accent:       #2b6cb0;
+  --accent-faint: #ebf8ff;
+  --accent-border:#90cdf4;
+  --warn:         #c05621;
+  --warn-faint:   #fffaf0;
+  --warn-border:  #fbd38d;
+  --good:         #276749;
+  --good-faint:   #f0fff4;
+  --good-border:  #9ae6b4;
+  --red:          #9b2c2c;
+  --red-faint:    #fff5f5;
+  --red-border:   #feb2b2;
+  --gray-faint:   #f7fafc;
+  --strong-color:     #63c599;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: transparent;
+  color: var(--text);
+  font-family: 'Noto Sans SC', sans-serif;
+  padding: 28px 20px 40px;
+  max-width: 100%;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* ── PAGE HEADER ── */
+.page-header {
+  margin-bottom: 22px;
+}
+
+.page-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--text);
+  margin-bottom: 5px;
+}
+
+.layer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 14px;
+  background: var(--accent-faint);
+  border: 1px solid var(--accent-border);
+  border-radius: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+}
+
+.layer-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ── SECTION TITLE ── */
+.section-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+/* ── CARD BASE ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.card-inner {
+  padding: 16px 18px;
+}
+
+.card-head-bar {
+  height: 3px;
+  width: 100%;
+}
+
+/* ── FUNCTION CARD ── */
+.func-card {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface);
+  margin-bottom: 14px;
+}
+
+.func-accent {
+  width: 4px;
+  flex-shrink: 0;
+  background: var(--accent);
+}
+
+.func-body {
+  padding: 14px 16px;
+  flex: 1;
+}
+
+.func-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.func-text {
+  font-size: 0.83rem;
+  color: var(--text-sub);
+}
+
+.func-text strong {
+  color: var(--strong-color);
+  font-weight: 600;
+}
+
+/* ── SIGNAL FLOW DIAGRAM ── */
+.signal-diagram {
+  background: var(--gray-faint);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+}
+
+.signal-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.flow-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+}
+
+.flow-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  min-width: 88px;
+}
+
+.flow-box {
+  border: 1px solid;
+  border-radius: 7px;
+  padding: 7px 10px;
+  text-align: center;
+  width: 84px;
+}
+
+.flow-box-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  margin-bottom: 3px;
+}
+
+.flow-box-desc {
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.flow-box.distorted {
+  background: var(--warn-faint);
+  border-color: var(--warn-border);
+}
+.flow-box.distorted .flow-box-label { color: var(--warn); }
+
+.flow-box.repeater {
+  background: var(--accent-faint);
+  border-color: var(--accent-border);
+}
+.flow-box.repeater .flow-box-label { color: var(--accent); }
+
+.flow-box.clean {
+  background: var(--good-faint);
+  border-color: var(--good-border);
+}
+.flow-box.clean .flow-box-label { color: var(--good); }
+
+.flow-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 62px;
+}
+
+.flow-arrow-line {
+  width: 100%;
+  height: 1.5px;
+  background: var(--border-soft);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.flow-arrow-line::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 6px solid var(--border);
+}
+
+/* mini SVG waveforms in flow */
+.mini-wave {
+  height: 20px;
+}
+
+.flow-caption {
+  font-size: 0.58rem;
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+  text-align: center;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+/* ── PROPS GRID ── */
+.props-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+@media (max-width: 500px) {
+  .props-grid { grid-template-columns: 1fr; }
+}
+
+.prop-card {
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.prop-card-head {
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--border-soft);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.prop-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.prop-card.red .prop-card-head    { background: var(--red-faint);  color: var(--red);  }
+.prop-card.red .prop-dot          { background: var(--red); }
+.prop-card.warn .prop-card-head   { background: var(--warn-faint); color: var(--warn); }
+.prop-card.warn .prop-dot         { background: var(--warn); }
+.prop-card.blue .prop-card-head   { background: var(--accent-faint); color: var(--accent); }
+.prop-card.blue .prop-dot         { background: var(--accent); }
+.prop-card.gray .prop-card-head   { background: var(--gray-faint); color: var(--text-muted); }
+.prop-card.gray .prop-dot         { background: var(--border); }
+
+.prop-card-body {
+  padding: 10px 12px;
+  font-size: 0.78rem;
+  color: var(--text-sub);
+  line-height: 1.6;
+}
+
+.prop-card-body strong {
+  color: var(--strong-color);
+  font-weight: 600;
+}
+
+/* ── 5-4-3 RULE ── */
+.rule-card {
+  border: 1px solid var(--accent-border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--accent-faint);
+  margin-bottom: 0;
+}
+
+.rule-head {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--accent-border);
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.rule-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+
+.rule-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--accent);
+  opacity: 0.6;
+}
+
+.rule-body {
+  padding: 12px 16px;
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.rule-nums {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.rule-num {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.rule-num-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.rule-num-desc {
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.rule-sep {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.2rem;
+  color: var(--accent-border);
+  font-weight: 300;
+  align-self: center;
+}
+
+.rule-divider {
+  width: 1px;
+  background: var(--accent-border);
+  margin: 0 4px;
+  flex-shrink: 0;
+}
+
+.rule-desc {
+  font-size: 0.78rem;
+  color: var(--text-sub);
+  line-height: 1.6;
+  align-self: center;
+}
+
+.rule-desc strong { color: var(--strong-color); font-weight: 600; }
+
+/* ── 5-4-3 VISUAL ── */
+.rule-visual {
+  padding: 12px 16px;
+  border-top: 1px solid var(--accent-border);
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+}
+
+.seg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.seg-line {
+  height: 3px;
+  border-radius: 2px;
+}
+
+.seg-hosts {
+  display: flex;
+  gap: 3px;
+  justify-content: center;
+}
+
+.seg-host {
+  width: 6px;
+  height: 8px;
+  border-radius: 1px;
+}
+
+.seg-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.52rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.seg.active .seg-line   { background: var(--accent); width: 52px; }
+.seg.active .seg-host   { background: var(--accent); opacity: 0.6; }
+.seg.active .seg-label  { color: var(--accent); }
+.seg.inactive .seg-line { background: var(--border-soft); width: 52px; border: 1px dashed var(--border); }
+.seg.inactive .seg-host { background: var(--border); }
+.seg.inactive .seg-label { color: var(--text-muted); }
+
+.rep-node {
+  width: 28px;
+  height: 22px;
+  border: 1.5px solid var(--accent-border);
+  border-radius: 4px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.48rem;
+  font-weight: 700;
+  color: var(--accent);
+  flex-shrink: 0;
+  margin: 0 2px;
+  align-self: flex-start;
+  margin-top: 10px;
+}
+
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="page-header">
+  <div class="page-title">中继器 · 工作原理与功能</div>
+  <br>
+  <span class="layer-badge">
+    <span class="layer-badge-dot"></span>
+    OSI 第一层 · 物理层 · Physical Layer
+  </span>
+</div>
+
+<!-- Function -->
+<div class="section-title">功能</div>
+<div class="func-card">
+  <div class="func-accent"></div>
+  <div class="func-body">
+    <div class="func-label">Core Function</div>
+    <div class="func-text">
+      对信号进行 <strong>整形放大</strong>，再生原始信号，延伸网络传输距离. 
+      与模拟放大不同，中继器重新生成规整的数字信号，而非简单放大 ( 放大会同时放大噪声 ) . 
+    </div>
+  </div>
+</div>
+
+<!-- Signal flow diagram -->
+<div class="signal-diagram">
+  <div class="signal-title">再生中继 · 工作原理</div>
+  <div class="flow-wrap">
+
+    <!-- Original signal -->
+    <div class="flow-node">
+      <div class="flow-box clean">
+        <div class="flow-box-label">原始信号</div>
+        <svg class="mini-wave" viewBox="0 0 60 20" preserveAspectRatio="none">
+          <polyline points="0,16 10,16 10,4 25,4 25,16 40,16 40,4 50,4 50,16 60,16"
+            fill="none" stroke="#276749" stroke-width="1.8" stroke-linejoin="round"/>
+        </svg>
+        <div class="flow-box-desc">规整的数字信号</div>
+      </div>
+    </div>
+
+    <!-- arrow -->
+    <div class="flow-arrow">
+      <div class="flow-arrow-line"></div>
+      <div class="flow-caption">传输 + 衰减</div>
+    </div>
+
+    <!-- Distorted signal -->
+    <div class="flow-node">
+      <div class="flow-box distorted">
+        <div class="flow-box-label">失真信号</div>
+        <svg class="mini-wave" viewBox="0 0 60 20" preserveAspectRatio="none">
+          <polyline points="0,14 4,13 7,15 10,8 13,5 18,6 22,14 25,16 28,15 32,15 34,10 38,5 42,6 46,14 50,16 54,15 58,15 60,15"
+            fill="none" stroke="#c05621" stroke-width="1.8" stroke-linejoin="round"/>
+        </svg>
+        <div class="flow-box-desc">衰减 + 噪声失真</div>
+      </div>
+    </div>
+
+    <!-- arrow -->
+    <div class="flow-arrow">
+      <div class="flow-arrow-line"></div>
+      <div class="flow-caption">识别 0/1 比特</div>
+    </div>
+
+    <!-- Repeater -->
+    <div class="flow-node">
+      <div class="flow-box repeater">
+        <div class="flow-box-label">中继器</div>
+        <svg class="mini-wave" viewBox="0 0 60 20" preserveAspectRatio="none">
+          <!-- two arrows pointing inward and outward -->
+          <rect x="18" y="5" width="24" height="10" rx="2" fill="#ebf8ff" stroke="#90cdf4" stroke-width="1"/>
+          <text x="30" y="13" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="6" fill="#2b6cb0">REGEN</text>
+        </svg>
+        <div class="flow-box-desc">再生 · 整形 · 输出</div>
+      </div>
+    </div>
+
+    <!-- arrow -->
+    <div class="flow-arrow">
+      <div class="flow-arrow-line"></div>
+      <div class="flow-caption">重新生成</div>
+    </div>
+
+    <!-- Clean signal -->
+    <div class="flow-node">
+      <div class="flow-box clean">
+        <div class="flow-box-label">再生信号</div>
+        <svg class="mini-wave" viewBox="0 0 60 20" preserveAspectRatio="none">
+          <polyline points="0,16 10,16 10,4 25,4 25,16 40,16 40,4 50,4 50,16 60,16"
+            fill="none" stroke="#276749" stroke-width="1.8" stroke-linejoin="round"/>
+        </svg>
+        <div class="flow-box-desc">还原规整信号</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Properties grid -->
+<div class="section-title">重要特性</div>
+<div class="props-grid">
+
+  <div class="prop-card red">
+    <div class="prop-card-head">
+      <span class="prop-dot"></span>同构网络限制
+    </div>
+    <div class="prop-card-body">
+      只能连接 <strong>相同速率和协议</strong> 的网段，无法连接异构网络. 
+    </div>
+  </div>
+
+  <div class="prop-card warn">
+    <div class="prop-card-head">
+      <span class="prop-dot"></span>冲突域不隔离
+    </div>
+    <div class="prop-card-body">
+      信号穿越中继器后继续广播，整个网络仍处于 <strong>同一个冲突域</strong>. 
+    </div>
+  </div>
+
+  <div class="prop-card red">
+    <div class="prop-card-head">
+      <span class="prop-dot"></span>不能跨 LAN
+    </div>
+    <div class="prop-card-body">
+      不理解高层协议，只处理物理信号，<strong>不能用于连接不同 LAN</strong>. 
+    </div>
+  </div>
+
+  <div class="prop-card blue">
+    <div class="prop-card-head">
+      <span class="prop-dot"></span>延长传输距离
+    </div>
+    <div class="prop-card-body">
+      通过再生信号克服衰减，可将物理网段 <strong>有效延伸</strong> 至更远距离. 
+    </div>
+  </div>
+
+</div>
+
+<!-- 5-4-3 Rule -->
+<div class="rule-card">
+  <div class="rule-head">
+    <span class="rule-title">5 - 4 - 3 规则</span>
+    <span class="rule-sub">10BASE-5 Ethernet</span>
+  </div>
+  <div class="rule-body">
+    <div class="rule-nums">
+      <div class="rule-num">
+        <span class="rule-num-val">5</span>
+        <span class="rule-num-desc">网段数</span>
+      </div>
+      <span class="rule-sep">—</span>
+      <div class="rule-num">
+        <span class="rule-num-val">4</span>
+        <span class="rule-num-desc">中继器</span>
+      </div>
+      <span class="rule-sep">—</span>
+      <div class="rule-num">
+        <span class="rule-num-val">3</span>
+        <span class="rule-num-desc">含主机段</span>
+      </div>
+    </div>
+    <div class="rule-divider"></div>
+    <div class="rule-desc">
+      最多 <strong>5 个网段</strong>、<strong>4 个中继器</strong> 串联; 
+      其中只有 <strong>3 个网段</strong> 可连接主机，另外 2 个仅作链路延伸. 
+    </div>
+  </div>
+
+  <!-- Visual representation -->
+  <div class="rule-visual">
+
+    <div class="seg active">
+      <div class="seg-hosts">
+        <div class="seg-host"></div><div class="seg-host"></div><div class="seg-host"></div>
+      </div>
+      <div class="seg-line"></div>
+      <div class="seg-label">段 1 ( 含主机 ) </div>
+    </div>
+
+    <div class="rep-node">R1</div>
+
+    <div class="seg inactive">
+      <div class="seg-hosts">
+        <div class="seg-host"></div><div class="seg-host"></div>
+      </div>
+      <div class="seg-line"></div>
+      <div class="seg-label">段 2 ( 仅链路 ) </div>
+    </div>
+
+    <div class="rep-node">R2</div>
+
+    <div class="seg active">
+      <div class="seg-hosts">
+        <div class="seg-host"></div><div class="seg-host"></div><div class="seg-host"></div>
+      </div>
+      <div class="seg-line"></div>
+      <div class="seg-label">段 3 ( 含主机 ) </div>
+    </div>
+
+    <div class="rep-node">R3</div>
+
+    <div class="seg inactive">
+      <div class="seg-hosts">
+        <div class="seg-host"></div><div class="seg-host"></div>
+      </div>
+      <div class="seg-line"></div>
+      <div class="seg-label">段 4 ( 仅链路 ) </div>
+    </div>
+
+    <div class="rep-node">R4</div>
+
+    <div class="seg active">
+      <div class="seg-hosts">
+        <div class="seg-host"></div><div class="seg-host"></div><div class="seg-host"></div>
+      </div>
+      <div class="seg-line"></div>
+      <div class="seg-label">段 5 ( 含主机 ) </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,2303 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>408-计算机网络-4-网络层 | SPARKLE</title><meta name="keywords" content="408,计算机网络,网络层"><meta name="author" content="sparkle520"><meta name="copyright" content="sparkle520"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="408-计算机网络-4-网络层"><meta name="application-name" content="408-计算机网络-4-网络层"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="408-计算机网络-4-网络层"><meta property="og:url" content="http://example.com/2026/03/11/408-%E8%AE%A1%E7%BD%914/index.html"><meta property="og:site_name" content="SPARKLE"><meta property="og:description" content="网络层  本文系统讲解网络层的功能、路由算法、IPv4&amp;#x2F;IPv6 协议、NAT、子网划分、CIDR、ARP、DHCP、ICMP、RIP&amp;#x2F;OSPF&amp;#x2F;BGP 路由协议、组播、移动 IP 及路由器工作原理，重点突出 IP 地址计算、子网划分、路由协议对比及 NAT 转换机制.     %%{"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://pic1.imgdb.cn/item/69a6f223f98389e4a9b7cf25.png"><meta property="article:author" content="sparkle520"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://pic1.imgdb.cn/item/69a6f223f98389e4a9b7cf25.png"><meta name="description" content="网络层  本文系统讲解网络层的功能、路由算法、IPv4&amp;#x2F;IPv6 协议、NAT、子网划分、CIDR、ARP、DHCP、ICMP、RIP&amp;#x2F;OSPF&amp;#x2F;BGP 路由协议、组播、移动 IP 及路由器工作原理，重点突出 IP 地址计算、子网划分、路由协议对比及 NAT 转换机制.     %%{"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2026/03/11/408-%E8%AE%A1%E7%BD%914/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: 'https://sparkle521.xyz',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":4000,"accessToken":"","mailMd5":""},
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: {"mode":"api","api":"https://img2color-go.vercel.app/api?img=","cover_change":true},
+  authorStatus: {"skills":["(❤ ω ❤)"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: sparkle520","link":"链接: ","source":"来源: SPARKLE","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#883ced","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'SPARKLE',
+  title: '408-计算机网络-4-网络层',
+  postAI: '',
+  pageFillDescription: '网络层, 总结与速查 ( Cheat Sheet ), 一、网络层的功能, 二、路由算法, 2.1 路由算法分类, 三、IPv4, 3.1 IPv4 数据报格式, 3.2 IPv4 地址, 3.3 子网划分与 CIDR, 3.4 ARP 协议, 3.5 DHCP 协议, 3.6 ICMP 协议, 3.7 NAT ( 网络地址转换 ), 四、IPv6, 五、路由协议, 5.1 RIP 协议, 5.2 OSPF 协议, 5.3 BGP 协议, 六、组播, 七、移动 IP, 八、路由器网络层本文系统讲解网络层的功能路由算法协议子网划分路由协议组播移动及路由器工作原理重点突出地址计算子网划分路由协议对比及转换机制网络层基本功能异构网络互联路由与转发拥塞控制路由算法静态路由动态路由距离向量链路状态数据报格式地址分类子网划分与地址格式报头简化与过渡路由协议算法算法路径向量组播组播地址组播路由移动归属代理外地代理三角路由路由器结构与功能转发与路由总结与速查知识点核心公式结论备注类地址默认掩码网络号主机号类地址默认掩码网络号主机号类地址默认掩码网络号主机号子网主机数为主机号位数去掉全网络号和全广播超网将多个连续网络合并缩短前缀长度路由聚合减少路由表条目广播请求单播回复同一链路内使用动态分配基于端口租约机制差错报告查询封装在数据报中使用回声请求应答私有端口公有节省公网距离向量度量跳数最大跳慢收敛适合小网络链路状态度量可配置快收敛适合大网络路径向量自治系统间策略路由互联网核心数据报生存时间每跳减为丢弃防止数据报永久循环一网络层的功能网络层的核心任务网络层位于第三层负责将分组从源主机传送到目的主机可能需要跨越多个异构网络不同类型的链路不同的数据链路层协议三大核心功能路由选择分组从源到目的的最优路径路由算法运行在路由器上维护路由表转发将到达路由器某端口的分组根据路由表或转发表从正确的出口端口发出转发是数据平面的操作速度要求极高路由转发的区别路由转发时间尺度慢秒级需要计算快纳秒级查表即发所在平面控制平面数据平面输入网络拓扑信息单个到达的分组输出路由表正确的出口端口拥塞控制当网络中分组过多导致性能下降时采取措施减少拥塞如显式拥塞通知令牌桶等其他功能异构网络互联通过协议屏蔽底层网络差异是网络层黏合剂提供无连接的尽力而为服务协议不提供可靠传输保证可靠性由运输层保证二路由算法路由算法分类静态路由动态路由静态路由动态路由配置方式管理员手动配置路由协议自动维护适应拓扑变化不能自适应能自动适应开销无额外通信开销需要路由协议报文开销适用场景小型网络特定路径控制大型动态网络安全性较高无协议报文暴露相对较低协议报文可伪造特殊静态路由默认路由匹配所有目的地址当路由表无更具体匹配时使用相当于其他所有目的地都往这里走常用于末节路由器指向主机路由指向单个主机的路由距离向量算法基本思想方程每个节点维护一张距离向量表记录到所有已知目的地的最短距离估计值及下一跳节点定期将自己的距离向量广播给直接相邻的邻居邻居根据收到的信息更新自己的距离向量更新规则其中是到邻居的链路代价是邻居到目的的距离估计算法流程初始化到自身距离为到直接邻居距离为链路代价到其他节点距离为每个节点将自己的距离向量发给所有邻居收到邻居的距离向量后用公式更新自己的距离向量若有变化再次发给邻居若无变化则收敛优点实现简单计算开销小缺点无穷计数问题当链路失效时距离向量算法收敛极慢节点间通过相互误导逐步将距离计数到无穷大典型场景线性拓扑断开得知不可达后从处得到说到距离更新为再从得到更新为两者相互引用距离不断增大直到超过最大值中为解决方法水平分割从某邻居学到的路由不再发回给该邻居毒性逆转将从某邻居学到的路由以距离无穷大发回给该邻居更明确地声明不要通过我到达此目的地触发更新拓扑变化时立即发送更新而不等待定时器链路状态算法基本思想算法每个节点通过泛洪将自己的链路状态信息直接相连的邻居及链路代价发给全网所有节点从而每个节点都拥有完整的网络拓扑图然后各自独立运行最短路径算法计算到所有目的节点的最短路径算法步骤初始化源节点到自身距离到其他节点距离从未确定集合中选取距离最小的节点加入确定集合对的每个邻居若则更新前驱重复步骤直到所有节点确定优点快速收敛网络变化后泛洪机制使全网快速同步重新计算时间短无环路每个节点基于完整拓扑计算不存在算法中的路由环路支持分层中的区域机制缺点开销大泛洪需要消耗带宽全网拓扑数据库需要较大存储空间实现复杂比算法复杂对比考研必考比较维度距离向量链路状态信息传播只发给直接邻居路由向量泛洪给全网链路状态拓扑知识局部只知道邻居告诉的全局知道整个网络计算算法分布式各自独立计算收敛速度慢可能计数到无穷快路由环路可能存在不会存在通信开销小只传向量给邻居大泛洪全网典型协议示例算法手动计算网络拓扑如下求从节点到所有节点的最短路径链路代价标注解初始化第轮选距离确定更新更新状态待定第轮选距离确定更新更新状态待定第轮选距离确定更新无改变更新状态待定第轮选距离确定更新无改变状态待定第轮选或距离均为确定第轮确定最终最短路径路径路径或相同代价路径路径路径三数据报格式数据报首部最小字节版本首部长区分服务总长度标识标志片偏移协议首部校验和源地址目的地址可选字段字节关键字段说明字段长度说明版本首部长度单位为字节最小值最大区分服务服务质量标记总长度首部数据的总字节数最大字节标识同一数据报的所有分片具有相同标识标志不允许分片后面还有分片片偏移该分片在原数据报中的偏移量单位为字节每经过一个路由器减为时丢弃并发超时报文协议上层协议首部校验和仅校验首部不含数据每跳重新计算变化源目的各字节数据报分片重要当数据报总长度超过链路最大传输单元时路由器对数据报进行分片分片只在目的主机重组不在中间路由器重组分片时数据部分必须是字节的整数倍因片偏移单位为除最后一片外最后一片所有分片标识相同片偏移记录各片在原数据报数据部分的起始位置示例分片计算一个数据报总长度字节首部字节数据字节字节求分片情况解每片最大数据字节且须为字节整数倍整除合法分片编号数据长度总长度片偏移字节片偏移字段值验证第片片偏移地址地址的分类有类历史方案地址为位点分十进制表示如类别首位地址范围默认子网掩码网络数每网络主机数类万类万类约万类组播地址类保留实验特殊地址地址含义本机请求中源地址回环地址测试本机栈有限广播地址只在本子网广播不跨路由器网络号直接广播地址如自动私有地址失败时自动分配私有地址不能在公网路由范围类别类私有类私有类私有子网划分与子网划分将一个网络的主机号部分进一步划分为子网号主机号通过子网掩码指示哪些位是网络子网号子网掩码位网络号和子网号对应位为主机号对应位为网络地址地址子网掩码划分子网的步骤从一个大网中划出若干子网确定需要的子网数量求所需子网号位数子网数确定需要的主机数求所需主机号位数主机数从原主机号中借位作子网号剩位作主机号新的子网掩码原掩码加上位每个子网可用主机数去掉全网络地址和全广播地址无类域间路由废弃了有类地址的概念允许以任意长度的前缀网络前缀划分地址块用斜线表示法如地址块表示前位为网络前缀后位为主机号地址块大小个地址地址聚合路由聚合超网将多个连续的地址块合并为一个更大的块缩短前缀减少路由表条目最长前缀匹配路由器转发时若多条路由均能匹配目的则选择前缀最长最具体的路由这是中路由查找的基本规则示例目的路由表中有和选更具体示例子网划分综合计算某公司分配到地址块需划分个子网每个子网最多容纳台主机设计子网方案解个子网需位台主机需位验证刚好用满位新子网掩码原加位子网编号子网地址可用范围广播地址子网子网子网子网每子网可用台主机满足需求示例路由聚合某路由器路由表包含以下四条路由尝试聚合解转为二进制第三字节前两位均为即前位的位第三字节的前位相同等等准确地说的第三字节前位均为后位变化聚合后前位相同涵盖验证包含个地址正好覆盖这个网络协议地址解析协议解决同一链路上已知地址求对应地址的问题工作过程主机需要发送分组给同网段的主机已知先查缓存若缓存无记录发送广播请求目的内容谁的是请告诉我你的地址同一链路上所有主机收到请求但只有回复一个单播应答目的的内容我的是是将的映射写入缓存有超时通常分钟跨路由器通信时的向发送分组不同网段先用解析默认网关的而非目的主机的路由器收到后再次解析下一跳的依次转发地址全程不变地址逐跳改变免费主机发送请求目标自身用于检测地址冲突更新网络中其他节点的缓存如地址变更后代理路由器代替远程主机回应请求使不支持子网的主机也能通信现代网络较少使用协议动态主机配置协议基于服务器端口客户端端口用于动态分配地址及其他配置信息子网掩码默认网关服务器等四步握手客户端服务器广播源我需要谁能给我单广播含建议我可以给你这个广播确认接受该好的我选择这个单广播确认分配确认租约开始广播原因客户端尚无只能广播广播也能让其他服务器知道请求已被满足仍广播租约机制分配的有租约期到期前客户端需续租发服务器续租则发否则客户端需重新走流程若客户端离开网络发主动释放中继代理路由器通常不转发广播跨子网的主机无法直接找到服务器通过在路由器上配置中继代理将广播转换为单播转发给服务器实现跨网段服务协议互联网控制报文协议封装在数据报中协议字段用于传递差错报告和网络诊断信息报文分为两类差错报告报文类型含义常见原因目的不可达分组无法送达目的地无路由端口未监听但需分片源点抑制请求发送方降速路由器缓冲区溢出现已废弃时间超过或重组超时路由环路工具基础参数问题首部字段有误非法字段值重定向通知主机更优路由路由器发现更短路径查询报文类型含义工具回声请求应答测试可达性命令时间戳请求应答时钟同步地址掩码请求应答查询子网掩码不发差错报文的情况差错报文本身出错防止风暴目的地址为广播或组播地址分片数据报非第一片源地址为或回环地址工作原理依次发送的或分组每个路由器减为时返回时间超过报文发送方记录路由器和往返时延逐跳探测路径网络地址转换允许多台私有主机共享一个或少数几个公有地址访问互联网缓解地址耗尽问题网络地址端口转换最常用形式通过地址端口号的组合实现多个内网主机共享同一公网工作过程示例内网主机访问内网路由器公网内网地址端口公网地址新端口目的表记录公网服务器的回复发往路由器查表转换为转发给内网主机的优缺点内容优点节省公网地址隐藏内网拓扑一定程度安全内网可自由更改缺点破坏端到端连接外网无法主动连内网主机困难修改端口影响某些协议表有状态路由器负担增加与不兼容穿透技术用于等应用四的产生背景与特性地址空间亿已耗尽将地址扩展至位个地址约从根本上解决地址问题的主要改进地址空间极大扩展位地址简化首部字节取消分片字段分片由端系统处理取消首部校验和可靠性交给上层或链路层取消可选字段改用扩展首部内置安全为必选功能中可选自动配置无状态地址自动配置不需要即可获取地址更好的支持流标签字段地址表示位地址用冒号分隔的组十六进制数表示缩写规则每组前导可省略连续的全组用代替每个地址只能用一次地址分类类型前缀说明全球单播地址公网可路由类似公有地址链路本地地址只在单链路有效自动配置类似组播地址代替广播无广播回环地址类似的未指定地址类似的到的过渡技术技术机制说明双栈主机同时运行和最简单两套协议栈隧道将数据报封装在数据报中跨越网络传输翻译与地址协议翻译纯主机访问网络五路由协议协议路由信息协议是最早的动态路由协议基于距离向量算法使用跳数作为度量每经过一个路由器代价加基本特点度量跳数最大跳表示不可达适合小型网络路由更新每秒广播或组播一次路由表给相邻路由器基于端口收敛速度慢存在无穷计数问题收敛可能需要数分钟简单配置方便版本地址类型有类不携带子网掩码无类携带子网掩码广播组播广播组播认证不支持支持明文不支持支持的定时器更新定时器定期发送完整路由表无效定时器路由未被更新则标记为不可达度量垃圾回收定时器不可达路由在后从路由表删除协议开放最短路径优先基于链路状态算法是大型网络中最广泛使用的内部路由协议的关键特性度量默认带宽可自定义千兆链路百兆快速收敛拓扑变化时立即触发泛洪而不是等待定时器直接封装在中协议号不使用无环路基于完整拓扑图的算法天然无环支持和路由更新携带子网掩码支持多路径等价多路径区域机制为了扩展性将网络划分为多个区域减少泛洪范围骨干区域所有其他区域必须直接连到或通过虚链路连接非骨干区域等区域内部运行区域边界路由器连接骨干区域与非骨干区域自治系统边界路由器连接自治系统与外部如报文类型类型名称作用报文发现邻居建立和维护邻居关系每一次数据库描述初始化时同步的摘要信息链路状态请求请求完整信息链路状态更新发送完整泛洪更新链路状态确认确认收到选举广播网络在以太网等广播多路访问网络中所有路由器两两建立邻居关系开销太大条选举指定路由器和备用指定路由器其他路由器只与交换减少报文数量协议边界网关协议是互联网上自治系统间的路由协议负责在不同机构之间交换路由信息自治系统由单一管理机构控制的网络集合有唯一的号位或位路由协议分类内部网关协议内部使用如外部网关协议之间使用是目前唯一实际使用的的关键特性路径向量算法不只传距离而是传完整的路径避免路由环路若路径中已包含自己的号则丢弃该路由基于端口可靠传输无需额外差错控制策略路由支持基于商业政策而非纯技术指标选择路由是互联网商业运营的基础增量更新只在路由变化时发送受影响的路由不像每全量发送邻居类型外部不同之间的会话直连链路内部同一内部的会话用于传递从外部学到的路由三种路由协议对比考研必考比较维度类型算法距离向量链路状态路径向量度量跳数带宽相关路径属性策略传输协议直接协议号更新方式全量每触发更新泛洪增量更新收敛速度慢快较慢策略复杂规模小型网络中大型企业网互联网骨干路由环路可能不可能不可能路径向量六组播组播基本概念传输类型目的地适用场景单播一个主机点对点通信广播所有主机局域网内广播组播一组特定主机视频会议金融行情推送组播的优势发送方只发一份数据网络在分叉点复制避免单播的重复发送和广播的无差别分发兼顾效率与精准类组播地址范围用途链路本地组播不跨路由器如互联网协议控制块源指定组播私有组播地址类似私有单播用于主机与本地组播路由器之间通信让路由器知道哪些主机加入了哪些组播组工作过程主机加入组播组时发送目的地址组播地址组播路由器定期发送询问哪些主机还在组里主机收到后在随机延时后回复抑制重复回复机制主机离开组时发送路由器发确认是否还有其他成员组播路由协议协议全称特点距离向量组播路由协议基于泛洪剪枝早期协议密集模式独立组播适合组成员密集分布推模式稀疏模式独立组播适合组成员稀疏分布需汇聚点最常用逆向路径转发组播路由器只转发从到达组播源的最短路径接口收到的组播数据报防止环路七移动移动的基本概念移动使主机在移动到不同网络时仍能保持原有地址不变维持正在进行的通信关键角色角色描述移动节点在不同网络间移动的主机归属代理移动节点归属网络中的路由器负责跟踪位置转发数据报外地代理当前所在网络中的路由器为提供转交地址转交地址在外地网络的临时地址从处获得归属地址的永久地址不变移动通信过程三角路由通信对端归属代理移动节点发往归属地址的分组隧道封装转交地址直接回复源地址归属地址移动到外地网络从获得转交地址向注册绑定更新向的归属地址发送数据报收到后用隧道封装转发给解封装将数据报转发给回复时直接以归属地址为源发给不需要经过因此称为三角路由三角路由的问题与优化问题每个数据报都要先绕到再隧道到路径不优增加时延优化路由优化将的当前通知此后可直接用隧道发给直接通信无需再绕八路由器路由器的结构路由器是工作在网络层的设备核心功能是路由维护路由表和转发交换分组路由器的主要组成部分路由器输入端口路由处理器线卡运行路由协议交维护路由表输入端口换线卡结转发表构输出端口控制平面数据平面线卡输出端口输入端口功能接收比特流成帧查转发表将分组送往正确的输出端口交换结构连接输入和输出端口有总线式交叉开关矩阵共享内存三种输出端口功能缓冲队列成帧发送路由处理器运行路由协议计算最短路径生成和维护路由表路由表转发表路由表路由协议维护包含所有路由来源直连静态等含度量下一跳等转发表从路由表中提取最优路由只包含目的前缀出口端口下一跳供数据平面高速查找路由器交换机集线器三层设备对比比较维度集线器交换机路由器工作层次物理层数据链路层网络层地址识别无地址地址冲突域不隔离每端口独立每接口独立广播域不隔离不隔离无隔离每接口独立广播域转发决策广播所有端口表查找路由表查找网络互联同一延伸同一内异构网络互联地址无无管理除外每接口有地址九综合真题解析真题子网划分最长前缀匹配路由器的路由表如下目的网络前缀下一跳接口接口接口接口默认分析目的地址将从哪个接口转发解对进行各条路由匹配最长前缀匹配覆盖前位匹配在此范围前缀长度第三字节为但第三字节为不匹配子网掩码即子网地址广播在此范围前缀长度默认路由全部匹配前缀长度最长前缀匹配选前缀最长从接口转发真题工作过程分析主机向主机发送数据报主机也在同一子网描述的完整工作过程并说明哪些主机会收到并处理请求解第步检查目的与自身在同一子网掩码决定直接通过链路层发送第步查本地缓存若无的记录发送广播请求源源目的目的广播内容谁的是第步所有同一子网的主机包括和都会收到这个广播帧发现目的自身处理该请求更新缓存记录的发送单播应答给发现目的自身丢弃该请求仅更新缓存中的记录第步收到的单播应答更新缓存封装以太网帧目的发送数据报真题工作过程分析内网有台主机通过路由器公网访问互联网分析下列数据报经后的变化并说明为什么需要端口转换解表场景内网地址端口公网地址端口状态活跃活跃活跃数据报转换主机发往出境内外源地址入境外内目的地址为什么需要而非纯若不使用端口转换只替换地址则台主机同时向外发送时都会映射到收到回复时无法区分该转发给哪台内网主机通过端口号区分不同的内网会话使一个公网可支持数万个并发连接真题路由更新无穷计数问题三个路由器线性连接初始收敛后各路由器路由表如下跳数到到到到到到现在之间的链路断开请描述的更新过程未使用水平分割解第步检测到链路断开将路由表中到的距离设为第步后正常更新向发路由表含到不可达向发路由表含到之前从学到现在报但认为自己到于是告诉到第步收到说到按经到比小更新到再告诉到更新到如此循环和的到距离从不断递增直到不可达才停止这就是无穷计数问题水平分割的解决效果若使用水平分割由于是从学到的不会将到再发回给此时更新到直接宣告不可达一轮更新即可收敛实际上水平分割不能完全解决所有场景三角形拓扑中仍可能发生真题综合对比应用某企业网络由台路由器组成其中有条跨城市的广域网链路时延差异大请分析应选用还是作为并给出理由解应选用理由如下规模台路由器超过推荐的小型网络最大跳意味着网络直径不超过跳大型网络极易触发跳不可达限制无跳数限制链路代价广域网链路时延差异大只以跳数计量无法区分和链路的与带宽成反比能选择带宽更高的路径更符合实际需求收敛速度使用触发更新泛洪拓扑变化后秒级收敛需等周期收敛可能超过故障恢复慢影响业务可扩展性支持区域划分可将台路由器按地区功能划分为多个减少泛洪范围减轻路由器计算压力路由精确性支持支持等价多路径负载均衡不支持子网掩码灵活性差结论对于有广域网链路规模较大对收敛要求高的企业网络是唯一合理选择仅适合台路由器以内的简单小型网络',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-03-03 23:48:43',
+  postMainColor: '#ec5759',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.min.css"><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/sparkle520?tab=repositories" title="github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="github"/><span class="back-menu-item-text">github</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">SPARKLE</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/408/" style="font-size: 1.05rem;">408<sup>14</sup></a><a href="/tags/AOP/" style="font-size: 1.05rem;">AOP<sup>1</sup></a><a href="/tags/Deep-Learning/" style="font-size: 1.05rem;">Deep Learning<sup>1</sup></a><a href="/tags/IoC/" style="font-size: 1.05rem;">IoC<sup>1</sup></a><a href="/tags/JSR303/" style="font-size: 1.05rem;">JSR303<sup>1</sup></a><a href="/tags/Matplotlib/" style="font-size: 1.05rem;">Matplotlib<sup>3</sup></a><a href="/tags/c/" style="font-size: 1.05rem;">c#<sup>2</sup></a><a href="/tags/java/" style="font-size: 1.05rem;">java<sup>4</sup></a><a href="/tags/python/" style="font-size: 1.05rem;">python<sup>5</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 1.05rem;">事务<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E3%80%82/" style="font-size: 1.05rem;">你的名字。<sup>3</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字同名小说<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%A4%96%E4%BC%A0%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字外传小说<sup>1</sup></a><a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size: 1.05rem;">写作<sup>4</sup></a><a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 1.05rem;">包管理<sup>1</sup></a><a href="/tags/%E5%8D%B7%E7%A7%AF%E5%85%AC%E5%BC%8F/" style="font-size: 1.05rem;">卷积公式<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90/" style="font-size: 1.05rem;">天气之子<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">天气之子同名小说<sup>1</sup></a><a href="/tags/%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">小说<sup>3</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">操作系统<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" style="font-size: 1.05rem;">数据校验<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" style="font-size: 1.05rem;">数据链路层<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 1.05rem;">概率论<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 1.05rem;">概率论与数理统计<sup>7</sup></a><a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 1.05rem;">汇编<sup>9</sup></a><a href="/tags/%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80/" style="font-size: 1.05rem;">泰勒展开<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/" style="font-size: 1.05rem;">物理层<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%80%BC/" style="font-size: 1.05rem;">特征值<sup>2</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F/" style="font-size: 1.05rem;">特征向量<sup>2</sup></a><a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">线性代数<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" style="font-size: 1.05rem;">网络体系结构<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" style="font-size: 1.05rem;">网络层<sup>2</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 1.05rem;">英语<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">英语语法<sup>16</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1.05rem;">计算机组成原理<sup>5</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.05rem;">计算机网络<sup>5</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">语法<sup>1</sup></a><a href="/tags/%E9%95%BF%E9%9A%BE%E5%8F%A5/" style="font-size: 1.05rem;">长难句<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">高等代数<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" style="font-size: 1.05rem;">高等数学<sup>14</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">三月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">11</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/02/"><span class="card-archive-list-date">二月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/01/"><span class="card-archive-list-date">一月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/12/"><span class="card-archive-list-date">十二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">15</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/11/"><span class="card-archive-list-date">十一月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/10/"><span class="card-archive-list-date">十月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/09/"><span class="card-archive-list-date">九月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/08/"><span class="card-archive-list-date">八月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url">计算机网络</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/408/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>408</span></a><a class="article-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>计算机网络</span></a><a class="article-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>网络层</span></a></span></div></div><h1 class="post-title" itemprop="name headline">408-计算机网络-4-网络层</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-03-11T15:00:00.000Z" title="发表于 2026-03-11 23:00:00">2026-03-11</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-03-03T15:48:43.735Z" title="更新于 2026-03-03 23:48:43">2026-03-03</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">9.8k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>35分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="408-计算机网络-4-网络层"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为系守镇"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>系守镇</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2026/03/11/408-%E8%AE%A1%E7%BD%914/#post-comment" tabindex="-1"><span id="twikoo-count"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://pic1.imgdb.cn/item/69a6f223f98389e4a9b7cf25.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2026/03/11/408-%E8%AE%A1%E7%BD%914/"><header><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url">计算机网络</a><a href="/tags/408/" tabindex="-1" itemprop="url">408</a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" tabindex="-1" itemprop="url">计算机网络</a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" tabindex="-1" itemprop="url">网络层</a><h1 id="CrawlerTitle" itemprop="name headline">408-计算机网络-4-网络层</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">sparkle520</span><time itemprop="dateCreated datePublished" datetime="2026-03-11T15:00:00.000Z" title="发表于 2026-03-11 23:00:00">2026-03-11</time><time itemprop="dateCreated datePublished" datetime="2026-03-03T15:48:43.735Z" title="更新于 2026-03-03 23:48:43">2026-03-03</time></header><h1 id="网络层">网络层</h1>
+<blockquote>
+<p>本文系统讲解网络层的功能、路由算法、IPv4/IPv6
+协议、NAT、子网划分、CIDR、ARP、DHCP、ICMP、RIP/OSPF/BGP
+路由协议、组播、移动 IP 及路由器工作原理，重点突出 IP
+地址计算、子网划分、路由协议对比及 NAT 转换机制.</p>
+</blockquote>
+<div class="mermaid-wrap"><pre class="mermaid-src" hidden>
+  %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;lineColor&#39;: &#39;#06B6D4&#39;, &#39;primaryColor&#39;: &#39;#06B6D4&#39;, &#39;primaryTextColor&#39;: &#39;#fff&#39;, &#39;primaryBorderColor&#39;: &#39;#0891b2&#39;, &#39;fontFamily&#39;: &#39;arial&#39;, &#39;fontSize&#39;: &#39;16px&#39; }}}%%
+mindmap
+  root((网络层))
+    基本功能
+      异构网络互联
+      路由与转发
+      拥塞控制
+    路由算法
+      静态路由
+      动态路由
+        距离向量 DV
+        链路状态 LS
+    IPv4
+      数据报格式
+      IP地址分类
+      子网划分与CIDR
+      ARP &#x2F; RARP
+      DHCP
+      ICMP
+      NAT
+    IPv6
+      地址格式
+      报头简化
+      与IPv4过渡
+    路由协议
+      RIP ( DV算法 ) 
+      OSPF ( LS算法 ) 
+      BGP ( 路径向量 ) 
+    组播
+      组播地址
+      IGMP
+      组播路由
+    移动IP
+      归属代理
+      外地代理
+      三角路由
+    路由器
+      结构与功能
+      转发与路由
+  </pre></div>
+<h3 id="总结与速查-cheat-sheet">总结与速查 ( Cheat Sheet )</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">知识点</th>
+<th style="text-align: left;">核心公式 / 结论</th>
+<th style="text-align: left;">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>A类地址</strong></td>
+<td style="text-align: left;"><code>1.0.0.0</code> ~
+<code>126.255.255.255</code>，默认掩码 <code>/8</code></td>
+<td style="text-align: left;">网络号 8 bit，主机号 24 bit</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>B类地址</strong></td>
+<td style="text-align: left;"><code>128.0.0.0</code> ~
+<code>191.255.255.255</code>，默认掩码 <code>/16</code></td>
+<td style="text-align: left;">网络号 16 bit，主机号 16 bit</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>C类地址</strong></td>
+<td style="text-align: left;"><code>192.0.0.0</code> ~
+<code>223.255.255.255</code>，默认掩码 <code>/24</code></td>
+<td style="text-align: left;">网络号 24 bit，主机号 8 bit</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>子网主机数</strong></td>
+<td style="text-align: left;"><span class="math inline">\(2^n -
+2\)</span> ( <span class="math inline">\(n\)</span> 为主机号位数 )</td>
+<td style="text-align: left;">去掉全 0 ( 网络号 ) 和全 1 ( 广播 )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CIDR 超网</strong></td>
+<td style="text-align: left;">将多个连续网络合并，缩短前缀长度</td>
+<td style="text-align: left;">路由聚合减少路由表条目</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>ARP</strong></td>
+<td style="text-align: left;">IP → MAC，广播请求，单播回复</td>
+<td style="text-align: left;">同一链路内使用</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>DHCP</strong></td>
+<td style="text-align: left;">动态分配 IP，基于 UDP，67/68 端口</td>
+<td style="text-align: left;">租约机制</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>ICMP</strong></td>
+<td style="text-align: left;">差错报告 + 查询，封装在 IP 数据报中</td>
+<td style="text-align: left;">ping 使用回声请求/应答</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>NAT</strong></td>
+<td style="text-align: left;">私有 IP + 端口 → 公有 IP ( NAPT )</td>
+<td style="text-align: left;">节省公网 IP</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RIP</strong></td>
+<td style="text-align: left;">距离向量，度量跳数，最大 15 跳</td>
+<td style="text-align: left;">慢收敛，适合小网络</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>OSPF</strong></td>
+<td style="text-align: left;">链路状态，Dijkstra，度量可配置</td>
+<td style="text-align: left;">快收敛，适合大网络</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BGP</strong></td>
+<td style="text-align: left;">路径向量，自治系统间，TCP 179</td>
+<td style="text-align: left;">策略路由，互联网核心</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TTL</strong></td>
+<td style="text-align: left;">IP 数据报生存时间，每跳减 1，为 0
+丢弃</td>
+<td style="text-align: left;">防止数据报永久循环</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="一网络层的功能">一、网络层的功能</h2>
+<div class="note info simple"><p><strong>网络层的核心任务</strong></p>
+<p>网络层位于 OSI 第三层，负责将分组从
+<strong>源主机传送到目的主机</strong> ，可能需要跨越多个异构网络 (
+不同类型的链路、不同的数据链路层协议 ).</p>
+<p><strong>三大核心功能 :</strong></p>
+<p><strong>1. 路由 ( Routing ) </strong> 选择分组从源到目的的
+<strong>最优路径</strong>. 路由算法运行在路由器上，维护路由表 ( Routing
+Table ).</p>
+<p><strong>2. 转发 ( Forwarding ) </strong>
+将到达路由器某端口的分组，根据路由表 ( 或转发表 FIB )
+<strong>从正确的出口端口发出</strong>.
+转发是数据平面的操作，速度要求极高.</p>
+<p><strong>路由 vs 转发的区别 :</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">路由 ( Routing )</th>
+<th style="text-align: center;">转发 ( Forwarding )</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">时间尺度</td>
+<td style="text-align: center;">慢 ( 秒级，需要计算 )</td>
+<td style="text-align: center;">快 ( 纳秒级，查表即发 )</td>
+</tr>
+<tr>
+<td style="text-align: center;">所在平面</td>
+<td style="text-align: center;">控制平面</td>
+<td style="text-align: center;">数据平面</td>
+</tr>
+<tr>
+<td style="text-align: center;">输入</td>
+<td style="text-align: center;">网络拓扑信息</td>
+<td style="text-align: center;">单个到达的分组</td>
+</tr>
+<tr>
+<td style="text-align: center;">输出</td>
+<td style="text-align: center;">路由表</td>
+<td style="text-align: center;">正确的出口端口</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3. 拥塞控制 ( Congestion Control ) </strong>
+当网络中分组过多导致性能下降时，采取措施减少拥塞 ( 如 ECN
+显式拥塞通知、令牌桶等 ).</p>
+<p><strong>其他功能 :</strong></p>
+<ul>
+<li><strong>异构网络互联</strong> : 通过 IP 协议屏蔽底层网络差异 (
+IPv4/IPv6 是”网络层黏合剂” ).</li>
+<li><strong>提供无连接的尽力而为服务</strong> : IP
+协议不提供可靠传输保证，可靠性由运输层 ( TCP ) 保证.</li>
+</ul>
+</div>
+<hr />
+<h2 id="二路由算法">二、路由算法</h2>
+<h3 id="路由算法分类">2.1 路由算法分类</h3>
+<div class="note info simple"><p><strong>静态路由 vs 动态路由</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">静态路由</th>
+<th style="text-align: center;">动态路由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>配置方式</strong></td>
+<td style="text-align: center;">管理员手动配置</td>
+<td style="text-align: center;">路由协议自动维护</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>适应拓扑变化</strong></td>
+<td style="text-align: center;">不能自适应</td>
+<td style="text-align: center;">能自动适应</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>开销</strong></td>
+<td style="text-align: center;">无额外通信开销</td>
+<td style="text-align: center;">需要路由协议报文开销</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>适用场景</strong></td>
+<td style="text-align: center;">小型网络、特定路径控制</td>
+<td style="text-align: center;">大型动态网络</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>安全性</strong></td>
+<td style="text-align: center;">较高 ( 无协议报文暴露 )</td>
+<td style="text-align: center;">相对较低 ( 协议报文可伪造 )</td>
+</tr>
+</tbody>
+</table>
+<p><strong>特殊静态路由 :</strong></p>
+<ul>
+<li><strong>默认路由 ( 0.0.0.0/0 ) </strong> :
+匹配所有目的地址，当路由表无更具体匹配时使用，相当于”其他所有目的地都往这里走”
+( 常用于末节路由器指向 ISP ).</li>
+<li><strong>主机路由 ( /32 ) </strong> : 指向单个主机的路由.</li>
+</ul>
+</div>
+<h3 id="距离向量算法-distance-vector-dv">2.2 距离向量算法 ( Distance
+Vector, DV )</h3>
+<div class="note info simple"><p><strong>基本思想 ( Bellman-Ford 方程 ) </strong></p>
+<p>每个节点维护一张 <strong>距离向量表</strong>
+，记录到所有已知目的地的最短距离估计值及下一跳. 节点定期将自己的距离向量
+<strong>广播给直接相邻的邻居</strong>
+，邻居根据收到的信息更新自己的距离向量.</p>
+<p><strong>更新规则 ( Bellman-Ford ) :</strong></p>
+<p><span class="math display">\[d_x(y) = \min_v \{ c(x,v) + d_v(y)
+\}\]</span></p>
+<p>其中 <span class="math inline">\(c(x,v)\)</span> 是 <span
+class="math inline">\(x\)</span> 到邻居 <span
+class="math inline">\(v\)</span> 的链路代价，<span
+class="math inline">\(d_v(y)\)</span> 是邻居 <span
+class="math inline">\(v\)</span> 到目的 <span
+class="math inline">\(y\)</span> 的距离估计.</p>
+<p><strong>算法流程 :</strong> 1. 初始化 : 到自身距离为
+0，到直接邻居距离为链路代价，到其他节点距离为 <span
+class="math inline">\(\infty\)</span>. 2.
+每个节点将自己的距离向量发给所有邻居. 3. 收到邻居的距离向量后，用
+Bellman-Ford 公式更新自己的距离向量. 4. 若有变化，再次发给邻居;
+若无变化则收敛.</p>
+<p><strong>优点 :</strong> 实现简单，计算开销小.</p>
+<p><strong>缺点 — 无穷计数 ( Count to Infinity ) 问题 :</strong></p>
+<p>当链路失效时，距离向量算法收敛极慢，节点间通过相互”误导”逐步将距离计数到无穷大.</p>
+<p><strong>典型场景</strong> : A-B-C 线性拓扑，B-C 断开，B 得知 C
+不可达后，从 A 处得到 A 说”到 C 距离 2”，B 更新为 3; A 再从 B 得到
+3，更新为 4…… 两者相互引用，距离不断增大，直到超过最大值 ( RIP 中为 16
+).</p>
+<p><strong>解决方法 :</strong></p>
+<ul>
+<li><strong>水平分割 ( Split Horizon ) </strong> :
+从某邻居学到的路由，不再发回给该邻居.</li>
+<li><strong>毒性逆转 ( Poison Reverse ) </strong> :
+将从某邻居学到的路由以距离无穷大发回给该邻居，更明确地声明”不要通过我到达此目的地”.</li>
+<li><strong>触发更新 ( Triggered Update ) </strong> :
+拓扑变化时立即发送更新，而不等待定时器.</li>
+</ul>
+</div>
+<h3 id="链路状态算法-link-state-ls">2.3 链路状态算法 ( Link State, LS
+)</h3>
+<div class="note info simple"><p><strong>基本思想 ( Dijkstra 算法 ) </strong></p>
+<p>每个节点通过 <strong>泛洪 ( Flooding ) </strong> 将自己的链路状态信息
+( 直接相连的邻居及链路代价 ) 发给 <strong>全网所有节点</strong>
+，从而每个节点都拥有完整的网络拓扑图，然后各自独立运行 <strong>Dijkstra
+最短路径算法</strong> 计算到所有目的节点的最短路径.</p>
+<p><strong>算法步骤 ( Dijkstra ) :</strong></p>
+<ol type="1">
+<li>初始化 : 源节点到自身距离 0，到其他节点距离 <span
+class="math inline">\(\infty\)</span>.</li>
+<li>从未确定集合中选取距离最小的节点 <span
+class="math inline">\(u\)</span>，加入确定集合.</li>
+<li>对 <span class="math inline">\(u\)</span> 的每个邻居 <span
+class="math inline">\(v\)</span> : 若 <span class="math inline">\(d(u) +
+c(u,v) &lt; d(v)\)</span>，则更新 <span class="math inline">\(d(v) =
+d(u) + c(u,v)\)</span>，前驱 = <span
+class="math inline">\(u\)</span>.</li>
+<li>重复步骤 2~3 直到所有节点确定.</li>
+</ol>
+<p><strong>优点 :</strong></p>
+<ul>
+<li><strong>快速收敛</strong> :
+网络变化后，泛洪机制使全网快速同步，重新计算时间短.</li>
+<li><strong>无环路</strong> : 每个节点基于完整拓扑计算，不存在 DV
+算法中的路由环路.</li>
+<li><strong>支持分层</strong> : OSPF 中的区域 ( Area ) 机制.</li>
+</ul>
+<p><strong>缺点 :</strong></p>
+<ul>
+<li><strong>开销大</strong> :
+泛洪需要消耗带宽，全网拓扑数据库需要较大存储空间.</li>
+<li><strong>实现复杂</strong> : 比 DV 算法复杂.</li>
+</ul>
+<p><strong>DV vs LS 对比 ( 考研必考 ) :</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">比较维度</th>
+<th style="text-align: center;">距离向量 ( DV )</th>
+<th style="text-align: center;">链路状态 ( LS )</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>信息传播</strong></td>
+<td style="text-align: center;">只发给直接邻居 ( 路由向量 )</td>
+<td style="text-align: center;">泛洪给全网 ( 链路状态 )</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>拓扑知识</strong></td>
+<td style="text-align: center;">局部 ( 只知道邻居告诉的 )</td>
+<td style="text-align: center;">全局 ( 知道整个网络 )</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>计算算法</strong></td>
+<td style="text-align: center;">Bellman-Ford ( 分布式 )</td>
+<td style="text-align: center;">Dijkstra ( 各自独立计算 )</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>收敛速度</strong></td>
+<td style="text-align: center;">慢 ( 可能计数到无穷 )</td>
+<td style="text-align: center;">快</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>路由环路</strong></td>
+<td style="text-align: center;">可能存在</td>
+<td style="text-align: center;">不会存在</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>通信开销</strong></td>
+<td style="text-align: center;">小 ( 只传向量给邻居 )</td>
+<td style="text-align: center;">大 ( 泛洪全网 )</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>典型协议</strong></td>
+<td style="text-align: center;"><strong>RIP</strong></td>
+<td style="text-align: center;"><strong>OSPF</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="note success simple"><p><strong>示例 1 ( Dijkstra 算法手动计算 ) </strong></p>
+<p>网络拓扑如下，求从节点 A 到所有节点的最短路径 ( 链路代价标注 ) :</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">A ──2── B ──3── D</span><br><span class="line">│       │       │</span><br><span class="line">5       1       2</span><br><span class="line">│       │       │</span><br><span class="line">C ──3── E ──1── F</span><br></pre></td></tr></table></figure>
+<p><strong>解 :</strong></p>
+<p>初始化 : <span class="math inline">\(d(A)=0\)</span>，<span
+class="math inline">\(d(B)=\infty\)</span>，<span
+class="math inline">\(d(C)=\infty\)</span>，<span
+class="math inline">\(d(D)=\infty\)</span>，<span
+class="math inline">\(d(E)=\infty\)</span>，<span
+class="math inline">\(d(F)=\infty\)</span>.</p>
+<p><strong>第1轮</strong> : 选 A ( 距离 0 ) ，确定 A.</p>
+<ul>
+<li>更新 B : <span class="math inline">\(0+2=2\)</span>; 更新 C : <span
+class="math inline">\(0+5=5\)</span>.</li>
+<li>状态 : <span class="math inline">\(\{A:0\}\)</span>，待定 <span
+class="math inline">\(\{B:2, C:5, D:\infty, E:\infty,
+F:\infty\}\)</span>.</li>
+</ul>
+<p><strong>第2轮</strong> : 选 B ( 距离 2 ) ，确定 B.</p>
+<ul>
+<li>更新 D : <span class="math inline">\(2+3=5\)</span>; 更新 E : <span
+class="math inline">\(2+1=3\)</span>.</li>
+<li>状态 : <span class="math inline">\(\{A:0, B:2\}\)</span>，待定 <span
+class="math inline">\(\{C:5, D:5, E:3, F:\infty\}\)</span>.</li>
+</ul>
+<p><strong>第3轮</strong> : 选 E ( 距离 3 ) ，确定 E.</p>
+<ul>
+<li>更新 C : <span class="math inline">\(\min(5, 3+3)=5\)</span> (
+无改变 ); 更新 F : <span class="math inline">\(3+1=4\)</span>.</li>
+<li>状态 : <span class="math inline">\(\{A:0, B:2, E:3\}\)</span>，待定
+<span class="math inline">\(\{C:5, D:5, F:4\}\)</span>.</li>
+</ul>
+<p><strong>第4轮</strong> : 选 F ( 距离 4 ) ，确定 F.</p>
+<ul>
+<li>更新 D : <span class="math inline">\(\min(5, 4+2)=5\)</span> (
+无改变 ).</li>
+<li>状态 : <span class="math inline">\(\{A:0, B:2, E:3,
+F:4\}\)</span>，待定 <span class="math inline">\(\{C:5,
+D:5\}\)</span>.</li>
+</ul>
+<p><strong>第5轮</strong> : 选 C 或 D ( 距离均为 5 ) ，确定 C.
+<strong>第6轮</strong> 确定 D.</p>
+<p>最终最短路径 :</p>
+<ul>
+<li>A→B : 2，路径 A-B</li>
+<li>A→C : 5，路径 A-C ( 或 A-B-E-C，相同代价 )</li>
+<li>A→D : 5，路径 A-B-D</li>
+<li>A→E : 3，路径 A-B-E</li>
+<li>A→F : 4，路径 A-B-E-F</li>
+</ul>
+</div>
+<hr />
+<h2 id="三ipv4">三、IPv4</h2>
+<h3 id="ipv4-数据报格式">3.1 IPv4 数据报格式</h3>
+<div class="note info simple"><p><strong>IPv4 数据报首部 ( 最小 20 字节 ) </strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">0      4      8      16     19     24      31</span><br><span class="line">┌──────┬──────┬───────────────┬─┬─┬────────────┐</span><br><span class="line">│版本(4)│首部长│  区分服务(8)  │  总长度(16)   │</span><br><span class="line">├───────┴──────┴───────────────┴─┴─┴────────────┤</span><br><span class="line">│        标识(16)         │标志(3)│片偏移(13)   │</span><br><span class="line">├──────────────┬───────────┴────────────────────┤</span><br><span class="line">│  TTL(8)      │  协议(8)  │    首部校验和(16)   │</span><br><span class="line">├──────────────┴───────────┴────────────────────┤</span><br><span class="line">│                  源IP地址(32)                  │</span><br><span class="line">├───────────────────────────────────────────────┤</span><br><span class="line">│                 目的IP地址(32)                 │</span><br><span class="line">├───────────────────────────────────────────────┤</span><br><span class="line">│               可选字段 ( 0~40字节 )               │</span><br><span class="line">└───────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+<p><strong>关键字段说明 :</strong></p>
+<table>
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 35%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">字段</th>
+<th style="text-align: center;">长度</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">版本</td>
+<td style="text-align: center;">4 bit</td>
+<td style="text-align: left;">IPv4 = 4，IPv6 = 6</td>
+</tr>
+<tr>
+<td style="text-align: center;">首部长度</td>
+<td style="text-align: center;">4 bit</td>
+<td style="text-align: left;">单位为 4 字节，最小值 5 ( = 20 B ) ，最大
+15 ( = 60 B )</td>
+</tr>
+<tr>
+<td style="text-align: center;">区分服务</td>
+<td style="text-align: center;">8 bit</td>
+<td style="text-align: left;">DSCP/ECN，QoS 服务质量标记</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>总长度</strong></td>
+<td style="text-align: center;">16 bit</td>
+<td style="text-align: left;"><strong>首部 + 数据</strong>
+的总字节数，最大 65535 字节</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>标识</strong></td>
+<td style="text-align: center;">16 bit</td>
+<td style="text-align: left;">同一数据报的所有分片具有
+<strong>相同</strong> 标识</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>标志</strong></td>
+<td style="text-align: center;">3 bit</td>
+<td style="text-align: left;">DF ( 不允许分片 ) 、MF ( 后面还有分片
+)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>片偏移</strong></td>
+<td style="text-align: center;">13 bit</td>
+<td style="text-align: left;">该分片在原数据报中的偏移量，单位为
+<strong>8 字节</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>TTL</strong></td>
+<td style="text-align: center;">8 bit</td>
+<td style="text-align: left;">每经过一个路由器减 1，为 0 时丢弃并发 ICMP
+超时报文</td>
+</tr>
+<tr>
+<td style="text-align: center;">协议</td>
+<td style="text-align: center;">8 bit</td>
+<td style="text-align: left;">上层协议 :
+TCP=6，UDP=17，ICMP=1，OSPF=89</td>
+</tr>
+<tr>
+<td style="text-align: center;">首部校验和</td>
+<td style="text-align: center;">16 bit</td>
+<td style="text-align: left;">仅校验首部 ( 不含数据 ) ，每跳重新计算 (
+TTL 变化 )</td>
+</tr>
+<tr>
+<td style="text-align: center;">源/目的 IP</td>
+<td style="text-align: center;">32 bit</td>
+<td style="text-align: left;">各 4 字节</td>
+</tr>
+</tbody>
+</table>
+<p><strong>IP 数据报分片 ( 重要 ) :</strong></p>
+<p>当数据报总长度超过链路 <strong>MTU ( 最大传输单元 ) </strong>
+时，路由器对数据报进行分片.</p>
+<ul>
+<li><strong>分片只在目的主机重组</strong> ( 不在中间路由器重组 ).</li>
+<li>分片时， <strong>数据部分</strong> 必须是 8 字节的整数倍 (
+因片偏移单位为 8 B ).</li>
+<li>除最后一片外，MF=1; 最后一片 MF=0.</li>
+<li>所有分片标识相同，片偏移记录各片在原数据报数据部分的起始位置.</li>
+</ul>
+</div>
+<div class="note success simple"><p><strong>示例 2 ( IP 分片计算 ) </strong></p>
+<p>一个 IP 数据报，总长度 3800 字节 ( 首部 20 字节，数据 3780 字节 )
+，MTU = 1500 字节，求分片情况.</p>
+<p><strong>解 :</strong></p>
+<p>每片最大数据 = <span class="math inline">\(1500 - 20 = 1480\)</span>
+字节，且须为 8 字节整数倍，<span class="math inline">\(1480 / 8 =
+185\)</span> ( 整除 ) ，合法.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">分片编号</th>
+<th style="text-align: center;">数据长度</th>
+<th style="text-align: center;">总长度</th>
+<th style="text-align: center;">MF</th>
+<th style="text-align: center;">片偏移 ( 字节 )</th>
+<th style="text-align: center;">片偏移字段值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1480 B</td>
+<td style="text-align: center;">1500 B</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1480 B</td>
+<td style="text-align: center;">1500 B</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1480</td>
+<td style="text-align: center;">185</td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">820 B</td>
+<td style="text-align: center;">840 B</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">2960</td>
+<td style="text-align: center;">370</td>
+</tr>
+</tbody>
+</table>
+<p>验证 : <span class="math inline">\(1480 + 1480 + 820 = 3780\)</span>
+B ✓. 第 3 片 MF=0，片偏移 = <span class="math inline">\(2960/8 =
+370\)</span>.</p>
+</div>
+<h3 id="ipv4-地址">3.2 IPv4 地址</h3>
+<div class="note info simple"><p><strong>IP 地址的分类 ( 有类 IP，历史方案 ) </strong></p>
+<p>IPv4 地址为 32 位，点分十进制表示 ( 如 <code>192.168.1.1</code>
+).</p>
+<table>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 13%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">类别</th>
+<th style="text-align: center;">首位</th>
+<th style="text-align: left;">地址范围</th>
+<th style="text-align: center;">默认子网掩码</th>
+<th style="text-align: center;">网络数</th>
+<th style="text-align: center;">每网络主机数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>A 类</strong></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: left;"><code>1.0.0.0</code> ~
+<code>126.255.255.255</code></td>
+<td style="text-align: center;">/8</td>
+<td style="text-align: center;">126</td>
+<td style="text-align: center;"><span class="math inline">\(2^{24}-2
+\approx 1600\)</span> 万</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>B 类</strong></td>
+<td style="text-align: center;">10</td>
+<td style="text-align: left;"><code>128.0.0.0</code> ~
+<code>191.255.255.255</code></td>
+<td style="text-align: center;">/16</td>
+<td style="text-align: center;">16384</td>
+<td style="text-align: center;"><span class="math inline">\(2^{16}-2
+\approx 6.5\)</span> 万</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>C 类</strong></td>
+<td style="text-align: center;">110</td>
+<td style="text-align: left;"><code>192.0.0.0</code> ~
+<code>223.255.255.255</code></td>
+<td style="text-align: center;">/24</td>
+<td style="text-align: center;">约 200 万</td>
+<td style="text-align: center;"><span class="math inline">\(2^8-2 =
+254\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>D 类</strong></td>
+<td style="text-align: center;">1110</td>
+<td style="text-align: left;"><code>224.0.0.0</code> ~
+<code>239.255.255.255</code></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><strong>组播地址</strong></td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>E 类</strong></td>
+<td style="text-align: center;">1111</td>
+<td style="text-align: left;"><code>240.0.0.0</code> ~
+<code>255.255.255.255</code></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">保留/实验</td>
+<td style="text-align: center;">—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>特殊 IP 地址 :</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">地址</th>
+<th style="text-align: left;">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>0.0.0.0</code></td>
+<td style="text-align: left;">本机 ( DHCP 请求中源地址 )</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>127.0.0.1</code></td>
+<td style="text-align: left;">回环地址 ( loopback ) ，测试本机 TCP/IP
+栈</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>255.255.255.255</code></td>
+<td style="text-align: left;">有限广播地址 ( 只在本子网广播，不跨路由器
+)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>网络号.255.255.255</code></td>
+<td style="text-align: left;">直接广播地址 ( 如
+<code>192.168.1.255</code> )</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>169.254.x.x</code></td>
+<td style="text-align: left;">APIPA ( 自动私有地址，DHCP 失败时自动分配
+)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>私有 IP 地址 ( RFC 1918，不能在公网路由 ) :</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">范围</th>
+<th style="text-align: center;">类别</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>10.0.0.0/8</code></td>
+<td style="text-align: center;">A 类私有</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>172.16.0.0/12</code> (
+<code>172.16</code> ~ <code>172.31</code> )</td>
+<td style="text-align: center;">B 类私有</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>192.168.0.0/16</code></td>
+<td style="text-align: center;">C 类私有</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="子网划分与-cidr">3.3 子网划分与 CIDR</h3>
+<div class="note info simple"><p><strong>子网划分 ( Subnetting ) </strong></p>
+<p>将一个网络的主机号部分进一步划分为 <strong>子网号 + 主机号</strong>
+，通过 <strong>子网掩码</strong> 指示哪些位是网络/子网号.</p>
+<p><strong>子网掩码 :</strong> 32 位，网络号和子网号对应位为
+1，主机号对应位为 0.</p>
+<p><span class="math display">\[\text{网络地址} = \text{IP 地址} \text{
+AND } \text{子网掩码}\]</span></p>
+<p><strong>划分子网的步骤 ( 从一个大网中划出若干子网 ) :</strong> 1.
+确定需要的子网数量，求所需子网号位数 <span
+class="math inline">\(k\)</span> ( <span class="math inline">\(2^k
+\ge\)</span> 子网数 ). 2. 确定需要的主机数，求所需主机号位数 <span
+class="math inline">\(h\)</span> ( <span class="math inline">\(2^h - 2
+\ge\)</span> 主机数 ). 3. 从原主机号中借 <span
+class="math inline">\(k\)</span> 位作子网号，剩 <span
+class="math inline">\(h\)</span> 位作主机号. 4. 新的子网掩码 =
+原掩码加上 <span class="math inline">\(k\)</span> 位 1.</p>
+<p><strong>每个子网可用主机数 = <span class="math inline">\(2^h -
+2\)</span></strong> ( 去掉全 0 网络地址和全 1 广播地址 ).</p>
+</div>
+<div class="note info simple"><p><strong>CIDR ( 无类域间路由，Classless Inter-Domain Routing )
+</strong></p>
+<p>CIDR 废弃了有类 IP 地址的概念，允许以 <strong>任意长度</strong>
+的前缀 ( 网络前缀 ) 划分地址块，用斜线表示法 ( 如
+<code>192.168.1.0/24</code> ).</p>
+<p><strong>CIDR 地址块 :</strong></p>
+<ul>
+<li><code>/n</code> 表示前 <span class="math inline">\(n\)</span>
+位为网络前缀，后 <span class="math inline">\(32-n\)</span>
+位为主机号.</li>
+<li>地址块大小 = <span class="math inline">\(2^{32-n}\)</span>
+个地址.</li>
+<li><strong>地址聚合 ( 路由聚合/超网 ) </strong> : 将多个连续的 CIDR
+地址块合并为一个更大的块，缩短前缀，减少路由表条目.</li>
+</ul>
+<p><strong>最长前缀匹配 ( Longest Prefix Match ) :</strong></p>
+<p>路由器转发时，若多条路由均能匹配目的 IP，则选择 <strong>前缀最长 (
+最具体 ) </strong> 的路由，这是 CIDR 中路由查找的基本规则.</p>
+<p><em>示例</em> : 目的 IP <code>192.168.1.100</code>，路由表中有
+<code>192.168.0.0/16</code> 和 <code>192.168.1.0/24</code>，选
+<code>/24</code> ( 更具体 ).</p>
+</div>
+<div class="note success simple"><p><strong>示例 3 ( 子网划分综合计算 ) </strong></p>
+<p>某公司分配到地址块 <code>192.168.10.0/24</code>，需划分 4
+个子网，每个子网最多容纳 50 台主机. 设计子网方案.</p>
+<p><strong>解 :</strong></p>
+<p>4 个子网需 <span class="math inline">\(k\)</span> 位 : <span
+class="math inline">\(2^k \ge 4 \implies k = 2\)</span>. 50 台主机需
+<span class="math inline">\(h\)</span> 位 : <span
+class="math inline">\(2^h - 2 \ge 50 \implies h = 6\)</span> ( <span
+class="math inline">\(2^6-2=62\)</span> ). 验证 : <span
+class="math inline">\(24 + k + h = 24 + 2 + 6 = 32\)</span> ( 刚好用满
+32 位 ) ✓.</p>
+<p>新子网掩码 : <code>/26</code> ( <code>255.255.255.192</code>，原
+<code>/24</code> 加 2 位 1 ).</p>
+<table>
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 26%" />
+<col style="width: 21%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">子网编号</th>
+<th style="text-align: center;">子网地址</th>
+<th style="text-align: left;">可用 IP 范围</th>
+<th style="text-align: center;">广播地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">子网 0</td>
+<td style="text-align: center;"><code>192.168.10.0/26</code></td>
+<td style="text-align: left;"><code>192.168.10.1</code> ~
+<code>192.168.10.62</code></td>
+<td style="text-align: center;"><code>192.168.10.63</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">子网 1</td>
+<td style="text-align: center;"><code>192.168.10.64/26</code></td>
+<td style="text-align: left;"><code>192.168.10.65</code> ~
+<code>192.168.10.126</code></td>
+<td style="text-align: center;"><code>192.168.10.127</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">子网 2</td>
+<td style="text-align: center;"><code>192.168.10.128/26</code></td>
+<td style="text-align: left;"><code>192.168.10.129</code> ~
+<code>192.168.10.190</code></td>
+<td style="text-align: center;"><code>192.168.10.191</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">子网 3</td>
+<td style="text-align: center;"><code>192.168.10.192/26</code></td>
+<td style="text-align: left;"><code>192.168.10.193</code> ~
+<code>192.168.10.254</code></td>
+<td style="text-align: center;"><code>192.168.10.255</code></td>
+</tr>
+</tbody>
+</table>
+<p>每子网可用 62 台主机 ( <span class="math inline">\(&gt;
+50\)</span>，满足需求 ) ✓.</p>
+</div>
+<div class="note success simple"><p><strong>示例 4 ( CIDR 路由聚合 ) </strong></p>
+<p>某路由器路由表包含以下四条路由，尝试聚合 :</p>
+<ul>
+<li><code>192.168.0.0/24</code>，<code>192.168.1.0/24</code>，<code>192.168.2.0/24</code>，<code>192.168.3.0/24</code></li>
+</ul>
+<p><strong>解 :</strong></p>
+<p>转为二进制 ( 第三字节 ) :</p>
+<ul>
+<li>0 = <code>00000000</code>，1 = <code>00000001</code>，2 =
+<code>00000010</code>，3 = <code>00000011</code></li>
+</ul>
+<p>前两位均为 <code>00</code>，即前 22 位 ( <code>192.168.</code> 的 16
+位 + 第三字节的前 6 位 <code>000000</code> ) 相同.</p>
+<p>等等，准确地说，<code>192.168.0</code>~<code>192.168.3</code>
+的第三字节前 6 位均为 <code>000000</code>，后 2 位变化.</p>
+<p>聚合后 : <code>192.168.0.0/22</code> ( 前 22 位相同，涵盖
+<code>192.168.0.0</code> ~ <code>192.168.3.255</code> ).</p>
+<p>验证 : <code>192.168.0.0/22</code> 包含 <span
+class="math inline">\(2^{32-22} = 2^{10} = 1024\)</span> 个地址 (
+<code>192.168.0.0</code> ~ <code>192.168.3.255</code> ) ，正好覆盖这 4
+个 /24 网络 ✓.</p>
+</div>
+<h3 id="arp-协议">3.4 ARP 协议</h3>
+<div class="note info simple"><p><strong>ARP ( 地址解析协议，Address Resolution Protocol )
+</strong></p>
+<p>ARP 解决同一链路上 <strong>已知 IP 地址，求对应 MAC 地址</strong>
+的问题.</p>
+<p><strong>工作过程 :</strong></p>
+<ol type="1">
+<li>主机 A 需要发送分组给同网段的主机 B ( IP 已知 ) ，先查 <strong>ARP
+缓存 ( ARP Cache ) </strong>.</li>
+<li>若缓存无记录，A 发送 <strong>ARP 广播请求</strong> ( 目的 MAC =
+<code>FF:FF:FF:FF:FF:FF</code> ) ，内容 : “谁的 IP 是 192.168.1.2?
+请告诉我你的 MAC 地址.”</li>
+<li>同一链路上所有主机收到请求，但只有 B 回复一个 <strong>ARP
+单播应答</strong> ( 目的 MAC = A 的 MAC ) ，内容 : “我的 IP 是
+192.168.1.2，MAC 是 00:1A:2B:3C:4D:5E.”</li>
+<li>A 将 B 的 IP↔︎MAC 映射写入 ARP 缓存 ( 有超时，通常 2 分钟 ).</li>
+</ol>
+<p><strong>跨路由器通信时的 ARP :</strong></p>
+<p>A ( <code>192.168.1.1</code> ) 向 C ( <code>10.0.0.1</code> )
+发送分组 ( 不同网段 ) :</p>
+<ul>
+<li>A 先用 ARP 解析 <strong>默认网关</strong> 的 MAC ( 而非目的主机 C 的
+MAC！ ).</li>
+<li>路由器收到后，再次 ARP 解析下一跳的 MAC，依次转发.</li>
+<li><strong>IP 地址全程不变，MAC 地址逐跳改变</strong>.</li>
+</ul>
+<p><strong>免费 ARP ( Gratuitous ARP ) :</strong></p>
+<p>主机发送 ARP 请求，目标 IP = 自身 IP，用于 : 检测 IP
+地址冲突、更新网络中其他节点的 ARP 缓存 ( 如 IP 地址变更后 ).</p>
+<p><strong>代理 ARP ( Proxy ARP ) :</strong></p>
+<p>路由器代替远程主机回应 ARP 请求，使不支持子网的主机也能通信.
+现代网络较少使用.</p>
+</div>
+<h3 id="dhcp-协议">3.5 DHCP 协议</h3>
+<div class="note info simple"><p><strong>DHCP ( 动态主机配置协议，Dynamic Host Configuration Protocol
+) </strong></p>
+<p>DHCP 基于 <strong>UDP</strong> ( 服务器端口 <strong>67</strong>
+，客户端端口 <strong>68</strong> ) ，用于 <strong>动态分配 IP
+地址</strong> 及其他配置信息 ( 子网掩码、默认网关、DNS 服务器等 ).</p>
+<p><strong>DHCP 四步握手 ( DORA ) :</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">客户端                              DHCP 服务器</span><br><span class="line">   │                                      │</span><br><span class="line">   │──DHCP Discover ( 广播，源IP=0.0.0.0 ) ──▶│  &quot;我需要IP，谁能给我? &quot;</span><br><span class="line">   │                                      │</span><br><span class="line">   │◀──DHCP Offer ( 单/广播，含建议IP ) ──────│  &quot;我可以给你这个IP&quot;</span><br><span class="line">   │                                      │</span><br><span class="line">   │──DHCP Request ( 广播，确认接受该IP ) ──▶│  &quot;好的，我选择这个IP&quot;</span><br><span class="line">   │                                      │</span><br><span class="line">   │◀──DHCP ACK ( 单/广播，确认分配 ) ────────│  &quot;确认，租约开始！&quot;</span><br><span class="line">   │                                      │</span><br></pre></td></tr></table></figure>
+<p><strong>广播原因 :</strong> 客户端尚无 IP，只能广播; 广播也能让其他
+DHCP 服务器知道请求已被满足 ( Request 仍广播 ).</p>
+<p><strong>租约机制 :</strong></p>
+<ul>
+<li>DHCP 分配的 IP 有 <strong>租约期 ( Lease Time ) </strong>
+，到期前客户端需续租 ( 发 DHCP Request ).</li>
+<li>服务器续租则发 DHCP ACK，否则客户端需重新走 DORA 流程.</li>
+<li>若客户端离开网络，发 <strong>DHCP Release</strong> 主动释放 IP.</li>
+</ul>
+<p><strong>DHCP 中继代理 ( Relay Agent ) :</strong></p>
+<p>路由器通常不转发广播，跨子网的主机无法直接找到 DHCP 服务器.
+通过在路由器上配置 <strong>DHCP 中继代理</strong> ，将 DHCP
+广播转换为单播转发给 DHCP 服务器，实现跨网段 DHCP 服务.</p>
+</div>
+<h3 id="icmp-协议">3.6 ICMP 协议</h3>
+<div class="note info simple"><p><strong>ICMP ( 互联网控制报文协议，Internet Control Message Protocol
+) </strong></p>
+<p>ICMP 封装在 IP 数据报中 ( 协议字段 = 1 ) ，用于传递
+<strong>差错报告</strong> 和 <strong>网络诊断</strong> 信息.</p>
+<p><strong>ICMP 报文分为两类 :</strong></p>
+<p><strong>1. 差错报告报文 ( Error Reporting ) </strong></p>
+<table>
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 35%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">类型</th>
+<th style="text-align: center;">含义</th>
+<th style="text-align: left;">常见原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">目的不可达 ( Type 3 )</td>
+<td style="text-align: center;">分组无法送达目的地</td>
+<td style="text-align: left;">无路由、端口未监听、DF 但需分片</td>
+</tr>
+<tr>
+<td style="text-align: center;">源点抑制 ( Type 4 )</td>
+<td style="text-align: center;">请求发送方降速</td>
+<td style="text-align: left;">路由器缓冲区溢出 ( 现已废弃 )</td>
+</tr>
+<tr>
+<td style="text-align: center;">时间超过 ( Type 11 )</td>
+<td style="text-align: center;">TTL=0 或重组超时</td>
+<td style="text-align: left;">路由环路、ttraceroute 工具基础</td>
+</tr>
+<tr>
+<td style="text-align: center;">参数问题 ( Type 12 )</td>
+<td style="text-align: center;">IP 首部字段有误</td>
+<td style="text-align: left;">非法字段值</td>
+</tr>
+<tr>
+<td style="text-align: center;">重定向 ( Type 5 )</td>
+<td style="text-align: center;">通知主机更优路由</td>
+<td style="text-align: left;">路由器发现更短路径</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2. 查询报文 ( Query ) </strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">类型</th>
+<th style="text-align: center;">含义</th>
+<th style="text-align: center;">工具</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">回声请求/应答 ( Type 8/0 )</td>
+<td style="text-align: center;">测试可达性</td>
+<td style="text-align: center;"><strong>ping</strong> 命令</td>
+</tr>
+<tr>
+<td style="text-align: center;">时间戳请求/应答 ( Type 13/14 )</td>
+<td style="text-align: center;">时钟同步</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td style="text-align: center;">地址掩码请求/应答 ( Type 17/18 )</td>
+<td style="text-align: center;">查询子网掩码</td>
+<td style="text-align: center;">—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>不发 ICMP 差错报文的情况 :</strong></p>
+<ul>
+<li>ICMP 差错报文本身出错 ( 防止 ICMP 风暴 ).</li>
+<li>目的地址为广播或组播地址.</li>
+<li>分片数据报 ( 非第一片 ).</li>
+<li>源地址为 0.0.0.0 或回环地址.</li>
+</ul>
+<p><strong>traceroute/tracert 工作原理 :</strong></p>
+<p>依次发送 TTL = 1, 2, 3, … 的 UDP ( 或 ICMP ) 分组，每个路由器 TTL
+减为 0 时返回 ICMP <strong>时间超过</strong> 报文 ( Type 11 )
+，发送方记录路由器 IP 和往返时延，逐跳探测路径.</p>
+</div>
+<h3 id="nat-网络地址转换">3.7 NAT ( 网络地址转换 )</h3>
+<div class="note info simple"><p><strong>NAT ( Network Address Translation ) </strong></p>
+<p>NAT 允许 <strong>多台私有 IP 主机共享一个 ( 或少数几个 ) 公有 IP
+地址</strong> 访问互联网，缓解 IPv4 地址耗尽问题.</p>
+<p><strong>NAPT ( 网络地址端口转换，PAT ) — 最常用形式 :</strong></p>
+<p>通过 <strong>IP地址 + 端口号</strong>
+的组合，实现多个内网主机共享同一公网 IP.</p>
+<p><strong>工作过程示例 :</strong></p>
+<p>内网主机 <code>192.168.1.10:1234</code> 访问 <code>8.8.8.8:80</code>
+:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">内网 → NAT 路由器 → 公网</span><br><span class="line"></span><br><span class="line">192.168.1.10:1234 → 203.0.113.1:5001 → 8.8.8.8:80</span><br><span class="line"> ( 内网地址:端口 )      ( 公网地址:新端口 )    ( 目的 ) </span><br></pre></td></tr></table></figure>
+<p>NAT 表记录 : <code>203.0.113.1:5001 ↔︎ 192.168.1.10:1234</code></p>
+<p>公网服务器 <code>8.8.8.8</code> 的回复发往
+<code>203.0.113.1:5001</code>，NAT 路由器查表转换为
+<code>192.168.1.10:1234</code> 转发给内网主机.</p>
+<p><strong>NAT 的优缺点 :</strong></p>
+<table>
+<colgroup>
+<col style="width: 55%" />
+<col style="width: 44%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;"></th>
+<th style="text-align: left;">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>优点</strong></td>
+<td style="text-align: left;">节省公网 IP 地址; 隐藏内网拓扑 (
+一定程度安全 ); 内网 IP 可自由更改</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>缺点</strong></td>
+<td style="text-align: left;">破坏端到端连接 (
+外网无法主动连内网主机，P2P 困难 ); 修改 IP/端口，影响某些协议 (
+FTP、SIP ); NAT 表有状态，路由器负担增加; 与 IPSec 不兼容</td>
+</tr>
+</tbody>
+</table>
+<p><strong>NAT 穿透技术 :</strong> STUN、TURN、ICE ( 用于 WebRTC、VoIP
+等 P2P 应用 ).</p>
+</div>
+<hr />
+<h2 id="四ipv6">四、IPv6</h2>
+<div class="note info simple"><p><strong>IPv6 的产生背景与特性</strong></p>
+<p>IPv4 地址空间 ( <span class="math inline">\(2^{32} \approx
+43\)</span> 亿 ) 已耗尽，IPv6 将地址扩展至 <strong>128 位</strong> (
+<span class="math inline">\(2^{128}\)</span> 个地址，约 <span
+class="math inline">\(3.4 \times 10^{38}\)</span> )
+，从根本上解决地址问题.</p>
+<p><strong>IPv6 的主要改进 :</strong> 1.
+<strong>地址空间极大扩展</strong> : 128 位地址. 2. <strong>简化首部 (
+Fixed Header，40 字节 ) </strong> : 取消分片字段 ( 分片由端系统处理 )
+、取消首部校验和 ( 可靠性交给上层或链路层 ) 、取消可选字段 (
+改用扩展首部 ). 3. <strong>内置安全</strong> : IPSec 为 IPv6 必选功能 (
+IPv4 中可选 ). 4. <strong>自动配置</strong> : 无状态地址自动配置 ( SLAAC
+) ，不需要 DHCP 即可获取地址. 5. <strong>更好的 QoS 支持</strong> :
+流标签 ( Flow Label ) 字段.</p>
+<p><strong>IPv6 地址表示 :</strong></p>
+<p>128 位地址，用冒号分隔的 8 组十六进制数表示 :
+<code>2001:0DB8:0000:0000:0000:FF00:0042:8329</code></p>
+<p><strong>缩写规则 :</strong> 1. 每组前导 0 可省略 :
+<code>2001:DB8:0:0:0:FF00:42:8329</code> 2. 连续的全 0 组用
+<code>::</code> 代替 ( 每个地址只能用一次 ) :
+<code>2001:DB8::FF00:42:8329</code></p>
+<p><strong>IPv6 地址分类 :</strong></p>
+<table>
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 35%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">类型</th>
+<th style="text-align: center;">前缀</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">全球单播地址</td>
+<td style="text-align: center;"><code>2000::/3</code></td>
+<td style="text-align: left;">公网可路由，类似 IPv4 公有地址</td>
+</tr>
+<tr>
+<td style="text-align: center;">链路本地地址</td>
+<td style="text-align: center;"><code>FE80::/10</code></td>
+<td style="text-align: left;">只在单链路有效，自动配置，类似
+169.254.x.x</td>
+</tr>
+<tr>
+<td style="text-align: center;">组播地址</td>
+<td style="text-align: center;"><code>FF00::/8</code></td>
+<td style="text-align: left;">代替 IPv4 广播 ( IPv6 无广播！ )</td>
+</tr>
+<tr>
+<td style="text-align: center;">回环地址</td>
+<td style="text-align: center;"><code>::1</code></td>
+<td style="text-align: left;">类似 IPv4 的 127.0.0.1</td>
+</tr>
+<tr>
+<td style="text-align: center;">未指定地址</td>
+<td style="text-align: center;"><code>::</code></td>
+<td style="text-align: left;">类似 IPv4 的 0.0.0.0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>IPv4 到 IPv6 的过渡技术 :</strong></p>
+<table>
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 35%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">技术</th>
+<th style="text-align: center;">机制</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>双栈 ( Dual Stack )
+</strong></td>
+<td style="text-align: center;">主机同时运行 IPv4 和 IPv6</td>
+<td style="text-align: left;">最简单，两套协议栈</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>隧道 ( Tunneling )
+</strong></td>
+<td style="text-align: center;">将 IPv6 数据报封装在 IPv4 数据报中</td>
+<td style="text-align: left;">跨越 IPv4 网络传输 IPv6</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>翻译 ( NAT64 ) </strong></td>
+<td style="text-align: center;">IPv6 与 IPv4 地址/协议翻译</td>
+<td style="text-align: left;">纯 IPv6 主机访问 IPv4 网络</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h2 id="五路由协议">五、路由协议</h2>
+<h3 id="rip-协议">5.1 RIP 协议</h3>
+<div class="note info simple"><p><strong>RIP ( 路由信息协议，Routing Information Protocol )
+</strong></p>
+<p>RIP 是最早的动态路由协议，基于 <strong>距离向量算法</strong> ，使用
+<strong>跳数</strong> 作为度量 ( 每经过一个路由器，代价加 1 ).</p>
+<p><strong>RIP 基本特点 :</strong></p>
+<ul>
+<li><strong>度量</strong> : 跳数， <strong>最大 15 跳</strong> ( 16
+表示不可达 ) ，适合小型网络.</li>
+<li><strong>路由更新</strong> : 每 <strong>30 秒</strong> 广播 ( 或组播
+) 一次路由表给相邻路由器 ( 基于 UDP，端口 <strong>520</strong> ).</li>
+<li><strong>收敛速度慢</strong> :
+存在无穷计数问题，收敛可能需要数分钟.</li>
+<li><strong>简单，配置方便</strong>.</li>
+</ul>
+<p><strong>RIP 版本 :</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">RIPv1</th>
+<th style="text-align: center;">RIPv2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">地址类型</td>
+<td style="text-align: center;">有类 ( 不携带子网掩码 )</td>
+<td style="text-align: center;">无类 ( 携带子网掩码 )</td>
+</tr>
+<tr>
+<td style="text-align: center;">广播/组播</td>
+<td style="text-align: center;">广播 <code>255.255.255.255</code></td>
+<td style="text-align: center;">组播 <code>224.0.0.9</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">认证</td>
+<td style="text-align: center;">不支持</td>
+<td style="text-align: center;">支持 ( 明文/MD5 )</td>
+</tr>
+<tr>
+<td style="text-align: center;">VLSM</td>
+<td style="text-align: center;">不支持</td>
+<td style="text-align: center;">支持</td>
+</tr>
+</tbody>
+</table>
+<p><strong>RIP 的定时器 :</strong></p>
+<ul>
+<li><strong>更新定时器</strong> : 30 s，定期发送完整路由表.</li>
+<li><strong>无效定时器</strong> : 180 s，路由未被更新则标记为不可达 (
+度量 = 16 ).</li>
+<li><strong>垃圾回收定时器</strong> : 120 s，不可达路由在 120 s
+后从路由表删除.</li>
+</ul>
+</div>
+<h3 id="ospf-协议">5.2 OSPF 协议</h3>
+<div class="note info simple"><p><strong>OSPF ( 开放最短路径优先，Open Shortest Path First )
+</strong></p>
+<p>OSPF 基于 <strong>链路状态算法 ( Dijkstra ) </strong> ，是大型 IP
+网络中最广泛使用的内部路由协议.</p>
+<p><strong>OSPF 的关键特性 :</strong></p>
+<ul>
+<li><strong>度量 ( Cost ) </strong> : 默认 <span class="math inline">\(=
+10^8 / 带宽\)</span> ( Mbps ) ，可自定义. 千兆链路 cost=1，百兆
+cost=10，10M cost=100.</li>
+<li><strong>快速收敛</strong> : 拓扑变化时立即触发 LSA
+泛洪，而不是等待定时器.</li>
+<li><strong>直接封装在 IP 中</strong> ( 协议号 <strong>89</strong>
+，不使用 UDP/TCP ).</li>
+<li><strong>无环路</strong> : 基于完整拓扑图的 Dijkstra
+算法天然无环.</li>
+<li><strong>支持 VLSM 和 CIDR</strong> : 路由更新携带子网掩码.</li>
+<li><strong>支持多路径</strong> : 等价多路径 ( ECMP ).</li>
+</ul>
+<p><strong>OSPF 区域 ( Area ) 机制 :</strong></p>
+<p>为了扩展性，OSPF 将网络划分为多个 <strong>区域</strong> ，减少 LSA
+泛洪范围 :</p>
+<ul>
+<li><strong>骨干区域 ( Area 0 ) </strong> : 所有其他区域必须直接连到
+Area 0 ( 或通过虚链路连接 ).</li>
+<li><strong>非骨干区域</strong> : Area 1、Area 2 等，区域内部运行
+Dijkstra.</li>
+<li><strong>ABR ( 区域边界路由器 ) </strong> :
+连接骨干区域与非骨干区域.</li>
+<li><strong>ASBR ( 自治系统边界路由器 ) </strong> : 连接 OSPF
+自治系统与外部 ( 如 BGP ).</li>
+</ul>
+<p><strong>OSPF 报文类型 :</strong></p>
+<table>
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 35%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">类型</th>
+<th style="text-align: center;">名称</th>
+<th style="text-align: left;">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Hello</td>
+<td style="text-align: center;">Hello 报文</td>
+<td style="text-align: left;">发现邻居、建立和维护邻居关系 ( 每 10 s
+一次，Dead Interval 40 s )</td>
+</tr>
+<tr>
+<td style="text-align: center;">DBD</td>
+<td style="text-align: center;">数据库描述</td>
+<td style="text-align: left;">初始化时同步 LSDB 的摘要信息</td>
+</tr>
+<tr>
+<td style="text-align: center;">LSR</td>
+<td style="text-align: center;">链路状态请求</td>
+<td style="text-align: left;">请求完整 LSA 信息</td>
+</tr>
+<tr>
+<td style="text-align: center;">LSU</td>
+<td style="text-align: center;">链路状态更新</td>
+<td style="text-align: left;">发送完整 LSA ( 泛洪更新 )</td>
+</tr>
+<tr>
+<td style="text-align: center;">LSAck</td>
+<td style="text-align: center;">链路状态确认</td>
+<td style="text-align: left;">确认收到 LSU</td>
+</tr>
+</tbody>
+</table>
+<p><strong>DR/BDR 选举 ( 广播网络 ) :</strong></p>
+<p>在以太网等广播多路访问网络中，所有路由器两两建立邻居关系开销太大 (
+<span class="math inline">\(n(n-1)/2\)</span> 条 ). OSPF 选举
+<strong>指定路由器 ( DR ) </strong> 和 <strong>备用指定路由器 ( BDR )
+</strong> ，其他路由器只与 DR/BDR 交换 LSA，减少报文数量.</p>
+</div>
+<h3 id="bgp-协议">5.3 BGP 协议</h3>
+<div class="note info simple"><p><strong>BGP ( 边界网关协议，Border Gateway Protocol ) </strong></p>
+<p>BGP 是互联网上 <strong>自治系统 ( AS ) 间</strong>
+的路由协议，负责在不同 ISP、机构之间交换路由信息.</p>
+<p><strong>自治系统 ( AS ) </strong> : 由单一管理机构控制的 IP
+网络集合，有唯一的 AS 号 ( ASN，16 位或 32 位 ).</p>
+<p><strong>路由协议分类 :</strong></p>
+<ul>
+<li><strong>IGP ( 内部网关协议 ) </strong> : AS 内部使用，如
+RIP、OSPF、IS-IS.</li>
+<li><strong>EGP ( 外部网关协议 ) </strong> : AS 之间使用，
+<strong>BGP</strong> 是目前唯一实际使用的 EGP.</li>
+</ul>
+<p><strong>BGP 的关键特性 :</strong></p>
+<ul>
+<li><strong>路径向量算法 ( Path Vector ) </strong> :
+不只传距离，而是传完整的 <strong>AS 路径</strong> ，避免路由环路 ( 若 AS
+路径中已包含自己的 AS 号，则丢弃该路由 ).</li>
+<li><strong>基于 TCP ( 端口 179 ) </strong> :
+可靠传输，无需额外差错控制.</li>
+<li><strong>策略路由</strong> : BGP 支持基于商业政策 ( 而非纯技术指标 )
+选择路由，是互联网商业运营的基础.</li>
+<li><strong>增量更新</strong> : 只在路由变化时发送受影响的路由 ( 不像
+RIP 每 30 s 全量发送 ).</li>
+</ul>
+<p><strong>BGP 邻居类型 :</strong></p>
+<ul>
+<li><strong>eBGP ( 外部 BGP ) </strong> : 不同 AS 之间的 BGP 会话 (
+直连链路 ).</li>
+<li><strong>iBGP ( 内部 BGP ) </strong> : 同一 AS 内部的 BGP 会话 (
+用于传递从外部学到的路由 ).</li>
+</ul>
+<p><strong>三种路由协议对比 ( 考研必考 ) :</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">比较维度</th>
+<th style="text-align: center;">RIP</th>
+<th style="text-align: center;">OSPF</th>
+<th style="text-align: center;">BGP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>类型</strong></td>
+<td style="text-align: center;">IGP</td>
+<td style="text-align: center;">IGP</td>
+<td style="text-align: center;">EGP</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>算法</strong></td>
+<td style="text-align: center;">距离向量 ( DV )</td>
+<td style="text-align: center;">链路状态 ( LS )</td>
+<td style="text-align: center;">路径向量 ( PV )</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>度量</strong></td>
+<td style="text-align: center;">跳数 ( ≤15 )</td>
+<td style="text-align: center;">Cost ( 带宽相关 )</td>
+<td style="text-align: center;">路径属性 ( 策略 )</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>传输协议</strong></td>
+<td style="text-align: center;">UDP 520</td>
+<td style="text-align: center;">直接 IP ( 协议号 89 )</td>
+<td style="text-align: center;">TCP 179</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>更新方式</strong></td>
+<td style="text-align: center;">全量，每 30 s</td>
+<td style="text-align: center;">触发更新，泛洪</td>
+<td style="text-align: center;">增量更新</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>收敛速度</strong></td>
+<td style="text-align: center;">慢</td>
+<td style="text-align: center;">快</td>
+<td style="text-align: center;">较慢 ( 策略复杂 )</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>规模</strong></td>
+<td style="text-align: center;">小型网络</td>
+<td style="text-align: center;">中大型企业网</td>
+<td style="text-align: center;">互联网骨干</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>路由环路</strong></td>
+<td style="text-align: center;">可能</td>
+<td style="text-align: center;">不可能</td>
+<td style="text-align: center;">不可能 ( 路径向量 )</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h2 id="六组播">六、组播</h2>
+<div class="note info simple"><p><strong>组播 ( Multicast ) 基本概念</strong></p>
+<table>
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 35%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">传输类型</th>
+<th style="text-align: center;">目的地</th>
+<th style="text-align: left;">适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>单播 ( Unicast ) </strong></td>
+<td style="text-align: center;">一个主机</td>
+<td style="text-align: left;">点对点通信 ( HTTP、FTP )</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>广播 ( Broadcast )
+</strong></td>
+<td style="text-align: center;">所有主机</td>
+<td style="text-align: left;">局域网内广播 ( ARP、DHCP )</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>组播 ( Multicast )
+</strong></td>
+<td style="text-align: center;">一组特定主机</td>
+<td style="text-align: left;">视频会议、IPTV、金融行情推送</td>
+</tr>
+</tbody>
+</table>
+<p><strong>组播的优势 :</strong> 发送方只发一份数据，网络在
+<strong>分叉点</strong>
+复制，避免单播的重复发送和广播的无差别分发，兼顾效率与精准.</p>
+<p><strong>D 类组播地址 ( 224.0.0.0 ~ 239.255.255.255 ) :</strong></p>
+<table>
+<colgroup>
+<col style="width: 55%" />
+<col style="width: 44%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">范围</th>
+<th style="text-align: left;">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>224.0.0.0/24</code></td>
+<td style="text-align: left;">链路本地组播 ( 不跨路由器 ) ，如
+<code>224.0.0.5</code> ( OSPF All Routers )</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>224.0.1.0/24</code></td>
+<td style="text-align: left;">互联网协议控制块</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>232.0.0.0/8</code></td>
+<td style="text-align: left;">源指定组播 ( SSM )</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>239.0.0.0/8</code></td>
+<td style="text-align: left;">私有组播地址 ( 类似私有单播 )</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="note info simple"><p><strong>IGMP ( Internet Group Management Protocol ) </strong></p>
+<p>IGMP 用于主机与 <strong>本地组播路由器</strong>
+之间通信，让路由器知道哪些主机加入了哪些组播组.</p>
+<p><strong>IGMPv2 工作过程 :</strong> 1. 主机加入组播组时，发送
+<strong>IGMP Membership Report</strong> ( 目的地址 = 组播地址 ). 2.
+组播路由器定期发送 <strong>IGMP Membership Query</strong> (
+询问哪些主机还在组里 ). 3. 主机收到 Query 后，在随机延时后回复 Report (
+抑制重复回复机制 ). 4. 主机离开组时，发送 <strong>IGMP Leave
+Group</strong> ; 路由器发 Group-Specific Query 确认是否还有其他成员.</p>
+<p><strong>组播路由协议 :</strong></p>
+<table>
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 35%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">协议</th>
+<th style="text-align: center;">全称</th>
+<th style="text-align: left;">特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">DVMRP</td>
+<td style="text-align: center;">距离向量组播路由协议</td>
+<td style="text-align: left;">基于 RPF，泛洪+剪枝，早期协议</td>
+</tr>
+<tr>
+<td style="text-align: center;">PIM-DM</td>
+<td style="text-align: center;">密集模式独立组播</td>
+<td style="text-align: left;">适合组成员密集分布，推模式</td>
+</tr>
+<tr>
+<td style="text-align: center;">PIM-SM</td>
+<td style="text-align: center;">稀疏模式独立组播</td>
+<td style="text-align: left;">适合组成员稀疏分布，需 RP 汇聚点，
+<strong>最常用</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>逆向路径转发 ( RPF ) </strong> : 组播路由器只转发从
+<strong>到达组播源的最短路径接口</strong>
+收到的组播数据报，防止环路.</p>
+</div>
+<hr />
+<h2 id="七移动-ip">七、移动 IP</h2>
+<div class="note info simple"><p><strong>移动 IP 的基本概念</strong></p>
+<p>移动 IP 使主机在移动到不同网络时，仍能保持 <strong>原有 IP
+地址不变</strong> ，维持正在进行的通信.</p>
+<p><strong>关键角色 :</strong></p>
+<table>
+<colgroup>
+<col style="width: 55%" />
+<col style="width: 44%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">角色</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>移动节点 ( MN ) </strong></td>
+<td style="text-align: left;">在不同网络间移动的主机</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>归属代理 ( HA, Home Agent )
+</strong></td>
+<td style="text-align: left;">移动节点归属网络中的路由器，负责跟踪 MN
+位置，转发数据报</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>外地代理 ( FA, Foreign Agent )
+</strong></td>
+<td style="text-align: left;">MN 当前所在网络中的路由器，为 MN
+提供转交地址</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>转交地址 ( CoA ) </strong></td>
+<td style="text-align: left;">MN 在外地网络的临时地址 ( 从 FA 处获得
+)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>归属地址</strong></td>
+<td style="text-align: left;">MN 的永久 IP 地址 ( 不变 )</td>
+</tr>
+</tbody>
+</table>
+<p><strong>移动 IP 通信过程 ( 三角路由 ) :</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">通信对端 ( CN )                 归属代理 ( HA )             移动节点 ( MN ) </span><br><span class="line">      │                           │                          │</span><br><span class="line">      │──发往MN归属地址的分组──────▶│                          │</span><br><span class="line">      │                           │──隧道封装──▶转交地址──────▶│</span><br><span class="line">      │                           │                          │</span><br><span class="line">      │◀────────────────MN 直接回复 ( 源地址=归属地址 ) ──────────│</span><br></pre></td></tr></table></figure>
+<ol type="1">
+<li>MN 移动到外地网络，从 FA 获得转交地址 ( CoA ) ，向 HA 注册 (
+<strong>绑定更新</strong> ).</li>
+<li>CN 向 MN 的归属地址发送数据报，HA 收到后 <strong>用隧道 ( IP-in-IP
+封装 ) </strong> 转发给 CoA ( FA ).</li>
+<li>FA 解封装，将数据报转发给 MN.</li>
+<li>MN 回复时，直接以 <strong>归属地址为源</strong> 发给 CN ( 不需要经过
+HA ) ，因此称为 <strong>三角路由</strong>.</li>
+</ol>
+<p><strong>三角路由的问题与优化 :</strong></p>
+<ul>
+<li><strong>问题</strong> : 每个数据报都要先绕到 HA，再隧道到
+MN，路径不优，增加时延.</li>
+<li><strong>优化 ( 路由优化 ) </strong> : HA 将 MN 的当前 CoA 通知
+CN，此后 CN 可直接用隧道发给 CoA ( <strong>直接通信</strong> )
+，无需再绕 HA.</li>
+</ul>
+</div>
+<hr />
+<h2 id="八路由器">八、路由器</h2>
+<div class="note info simple"><p><strong>路由器的结构</strong></p>
+<p>路由器是工作在 <strong>网络层</strong> 的设备，核心功能是
+<strong>路由</strong> ( 维护路由表 ) 和 <strong>转发</strong> ( 交换分组
+).</p>
+<p><strong>路由器的主要组成部分 :</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────────────────────────────┐</span><br><span class="line">│              路由器                      │</span><br><span class="line">│  ┌──────────┐      ┌──────────────────┐ │</span><br><span class="line">│  │ 输入端口  │      │   路由处理器      │ │</span><br><span class="line">│  │ ( 线卡 )   │──────│ ( 运行路由协议，  │ │</span><br><span class="line">│  ├──────────┤  交  │ 维护路由表 )       │ │</span><br><span class="line">│  │ 输入端口  │  换  ├──────────────────┤ │</span><br><span class="line">│  │ ( 线卡 )   │  结  │   转发表 ( FIB )   │ │</span><br><span class="line">│  ├──────────┤  构  └──────────────────┘ │</span><br><span class="line">│  │ 输出端口  │      ↕ ( 控制平面→数据平面 ) │</span><br><span class="line">│  │ ( 线卡 )   │                            │</span><br><span class="line">│  ├──────────┤                            │</span><br><span class="line">│  │ 输出端口  │                            │</span><br><span class="line">│  └──────────┘                            │</span><br><span class="line">└─────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+<p><strong>输入端口功能 :</strong> 接收比特流、成帧、查转发表 ( FIB )
+、将分组送往正确的输出端口. <strong>交换结构 ( Switching Fabric )
+:</strong> 连接输入和输出端口，有总线式、交叉开关矩阵、共享内存三种.
+<strong>输出端口功能 :</strong> 缓冲 ( 队列 ) 、成帧、发送.
+<strong>路由处理器 :</strong> 运行路由协议 ( RIP/OSPF/BGP )
+，计算最短路径，生成和维护路由表.</p>
+<p><strong>路由表 vs 转发表 :</strong></p>
+<ul>
+<li><strong>路由表 ( RIB ) </strong> : 路由协议维护，包含所有路由来源 (
+直连、静态、RIP、OSPF 等 ) ，含度量、下一跳等.</li>
+<li><strong>转发表 ( FIB ) </strong> :
+从路由表中提取最优路由，只包含目的前缀→出口端口→下一跳
+MAC，供数据平面高速查找.</li>
+</ul>
+</div>
+<div class="note info simple"><p><strong>路由器 vs 交换机 vs 集线器 ( 三层设备对比 ) </strong></p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">比较维度</th>
+<th style="text-align: center;">集线器 ( Hub )</th>
+<th style="text-align: center;">交换机 ( Switch )</th>
+<th style="text-align: center;">路由器 ( Router )</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>工作层次</strong></td>
+<td style="text-align: center;">物理层 ( L1 )</td>
+<td style="text-align: center;">数据链路层 ( L2 )</td>
+<td style="text-align: center;">网络层 ( L3 )</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>地址识别</strong></td>
+<td style="text-align: center;">无</td>
+<td style="text-align: center;">MAC 地址</td>
+<td style="text-align: center;">IP 地址</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>冲突域</strong></td>
+<td style="text-align: center;">不隔离</td>
+<td style="text-align: center;">每端口独立</td>
+<td style="text-align: center;">每接口独立</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>广播域</strong></td>
+<td style="text-align: center;">不隔离</td>
+<td style="text-align: center;">不隔离 ( 无 VLAN )</td>
+<td style="text-align: center;"><strong>隔离</strong> ( 每接口独立广播域
+)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>转发决策</strong></td>
+<td style="text-align: center;">广播所有端口</td>
+<td style="text-align: center;">MAC 表查找</td>
+<td style="text-align: center;">路由表查找</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>网络互联</strong></td>
+<td style="text-align: center;">同一 LAN 延伸</td>
+<td style="text-align: center;">同一 LAN 内</td>
+<td style="text-align: center;"><strong>异构网络互联</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>IP 地址</strong></td>
+<td style="text-align: center;">无</td>
+<td style="text-align: center;">无 ( 管理 IP 除外 )</td>
+<td style="text-align: center;">每接口有 IP 地址</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h2 id="九综合真题解析-selected-problems">九、综合真题解析 ( Selected
+Problems )</h2>
+<div class="note success simple"><p><strong>真题 1 ( 子网划分 + 最长前缀匹配 ) </strong></p>
+<p>路由器的路由表如下 :</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">目的网络/前缀</th>
+<th style="text-align: center;">下一跳</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>192.168.0.0/22</code></td>
+<td style="text-align: center;">接口 0</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>192.168.1.0/24</code></td>
+<td style="text-align: center;">接口 1</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>192.168.2.0/25</code></td>
+<td style="text-align: center;">接口 2</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>0.0.0.0/0</code></td>
+<td style="text-align: center;">接口 3 ( 默认 )</td>
+</tr>
+</tbody>
+</table>
+<p>分析目的 IP 地址 <code>192.168.2.100</code> 将从哪个接口转发?</p>
+<p><strong>解 :</strong></p>
+<p>对 <code>192.168.2.100</code> 进行各条路由匹配 ( 最长前缀匹配 ) :</p>
+<ul>
+<li><strong><code>192.168.0.0/22</code></strong> : 覆盖
+<code>192.168.0.0</code> ~ <code>192.168.3.255</code> ( 前 22 位匹配 )
+，<code>192.168.2.100</code> 在此范围 ✓，前缀长度 22.</li>
+<li><strong><code>192.168.1.0/24</code></strong> : 第三字节为 1，但
+<code>192.168.2.100</code> 第三字节为 2， <strong>不匹配</strong>
+✗.</li>
+<li><strong><code>192.168.2.0/25</code></strong> : 子网掩码
+<code>/25</code> 即 <code>255.255.255.128</code>，子网地址
+<code>192.168.2.0</code>，广播
+<code>192.168.2.127</code>，<code>192.168.2.100</code> 在此范围
+✓，前缀长度 25.</li>
+<li><strong><code>0.0.0.0/0</code></strong> : 默认路由，全部匹配
+✓，前缀长度 0.</li>
+</ul>
+<p>最长前缀匹配 : 选 <strong><code>192.168.2.0/25</code></strong> (
+前缀最长，25 &gt; 22 &gt; 0 ) ，从 <strong>接口 2</strong> 转发.</p>
+</div>
+<div class="note success simple"><p><strong>真题 2 ( ARP 工作过程分析 ) </strong></p>
+<p>主机 A ( <code>192.168.1.10/24</code>，MAC = <code>AA:AA</code> )
+向主机 B ( <code>192.168.1.20/24</code>，MAC = <code>BB:BB</code> ) 发送
+IP 数据报. 主机 C ( <code>192.168.1.30/24</code>，MAC =
+<code>CC:CC</code> ) 也在同一子网. 描述 ARP
+的完整工作过程，并说明哪些主机会收到并处理 ARP 请求.</p>
+<p><strong>解 :</strong></p>
+<p><strong>第 1 步</strong> : A 检查目的 IP <code>192.168.1.20</code>
+与自身在同一子网 ( 掩码 /24 ) ，决定直接通过链路层发送.</p>
+<p><strong>第 2 步</strong> : A 查本地 ARP 缓存，若无 B 的 MAC 记录 →
+发送 ARP 广播请求 :</p>
+<ul>
+<li>源 IP : <code>192.168.1.10</code>，源 MAC : <code>AA:AA</code></li>
+<li>目的 IP : <code>192.168.1.20</code>，目的 MAC :
+<code>FF:FF:FF:FF:FF:FF</code> ( 广播 )</li>
+<li>内容 : “谁的 IP 是 <code>192.168.1.20</code>?”</li>
+</ul>
+<p><strong>第 3 步</strong> : <strong>所有同一子网的主机 ( 包括 B 和 C )
+都会收到</strong> 这个广播帧.</p>
+<ul>
+<li>B 发现目的 IP = 自身 IP， <strong>处理该请求</strong> ，更新 ARP
+缓存 ( 记录 A 的 IP↔︎MAC ) ，发送 ARP 单播应答给 A.</li>
+<li>C 发现目的 IP ≠ 自身 IP， <strong>丢弃该请求</strong> ( 仅更新 ARP
+缓存中 A 的记录 ).</li>
+</ul>
+<p><strong>第 4 步</strong> : A 收到 B 的 ARP 单播应答 ( MAC =
+<code>BB:BB</code> ) ，更新 ARP 缓存，封装以太网帧 ( 目的 MAC =
+<code>BB:BB</code> ) 发送 IP 数据报.</p>
+</div>
+<div class="note success simple"><p><strong>真题 3 ( NAT 工作过程分析 ) </strong></p>
+<p>内网有 3 台主机 (
+<code>10.0.0.1</code>，<code>10.0.0.2</code>，<code>10.0.0.3</code> )
+，通过 NAT 路由器 ( 公网 IP = <code>202.1.1.1</code> ) 访问互联网.
+分析下列数据报经 NAT 后的变化，并说明为什么需要 NAPT ( 端口转换 ).</p>
+<p><strong>解 :</strong></p>
+<p><strong>NAT 表 ( NAPT 场景 ) :</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">内网地址:端口</th>
+<th style="text-align: center;">公网地址:端口</th>
+<th style="text-align: center;">状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>10.0.0.1:1025</code></td>
+<td style="text-align: center;"><code>202.1.1.1:60001</code></td>
+<td style="text-align: center;">活跃</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>10.0.0.2:1025</code></td>
+<td style="text-align: center;"><code>202.1.1.1:60002</code></td>
+<td style="text-align: center;">活跃</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>10.0.0.3:1080</code></td>
+<td style="text-align: center;"><code>202.1.1.1:60003</code></td>
+<td style="text-align: center;">活跃</td>
+</tr>
+</tbody>
+</table>
+<p><strong>数据报转换 :</strong></p>
+<p>主机 <code>10.0.0.1:1025</code> 发往 <code>8.8.8.8:53</code> :</p>
+<ul>
+<li>出境 ( 内→外 ) : 源地址 <code>10.0.0.1:1025</code> →
+<code>202.1.1.1:60001</code></li>
+<li>入境 ( 外→内 ) : 目的地址 <code>202.1.1.1:60001</code> →
+<code>10.0.0.1:1025</code></li>
+</ul>
+<p><strong>为什么需要 NAPT ( 而非纯 NAT ) :</strong></p>
+<p>若不使用端口转换，只替换 IP 地址，则 3
+台主机同时向外发送时，都会映射到
+<code>202.1.1.1</code>，收到回复时无法区分该转发给哪台内网主机. NAPT
+通过 <strong>端口号</strong> 区分不同的内网会话，使一个公网 IP
+可支持数万个并发连接.</p>
+</div>
+<div class="note success simple"><p><strong>真题 4 ( RIP 路由更新 + 无穷计数问题 ) </strong></p>
+<p>三个路由器 A-B-C 线性连接，RIP 初始收敛后各路由器路由表如下 ( 跳数 )
+:</p>
+<ul>
+<li>A : 到 B=1，到 C=2</li>
+<li>B : 到 A=1，到 C=1</li>
+<li>C : 到 A=2，到 B=1</li>
+</ul>
+<p>现在 B-C 之间的链路 <strong>断开</strong> ，请描述 RIP 的更新过程 (
+未使用水平分割 ).</p>
+<p><strong>解 :</strong></p>
+<p><strong>第 1 步</strong> : B 检测到 B-C 链路断开，将路由表中到 C
+的距离设为 <span class="math inline">\(\infty\)</span> ( 16 ).</p>
+<p><strong>第 2 步 ( 30 s 后，RIP 正常更新 ) :</strong></p>
+<ul>
+<li>B 向 A 发路由表，含”到 C = 16 ( 不可达 ) “.</li>
+<li>A 向 B 发路由表，含”到 C = 2” ( A 之前从 B 学到 C=2，现在 B 报
+C=16，但 A 认为自己到 C=2，于是告诉 B “到 C = 2” ).</li>
+</ul>
+<p><strong>第 3 步</strong> : B 收到 A 说”到 C = 2”，按 Bellman-Ford :
+经 A 到 C = 2+1 = 3 ( 比 16 小 ) ，更新 B 到 C = 3. B 再告诉 A “到 C =
+3”，A 更新到 C = 4…</p>
+<p>如此循环，B 和 A 的到 C 距离从 3, 4, 5, 6… 不断递增，直到 16 ( 不可达
+) 才停止. 这就是 <strong>无穷计数 ( Count to Infinity ) </strong>
+问题.</p>
+<p><strong>水平分割的解决效果 :</strong> 若 A 使用水平分割，由于 A 是从
+B 学到的 C=2，A 不会将”到 C = 2”再发回给 B. 此时 B 更新到 C =
+16，直接宣告 C 不可达， <strong>一轮更新即可收敛</strong> (
+实际上水平分割不能完全解决所有场景，三角形拓扑中仍可能发生 ).</p>
+</div>
+<div class="note success simple"><p><strong>真题 5 ( OSPF vs RIP 综合对比应用 ) </strong></p>
+<p>某企业网络由 50 台路由器组成，其中有 3 条跨城市的广域网链路 (
+时延差异大 ) ，请分析应选用 RIP 还是 OSPF 作为 IGP，并给出理由.</p>
+<p><strong>解 :</strong></p>
+<p><strong>应选用 OSPF</strong> ，理由如下 :</p>
+<ol type="1">
+<li><p><strong>规模</strong> : 50 台路由器超过 RIP 推荐的小型网络 ( RIP
+最大 15 跳意味着网络直径不超过 15 跳，大型网络极易触发 16 跳不可达限制
+). OSPF 无跳数限制.</p></li>
+<li><p><strong>链路代价</strong> : 广域网链路时延差异大，RIP
+只以跳数计量，无法区分 1 Mbps 和 1 Gbps 链路; OSPF 的 Cost
+与带宽成反比，能 <strong>选择带宽更高的路径</strong>
+，更符合实际需求.</p></li>
+<li><p><strong>收敛速度</strong> : OSPF 使用触发更新 +
+泛洪，拓扑变化后秒级收敛; RIP 需等 30 s 周期，收敛可能超过 180
+s，故障恢复慢，影响业务.</p></li>
+<li><p><strong>可扩展性</strong> : OSPF 支持区域划分，可将 50
+台路由器按地区/功能划分为多个 Area，减少 LSA
+泛洪范围，减轻路由器计算压力.</p></li>
+<li><p><strong>路由精确性</strong> : OSPF 支持
+VLSM、CIDR，支持等价多路径 ( ECMP ) 负载均衡; RIPv1
+不支持子网掩码，灵活性差.</p></li>
+</ol>
+<p><strong>结论</strong> :
+对于有广域网链路、规模较大、对收敛要求高的企业网络， <strong>OSPF
+是唯一合理选择</strong>. RIP 仅适合 10 台路由器以内的简单小型网络.</p>
+</div>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">sparkle520</div><div class="post-copyright__author_desc">我一直都在寻找着什么</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="http://example.com/2026/03/11/408-%E8%AE%A1%E7%BD%914/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('http://example.com/2026/03/11/408-%E8%AE%A1%E7%BD%914/')">408-计算机网络-4-网络层</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="http://example.com/2026/03/11/408-%E8%AE%A1%E7%BD%914/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=408-计算机网络-4-网络层&amp;url=http://example.com/2026/03/11/408-%E8%AE%A1%E7%BD%914/&amp;pic=https://pic1.imgdb.cn/item/69a6f223f98389e4a9b7cf25.png" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">SPARKLE</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/408/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>408<span class="tagsPageCount">14</span></a><a class="post-meta__box__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>计算机网络<span class="tagsPageCount">5</span></a><a class="post-meta__box__tags" href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>网络层<span class="tagsPageCount">2</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://pic1.imgdb.cn/item/67a092fbd0e0a243d4f9b7e9.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/03/11/408-%E8%AE%A1%E7%BD%913/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69a6ec8cf98389e4a9b7ce2e.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">408-计算机网络-3-数据链路层</div></div></a></div><div class="next-post pull-right"><a href="/2026/03/12/%E6%A6%82%E7%BB%9F1/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/67a092fbd0e0a243d4f9b7e9.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">概统 第一章 随机事件及其概率</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2026/03/09/408-%E8%AE%A1%E7%BD%911/" title="408-计算机网络-1-计算机网络概述与体系结构"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69a6e54af98389e4a9b7cc06.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-09</div><div class="title">408-计算机网络-1-计算机网络概述与体系结构</div></div></a></div><div><a href="/2026/03/11/408-%E8%AE%A1%E7%BD%913/" title="408-计算机网络-3-数据链路层"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69a6ec8cf98389e4a9b7ce2e.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-11</div><div class="title">408-计算机网络-3-数据链路层</div></div></a></div><div><a href="/2026/03/10/408-%E8%AE%A1%E7%BD%912/" title="408-计算机网络-2-物理层"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69a6eadbf98389e4a9b7cdf6.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-10</div><div class="title">408-计算机网络-2-物理层</div></div></a></div><div><a href="/2025/07/04/%E8%AE%A1%E7%BD%91%E7%AC%AC%E5%9B%9B%E7%AB%A0/" title="计算机网络 第四章 网络层"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/6867d38058cb8da5c890817d.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-07-04</div><div class="title">计算机网络 第四章 网络层</div></div></a></div><div><a href="/2025/12/22/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F1/" title="408-操作系统-1-计算机系统概述"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492a76c154427986d991c5.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-22</div><div class="title">408-操作系统-1-计算机系统概述</div></div></a></div><div><a href="/2025/12/23/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F2/" title="408-操作系统-2-进程与线程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492ebfc154427986d9c262.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-23</div><div class="title">408-操作系统-2-进程与线程</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/671cfe2fd29ded1a8c5ffb0b.png" alt="status"/></div></div><div class="author-info__description">不管你在<strong style="color:white">这个世界</strong>的哪个地方，我一定<strong style="color:white">会</strong>，再次去<strong style="color:white">见</strong>你的!</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">sparkle520</h1><div class="author-info__desc">我一直都在寻找着什么</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/sparkle520" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/34882250" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">Hello World! 欢迎来到我的博客~</div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://pic.imgdb.cn/item/66c487f1d9c307b7e9ba5c7a.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://pic.imgdb.cn/item/66c487ebd9c307b7e9ba5725.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="toc-number">1.</span> <span class="toc-text">网络层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E9%80%9F%E6%9F%A5-cheat-sheet"><span class="toc-number">1.0.1.</span> <span class="toc-text">总结与速查 ( Cheat Sheet )</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E7%BD%91%E7%BB%9C%E5%B1%82%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-number">1.1.</span> <span class="toc-text">一、网络层的功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95"><span class="toc-number">1.2.</span> <span class="toc-text">二、路由算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95%E5%88%86%E7%B1%BB"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 路由算法分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%9D%E7%A6%BB%E5%90%91%E9%87%8F%E7%AE%97%E6%B3%95-distance-vector-dv"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 距离向量算法 ( Distance
+Vector, DV )</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%B7%AF%E7%8A%B6%E6%80%81%E7%AE%97%E6%B3%95-link-state-ls"><span class="toc-number">1.2.3.</span> <span class="toc-text">2.3 链路状态算法 ( Link State, LS
+)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89ipv4"><span class="toc-number">1.3.</span> <span class="toc-text">三、IPv4</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ipv4-%E6%95%B0%E6%8D%AE%E6%8A%A5%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1 IPv4 数据报格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ipv4-%E5%9C%B0%E5%9D%80"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.2 IPv4 地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%90%E7%BD%91%E5%88%92%E5%88%86%E4%B8%8E-cidr"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.3 子网划分与 CIDR</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#arp-%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.3.4.</span> <span class="toc-text">3.4 ARP 协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dhcp-%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.3.5.</span> <span class="toc-text">3.5 DHCP 协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#icmp-%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.3.6.</span> <span class="toc-text">3.6 ICMP 协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nat-%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.3.7.</span> <span class="toc-text">3.7 NAT ( 网络地址转换 )</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9Bipv6"><span class="toc-number">1.4.</span> <span class="toc-text">四、IPv6</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.5.</span> <span class="toc-text">五、路由协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#rip-%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.5.1.</span> <span class="toc-text">5.1 RIP 协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ospf-%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.5.2.</span> <span class="toc-text">5.2 OSPF 协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bgp-%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.5.3.</span> <span class="toc-text">5.3 BGP 协议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E7%BB%84%E6%92%AD"><span class="toc-number">1.6.</span> <span class="toc-text">六、组播</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E7%A7%BB%E5%8A%A8-ip"><span class="toc-number">1.7.</span> <span class="toc-text">七、移动 IP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E8%B7%AF%E7%94%B1%E5%99%A8"><span class="toc-number">1.8.</span> <span class="toc-text">八、路由器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%9D%E7%BB%BC%E5%90%88%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90-selected-problems"><span class="toc-number">1.9.</span> <span class="toc-text">九、综合真题解析 ( Selected
+Problems )</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/03/12/%E6%A6%82%E7%BB%9F1/" title="概统 第一章 随机事件及其概率"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/67a092fbd0e0a243d4f9b7e9.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="概统 第一章 随机事件及其概率"/></a><div class="content"><a class="title" href="/2026/03/12/%E6%A6%82%E7%BB%9F1/" title="概统 第一章 随机事件及其概率">概统 第一章 随机事件及其概率</a><time datetime="2026-03-12T12:00:00.000Z" title="发表于 2026-03-12 20:00:00">2026-03-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/11/408-%E8%AE%A1%E7%BD%914/" title="408-计算机网络-4-网络层"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69a6f223f98389e4a9b7cf25.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-计算机网络-4-网络层"/></a><div class="content"><a class="title" href="/2026/03/11/408-%E8%AE%A1%E7%BD%914/" title="408-计算机网络-4-网络层">408-计算机网络-4-网络层</a><time datetime="2026-03-11T15:00:00.000Z" title="发表于 2026-03-11 23:00:00">2026-03-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/11/408-%E8%AE%A1%E7%BD%913/" title="408-计算机网络-3-数据链路层"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69a6ec8cf98389e4a9b7ce2e.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-计算机网络-3-数据链路层"/></a><div class="content"><a class="title" href="/2026/03/11/408-%E8%AE%A1%E7%BD%913/" title="408-计算机网络-3-数据链路层">408-计算机网络-3-数据链路层</a><time datetime="2026-03-11T14:00:00.000Z" title="发表于 2026-03-11 22:00:00">2026-03-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/10/408-%E8%AE%A1%E7%BD%912/" title="408-计算机网络-2-物理层"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69a6eadbf98389e4a9b7cdf6.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-计算机网络-2-物理层"/></a><div class="content"><a class="title" href="/2026/03/10/408-%E8%AE%A1%E7%BD%912/" title="408-计算机网络-2-物理层">408-计算机网络-2-物理层</a><time datetime="2026-03-10T13:00:00.000Z" title="发表于 2026-03-10 21:00:00">2026-03-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/09/408-%E8%AE%A1%E7%BD%911/" title="408-计算机网络-1-计算机网络概述与体系结构"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69a6e54af98389e4a9b7cc06.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-计算机网络-1-计算机网络概述与体系结构"/></a><div class="content"><a class="title" href="/2026/03/09/408-%E8%AE%A1%E7%BD%911/" title="408-计算机网络-1-计算机网络概述与体系结构">408-计算机网络-1-计算机网络概述与体系结构</a><time datetime="2026-03-09T12:00:27.000Z" title="发表于 2026-03-09 20:00:27">2026-03-09</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  if (true) { 
+    window.typed = new Typed("#footer-type-tips", {
+      strings: ["只要记住你的名字&#44; 不管你在世界的哪个地方&#44; 我一定&#44; 会去见你 !"],
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50
+    })
+  } else {
+    document.getElementById("footer-type-tips").innerHTML = '只要记住你的名字&#44; 不管你在世界的哪个地方&#44; 我一定&#44; 会去见你 !'
+  }
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.cbd.int/typed.js@2.1.0/dist/typed.umd.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/sparkle520" title="sparkle">sparkle</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">91</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">58</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">7</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/sparkle520?tab=repositories" title="github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="github"/><span class="back-menu-item-text">github</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/408/" style="font-size: 0.88rem;">408<sup>14</sup></a><a href="/tags/AOP/" style="font-size: 0.88rem;">AOP<sup>1</sup></a><a href="/tags/Deep-Learning/" style="font-size: 0.88rem;">Deep Learning<sup>1</sup></a><a href="/tags/IoC/" style="font-size: 0.88rem;">IoC<sup>1</sup></a><a href="/tags/JSR303/" style="font-size: 0.88rem;">JSR303<sup>1</sup></a><a href="/tags/Matplotlib/" style="font-size: 0.88rem;">Matplotlib<sup>3</sup></a><a href="/tags/c/" style="font-size: 0.88rem;">c#<sup>2</sup></a><a href="/tags/java/" style="font-size: 0.88rem;">java<sup>4</sup></a><a href="/tags/python/" style="font-size: 0.88rem;">python<sup>5</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 0.88rem;">事务<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E3%80%82/" style="font-size: 0.88rem;">你的名字。<sup>3</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">你的名字同名小说<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%A4%96%E4%BC%A0%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">你的名字外传小说<sup>1</sup></a><a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size: 0.88rem;">写作<sup>4</sup></a><a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 0.88rem;">包管理<sup>1</sup></a><a href="/tags/%E5%8D%B7%E7%A7%AF%E5%85%AC%E5%BC%8F/" style="font-size: 0.88rem;">卷积公式<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90/" style="font-size: 0.88rem;">天气之子<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">天气之子同名小说<sup>1</sup></a><a href="/tags/%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">小说<sup>3</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 0.88rem;">操作系统<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" style="font-size: 0.88rem;">数据校验<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" style="font-size: 0.88rem;">数据链路层<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 0.88rem;">概率论<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 0.88rem;">概率论与数理统计<sup>7</sup></a><a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 0.88rem;">汇编<sup>9</sup></a><a href="/tags/%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80/" style="font-size: 0.88rem;">泰勒展开<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/" style="font-size: 0.88rem;">物理层<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%80%BC/" style="font-size: 0.88rem;">特征值<sup>2</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F/" style="font-size: 0.88rem;">特征向量<sup>2</sup></a><a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 0.88rem;">线性代数<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" style="font-size: 0.88rem;">网络体系结构<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" style="font-size: 0.88rem;">网络层<sup>2</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 0.88rem;">英语<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95/" style="font-size: 0.88rem;">英语语法<sup>16</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 0.88rem;">计算机组成原理<sup>5</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 0.88rem;">计算机网络<sup>5</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 0.88rem;">语法<sup>1</sup></a><a href="/tags/%E9%95%BF%E9%9A%BE%E5%8F%A5/" style="font-size: 0.88rem;">长难句<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/" style="font-size: 0.88rem;">高等代数<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" style="font-size: 0.88rem;">高等数学<sup>14</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script async src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.cbd.int/mathjax@3.2.2/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.cbd.int/mermaid@10.9.1/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  anzhiyu.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://sparkle521.xyz',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://cdn.cbd.int/twikoo@1.6.25/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://sparkle521.xyz',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"><script async src="/js/anzhiyu/comment_barrage.js"></script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://sparkle521.xyz',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.cbd.int/twikoo@1.6.25/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script async data-pjax src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.1/bubble/bubble.js"></script><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><div><canvas id="snow" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999;pointer-events:none"></canvas></div><script>const notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));</script><script async type="text/javascript" src="https://cdn.jsdelivr.net/gh/Candinya/Kratos-Rebirth@latest/source/js/snow.min.js"></script><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

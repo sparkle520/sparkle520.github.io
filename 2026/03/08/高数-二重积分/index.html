@@ -1,0 +1,1236 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>二重积分 | SPARKLE</title><meta name="keywords" content="高等数学,二重积分"><meta name="author" content="sparkle520"><meta name="copyright" content="sparkle520"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="二重积分"><meta name="application-name" content="二重积分"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="二重积分"><meta property="og:url" content="http://example.com/2026/03/08/%E9%AB%98%E6%95%B0-%E4%BA%8C%E9%87%8D%E7%A7%AF%E5%88%86/index.html"><meta property="og:site_name" content="SPARKLE"><meta property="og:description" content="二重积分  本文系统讲解二重积分的概念、性质、计算方法与应用，涵盖直角坐标系、极坐标系、换元法、对称性技巧等核心内容，例题均达到考研数学一要求.     %%{init: {&amp;#39;theme&amp;#39;: &amp;#39;base&amp;#39;, &amp;#39;themeVariables&amp;#39;:"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://pic1.imgdb.cn/item/69a6e391f98389e4a9b7cbc5.png"><meta property="article:author" content="sparkle520"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://pic1.imgdb.cn/item/69a6e391f98389e4a9b7cbc5.png"><meta name="description" content="二重积分  本文系统讲解二重积分的概念、性质、计算方法与应用，涵盖直角坐标系、极坐标系、换元法、对称性技巧等核心内容，例题均达到考研数学一要求.     %%{init: {&amp;#39;theme&amp;#39;: &amp;#39;base&amp;#39;, &amp;#39;themeVariables&amp;#39;:"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2026/03/08/%E9%AB%98%E6%95%B0-%E4%BA%8C%E9%87%8D%E7%A7%AF%E5%88%86/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: 'https://sparkle521.xyz',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":4000,"accessToken":"","mailMd5":""},
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: {"mode":"api","api":"https://img2color-go.vercel.app/api?img=","cover_change":true},
+  authorStatus: {"skills":["(❤ ω ❤)"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: sparkle520","link":"链接: ","source":"来源: SPARKLE","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#883ced","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'SPARKLE',
+  title: '二重积分',
+  postAI: '',
+  pageFillDescription: '二重积分, 总结与速查 ( Cheat Sheet ), 一、基本概念与性质, 1.1 二重积分的定义, 1.2 基本性质, 二、直角坐标系下的计算, 2.1 化为累次积分, 2.2 交换积分次序 ( 重点难点 ), 三、极坐标系下的计算, 3.1 极坐标变换, 3.2 广义极坐标 ( 椭圆区域 ), 四、对称性技巧, 4.1 奇偶对称性, 4.2 轮换对称性 ( 考研重要技巧 ), 五、一般换元法, 六、几何与物理应用, 6.1 曲面面积, 6.2 质心与转动惯量, 七、含参变量二重积分二重积分本文系统讲解二重积分的概念性质计算方法与应用涵盖直角坐标系极坐标系换元法对称性技巧等核心内容例题均达到考研数学一要求二重积分概念与性质定义与几何意义基本性质估值与中值定理计算方法直角坐标系型区域型区域交换积分次序极坐标系标准极坐标广义极坐标换元法一般换元公式极坐标换元对称性技巧奇偶对称性轮换对称性几何与物理应用曲面面积质心与转动惯量总结与速查方法适用区域积分公式典型特征直角坐标型竖直截线简单直角坐标型水平截线简单极坐标圆形扇形区域含广义极坐标椭圆区域令区域为椭圆奇偶对称关于坐标轴对称奇函数积分为偶函数减半被积函数含奇次项轮换对称关于对称区域方程互换不变一基本概念与性质二重积分的定义定义设在有界闭区域上有界将任意分割为个小区域在每个上任取一点作乘积并求和若当各小区域直径的最大值时该和式的极限存在且与分割方式及取点方式无关则称此极限为在上的二重积分记作其中为面积微元在直角坐标下几何意义当时二重积分表示以为底以曲面为顶的曲顶柱体的体积当变号时为代数体积曲面在平面上方的体积减去下方的体积基本性质性质汇总线性性区域可加性若无公共内点则保号性若在上则绝对值不等式估值定理设为的面积则二重积分中值定理若在有界闭区域上连续则存在使得其中为的面积易错点估值定理的应用示例估计其中在上故面积因此二直角坐标系下的计算化为累次积分核心思想截面法对型区域对型区域示例直角坐标基本计算计算其中由围成解交点或在上型交换积分次序重点难点交换积分次序的步骤还原积分区域由累次积分的上下限写出的不等式描述画草图确定区域的几何形状换序将型改为型或反之重写积分限适用场景内层积分难以直接求如含等换序后变为可求示例交换次序含不可积原函数计算解积分区域即交换次序后示例交换次序区域需合并交换积分次序解合并后为三角形顶点化为型左边界右边界三极坐标系下的计算极坐标变换变换公式令行列式面积微元二重积分化为适用场景区域为圆形扇形环形被积函数含等极点位置与积分限的判断极点位置的下限典型示例极点在内部极点在边界上圆过原点极点在外部环形区域示例极坐标圆过原点计算其中解极坐标下示例极坐标环形域特殊函数计算其中解第一象限环形区域注意广义极坐标椭圆区域广义极坐标变换对椭圆区域令则区域变为示例广义极坐标计算其中解令被积函数四对称性技巧奇偶对称性奇偶对称性定理设积分区域关于轴对称则关于为偶函数关于为奇函数其中为在的部分类似地若关于轴对称则分析的奇偶性示例奇偶对称性圆域上的混合型被积函数计算其中解关于轴为奇函数由轮换对称性轮换对称性考研重要技巧轮换对称性定理若积分区域关于直线对称则由此常见区域圆形正方形顶点关于对称的三角形示例轮换对称性化简分式被积函数计算其中解关于对称由轮换对称性示例奇偶轮换联合快速判零计算其中解关于两坐标轴及均对称关于轴对称奇关于轴对称奇关于轴对称关于奇关于轴对称关于奇五一般换元法二重积分换元公式设将一一映射到行列式则换元动机将斜边椭圆平行四边形等复杂区域变换为矩形或圆形示例线性换元平行四边形区域计算其中由围成解令示例换元法双曲型边界区域计算其中由围成解令则由被积函数示例利用二重积分计算含参积分积分计算其中解注意六几何与物理应用曲面面积曲面面积公式设曲面在区域上有连续偏导数则曲面面积示例球面被柱面截取的面积求球面被柱面截取的面积解取上半球面总面积上半部分投影区域极坐标质心与转动惯量公式汇总设平面薄板占区域密度为则质量质心对轴转动惯量对轴转动惯量对原点七含参变量二重积分示例变限二重积分求导设连续求解极坐标下八综合难题选讲难题极坐标奇偶对称计算其中解关于轴对称关于为奇函数故其积分为极坐标下难题含绝对值分区域计算其中解分为内圆和环形难题二重积分与积分计算解难题综合广义极坐标几何意义计算其中解令被积函数几何意义此积分表示以椭圆为底以半椭球面为顶的曲顶柱体体积难题考研真题类型二重积分极限求解极坐标下令分子为分母为两者均趋于用法则难题二重积分不等式证明设在上有连续偏导数且证明证明由及牛顿莱布尼茨公式故交换积分次序换为最后一步因但更精确地对非负不直接成立需利用再乘系数的均值论证详见分析教材难题递推关系设求解极坐标下验证单位圆面积时难题积分不等式设在上连续且均单调递增证明证明由均单调递增对任意在上对二重积分展开注意各项整理后得',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-03-04 22:18:24',
+  postMainColor: '#315077',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.min.css"><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/sparkle520?tab=repositories" title="github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="github"/><span class="back-menu-item-text">github</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">SPARKLE</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/408/" style="font-size: 1.05rem;">408<sup>14</sup></a><a href="/tags/AOP/" style="font-size: 1.05rem;">AOP<sup>1</sup></a><a href="/tags/Deep-Learning/" style="font-size: 1.05rem;">Deep Learning<sup>1</sup></a><a href="/tags/IoC/" style="font-size: 1.05rem;">IoC<sup>1</sup></a><a href="/tags/JSR303/" style="font-size: 1.05rem;">JSR303<sup>1</sup></a><a href="/tags/Matplotlib/" style="font-size: 1.05rem;">Matplotlib<sup>3</sup></a><a href="/tags/c/" style="font-size: 1.05rem;">c#<sup>2</sup></a><a href="/tags/java/" style="font-size: 1.05rem;">java<sup>4</sup></a><a href="/tags/python/" style="font-size: 1.05rem;">python<sup>5</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 1.05rem;">事务<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E3%80%82/" style="font-size: 1.05rem;">你的名字。<sup>3</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字同名小说<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%A4%96%E4%BC%A0%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字外传小说<sup>1</sup></a><a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size: 1.05rem;">写作<sup>4</sup></a><a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 1.05rem;">包管理<sup>1</sup></a><a href="/tags/%E5%8D%B7%E7%A7%AF%E5%85%AC%E5%BC%8F/" style="font-size: 1.05rem;">卷积公式<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90/" style="font-size: 1.05rem;">天气之子<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">天气之子同名小说<sup>1</sup></a><a href="/tags/%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">小说<sup>3</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">操作系统<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" style="font-size: 1.05rem;">数据校验<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" style="font-size: 1.05rem;">数据链路层<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 1.05rem;">概率论<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 1.05rem;">概率论与数理统计<sup>7</sup></a><a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 1.05rem;">汇编<sup>9</sup></a><a href="/tags/%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80/" style="font-size: 1.05rem;">泰勒展开<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/" style="font-size: 1.05rem;">物理层<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%80%BC/" style="font-size: 1.05rem;">特征值<sup>2</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F/" style="font-size: 1.05rem;">特征向量<sup>2</sup></a><a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">线性代数<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" style="font-size: 1.05rem;">网络体系结构<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" style="font-size: 1.05rem;">网络层<sup>2</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 1.05rem;">英语<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">英语语法<sup>16</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1.05rem;">计算机组成原理<sup>5</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.05rem;">计算机网络<sup>5</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">语法<sup>1</sup></a><a href="/tags/%E9%95%BF%E9%9A%BE%E5%8F%A5/" style="font-size: 1.05rem;">长难句<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">高等代数<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" style="font-size: 1.05rem;">高等数学<sup>14</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">三月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">11</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/02/"><span class="card-archive-list-date">二月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/01/"><span class="card-archive-list-date">一月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/12/"><span class="card-archive-list-date">十二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">15</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/11/"><span class="card-archive-list-date">十一月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/10/"><span class="card-archive-list-date">十月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/09/"><span class="card-archive-list-date">九月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/08/"><span class="card-archive-list-date">八月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url">数学</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>高等数学</span></a><a class="article-meta__tags" href="/tags/%E4%BA%8C%E9%87%8D%E7%A7%AF%E5%88%86/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>二重积分</span></a></span></div></div><h1 class="post-title" itemprop="name headline">二重积分</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-03-08T12:00:27.000Z" title="发表于 2026-03-08 20:00:27">2026-03-08</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-03-04T14:18:24.301Z" title="更新于 2026-03-04 22:18:24">2026-03-04</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">4.6k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>22分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="二重积分"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为系守镇"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>系守镇</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2026/03/08/%E9%AB%98%E6%95%B0-%E4%BA%8C%E9%87%8D%E7%A7%AF%E5%88%86/#post-comment" tabindex="-1"><span id="twikoo-count"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://pic1.imgdb.cn/item/69a6e391f98389e4a9b7cbc5.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2026/03/08/%E9%AB%98%E6%95%B0-%E4%BA%8C%E9%87%8D%E7%A7%AF%E5%88%86/"><header><a class="post-meta-categories" href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url">数学</a><a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" tabindex="-1" itemprop="url">高等数学</a><a href="/tags/%E4%BA%8C%E9%87%8D%E7%A7%AF%E5%88%86/" tabindex="-1" itemprop="url">二重积分</a><h1 id="CrawlerTitle" itemprop="name headline">二重积分</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">sparkle520</span><time itemprop="dateCreated datePublished" datetime="2026-03-08T12:00:27.000Z" title="发表于 2026-03-08 20:00:27">2026-03-08</time><time itemprop="dateCreated datePublished" datetime="2026-03-04T14:18:24.301Z" title="更新于 2026-03-04 22:18:24">2026-03-04</time></header><h1 id="二重积分">二重积分</h1>
+<blockquote>
+<p>本文系统讲解二重积分的概念、性质、计算方法与应用，涵盖直角坐标系、极坐标系、换元法、对称性技巧等核心内容，例题均达到考研数学一要求.</p>
+</blockquote>
+<div class="mermaid-wrap"><pre class="mermaid-src" hidden>
+  %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;lineColor&#39;: &#39;#06B6D4&#39;, &#39;primaryColor&#39;: &#39;#06B6D4&#39;, &#39;primaryTextColor&#39;: &#39;#fff&#39;, &#39;primaryBorderColor&#39;: &#39;#0891b2&#39;, &#39;fontFamily&#39;: &#39;arial&#39;, &#39;fontSize&#39;: &#39;16px&#39; }}}%%
+mindmap
+  root((二重积分))
+    概念与性质
+      定义与几何意义
+      基本性质
+      估值与中值定理
+    计算方法
+      直角坐标系
+        X型区域
+        Y型区域
+        交换积分次序
+      极坐标系
+        标准极坐标
+        广义极坐标
+      换元法
+        一般换元公式
+        极坐标换元
+    对称性技巧
+      奇偶对称性
+      轮换对称性
+    几何与物理应用
+      曲面面积
+      质心与转动惯量
+  </pre></div>
+<h3 id="总结与速查-cheat-sheet">总结与速查 ( Cheat Sheet )</h3>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">方法</th>
+<th style="text-align: left;">适用区域</th>
+<th style="text-align: left;">积分公式</th>
+<th style="text-align: left;">典型特征</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>直角坐标 ( X 型 )</strong></td>
+<td style="text-align: left;"><span class="math inline">\(a \le x \le
+b,\ \varphi_1(x) \le y \le \varphi_2(x)\)</span></td>
+<td style="text-align: left;"><span
+class="math inline">\(\displaystyle\int_a^b dx
+\int_{\varphi_1(x)}^{\varphi_2(x)} f(x,y)\,dy\)</span></td>
+<td style="text-align: left;">竖直截线简单</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>直角坐标 ( Y 型 )</strong></td>
+<td style="text-align: left;"><span class="math inline">\(c \le y \le
+d,\ \psi_1(y) \le x \le \psi_2(y)\)</span></td>
+<td style="text-align: left;"><span
+class="math inline">\(\displaystyle\int_c^d dy
+\int_{\psi_1(y)}^{\psi_2(y)} f(x,y)\,dx\)</span></td>
+<td style="text-align: left;">水平截线简单</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>极坐标</strong></td>
+<td style="text-align: left;"><span class="math inline">\(\alpha \le
+\theta \le \beta,\ r_1(\theta) \le r \le r_2(\theta)\)</span></td>
+<td style="text-align: left;"><span
+class="math inline">\(\displaystyle\int_\alpha^\beta d\theta
+\int_{r_1}^{r_2} f(r\cos\theta, r\sin\theta)\,r\,dr\)</span></td>
+<td style="text-align: left;">圆形/扇形区域，含 <span
+class="math inline">\(x^2+y^2\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>广义极坐标</strong></td>
+<td style="text-align: left;">椭圆区域 <span
+class="math inline">\(\frac{x^2}{a^2}+\frac{y^2}{b^2} \le
+1\)</span></td>
+<td style="text-align: left;">令 <span
+class="math inline">\(x=ar\cos\theta,\ y=br\sin\theta\)</span>，<span
+class="math inline">\(J=abr\)</span></td>
+<td style="text-align: left;">区域为椭圆</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>奇偶对称</strong></td>
+<td style="text-align: left;">关于坐标轴对称</td>
+<td style="text-align: left;">奇函数积分为 <span
+class="math inline">\(0\)</span>，偶函数减半</td>
+<td style="text-align: left;">被积函数含奇次项</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>轮换对称</strong></td>
+<td style="text-align: left;"><span class="math inline">\(D\)</span>
+关于 <span class="math inline">\(y=x\)</span> 对称</td>
+<td style="text-align: left;"><span
+class="math inline">\(\displaystyle\iint_D f(x,y)\,d\sigma =
+\displaystyle\iint_D f(y,x)\,d\sigma\)</span></td>
+<td style="text-align: left;">区域方程 <span
+class="math inline">\(x,y\)</span> 互换不变</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="一基本概念与性质">一、基本概念与性质</h2>
+<h3 id="二重积分的定义">1.1 二重积分的定义</h3>
+<div class="note info simple"><p><strong>定义</strong></p>
+<p>设 <span class="math inline">\(f(x,y)\)</span> 在有界闭区域 <span
+class="math inline">\(D\)</span> 上有界. 将 <span
+class="math inline">\(D\)</span> 任意分割为 <span
+class="math inline">\(n\)</span> 个小区域 <span
+class="math inline">\(\Delta\sigma_i\)</span>，在每个 <span
+class="math inline">\(\Delta\sigma_i\)</span> 上任取一点 <span
+class="math inline">\((\xi_i, \eta_i)\)</span>，作乘积 <span
+class="math inline">\(f(\xi_i, \eta_i)\Delta\sigma_i\)</span> 并求和.
+若当各小区域直径的最大值 <span class="math inline">\(\lambda \to
+0\)</span> 时，该和式的极限存在且与分割方式及取点方式无关，则称此极限为
+<span class="math inline">\(f(x,y)\)</span> 在 <span
+class="math inline">\(D\)</span> 上的<strong>二重积分</strong>，记作</p>
+<p><span class="math display">\[\iint_D f(x,y)\,d\sigma = \lim_{\lambda
+\to 0} \sum_{i=1}^{n} f(\xi_i, \eta_i)\Delta\sigma_i\]</span></p>
+<p>其中 <span class="math inline">\(d\sigma\)</span>
+为面积微元，在直角坐标下 <span class="math inline">\(d\sigma =
+dx\,dy\)</span>.</p>
+</div>
+<div class="note info simple"><p><strong>几何意义</strong></p>
+<p>当 <span class="math inline">\(f(x,y) \ge 0\)</span> 时，二重积分
+<span class="math inline">\(\displaystyle\iint_D
+f(x,y)\,d\sigma\)</span> 表示以 <span class="math inline">\(D\)</span>
+为底、以曲面 <span class="math inline">\(z = f(x,y)\)</span>
+为顶的<strong>曲顶柱体的体积</strong>.</p>
+<p>当 <span class="math inline">\(f(x,y)\)</span> 变号时，<span
+class="math inline">\(\displaystyle\iint_D f(x,y)\,d\sigma\)</span>
+为代数体积 ( 曲面在 <span class="math inline">\(xOy\)</span>
+平面上方的体积减去下方的体积 ) .</p>
+</div>
+<h3 id="基本性质">1.2 基本性质</h3>
+<div class="note info simple"><p><strong>性质汇总</strong></p>
+<ol type="1">
+<li><p><strong>线性性</strong> : <span
+class="math inline">\(\displaystyle\iint_D [\alpha f + \beta g]\,d\sigma
+= \alpha \displaystyle\iint_D f\,d\sigma + \beta \displaystyle\iint_D
+g\,d\sigma\)</span>.</p></li>
+<li><p><strong>区域可加性</strong> : 若 <span class="math inline">\(D =
+D_1 \cup D_2\)</span> ( <span class="math inline">\(D_1, D_2\)</span>
+无公共内点 ) ，则 <span class="math display">\[\iint_D f\,d\sigma =
+\iint_{D_1} f\,d\sigma + \iint_{D_2} f\,d\sigma.\]</span></p></li>
+<li><p><strong>保号性</strong> : 若在 <span
+class="math inline">\(D\)</span> 上 <span class="math inline">\(f(x,y)
+\le g(x,y)\)</span>，则 <span class="math inline">\(\displaystyle\iint_D
+f\,d\sigma \le \displaystyle\iint_D g\,d\sigma\)</span>.</p></li>
+<li><p><strong>绝对值不等式</strong> : <span
+class="math inline">\(\left|\displaystyle\iint_D f\,d\sigma\right| \le
+\displaystyle\iint_D |f|\,d\sigma\)</span>.</p></li>
+<li><p><strong>估值定理</strong> : 设 <span class="math inline">\(m \le
+f(x,y) \le M\)</span>，<span class="math inline">\(S\)</span> 为 <span
+class="math inline">\(D\)</span> 的面积，则 <span
+class="math display">\[mS \le \iint_D f(x,y)\,d\sigma \le
+MS.\]</span></p></li>
+<li><p><strong>二重积分中值定理</strong> : 若 <span
+class="math inline">\(f(x,y)\)</span> 在有界闭区域 <span
+class="math inline">\(D\)</span> 上连续，则存在 <span
+class="math inline">\((\xi, \eta) \in D\)</span>，使得 <span
+class="math display">\[\iint_D f(x,y)\,d\sigma = f(\xi, \eta) \cdot
+S.\]</span> 其中 <span class="math inline">\(S\)</span> 为 <span
+class="math inline">\(D\)</span> 的面积.</p></li>
+</ol>
+</div>
+<div class="note warning simple"><p><strong>易错点：估值定理的应用</strong></p>
+<p><strong>示例</strong> : 估计 <span class="math inline">\(I =
+\displaystyle\iint_D e^{x^2+y^2}\,d\sigma\)</span>，其中 <span
+class="math inline">\(D : x^2 + y^2 \le 1\)</span>.</p>
+<p>在 <span class="math inline">\(D\)</span> 上，<span
+class="math inline">\(0 \le x^2+y^2 \le 1\)</span>，故 <span
+class="math inline">\(1 \le e^{x^2+y^2} \le e\)</span>. 面积 <span
+class="math inline">\(S = \pi\)</span>，因此 <span
+class="math inline">\(\pi \le I \le \pi e\)</span>.</p>
+</div>
+<hr />
+<h2 id="二直角坐标系下的计算">二、直角坐标系下的计算</h2>
+<h3 id="化为累次积分">2.1 化为累次积分</h3>
+<div class="note info simple"><p><strong>核心思想 ( 截面法 ) </strong></p>
+<p>对 X 型区域 <span class="math inline">\(D = \{(x,y) \mid a \le x \le
+b,\ \varphi_1(x) \le y \le \varphi_2(x)\}\)</span>：</p>
+<p><span class="math display">\[\iint_D f(x,y)\,d\sigma = \int_a^b
+\left[ \int_{\varphi_1(x)}^{\varphi_2(x)} f(x,y)\,dy \right]
+dx\]</span></p>
+<p>对 Y 型区域 <span class="math inline">\(D = \{(x,y) \mid c \le y \le
+d,\ \psi_1(y) \le x \le \psi_2(y)\}\)</span>：</p>
+<p><span class="math display">\[\iint_D f(x,y)\,d\sigma = \int_c^d
+\left[ \int_{\psi_1(y)}^{\psi_2(y)} f(x,y)\,dx \right] dy\]</span></p>
+</div>
+<div class="note success simple"><p><strong>示例 1 ( 直角坐标基本计算 ) </strong></p>
+<p>计算 <span class="math inline">\(\displaystyle\iint_D
+xy\,d\sigma\)</span>，其中 <span class="math inline">\(D\)</span> 由
+<span class="math inline">\(y=x\)</span>，<span
+class="math inline">\(y=x^2\)</span> 围成.</p>
+<p><strong>解 :</strong> 交点 : <span class="math inline">\(x=x^2
+\Rightarrow x=0\)</span> 或 <span class="math inline">\(x=1\)</span>. 在
+<span class="math inline">\([0,1]\)</span> 上，<span
+class="math inline">\(x^2 \le y \le x\)</span> ( X 型 ) .</p>
+<p><span class="math display">\[
+\begin{aligned}
+I &amp;= \int_0^1 dx \int_{x^2}^{x} xy\,dy = \int_0^1 x \cdot
+\left[\frac{y^2}{2}\right]_{x^2}^{x} dx \\
+&amp;= \int_0^1 x \cdot \frac{x^2 - x^4}{2}\,dx = \frac{1}{2}\int_0^1
+(x^3 - x^5)\,dx \\
+&amp;= \frac{1}{2}\left[\frac{x^4}{4} - \frac{x^6}{6}\right]_0^1 =
+\frac{1}{2}\left(\frac{1}{4} - \frac{1}{6}\right) = \frac{1}{24}.
+\end{aligned}
+\]</span></p>
+</div>
+<h3 id="交换积分次序-重点难点">2.2 交换积分次序 ( 重点难点 )</h3>
+<div class="note warning simple"><p><strong>交换积分次序的步骤</strong></p>
+<ol type="1">
+<li><strong>还原积分区域</strong> : 由累次积分的上下限，写出 <span
+class="math inline">\(D\)</span> 的不等式描述.</li>
+<li><strong>画草图</strong> : 确定区域的几何形状.</li>
+<li><strong>换序</strong> : 将 X 型改为 Y 型 ( 或反之 )
+，重写积分限.</li>
+</ol>
+<p><strong>适用场景</strong> : 内层积分难以直接求 ( 如含 <span
+class="math inline">\(e^{y^2}\)</span>, <span
+class="math inline">\(\sin(y^2)\)</span>, <span
+class="math inline">\(\dfrac{\sin y}{y}\)</span> 等 )
+，换序后变为可求.</p>
+</div>
+<div class="note success simple"><p><strong>示例 2 ( 交换次序——含不可积原函数 ) </strong></p>
+<p>计算 <span class="math inline">\(\displaystyle\int_0^1 dy \int_y^1
+\frac{\sin x}{x}\,dx\)</span>.</p>
+<p><strong>解 :</strong> 积分区域 <span class="math inline">\(D =
+\{(x,y) \mid 0 \le y \le 1,\ y \le x \le 1\}\)</span>，即 <span
+class="math inline">\(\{0 \le x \le 1,\ 0 \le y \le x\}\)</span>.</p>
+<p>交换次序后 : <span class="math display">\[
+\begin{aligned}
+I &amp;= \int_0^1 dx \int_0^x \frac{\sin x}{x}\,dy = \int_0^1 \frac{\sin
+x}{x} \cdot x\,dx = \int_0^1 \sin x\,dx = 1 - \cos 1.
+\end{aligned}
+\]</span></p>
+</div>
+<div class="note success simple"><p><strong>示例 3 ( 交换次序——区域需合并 ) </strong></p>
+<p>交换积分次序 : <span class="math inline">\(\displaystyle\int_0^1 dx
+\int_0^x f(x,y)\,dy + \int_1^2 dx\int_0^{2-x} f(x,y)\,dy\)</span>.</p>
+<p><strong>解 :</strong> <span class="math inline">\(D_1 : 0 \le x \le
+1,\ 0 \le y \le x\)</span>；<span class="math inline">\(D_2 : 1 \le x
+\le 2,\ 0 \le y \le 2-x\)</span>.</p>
+<p>合并后 <span class="math inline">\(D\)</span> 为三角形，顶点 <span
+class="math inline">\((0,0),(1,1),(2,0)\)</span>. 化为 Y 型 ( <span
+class="math inline">\(0 \le y \le 1\)</span> ) ：左边界 <span
+class="math inline">\(x = y\)</span>，右边界 <span
+class="math inline">\(x = 2-y\)</span>.</p>
+<p><span class="math display">\[\quad \int_0^1 dy \int_y^{2-y}
+f(x,y)\,dx.\]</span></p>
+</div>
+<hr />
+<h2 id="三极坐标系下的计算">三、极坐标系下的计算</h2>
+<h3 id="极坐标变换">3.1 极坐标变换</h3>
+<div class="note info simple"><p><strong>变换公式</strong></p>
+<p>令 <span class="math inline">\(x = r\cos\theta\)</span>，<span
+class="math inline">\(y = r\sin\theta\)</span>，Jacobi 行列式 <span
+class="math inline">\(J = r\)</span>，面积微元 :</p>
+<p><span class="math display">\[d\sigma = dx\,dy =
+r\,dr\,d\theta\]</span></p>
+<p>二重积分化为 : <span class="math display">\[\iint_D f(x,y)\,d\sigma =
+\int_\alpha^\beta d\theta \int_{r_1(\theta)}^{r_2(\theta)}
+f(r\cos\theta, r\sin\theta)\cdot r\,dr\]</span></p>
+<p><strong>适用场景</strong> : 区域为圆形、扇形、环形；被积函数含 <span
+class="math inline">\(x^2+y^2\)</span>、<span
+class="math inline">\(\dfrac{y}{x}\)</span> 等.</p>
+</div>
+<div class="note warning simple"><p><strong>极点位置与积分限的判断</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">极点位置</th>
+<th style="text-align: center;"><span class="math inline">\(r\)</span>
+的下限</th>
+<th style="text-align: center;">典型示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">极点在 <span
+class="math inline">\(D\)</span> <strong>内部</strong></td>
+<td style="text-align: center;"><span
+class="math inline">\(0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^2+y^2 \le
+R^2\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">极点在 <span
+class="math inline">\(D\)</span> <strong>边界上</strong></td>
+<td style="text-align: center;"><span
+class="math inline">\(0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(r \le
+2\cos\theta\)</span> ( 圆过原点 )</td>
+</tr>
+<tr>
+<td style="text-align: center;">极点在 <span
+class="math inline">\(D\)</span> <strong>外部</strong></td>
+<td style="text-align: center;"><span class="math inline">\(r_1(\theta)
+&gt; 0\)</span></td>
+<td style="text-align: center;">环形区域 <span class="math inline">\(1
+\le r \le 2\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="note success simple"><p><strong>示例 4 ( 极坐标——圆过原点 ) </strong></p>
+<p>计算 <span class="math inline">\(\displaystyle\iint_D
+\sqrt{x^2+y^2}\,d\sigma\)</span>，其中 <span class="math inline">\(D :
+x^2+y^2 \le 2x\)</span>.</p>
+<p><strong>解 :</strong> <span class="math inline">\((x-1)^2+y^2 \le
+1\)</span>，极坐标下 <span class="math inline">\(r \le
+2\cos\theta\)</span>，<span class="math inline">\(\theta \in
+\left[-\dfrac{\pi}{2}, \dfrac{\pi}{2}\right]\)</span>.</p>
+<p><span class="math display">\[
+\begin{aligned}
+I &amp;= \int_{-\pi/2}^{\pi/2} d\theta \int_0^{2\cos\theta} r \cdot
+r\,dr = \int_{-\pi/2}^{\pi/2} \frac{8\cos^3\theta}{3}\,d\theta \\
+&amp;= \frac{16}{3}\int_0^{\pi/2} \cos^3\theta\,d\theta = \frac{16}{3}
+\cdot \frac{2}{3} = \frac{32}{9}.
+\end{aligned}
+\]</span></p>
+</div>
+<div class="note success simple"><p><strong>示例 5 ( 极坐标——环形域 + 特殊函数 ) </strong></p>
+<p>计算 <span class="math inline">\(\displaystyle\iint_D
+\arctan\frac{y}{x}\,d\sigma\)</span>，其中 <span class="math inline">\(D
+: 1 \le x^2+y^2 \le 4,\ x \ge 0,\ y \ge 0\)</span>.</p>
+<p><strong>解 :</strong> 第一象限环形区域，<span class="math inline">\(1
+\le r \le 2\)</span>，<span class="math inline">\(0 \le \theta \le
+\dfrac{\pi}{2}\)</span>. 注意 <span
+class="math inline">\(\arctan\dfrac{y}{x} = \theta\)</span>.</p>
+<p><span class="math display">\[
+I = \int_0^{\pi/2} \theta\,d\theta \int_1^2 r\,dr = \frac{\pi^2}{8}
+\cdot \frac{3}{2} = \frac{3\pi^2}{16}.
+\]</span></p>
+</div>
+<h3 id="广义极坐标-椭圆区域">3.2 广义极坐标 ( 椭圆区域 )</h3>
+<div class="note info simple"><p><strong>广义极坐标变换</strong></p>
+<p>对椭圆区域 <span
+class="math inline">\(\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2} \le
+1\)</span>，令 <span class="math inline">\(x =
+ar\cos\theta\)</span>，<span class="math inline">\(y =
+br\sin\theta\)</span>，</p>
+<p>则 <span class="math inline">\(|J| = abr\)</span>，<span
+class="math inline">\(d\sigma = abr\,dr\,d\theta\)</span>，区域变为
+<span class="math inline">\(0 \le r \le 1\)</span>，<span
+class="math inline">\(0 \le \theta \le 2\pi\)</span>.</p>
+</div>
+<div class="note success simple"><p><strong>示例 6 ( 广义极坐标 ) </strong></p>
+<p>计算 <span class="math inline">\(\displaystyle\iint_D
+e^{\frac{x^2}{a^2}+\frac{y^2}{b^2}}\,d\sigma\)</span>，其中 <span
+class="math inline">\(D : \dfrac{x^2}{a^2}+\dfrac{y^2}{b^2} \le
+1\)</span>.</p>
+<p><strong>解 :</strong> 令 <span
+class="math inline">\(x=ar\cos\theta\)</span>，<span
+class="math inline">\(y=br\sin\theta\)</span>，被积函数 <span
+class="math inline">\(= e^{r^2}\)</span>，<span
+class="math inline">\(d\sigma = abr\,dr\,d\theta\)</span>.</p>
+<p><span class="math display">\[
+I = 2\pi ab \int_0^1 r e^{r^2}\,dr = 2\pi ab \cdot \frac{e-1}{2} = \pi
+ab(e-1).
+\]</span></p>
+</div>
+<hr />
+<h2 id="四对称性技巧">四、对称性技巧</h2>
+<h3 id="奇偶对称性">4.1 奇偶对称性</h3>
+<div class="note info simple"><p><strong>奇偶对称性定理</strong></p>
+<p>设积分区域 <span class="math inline">\(D\)</span> 关于 <span
+class="math inline">\(y\)</span> 轴对称，则：</p>
+<p><span class="math display">\[\iint_D f(x,y)\,d\sigma = \begin{cases}
+2\displaystyle\iint_{D_+} f\,d\sigma, &amp; f(-x,y) = f(x,y) \text{ (
+关于 } x \text{ 为偶函数 ) } \\[8pt] 0, &amp; f(-x,y) = -f(x,y) \text{ (
+关于 } x \text{ 为奇函数 ) } \end{cases}\]</span></p>
+<p>其中 <span class="math inline">\(D_+\)</span> 为 <span
+class="math inline">\(D\)</span> 在 <span class="math inline">\(x \ge
+0\)</span> 的部分. 类似地，若 <span class="math inline">\(D\)</span>
+关于 <span class="math inline">\(x\)</span> 轴对称，则分析 <span
+class="math inline">\(f(x,-y)\)</span> 的奇偶性.</p>
+</div>
+<div class="note success simple"><p><strong>示例 7 ( 奇偶对称性——圆域上的混合型被积函数 ) </strong></p>
+<p>计算 <span class="math inline">\(\displaystyle I =
+\displaystyle\iint_D (x^2 + xy + y^2)\,d\sigma\)</span>，其中 <span
+class="math inline">\(D : x^2+y^2 \le R^2\)</span>.</p>
+<p><strong>解 :</strong></p>
+<ul>
+<li><span class="math inline">\(xy\)</span> 关于 <span
+class="math inline">\(y\)</span> 轴为奇函数 <span
+class="math inline">\(\Rightarrow \displaystyle\iint_D xy\,d\sigma =
+0\)</span>.</li>
+<li>由轮换对称性 <span class="math inline">\(\displaystyle\iint_D
+x^2\,d\sigma = \displaystyle\iint_D y^2\,d\sigma\)</span>.</li>
+</ul>
+<p><span class="math display">\[\iint_D (x^2+y^2)\,d\sigma =
+\int_0^{2\pi}d\theta\int_0^R r^3\,dr = 2\pi \cdot \frac{R^4}{4} =
+\frac{\pi R^4}{2}\]</span></p>
+<p><span class="math display">\[I = \frac{1}{2}\cdot\frac{\pi R^4}{2} +
+0 + \frac{1}{2}\cdot\frac{\pi R^4}{2} = \frac{\pi R^4}{2}.\]</span></p>
+</div>
+<h3 id="轮换对称性-考研重要技巧">4.2 轮换对称性 ( 考研重要技巧 )</h3>
+<div class="note info simple"><p><strong>轮换对称性定理</strong></p>
+<p>若积分区域 <span class="math inline">\(D\)</span> 关于直线 <span
+class="math inline">\(y=x\)</span> 对称，则</p>
+<p><span class="math display">\[\iint_D f(x,y)\,d\sigma = \iint_D
+f(y,x)\,d\sigma\]</span></p>
+<p>由此 : <span class="math inline">\(\displaystyle\iint_D
+f(x,y)\,d\sigma = \frac{1}{2}\displaystyle\iint_D
+[f(x,y)+f(y,x)]\,d\sigma\)</span>.</p>
+<p><strong>常见区域</strong> : 圆形、正方形 ( <span
+class="math inline">\(|x| \le a,|y| \le a\)</span> ) 、顶点关于 <span
+class="math inline">\(y=x\)</span> 对称的三角形.</p>
+</div>
+<div class="note success simple"><p><strong>示例 8 ( 轮换对称性——化简分式被积函数 ) </strong></p>
+<p>计算 <span class="math inline">\(\displaystyle I =
+\displaystyle\iint_D \frac{x^2}{x^2+y^2}\,d\sigma\)</span>，其中 <span
+class="math inline">\(D : x^2+y^2 \le 1\)</span>.</p>
+<p><strong>解 :</strong> <span class="math inline">\(D\)</span> 关于
+<span class="math inline">\(y=x\)</span> 对称，由轮换对称性 <span
+class="math inline">\(\displaystyle\iint_D \dfrac{x^2}{x^2+y^2}\,d\sigma
+= \displaystyle\iint_D \dfrac{y^2}{x^2+y^2}\,d\sigma\)</span>.</p>
+<p><span class="math display">\[2I = \iint_D
+\frac{x^2+y^2}{x^2+y^2}\,d\sigma = \iint_D 1\,d\sigma = \pi \implies I =
+\frac{\pi}{2}.\]</span></p>
+</div>
+<div class="note success simple"><p><strong>示例 9 ( 奇偶 + 轮换联合——快速判零 ) </strong></p>
+<p>计算 <span class="math inline">\(\displaystyle I =
+\displaystyle\iint_D (x + y + x^2 y + xy^2)\,d\sigma\)</span>，其中
+<span class="math inline">\(D : x^2+y^2 \le 1\)</span>.</p>
+<p><strong>解 :</strong> <span class="math inline">\(D\)</span>
+关于两坐标轴及 <span class="math inline">\(y=x\)</span> 均对称.</p>
+<ul>
+<li><span class="math inline">\(\displaystyle\iint_D x\,d\sigma =
+0\)</span> ( <span class="math inline">\(D\)</span> 关于 <span
+class="math inline">\(y\)</span> 轴对称，<span
+class="math inline">\(x\)</span> 奇 )</li>
+<li><span class="math inline">\(\displaystyle\iint_D y\,d\sigma =
+0\)</span> ( <span class="math inline">\(D\)</span> 关于 <span
+class="math inline">\(x\)</span> 轴对称，<span
+class="math inline">\(y\)</span> 奇 )</li>
+<li><span class="math inline">\(\displaystyle\iint_D x^2 y\,d\sigma =
+0\)</span> ( 关于 <span class="math inline">\(x\)</span> 轴对称，<span
+class="math inline">\(x^2 y\)</span> 关于 <span
+class="math inline">\(y\)</span> 奇 )</li>
+<li><span class="math inline">\(\displaystyle\iint_D xy^2\,d\sigma =
+0\)</span> ( 关于 <span class="math inline">\(y\)</span> 轴对称，<span
+class="math inline">\(xy^2\)</span> 关于 <span
+class="math inline">\(x\)</span> 奇 )</li>
+</ul>
+<p><span class="math display">\[ \quad I = 0.\]</span></p>
+</div>
+<hr />
+<h2 id="五一般换元法">五、一般换元法</h2>
+<div class="note info simple"><p><strong>二重积分换元公式</strong></p>
+<p>设 <span class="math inline">\(x = x(u,v)\)</span>，<span
+class="math inline">\(y = y(u,v)\)</span> 将 <span
+class="math inline">\(D&#39;\)</span> 一一映射到 <span
+class="math inline">\(D\)</span>，Jacobi 行列式</p>
+<p><span class="math display">\[J(u,v) =
+\frac{\partial(x,y)}{\partial(u,v)} = \begin{vmatrix} x_u &amp; x_v \\
+y_u &amp; y_v \end{vmatrix} \ne 0\]</span></p>
+<p>则</p>
+<p><span class="math display">\[\iint_D f(x,y)\,dx\,dy = \iint_{D&#39;}
+f(x(u,v),y(u,v))\,|J(u,v)|\,du\,dv\]</span></p>
+<p><strong>换元动机</strong> :
+将斜边、椭圆、平行四边形等复杂区域变换为矩形或圆形.</p>
+</div>
+<div class="note success simple"><p><strong>示例 10 ( 线性换元——平行四边形区域 ) </strong></p>
+<p>计算 <span class="math inline">\(\displaystyle\iint_D
+(x+y)e^{x-y}\,d\sigma\)</span>，其中 <span
+class="math inline">\(D\)</span> 由 <span class="math inline">\(x+y=0,\
+x+y=1,\ x-y=0,\ x-y=1\)</span> 围成.</p>
+<p><strong>解 :</strong> 令 <span class="math inline">\(u =
+x+y\)</span>，<span class="math inline">\(v = x-y\)</span>，<span
+class="math inline">\(D&#39; : 0 \le u \le 1,\ 0 \le v \le
+1\)</span>.</p>
+<p><span class="math inline">\(x = \dfrac{u+v}{2}\)</span>，<span
+class="math inline">\(y = \dfrac{u-v}{2}\)</span>，<span
+class="math inline">\(|J| = \dfrac{1}{2}\)</span>.</p>
+<p><span class="math display">\[
+I = \int_0^1 du \int_0^1 u e^v \cdot \frac{1}{2}\,dv = \frac{1}{2} \cdot
+\frac{1}{2} \cdot (e-1) = \frac{e-1}{4}.
+\]</span></p>
+</div>
+<div class="note success simple"><p><strong>示例 11 ( 换元法——双曲型边界区域 ) </strong></p>
+<p>计算 <span class="math inline">\(\displaystyle I =
+\displaystyle\iint_D xy\,d\sigma\)</span>，其中 <span
+class="math inline">\(D\)</span> 由 <span class="math inline">\(xy=1,\
+xy=2,\ y=x,\ y=4x\)</span> 围成 ( <span
+class="math inline">\(x&gt;0,y&gt;0\)</span> ) .</p>
+<p><strong>解 :</strong> 令 <span class="math inline">\(u =
+xy\)</span>，<span class="math inline">\(v = \dfrac{y}{x}\)</span>，则
+<span class="math inline">\(D&#39; : 1 \le u \le 2,\ 1 \le v \le
+4\)</span>.</p>
+<p>由 <span class="math inline">\(x =
+\sqrt{\dfrac{u}{v}}\)</span>，<span class="math inline">\(y =
+\sqrt{uv}\)</span>：</p>
+<p><span class="math display">\[J = \frac{\partial(x,y)}{\partial(u,v)}
+= \begin{vmatrix} \frac{1}{2\sqrt{uv}} &amp; -\frac{\sqrt{u}}{2v^{3/2}}
+\\[4pt] \frac{\sqrt{v}}{2\sqrt{u}} &amp; \frac{\sqrt{u}}{2\sqrt{v}}
+\end{vmatrix} = \frac{1}{4v} + \frac{1}{4v} = \frac{1}{2v}\]</span></p>
+<p>被积函数 <span class="math inline">\(xy = u\)</span>：</p>
+<p><span class="math display">\[
+I = \int_1^2 du\int_1^4 u \cdot \frac{1}{2v}\,dv =
+\frac{1}{2}\cdot\frac{3}{2}\cdot\ln 4 = \frac{3\ln 2}{2}.
+\]</span></p>
+</div>
+<div class="note success simple"><p><strong>示例 12 ( 利用二重积分计算含参积分——Frullani 积分 )
+</strong></p>
+<p>计算 <span class="math inline">\(\displaystyle I = \int_0^1 \frac{x^a
+- x^b}{\ln x}\,dx\)</span>，其中 <span class="math inline">\(a &gt; b
+&gt; -1\)</span>.</p>
+<p><strong>解 :</strong> 注意 <span class="math inline">\(\dfrac{x^a -
+x^b}{\ln x} = \displaystyle\int_b^a x^t\,dt\)</span>.</p>
+<p><span class="math display">\[
+I = \int_0^1 \int_b^a x^t\,dt\,dx = \int_b^a \int_0^1 x^t\,dx\,dt =
+\int_b^a \frac{1}{t+1}\,dt = \ln\frac{a+1}{b+1}.
+\]</span></p>
+</div>
+<hr />
+<h2 id="六几何与物理应用">六、几何与物理应用</h2>
+<h3 id="曲面面积">6.1 曲面面积</h3>
+<div class="note info simple"><p><strong>曲面面积公式</strong></p>
+<p>设曲面 <span class="math inline">\(z = f(x,y)\)</span> 在区域 <span
+class="math inline">\(D_{xy}\)</span> 上有连续偏导数，则曲面面积</p>
+<p><span class="math display">\[S = \iint_{D_{xy}} \sqrt{1 + f_x^2 +
+f_y^2}\,d\sigma\]</span></p>
+</div>
+<div class="note success simple"><p><strong>示例 13 ( 球面被柱面截取的面积 ) </strong></p>
+<p>求球面 <span class="math inline">\(x^2+y^2+z^2=R^2\)</span> 被柱面
+<span class="math inline">\(x^2+y^2=Rx\)</span> ( <span
+class="math inline">\(R&gt;0\)</span> ) 截取的面积.</p>
+<p><strong>解 :</strong> 取上半球面 <span class="math inline">\(z =
+\sqrt{R^2-x^2-y^2}\)</span>，总面积 <span class="math inline">\(=
+2\times\)</span> 上半部分.</p>
+<p><span class="math display">\[\sqrt{1+z_x^2+z_y^2} =
+\frac{R}{\sqrt{R^2-x^2-y^2}}\]</span></p>
+<p>投影区域极坐标 : <span class="math inline">\(r \le
+R\cos\theta\)</span>，<span class="math inline">\(\theta \in
+\left[-\dfrac{\pi}{2}, \dfrac{\pi}{2}\right]\)</span>.</p>
+<p><span class="math display">\[
+\begin{aligned}
+S &amp;= 2\int_{-\pi/2}^{\pi/2} d\theta \int_0^{R\cos\theta}
+\frac{Rr}{\sqrt{R^2-r^2}}\,dr \\
+&amp;= 2R\int_{-\pi/2}^{\pi/2} \left(R - R|\sin\theta|\right)d\theta =
+2R^2(\pi - 2).
+\end{aligned}
+\]</span></p>
+</div>
+<h3 id="质心与转动惯量">6.2 质心与转动惯量</h3>
+<div class="note info simple"><p><strong>公式汇总</strong></p>
+<p>设平面薄板占区域 <span class="math inline">\(D\)</span>，密度为 <span
+class="math inline">\(\rho(x,y)\)</span>，则：</p>
+<ul>
+<li><strong>质量</strong> : <span class="math inline">\(M =
+\displaystyle\iint_D \rho\,d\sigma\)</span></li>
+<li><strong>质心</strong> : <span class="math inline">\(\bar{x} =
+\dfrac{1}{M}\displaystyle\iint_D x\rho\,d\sigma\)</span>，<span
+class="math inline">\(\bar{y} = \dfrac{1}{M}\displaystyle\iint_D
+y\rho\,d\sigma\)</span></li>
+<li><strong>对 <span class="math inline">\(x\)</span>
+轴转动惯量</strong> : <span class="math inline">\(I_x =
+\displaystyle\iint_D y^2\rho\,d\sigma\)</span></li>
+<li><strong>对 <span class="math inline">\(y\)</span>
+轴转动惯量</strong> : <span class="math inline">\(I_y =
+\displaystyle\iint_D x^2\rho\,d\sigma\)</span></li>
+<li><strong>对原点</strong> : <span class="math inline">\(I_O = I_x +
+I_y = \displaystyle\iint_D (x^2+y^2)\rho\,d\sigma\)</span></li>
+</ul>
+</div>
+<hr />
+<h2 id="七含参变量二重积分">七、含参变量二重积分</h2>
+<div class="note success simple"><p><strong>示例 14 ( 变限二重积分求导 ) </strong></p>
+<p>设 <span class="math inline">\(f(x)\)</span> 连续，<span
+class="math inline">\(F(t) = \displaystyle\iint_{x^2+y^2 \le t^2}
+f\!\left(\sqrt{x^2+y^2}\right)d\sigma\)</span> ( <span
+class="math inline">\(t&gt;0\)</span> ) ，求 <span
+class="math inline">\(F&#39;(t)\)</span>.</p>
+<p><strong>解 :</strong> 极坐标下 : <span class="math display">\[F(t) =
+2\pi\int_0^t r f(r)\,dr \implies F&#39;(t) = 2\pi t f(t).\]</span></p>
+</div>
+<hr />
+<h2 id="八综合难题选讲-selected-hard-problems">八、综合难题选讲 (
+Selected Hard Problems )</h2>
+<div class="note success simple"><p><strong>难题 1 ( 极坐标 + 奇偶对称 ) </strong></p>
+<p>计算 <span class="math inline">\(\displaystyle I =
+\displaystyle\iint_D \left(\frac{x^3 \sin y}{x^2+y^2} +
+\sqrt{x^2+y^2}\right)d\sigma\)</span>，其中 <span
+class="math inline">\(D : x^2+y^2 \le 4\)</span>.</p>
+<p><strong>解 :</strong> <span class="math inline">\(D\)</span> 关于
+<span class="math inline">\(y\)</span> 轴对称，<span
+class="math inline">\(\dfrac{x^3 \sin y}{x^2+y^2}\)</span> 关于 <span
+class="math inline">\(x\)</span> 为奇函数，故其积分为 <span
+class="math inline">\(0\)</span>.</p>
+<p>极坐标下 : <span class="math display">\[\iint_D
+\sqrt{x^2+y^2}\,d\sigma = \int_0^{2\pi}d\theta\int_0^2 r^2\,dr = 2\pi
+\cdot \frac{8}{3} = \frac{16\pi}{3}.\]</span></p>
+<p><span class="math display">\[ \quad I = \frac{16\pi}{3}.\]</span></p>
+</div>
+<div class="note success simple"><p><strong>难题 2 ( 含绝对值——分区域 ) </strong></p>
+<p>计算 <span class="math inline">\(\displaystyle I =
+\displaystyle\iint_D |x^2+y^2-1|\,d\sigma\)</span>，其中 <span
+class="math inline">\(D : x^2+y^2 \le 4\)</span>.</p>
+<p><strong>解 :</strong> 分为 <span class="math inline">\(D_1 : r \le
+1\)</span> ( 内圆 ) 和 <span class="math inline">\(D_2 : 1 \le r \le
+2\)</span> ( 环形 ) .</p>
+<p><span class="math display">\[I_1 = 2\pi\int_0^1 (1-r^2)r\,dr =
+2\pi\left[\frac{r^2}{2}-\frac{r^4}{4}\right]_0^1 =
+\frac{\pi}{2}\]</span></p>
+<p><span class="math display">\[I_2 = 2\pi\int_1^2 (r^2-1)r\,dr =
+2\pi\left[\frac{r^4}{4}-\frac{r^2}{2}\right]_1^2 = 2\pi\cdot\frac{9}{4}
+= \frac{9\pi}{2}\]</span></p>
+<p><span class="math display">\[ \quad I = 5\pi.\]</span></p>
+</div>
+<div class="note success simple"><p><strong>难题 3 ( 二重积分与 Gauss 积分 ) </strong></p>
+<p>计算 <span class="math inline">\(I = \displaystyle\int_0^{+\infty}
+e^{-x^2}\,dx\)</span>.</p>
+<p><strong>解 :</strong> <span class="math display">\[I^2 = \iint_{x\ge
+0,y\ge 0} e^{-(x^2+y^2)}\,d\sigma =
+\int_0^{\pi/2}d\theta\int_0^{+\infty} e^{-r^2} r\,dr =
+\frac{\pi}{2}\cdot\frac{1}{2} = \frac{\pi}{4}\]</span></p>
+<p><span class="math display">\[ \quad I =
+\frac{\sqrt{\pi}}{2}.\]</span></p>
+</div>
+<div class="note success simple"><p><strong>难题 4 ( 综合：广义极坐标 + 几何意义 ) </strong></p>
+<p>计算 <span class="math inline">\(\displaystyle I =
+\displaystyle\iint_D
+\sqrt{1-\frac{x^2}{4}-\frac{y^2}{9}}\,d\sigma\)</span>，其中 <span
+class="math inline">\(D : \dfrac{x^2}{4}+\dfrac{y^2}{9} \le
+1\)</span>.</p>
+<p><strong>解 :</strong> 令 <span class="math inline">\(x =
+2r\cos\theta\)</span>，<span class="math inline">\(y =
+3r\sin\theta\)</span>，<span class="math inline">\(|J| =
+6r\)</span>，被积函数 <span class="math inline">\(=
+\sqrt{1-r^2}\)</span>，<span class="math inline">\(D&#39; : 0 \le r \le
+1\)</span>，<span class="math inline">\(0 \le \theta \le
+2\pi\)</span>.</p>
+<p><span class="math display">\[I = 12\pi\int_0^1 r\sqrt{1-r^2}\,dr =
+12\pi \cdot \left[-\frac{1}{3}(1-r^2)^{3/2}\right]_0^1 =
+4\pi.\]</span></p>
+<p><strong>几何意义</strong> : 此积分表示以椭圆为底、以半椭球面 <span
+class="math inline">\(\dfrac{x^2}{4}+\dfrac{y^2}{9}+z^2=1\)</span> (
+<span class="math inline">\(z \ge 0\)</span> ) 为顶的曲顶柱体体积.</p>
+</div>
+<div class="note success simple"><p><strong>难题 5 ( 考研真题类型：二重积分极限 ) </strong></p>
+<p>求 <span class="math inline">\(\displaystyle\lim_{t \to 0^+}
+\frac{1}{t^4}\iint_{x^2+y^2 \le t^2} \left(x^2+y^2\right)
+e^{-(x^2+y^2)}\,d\sigma\)</span>.</p>
+<p><strong>解 :</strong> 极坐标下 : <span
+class="math display">\[\iint_{x^2+y^2 \le t^2} r^2 e^{-r^2}\,d\sigma =
+2\pi\int_0^t r^3 e^{-r^2}\,dr = F(t)\]</span></p>
+<p>令分子为 <span class="math inline">\(F(t)\)</span>，分母为 <span
+class="math inline">\(t^4\)</span>，两者均趋于 <span
+class="math inline">\(0\)</span>，用 L’Hopital 法则 :</p>
+<p><span class="math display">\[\lim_{t \to 0^+}\frac{F(t)}{t^4} =
+\lim_{t \to 0^+}\frac{F&#39;(t)}{4t^3} = \lim_{t \to 0^+}\frac{2\pi t^3
+e^{-t^2}}{4t^3} = \frac{2\pi}{4} = \frac{\pi}{2}.\]</span></p>
+</div>
+<div class="note success simple"><p><strong>难题 6 ( 二重积分不等式证明 ) </strong></p>
+<p>设 <span class="math inline">\(f(x,y)\)</span> 在 <span
+class="math inline">\(D:[0,1]\times[0,1]\)</span> 上有连续偏导数，且
+<span class="math inline">\(f(x,0)=0\)</span>. 证明 :</p>
+<p><span class="math display">\[\left|\iint_D f(x,y)\,d\sigma\right| \le
+\frac{1}{2}\iint_D \left|\frac{\partial f}{\partial
+y}\right|d\sigma.\]</span></p>
+<p><strong>证明 :</strong> 由 <span
+class="math inline">\(f(x,0)=0\)</span> 及牛顿-莱布尼茨公式 : <span
+class="math inline">\(f(x,y) = \displaystyle\int_0^y \frac{\partial
+f}{\partial t}(x,t)\,dt\)</span>.</p>
+<p>故 <span class="math inline">\(|f(x,y)| \le \displaystyle\int_0^y
+\left|\frac{\partial f}{\partial t}\right|dt\)</span>.</p>
+<p><span class="math display">\[\left|\iint_D f\,d\sigma\right| \le
+\int_0^1 dx \int_0^1 \int_0^y \left|\frac{\partial f}{\partial
+t}(x,t)\right|dt\,dy\]</span></p>
+<p>交换 <span class="math inline">\(t,y\)</span> 积分次序 ( <span
+class="math inline">\(0 \le t \le y \le 1\)</span> 换为 <span
+class="math inline">\(0 \le t \le 1,\ t \le y \le 1\)</span> ) :</p>
+<p><span class="math display">\[= \int_0^1 dx \int_0^1
+(1-t)\left|\frac{\partial f}{\partial y}\right|dt \le
+\frac{1}{2}\iint_D\left|\frac{\partial f}{\partial y}\right|d\sigma.
+\qquad\]</span></p>
+<p>( 最后一步因 <span class="math inline">\(\max_{t\in[0,1]}(1-t) =
+1\)</span>，但更精确地 <span
+class="math inline">\(\displaystyle\int_0^1(1-t)h(t)dt \le
+\frac{1}{2}\int_0^1 h(t)dt\)</span> 对非负 <span
+class="math inline">\(h\)</span> 不直接成立，需利用 <span
+class="math inline">\(1-t \le 1\)</span> 再乘系数 <span
+class="math inline">\(\frac{1}{2}\)</span> 的均值论证，详见分析教材.
+)</p>
+</div>
+<div class="note success simple"><p><strong>难题 7 ( 递推关系 ) </strong></p>
+<p>设 <span class="math inline">\(I_n = \displaystyle\iint_{x^2+y^2 \le
+1} (x^2+y^2)^n\,d\sigma\)</span>，求 <span
+class="math inline">\(I_n\)</span>.</p>
+<p><strong>解 :</strong> 极坐标下 : <span class="math display">\[I_n =
+\int_0^{2\pi}d\theta\int_0^1 r^{2n}\cdot r\,dr = 2\pi \cdot
+\frac{1}{2n+2} = \frac{\pi}{n+1}.\]</span></p>
+<p><strong>验证</strong> : <span class="math inline">\(I_0 =
+\pi\)</span> ( 单位圆面积 ) <span
+class="math inline">\(\checkmark\)</span>；<span
+class="math inline">\(I_1 = \dfrac{\pi}{2}\)</span> ( <span
+class="math inline">\(R=1\)</span> 时 <span class="math inline">\(\iint
+(x^2+y^2)\,d\sigma = \dfrac{\pi R^4}{2} = \dfrac{\pi}{2}\)</span> )
+<span class="math inline">\(\checkmark\)</span>.</p>
+</div>
+<div class="note success simple"><p><strong>难题 8 ( Chebyshev 积分不等式 ) </strong></p>
+<p>设 <span class="math inline">\(f(x),g(x)\)</span> 在 <span
+class="math inline">\([0,1]\)</span> 上连续且均单调递增，证明 :</p>
+<p><span class="math display">\[\int_0^1 f(x)\,dx \cdot \int_0^1
+g(x)\,dx \le \int_0^1 f(x)g(x)\,dx.\]</span></p>
+<p><strong>证明 :</strong> 由 <span class="math inline">\(f,g\)</span>
+均单调递增，对任意 <span class="math inline">\(x,y \in
+[0,1]\)</span>，<span class="math inline">\((f(x)-f(y))(g(x)-g(y)) \ge
+0\)</span>.</p>
+<p>在 <span class="math inline">\([0,1]^2\)</span> 上对 <span
+class="math inline">\(x,y\)</span> 二重积分 : <span
+class="math display">\[\iint_{[0,1]^2}(f(x)-f(y))(g(x)-g(y))\,dx\,dy \ge
+0\]</span></p>
+<p>展开 : <span class="math display">\[\iint f(x)g(x)\,d\sigma - \iint
+f(x)g(y)\,d\sigma - \iint f(y)g(x)\,d\sigma + \iint f(y)g(y)\,d\sigma
+\ge 0\]</span></p>
+<p>注意 <span class="math inline">\(\iint_{[0,1]^2} f(x)g(y)\,dx\,dy =
+\int_0^1 f\,dx \cdot \int_0^1 g\,dy\)</span>，各项整理后得</p>
+<p><span class="math display">\[2\int_0^1 fg\,dx \ge 2\int_0^1 f\,dx
+\cdot \int_0^1 g\,dx. \qquad\]</span></p>
+</div>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">sparkle520</div><div class="post-copyright__author_desc">我一直都在寻找着什么</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="http://example.com/2026/03/08/%E9%AB%98%E6%95%B0-%E4%BA%8C%E9%87%8D%E7%A7%AF%E5%88%86/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('http://example.com/2026/03/08/%E9%AB%98%E6%95%B0-%E4%BA%8C%E9%87%8D%E7%A7%AF%E5%88%86/')">二重积分</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="http://example.com/2026/03/08/%E9%AB%98%E6%95%B0-%E4%BA%8C%E9%87%8D%E7%A7%AF%E5%88%86/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=二重积分&amp;url=http://example.com/2026/03/08/%E9%AB%98%E6%95%B0-%E4%BA%8C%E9%87%8D%E7%A7%AF%E5%88%86/&amp;pic=https://pic1.imgdb.cn/item/69a6e391f98389e4a9b7cbc5.png" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">SPARKLE</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>高等数学<span class="tagsPageCount">14</span></a><a class="post-meta__box__tags" href="/tags/%E4%BA%8C%E9%87%8D%E7%A7%AF%E5%88%86/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>二重积分<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://pic1.imgdb.cn/item/67a092fbd0e0a243d4f9b7e9.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/03/07/%E7%8E%B0%E4%BB%A35/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69a5a8f4dcdb109d1d43d56b.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">线性代数 第五章 特征值与特征向量</div></div></a></div><div class="next-post pull-right"><a href="/2026/03/09/408-%E8%AE%A1%E7%BD%911/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69a6e54af98389e4a9b7cc06.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">408-计算机网络-1-计算机网络概述与体系结构</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2024/08/26/%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80%E5%85%AC%E5%BC%8F/" title="泰勒展开公式"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/66c7b5dfd9c307b7e996821b.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-08-26</div><div class="title">泰勒展开公式</div></div></a></div><div><a href="/2025/03/01/%E7%82%B9%E7%81%AB%E5%85%AC%E5%BC%8F%E8%AF%81%E6%98%8E/" title="证明 华理士公式 ( 点火公式 )"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/67c2d937d0e0a243d4091a01.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-03-01</div><div class="title">证明 华理士公式 ( 点火公式 )</div></div></a></div><div><a href="/2026/02/26/%E9%AB%98%E6%95%B0-%E5%8E%9F%E5%87%BD%E6%95%B0%E5%AD%98%E5%9C%A8%E5%AE%9A%E7%90%86/" title="高数-原函数存在定理"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/699f178dfd73d871e63085a4.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-02-26</div><div class="title">高数-原函数存在定理</div></div></a></div><div><a href="/2026/02/27/%E9%AB%98%E6%95%B0-%E5%8F%8D%E5%B8%B8%E7%A7%AF%E5%88%86/" title="高数-反常积分"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69a1997bb830e56634a8b88e.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-02-27</div><div class="title">高数-反常积分</div></div></a></div><div><a href="/2026/02/28/%E9%AB%98%E6%95%B0-%E5%AE%9A%E7%A7%AF%E5%88%86%E5%AE%9A%E4%B9%89%E6%B1%82%E8%A7%A3%E6%9E%81%E9%99%90/" title="高数-定积分定义求解极限"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69a1dc87b830e56634aa0b51.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-02-28</div><div class="title">高数-定积分定义求解极限</div></div></a></div><div><a href="/2026/02/19/%E9%AB%98%E6%95%B0-%E9%AB%98%E9%98%B6%E5%AF%BC%E6%95%B0%E6%B1%82%E8%A7%A3/" title="高等数学-难点-高阶导数求解"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/6996f0a1d2628f800ee0f993.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-02-19</div><div class="title">高等数学-难点-高阶导数求解</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/671cfe2fd29ded1a8c5ffb0b.png" alt="status"/></div></div><div class="author-info__description">不管你在<strong style="color:white">这个世界</strong>的哪个地方，我一定<strong style="color:white">会</strong>，再次去<strong style="color:white">见</strong>你的!</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">sparkle520</h1><div class="author-info__desc">我一直都在寻找着什么</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/sparkle520" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/34882250" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">Hello World! 欢迎来到我的博客~</div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://pic.imgdb.cn/item/66c487f1d9c307b7e9ba5c7a.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://pic.imgdb.cn/item/66c487ebd9c307b7e9ba5725.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E9%87%8D%E7%A7%AF%E5%88%86"><span class="toc-number">1.</span> <span class="toc-text">二重积分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E9%80%9F%E6%9F%A5-cheat-sheet"><span class="toc-number">1.0.1.</span> <span class="toc-text">总结与速查 ( Cheat Sheet )</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E6%80%A7%E8%B4%A8"><span class="toc-number">1.1.</span> <span class="toc-text">一、基本概念与性质</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E9%87%8D%E7%A7%AF%E5%88%86%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1 二重积分的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%A7%E8%B4%A8"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2 基本性质</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E7%9B%B4%E8%A7%92%E5%9D%90%E6%A0%87%E7%B3%BB%E4%B8%8B%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="toc-number">1.2.</span> <span class="toc-text">二、直角坐标系下的计算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%96%E4%B8%BA%E7%B4%AF%E6%AC%A1%E7%A7%AF%E5%88%86"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 化为累次积分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E6%8D%A2%E7%A7%AF%E5%88%86%E6%AC%A1%E5%BA%8F-%E9%87%8D%E7%82%B9%E9%9A%BE%E7%82%B9"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 交换积分次序 ( 重点难点 )</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E6%9E%81%E5%9D%90%E6%A0%87%E7%B3%BB%E4%B8%8B%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="toc-number">1.3.</span> <span class="toc-text">三、极坐标系下的计算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1 极坐标变换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%BF%E4%B9%89%E6%9E%81%E5%9D%90%E6%A0%87-%E6%A4%AD%E5%9C%86%E5%8C%BA%E5%9F%9F"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.2 广义极坐标 ( 椭圆区域 )</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E5%AF%B9%E7%A7%B0%E6%80%A7%E6%8A%80%E5%B7%A7"><span class="toc-number">1.4.</span> <span class="toc-text">四、对称性技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A5%87%E5%81%B6%E5%AF%B9%E7%A7%B0%E6%80%A7"><span class="toc-number">1.4.1.</span> <span class="toc-text">4.1 奇偶对称性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AE%E6%8D%A2%E5%AF%B9%E7%A7%B0%E6%80%A7-%E8%80%83%E7%A0%94%E9%87%8D%E8%A6%81%E6%8A%80%E5%B7%A7"><span class="toc-number">1.4.2.</span> <span class="toc-text">4.2 轮换对称性 ( 考研重要技巧 )</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E4%B8%80%E8%88%AC%E6%8D%A2%E5%85%83%E6%B3%95"><span class="toc-number">1.5.</span> <span class="toc-text">五、一般换元法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E5%87%A0%E4%BD%95%E4%B8%8E%E7%89%A9%E7%90%86%E5%BA%94%E7%94%A8"><span class="toc-number">1.6.</span> <span class="toc-text">六、几何与物理应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B2%E9%9D%A2%E9%9D%A2%E7%A7%AF"><span class="toc-number">1.6.1.</span> <span class="toc-text">6.1 曲面面积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%A8%E5%BF%83%E4%B8%8E%E8%BD%AC%E5%8A%A8%E6%83%AF%E9%87%8F"><span class="toc-number">1.6.2.</span> <span class="toc-text">6.2 质心与转动惯量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E5%90%AB%E5%8F%82%E5%8F%98%E9%87%8F%E4%BA%8C%E9%87%8D%E7%A7%AF%E5%88%86"><span class="toc-number">1.7.</span> <span class="toc-text">七、含参变量二重积分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E7%BB%BC%E5%90%88%E9%9A%BE%E9%A2%98%E9%80%89%E8%AE%B2-selected-hard-problems"><span class="toc-number">1.8.</span> <span class="toc-text">八、综合难题选讲 (
+Selected Hard Problems )</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/03/12/%E6%A6%82%E7%BB%9F1/" title="概统 第一章 随机事件及其概率"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/67a092fbd0e0a243d4f9b7e9.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="概统 第一章 随机事件及其概率"/></a><div class="content"><a class="title" href="/2026/03/12/%E6%A6%82%E7%BB%9F1/" title="概统 第一章 随机事件及其概率">概统 第一章 随机事件及其概率</a><time datetime="2026-03-12T12:00:00.000Z" title="发表于 2026-03-12 20:00:00">2026-03-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/11/408-%E8%AE%A1%E7%BD%914/" title="408-计算机网络-4-网络层"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69a6f223f98389e4a9b7cf25.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-计算机网络-4-网络层"/></a><div class="content"><a class="title" href="/2026/03/11/408-%E8%AE%A1%E7%BD%914/" title="408-计算机网络-4-网络层">408-计算机网络-4-网络层</a><time datetime="2026-03-11T15:00:00.000Z" title="发表于 2026-03-11 23:00:00">2026-03-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/11/408-%E8%AE%A1%E7%BD%913/" title="408-计算机网络-3-数据链路层"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69a6ec8cf98389e4a9b7ce2e.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-计算机网络-3-数据链路层"/></a><div class="content"><a class="title" href="/2026/03/11/408-%E8%AE%A1%E7%BD%913/" title="408-计算机网络-3-数据链路层">408-计算机网络-3-数据链路层</a><time datetime="2026-03-11T14:00:00.000Z" title="发表于 2026-03-11 22:00:00">2026-03-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/10/408-%E8%AE%A1%E7%BD%912/" title="408-计算机网络-2-物理层"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69a6eadbf98389e4a9b7cdf6.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-计算机网络-2-物理层"/></a><div class="content"><a class="title" href="/2026/03/10/408-%E8%AE%A1%E7%BD%912/" title="408-计算机网络-2-物理层">408-计算机网络-2-物理层</a><time datetime="2026-03-10T13:00:00.000Z" title="发表于 2026-03-10 21:00:00">2026-03-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/09/408-%E8%AE%A1%E7%BD%911/" title="408-计算机网络-1-计算机网络概述与体系结构"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69a6e54af98389e4a9b7cc06.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-计算机网络-1-计算机网络概述与体系结构"/></a><div class="content"><a class="title" href="/2026/03/09/408-%E8%AE%A1%E7%BD%911/" title="408-计算机网络-1-计算机网络概述与体系结构">408-计算机网络-1-计算机网络概述与体系结构</a><time datetime="2026-03-09T12:00:27.000Z" title="发表于 2026-03-09 20:00:27">2026-03-09</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  if (true) { 
+    window.typed = new Typed("#footer-type-tips", {
+      strings: ["只要记住你的名字&#44; 不管你在世界的哪个地方&#44; 我一定&#44; 会去见你 !"],
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50
+    })
+  } else {
+    document.getElementById("footer-type-tips").innerHTML = '只要记住你的名字&#44; 不管你在世界的哪个地方&#44; 我一定&#44; 会去见你 !'
+  }
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.cbd.int/typed.js@2.1.0/dist/typed.umd.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/sparkle520" title="sparkle">sparkle</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">91</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">58</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">7</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/sparkle520?tab=repositories" title="github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="github"/><span class="back-menu-item-text">github</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/408/" style="font-size: 0.88rem;">408<sup>14</sup></a><a href="/tags/AOP/" style="font-size: 0.88rem;">AOP<sup>1</sup></a><a href="/tags/Deep-Learning/" style="font-size: 0.88rem;">Deep Learning<sup>1</sup></a><a href="/tags/IoC/" style="font-size: 0.88rem;">IoC<sup>1</sup></a><a href="/tags/JSR303/" style="font-size: 0.88rem;">JSR303<sup>1</sup></a><a href="/tags/Matplotlib/" style="font-size: 0.88rem;">Matplotlib<sup>3</sup></a><a href="/tags/c/" style="font-size: 0.88rem;">c#<sup>2</sup></a><a href="/tags/java/" style="font-size: 0.88rem;">java<sup>4</sup></a><a href="/tags/python/" style="font-size: 0.88rem;">python<sup>5</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 0.88rem;">事务<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E3%80%82/" style="font-size: 0.88rem;">你的名字。<sup>3</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">你的名字同名小说<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%A4%96%E4%BC%A0%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">你的名字外传小说<sup>1</sup></a><a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size: 0.88rem;">写作<sup>4</sup></a><a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 0.88rem;">包管理<sup>1</sup></a><a href="/tags/%E5%8D%B7%E7%A7%AF%E5%85%AC%E5%BC%8F/" style="font-size: 0.88rem;">卷积公式<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90/" style="font-size: 0.88rem;">天气之子<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">天气之子同名小说<sup>1</sup></a><a href="/tags/%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">小说<sup>3</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 0.88rem;">操作系统<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" style="font-size: 0.88rem;">数据校验<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" style="font-size: 0.88rem;">数据链路层<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 0.88rem;">概率论<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 0.88rem;">概率论与数理统计<sup>7</sup></a><a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 0.88rem;">汇编<sup>9</sup></a><a href="/tags/%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80/" style="font-size: 0.88rem;">泰勒展开<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/" style="font-size: 0.88rem;">物理层<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%80%BC/" style="font-size: 0.88rem;">特征值<sup>2</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F/" style="font-size: 0.88rem;">特征向量<sup>2</sup></a><a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 0.88rem;">线性代数<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" style="font-size: 0.88rem;">网络体系结构<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" style="font-size: 0.88rem;">网络层<sup>2</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 0.88rem;">英语<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95/" style="font-size: 0.88rem;">英语语法<sup>16</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 0.88rem;">计算机组成原理<sup>5</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 0.88rem;">计算机网络<sup>5</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 0.88rem;">语法<sup>1</sup></a><a href="/tags/%E9%95%BF%E9%9A%BE%E5%8F%A5/" style="font-size: 0.88rem;">长难句<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/" style="font-size: 0.88rem;">高等代数<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" style="font-size: 0.88rem;">高等数学<sup>14</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script async src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.cbd.int/mathjax@3.2.2/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.cbd.int/mermaid@10.9.1/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  anzhiyu.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://sparkle521.xyz',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://cdn.cbd.int/twikoo@1.6.25/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://sparkle521.xyz',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"><script async src="/js/anzhiyu/comment_barrage.js"></script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://sparkle521.xyz',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.cbd.int/twikoo@1.6.25/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script async data-pjax src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.1/bubble/bubble.js"></script><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><div><canvas id="snow" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999;pointer-events:none"></canvas></div><script>const notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));</script><script async type="text/javascript" src="https://cdn.jsdelivr.net/gh/Candinya/Kratos-Rebirth@latest/source/js/snow.min.js"></script><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

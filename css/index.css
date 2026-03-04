@@ -23315,9 +23315,7 @@ html.hide-aside .layout > div:first-child {
 .mermaid-wrap svg[id^="mermaid-"] rect:not(.actor):not(.note):not(.labelBox):not([class*="activation"]):not(.task):not(.section) {
   rx: 12px !important;
   ry: 12px !important;
-  stroke: #A5A5FF !important;     /* 比浅紫稍深一点的边框 */
   stroke-width: 2px !important;
-  stroke-dasharray: 6, 4 !important; /* 虚线边框 */
   fill-opacity: 0.6 !important;   /* 降低透明度，让背景色更清爽 */
   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.03)); /* 极淡阴影 */
 }
