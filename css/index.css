@@ -19334,43 +19334,54 @@ div.videos[col='4'] iframe {
   font-size: larger;
 }
 .note.default.simple {
-  border-color: #86909c !important;
+  border: 1px solid rgba(134,144,156,0.2) !important;
   background-color: #fdfdfd !important;
   color: var(--anzhiyu-fontcolor);
-  -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.03) !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.03) !important;
-  -webkit-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  -moz-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  -o-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  -ms-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border-radius: 8px !important;
+  -webkit-box-shadow: 0 8px 16px -4px rgba(0,0,0,0.05) !important;
+  box-shadow: 0 8px 16px -4px rgba(0,0,0,0.05) !important;
+  -webkit-transition: all 0.3s ease !important;
+  -moz-transition: all 0.3s ease !important;
+  -o-transition: all 0.3s ease !important;
+  -ms-transition: all 0.3s ease !important;
+  transition: all 0.3s ease !important;
 }
 .note.default.simple::after {
   color: #86909c !important;
-  opacity: 0.75;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
-  filter: alpha(opacity=75);
+  opacity: 0.1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+  filter: alpha(opacity=10);
   line-height: 1;
+  font-size: 80px;
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  -webkit-transform: rotate(15deg);
+  -moz-transform: rotate(15deg);
+  -o-transform: rotate(15deg);
+  -ms-transform: rotate(15deg);
+  transform: rotate(15deg);
+  pointer-events: none;
   content: '\2726';
 }
 .note.default.simple strong {
   color: #86909c !important;
 }
-.note.default.simple em:hover {
+.note.default.simple em {
   color: #86909c !important;
-  text-decoration: underline wavy #86909c !important;
 }
 .note.default.simple code {
   color: #86909c !important;
-  background: rgba(134,144,156,0.2) !important;
-  border: 1px solid #86909c !important;
+  background: rgba(134,144,156,0.1) !important;
+  border: none !important;
+  border-radius: 4px;
 }
 .note.default.simple table {
-  border: 1px solid #86909c !important;
+  border: 1px solid rgba(134,144,156,0.2) !important;
 }
 .note.default.simple table thead th {
   color: #86909c !important;
-  background: rgba(134,144,156,0.2) !important;
+  background: rgba(134,144,156,0.1) !important;
 }
 .note.default.simple ul li::marker,
 .note.default.simple ol li::marker {
@@ -19378,19 +19389,21 @@ div.videos[col='4'] iframe {
 }
 .note.default.simple ul li::before,
 .note.default.simple ol li::before {
-  border-left: 0.5px solid #86909c !important;
+  border-color: #86909c !important;
 }
 .note.default.simple > p:first-of-type > strong:first-of-type {
   background: #86909c !important;
   color: #fff !important;
-  position: absolute;
-  top: -13px !important;
-  left: 15px !important;
-  padding: 6px 14px !important;
-  border-radius: 4px !important;
+  top: -14px !important;
+  left: 20px !important;
+  padding: 4px 16px !important;
+  border-radius: 20px !important;
+  -webkit-box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+  font-weight: 700 !important;
+  letter-spacing: 1px !important;
+  font-size: 13px !important;
   line-height: 24px !important;
-  font-size: 14px !important;
-  font-weight: 600 !important;
   white-space: nowrap !important;
   z-index: 9 !important;
   -webkit-transform: none !important;
@@ -19398,8 +19411,6 @@ div.videos[col='4'] iframe {
   -o-transform: none !important;
   -ms-transform: none !important;
   transform: none !important;
-  -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.12) !important;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.12) !important;
   -webkit-font-smoothing: antialiased !important;
   -moz-osx-font-smoothing: grayscale !important;
 }
@@ -19434,43 +19445,54 @@ div.videos[col='4'] iframe {
   color: #4e5969;
 }
 .note.primary.simple {
-  border-color: #8b5cf6 !important;
+  border: 1px solid rgba(139,92,246,0.2) !important;
   background-color: #fcfaff !important;
   color: var(--anzhiyu-fontcolor);
-  -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.03) !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.03) !important;
-  -webkit-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  -moz-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  -o-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  -ms-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border-radius: 8px !important;
+  -webkit-box-shadow: 0 8px 16px -4px rgba(0,0,0,0.05) !important;
+  box-shadow: 0 8px 16px -4px rgba(0,0,0,0.05) !important;
+  -webkit-transition: all 0.3s ease !important;
+  -moz-transition: all 0.3s ease !important;
+  -o-transition: all 0.3s ease !important;
+  -ms-transition: all 0.3s ease !important;
+  transition: all 0.3s ease !important;
 }
 .note.primary.simple::after {
   color: #8b5cf6 !important;
-  opacity: 0.75;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
-  filter: alpha(opacity=75);
+  opacity: 0.1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+  filter: alpha(opacity=10);
   line-height: 1;
+  font-size: 80px;
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  -webkit-transform: rotate(15deg);
+  -moz-transform: rotate(15deg);
+  -o-transform: rotate(15deg);
+  -ms-transform: rotate(15deg);
+  transform: rotate(15deg);
+  pointer-events: none;
   content: '\2605';
 }
 .note.primary.simple strong {
   color: #8b5cf6 !important;
 }
-.note.primary.simple em:hover {
+.note.primary.simple em {
   color: #8b5cf6 !important;
-  text-decoration: underline wavy #8b5cf6 !important;
 }
 .note.primary.simple code {
   color: #8b5cf6 !important;
-  background: rgba(139,92,246,0.2) !important;
-  border: 1px solid #8b5cf6 !important;
+  background: rgba(139,92,246,0.1) !important;
+  border: none !important;
+  border-radius: 4px;
 }
 .note.primary.simple table {
-  border: 1px solid #8b5cf6 !important;
+  border: 1px solid rgba(139,92,246,0.2) !important;
 }
 .note.primary.simple table thead th {
   color: #8b5cf6 !important;
-  background: rgba(139,92,246,0.2) !important;
+  background: rgba(139,92,246,0.1) !important;
 }
 .note.primary.simple ul li::marker,
 .note.primary.simple ol li::marker {
@@ -19478,19 +19500,21 @@ div.videos[col='4'] iframe {
 }
 .note.primary.simple ul li::before,
 .note.primary.simple ol li::before {
-  border-left: 0.5px solid #8b5cf6 !important;
+  border-color: #8b5cf6 !important;
 }
 .note.primary.simple > p:first-of-type > strong:first-of-type {
   background: #8b5cf6 !important;
   color: #fff !important;
-  position: absolute;
-  top: -13px !important;
-  left: 15px !important;
-  padding: 6px 14px !important;
-  border-radius: 4px !important;
+  top: -14px !important;
+  left: 20px !important;
+  padding: 4px 16px !important;
+  border-radius: 20px !important;
+  -webkit-box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+  font-weight: 700 !important;
+  letter-spacing: 1px !important;
+  font-size: 13px !important;
   line-height: 24px !important;
-  font-size: 14px !important;
-  font-weight: 600 !important;
   white-space: nowrap !important;
   z-index: 9 !important;
   -webkit-transform: none !important;
@@ -19498,8 +19522,6 @@ div.videos[col='4'] iframe {
   -o-transform: none !important;
   -ms-transform: none !important;
   transform: none !important;
-  -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.12) !important;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.12) !important;
   -webkit-font-smoothing: antialiased !important;
   -moz-osx-font-smoothing: grayscale !important;
 }
@@ -19534,43 +19556,54 @@ div.videos[col='4'] iframe {
   color: #6d28d9;
 }
 .note.info.simple {
-  border-color: #2563eb !important;
+  border: 1px solid rgba(37,99,235,0.2) !important;
   background-color: #f6fafe !important;
   color: var(--anzhiyu-fontcolor);
-  -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.03) !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.03) !important;
-  -webkit-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  -moz-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  -o-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  -ms-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border-radius: 8px !important;
+  -webkit-box-shadow: 0 8px 16px -4px rgba(0,0,0,0.05) !important;
+  box-shadow: 0 8px 16px -4px rgba(0,0,0,0.05) !important;
+  -webkit-transition: all 0.3s ease !important;
+  -moz-transition: all 0.3s ease !important;
+  -o-transition: all 0.3s ease !important;
+  -ms-transition: all 0.3s ease !important;
+  transition: all 0.3s ease !important;
 }
 .note.info.simple::after {
   color: #2563eb !important;
-  opacity: 0.75;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
-  filter: alpha(opacity=75);
+  opacity: 0.1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+  filter: alpha(opacity=10);
   line-height: 1;
+  font-size: 80px;
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  -webkit-transform: rotate(15deg);
+  -moz-transform: rotate(15deg);
+  -o-transform: rotate(15deg);
+  -ms-transform: rotate(15deg);
+  transform: rotate(15deg);
+  pointer-events: none;
   content: '\2660';
 }
 .note.info.simple strong {
   color: #2563eb !important;
 }
-.note.info.simple em:hover {
+.note.info.simple em {
   color: #2563eb !important;
-  text-decoration: underline wavy #2563eb !important;
 }
 .note.info.simple code {
   color: #2563eb !important;
-  background: rgba(37,99,235,0.2) !important;
-  border: 1px solid #2563eb !important;
+  background: rgba(37,99,235,0.1) !important;
+  border: none !important;
+  border-radius: 4px;
 }
 .note.info.simple table {
-  border: 1px solid #2563eb !important;
+  border: 1px solid rgba(37,99,235,0.2) !important;
 }
 .note.info.simple table thead th {
   color: #2563eb !important;
-  background: rgba(37,99,235,0.2) !important;
+  background: rgba(37,99,235,0.1) !important;
 }
 .note.info.simple ul li::marker,
 .note.info.simple ol li::marker {
@@ -19578,19 +19611,21 @@ div.videos[col='4'] iframe {
 }
 .note.info.simple ul li::before,
 .note.info.simple ol li::before {
-  border-left: 0.5px solid #2563eb !important;
+  border-color: #2563eb !important;
 }
 .note.info.simple > p:first-of-type > strong:first-of-type {
   background: #2563eb !important;
   color: #fff !important;
-  position: absolute;
-  top: -13px !important;
-  left: 15px !important;
-  padding: 6px 14px !important;
-  border-radius: 4px !important;
+  top: -14px !important;
+  left: 20px !important;
+  padding: 4px 16px !important;
+  border-radius: 20px !important;
+  -webkit-box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+  font-weight: 700 !important;
+  letter-spacing: 1px !important;
+  font-size: 13px !important;
   line-height: 24px !important;
-  font-size: 14px !important;
-  font-weight: 600 !important;
   white-space: nowrap !important;
   z-index: 9 !important;
   -webkit-transform: none !important;
@@ -19598,8 +19633,6 @@ div.videos[col='4'] iframe {
   -o-transform: none !important;
   -ms-transform: none !important;
   transform: none !important;
-  -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.12) !important;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.12) !important;
   -webkit-font-smoothing: antialiased !important;
   -moz-osx-font-smoothing: grayscale !important;
 }
@@ -19634,43 +19667,54 @@ div.videos[col='4'] iframe {
   color: #1d4ed8;
 }
 .note.success.simple {
-  border-color: #16a34a !important;
+  border: 1px solid rgba(22,163,74,0.2) !important;
   background-color: #f4fdf9 !important;
   color: var(--anzhiyu-fontcolor);
-  -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.03) !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.03) !important;
-  -webkit-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  -moz-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  -o-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  -ms-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border-radius: 8px !important;
+  -webkit-box-shadow: 0 8px 16px -4px rgba(0,0,0,0.05) !important;
+  box-shadow: 0 8px 16px -4px rgba(0,0,0,0.05) !important;
+  -webkit-transition: all 0.3s ease !important;
+  -moz-transition: all 0.3s ease !important;
+  -o-transition: all 0.3s ease !important;
+  -ms-transition: all 0.3s ease !important;
+  transition: all 0.3s ease !important;
 }
 .note.success.simple::after {
   color: #16a34a !important;
-  opacity: 0.75;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
-  filter: alpha(opacity=75);
+  opacity: 0.1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+  filter: alpha(opacity=10);
   line-height: 1;
+  font-size: 80px;
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  -webkit-transform: rotate(15deg);
+  -moz-transform: rotate(15deg);
+  -o-transform: rotate(15deg);
+  -ms-transform: rotate(15deg);
+  transform: rotate(15deg);
+  pointer-events: none;
   content: '\2663';
 }
 .note.success.simple strong {
   color: #16a34a !important;
 }
-.note.success.simple em:hover {
+.note.success.simple em {
   color: #16a34a !important;
-  text-decoration: underline wavy #16a34a !important;
 }
 .note.success.simple code {
   color: #16a34a !important;
-  background: rgba(22,163,74,0.2) !important;
-  border: 1px solid #16a34a !important;
+  background: rgba(22,163,74,0.1) !important;
+  border: none !important;
+  border-radius: 4px;
 }
 .note.success.simple table {
-  border: 1px solid #16a34a !important;
+  border: 1px solid rgba(22,163,74,0.2) !important;
 }
 .note.success.simple table thead th {
   color: #16a34a !important;
-  background: rgba(22,163,74,0.2) !important;
+  background: rgba(22,163,74,0.1) !important;
 }
 .note.success.simple ul li::marker,
 .note.success.simple ol li::marker {
@@ -19678,19 +19722,21 @@ div.videos[col='4'] iframe {
 }
 .note.success.simple ul li::before,
 .note.success.simple ol li::before {
-  border-left: 0.5px solid #16a34a !important;
+  border-color: #16a34a !important;
 }
 .note.success.simple > p:first-of-type > strong:first-of-type {
   background: #16a34a !important;
   color: #fff !important;
-  position: absolute;
-  top: -13px !important;
-  left: 15px !important;
-  padding: 6px 14px !important;
-  border-radius: 4px !important;
+  top: -14px !important;
+  left: 20px !important;
+  padding: 4px 16px !important;
+  border-radius: 20px !important;
+  -webkit-box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+  font-weight: 700 !important;
+  letter-spacing: 1px !important;
+  font-size: 13px !important;
   line-height: 24px !important;
-  font-size: 14px !important;
-  font-weight: 600 !important;
   white-space: nowrap !important;
   z-index: 9 !important;
   -webkit-transform: none !important;
@@ -19698,8 +19744,6 @@ div.videos[col='4'] iframe {
   -o-transform: none !important;
   -ms-transform: none !important;
   transform: none !important;
-  -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.12) !important;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.12) !important;
   -webkit-font-smoothing: antialiased !important;
   -moz-osx-font-smoothing: grayscale !important;
 }
@@ -19734,43 +19778,54 @@ div.videos[col='4'] iframe {
   color: #15803d;
 }
 .note.warning.simple {
-  border-color: #f97316 !important;
+  border: 1px solid rgba(249,115,22,0.2) !important;
   background-color: #fffaf3 !important;
   color: var(--anzhiyu-fontcolor);
-  -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.03) !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.03) !important;
-  -webkit-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  -moz-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  -o-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  -ms-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border-radius: 8px !important;
+  -webkit-box-shadow: 0 8px 16px -4px rgba(0,0,0,0.05) !important;
+  box-shadow: 0 8px 16px -4px rgba(0,0,0,0.05) !important;
+  -webkit-transition: all 0.3s ease !important;
+  -moz-transition: all 0.3s ease !important;
+  -o-transition: all 0.3s ease !important;
+  -ms-transition: all 0.3s ease !important;
+  transition: all 0.3s ease !important;
 }
 .note.warning.simple::after {
   color: #f97316 !important;
-  opacity: 0.75;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
-  filter: alpha(opacity=75);
+  opacity: 0.1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+  filter: alpha(opacity=10);
   line-height: 1;
+  font-size: 80px;
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  -webkit-transform: rotate(15deg);
+  -moz-transform: rotate(15deg);
+  -o-transform: rotate(15deg);
+  -ms-transform: rotate(15deg);
+  transform: rotate(15deg);
+  pointer-events: none;
   content: '\2665';
 }
 .note.warning.simple strong {
   color: #f97316 !important;
 }
-.note.warning.simple em:hover {
+.note.warning.simple em {
   color: #f97316 !important;
-  text-decoration: underline wavy #f97316 !important;
 }
 .note.warning.simple code {
   color: #f97316 !important;
-  background: rgba(249,115,22,0.2) !important;
-  border: 1px solid #f97316 !important;
+  background: rgba(249,115,22,0.1) !important;
+  border: none !important;
+  border-radius: 4px;
 }
 .note.warning.simple table {
-  border: 1px solid #f97316 !important;
+  border: 1px solid rgba(249,115,22,0.2) !important;
 }
 .note.warning.simple table thead th {
   color: #f97316 !important;
-  background: rgba(249,115,22,0.2) !important;
+  background: rgba(249,115,22,0.1) !important;
 }
 .note.warning.simple ul li::marker,
 .note.warning.simple ol li::marker {
@@ -19778,19 +19833,21 @@ div.videos[col='4'] iframe {
 }
 .note.warning.simple ul li::before,
 .note.warning.simple ol li::before {
-  border-left: 0.5px solid #f97316 !important;
+  border-color: #f97316 !important;
 }
 .note.warning.simple > p:first-of-type > strong:first-of-type {
   background: #f97316 !important;
   color: #fff !important;
-  position: absolute;
-  top: -13px !important;
-  left: 15px !important;
-  padding: 6px 14px !important;
-  border-radius: 4px !important;
+  top: -14px !important;
+  left: 20px !important;
+  padding: 4px 16px !important;
+  border-radius: 20px !important;
+  -webkit-box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+  font-weight: 700 !important;
+  letter-spacing: 1px !important;
+  font-size: 13px !important;
   line-height: 24px !important;
-  font-size: 14px !important;
-  font-weight: 600 !important;
   white-space: nowrap !important;
   z-index: 9 !important;
   -webkit-transform: none !important;
@@ -19798,8 +19855,6 @@ div.videos[col='4'] iframe {
   -o-transform: none !important;
   -ms-transform: none !important;
   transform: none !important;
-  -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.12) !important;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.12) !important;
   -webkit-font-smoothing: antialiased !important;
   -moz-osx-font-smoothing: grayscale !important;
 }
@@ -19834,43 +19889,54 @@ div.videos[col='4'] iframe {
   color: #c2410c;
 }
 .note.danger.simple {
-  border-color: #ef4444 !important;
+  border: 1px solid rgba(239,68,68,0.2) !important;
   background-color: #fef8f9 !important;
   color: var(--anzhiyu-fontcolor);
-  -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.03) !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.03) !important;
-  -webkit-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  -moz-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  -o-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  -ms-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border-radius: 8px !important;
+  -webkit-box-shadow: 0 8px 16px -4px rgba(0,0,0,0.05) !important;
+  box-shadow: 0 8px 16px -4px rgba(0,0,0,0.05) !important;
+  -webkit-transition: all 0.3s ease !important;
+  -moz-transition: all 0.3s ease !important;
+  -o-transition: all 0.3s ease !important;
+  -ms-transition: all 0.3s ease !important;
+  transition: all 0.3s ease !important;
 }
 .note.danger.simple::after {
   color: #ef4444 !important;
-  opacity: 0.75;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
-  filter: alpha(opacity=75);
+  opacity: 0.1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+  filter: alpha(opacity=10);
   line-height: 1;
+  font-size: 80px;
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  -webkit-transform: rotate(15deg);
+  -moz-transform: rotate(15deg);
+  -o-transform: rotate(15deg);
+  -ms-transform: rotate(15deg);
+  transform: rotate(15deg);
+  pointer-events: none;
   content: '\2666';
 }
 .note.danger.simple strong {
   color: #ef4444 !important;
 }
-.note.danger.simple em:hover {
+.note.danger.simple em {
   color: #ef4444 !important;
-  text-decoration: underline wavy #ef4444 !important;
 }
 .note.danger.simple code {
   color: #ef4444 !important;
-  background: rgba(239,68,68,0.2) !important;
-  border: 1px solid #ef4444 !important;
+  background: rgba(239,68,68,0.1) !important;
+  border: none !important;
+  border-radius: 4px;
 }
 .note.danger.simple table {
-  border: 1px solid #ef4444 !important;
+  border: 1px solid rgba(239,68,68,0.2) !important;
 }
 .note.danger.simple table thead th {
   color: #ef4444 !important;
-  background: rgba(239,68,68,0.2) !important;
+  background: rgba(239,68,68,0.1) !important;
 }
 .note.danger.simple ul li::marker,
 .note.danger.simple ol li::marker {
@@ -19878,19 +19944,21 @@ div.videos[col='4'] iframe {
 }
 .note.danger.simple ul li::before,
 .note.danger.simple ol li::before {
-  border-left: 0.5px solid #ef4444 !important;
+  border-color: #ef4444 !important;
 }
 .note.danger.simple > p:first-of-type > strong:first-of-type {
   background: #ef4444 !important;
   color: #fff !important;
-  position: absolute;
-  top: -13px !important;
-  left: 15px !important;
-  padding: 6px 14px !important;
-  border-radius: 4px !important;
+  top: -14px !important;
+  left: 20px !important;
+  padding: 4px 16px !important;
+  border-radius: 20px !important;
+  -webkit-box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+  font-weight: 700 !important;
+  letter-spacing: 1px !important;
+  font-size: 13px !important;
   line-height: 24px !important;
-  font-size: 14px !important;
-  font-weight: 600 !important;
   white-space: nowrap !important;
   z-index: 9 !important;
   -webkit-transform: none !important;
@@ -19898,8 +19966,6 @@ div.videos[col='4'] iframe {
   -o-transform: none !important;
   -ms-transform: none !important;
   transform: none !important;
-  -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.12) !important;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.12) !important;
   -webkit-font-smoothing: antialiased !important;
   -moz-osx-font-smoothing: grayscale !important;
 }
@@ -19934,43 +20000,54 @@ div.videos[col='4'] iframe {
   color: #dc2626;
 }
 .note.sparkle.simple {
-  border-color: #7c3aed !important;
+  border: 1px solid rgba(124,58,237,0.2) !important;
   background-color: #faf7fe !important;
   color: var(--anzhiyu-fontcolor);
-  -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.03) !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.03) !important;
-  -webkit-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  -moz-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  -o-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  -ms-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border-radius: 8px !important;
+  -webkit-box-shadow: 0 8px 16px -4px rgba(0,0,0,0.05) !important;
+  box-shadow: 0 8px 16px -4px rgba(0,0,0,0.05) !important;
+  -webkit-transition: all 0.3s ease !important;
+  -moz-transition: all 0.3s ease !important;
+  -o-transition: all 0.3s ease !important;
+  -ms-transition: all 0.3s ease !important;
+  transition: all 0.3s ease !important;
 }
 .note.sparkle.simple::after {
   color: #7c3aed !important;
-  opacity: 0.75;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
-  filter: alpha(opacity=75);
+  opacity: 0.1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+  filter: alpha(opacity=10);
   line-height: 1;
+  font-size: 80px;
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  -webkit-transform: rotate(15deg);
+  -moz-transform: rotate(15deg);
+  -o-transform: rotate(15deg);
+  -ms-transform: rotate(15deg);
+  transform: rotate(15deg);
+  pointer-events: none;
   content: '\2729';
 }
 .note.sparkle.simple strong {
   color: #7c3aed !important;
 }
-.note.sparkle.simple em:hover {
+.note.sparkle.simple em {
   color: #7c3aed !important;
-  text-decoration: underline wavy #7c3aed !important;
 }
 .note.sparkle.simple code {
   color: #7c3aed !important;
-  background: rgba(124,58,237,0.2) !important;
-  border: 1px solid #7c3aed !important;
+  background: rgba(124,58,237,0.1) !important;
+  border: none !important;
+  border-radius: 4px;
 }
 .note.sparkle.simple table {
-  border: 1px solid #7c3aed !important;
+  border: 1px solid rgba(124,58,237,0.2) !important;
 }
 .note.sparkle.simple table thead th {
   color: #7c3aed !important;
-  background: rgba(124,58,237,0.2) !important;
+  background: rgba(124,58,237,0.1) !important;
 }
 .note.sparkle.simple ul li::marker,
 .note.sparkle.simple ol li::marker {
@@ -19978,19 +20055,21 @@ div.videos[col='4'] iframe {
 }
 .note.sparkle.simple ul li::before,
 .note.sparkle.simple ol li::before {
-  border-left: 0.5px solid #7c3aed !important;
+  border-color: #7c3aed !important;
 }
 .note.sparkle.simple > p:first-of-type > strong:first-of-type {
   background: #7c3aed !important;
   color: #fff !important;
-  position: absolute;
-  top: -13px !important;
-  left: 15px !important;
-  padding: 6px 14px !important;
-  border-radius: 4px !important;
+  top: -14px !important;
+  left: 20px !important;
+  padding: 4px 16px !important;
+  border-radius: 20px !important;
+  -webkit-box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+  font-weight: 700 !important;
+  letter-spacing: 1px !important;
+  font-size: 13px !important;
   line-height: 24px !important;
-  font-size: 14px !important;
-  font-weight: 600 !important;
   white-space: nowrap !important;
   z-index: 9 !important;
   -webkit-transform: none !important;
@@ -19998,8 +20077,6 @@ div.videos[col='4'] iframe {
   -o-transform: none !important;
   -ms-transform: none !important;
   transform: none !important;
-  -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.12) !important;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.12) !important;
   -webkit-font-smoothing: antialiased !important;
   -moz-osx-font-smoothing: grayscale !important;
 }

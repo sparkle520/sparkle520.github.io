@@ -813,6 +813,10 @@ document.addEventListener("DOMContentLoaded", function () {
       );
       document.documentElement.style.removeProperty("--anzhiyu-main-light");
     }
+
+    if (GLOBAL_CONFIG_SITE.isPost) {
+      coverColor();
+    }
   };
 
   /**
@@ -1220,7 +1224,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const coverColor = async () => {
     const root = document.querySelector(":root");
     const path = document.getElementById("post-top-bg")?.src;
-    if (!path) {
+    const theme = document.documentElement.getAttribute("data-theme");
+    if (!path || theme === "dark") {
       // 非文章情况，直接设置不需要请求了
       root.style.setProperty("--anzhiyu-bar-background", "var(--anzhiyu-meta-theme-color)");
       requestAnimationFrame(() => {
@@ -1251,7 +1256,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let value = GLOBAL_CONFIG_SITE.postMainColor;
         if (getContrastYIQ(value) === "light") {
           value = LightenDarkenColor(colorHex(value), 0);
-        }
+        } 
 
         root.style.setProperty("--anzhiyu-bar-background", value);
         requestAnimationFrame(() => {
