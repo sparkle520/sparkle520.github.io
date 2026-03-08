@@ -19364,6 +19364,13 @@ div.videos[col='4'] iframe {
   pointer-events: none;
   content: '\2726';
 }
+@media (max-width: 768px) {
+  .note.default.simple::after {
+    font-size: 40px;
+    bottom: -10px;
+    right: -10px;
+  }
+}
 .note.default.simple strong {
   color: #86909c !important;
 }
@@ -19474,6 +19481,13 @@ div.videos[col='4'] iframe {
   transform: rotate(15deg);
   pointer-events: none;
   content: '\2605';
+}
+@media (max-width: 768px) {
+  .note.primary.simple::after {
+    font-size: 40px;
+    bottom: -10px;
+    right: -10px;
+  }
 }
 .note.primary.simple strong {
   color: #8b5cf6 !important;
@@ -19586,6 +19600,13 @@ div.videos[col='4'] iframe {
   pointer-events: none;
   content: '\2660';
 }
+@media (max-width: 768px) {
+  .note.info.simple::after {
+    font-size: 40px;
+    bottom: -10px;
+    right: -10px;
+  }
+}
 .note.info.simple strong {
   color: #2563eb !important;
 }
@@ -19696,6 +19717,13 @@ div.videos[col='4'] iframe {
   transform: rotate(15deg);
   pointer-events: none;
   content: '\2663';
+}
+@media (max-width: 768px) {
+  .note.success.simple::after {
+    font-size: 40px;
+    bottom: -10px;
+    right: -10px;
+  }
 }
 .note.success.simple strong {
   color: #16a34a !important;
@@ -19808,6 +19836,13 @@ div.videos[col='4'] iframe {
   pointer-events: none;
   content: '\2665';
 }
+@media (max-width: 768px) {
+  .note.warning.simple::after {
+    font-size: 40px;
+    bottom: -10px;
+    right: -10px;
+  }
+}
 .note.warning.simple strong {
   color: #f97316 !important;
 }
@@ -19919,6 +19954,13 @@ div.videos[col='4'] iframe {
   pointer-events: none;
   content: '\2666';
 }
+@media (max-width: 768px) {
+  .note.danger.simple::after {
+    font-size: 40px;
+    bottom: -10px;
+    right: -10px;
+  }
+}
 .note.danger.simple strong {
   color: #ef4444 !important;
 }
@@ -20029,6 +20071,13 @@ div.videos[col='4'] iframe {
   transform: rotate(15deg);
   pointer-events: none;
   content: '\2729';
+}
+@media (max-width: 768px) {
+  .note.sparkle.simple::after {
+    font-size: 40px;
+    bottom: -10px;
+    right: -10px;
+  }
 }
 .note.sparkle.simple strong {
   color: #7c3aed !important;
