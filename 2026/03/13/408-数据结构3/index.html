@@ -1,0 +1,1270 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>408-数据结构-3-栈、队列和数组 | SPARKLE</title><meta name="keywords" content="408,数据结构"><meta name="author" content="sparkle520"><meta name="copyright" content="sparkle520"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="408-数据结构-3-栈、队列和数组"><meta name="application-name" content="408-数据结构-3-栈、队列和数组"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="408-数据结构-3-栈、队列和数组"><meta property="og:url" content="http://example.com/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%843/index.html"><meta property="og:site_name" content="SPARKLE"><meta property="og:description" content="第3章 栈、队列和数组 3.1 栈 ( Stack ) 3.1.1 定义与特性 栈 是只允许在 一端 进行插入或删除操作的线性表. 允许操作的一端称为 栈顶 ( Top )，不允许操作的一端称为 栈底 ( Bottom ).   LIFO ( Last In First Out )"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://pic1.imgdb.cn/item/69b00d9e6738cb8aa1298eb8.png"><meta property="article:author" content="sparkle520"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://pic1.imgdb.cn/item/69b00d9e6738cb8aa1298eb8.png"><meta name="description" content="第3章 栈、队列和数组 3.1 栈 ( Stack ) 3.1.1 定义与特性 栈 是只允许在 一端 进行插入或删除操作的线性表. 允许操作的一端称为 栈顶 ( Top )，不允许操作的一端称为 栈底 ( Bottom ).   LIFO ( Last In First Out )"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%843/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: 'https://sparkle521.xyz',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":4000,"accessToken":"","mailMd5":""},
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: {"mode":"api","api":"https://img2color-go.vercel.app/api?img=","cover_change":true},
+  authorStatus: {"skills":["(❤ ω ❤)"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: sparkle520","link":"链接: ","source":"来源: SPARKLE","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#883ced","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'SPARKLE',
+  title: '408-数据结构-3-栈、队列和数组',
+  postAI: '',
+  pageFillDescription: '第3章 栈、队列和数组, 3.1 栈 ( Stack ), 3.1.1 定义与特性, 3.1.2 基本操作, 3.1.3 顺序栈, 3.1.4 链栈, 3.1.5 栈的应用, 3.1.6 408 常考点, 3.2 队列 ( Queue ), 3.2.1 定义与特性, 3.2.2 基本操作, 3.2.3 顺序队列与假溢出, 3.2.4 循环队列, 3.2.5 链队列, 3.2.6 双端队列, 3.2.7 队列的应用, 3.2.8 408 常考点, 3.3 数组与特殊矩阵, 3.3.1 数组的存储与地址计算, 3.3.2 特殊矩阵压缩存储, 3.3.3 稀疏矩阵, 3.3.4 408 常考点, 3.4 例题精选, 3.5 本章疑难点, 1. 循环队列判空 / 判满, 2. 栈与递归的关系, 3. 后缀表达式求值与中缀转后缀, 4. 特殊矩阵压缩下标公式, 5. 十字链表 vs. 三元组, 3.6 本章小结第章栈队列和数组栈定义与特性栈是只允许在一端进行插入或删除操作的线性表允许操作的一端称为栈顶不允许操作的一端称为栈底后进先出最后入栈的元素最先出栈个不同元素入栈出栈序列共有种数基本操作操作功能说明初始化一个空栈判断栈是否为空空返回入栈将元素压入栈顶出栈弹出栈顶元素并用返回读栈顶将栈顶元素赋给但不弹出销毁栈释放内存与的区别只读取栈顶栈不变化会删除栈顶元素顺序栈结构定义入栈出栈共享栈栈顶指针初始化为时栈空时栈满栈顶元素为入栈栈满出栈栈空时间复杂度均为共享栈两个栈共享同一块数组空间栈的栈底在栈的栈底在分别向中间增长栈从向右增长栈从向左增长栈满条件优点两个栈的空间互补总存储利用率更高适合两栈大小互为消长的场景链栈链栈用单链表实现规定所有操作在链表头部进行无需头结点链栈不存在栈满问题入栈在链表头部插入结点出栈删除链表头部结点适合栈的大小无法预估的场景比较项顺序栈链栈空间预分配可能溢出或浪费按需分配灵活指针开销无每个结点有指针域访问速度稍快数组连续稍慢指针跳转栈的应用括号匹配中缀转后缀后缀表达式求值递归与算法思路遇到左括号入栈遇到右括号检查栈顶若匹配则出栈若不匹配或栈空则失败扫描结束后栈为空则匹配成功规则运算符栈遇到操作数直接输出遇到左括号入栈遇到右括号弹出并输出直到遇到左括号不输出遇到运算符弹出并输出所有优先级大于等于当前运算符的栈顶运算符再将当前运算符入栈扫描结束弹出并输出栈中所有运算符运算符优先级括号内的运算符暂时优先级视为最低示例算法思路操作数栈遇到操作数入栈遇到运算符弹出栈顶两个元素执行运算将结果入栈扫描结束栈中唯一元素即为结果示例弹出相乘得再弹出与相加得递归调用系统用调用栈保存每次函数调用的返回地址局部变量和参数递归调用本质是栈的隐式应用递归深度过大会导致栈溢出所有递归算法均可用栈显式模拟消除递归深度优先搜索将起始结点入栈弹出栈顶结点标记已访问将其未访问邻居依次入栈重复直到栈为空常考点出栈序列判定数共享栈表达式已知入栈序列判断某出栈序列是否合法核心是用栈模拟设入栈序列为待验证出栈序列为从到依次入栈每次入栈后只要栈顶等于当前需要输出的就持续出栈并令后移扫描结束后若成功输出完全部则合法常见误区是只看局部可出而不做全流程模拟个元素的合法出栈序列数为典型等价模型是括号匹配或路径常以小让你列举或判断序列数量两栈相向增长栈满条件是本质是把两个栈的空闲空间合并成一个池空间利用率优于两个独立顺序栈出题点常在于初始化与判满条件写错中缀转后缀用运算符栈后缀求值用操作数栈运算符处理看两件事优先级与结合性常按左结合处理遇到右括号只弹出到左括号为止左括号不输出队列定义与特性队列是只允许在一端插入在另一端删除的线性表允许插入的一端称为队尾允许删除的一端称为队头先进先出最先入队的元素最先出队基本操作操作功能说明初始化一个空队列判断队列是否为空入队将元素插入队尾出队删除队头元素并用返回读队头将队头元素赋给但不删除顺序队列与假溢出用数组实现队列时频繁入队出队后到达数组末尾而数组前端有空间这种现象称为假溢出解决假溢出的方法是使用循环队列将数组首尾相接下标运算采用取模循环队列结构定义入队出队队长与队满变体指向队头指向队尾的下一个位置初始化队空队满牺牲一个存储单元区分队空满入队队满出队队空队列长度区分队空满的三种方案方案说明牺牲一个存储单元队满最常用增加计数器队空队满增加标志位最后操作为删除且时队空最后操作为插入时队满链队列链队列用带头结点的单链表实现指向头结点指向尾结点不存在队满问题入队在链表尾部插入新结点出队删除头结点之后的第一个数据结点队空条件均指向头结点比较项顺序队列循环链队列空间预分配按需分配队满有容量固定无指针开销无每结点一个指针适用场景大小已知大小不定双端队列定义输入受限输出受限考点双端队列两端均可进行插入和删除操作的线性表可看作栈与队列的推广完全双端队列包含所有输入输出受限的情形输入受限双端队列只允许在一端插入两端均可删除该队列能输出的序列是普通队列的超集但不是所有栈能输出的序列都能输出输出受限双端队列两端均可插入只允许在一端删除该队列能输出的序列是普通队列的超集但不是所有栈能输出的序列都能输出双端队列考题常考以下判断若序列可由栈得到则一定能由双端队列得到双端队列更强大某序列不能由栈得到但能由输出受限双端队列得到典型区分点判断方法画出入队过程验证各时刻队列状态是否合法队列的应用广度优先搜索从起始结点出发逐层访问每层结点依次入队出队时将未访问邻居入队进程调度操作系统用队列管理等待的进程就绪队列打印缓冲区消息队列先到先服务典型应用层次遍历二叉树利用队列按层输出各结点常考点循环队列三方案假溢出与真溢出栈与队列互相模拟双端队列判定方案队空队满备注牺牲一格最常见加不浪费空间加易写错假溢出是数组前端有空但到末尾导致无法入队真溢出是容量确实不够循环队列解决的是假溢出不会改变固定容量的上限两个栈实现队列入队压入栈出队时若栈为空则把全部倒入再从弹出两个队列实现栈维持一个空队列作为辅助把除最后一个元素外的元素转移到辅助队列再弹出最后一个常问最坏与均摊复杂度两栈实现队列的出队均摊为题目通常给入队序列与出队序列要求判断能否由某类双端队列得到有效做法是画状态或做过程模拟避免凭直觉判断数组与特殊矩阵数组的存储与地址计算一维数组二维数组下标从开始设数组首地址为每个元素占字节设数组首地址为行优先存储语言默认列优先存储若数组行优先存储考题中下标起始值不固定务必仔细读题确认下标范围再套公式特殊矩阵压缩存储压缩存储对具有规律分布的特殊矩阵只存储有效元素其余元素通过计算得到以节省空间对称矩阵三角矩阵对角矩阵对称矩阵阶矩阵只需存储下三角部分含主对角线共个元素存入一维数组下标对应关系行优先存储下三角下三角上三角用下三角矩阵上三角区域不含对角线全为常数只存下三角对角线元素及常数共个元素存常数的位置上三角矩阵下三角区域全为常数类似处理只存上三角对角线常数对角矩阵带状矩阵非零元素集中在主对角线及其两侧共条对角线的带状区域内带宽为为半带宽以三对角矩阵为例只存储个非零元素反向推导已知求稀疏矩阵稀疏矩阵矩阵中非零元素个数远少于零元素个数通常非零元素个数时视为稀疏三元组表十字链表对比三元组表将每个非零元素用表示顺序存入一维数组同时记录矩阵规模和非零元素总数行列下标元素值行数列数非零元个数存储量为非零元个数转置算法按列扫描原矩阵时间复杂度普通转置或快速转置十字链表每个非零元素用一个结点表示结点含个域指向同行下一个非零元素指向同列下一个非零元素另有行头指针数组和列头指针数组优点插入删除非零元素方便无需移动大量数据缺点指针开销大结构复杂不如三元组直观表示方法存储量转置复杂度插删方便性适用场景三元组表一般静态稀疏矩阵十字链表好动态修改频繁常考点地址计算压缩存储快速转置先确认下标起始还是与存储方式行优先还是列优先地址公式里最容易错的是把写反题目常给元素大小与首地址最终答案常以字节偏移给出对称矩阵常让你算或反算三角矩阵会额外出现一个常数位存容易漏带状矩阵要先判断是否落在带内否则该位置为或常数快速转置把按列找元素改为一次统计前缀和定位把复杂度降到统计每列非零元个数记录该列在转置后数组中的起始位置前缀和扫描原三元组数组时直接把元素放到转置数组的目标下标例题精选例题循环队列队长循环队列求队列中元素个数解例题出栈序列合法性入栈序列为判断是否为合法出栈序列解模拟过程压压压弹此时栈为栈顶为但需弹出不合法因此不是合法出栈序列例题对称矩阵下标映射对称矩阵按行优先存储下三角于求对应中下标解属于下三角例题中缀转后缀将中缀表达式转换为后缀表达式解扫描过程运算符栈记为输出序列记为弹出直到输出丢弃弹出优先级不小于的运算符依次输出再将入栈输出入栈输出扫描结束弹出剩余运算符结果为例题出栈序列判定入栈序列为判断出栈序列是否合法解模拟入栈出栈依次压入弹出再压入弹出此时栈顶为弹出继续弹出可完成输出因此为合法序列例题出栈序列判定入栈序列为判断出栈序列是否合法解压入弹出此时栈顶为但下一次需要输出且被压住无法直接弹出继续入栈只能压入使更不可能弹出因此该序列不合法例题两栈实现队列的均摊用两个栈实现队列入队执行出队若栈为空则把全部倒入再证明出队操作均摊为解每个元素最多经历一次从栈到栈的转移入队时压入一次转移时从弹出一次并压入一次出队时从弹出一次因此每个元素总共参与常数次栈操作总成本为次队列操作的均摊时间复杂度为例题循环队列操作序列循环队列采用牺牲一格方案初始依次执行入队出队两次再入队求此时与队列长度解牺牲一格方案下队列长度模拟过程后队列中为此时因此例题地址计算二维数组行优先存储元素占字节求解下标从开始行优先代入例题三角矩阵压缩下三角矩阵的上三角元素均为常数按行优先压缩到一维数组求对应的存储下标解只存下三角含主对角线的个元素以及常数位例题快速转置定位稀疏矩阵三元组表中共有个非零元列数为说明快速转置中的含义并写出其递推关系解表示转置后三元组数组中第列转置后为第行的第一个非零元存放的位置若是原矩阵第列非零元个数则这样扫描原三元组数组时可以把每个元素直接放到目标位置并递增该列的当前位置指针本章疑难点循环队列判空判满牺牲一格方案最常用务必记住队满条件而非三种方案各有优缺点选择时结合题目要求栈与递归的关系每次函数调用都会在系统栈上开辟一个栈帧保存局部变量参数和返回地址递归深度过大会导致栈溢出可改用显式栈消除递归后缀表达式求值与中缀转后缀中缀转后缀用运算符栈后缀表达式求值用操作数栈两者使用的栈类型不同注意区分特殊矩阵压缩下标公式考试中常给出从开始的下标务必仔细读题后代入正确公式不要混淆行列十字链表三元组三元组转置更快快速转置十字链表插删更方便按照操作类型选择本章小结栈和队列都是操作受限的线性表本质上是特殊的线性表顺序栈链栈循环队列链队列是四种实现方式各有适用场景双端队列是栈和队列的推广输入输出受限双端队列是重要变体数组地址计算和特殊矩阵压缩存储是纯粹的计算题掌握公式即可稀疏矩阵三元组与十字链表是空间优化的重要思想十字链表插删优势明显',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-03-10 23:02:49',
+  postMainColor: '#92A9EF',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.min.css"><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/sparkle520?tab=repositories" title="github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="github"/><span class="back-menu-item-text">github</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">SPARKLE</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/408/" style="font-size: 1.05rem;">408<sup>21</sup></a><a href="/tags/AOP/" style="font-size: 1.05rem;">AOP<sup>1</sup></a><a href="/tags/Deep-Learning/" style="font-size: 1.05rem;">Deep Learning<sup>1</sup></a><a href="/tags/IoC/" style="font-size: 1.05rem;">IoC<sup>1</sup></a><a href="/tags/JSR303/" style="font-size: 1.05rem;">JSR303<sup>1</sup></a><a href="/tags/Matplotlib/" style="font-size: 1.05rem;">Matplotlib<sup>3</sup></a><a href="/tags/c/" style="font-size: 1.05rem;">c#<sup>2</sup></a><a href="/tags/java/" style="font-size: 1.05rem;">java<sup>4</sup></a><a href="/tags/python/" style="font-size: 1.05rem;">python<sup>5</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 1.05rem;">事务<sup>1</sup></a><a href="/tags/%E4%BA%8C%E6%AC%A1%E5%9E%8B/" style="font-size: 1.05rem;">二次型<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E3%80%82/" style="font-size: 1.05rem;">你的名字。<sup>3</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字同名小说<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%A4%96%E4%BC%A0%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字外传小说<sup>1</sup></a><a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size: 1.05rem;">写作<sup>4</sup></a><a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 1.05rem;">包管理<sup>1</sup></a><a href="/tags/%E5%8D%B7%E7%A7%AF%E5%85%AC%E5%BC%8F/" style="font-size: 1.05rem;">卷积公式<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90/" style="font-size: 1.05rem;">天气之子<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">天气之子同名小说<sup>1</sup></a><a href="/tags/%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">小说<sup>2</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">操作系统<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" style="font-size: 1.05rem;">数据校验<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" style="font-size: 1.05rem;">数据链路层<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 1.05rem;">概率论<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 1.05rem;">概率论与数理统计<sup>7</sup></a><a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 1.05rem;">汇编<sup>9</sup></a><a href="/tags/%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80/" style="font-size: 1.05rem;">泰勒展开<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/" style="font-size: 1.05rem;">物理层<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%80%BC/" style="font-size: 1.05rem;">特征值<sup>2</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F/" style="font-size: 1.05rem;">特征向量<sup>2</sup></a><a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">线性代数<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" style="font-size: 1.05rem;">网络体系结构<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" style="font-size: 1.05rem;">网络层<sup>2</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 1.05rem;">英语<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">英语语法<sup>24</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1.05rem;">计算机组成原理<sup>5</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.05rem;">计算机网络<sup>5</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">语法<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">高等代数<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" style="font-size: 1.05rem;">高等数学<sup>14</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">三月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">21</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/02/"><span class="card-archive-list-date">二月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/01/"><span class="card-archive-list-date">一月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/12/"><span class="card-archive-list-date">十二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">15</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/11/"><span class="card-archive-list-date">十一月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/10/"><span class="card-archive-list-date">十月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/09/"><span class="card-archive-list-date">九月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/08/"><span class="card-archive-list-date">八月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url">计算机</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/408/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>408</span></a><a class="article-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>数据结构</span></a></span></div></div><h1 class="post-title" itemprop="name headline">408-数据结构-3-栈、队列和数组</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-03-13T14:00:00.000Z" title="发表于 2026-03-13 22:00:00">2026-03-13</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-03-10T15:02:49.912Z" title="更新于 2026-03-10 23:02:49">2026-03-10</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">5.4k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>19分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="408-数据结构-3-栈、队列和数组"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为系守镇"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>系守镇</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%843/#post-comment" tabindex="-1"><span id="twikoo-count"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://pic1.imgdb.cn/item/69b00d9e6738cb8aa1298eb8.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%843/"><header><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url">计算机</a><a href="/tags/408/" tabindex="-1" itemprop="url">408</a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" tabindex="-1" itemprop="url">数据结构</a><h1 id="CrawlerTitle" itemprop="name headline">408-数据结构-3-栈、队列和数组</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">sparkle520</span><time itemprop="dateCreated datePublished" datetime="2026-03-13T14:00:00.000Z" title="发表于 2026-03-13 22:00:00">2026-03-13</time><time itemprop="dateCreated datePublished" datetime="2026-03-10T15:02:49.912Z" title="更新于 2026-03-10 23:02:49">2026-03-10</time></header><h1 id="第3章-栈队列和数组">第3章 栈、队列和数组</h1>
+<h2 id="栈-stack">3.1 栈 ( Stack )</h2>
+<h3 id="定义与特性">3.1.1 定义与特性</h3>
+<div class="note info simple"><p><strong>栈</strong> 是只允许在 <strong>一端</strong>
+进行插入或删除操作的线性表. 允许操作的一端称为 <strong>栈顶</strong> (
+Top )，不允许操作的一端称为 <strong>栈底</strong> ( Bottom ).</p>
+</div>
+<ul>
+<li><strong>LIFO</strong> ( Last In First Out ) —
+后进先出，最后入栈的元素最先出栈.</li>
+<li><span class="math inline">\(n\)</span> 个不同元素入栈，出栈序列共有
+<span class="math inline">\(\dfrac{1}{n+1}\dbinom{2n}{n}\)</span> 种 (
+Catalan 数 ).</li>
+</ul>
+<h3 id="基本操作">3.1.2 基本操作</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">操作</th>
+<th style="text-align: left;">功能说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><kbd>InitStack(S)</kbd></td>
+<td style="text-align: left;">初始化一个空栈 <span
+class="math inline">\(S\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><kbd>StackEmpty(S)</kbd></td>
+<td style="text-align: left;">判断栈是否为空，空返回
+<code>true</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><kbd>Push(S, x)</kbd></td>
+<td style="text-align: left;">入栈，将元素 <span
+class="math inline">\(x\)</span> 压入栈顶</td>
+</tr>
+<tr>
+<td style="text-align: left;"><kbd>Pop(S, x)</kbd></td>
+<td style="text-align: left;">出栈，弹出栈顶元素并用 <span
+class="math inline">\(x\)</span> 返回</td>
+</tr>
+<tr>
+<td style="text-align: left;"><kbd>GetTop(S, x)</kbd></td>
+<td style="text-align: left;">读栈顶，将栈顶元素赋给 <span
+class="math inline">\(x\)</span> 但不弹出</td>
+</tr>
+<tr>
+<td style="text-align: left;"><kbd>DestroyStack(S)</kbd></td>
+<td style="text-align: left;">销毁栈，释放内存</td>
+</tr>
+</tbody>
+</table>
+<div class="note warning simple"><p><code>GetTop</code> 与 <code>Pop</code> 的区别 <code>GetTop</code> 只
+<strong>读取</strong> 栈顶，栈不变化; <code>Pop</code> 会
+<strong>删除</strong> 栈顶元素.</p>
+</div>
+<h3 id="顺序栈">3.1.3 顺序栈</h3>
+<div class="tabs" id="seq-stack"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="seq-stack-1">结构定义</button><button type="button" class="tab " data-href="seq-stack-2">入栈 / 出栈</button><button type="button" class="tab " data-href="seq-stack-3">共享栈</button></ul><div class="tab-contents"><div class="tab-item-content active" id="seq-stack-1"><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MaxSize 50</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    ElemType data[MaxSize];</span><br><span class="line">    <span class="type">int</span> top;          <span class="comment">// 栈顶指针，初始化为 -1</span></span><br><span class="line">&#125; SqStack;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>S.top == -1</code> 时栈空; <code>S.top == MaxSize - 1</code>
+时栈满.</li>
+<li>栈顶元素为 <code>S.data[S.top]</code>.</li>
+</ul></div><div class="tab-item-content" id="seq-stack-2"><p><strong>入栈</strong> ( Push )</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> <span class="title function_">Push</span><span class="params">(SqStack &amp;S, ElemType x)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (S.top == MaxSize - <span class="number">1</span>) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 栈满</span></span><br><span class="line">    S.data[++S.top] = x;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>出栈</strong> ( Pop )</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> <span class="title function_">Pop</span><span class="params">(SqStack &amp;S, ElemType &amp;x)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (S.top == <span class="number">-1</span>) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 栈空</span></span><br><span class="line">    x = S.data[S.top--];</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>时间复杂度均为 <span class="math inline">\(O(1)\)</span>.</p></div><div class="tab-item-content" id="seq-stack-3"><p><strong>共享栈</strong> 两个栈共享同一块数组空间，栈 1 的栈底在
+<code>data[0]</code>，栈 2 的栈底在
+<code>data[MaxSize-1]</code>，分别向中间增长.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 栈 1 top1 从 -1 向右增长</span></span><br><span class="line"><span class="comment">// 栈 2 top2 从 MaxSize 向左增长</span></span><br><span class="line"><span class="comment">// 栈满条件 top1 + 1 == top2</span></span><br></pre></td></tr></table></figure>
+<p><span class="p green">优点</span>
+两个栈的空间互补，总存储利用率更高，适合两栈大小互为消长的场景.</p></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="链栈">3.1.4 链栈</h3>
+<div class="note info simple"><p><strong>链栈</strong> 用单链表实现，规定所有操作在
+<strong>链表头部</strong> 进行，无需头结点. 链栈不存在栈满问题.</p>
+</div>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Lnode</span> &#123;</span></span><br><span class="line">    ElemType data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Lnode</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125; *LiStack;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>入栈 = 在链表头部插入结点，<span
+class="math inline">\(O(1)\)</span>.</li>
+<li>出栈 = 删除链表头部结点，<span
+class="math inline">\(O(1)\)</span>.</li>
+<li>适合栈的大小无法预估的场景.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">比较项</th>
+<th style="text-align: left;">顺序栈</th>
+<th style="text-align: left;">链栈</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">空间</td>
+<td style="text-align: left;">预分配，可能溢出或浪费</td>
+<td style="text-align: left;">按需分配，灵活</td>
+</tr>
+<tr>
+<td style="text-align: left;">指针开销</td>
+<td style="text-align: left;">无</td>
+<td style="text-align: left;">每个结点有指针域</td>
+</tr>
+<tr>
+<td style="text-align: left;">访问速度</td>
+<td style="text-align: left;">稍快 ( 数组连续 )</td>
+<td style="text-align: left;">稍慢 ( 指针跳转 )</td>
+</tr>
+</tbody>
+</table>
+<h3 id="栈的应用">3.1.5 栈的应用</h3>
+<div class="tabs" id="stack-app"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="stack-app-1">括号匹配</button><button type="button" class="tab " data-href="stack-app-2">中缀转后缀</button><button type="button" class="tab " data-href="stack-app-3">后缀表达式求值</button><button type="button" class="tab " data-href="stack-app-4">递归与 DFS</button></ul><div class="tab-contents"><div class="tab-item-content active" id="stack-app-1"><p><strong>算法思路</strong></p>
+<ol type="1">
+<li>遇到左括号 <code>(</code>、<code>[</code>、<code>{</code> →
+入栈.</li>
+<li>遇到右括号 → 检查栈顶 若匹配则出栈; 若不匹配或栈空则失败.</li>
+<li>扫描结束后栈为空则匹配成功.</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> <span class="title function_">bracketCheck</span><span class="params">(<span class="type">char</span> *str, <span class="type">int</span> len)</span> &#123;</span><br><span class="line">    SqStack S; InitStack(S);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (str[i] == <span class="string">&#x27;(&#x27;</span> || str[i] == <span class="string">&#x27;[&#x27;</span> || str[i] == <span class="string">&#x27;&#123;&#x27;</span>)</span><br><span class="line">            Push(S, str[i]);</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (StackEmpty(S)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="type">char</span> topElem; Pop(S, topElem);</span><br><span class="line">            <span class="keyword">if</span> (str[i] == <span class="string">&#x27;)&#x27;</span> &amp;&amp; topElem != <span class="string">&#x27;(&#x27;</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">if</span> (str[i] == <span class="string">&#x27;]&#x27;</span> &amp;&amp; topElem != <span class="string">&#x27;[&#x27;</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">if</span> (str[i] == <span class="string">&#x27;&#125;&#x27;</span> &amp;&amp; topElem != <span class="string">&#x27;&#123;&#x27;</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> StackEmpty(S);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-item-content" id="stack-app-2"><p><strong>规则</strong> ( 运算符栈 )</p>
+<ol type="1">
+<li>遇到 <strong>操作数</strong> → 直接输出.</li>
+<li>遇到 <strong>左括号</strong> <code>(</code> → 入栈.</li>
+<li>遇到 <strong>右括号</strong> <code>)</code> → 弹出并输出直到遇到
+<code>(</code>，左括号不输出.</li>
+<li>遇到 <strong>运算符</strong> → 弹出并输出所有优先级
+<strong>大于等于</strong>
+当前运算符的栈顶运算符，再将当前运算符入栈.</li>
+<li>扫描结束 → 弹出并输出栈中所有运算符.</li>
+</ol>
+<div class="note info simple">
+<p>
+运算符优先级 <code>*</code>、<code>/</code> &gt;
+<code>+</code>、<code>-</code> &gt; <code>(</code>.
+括号内的运算符暂时优先级视为最低.
+</p>
+</div>
+<p><strong>示例</strong> <code>A + B * C - D</code> →
+<code>A B C * + D -</code></p></div><div class="tab-item-content" id="stack-app-3"><p><strong>算法思路</strong> ( 操作数栈 )</p>
+<ol type="1">
+<li>遇到 <strong>操作数</strong> → 入栈.</li>
+<li>遇到 <strong>运算符</strong> →
+弹出栈顶两个元素，执行运算，将结果入栈.</li>
+<li>扫描结束 → 栈中唯一元素即为结果.</li>
+</ol>
+<p><strong>示例</strong> <code>2 3 4 * +</code> → 弹出 3、4 相乘得
+12，再弹出 2 与 12 相加得 14.</p></div><div class="tab-item-content" id="stack-app-4"><p><strong>递归调用</strong> 系统用 <strong>调用栈</strong>
+保存每次函数调用的返回地址、局部变量和参数.
+递归调用本质是栈的隐式应用.</p>
+<ul>
+<li>递归深度过大会导致 <strong>栈溢出</strong> ( Stack Overflow ).</li>
+<li>所有递归算法均可用栈显式模拟，消除递归.</li>
+</ul>
+<p><strong>深度优先搜索 ( DFS )</strong></p>
+<ol type="1">
+<li>将起始结点入栈.</li>
+<li>弹出栈顶结点，标记已访问，将其未访问邻居依次入栈.</li>
+<li>重复直到栈为空.</li>
+</ol></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="常考点">3.1.6 408 常考点</h3>
+<div class="tabs" id="stack-points"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="stack-points-1">出栈序列判定</button><button type="button" class="tab " data-href="stack-points-2">Catalan 数</button><button type="button" class="tab " data-href="stack-points-3">共享栈</button><button type="button" class="tab " data-href="stack-points-4">表达式</button></ul><div class="tab-contents"><div class="tab-item-content active" id="stack-points-1"><div class="note info simple">
+<p>
+已知入栈序列，判断某出栈序列是否合法，核心是用栈模拟.
+</p>
+</div>
+<p>设入栈序列为 <span
+class="math inline">\(1,2,\ldots,n\)</span>，待验证出栈序列为 <span
+class="math inline">\(b_1,b_2,\ldots,b_n\)</span>.</p>
+<ul>
+<li>从 1 到 <span class="math inline">\(n\)</span> 依次入栈</li>
+<li>每次入栈后，只要栈顶等于当前需要输出的 <span
+class="math inline">\(b_k\)</span> 就持续出栈并令 <span
+class="math inline">\(k\)</span> 后移</li>
+<li>扫描结束后若成功输出完全部 <span
+class="math inline">\(b\)</span>，则合法</li>
+</ul>
+<p>常见误区是只看「局部可出」而不做全流程模拟.</p></div><div class="tab-item-content" id="stack-points-2"><ul>
+<li><span class="math inline">\(n\)</span> 个元素的合法出栈序列数为
+<span class="math display">\[C_n =
+\dfrac{1}{n+1}\dbinom{2n}{n}.\]</span></li>
+<li>典型等价模型是「括号匹配」或「Dyck 路径」</li>
+<li>408 常以小 <span class="math inline">\(n\)</span>
+让你列举或判断序列数量</li>
+</ul></div><div class="tab-item-content" id="stack-points-3"><ul>
+<li>两栈相向增长，栈满条件是 <code>top1 + 1 == top2</code></li>
+<li>本质是把两个栈的空闲空间合并成一个池，空间利用率优于两个独立顺序栈</li>
+<li>出题点常在于初始化与判满条件写错</li>
+</ul></div><div class="tab-item-content" id="stack-points-4"><ul>
+<li>中缀转后缀用 <strong>运算符栈</strong>，后缀求值用
+<strong>操作数栈</strong></li>
+<li>运算符处理看两件事 <strong>优先级</strong> 与
+<strong>结合性</strong> ( 408 常按左结合处理 <code>+ - * /</code> )</li>
+<li>遇到右括号只弹出到左括号为止，左括号不输出</li>
+</ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<hr />
+<h2 id="队列-queue">3.2 队列 ( Queue )</h2>
+<h3 id="定义与特性-1">3.2.1 定义与特性</h3>
+<div class="note info simple"><p><strong>队列</strong> 是只允许在 <strong>一端</strong> 插入、在
+<strong>另一端</strong> 删除的线性表. 允许插入的一端称为
+<strong>队尾</strong> ( Rear )，允许删除的一端称为 <strong>队头</strong>
+( Front ).</p>
+</div>
+<ul>
+<li><strong>FIFO</strong> ( First In First Out ) —
+先进先出，最先入队的元素最先出队.</li>
+</ul>
+<h3 id="基本操作-1">3.2.2 基本操作</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">操作</th>
+<th style="text-align: left;">功能说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>InitQueue(Q)</code></td>
+<td style="text-align: left;">初始化一个空队列 <span
+class="math inline">\(Q\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>QueueEmpty(Q)</code></td>
+<td style="text-align: left;">判断队列是否为空</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>EnQueue(Q, x)</code></td>
+<td style="text-align: left;">入队，将元素 <span
+class="math inline">\(x\)</span> 插入队尾</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>DeQueue(Q, x)</code></td>
+<td style="text-align: left;">出队，删除队头元素并用 <span
+class="math inline">\(x\)</span> 返回</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>GetHead(Q, x)</code></td>
+<td style="text-align: left;">读队头，将队头元素赋给 <span
+class="math inline">\(x\)</span> 但不删除</td>
+</tr>
+</tbody>
+</table>
+<h3 id="顺序队列与假溢出">3.2.3 顺序队列与假溢出</h3>
+<p>用数组实现队列时，频繁入队出队后 <code>rear</code>
+到达数组末尾，而数组前端有空间，这种现象称为
+<strong>假溢出</strong>.</p>
+<div class="note warning simple"><p>解决假溢出的方法是使用 <strong>循环队列</strong>
+将数组首尾相接，下标运算采用取模 <code>% MaxSize</code>.</p>
+</div>
+<h3 id="循环队列">3.2.4 循环队列</h3>
+<div class="tabs" id="circular-queue"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="circular-queue-1">结构定义</button><button type="button" class="tab " data-href="circular-queue-2">入队 / 出队</button><button type="button" class="tab " data-href="circular-queue-3">队长与队满变体</button></ul><div class="tab-contents"><div class="tab-item-content active" id="circular-queue-1"><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MaxSize 50</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    ElemType data[MaxSize];</span><br><span class="line">    <span class="type">int</span> front, rear;  <span class="comment">// front 指向队头，rear 指向队尾的下一个位置</span></span><br><span class="line">&#125; SqQueue;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>初始化 <code>Q.front = Q.rear = 0</code>.</li>
+<li><strong>队空</strong> <code>Q.front == Q.rear</code>.</li>
+<li><strong>队满</strong> <code>(Q.rear + 1) % MaxSize == Q.front</code>
+( 牺牲一个存储单元区分队空 / 满 ).</li>
+</ul></div><div class="tab-item-content" id="circular-queue-2"><p><strong>入队</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> <span class="title function_">EnQueue</span><span class="params">(SqQueue &amp;Q, ElemType x)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> ((Q.rear + <span class="number">1</span>) % MaxSize == Q.front) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 队满</span></span><br><span class="line">    Q.data[Q.rear] = x;</span><br><span class="line">    Q.rear = (Q.rear + <span class="number">1</span>) % MaxSize;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>出队</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> <span class="title function_">DeQueue</span><span class="params">(SqQueue &amp;Q, ElemType &amp;x)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (Q.front == Q.rear) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 队空</span></span><br><span class="line">    x = Q.data[Q.front];</span><br><span class="line">    Q.front = (Q.front + <span class="number">1</span>) % MaxSize;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-item-content" id="circular-queue-3"><p><strong>队列长度</strong></p>
+<p><span class="math display">\[\text{len} = (\text{rear} - \text{front}
++ \text{MaxSize}) \bmod \text{MaxSize}\]</span></p>
+<p><strong>区分队空 / 满的三种方案</strong></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">方案</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">牺牲一个存储单元</td>
+<td style="text-align: left;">队满
+<code>(rear+1)%MaxSize == front</code> ( 最常用 )</td>
+</tr>
+<tr>
+<td style="text-align: left;">增加 <code>size</code> 计数器</td>
+<td style="text-align: left;"><code>size == 0</code>
+队空，<code>size == MaxSize</code> 队满</td>
+</tr>
+<tr>
+<td style="text-align: left;">增加 <code>tag</code> 标志位</td>
+<td style="text-align: left;">最后操作为删除且 <code>front==rear</code>
+时队空; 最后操作为插入时队满</td>
+</tr>
+</tbody>
+</table></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="链队列">3.2.5 链队列</h3>
+<div class="note info simple"><p><strong>链队列</strong> 用带头结点的单链表实现，<code>front</code>
+指向头结点，<code>rear</code> 指向尾结点. 不存在队满问题.</p>
+</div>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">LNode</span> &#123;</span></span><br><span class="line">    ElemType data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">LNode</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125; LNode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    LNode *front, *rear;</span><br><span class="line">&#125; LinkQueue;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>入队 在链表 <strong>尾部</strong> 插入新结点，<span
+class="math inline">\(O(1)\)</span>.</li>
+<li>出队 删除头结点之后的第一个数据结点，<span
+class="math inline">\(O(1)\)</span>.</li>
+<li>队空条件 <code>Q.front == Q.rear</code> ( 均指向头结点 ).</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">比较项</th>
+<th style="text-align: left;">顺序队列 ( 循环 )</th>
+<th style="text-align: left;">链队列</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">空间</td>
+<td style="text-align: left;">预分配</td>
+<td style="text-align: left;">按需分配</td>
+</tr>
+<tr>
+<td style="text-align: left;">队满</td>
+<td style="text-align: left;">有 ( 容量固定 )</td>
+<td style="text-align: left;">无</td>
+</tr>
+<tr>
+<td style="text-align: left;">指针开销</td>
+<td style="text-align: left;">无</td>
+<td style="text-align: left;">每结点一个指针</td>
+</tr>
+<tr>
+<td style="text-align: left;">适用场景</td>
+<td style="text-align: left;">大小已知</td>
+<td style="text-align: left;">大小不定</td>
+</tr>
+</tbody>
+</table>
+<h3 id="双端队列">3.2.6 双端队列</h3>
+<div class="tabs" id="deque"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="deque-1">定义</button><button type="button" class="tab " data-href="deque-2">输入受限</button><button type="button" class="tab " data-href="deque-3">输出受限</button><button type="button" class="tab " data-href="deque-4">408 考点</button></ul><div class="tab-contents"><div class="tab-item-content active" id="deque-1"><p><strong>双端队列 ( Deque )</strong>
+两端均可进行插入和删除操作的线性表.</p>
+<ul>
+<li>可看作栈与队列的推广.</li>
+<li>完全双端队列包含所有输入 / 输出受限的情形.</li>
+</ul></div><div class="tab-item-content" id="deque-2"><p><strong>输入受限双端队列</strong> 只允许在
+<strong>一端插入</strong>，两端均可删除.</p>
+<ul>
+<li>该队列能输出的序列是普通队列的超集，但不是所有栈能输出的序列都能输出.</li>
+</ul></div><div class="tab-item-content" id="deque-3"><p><strong>输出受限双端队列</strong> 两端均可插入，只允许在
+<strong>一端删除</strong>.</p>
+<ul>
+<li>该队列能输出的序列是普通队列的超集，但不是所有栈能输出的序列都能输出.</li>
+</ul></div><div class="tab-item-content" id="deque-4"><p>双端队列考题常考以下判断</p>
+<ol type="1">
+<li>若序列可由 <strong>栈</strong> 得到，则一定能由
+<strong>双端队列</strong> 得到 ( 双端队列更强大 ).</li>
+<li>某序列 <strong>不能</strong> 由栈得到，但 <strong>能</strong>
+由输出受限双端队列得到 → 典型区分点.</li>
+<li><strong>判断方法</strong>
+画出入队过程，验证各时刻队列状态是否合法.</li>
+</ol></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="队列的应用">3.2.7 队列的应用</h3>
+<ul>
+<li><strong>广度优先搜索 ( BFS )</strong>
+从起始结点出发，逐层访问，每层结点依次入队，出队时将未访问邻居入队.</li>
+<li><strong>进程调度</strong> 操作系统用队列管理等待 CPU 的进程 (
+就绪队列 ).</li>
+<li><strong>打印缓冲区、消息队列</strong> 先到先服务，典型 FIFO
+应用.</li>
+<li><strong>层次遍历二叉树</strong> 利用队列按层输出各结点.</li>
+</ul>
+<h3 id="常考点-1">3.2.8 408 常考点</h3>
+<div class="tabs" id="queue-points"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="queue-points-1">循环队列三方案</button><button type="button" class="tab " data-href="queue-points-2">假溢出与真溢出</button><button type="button" class="tab " data-href="queue-points-3">栈与队列互相模拟</button><button type="button" class="tab " data-href="queue-points-4">双端队列判定</button></ul><div class="tab-contents"><div class="tab-item-content active" id="queue-points-1"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">方案</th>
+<th style="text-align: left;">队空</th>
+<th style="text-align: left;">队满</th>
+<th style="text-align: left;">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">牺牲一格</td>
+<td style="text-align: left;"><code>front == rear</code></td>
+<td
+style="text-align: left;"><code>(rear+1)%MaxSize == front</code></td>
+<td style="text-align: left;">最常见</td>
+</tr>
+<tr>
+<td style="text-align: left;">加 <code>size</code></td>
+<td style="text-align: left;"><code>size == 0</code></td>
+<td style="text-align: left;"><code>size == MaxSize</code></td>
+<td style="text-align: left;">不浪费空间</td>
+</tr>
+<tr>
+<td style="text-align: left;">加 <code>tag</code></td>
+<td
+style="text-align: left;"><code>front==rear &amp;&amp; tag==0</code></td>
+<td
+style="text-align: left;"><code>front==rear &amp;&amp; tag==1</code></td>
+<td style="text-align: left;">易写错</td>
+</tr>
+</tbody>
+</table></div><div class="tab-item-content" id="queue-points-2"><ul>
+<li>假溢出是数组前端有空但 <code>rear</code> 到末尾导致无法入队</li>
+<li>真溢出是容量确实不够</li>
+<li>循环队列解决的是假溢出，不会改变固定容量的上限</li>
+</ul></div><div class="tab-item-content" id="queue-points-3"><ul>
+<li>两个栈实现队列 入队压入栈 A，出队时若栈 B 为空则把 A 全部倒入
+B，再从 B 弹出</li>
+<li>两个队列实现栈
+维持一个空队列作为辅助，把除最后一个元素外的元素转移到辅助队列，再弹出最后一个</li>
+<li>408 常问最坏与均摊复杂度 两栈实现队列的出队均摊为 <span
+class="math inline">\(O(1)\)</span></li>
+</ul></div><div class="tab-item-content" id="queue-points-4"><ul>
+<li>题目通常给「入队序列」与「出队序列」，要求判断能否由某类双端队列得到</li>
+<li>有效做法是画状态或做过程模拟，避免凭直觉判断</li>
+</ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h2 id="数组与特殊矩阵">3.3 数组与特殊矩阵</h2>
+<h3 id="数组的存储与地址计算">3.3.1 数组的存储与地址计算</h3>
+<div class="tabs" id="array-addr"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="array-addr-1">一维数组</button><button type="button" class="tab " data-href="array-addr-2">二维数组</button><button type="button" class="tab " data-href="array-addr-3">下标从 1 开始</button></ul><div class="tab-contents"><div class="tab-item-content active" id="array-addr-1"><p>设数组 <span class="math inline">\(A[0 \ldots n-1]\)</span>，首地址为
+<span class="math inline">\(\text{LOC}(A[0])\)</span>，每个元素占 <span
+class="math inline">\(L\)</span> 字节</p>
+<p><span class="math display">\[\text{LOC}(A[i]) = \text{LOC}(A[0]) + i
+\times L\]</span></p></div><div class="tab-item-content" id="array-addr-2"><p>设数组 <span class="math inline">\(A[0 \ldots m-1][0 \ldots
+n-1]\)</span>，首地址为 <span
+class="math inline">\(\text{LOC}(A[0][0])\)</span>.</p>
+<p><strong>行优先存储</strong> ( C 语言默认 )</p>
+<p><span class="math display">\[\text{LOC}(A[i][j]) =
+\text{LOC}(A[0][0]) + (i \times n + j) \times L\]</span></p>
+<p><strong>列优先存储</strong> ( Fortran )</p>
+<p><span class="math display">\[\text{LOC}(A[i][j]) =
+\text{LOC}(A[0][0]) + (j \times m + i) \times L\]</span></p></div><div class="tab-item-content" id="array-addr-3"><p>若数组 <span class="math inline">\(A[1 \ldots m][1 \ldots
+n]\)</span>，行优先存储 :</p>
+<p><span class="math display">\[\text{LOC}(A[i][j]) =
+\text{LOC}(A[1][1]) + [(i-1) \times n + (j-1)] \times L\]</span></p>
+<div class="note warning simple">
+<p>
+408 考题中下标起始值不固定，务必 <strong>仔细读题</strong>
+确认下标范围，再套公式.
+</p>
+</div></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="特殊矩阵压缩存储">3.3.2 特殊矩阵压缩存储</h3>
+<div class="note info simple"><p><strong>压缩存储</strong> 对具有规律分布的特殊矩阵，只存储
+<strong>有效元素</strong>，其余元素通过计算得到，以节省空间.</p>
+</div>
+<div class="tabs" id="special-matrix"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="special-matrix-1">对称矩阵</button><button type="button" class="tab " data-href="special-matrix-2">三角矩阵</button><button type="button" class="tab " data-href="special-matrix-3">对角矩阵</button></ul><div class="tab-contents"><div class="tab-item-content active" id="special-matrix-1"><p><strong>对称矩阵</strong> <span class="math inline">\(A[i][j] =
+A[j][i]\)</span>，<span class="math inline">\(n\)</span> 阶矩阵只需存储
+<strong>下三角</strong> 部分 ( 含主对角线 )，共 <span
+class="math inline">\(\dfrac{n(n+1)}{2}\)</span> 个元素，存入一维数组
+<span class="math inline">\(B[0 \ldots \frac{n(n+1)}{2}-1]\)</span>.</p>
+<p>下标对应关系 ( <span class="math inline">\(1 \leq i,j \leq
+n\)</span>，行优先存储下三角 ) :</p>
+<p><span class="math display">\[k = \begin{cases} \dfrac{i(i-1)}{2} + j
+- 1 &amp; i \geq j \text{ ( 下三角 )} \\[6pt] \dfrac{j(j-1)}{2} + i - 1
+&amp; i &lt; j \text{ ( 上三角，用 } A[j][i] \text{ ) }
+\end{cases}\]</span></p></div><div class="tab-item-content" id="special-matrix-2"><p><strong>下三角矩阵</strong> 上三角区域 ( 不含对角线 ) 全为常数 <span
+class="math inline">\(c\)</span>，只存下三角 + 对角线元素及常数 <span
+class="math inline">\(c\)</span>，共 <span
+class="math inline">\(\dfrac{n(n+1)}{2} + 1\)</span> 个元素.</p>
+<p><span class="math display">\[k = \begin{cases} \dfrac{i(i-1)}{2} + j
+- 1 &amp; i \geq j \\[6pt] \dfrac{n(n+1)}{2} &amp; i &lt; j \text{ (
+存常数 } c \text{ 的位置 ) } \end{cases}\]</span></p>
+<p><strong>上三角矩阵</strong> 下三角区域全为常数，类似处理，只存上三角
++ 对角线 + 常数.</p></div><div class="tab-item-content" id="special-matrix-3"><p><strong>对角矩阵</strong> ( 带状矩阵 )
+非零元素集中在主对角线及其两侧共 <span class="math inline">\(d\)</span>
+条对角线的带状区域内，带宽为 <span class="math inline">\(d =
+2b+1\)</span> ( <span class="math inline">\(b\)</span> 为半带宽 ).</p>
+<p>以三对角矩阵 ( <span class="math inline">\(b=1\)</span> )
+为例，只存储 <span class="math inline">\(3n-2\)</span> 个非零元素</p>
+<p><span class="math display">\[k = 2(i-1) + (j - i + 1) \quad (|i-j|
+\leq 1)\]</span></p>
+<p>反向推导 已知 <span class="math inline">\(k\)</span>，求 <span
+class="math inline">\((i,j)\)</span></p>
+<p><span class="math display">\[i = \left\lfloor \dfrac{k+1}{3}
+\right\rfloor + 1, \quad j = k - 2(i-1) + i - 1\]</span></p></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="稀疏矩阵">3.3.3 稀疏矩阵</h3>
+<div class="note info simple"><p><strong>稀疏矩阵</strong> 矩阵中非零元素个数远少于零元素个数.
+通常非零元素个数 <span class="math inline">\(t \leq \dfrac{m \times
+n}{3}\)</span> 时视为稀疏.</p>
+</div>
+<div class="tabs" id="sparse-matrix"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="sparse-matrix-1">三元组表</button><button type="button" class="tab " data-href="sparse-matrix-2">十字链表</button><button type="button" class="tab " data-href="sparse-matrix-3">对比</button></ul><div class="tab-contents"><div class="tab-item-content active" id="sparse-matrix-1"><p><strong>三元组表</strong> ( Triple ) 将每个非零元素用 <span
+class="math inline">\((i,\ j,\ v)\)</span>
+表示，顺序存入一维数组，同时记录矩阵规模 <span
+class="math inline">\(m\)</span>、<span class="math inline">\(n\)</span>
+和非零元素总数 <span class="math inline">\(t\)</span>.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MaxSize 200</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> i, j;       <span class="comment">// 行列下标</span></span><br><span class="line">    ElemType v;     <span class="comment">// 元素值</span></span><br><span class="line">&#125; Triple;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    Triple data[MaxSize];</span><br><span class="line">    <span class="type">int</span> mu, nu, tu; <span class="comment">// 行数、列数、非零元个数</span></span><br><span class="line">&#125; TSMatrix;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>存储量 <span class="math inline">\(O(t)\)</span>，<span
+class="math inline">\(t\)</span> 为非零元个数.</li>
+<li>转置算法 按列扫描原矩阵，时间复杂度 <span class="math inline">\(O(n
+\times t)\)</span> ( 普通转置 ) 或 <span
+class="math inline">\(O(n+t)\)</span> ( 快速转置 ).</li>
+</ul></div><div class="tab-item-content" id="sparse-matrix-2"><p><strong>十字链表</strong> ( Orthogonal List )
+每个非零元素用一个结点表示，结点含 5 个域</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">| row | col | val | right | down |</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>right</code> 指向同行下一个非零元素.</li>
+<li><code>down</code> 指向同列下一个非零元素.</li>
+<li>另有 <code>rhead[]</code> 行头指针数组和 <code>chead[]</code>
+列头指针数组.</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">                  chead[1]  chead[2]  chead[3]</span><br><span class="line">rhead[1] ──→ (1,2,3) ──→ (1,3,5) ──→ NULL</span><br><span class="line">                ↓                    ↓</span><br><span class="line">rhead[2] ──→ (2,1,2) ──→ NULL    (2,3,4) ──→ NULL</span><br></pre></td></tr></table></figure>
+<ul>
+<li><span class="p green">优点</span>
+插入、删除非零元素方便，无需移动大量数据.</li>
+<li><span class="p red">缺点</span>
+指针开销大，结构复杂，不如三元组直观.</li>
+</ul></div><div class="tab-item-content" id="sparse-matrix-3"><table style="width:100%;">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">表示方法</th>
+<th style="text-align: center;">存储量</th>
+<th style="text-align: center;">转置复杂度</th>
+<th style="text-align: center;">插删方便性</th>
+<th style="text-align: left;">适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">三元组表</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(t)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n+t)\)</span></td>
+<td style="text-align: center;">一般</td>
+<td style="text-align: left;">静态稀疏矩阵</td>
+</tr>
+<tr>
+<td style="text-align: left;">十字链表</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(t)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(t)\)</span></td>
+<td style="text-align: center;"><span class="p green">好</span></td>
+<td style="text-align: left;">动态修改频繁</td>
+</tr>
+</tbody>
+</table></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="常考点-2">3.3.4 408 常考点</h3>
+<div class="tabs" id="array-points"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="array-points-1">地址计算</button><button type="button" class="tab " data-href="array-points-2">压缩存储</button><button type="button" class="tab " data-href="array-points-3">快速转置</button></ul><div class="tab-contents"><div class="tab-item-content active" id="array-points-1"><ul>
+<li>先确认下标起始 ( 0 还是 1 ) 与存储方式 ( 行优先还是列优先 )</li>
+<li>地址公式里最容易错的是把 <span
+class="math inline">\(m\)</span>、<span class="math inline">\(n\)</span>
+写反</li>
+<li>题目常给元素大小 <span class="math inline">\(L\)</span>
+与首地址，最终答案常以字节偏移给出</li>
+</ul></div><div class="tab-item-content" id="array-points-2"><ul>
+<li>对称矩阵常让你算 <span class="math inline">\(k\)</span> 或反算 <span
+class="math inline">\((i,j)\)</span></li>
+<li>三角矩阵会额外出现一个「常数位」存 <span
+class="math inline">\(c\)</span>，容易漏</li>
+<li>带状矩阵要先判断 <span class="math inline">\((i,j)\)</span>
+是否落在带内，否则该位置为 0 或常数</li>
+</ul></div><div class="tab-item-content" id="array-points-3"><div class="note info simple">
+<p>
+快速转置把「按列找元素」改为「一次统计 + 前缀和定位」，把复杂度降到
+<span class="math inline">(O(n+t))</span>.
+</p>
+</div>
+<ul>
+<li><code>num[col]</code> 统计每列非零元个数</li>
+<li><code>pos[col]</code> 记录该列在转置后数组中的起始位置 ( 前缀和
+)</li>
+<li>扫描原三元组数组时直接把元素放到转置数组的目标下标</li>
+</ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<hr />
+<h2 id="例题精选">3.4 例题精选</h2>
+<div class="note success simple"><p><strong>例题 1 ( 循环队列队长 )</strong> 循环队列
+<code>MaxSize = 10</code>，<code>front = 6</code>，<code>rear = 3</code>，求队列中元素个数.</p>
+<p><strong>解</strong> <span class="math inline">\(\text{len} =
+(\text{rear} - \text{front} + \text{MaxSize}) \bmod \text{MaxSize} = (3
+- 6 + 10) \bmod 10 = 7\)</span>.</p>
+</div>
+<div class="note success simple"><p><strong>例题 2 ( 出栈序列合法性 )</strong> 入栈序列为 <span
+class="math inline">\(1,2,3\)</span>，判断 <span
+class="math inline">\(3,1,2\)</span> 是否为合法出栈序列.</p>
+<p><strong>解</strong> 模拟过程 压 1、压 2、压 3、弹 3，此时栈为 <span
+class="math inline">\([1,2]\)</span>，栈顶为 2，但需弹出 1，<span
+class="p red">不合法</span>. 因此 <span
+class="math inline">\(3,1,2\)</span> 不是合法出栈序列.</p>
+</div>
+<div class="note success simple"><p><strong>例题 3 ( 对称矩阵下标映射 )</strong> 对称矩阵 <span
+class="math inline">\(A[1\ldots 6][1\ldots 6]\)</span>
+按行优先存储下三角于 <span class="math inline">\(B[0\ldots
+20]\)</span>，求 <span class="math inline">\(A[4][2]\)</span> 对应 <span
+class="math inline">\(B\)</span> 中下标 <span
+class="math inline">\(k\)</span>.</p>
+<p><strong>解</strong> <span class="math inline">\(i = 4 &gt; j =
+2\)</span>，属于下三角，<span class="math inline">\(k =
+\dfrac{i(i-1)}{2} + j - 1 = \dfrac{4 \times 3}{2} + 2 - 1 =
+7\)</span>.</p>
+</div>
+<div class="note success simple"><p><strong>例题 4 ( 中缀转后缀 )</strong> 将中缀表达式
+<code>A + B * (C - D) - E / F</code> 转换为后缀表达式.</p>
+<p><strong>解</strong> 扫描过程 ( 运算符栈记为
+<code>OP</code>，输出序列记为 <code>OUT</code> )</p>
+<ol type="1">
+<li><code>A</code> → <code>OUT: A</code></li>
+<li><code>+</code> → <code>OP: +</code></li>
+<li><code>B</code> → <code>OUT: A B</code></li>
+<li><code>*</code> → <code>OP: + *</code></li>
+<li><code>(</code> → <code>OP: + * (</code></li>
+<li><code>C</code> → <code>OUT: A B C</code></li>
+<li><code>-</code> → <code>OP: + * ( -</code></li>
+<li><code>D</code> → <code>OUT: A B C D</code></li>
+<li><code>)</code> → 弹出直到 <code>(</code> 输出 <code>-</code>，丢弃
+<code>(</code></li>
+<li><code>-</code> → 弹出优先级不小于 <code>-</code> 的运算符 依次输出
+<code>*</code>、<code>+</code>，再将 <code>-</code> 入栈</li>
+<li><code>E</code> → 输出</li>
+<li><code>/</code> → 入栈</li>
+<li><code>F</code> → 输出</li>
+<li>扫描结束 → 弹出剩余运算符</li>
+</ol>
+<p>结果为 <code>A B C D - * + E F / -</code>.</p>
+</div>
+<div class="note success simple"><p><strong>例题 5 ( 出栈序列判定 )</strong> 入栈序列为 <span
+class="math inline">\(1,2,3,4,5\)</span>，判断出栈序列 <span
+class="math inline">\(4,5,3,2,1\)</span> 是否合法.</p>
+<p><strong>解</strong> 模拟入栈出栈.</p>
+<p>依次压入 1,2,3,4，弹出 4. 再压入 5，弹出 5. 此时栈顶为 3，弹出 3.
+继续弹出 2,1. 可完成输出，因此为 <span class="p green">合法</span>
+序列.</p>
+</div>
+<div class="note success simple"><p><strong>例题 6 ( 出栈序列判定 )</strong> 入栈序列为 <span
+class="math inline">\(1,2,3,4,5\)</span>，判断出栈序列 <span
+class="math inline">\(3,1,2,5,4\)</span> 是否合法.</p>
+<p><strong>解</strong> 压入 1,2,3，弹出 3. 此时栈顶为
+2，但下一次需要输出 1，且 1 被 2 压住，无法直接弹出. 继续入栈只能压入
+4,5，使 1 更不可能弹出. 因此该序列 <span
+class="p red">不合法</span>.</p>
+</div>
+<div class="note success simple"><p><strong>例题 7 ( 两栈实现队列的均摊 )</strong>
+用两个栈实现队列，入队执行 <code>push(A, x)</code>，出队若栈 B 为空则把
+A 全部倒入 B，再 <code>pop(B)</code>. 证明出队操作均摊为 <span
+class="math inline">\(O(1)\)</span>.</p>
+<p><strong>解</strong> 每个元素最多经历一次从栈 A 到栈 B 的转移.</p>
+<ul>
+<li>入队时压入 A 一次</li>
+<li>转移时从 A 弹出一次并压入 B 一次</li>
+<li>出队时从 B 弹出一次</li>
+</ul>
+<p>因此每个元素总共参与常数次栈操作，总成本为 <span
+class="math inline">\(O(m)\)</span>，<span
+class="math inline">\(m\)</span> 次队列操作的均摊时间复杂度为 <span
+class="math inline">\(O(1)\)</span>.</p>
+</div>
+<div class="note success simple"><p><strong>例题 8 ( 循环队列操作序列 )</strong> 循环队列
+<code>MaxSize = 6</code> 采用牺牲一格方案，初始
+<code>front = rear = 0</code>. 依次执行入队 1,2,3,4，出队两次，再入队
+5,6，求此时 <code>front</code>、<code>rear</code> 与队列长度.</p>
+<p><strong>解</strong> 牺牲一格方案下，队列长度 <span
+class="math display">\[\text{len} = (\text{rear} - \text{front} +
+\text{MaxSize}) \bmod \text{MaxSize}.\]</span></p>
+<p>模拟过程后队列中为 <code>3,4,5,6</code>.</p>
+<p>此时 <code>front = 2</code>，<code>rear = 0</code>，因此 <span
+class="math display">\[\text{len} = (0 - 2 + 6) \bmod 6 =
+4.\]</span></p>
+</div>
+<div class="note success simple"><p><strong>例题 9 ( 地址计算 )</strong> 二维数组 <span
+class="math inline">\(A[1\ldots 10][1\ldots 20]\)</span>
+行优先存储，元素占 4 字节，<span
+class="math inline">\(\text{LOC}(A[1][1])=1000\)</span>. 求 <span
+class="math inline">\(\text{LOC}(A[3][5])\)</span>.</p>
+<p><strong>解</strong> 下标从 1 开始，行优先 : <span
+class="math display">\[\text{LOC}(A[i][j]) = \text{LOC}(A[1][1]) +
+[(i-1)\times n + (j-1)]\times L.\]</span></p>
+<p>代入 <span class="math inline">\(i=3,j=5,n=20,L=4\)</span> : <span
+class="math display">\[1000 + [(2\times 20 + 4)\times 4] = 1000 + 176 =
+1176.\]</span></p>
+</div>
+<div class="note success simple"><p><strong>例题 10 ( 三角矩阵压缩 )</strong> 下三角矩阵 <span
+class="math inline">\(A[1\ldots n][1\ldots n]\)</span>
+的上三角元素均为常数 <span
+class="math inline">\(c\)</span>，按行优先压缩到一维数组 <span
+class="math inline">\(B\)</span>. 求 <span
+class="math inline">\(A[i][j]\)</span> 对应的存储下标.</p>
+<p><strong>解</strong> 只存下三角含主对角线的 <span
+class="math inline">\(\\dfrac{n(n+1)}{2}\)</span>
+个元素，以及常数位.</p>
+<p><span class="math display">\[k = \begin{cases}
+\dfrac{i(i-1)}{2} + j - 1 &amp; i \ge j \\\\[4pt]
+\dfrac{n(n+1)}{2} &amp; i &lt; j
+\end{cases}\]</span></p>
+</div>
+<div class="note success simple"><p><strong>例题 11 ( 快速转置定位 )</strong> 稀疏矩阵三元组表中共有
+<span class="math inline">\(t\)</span> 个非零元，列数为 <span
+class="math inline">\(n\)</span>. 说明快速转置中 <code>pos[col]</code>
+的含义，并写出其递推关系.</p>
+<p><strong>解</strong> <code>pos[col]</code> 表示转置后三元组数组中「第
+<code>col</code> 列 ( 转置后为第 <code>col</code> 行 )
+的第一个非零元」存放的位置.</p>
+<p>若 <code>num[col]</code> 是原矩阵第 <code>col</code>
+列非零元个数，则</p>
+<ul>
+<li><code>pos[1] = 0</code></li>
+<li><code>pos[col] = pos[col-1] + num[col-1]</code> ( <span
+class="math inline">\(2 \le col \le n\)</span> )</li>
+</ul>
+<p>这样扫描原三元组数组时，可以把每个元素直接放到目标位置并递增该列的当前位置指针.</p>
+</div>
+<hr />
+<h2 id="本章疑难点">3.5 本章疑难点</h2>
+<h4 id="循环队列判空-判满">1. 循环队列判空 / 判满</h4>
+<ul>
+<li>牺牲一格方案最常用，务必记住队满条件
+<code>(rear+1)%MaxSize == front</code> 而非
+<code>rear == front</code>.</li>
+<li>三种方案各有优缺点，选择时结合题目要求.</li>
+</ul>
+<h4 id="栈与递归的关系">2. 栈与递归的关系</h4>
+<ul>
+<li>每次函数调用都会在系统栈上开辟一个
+<strong>栈帧</strong>，保存局部变量、参数和返回地址.</li>
+<li>递归深度过大会导致
+<strong>栈溢出</strong>，可改用显式栈消除递归.</li>
+</ul>
+<h4 id="后缀表达式求值与中缀转后缀">3. 后缀表达式求值与中缀转后缀</h4>
+<ul>
+<li>中缀转后缀用 <strong>运算符栈</strong>; 后缀表达式求值用
+<strong>操作数栈</strong>. 两者使用的栈类型不同，注意区分.</li>
+</ul>
+<h4 id="特殊矩阵压缩下标公式">4. 特殊矩阵压缩下标公式</h4>
+<ul>
+<li>408 考试中常给出 <strong>从 1 开始</strong>
+的下标，务必仔细读题后代入正确公式，不要混淆行列.</li>
+</ul>
+<h4 id="十字链表-vs.-三元组">5. 十字链表 vs. 三元组</h4>
+<ul>
+<li>三元组转置更快 ( 快速转置 <span
+class="math inline">\(O(n+t)\)</span> ); 十字链表插删更方便.
+按照操作类型选择.</li>
+</ul>
+<hr />
+<h2 id="本章小结">3.6 本章小结</h2>
+<ul>
+<li>栈 ( LIFO ) 和队列 ( FIFO )
+都是操作受限的线性表，本质上是特殊的线性表.</li>
+<li>顺序栈 / 链栈、循环队列 / 链队列是四种实现方式，各有适用场景.</li>
+<li>双端队列是栈和队列的推广，输入 / 输出受限双端队列是重要变体.</li>
+<li>数组地址计算和特殊矩阵压缩存储是纯粹的计算题，掌握公式即可.</li>
+<li>稀疏矩阵三元组与十字链表是空间优化的重要思想，十字链表插删优势明显.</li>
+</ul>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">sparkle520</div><div class="post-copyright__author_desc">我一直都在寻找着什么</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="http://example.com/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%843/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('http://example.com/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%843/')">408-数据结构-3-栈、队列和数组</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="http://example.com/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%843/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=408-数据结构-3-栈、队列和数组&amp;url=http://example.com/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%843/&amp;pic=https://pic1.imgdb.cn/item/69b00d9e6738cb8aa1298eb8.png" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">SPARKLE</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/408/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>408<span class="tagsPageCount">21</span></a><a class="post-meta__box__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>数据结构<span class="tagsPageCount">7</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://pic1.imgdb.cn/item/69b022ea6738cb8aa129ae4b.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%842/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b00d556738cb8aa1298e3c.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">408-数据结构-2-线性表</div></div></a></div><div class="next-post pull-right"><a href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%844/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b01e0c6738cb8aa129a777.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">408-数据结构-4-树与二叉树</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%841/" title="408-数据结构-1-绪论"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b00e866738cb8aa1299045.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-13</div><div class="title">408-数据结构-1-绪论</div></div></a></div><div><a href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%842/" title="408-数据结构-2-线性表"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b00d556738cb8aa1298e3c.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-13</div><div class="title">408-数据结构-2-线性表</div></div></a></div><div><a href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%847/" title="408-数据结构-7-内部排序"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b022ea6738cb8aa129ae4b.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-14</div><div class="title">408-数据结构-7-内部排序</div></div></a></div><div><a href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%846/" title="408-数据结构-6-查找"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b022936738cb8aa129ade8.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-14</div><div class="title">408-数据结构-6-查找</div></div></a></div><div><a href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%844/" title="408-数据结构-4-树与二叉树"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b01e0c6738cb8aa129a777.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-13</div><div class="title">408-数据结构-4-树与二叉树</div></div></a></div><div><a href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%845/" title="408-数据结构-5-图"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b021cd6738cb8aa129acd7.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-14</div><div class="title">408-数据结构-5-图</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/671cfe2fd29ded1a8c5ffb0b.png" alt="status"/></div></div><div class="author-info__description">不管你在<strong style="color:white">这个世界</strong>的哪个地方，我一定<strong style="color:white">会</strong>，再次去<strong style="color:white">见</strong>你的!</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">sparkle520</h1><div class="author-info__desc">我一直都在寻找着什么</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/sparkle520" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/34882250" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">Hello World! 欢迎来到我的博客~</div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://pic.imgdb.cn/item/66c487f1d9c307b7e9ba5c7a.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://pic.imgdb.cn/item/66c487ebd9c307b7e9ba5725.png) center center / 100% no-repeat"></div></div></div></div><div class="card-widget card-countdown"><div class="item-headline"><i></i><span></span></div><div class="item-content"><div class="cd-count-left">
+  <span class="cd-text">距离</span>
+  <span class="cd-name" id="eventName"></span>
+  <span class="cd-time" id="daysUntil"></span>
+  <span class="cd-date" id="eventDate"></span>
+</div>
+<div id="countRight" class="cd-count-right"></div>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC3%E7%AB%A0-%E6%A0%88%E9%98%9F%E5%88%97%E5%92%8C%E6%95%B0%E7%BB%84"><span class="toc-number">1.</span> <span class="toc-text">第3章 栈、队列和数组</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%88-stack"><span class="toc-number">1.1.</span> <span class="toc-text">3.1 栈 ( Stack )</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E4%B8%8E%E7%89%B9%E6%80%A7"><span class="toc-number">1.1.1.</span> <span class="toc-text">3.1.1 定义与特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">1.1.2.</span> <span class="toc-text">3.1.2 基本操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E6%A0%88"><span class="toc-number">1.1.3.</span> <span class="toc-text">3.1.3 顺序栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E6%A0%88"><span class="toc-number">1.1.4.</span> <span class="toc-text">3.1.4 链栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">1.1.5.</span> <span class="toc-text">3.1.5 栈的应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%80%83%E7%82%B9"><span class="toc-number">1.1.6.</span> <span class="toc-text">3.1.6 408 常考点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%9F%E5%88%97-queue"><span class="toc-number">1.2.</span> <span class="toc-text">3.2 队列 ( Queue )</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E4%B8%8E%E7%89%B9%E6%80%A7-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">3.2.1 定义与特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C-1"><span class="toc-number">1.2.2.</span> <span class="toc-text">3.2.2 基本操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E9%98%9F%E5%88%97%E4%B8%8E%E5%81%87%E6%BA%A2%E5%87%BA"><span class="toc-number">1.2.3.</span> <span class="toc-text">3.2.3 顺序队列与假溢出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97"><span class="toc-number">1.2.4.</span> <span class="toc-text">3.2.4 循环队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E9%98%9F%E5%88%97"><span class="toc-number">1.2.5.</span> <span class="toc-text">3.2.5 链队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97"><span class="toc-number">1.2.6.</span> <span class="toc-text">3.2.6 双端队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%9F%E5%88%97%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">1.2.7.</span> <span class="toc-text">3.2.7 队列的应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%80%83%E7%82%B9-1"><span class="toc-number">1.2.8.</span> <span class="toc-text">3.2.8 408 常考点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E4%B8%8E%E7%89%B9%E6%AE%8A%E7%9F%A9%E9%98%B5"><span class="toc-number">1.3.</span> <span class="toc-text">3.3 数组与特殊矩阵</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E7%9A%84%E5%AD%98%E5%82%A8%E4%B8%8E%E5%9C%B0%E5%9D%80%E8%AE%A1%E7%AE%97"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.3.1 数组的存储与地址计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E7%9F%A9%E9%98%B5%E5%8E%8B%E7%BC%A9%E5%AD%98%E5%82%A8"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.3.2 特殊矩阵压缩存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.3.3 稀疏矩阵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%80%83%E7%82%B9-2"><span class="toc-number">1.3.4.</span> <span class="toc-text">3.3.4 408 常考点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98%E7%B2%BE%E9%80%89"><span class="toc-number">1.4.</span> <span class="toc-text">3.4 例题精选</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E7%AB%A0%E7%96%91%E9%9A%BE%E7%82%B9"><span class="toc-number">1.5.</span> <span class="toc-text">3.5 本章疑难点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97%E5%88%A4%E7%A9%BA-%E5%88%A4%E6%BB%A1"><span class="toc-number">1.5.0.1.</span> <span class="toc-text">1. 循环队列判空 &#x2F; 判满</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%88%E4%B8%8E%E9%80%92%E5%BD%92%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">1.5.0.2.</span> <span class="toc-text">2. 栈与递归的关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC%E4%B8%8E%E4%B8%AD%E7%BC%80%E8%BD%AC%E5%90%8E%E7%BC%80"><span class="toc-number">1.5.0.3.</span> <span class="toc-text">3. 后缀表达式求值与中缀转后缀</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E7%9F%A9%E9%98%B5%E5%8E%8B%E7%BC%A9%E4%B8%8B%E6%A0%87%E5%85%AC%E5%BC%8F"><span class="toc-number">1.5.0.4.</span> <span class="toc-text">4. 特殊矩阵压缩下标公式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%81%E5%AD%97%E9%93%BE%E8%A1%A8-vs.-%E4%B8%89%E5%85%83%E7%BB%84"><span class="toc-number">1.5.0.5.</span> <span class="toc-text">5. 十字链表 vs. 三元组</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93"><span class="toc-number">1.6.</span> <span class="toc-text">3.6 本章小结</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/03/16/%E8%8B%B1%E8%AF%AD-%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0-%E5%B7%B2%E5%8A%A0%E5%AF%86/" title="英语个人笔记 ( 已加密 )"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69ad99d2001548a02b697c75.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="英语个人笔记 ( 已加密 )"/></a><div class="content"><a class="title" href="/2026/03/16/%E8%8B%B1%E8%AF%AD-%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0-%E5%B7%B2%E5%8A%A0%E5%AF%86/" title="英语个人笔记 ( 已加密 )">英语个人笔记 ( 已加密 )</a><time datetime="2026-03-16T14:00:27.000Z" title="发表于 2026-03-16 22:00:27">2026-03-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%847/" title="408-数据结构-7-内部排序"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b022ea6738cb8aa129ae4b.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-数据结构-7-内部排序"/></a><div class="content"><a class="title" href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%847/" title="408-数据结构-7-内部排序">408-数据结构-7-内部排序</a><time datetime="2026-03-13T18:00:00.000Z" title="发表于 2026-03-14 02:00:00">2026-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%846/" title="408-数据结构-6-查找"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b022936738cb8aa129ade8.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-数据结构-6-查找"/></a><div class="content"><a class="title" href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%846/" title="408-数据结构-6-查找">408-数据结构-6-查找</a><time datetime="2026-03-13T17:00:00.000Z" title="发表于 2026-03-14 01:00:00">2026-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%845/" title="408-数据结构-5-图"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b021cd6738cb8aa129acd7.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-数据结构-5-图"/></a><div class="content"><a class="title" href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%845/" title="408-数据结构-5-图">408-数据结构-5-图</a><time datetime="2026-03-13T16:00:00.000Z" title="发表于 2026-03-14 00:00:00">2026-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%844/" title="408-数据结构-4-树与二叉树"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b01e0c6738cb8aa129a777.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-数据结构-4-树与二叉树"/></a><div class="content"><a class="title" href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%844/" title="408-数据结构-4-树与二叉树">408-数据结构-4-树与二叉树</a><time datetime="2026-03-13T15:00:00.000Z" title="发表于 2026-03-13 23:00:00">2026-03-13</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  if (true) { 
+    window.typed = new Typed("#footer-type-tips", {
+      strings: ["只要记住你的名字&#44; 不管你在世界的哪个地方&#44; 我一定&#44; 会去见你 !"],
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50
+    })
+  } else {
+    document.getElementById("footer-type-tips").innerHTML = '只要记住你的名字&#44; 不管你在世界的哪个地方&#44; 我一定&#44; 会去见你 !'
+  }
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.cbd.int/typed.js@2.1.0/dist/typed.umd.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/sparkle520" title="sparkle">sparkle</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">107</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">61</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">7</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/sparkle520?tab=repositories" title="github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="github"/><span class="back-menu-item-text">github</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/408/" style="font-size: 0.88rem;">408<sup>21</sup></a><a href="/tags/AOP/" style="font-size: 0.88rem;">AOP<sup>1</sup></a><a href="/tags/Deep-Learning/" style="font-size: 0.88rem;">Deep Learning<sup>1</sup></a><a href="/tags/IoC/" style="font-size: 0.88rem;">IoC<sup>1</sup></a><a href="/tags/JSR303/" style="font-size: 0.88rem;">JSR303<sup>1</sup></a><a href="/tags/Matplotlib/" style="font-size: 0.88rem;">Matplotlib<sup>3</sup></a><a href="/tags/c/" style="font-size: 0.88rem;">c#<sup>2</sup></a><a href="/tags/java/" style="font-size: 0.88rem;">java<sup>4</sup></a><a href="/tags/python/" style="font-size: 0.88rem;">python<sup>5</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 0.88rem;">事务<sup>1</sup></a><a href="/tags/%E4%BA%8C%E6%AC%A1%E5%9E%8B/" style="font-size: 0.88rem;">二次型<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E3%80%82/" style="font-size: 0.88rem;">你的名字。<sup>3</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">你的名字同名小说<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%A4%96%E4%BC%A0%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">你的名字外传小说<sup>1</sup></a><a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size: 0.88rem;">写作<sup>4</sup></a><a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 0.88rem;">包管理<sup>1</sup></a><a href="/tags/%E5%8D%B7%E7%A7%AF%E5%85%AC%E5%BC%8F/" style="font-size: 0.88rem;">卷积公式<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90/" style="font-size: 0.88rem;">天气之子<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">天气之子同名小说<sup>1</sup></a><a href="/tags/%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">小说<sup>2</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 0.88rem;">操作系统<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" style="font-size: 0.88rem;">数据校验<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" style="font-size: 0.88rem;">数据链路层<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 0.88rem;">概率论<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 0.88rem;">概率论与数理统计<sup>7</sup></a><a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 0.88rem;">汇编<sup>9</sup></a><a href="/tags/%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80/" style="font-size: 0.88rem;">泰勒展开<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/" style="font-size: 0.88rem;">物理层<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%80%BC/" style="font-size: 0.88rem;">特征值<sup>2</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F/" style="font-size: 0.88rem;">特征向量<sup>2</sup></a><a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 0.88rem;">线性代数<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" style="font-size: 0.88rem;">网络体系结构<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" style="font-size: 0.88rem;">网络层<sup>2</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 0.88rem;">英语<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95/" style="font-size: 0.88rem;">英语语法<sup>24</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 0.88rem;">计算机组成原理<sup>5</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 0.88rem;">计算机网络<sup>5</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 0.88rem;">语法<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/" style="font-size: 0.88rem;">高等代数<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" style="font-size: 0.88rem;">高等数学<sup>14</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script async src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.cbd.int/mathjax@3.2.2/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.cbd.int/mermaid@10.9.1/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  anzhiyu.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://sparkle521.xyz',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://cdn.cbd.int/twikoo@1.6.25/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://sparkle521.xyz',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"><script async src="/js/anzhiyu/comment_barrage.js"></script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://sparkle521.xyz',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.cbd.int/twikoo@1.6.25/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script async data-pjax src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.1/bubble/bubble.js"></script><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script>const notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));</script><script src="/custom/countdown.js"></script><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

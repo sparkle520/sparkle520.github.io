@@ -1,0 +1,1397 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>408-数据结构-7-内部排序 | SPARKLE</title><meta name="keywords" content="408,数据结构"><meta name="author" content="sparkle520"><meta name="copyright" content="sparkle520"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="408-数据结构-7-内部排序"><meta name="application-name" content="408-数据结构-7-内部排序"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="408-数据结构-7-内部排序"><meta property="og:url" content="http://example.com/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%847/index.html"><meta property="og:site_name" content="SPARKLE"><meta property="og:description" content="第7章 内部排序 ( Internal Sorting ) 7.1 基本概念 7.1.1 核心术语 排序 将一组无序的记录按关键字的某种顺序 ( 递增或递减 ) 重新排列的过程. 内部排序 指排序期间所有数据均在内存中，外部排序 需借助外存.         术语 定"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://pic1.imgdb.cn/item/69b022ea6738cb8aa129ae4b.png"><meta property="article:author" content="sparkle520"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://pic1.imgdb.cn/item/69b022ea6738cb8aa129ae4b.png"><meta name="description" content="第7章 内部排序 ( Internal Sorting ) 7.1 基本概念 7.1.1 核心术语 排序 将一组无序的记录按关键字的某种顺序 ( 递增或递减 ) 重新排列的过程. 内部排序 指排序期间所有数据均在内存中，外部排序 需借助外存.         术语 定"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%847/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: 'https://sparkle521.xyz',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":4000,"accessToken":"","mailMd5":""},
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: {"mode":"api","api":"https://img2color-go.vercel.app/api?img=","cover_change":true},
+  authorStatus: {"skills":["(❤ ω ❤)"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: sparkle520","link":"链接: ","source":"来源: SPARKLE","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#883ced","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'SPARKLE',
+  title: '408-数据结构-7-内部排序',
+  postAI: '',
+  pageFillDescription: '7.1 基本概念, 7.1.1 核心术语, 7.1.2 稳定性的重要性, 7.1.3 408 常考点, 7.2 插入排序, 7.2.1 直接插入排序, 7.2.2 折半插入排序, 7.2.3 希尔排序 ( Shell Sort ), 7.3 交换排序, 7.3.1 冒泡排序, 7.3.2 快速排序, 7.3.3 408 常考点 ( 快速排序 ), 7.4 选择排序, 7.4.1 简单选择排序, 7.4.2 堆排序, 7.5 归并排序, 7.5.1 408 常考点 ( 归并排序 ), 7.6 基数排序, 7.6.1 408 常考点 ( 基数排序 ), 7.7 算法对比, 7.7.1 综合对比表, 7.7.2 记忆口诀, 7.7.3 适用场景选择, 7.7.4 408 常考点 ( 选算法题 ), 7.8 下界定理与基于比较的排序, 7.8.1 408 常考点, 7.9 例题精选第章内部排序基本概念核心术语排序将一组无序的记录按关键字的某种顺序递增或递减重新排列的过程内部排序指排序期间所有数据均在内存中外部排序需借助外存术语定义稳定性若排序前后值相同的两个元素相对位置不变则该算法稳定比较次数算法执行过程中关键字比较的总次数移动次数算法执行过程中记录移动交换的总次数原地排序空间复杂度不使用额外数组趟对序列进行一次完整扫描或处理称为一趟稳定性的重要性若记录有多个关键字先按次关键字排序再按主关键字稳定排序可保留次关键字的顺序基数排序的基础不稳定的排序算法快速排序堆排序希尔排序简单选择排序稳定的排序算法插入排序直接折半冒泡排序归并排序基数排序稳定性是算法本身的性质不是输入数据的性质但不稳定排序在某些特定输入下可能表现为稳定考试以最坏情况为准常考点稳定性时间与空间出题点稳定性的判定只看关键字相等的元素是否可能发生跨越交换跨组移动多关键字排序常用技巧先按次关键字排序再对主关键字做稳定排序即可保留次关键字顺序记忆口诀不稳定的只有快堆希选其余插冒归基稳定原地排序指辅助空间递归栈一般不计入辅助数组但常单独讨论快排递归栈归并排序数组实现需要辅助数组但链表归并可以做到额外空间比较次数与移动次数要分开看折半插入减少比较但不减少移动因此总体仍是重点会考过程快排最坏情况建堆为何是归并趟数与稳定性选最合适算法题按规模有序性稳定性空间限制四个维度给理由插入排序直接插入排序算法思路复杂度分析将第个元素插入到前个已排好序的子序列的合适位置从下标开始存哨兵哨兵后移插入情况比较次数移动次数时间复杂度最好正序最坏逆序平均空间复杂度稳定适合基本有序或小规模序列折半插入排序折半插入排序在直接插入的基础上用折半查找确定插入位置减少比较次数但移动次数不变为插入位置后移比较次数折半查找移动次数仍为时间复杂度总体仍为移动主导稳定希尔排序算法思路复杂度与特性希尔排序按步长增量序列分组每组内做直接插入排序逐步缩小步长直到步长序列示例暂存无哨兵作用仅借用号位时间复杂度与步长序列有关常见结果空间复杂度不稳定相同元素可能因不同分组被打乱顺序适合中等规模序列是突破的第一个改进插入排序步长序列选择步长序列最坏复杂度原始序列交换排序冒泡排序算法实现复杂度分析本趟无交换已有序提前结束每趟将最小元素冒到前端优化避免不必要的扫描情况比较次数交换次数时间复杂度最好正序最坏逆序平均空间复杂度稳定快速排序快速排序是最高频考点之一需掌握过程递归实现非递归实现时间复杂度分析及最坏情况过程递归实现非递归实现复杂度分析优化策略划分选取枢轴将序列划分为左右两部分取第一个元素为枢轴右侧小于的移到左边左侧大于的移到右边枢轴就位返回枢轴最终位置调用情况递归深度时间复杂度说明最好每次划分均匀最坏有序序列取首元素为枢轴平均期望空间复杂度平均递归栈最坏不稳定过程中远距离交换随机选取枢轴随机选取中的元素为枢轴避免有序序列最坏情况三数取中取的中间值为枢轴更稳定小规模切换当子数组长度通常时切换为直接插入排序三向划分将等于的元素单独分区荷兰国旗问题处理大量重复元素时效率更高常考点快速排序不变量最坏与优化空间与稳定性结束后一定就位左侧元素均右侧元素均题目手算时重点盯的移动条件以及先从右找再从左找的赋值顺序取首元素作枢轴时正序逆序会退化到最坏递归深度也退化为常见改进随机枢轴三数取中小区间切插入三向划分大量重复关键字快排不稳定的根因是跨区远距离交换空间复杂度平均为递归栈最坏为非递归实现用显式栈等价选择排序简单选择排序算法实现复杂度分析每趟从未排序部分找最小元素放到已排序末尾比较次数始终与输入无关交换次数最好正序最坏时间复杂度始终空间复杂度不稳定可能将当前最小值跳过相同元素交换到前面不稳定示例第趟选与交换和相对顺序改变堆排序堆排序已在第章堆中详细介绍此处重点对比性能特点步骤操作时间复杂度建堆从最后一个分支结点向上排序循环次每次取堆顶并总计建堆排序空间复杂度原地排序不稳定堆顶与末尾互换后相对顺序可能改变最坏情况仍为是唯一能保证最坏且空间的排序归并排序递归实现非递归实现复杂度分析趟数与归并过程辅助数组复制到辅助数组保证稳定性自底向上归并从步长开始每轮步长翻倍对相邻块两两合并非递归版本不需要额外的递归栈实际工程中更常用时间复杂度任何情况均为共趟每趟空间复杂度辅助数组稳定中时优先取左边保持相对顺序为什么归并是稳定的时遇到相等元素总是先取左子序列前者保证原来靠前的元素仍在前面个元素的二路归并排序共需趟归并趟数有序子列长度归并次数示例初始第趟第趟第趟常考点归并排序趟数稳定性空间二路归并排序需要趟每趟都是全数组级别的合并因此每趟手算题常考第趟结束后有序子列最大长度为是否稳定只看的相等处理取左边则稳定若写成可能破坏稳定性数组归并通常需要辅助数组链表归并可做到额外空间基数排序基本思想示例复杂度分析桶排序基数排序不比较关键字大小而是按关键字各位的值分配到桶队列中再收集重复次为最大位数完成排序从低位到高位排序最常用从高位到低位排序每趟过程分配按当前位值将元素分配到个桶为基数十进制收集按桶顺序将元素依次收回序列序列三位十进制第趟按个位桶桶桶桶桶收集第趟按十位桶桶桶桶收集第趟按百位桶桶桶桶桶收集排序完成设个元素每个关键字有位每位基数为每趟分配收集共趟时间复杂度通常视为为常数时空间复杂度个指针节点个桶稳定每趟分配和收集保持相对顺序各趟均稳定总体稳定基数排序是非比较排序突破了基于比较的排序下界但仅适用于关键字可分解为多个位的场景整数字符串等桶排序基数排序的简化版将元素按值域分配到若干桶每个桶内单独排序后合并时间复杂度为桶的数量适用于值域范围已知且分布均匀的场景稳定常考点基数排序参数含义稳定性与适用与下界关系是最大位数是基数十进制时间复杂度通常写是否可视为常数取决于关键字范围位数不受增长影响时才可近似视为每一趟都要稳定分配与收集才能保证最终整体稳定只能用于可分位的关键字整数字符串不适用于无法自然分位的对象基数排序不是基于比较的排序因此不受比较下界约束算法对比综合对比表这张表是必考内容需完整记忆重点关注不稳定算法快堆希选和各算法最好情况算法最好平均最坏空间稳定性直接插入稳定折半插入稳定希尔排序不稳定冒泡排序稳定快速排序不稳定简单选择不稳定堆排序不稳定归并排序稳定基数排序稳定折半插入的最好情况比较次数是但移动次数仍为总体时间仍记忆口诀不稳定的排序快快排堆堆排希希尔选简单选择谐音快堆希选记住这个不稳定其余均稳定空间的排序只有归并排序最坏仍的排序只有堆排序和归并排序最好能到的排序直接插入冒泡含优化希尔适用场景选择按数据规模按特殊要求综合推荐规模推荐算法理由小规模直接插入简单选择常数小实现简单中规模希尔排序超越插入大规模快速排序堆排序归并排序要求推荐算法稳定性必须保证归并排序大规模插入冒泡小规模空间严格堆排序大规模插入冒泡小规模链式存储归并排序可原地归并插入排序顺序插入数据基本有序直接插入接近数据完全逆序快速排序随机化归并排序关键字是整数且范围小基数排序桶排序最坏情况有保证堆排序实践中最快快速排序常数因子小缓存友好实际工程综合推荐内省排序快速排序堆排序插入排序的三路混合结合三者优势归并排序变体保证稳定归并排序插入排序充分利用数据中的有序段考试中通常要求选择最合适的算法答题时需说明理由规模有序性稳定性空间限制常考点选算法题答题模板高频结论先说限制是否要求稳定是否空间受限数据规模是否基本有序是否为链表再给结论选哪种排序最后给理由时间复杂度最好平均最坏空间复杂度稳定性基本有序直接插入接近要最坏保证且空间堆排序要稳定且大规模归并排序数组或链表归并链表下界定理与基于比较的排序排序下界定理基于比较的排序算法最坏情况下至少需要次比较证明思路个元素的全排列有种每次比较最多将可能性减半需至少次比较堆排序和归并排序达到了这个下界最坏基数排序突破了这个下界因为它不是基于比较的常考点下界结论仅针对基于比较的排序模型若题目给出只能比较关键字大小则无法突破非比较排序之所以可能更快是因为利用了关键字结构位字符值域相当于引入了额外信息与额外空间例题精选例题快速排序手动模拟对序列进行快速排序取第一个元素为枢轴写出第一次后的结果解从右向左找的前进从左向右找的跳过后退继续前进从左后退继续后退就位结果枢轴位于下标值例题归并排序趟数对个元素进行二路归并排序共需几趟第趟结束后有序子列最长长度是多少解趟数趟第趟结束后有序子列长度每段最多个元素例题稳定性判断判断以下场景哪些需要稳定排序按姓名排序学生可能同名电商平台按评分排序商品评分相同时保持原始顺序上架时间序给整数数组从小到大排序不关心相同值顺序解姓名相同的学生排序后顺序无意义不必稳定必须稳定评分相同时需保留上架时间顺序不需要稳定例题场景选算法有个记录需要对其中最小的个记录进行排序输出提出最高效方案解先用大顶堆维护大小为的堆扫描所有个记录时间再对堆中个元素进行堆排序输出时间总时间远优于全部排序',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-03-10 22:39:15',
+  postMainColor: '#0968B8',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.min.css"><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/sparkle520?tab=repositories" title="github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="github"/><span class="back-menu-item-text">github</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">SPARKLE</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/408/" style="font-size: 1.05rem;">408<sup>21</sup></a><a href="/tags/AOP/" style="font-size: 1.05rem;">AOP<sup>1</sup></a><a href="/tags/Deep-Learning/" style="font-size: 1.05rem;">Deep Learning<sup>1</sup></a><a href="/tags/IoC/" style="font-size: 1.05rem;">IoC<sup>1</sup></a><a href="/tags/JSR303/" style="font-size: 1.05rem;">JSR303<sup>1</sup></a><a href="/tags/Matplotlib/" style="font-size: 1.05rem;">Matplotlib<sup>3</sup></a><a href="/tags/c/" style="font-size: 1.05rem;">c#<sup>2</sup></a><a href="/tags/java/" style="font-size: 1.05rem;">java<sup>4</sup></a><a href="/tags/python/" style="font-size: 1.05rem;">python<sup>5</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 1.05rem;">事务<sup>1</sup></a><a href="/tags/%E4%BA%8C%E6%AC%A1%E5%9E%8B/" style="font-size: 1.05rem;">二次型<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E3%80%82/" style="font-size: 1.05rem;">你的名字。<sup>3</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字同名小说<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%A4%96%E4%BC%A0%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字外传小说<sup>1</sup></a><a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size: 1.05rem;">写作<sup>4</sup></a><a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 1.05rem;">包管理<sup>1</sup></a><a href="/tags/%E5%8D%B7%E7%A7%AF%E5%85%AC%E5%BC%8F/" style="font-size: 1.05rem;">卷积公式<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90/" style="font-size: 1.05rem;">天气之子<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">天气之子同名小说<sup>1</sup></a><a href="/tags/%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">小说<sup>2</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">操作系统<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" style="font-size: 1.05rem;">数据校验<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" style="font-size: 1.05rem;">数据链路层<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 1.05rem;">概率论<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 1.05rem;">概率论与数理统计<sup>7</sup></a><a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 1.05rem;">汇编<sup>9</sup></a><a href="/tags/%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80/" style="font-size: 1.05rem;">泰勒展开<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/" style="font-size: 1.05rem;">物理层<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%80%BC/" style="font-size: 1.05rem;">特征值<sup>2</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F/" style="font-size: 1.05rem;">特征向量<sup>2</sup></a><a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">线性代数<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" style="font-size: 1.05rem;">网络体系结构<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" style="font-size: 1.05rem;">网络层<sup>2</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 1.05rem;">英语<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">英语语法<sup>24</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1.05rem;">计算机组成原理<sup>5</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.05rem;">计算机网络<sup>5</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">语法<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">高等代数<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" style="font-size: 1.05rem;">高等数学<sup>14</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">三月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">21</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/02/"><span class="card-archive-list-date">二月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/01/"><span class="card-archive-list-date">一月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/12/"><span class="card-archive-list-date">十二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">15</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/11/"><span class="card-archive-list-date">十一月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/10/"><span class="card-archive-list-date">十月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/09/"><span class="card-archive-list-date">九月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/08/"><span class="card-archive-list-date">八月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url">计算机</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/408/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>408</span></a><a class="article-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>数据结构</span></a></span></div></div><h1 class="post-title" itemprop="name headline">408-数据结构-7-内部排序</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-03-13T18:00:00.000Z" title="发表于 2026-03-14 02:00:00">2026-03-14</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-03-10T14:39:15.215Z" title="更新于 2026-03-10 22:39:15">2026-03-10</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">5.2k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>20分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="408-数据结构-7-内部排序"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为系守镇"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>系守镇</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%847/#post-comment" tabindex="-1"><span id="twikoo-count"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://pic1.imgdb.cn/item/69b022ea6738cb8aa129ae4b.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%847/"><header><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url">计算机</a><a href="/tags/408/" tabindex="-1" itemprop="url">408</a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" tabindex="-1" itemprop="url">数据结构</a><h1 id="CrawlerTitle" itemprop="name headline">408-数据结构-7-内部排序</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">sparkle520</span><time itemprop="dateCreated datePublished" datetime="2026-03-13T18:00:00.000Z" title="发表于 2026-03-14 02:00:00">2026-03-14</time><time itemprop="dateCreated datePublished" datetime="2026-03-10T14:39:15.215Z" title="更新于 2026-03-10 22:39:15">2026-03-10</time></header><h1 id="第7章-内部排序-internal-sorting">第7章 内部排序 ( Internal
+Sorting )</h1>
+<h2 id="基本概念">7.1 基本概念</h2>
+<h3 id="核心术语">7.1.1 核心术语</h3>
+<div class="note info simple"><p><strong>排序</strong> 将一组无序的记录按关键字的某种顺序 ( 递增或递减
+) 重新排列的过程. <strong>内部排序</strong>
+指排序期间所有数据均在内存中，<strong>外部排序</strong> 需借助外存.</p>
+</div>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">术语</th>
+<th style="text-align: left;">定义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>稳定性</strong></td>
+<td
+style="text-align: left;">若排序前后，值相同的两个元素相对位置不变，则该算法
+<strong>稳定</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>比较次数</strong></td>
+<td style="text-align: left;">算法执行过程中关键字比较的总次数</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>移动次数</strong></td>
+<td style="text-align: left;">算法执行过程中记录移动 ( 交换 )
+的总次数</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>原地排序</strong></td>
+<td style="text-align: left;">空间复杂度 <span
+class="math inline">\(O(1)\)</span>，不使用额外数组</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>趟</strong></td>
+<td style="text-align: left;">对序列进行一次完整扫描或处理称为一趟</td>
+</tr>
+</tbody>
+</table>
+<h3 id="稳定性的重要性">7.1.2 稳定性的重要性</h3>
+<ul>
+<li>若记录有多个关键字，先按次关键字排序，再按主关键字
+<strong>稳定</strong> 排序，可保留次关键字的顺序 ( 基数排序的基础
+).</li>
+<li>不稳定的排序算法
+<strong>快速排序、堆排序、希尔排序、简单选择排序</strong>.</li>
+<li>稳定的排序算法 <strong>插入排序 ( 直接/折半 )
+、冒泡排序、归并排序、基数排序</strong>.</li>
+</ul>
+<div class="note warning simple"><p>稳定性是算法本身的性质，不是输入数据的性质.
+但不稳定排序在某些特定输入下可能表现为稳定，考试以最坏情况为准.</p>
+</div>
+<h3 id="常考点">7.1.3 408 常考点</h3>
+<div class="tabs" id="sort-basic-points"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="sort-basic-points-1">稳定性</button><button type="button" class="tab " data-href="sort-basic-points-2">时间与空间</button><button type="button" class="tab " data-href="sort-basic-points-3">出题点</button></ul><div class="tab-contents"><div class="tab-item-content active" id="sort-basic-points-1"><ul>
+<li>稳定性的判定只看 <strong>关键字相等</strong>
+的元素是否可能发生“跨越交换 / 跨组移动”</li>
+<li>多关键字排序常用技巧 先按次关键字排序，再对主关键字做
+<strong>稳定排序</strong>，即可保留次关键字顺序</li>
+<li>记忆口诀 不稳定的只有 “快、堆、希、选”，其余 ( 插、冒、归、基 )
+稳定</li>
+</ul></div><div class="tab-item-content" id="sort-basic-points-2"><ul>
+<li>“原地排序”指辅助空间 <span class="math inline">\(O(1)\)</span> (
+递归栈一般不计入辅助数组，但 408 常单独讨论快排递归栈 )</li>
+<li>归并排序数组实现需要辅助数组 <span
+class="math inline">\(O(n)\)</span>，但链表归并可以做到 <span
+class="math inline">\(O(1)\)</span> 额外空间</li>
+<li>比较次数与移动次数要分开看
+折半插入减少比较但不减少移动，因此总体仍是 <span
+class="math inline">\(O(n^2)\)</span></li>
+</ul></div><div class="tab-item-content" id="sort-basic-points-3"><ul>
+<li>重点会考 Partition 过程、快排最坏情况、建堆为何是 <span
+class="math inline">\(O(n)\)</span>、归并趟数与稳定性</li>
+<li>选“最合适算法”题 按规模 / 有序性 / 稳定性 /
+空间限制四个维度给理由</li>
+</ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h2 id="插入排序">7.2 插入排序</h2>
+<h3 id="直接插入排序">7.2.1 直接插入排序</h3>
+<div class="tabs" id="insert-sort"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="insert-sort-1">算法思路</button><button type="button" class="tab " data-href="insert-sort-2">复杂度分析</button></ul><div class="tab-contents"><div class="tab-item-content active" id="insert-sort-1"><p>将第 <span class="math inline">\(i\)</span> 个元素插入到前 <span
+class="math inline">\(i-1\)</span> 个 <strong>已排好序</strong>
+的子序列的合适位置.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">InsertSort</span><span class="params">(ElemType A[], <span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;      <span class="comment">// 从下标 1 开始，0 存哨兵</span></span><br><span class="line">        <span class="keyword">if</span> (A[i] &lt; A[i<span class="number">-1</span>]) &#123;</span><br><span class="line">            A[<span class="number">0</span>] = A[i];                <span class="comment">// 哨兵</span></span><br><span class="line">            <span class="type">int</span> j;</span><br><span class="line">            <span class="keyword">for</span> (j = i<span class="number">-1</span>; A[<span class="number">0</span>] &lt; A[j]; j--)</span><br><span class="line">                A[j+<span class="number">1</span>] = A[j];         <span class="comment">// 后移</span></span><br><span class="line">            A[j+<span class="number">1</span>] = A[<span class="number">0</span>];             <span class="comment">// 插入</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-item-content" id="insert-sort-2"><table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 26%" />
+<col style="width: 26%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">情况</th>
+<th style="text-align: center;">比较次数</th>
+<th style="text-align: center;">移动次数</th>
+<th style="text-align: center;">时间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="p green">最好 ( 正序
+)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(n-1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(0\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="p red">最坏 ( 逆序
+)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\dfrac{n(n-1)}{2}\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\dfrac{(n+1)(n-1)}{2}\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n^2)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="p yellow">平均</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\dfrac{n^2}{4}\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\dfrac{n^2}{4}\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n^2)\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>空间复杂度 <span
+class="math inline">\(O(1)\)</span>，<strong>稳定</strong>，适合
+<strong>基本有序</strong> 或 <strong>小规模</strong> 序列.</li>
+</ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="折半插入排序">7.2.2 折半插入排序</h3>
+<div class="note info simple"><p><strong>折半插入排序</strong></p>
+<p>在直接插入的基础上，用 <strong>折半查找</strong>
+确定插入位置，减少比较次数，但移动次数不变.</p>
+</div>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">BInsertSort</span><span class="params">(ElemType A[], <span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        A[<span class="number">0</span>] = A[i];</span><br><span class="line">        <span class="type">int</span> low = <span class="number">1</span>, high = i - <span class="number">1</span>, mid;</span><br><span class="line">        <span class="keyword">while</span> (low &lt;= high) &#123;</span><br><span class="line">            mid = (low + high) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (A[mid] &gt; A[<span class="number">0</span>]) high = mid - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span>               low  = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// high+1 为插入位置，[high+1, i-1] 后移</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = i - <span class="number">1</span>; j &gt;= high + <span class="number">1</span>; j--)</span><br><span class="line">            A[j+<span class="number">1</span>] = A[j];</span><br><span class="line">        A[high+<span class="number">1</span>] = A[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>比较次数 <span class="math inline">\(O(n \log n)\)</span> ( 折半查找
+) ; 移动次数仍为 <span class="math inline">\(O(n^2)\)</span>.</li>
+<li>时间复杂度总体仍为 <span class="math inline">\(O(n^2)\)</span> (
+移动主导 )，<strong>稳定</strong>.</li>
+</ul>
+<h3 id="希尔排序-shell-sort">7.2.3 希尔排序 ( Shell Sort )</h3>
+<div class="tabs" id="shell-sort"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="shell-sort-1">算法思路</button><button type="button" class="tab " data-href="shell-sort-2">复杂度与特性</button></ul><div class="tab-contents"><div class="tab-item-content active" id="shell-sort-1"><p><strong>希尔排序</strong> 按 <strong>步长</strong> ( 增量序列 )
+分组，每组内做直接插入排序，逐步缩小步长直到 1.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">ShellSort</span><span class="params">(ElemType A[], <span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> dk = n/<span class="number">2</span>; dk &gt;= <span class="number">1</span>; dk /= <span class="number">2</span>) &#123;  <span class="comment">// 步长序列 ( 示例 ) </span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = dk + <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (A[i] &lt; A[i - dk]) &#123;</span><br><span class="line">                A[<span class="number">0</span>] = A[i];               <span class="comment">// 暂存 ( 无哨兵作用，仅借用 0 号位 ) </span></span><br><span class="line">                <span class="type">int</span> j;</span><br><span class="line">                <span class="keyword">for</span> (j = i - dk; j &gt; <span class="number">0</span> &amp;&amp; A[<span class="number">0</span>] &lt; A[j]; j -= dk)</span><br><span class="line">                    A[j + dk] = A[j];</span><br><span class="line">                A[j + dk] = A[<span class="number">0</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-item-content" id="shell-sort-2"><ul>
+<li>时间复杂度与步长序列有关，常见结果 <span
+class="math inline">\(O(n^{1.3}) \sim O(n^{1.5})\)</span>.</li>
+<li>空间复杂度 <span
+class="math inline">\(O(1)\)</span>，<strong>不稳定</strong> (
+相同元素可能因不同分组被打乱顺序 ).</li>
+<li>适合 <strong>中等规模</strong> 序列，是突破 <span
+class="math inline">\(O(n^2)\)</span> 的第一个改进插入排序.</li>
+</ul>
+<p><strong>步长序列选择</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">步长序列</th>
+<th style="text-align: center;">最坏复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="math inline">\(n/2, n/4,
+\ldots, 1\)</span> ( Shell 原始 )</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n^2)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">Hibbard <span class="math inline">\(2^k -
+1, \ldots, 3, 1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n^{3/2})\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">Sedgewick 序列</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n^{4/3})\)</span></td>
+</tr>
+</tbody>
+</table></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h2 id="交换排序">7.3 交换排序</h2>
+<h3 id="冒泡排序">7.3.1 冒泡排序</h3>
+<div class="tabs" id="bubble-sort"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="bubble-sort-1">算法实现</button><button type="button" class="tab " data-href="bubble-sort-2">复杂度分析</button></ul><div class="tab-contents"><div class="tab-item-content active" id="bubble-sort-1"><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">BubbleSort</span><span class="params">(ElemType A[], <span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="type">bool</span> flag;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        flag = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = n - <span class="number">1</span>; j &gt; i; j--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (A[j<span class="number">-1</span>] &gt; A[j]) &#123;</span><br><span class="line">                swap(A[j<span class="number">-1</span>], A[j]);</span><br><span class="line">                flag = <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!flag) <span class="keyword">return</span>;   <span class="comment">// 本趟无交换，已有序，提前结束</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每趟将最小元素”冒”到前端，flag 优化避免不必要的扫描.</p></div><div class="tab-item-content" id="bubble-sort-2"><table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 26%" />
+<col style="width: 26%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">情况</th>
+<th style="text-align: center;">比较次数</th>
+<th style="text-align: center;">交换次数</th>
+<th style="text-align: center;">时间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="p green">最好 ( 正序
+)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(n-1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(0\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="p red">最坏 ( 逆序
+)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\dfrac{n(n-1)}{2}\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\dfrac{n(n-1)}{2}\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n^2)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="p yellow">平均</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\dfrac{n^2}{4}\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\dfrac{n^2}{4}\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n^2)\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>空间复杂度 <span
+class="math inline">\(O(1)\)</span>，<strong>稳定</strong>.</li>
+</ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="快速排序">7.3.2 快速排序</h3>
+<div class="note warning simple"><p>快速排序是 408 <strong>最高频</strong> 考点之一，需掌握 Partition
+过程、递归实现、非递归实现、时间复杂度分析及最坏情况.</p>
+</div>
+<div class="tabs" id="quick-sort"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="quick-sort-1">Partition 过程</button><button type="button" class="tab " data-href="quick-sort-2">递归实现</button><button type="button" class="tab " data-href="quick-sort-3">非递归实现</button><button type="button" class="tab " data-href="quick-sort-4">复杂度分析</button><button type="button" class="tab " data-href="quick-sort-5">优化策略</button></ul><div class="tab-contents"><div class="tab-item-content active" id="quick-sort-1"><p><strong>划分</strong> ( Partition ) 选取枢轴 pivot，将序列划分为左 ≤
+pivot、右 ≥ pivot 两部分.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">Partition</span><span class="params">(ElemType A[], <span class="type">int</span> low, <span class="type">int</span> high)</span> &#123;</span><br><span class="line">    ElemType pivot = A[low];     <span class="comment">// 取第一个元素为枢轴</span></span><br><span class="line">    <span class="keyword">while</span> (low &lt; high) &#123;</span><br><span class="line">        <span class="keyword">while</span> (low &lt; high &amp;&amp; A[high] &gt;= pivot) high--;</span><br><span class="line">        A[low] = A[high];        <span class="comment">// 右侧小于 pivot 的移到左边</span></span><br><span class="line">        <span class="keyword">while</span> (low &lt; high &amp;&amp; A[low]  &lt;= pivot) low++;</span><br><span class="line">        A[high] = A[low];        <span class="comment">// 左侧大于 pivot 的移到右边</span></span><br><span class="line">    &#125;</span><br><span class="line">    A[low] = pivot;              <span class="comment">// 枢轴就位</span></span><br><span class="line">    <span class="keyword">return</span> low;                  <span class="comment">// 返回枢轴最终位置</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-item-content" id="quick-sort-2"><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">QuickSort</span><span class="params">(ElemType A[], <span class="type">int</span> low, <span class="type">int</span> high)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (low &lt; high) &#123;</span><br><span class="line">        <span class="type">int</span> pivotPos = Partition(A, low, high);</span><br><span class="line">        QuickSort(A, low,        pivotPos - <span class="number">1</span>);</span><br><span class="line">        QuickSort(A, pivotPos + <span class="number">1</span>, high);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>调用</strong> <code>QuickSort(A, 1, n)</code>.</p></div><div class="tab-item-content" id="quick-sort-3"><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">QuickSort_NR</span><span class="params">(ElemType A[], <span class="type">int</span> low, <span class="type">int</span> high)</span> &#123;</span><br><span class="line">    SqStack S; InitStack(S);</span><br><span class="line">    Push(S, low); Push(S, high);</span><br><span class="line">    <span class="keyword">while</span> (!StackEmpty(S)) &#123;</span><br><span class="line">        <span class="type">int</span> h; Pop(S, h);</span><br><span class="line">        <span class="type">int</span> l; Pop(S, l);</span><br><span class="line">        <span class="keyword">if</span> (l &lt; h) &#123;</span><br><span class="line">            <span class="type">int</span> p = Partition(A, l, h);</span><br><span class="line">            <span class="keyword">if</span> (l &lt; p - <span class="number">1</span>) &#123; Push(S, l);   Push(S, p<span class="number">-1</span>); &#125;</span><br><span class="line">            <span class="keyword">if</span> (p + <span class="number">1</span> &lt; h) &#123; Push(S, p+<span class="number">1</span>); Push(S, h);   &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-item-content" id="quick-sort-4"><table>
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 27%" />
+<col style="width: 27%" />
+<col style="width: 22%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">情况</th>
+<th style="text-align: center;">递归深度</th>
+<th style="text-align: center;">时间复杂度</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="p green">最好</span></td>
+<td style="text-align: center;"><span class="math inline">\(O(\log
+n)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O(n \log
+n)\)</span></td>
+<td style="text-align: left;">每次划分均匀</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="p red">最坏</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n^2)\)</span></td>
+<td style="text-align: left;">有序序列取首元素为枢轴</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="p yellow">平均</span></td>
+<td style="text-align: center;"><span class="math inline">\(O(\log
+n)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O(n \log
+n)\)</span></td>
+<td style="text-align: left;">期望 <span class="math inline">\(O(n \log
+n)\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>空间复杂度 <span class="math inline">\(O(\log n)\)</span> 平均 (
+递归栈 ) ; <span class="math inline">\(O(n)\)</span> 最坏.</li>
+<li><strong>不稳定</strong> ( Partition 过程中远距离交换 ).</li>
+</ul></div><div class="tab-item-content" id="quick-sort-5"><ol type="1">
+<li><strong>随机选取枢轴</strong> 随机选取 <code>[low, high]</code>
+中的元素为枢轴，避免有序序列最坏情况.</li>
+<li><strong>三数取中</strong> 取
+<code>A[low]</code>、<code>A[mid]</code>、<code>A[high]</code>
+的中间值为枢轴，更稳定.</li>
+<li><strong>小规模切换</strong> 当子数组长度 <span
+class="math inline">\(\leq k\)</span> ( 通常 <span
+class="math inline">\(k = 10 \sim 20\)</span> )
+时切换为直接插入排序.</li>
+<li><strong>三向划分</strong> 将等于 pivot 的元素单独分区 ( 荷兰国旗问题
+)，处理大量重复元素时效率更高.</li>
+</ol></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="常考点-快速排序">7.3.3 408 常考点 ( 快速排序 )</h3>
+<div class="tabs" id="quicksort-points"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="quicksort-points-1">Partition 不变量</button><button type="button" class="tab " data-href="quicksort-points-2">最坏与优化</button><button type="button" class="tab " data-href="quicksort-points-3">空间与稳定性</button></ul><div class="tab-contents"><div class="tab-item-content active" id="quicksort-points-1"><ul>
+<li>Partition 结束后 pivot 一定就位，pivot 左侧元素均 ≤
+pivot，右侧元素均 ≥ pivot</li>
+<li>题目手算时重点盯 <code>low</code>、<code>high</code>
+的移动条件，以及“先从右找，再从左找”的赋值顺序</li>
+</ul></div><div class="tab-item-content" id="quicksort-points-2"><ul>
+<li>取首元素作枢轴时，正序/逆序会退化到最坏 <span
+class="math inline">\(O(n^2)\)</span>，递归深度也退化为 <span
+class="math inline">\(O(n)\)</span></li>
+<li>常见改进 随机枢轴、三数取中、小区间切插入、三向划分 ( 大量重复关键字
+)</li>
+</ul></div><div class="tab-item-content" id="quicksort-points-3"><ul>
+<li>快排 <strong>不稳定</strong> 的根因是跨区远距离交换</li>
+<li>空间复杂度平均为递归栈 <span class="math inline">\(O(\log
+n)\)</span>，最坏为 <span
+class="math inline">\(O(n)\)</span>，非递归实现用显式栈等价</li>
+</ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h2 id="选择排序">7.4 选择排序</h2>
+<h3 id="简单选择排序">7.4.1 简单选择排序</h3>
+<div class="tabs" id="select-sort"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="select-sort-1">算法实现</button><button type="button" class="tab " data-href="select-sort-2">复杂度分析</button></ul><div class="tab-contents"><div class="tab-item-content active" id="select-sort-1"><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">SelectSort</span><span class="params">(ElemType A[], <span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="type">int</span> minIdx = i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>; j &lt; n; j++)</span><br><span class="line">            <span class="keyword">if</span> (A[j] &lt; A[minIdx]) minIdx = j;</span><br><span class="line">        <span class="keyword">if</span> (minIdx != i) swap(A[i], A[minIdx]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每趟从未排序部分找最小元素，放到已排序末尾.</p></div><div class="tab-item-content" id="select-sort-2"><ul>
+<li>比较次数 始终 <span
+class="math inline">\(\dfrac{n(n-1)}{2}\)</span>，与输入无关.</li>
+<li>交换次数 最好 <span class="math inline">\(0\)</span> ( 正序 )，最坏
+<span class="math inline">\(n-1\)</span>.</li>
+<li>时间复杂度 始终 <span class="math inline">\(O(n^2)\)</span>;
+空间复杂度 <span class="math inline">\(O(1)\)</span>.</li>
+<li><strong>不稳定</strong> ( 可能将当前最小值跳过相同元素交换到前面
+).</li>
+</ul>
+<p><strong>不稳定示例</strong> <span class="math inline">\(\{3_a, 3_b,
+1\}\)</span> → 第 1 趟选 1 与 <span class="math inline">\(3_a\)</span>
+交换 → <span class="math inline">\(\{1, 3_b, 3_a\}\)</span>，<span
+class="math inline">\(3_a\)</span> 和 <span
+class="math inline">\(3_b\)</span> 相对顺序改变.</p></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="堆排序">7.4.2 堆排序</h3>
+<div class="note info simple"><p>堆排序已在第 4 章 ( 堆 ) 中详细介绍，此处重点对比性能特点.</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">步骤</th>
+<th style="text-align: left;">操作</th>
+<th style="text-align: center;">时间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">建堆</td>
+<td
+style="text-align: left;"><code>BuildHeap</code>，从最后一个分支结点向上
+<code>siftDown</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">排序</td>
+<td style="text-align: left;">循环 <span
+class="math inline">\(n-1\)</span> 次，每次取堆顶并
+<code>siftDown</code></td>
+<td style="text-align: center;"><span class="math inline">\(O(n \log
+n)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>总计</strong></td>
+<td style="text-align: left;">建堆 + 排序</td>
+<td style="text-align: center;"><strong><span class="math inline">\(O(n
+\log n)\)</span></strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>空间复杂度 <span class="math inline">\(O(1)\)</span> ( 原地排序
+).</li>
+<li><strong>不稳定</strong> ( 堆顶与末尾互换后，相对顺序可能改变 ).</li>
+<li>最坏情况仍为 <span class="math inline">\(O(n \log
+n)\)</span>，是唯一能保证最坏 <span class="math inline">\(O(n \log
+n)\)</span> 且空间 <span class="math inline">\(O(1)\)</span>
+的排序.</li>
+</ul>
+<h2 id="归并排序">7.5 归并排序</h2>
+<div class="tabs" id="merge-sort"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="merge-sort-1">递归实现</button><button type="button" class="tab " data-href="merge-sort-2">非递归实现</button><button type="button" class="tab " data-href="merge-sort-3">复杂度分析</button><button type="button" class="tab " data-href="merge-sort-4">趟数与归并过程</button></ul><div class="tab-contents"><div class="tab-item-content active" id="merge-sort-1"><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">ElemType B[MaxSize]; <span class="comment">// 辅助数组</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">Merge</span><span class="params">(ElemType A[], <span class="type">int</span> low, <span class="type">int</span> mid, <span class="type">int</span> high)</span> &#123;</span><br><span class="line">    <span class="type">int</span> i, j, k;</span><br><span class="line">    <span class="keyword">for</span> (k = low; k &lt;= high; k++) B[k] = A[k]; <span class="comment">// 复制到辅助数组</span></span><br><span class="line">    <span class="keyword">for</span> (i = low, j = mid+<span class="number">1</span>, k = low; i &lt;= mid &amp;&amp; j &lt;= high; k++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (B[i] &lt;= B[j]) A[k] = B[i++];        <span class="comment">// ≤ 保证稳定性</span></span><br><span class="line">        <span class="keyword">else</span>               A[k] = B[j++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (i &lt;= mid)  A[k++] = B[i++];</span><br><span class="line">    <span class="keyword">while</span> (j &lt;= high) A[k++] = B[j++];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">MergeSort</span><span class="params">(ElemType A[], <span class="type">int</span> low, <span class="type">int</span> high)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (low &lt; high) &#123;</span><br><span class="line">        <span class="type">int</span> mid = (low + high) / <span class="number">2</span>;</span><br><span class="line">        MergeSort(A, low,    mid);</span><br><span class="line">        MergeSort(A, mid+<span class="number">1</span>, high);</span><br><span class="line">        Merge(A, low, mid, high);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-item-content" id="merge-sort-2"><p><strong>自底向上归并</strong> 从步长 1
+开始，每轮步长翻倍，对相邻块两两合并.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">MergeSort_NR</span><span class="params">(ElemType A[], <span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> step = <span class="number">1</span>; step &lt; n; step *= <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="type">int</span> low = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (low + step &lt; n) &#123;</span><br><span class="line">            <span class="type">int</span> mid  = low + step - <span class="number">1</span>;</span><br><span class="line">            <span class="type">int</span> high = min(low + <span class="number">2</span>*step - <span class="number">1</span>, n - <span class="number">1</span>);</span><br><span class="line">            Merge(A, low, mid, high);</span><br><span class="line">            low += <span class="number">2</span> * step;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>非递归版本不需要额外的递归栈，实际工程中更常用.</li>
+</ul></div><div class="tab-item-content" id="merge-sort-3"><ul>
+<li><strong>时间复杂度</strong> 任何情况均为 <span
+class="math inline">\(O(n \log n)\)</span>，共 <span
+class="math inline">\(\lceil \log_2 n \rceil\)</span> 趟，每趟 <span
+class="math inline">\(O(n)\)</span>.</li>
+<li><strong>空间复杂度</strong> <span
+class="math inline">\(O(n)\)</span> ( 辅助数组 ).</li>
+<li><strong>稳定</strong> ( <code>Merge</code> 中
+<code>B[i] &lt;= B[j]</code> 时优先取左边，保持相对顺序 ).</li>
+</ul>
+<p><strong>为什么归并是稳定的</strong> <code>Merge</code>
+时遇到相等元素，总是先取左子序列 ( 前者
+)，保证原来靠前的元素仍在前面.</p></div><div class="tab-item-content" id="merge-sort-4"><p><span class="math inline">\(n\)</span> 个元素的二路归并排序，共需
+<span class="math inline">\(\lceil \log_2 n \rceil\)</span> 趟归并.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">趟数</th>
+<th style="text-align: center;">有序子列长度</th>
+<th style="text-align: center;">归并次数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"><span class="math inline">\(\lfloor n/2
+\rfloor\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;"><span class="math inline">\(\lfloor n/4
+\rfloor\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(k\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(2^k\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\lfloor
+n/2^k \rfloor\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>示例</strong> <span class="math inline">\(\{49, 38, 65, 97,
+76, 13, 27\}\)</span></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">初始 [49] [38] [65] [97] [76] [13] [27]</span><br><span class="line">第1趟 [38,49] [65,97] [13,76] [27]</span><br><span class="line">第2趟 [38,49,65,97] [13,27,76]</span><br><span class="line">第3趟 [13,27,38,49,65,76,97]</span><br></pre></td></tr></table></figure></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="常考点-归并排序">7.5.1 408 常考点 ( 归并排序 )</h3>
+<div class="tabs" id="mergesort-points"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="mergesort-points-1">趟数</button><button type="button" class="tab " data-href="mergesort-points-2">稳定性</button><button type="button" class="tab " data-href="mergesort-points-3">空间</button></ul><div class="tab-contents"><div class="tab-item-content active" id="mergesort-points-1"><ul>
+<li>二路归并排序需要 <span class="math inline">\(\lceil \log_2 n
+\rceil\)</span> 趟，每趟都是“全数组级别”的合并，因此每趟 <span
+class="math inline">\(O(n)\)</span></li>
+<li>手算题常考 第 <span class="math inline">\(k\)</span>
+趟结束后有序子列最大长度为 <span class="math inline">\(\min(2^k,
+n)\)</span></li>
+</ul></div><div class="tab-item-content" id="mergesort-points-2"><ul>
+<li>是否稳定只看 <code>Merge</code> 的相等处理 <code>&lt;=</code>
+取左边则稳定; 若写成 <code>&lt;</code> 可能破坏稳定性</li>
+</ul></div><div class="tab-item-content" id="mergesort-points-3"><ul>
+<li>数组归并通常需要辅助数组 <span class="math inline">\(O(n)\)</span>;
+链表归并可做到 <span class="math inline">\(O(1)\)</span> 额外空间</li>
+</ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h2 id="基数排序">7.6 基数排序</h2>
+<div class="tabs" id="radix-sort"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="radix-sort-1">基本思想</button><button type="button" class="tab " data-href="radix-sort-2">示例</button><button type="button" class="tab " data-href="radix-sort-3">复杂度分析</button><button type="button" class="tab " data-href="radix-sort-4">桶排序</button></ul><div class="tab-contents"><div class="tab-item-content active" id="radix-sort-1"><p><strong>基数排序</strong> 不比较关键字大小，而是按关键字
+<strong>各位的值</strong> 分配到桶 ( 队列 ) 中，再收集，重复 <span
+class="math inline">\(d\)</span> 次 ( <span
+class="math inline">\(d\)</span> 为最大位数 )，完成排序.</p>
+<ul>
+<li><strong>LSD</strong> ( Least Significant Digit ) 从低位到高位排序 (
+最常用 ).</li>
+<li><strong>MSD</strong> ( Most Significant Digit )
+从高位到低位排序.</li>
+</ul>
+<p><strong>每趟过程</strong></p>
+<ol type="1">
+<li><strong>分配</strong> 按当前位值将元素分配到 <span
+class="math inline">\(r\)</span> 个桶 ( <span
+class="math inline">\(r\)</span> 为基数，十进制 <span
+class="math inline">\(r = 10\)</span> ).</li>
+<li><strong>收集</strong> 按桶顺序将元素依次收回序列.</li>
+</ol></div><div class="tab-item-content" id="radix-sort-2"><p>序列 <span class="math inline">\(\{329, 457, 657, 839, 436, 720,
+355\}\)</span>，三位十进制，LSD :</p>
+<p><strong>第 1 趟 ( 按个位 ) </strong> :</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">桶 0 720</span><br><span class="line">桶 5 355</span><br><span class="line">桶 6 436</span><br><span class="line">桶 7 457, 657</span><br><span class="line">桶 9 329, 839</span><br><span class="line">收集 720, 355, 436, 457, 657, 329, 839</span><br></pre></td></tr></table></figure>
+<p><strong>第 2 趟 ( 按十位 ) </strong> :</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">桶 2 720, 329</span><br><span class="line">桶 3 839</span><br><span class="line">桶 4 436</span><br><span class="line">桶 5 355, 457, 657</span><br><span class="line">收集 720, 329, 839, 436, 355, 457, 657</span><br></pre></td></tr></table></figure>
+<p><strong>第 3 趟 ( 按百位 ) </strong> :</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">桶 3 329, 355</span><br><span class="line">桶 4 436, 457</span><br><span class="line">桶 6 657</span><br><span class="line">桶 7 720</span><br><span class="line">桶 8 839</span><br><span class="line">收集 329, 355, 436, 457, 657, 720, 839</span><br></pre></td></tr></table></figure>
+<p>排序完成.</p></div><div class="tab-item-content" id="radix-sort-3"><p>设 <span class="math inline">\(n\)</span> 个元素，每个关键字有 <span
+class="math inline">\(d\)</span> 位，每位基数为 <span
+class="math inline">\(r\)</span> :</p>
+<ul>
+<li>每趟分配 <span class="math inline">\(O(n)\)</span>，收集 <span
+class="math inline">\(O(r)\)</span>，共 <span
+class="math inline">\(d\)</span> 趟.</li>
+<li>时间复杂度 <span class="math inline">\(O(d(n +
+r))\)</span>，通常视为 <span class="math inline">\(O(n)\)</span> ( <span
+class="math inline">\(d, r\)</span> 为常数时 ).</li>
+<li>空间复杂度 <span class="math inline">\(O(n + r)\)</span> ( <span
+class="math inline">\(n\)</span> 个指针节点 + <span
+class="math inline">\(r\)</span> 个桶 ).</li>
+<li><strong>稳定</strong> (
+每趟分配和收集保持相对顺序，各趟均稳定，总体稳定 ).</li>
+</ul>
+<div class="note tip simple">
+<p>
+基数排序是 <strong>非比较</strong> 排序，突破了基于比较的排序 <span
+class="math inline">(O(n n))</span> 下界.
+但仅适用于关键字可分解为多个位的场景 ( 整数、字符串等 ).
+</p>
+</div></div><div class="tab-item-content" id="radix-sort-4"><p><strong>桶排序</strong>
+基数排序的简化版，将元素按值域分配到若干桶，每个桶内单独排序后合并.</p>
+<ul>
+<li>时间复杂度 <span class="math inline">\(O(n + k)\)</span>，<span
+class="math inline">\(k\)</span> 为桶的数量.</li>
+<li>适用于值域范围已知且分布均匀的场景.</li>
+<li><strong>稳定</strong>.</li>
+</ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="常考点-基数排序">7.6.1 408 常考点 ( 基数排序 )</h3>
+<div class="tabs" id="radix-points"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="radix-points-1">参数含义</button><button type="button" class="tab " data-href="radix-points-2">稳定性与适用</button><button type="button" class="tab " data-href="radix-points-3">与下界关系</button></ul><div class="tab-contents"><div class="tab-item-content active" id="radix-points-1"><ul>
+<li><span class="math inline">\(d\)</span> 是最大位数，<span
+class="math inline">\(r\)</span> 是基数 ( 十进制 <span
+class="math inline">\(r=10\)</span> )，时间复杂度通常写 <span
+class="math inline">\(O(d(n+r))\)</span></li>
+<li><span class="math inline">\(d,r\)</span>
+是否可视为常数取决于关键字范围 位数不受 <span
+class="math inline">\(n\)</span> 增长影响时才可近似视为 <span
+class="math inline">\(O(n)\)</span></li>
+</ul></div><div class="tab-item-content" id="radix-points-2"><ul>
+<li>LSD 每一趟都要稳定分配与收集，才能保证最终整体稳定</li>
+<li>只能用于“可分位”的关键字 ( 整数、字符串
+)，不适用于无法自然分位的对象</li>
+</ul></div><div class="tab-item-content" id="radix-points-3"><ul>
+<li>基数排序不是“基于比较”的排序，因此不受 <span
+class="math inline">\(\Omega(n \log n)\)</span> 比较下界约束</li>
+</ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h2 id="算法对比">7.7 算法对比</h2>
+<h3 id="综合对比表">7.7.1 综合对比表</h3>
+<div class="note warning simple"><p>这张表是 408 必考内容，需完整记忆. 重点关注不稳定算法 (
+快、堆、希、选 ) 和各算法最好情况.</p>
+</div>
+<table>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">算法</th>
+<th style="text-align: center;">最好</th>
+<th style="text-align: center;">平均</th>
+<th style="text-align: center;">最坏</th>
+<th style="text-align: center;">空间</th>
+<th style="text-align: center;">稳定性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">直接插入</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n^2)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n^2)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(1)\)</span></td>
+<td style="text-align: center;"><span class='p green'>稳定</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">折半插入</td>
+<td style="text-align: center;"><span class="math inline">\(O(n \log
+n)\)</span>*</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n^2)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n^2)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(1)\)</span></td>
+<td style="text-align: center;"><span class='p green'>稳定</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">希尔排序</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n^{1.3})\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n^2)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(1)\)</span></td>
+<td style="text-align: center;"><span class='p red'>不稳定</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">冒泡排序</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n^2)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n^2)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(1)\)</span></td>
+<td style="text-align: center;"><span class='p green'>稳定</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">快速排序</td>
+<td style="text-align: center;"><span class="math inline">\(O(n \log
+n)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O(n \log
+n)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n^2)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O(\log
+n)\)</span></td>
+<td style="text-align: center;"><span class='p red'>不稳定</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">简单选择</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n^2)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n^2)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n^2)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(1)\)</span></td>
+<td style="text-align: center;"><span class='p red'>不稳定</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">堆排序</td>
+<td style="text-align: center;"><span class="math inline">\(O(n \log
+n)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O(n \log
+n)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O(n \log
+n)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(1)\)</span></td>
+<td style="text-align: center;"><span class='p red'>不稳定</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">归并排序</td>
+<td style="text-align: center;"><span class="math inline">\(O(n \log
+n)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O(n \log
+n)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O(n \log
+n)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+<td style="text-align: center;"><span class='p green'>稳定</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">基数排序</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(d(n+r))\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(d(n+r))\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(d(n+r))\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n+r)\)</span></td>
+<td style="text-align: center;"><span class='p green'>稳定</span></td>
+</tr>
+</tbody>
+</table>
+<p>*折半插入的最好情况比较次数是 <span class="math inline">\(O(n \log
+n)\)</span>，但移动次数仍为 <span
+class="math inline">\(O(n^2)\)</span>，总体时间仍 <span
+class="math inline">\(O(n^2)\)</span>.</p>
+<h3 id="记忆口诀">7.7.2 记忆口诀</h3>
+<div class="note info simple"><p><strong>不稳定的排序</strong></p>
+<p>“<strong>快</strong> ( 快排 ) <strong>堆</strong> ( 堆排 )
+<strong>希</strong> ( 希尔 ) <strong>选</strong> ( 简单选择 )” —
+谐音”快堆希选”，记住这 4 个不稳定，其余均稳定.</p>
+<p><strong>空间 <span class="math inline">\(O(n)\)</span>
+的排序</strong> 只有 <strong>归并排序</strong>.</p>
+<p><strong>最坏仍 <span class="math inline">\(O(n \log n)\)</span>
+的排序</strong> 只有 <strong>堆排序</strong> 和
+<strong>归并排序</strong>.</p>
+<p><strong>最好能到 <span class="math inline">\(O(n)\)</span>
+的排序</strong> 直接插入、冒泡 ( 含优化 ) 、希尔.</p>
+</div>
+<h3 id="适用场景选择">7.7.3 适用场景选择</h3>
+<div class="tabs" id="sort-scene"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="sort-scene-1">按数据规模</button><button type="button" class="tab " data-href="sort-scene-2">按特殊要求</button><button type="button" class="tab " data-href="sort-scene-3">综合推荐</button></ul><div class="tab-contents"><div class="tab-item-content active" id="sort-scene-1"><table>
+<thead>
+<tr>
+<th style="text-align: left;">规模</th>
+<th style="text-align: left;">推荐算法</th>
+<th style="text-align: left;">理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="math inline">\(n \leq
+50\)</span> ( 小规模 )</td>
+<td style="text-align: left;">直接插入、简单选择</td>
+<td style="text-align: left;">常数小，实现简单</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\(50 &lt; n \leq
+1000\)</span> ( 中规模 )</td>
+<td style="text-align: left;">希尔排序</td>
+<td style="text-align: left;"><span
+class="math inline">\(O(n^{1.3})\)</span>，超越插入</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\(n &gt;
+1000\)</span> ( 大规模 )</td>
+<td style="text-align: left;">快速排序、堆排序、归并排序</td>
+<td style="text-align: left;"><span class="math inline">\(O(n \log
+n)\)</span></td>
+</tr>
+</tbody>
+</table></div><div class="tab-item-content" id="sort-scene-2"><table>
+<thead>
+<tr>
+<th style="text-align: left;">要求</th>
+<th style="text-align: left;">推荐算法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">稳定性必须保证</td>
+<td style="text-align: left;">归并排序 ( 大规模 ) 、插入 / 冒泡 ( 小规模
+)</td>
+</tr>
+<tr>
+<td style="text-align: left;">空间严格 <span
+class="math inline">\(O(1)\)</span></td>
+<td style="text-align: left;">堆排序 ( 大规模 ) 、插入 / 冒泡 ( 小规模
+)</td>
+</tr>
+<tr>
+<td style="text-align: left;">链式存储</td>
+<td style="text-align: left;">归并排序 ( 可原地归并 ) 、插入排序 (
+顺序插入 )</td>
+</tr>
+<tr>
+<td style="text-align: left;">数据基本有序</td>
+<td style="text-align: left;"><span class="p blue">直接插入</span> (
+接近 <span class="math inline">\(O(n)\)</span> )</td>
+</tr>
+<tr>
+<td style="text-align: left;">数据完全逆序</td>
+<td style="text-align: left;">快速排序 ( 随机化 ) 、归并排序</td>
+</tr>
+<tr>
+<td style="text-align: left;">关键字是整数且范围小</td>
+<td style="text-align: left;">基数排序、桶排序</td>
+</tr>
+<tr>
+<td style="text-align: left;">最坏情况有保证</td>
+<td style="text-align: left;">堆排序 <span class="math inline">\(O(n
+\log n)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">实践中最快</td>
+<td style="text-align: left;">快速排序 ( 常数因子小，缓存友好 )</td>
+</tr>
+</tbody>
+</table></div><div class="tab-item-content" id="sort-scene-3"><p>实际工程综合推荐</p>
+<ul>
+<li><strong>STL <code>std::sort</code></strong> 内省排序 ( Introsort ) =
+快速排序 + 堆排序 + 插入排序的三路混合，结合三者优势.</li>
+<li><strong>STL <code>std::stable_sort</code></strong>
+归并排序变体，保证稳定.</li>
+<li><strong>Python <code>timsort</code></strong> 归并排序 +
+插入排序，充分利用数据中的有序段.</li>
+</ul>
+<div class="note info simple">
+<p>
+408 考试中通常要求选择”最合适”的算法，答题时需说明理由 (
+规模、有序性、稳定性、空间限制 ).
+</p>
+</div></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="常考点-选算法题">7.7.4 408 常考点 ( 选算法题 )</h3>
+<div class="tabs" id="sort-choice-points"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="sort-choice-points-1">答题模板</button><button type="button" class="tab " data-href="sort-choice-points-2">高频结论</button></ul><div class="tab-contents"><div class="tab-item-content active" id="sort-choice-points-1"><ul>
+<li>先说限制
+是否要求稳定、是否空间受限、数据规模、是否基本有序、是否为链表</li>
+<li>再给结论 选哪种排序</li>
+<li>最后给理由 时间复杂度 ( 最好/平均/最坏 ) 、空间复杂度、稳定性</li>
+</ul></div><div class="tab-item-content" id="sort-choice-points-2"><ul>
+<li><strong>基本有序</strong> 直接插入 ( 接近 <span
+class="math inline">\(O(n)\)</span> )</li>
+<li>要最坏保证且空间 <span class="math inline">\(O(1)\)</span>
+堆排序</li>
+<li>要稳定且大规模 归并排序 ( 数组 ) 或链表归并 ( 链表 )</li>
+</ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h2 id="下界定理与基于比较的排序">7.8 下界定理与基于比较的排序</h2>
+<div class="note info simple"><p><strong>排序下界定理</strong></p>
+<p>基于比较的排序算法，最坏情况下至少需要 <span
+class="math inline">\(\Omega(n \log n)\)</span> 次比较.</p>
+</div>
+<p><strong>证明思路</strong> <span class="math inline">\(n\)</span>
+个元素的全排列有 <span class="math inline">\(n!\)</span>
+种，每次比较最多将可能性减半，需至少 <span class="math inline">\(\lceil
+\log_2(n!) \rceil \approx n \log_2 n - n \log_2 e = \Omega(n \log
+n)\)</span> 次比较.</p>
+<ul>
+<li>堆排序和归并排序达到了这个下界 ( 最坏 <span
+class="math inline">\(O(n \log n)\)</span> ).</li>
+<li>基数排序突破了这个下界，因为它 <strong>不是基于比较</strong>
+的.</li>
+</ul>
+<h3 id="常考点-1">7.8.1 408 常考点</h3>
+<ul>
+<li>下界结论仅针对“基于比较”的排序模型;
+若题目给出“只能比较关键字大小”，则无法突破 <span
+class="math inline">\(\Omega(n \log n)\)</span></li>
+<li>非比较排序之所以可能更快，是因为利用了关键字结构 ( 位/字符/值域
+)，相当于引入了额外信息与额外空间</li>
+</ul>
+<h2 id="例题精选">7.9 例题精选</h2>
+<div class="note success simple"><p><strong>例题 1 ( 快速排序手动模拟 )</strong> 对序列 <span
+class="math inline">\(\{49, 38, 65, 97, 76, 13, 27, 49&#39;\}\)</span>
+进行快速排序 ( 取第一个元素为枢轴 )，写出第一次 Partition 后的结果.</p>
+<p><strong>解</strong> pivot <span class="math inline">\(=
+49\)</span>，low <span class="math inline">\(= 1\)</span>，high <span
+class="math inline">\(= 8\)</span>.</p>
+<p>从右向左找 <span class="math inline">\(&lt; 49\)</span> 的 <span
+class="math inline">\(A[7] = 27 &lt; 49\)</span>，<span
+class="math inline">\(A[1] = 27\)</span>，low 前进.</p>
+<p>从左向右找 <span class="math inline">\(&gt; 49\)</span> 的 <span
+class="math inline">\(A[2] = 38 &lt;49\)</span> ( 跳过 ) <span
+class="math inline">\(\to\)</span> <span class="math inline">\(A[3] = 65
+&gt; 49\)</span>，<span class="math inline">\(A[7] = 65\)</span>，high
+后退.</p>
+<p>继续 <span class="math inline">\(A[6] = 13 &lt; 49\)</span>，<span
+class="math inline">\(A[3] = 13\)</span>，low 前进.</p>
+<p>从左 <span class="math inline">\(A[4] = 97 &gt; 49\)</span>，<span
+class="math inline">\(A[6] = 97\)</span>，high 后退.</p>
+<p>继续 <span class="math inline">\(A[5] = 76 \ge 49\)</span>，high
+后退.</p>
+<p>low <span class="math inline">\(= 4\)</span>，high <span
+class="math inline">\(= 4\)</span>，<span class="math inline">\(A[4] =
+49\)</span> ( pivot 就位 ).</p>
+<p>结果 <span class="math inline">\(\{27, 38, 13, \mathbf{49}, 76, 97,
+65, 49&#39;\}\)</span>，枢轴位于下标 4 ( 值 49 ).</p>
+</div>
+<div class="note success simple"><p><strong>例题 2 ( 归并排序趟数 )</strong> 对 <span
+class="math inline">\(n = 10\)</span> 个元素进行二路归并排序，共需几趟 ?
+第 2 趟结束后有序子列最长长度是多少 ?</p>
+<p><strong>解</strong> 趟数 <span class="math inline">\(= \lceil \log_2
+10 \rceil = 4\)</span> 趟. 第 2 趟结束后，有序子列长度 <span
+class="math inline">\(= \min(2^2, n) = 4\)</span>，每段最多 4
+个元素.</p>
+</div>
+<div class="note success simple"><p><strong>例题 3 ( 稳定性判断 )</strong>
+判断以下场景哪些需要稳定排序</p>
+<ol type="1">
+<li>按姓名排序学生，可能同名.</li>
+<li>电商平台按评分排序商品，评分相同时保持原始顺序 ( 上架时间序 ).</li>
+<li>给整数数组从小到大排序，不关心相同值顺序.</li>
+</ol>
+<p><strong>解</strong></p>
+<ol type="1">
+<li>姓名相同的学生排序后顺序无意义，不必稳定.</li>
+<li><span class="p red">必须稳定</span> —
+评分相同时需保留上架时间顺序.</li>
+<li>不需要稳定.</li>
+</ol>
+</div>
+<div class="note success simple"><p><strong>例题 4 ( 场景选算法 )</strong> 有 <span
+class="math inline">\(10^6\)</span> 个记录，需要对其中最小的 1000
+个记录进行排序输出，提出最高效方案.</p>
+<p><strong>解</strong></p>
+<p>先用 <strong>大顶堆</strong> 维护大小为 1000 的堆，扫描所有 <span
+class="math inline">\(10^6\)</span> 个记录，时间 <span
+class="math inline">\(O(n \log k) = O(10^6 \times 10) =
+O(10^7)\)</span>.</p>
+<p>再对堆中 1000 个元素进行 <strong>堆排序</strong> 输出，时间 <span
+class="math inline">\(O(k \log k)\)</span>. 总时间 <span
+class="math inline">\(O(n \log k)\)</span>，远优于全部排序 <span
+class="math inline">\(O(n \log n)\)</span>.</p>
+</div>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">sparkle520</div><div class="post-copyright__author_desc">我一直都在寻找着什么</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="http://example.com/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%847/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('http://example.com/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%847/')">408-数据结构-7-内部排序</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="http://example.com/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%847/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=408-数据结构-7-内部排序&amp;url=http://example.com/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%847/&amp;pic=https://pic1.imgdb.cn/item/69b022ea6738cb8aa129ae4b.png" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">SPARKLE</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/408/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>408<span class="tagsPageCount">21</span></a><a class="post-meta__box__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>数据结构<span class="tagsPageCount">7</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://pic1.imgdb.cn/item/69b022ea6738cb8aa129ae4b.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%846/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b022936738cb8aa129ade8.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">408-数据结构-6-查找</div></div></a></div><div class="next-post pull-right"><a href="/2026/03/16/%E8%8B%B1%E8%AF%AD-%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0-%E5%B7%B2%E5%8A%A0%E5%AF%86/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69ad99d2001548a02b697c75.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">英语个人笔记 ( 已加密 )</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%841/" title="408-数据结构-1-绪论"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b00e866738cb8aa1299045.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-13</div><div class="title">408-数据结构-1-绪论</div></div></a></div><div><a href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%842/" title="408-数据结构-2-线性表"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b00d556738cb8aa1298e3c.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-13</div><div class="title">408-数据结构-2-线性表</div></div></a></div><div><a href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%843/" title="408-数据结构-3-栈、队列和数组"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b00d9e6738cb8aa1298eb8.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-13</div><div class="title">408-数据结构-3-栈、队列和数组</div></div></a></div><div><a href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%846/" title="408-数据结构-6-查找"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b022936738cb8aa129ade8.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-14</div><div class="title">408-数据结构-6-查找</div></div></a></div><div><a href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%844/" title="408-数据结构-4-树与二叉树"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b01e0c6738cb8aa129a777.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-13</div><div class="title">408-数据结构-4-树与二叉树</div></div></a></div><div><a href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%845/" title="408-数据结构-5-图"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b021cd6738cb8aa129acd7.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-14</div><div class="title">408-数据结构-5-图</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/671cfe2fd29ded1a8c5ffb0b.png" alt="status"/></div></div><div class="author-info__description">不管你在<strong style="color:white">这个世界</strong>的哪个地方，我一定<strong style="color:white">会</strong>，再次去<strong style="color:white">见</strong>你的!</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">sparkle520</h1><div class="author-info__desc">我一直都在寻找着什么</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/sparkle520" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/34882250" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">Hello World! 欢迎来到我的博客~</div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://pic.imgdb.cn/item/66c487f1d9c307b7e9ba5c7a.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://pic.imgdb.cn/item/66c487ebd9c307b7e9ba5725.png) center center / 100% no-repeat"></div></div></div></div><div class="card-widget card-countdown"><div class="item-headline"><i></i><span></span></div><div class="item-content"><div class="cd-count-left">
+  <span class="cd-text">距离</span>
+  <span class="cd-name" id="eventName"></span>
+  <span class="cd-time" id="daysUntil"></span>
+  <span class="cd-date" id="eventDate"></span>
+</div>
+<div id="countRight" class="cd-count-right"></div>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC7%E7%AB%A0-%E5%86%85%E9%83%A8%E6%8E%92%E5%BA%8F-internal-sorting"><span class="toc-number">1.</span> <span class="toc-text">第7章 内部排序 ( Internal
+Sorting )</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">7.1 基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%9C%AF%E8%AF%AD"><span class="toc-number">1.1.1.</span> <span class="toc-text">7.1.1 核心术语</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%B3%E5%AE%9A%E6%80%A7%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7"><span class="toc-number">1.1.2.</span> <span class="toc-text">7.1.2 稳定性的重要性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%80%83%E7%82%B9"><span class="toc-number">1.1.3.</span> <span class="toc-text">7.1.3 408 常考点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="toc-number">1.2.</span> <span class="toc-text">7.2 插入排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="toc-number">1.2.1.</span> <span class="toc-text">7.2.1 直接插入排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%98%E5%8D%8A%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="toc-number">1.2.2.</span> <span class="toc-text">7.2.2 折半插入排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F-shell-sort"><span class="toc-number">1.2.3.</span> <span class="toc-text">7.2.3 希尔排序 ( Shell Sort )</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%A4%E6%8D%A2%E6%8E%92%E5%BA%8F"><span class="toc-number">1.3.</span> <span class="toc-text">7.3 交换排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F"><span class="toc-number">1.3.1.</span> <span class="toc-text">7.3.1 冒泡排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F"><span class="toc-number">1.3.2.</span> <span class="toc-text">7.3.2 快速排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%80%83%E7%82%B9-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F"><span class="toc-number">1.3.3.</span> <span class="toc-text">7.3.3 408 常考点 ( 快速排序 )</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F"><span class="toc-number">1.4.</span> <span class="toc-text">7.4 选择排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F"><span class="toc-number">1.4.1.</span> <span class="toc-text">7.4.1 简单选择排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A0%86%E6%8E%92%E5%BA%8F"><span class="toc-number">1.4.2.</span> <span class="toc-text">7.4.2 堆排序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F"><span class="toc-number">1.5.</span> <span class="toc-text">7.5 归并排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%80%83%E7%82%B9-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F"><span class="toc-number">1.5.1.</span> <span class="toc-text">7.5.1 408 常考点 ( 归并排序 )</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F"><span class="toc-number">1.6.</span> <span class="toc-text">7.6 基数排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%80%83%E7%82%B9-%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F"><span class="toc-number">1.6.1.</span> <span class="toc-text">7.6.1 408 常考点 ( 基数排序 )</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E5%AF%B9%E6%AF%94"><span class="toc-number">1.7.</span> <span class="toc-text">7.7 算法对比</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E5%AF%B9%E6%AF%94%E8%A1%A8"><span class="toc-number">1.7.1.</span> <span class="toc-text">7.7.1 综合对比表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B0%E5%BF%86%E5%8F%A3%E8%AF%80"><span class="toc-number">1.7.2.</span> <span class="toc-text">7.7.2 记忆口诀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF%E9%80%89%E6%8B%A9"><span class="toc-number">1.7.3.</span> <span class="toc-text">7.7.3 适用场景选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%80%83%E7%82%B9-%E9%80%89%E7%AE%97%E6%B3%95%E9%A2%98"><span class="toc-number">1.7.4.</span> <span class="toc-text">7.7.4 408 常考点 ( 选算法题 )</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E7%95%8C%E5%AE%9A%E7%90%86%E4%B8%8E%E5%9F%BA%E4%BA%8E%E6%AF%94%E8%BE%83%E7%9A%84%E6%8E%92%E5%BA%8F"><span class="toc-number">1.8.</span> <span class="toc-text">7.8 下界定理与基于比较的排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%80%83%E7%82%B9-1"><span class="toc-number">1.8.1.</span> <span class="toc-text">7.8.1 408 常考点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98%E7%B2%BE%E9%80%89"><span class="toc-number">1.9.</span> <span class="toc-text">7.9 例题精选</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/03/16/%E8%8B%B1%E8%AF%AD-%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0-%E5%B7%B2%E5%8A%A0%E5%AF%86/" title="英语个人笔记 ( 已加密 )"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69ad99d2001548a02b697c75.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="英语个人笔记 ( 已加密 )"/></a><div class="content"><a class="title" href="/2026/03/16/%E8%8B%B1%E8%AF%AD-%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0-%E5%B7%B2%E5%8A%A0%E5%AF%86/" title="英语个人笔记 ( 已加密 )">英语个人笔记 ( 已加密 )</a><time datetime="2026-03-16T14:00:27.000Z" title="发表于 2026-03-16 22:00:27">2026-03-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%847/" title="408-数据结构-7-内部排序"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b022ea6738cb8aa129ae4b.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-数据结构-7-内部排序"/></a><div class="content"><a class="title" href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%847/" title="408-数据结构-7-内部排序">408-数据结构-7-内部排序</a><time datetime="2026-03-13T18:00:00.000Z" title="发表于 2026-03-14 02:00:00">2026-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%846/" title="408-数据结构-6-查找"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b022936738cb8aa129ade8.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-数据结构-6-查找"/></a><div class="content"><a class="title" href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%846/" title="408-数据结构-6-查找">408-数据结构-6-查找</a><time datetime="2026-03-13T17:00:00.000Z" title="发表于 2026-03-14 01:00:00">2026-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%845/" title="408-数据结构-5-图"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b021cd6738cb8aa129acd7.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-数据结构-5-图"/></a><div class="content"><a class="title" href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%845/" title="408-数据结构-5-图">408-数据结构-5-图</a><time datetime="2026-03-13T16:00:00.000Z" title="发表于 2026-03-14 00:00:00">2026-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%844/" title="408-数据结构-4-树与二叉树"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b01e0c6738cb8aa129a777.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-数据结构-4-树与二叉树"/></a><div class="content"><a class="title" href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%844/" title="408-数据结构-4-树与二叉树">408-数据结构-4-树与二叉树</a><time datetime="2026-03-13T15:00:00.000Z" title="发表于 2026-03-13 23:00:00">2026-03-13</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  if (true) { 
+    window.typed = new Typed("#footer-type-tips", {
+      strings: ["只要记住你的名字&#44; 不管你在世界的哪个地方&#44; 我一定&#44; 会去见你 !"],
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50
+    })
+  } else {
+    document.getElementById("footer-type-tips").innerHTML = '只要记住你的名字&#44; 不管你在世界的哪个地方&#44; 我一定&#44; 会去见你 !'
+  }
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.cbd.int/typed.js@2.1.0/dist/typed.umd.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/sparkle520" title="sparkle">sparkle</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">107</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">61</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">7</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/sparkle520?tab=repositories" title="github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="github"/><span class="back-menu-item-text">github</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/408/" style="font-size: 0.88rem;">408<sup>21</sup></a><a href="/tags/AOP/" style="font-size: 0.88rem;">AOP<sup>1</sup></a><a href="/tags/Deep-Learning/" style="font-size: 0.88rem;">Deep Learning<sup>1</sup></a><a href="/tags/IoC/" style="font-size: 0.88rem;">IoC<sup>1</sup></a><a href="/tags/JSR303/" style="font-size: 0.88rem;">JSR303<sup>1</sup></a><a href="/tags/Matplotlib/" style="font-size: 0.88rem;">Matplotlib<sup>3</sup></a><a href="/tags/c/" style="font-size: 0.88rem;">c#<sup>2</sup></a><a href="/tags/java/" style="font-size: 0.88rem;">java<sup>4</sup></a><a href="/tags/python/" style="font-size: 0.88rem;">python<sup>5</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 0.88rem;">事务<sup>1</sup></a><a href="/tags/%E4%BA%8C%E6%AC%A1%E5%9E%8B/" style="font-size: 0.88rem;">二次型<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E3%80%82/" style="font-size: 0.88rem;">你的名字。<sup>3</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">你的名字同名小说<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%A4%96%E4%BC%A0%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">你的名字外传小说<sup>1</sup></a><a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size: 0.88rem;">写作<sup>4</sup></a><a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 0.88rem;">包管理<sup>1</sup></a><a href="/tags/%E5%8D%B7%E7%A7%AF%E5%85%AC%E5%BC%8F/" style="font-size: 0.88rem;">卷积公式<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90/" style="font-size: 0.88rem;">天气之子<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">天气之子同名小说<sup>1</sup></a><a href="/tags/%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">小说<sup>2</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 0.88rem;">操作系统<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" style="font-size: 0.88rem;">数据校验<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" style="font-size: 0.88rem;">数据链路层<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 0.88rem;">概率论<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 0.88rem;">概率论与数理统计<sup>7</sup></a><a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 0.88rem;">汇编<sup>9</sup></a><a href="/tags/%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80/" style="font-size: 0.88rem;">泰勒展开<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/" style="font-size: 0.88rem;">物理层<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%80%BC/" style="font-size: 0.88rem;">特征值<sup>2</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F/" style="font-size: 0.88rem;">特征向量<sup>2</sup></a><a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 0.88rem;">线性代数<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" style="font-size: 0.88rem;">网络体系结构<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" style="font-size: 0.88rem;">网络层<sup>2</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 0.88rem;">英语<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95/" style="font-size: 0.88rem;">英语语法<sup>24</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 0.88rem;">计算机组成原理<sup>5</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 0.88rem;">计算机网络<sup>5</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 0.88rem;">语法<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/" style="font-size: 0.88rem;">高等代数<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" style="font-size: 0.88rem;">高等数学<sup>14</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script async src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.cbd.int/mathjax@3.2.2/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.cbd.int/mermaid@10.9.1/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  anzhiyu.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://sparkle521.xyz',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://cdn.cbd.int/twikoo@1.6.25/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://sparkle521.xyz',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"><script async src="/js/anzhiyu/comment_barrage.js"></script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://sparkle521.xyz',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.cbd.int/twikoo@1.6.25/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script async data-pjax src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.1/bubble/bubble.js"></script><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script>const notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));</script><script src="/custom/countdown.js"></script><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

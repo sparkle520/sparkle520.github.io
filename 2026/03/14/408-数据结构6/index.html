@@ -1,0 +1,1548 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>408-数据结构-6-查找 | SPARKLE</title><meta name="keywords" content="408,数据结构"><meta name="author" content="sparkle520"><meta name="copyright" content="sparkle520"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="408-数据结构-6-查找"><meta name="application-name" content="408-数据结构-6-查找"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="408-数据结构-6-查找"><meta property="og:url" content="http://example.com/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%846/index.html"><meta property="og:site_name" content="SPARKLE"><meta property="og:description" content="第6章 查找 ( Search ) 6.1 基本概念 6.1.1 核心术语 查找 在数据集合中寻找满足某种条件的数据元素的过程. 查找的结果是找到或找不到.         术语 定义     查找表 由同一类型的数据元素 ( 或记录 ) 构成的集合"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://pic1.imgdb.cn/item/69b022936738cb8aa129ade8.png"><meta property="article:author" content="sparkle520"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://pic1.imgdb.cn/item/69b022936738cb8aa129ade8.png"><meta name="description" content="第6章 查找 ( Search ) 6.1 基本概念 6.1.1 核心术语 查找 在数据集合中寻找满足某种条件的数据元素的过程. 查找的结果是找到或找不到.         术语 定义     查找表 由同一类型的数据元素 ( 或记录 ) 构成的集合"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%846/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: 'https://sparkle521.xyz',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":4000,"accessToken":"","mailMd5":""},
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: {"mode":"api","api":"https://img2color-go.vercel.app/api?img=","cover_change":true},
+  authorStatus: {"skills":["(❤ ω ❤)"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: sparkle520","link":"链接: ","source":"来源: SPARKLE","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#883ced","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'SPARKLE',
+  title: '408-数据结构-6-查找',
+  postAI: '',
+  pageFillDescription: '第6章 查找 ( Search ), 6.1 基本概念, 6.1.1 核心术语, 6.1.2 平均查找长度 ( ASL ), 6.2 静态查找, 6.2.1 顺序查找, 6.2.2 折半查找 ( 二分查找 ), 6.2.3 分块查找 ( 索引顺序查找 ), 6.2.4 408 常考点, 6.3 动态查找 ( 树形结构 ), 6.3.1 二叉排序树与 AVL 树, 6.3.2 B 树, 6.3.3 B+ 树, 6.3.4 红黑树 ( 了解 ), 6.4 散列 ( Hash ), 6.4.1 基本概念, 6.4.2 散列函数, 6.4.3 冲突处理方法, 6.4.4 散列表的操作与 ASL, 6.4.5 408 常考点, 6.5 各查找方法综合对比, 6.6 例题精选, 6.7 本章疑难点, 1. ASL 的计算基准, 2. 折半查找判定树的失败结点, 3. B 树 vs B+ 树核心区别, 4. 开放定址法删除必须用墓碑, 6. 红黑树的插入默认红色, 6.8 本章小结第章查找基本概念核心术语查找在数据集合中寻找满足某种条件的数据元素的过程查找的结果是找到或找不到术语定义查找表由同一类型的数据元素或记录构成的集合关键字数据元素中唯一标识该元素的数据项可以是主关键字或次关键字静态查找查找时不修改查找表只做查找操作如顺序查找折半查找动态查找查找时可以插入或删除元素如二叉排序树散列表平均查找长度平均查找长度查找过程中关键字比较次数的期望值是衡量查找算法效率的核心指标表示查找第个元素的概率通常假定等概率表示找到第个元素所需的比较次数需分别计算查找成功和查找失败的静态查找顺序查找算法实现分析有序表优化带哨兵的顺序查找下标从开始哨兵避免越界判断返回表示查找失败哨兵的作用将循环是否越界与是否找到合并为一次判断减少比较次数设表长为等概率查找成功失败时间复杂度适用于无序表或链式存储若表有序查找失败时不必扫描到尾扫描到第一个大于的元素即可判定失败失败时平均比较次数降低但成功不变失败有序折半查找二分查找折半查找仅适用于有序的顺序表不适用于链表无法随机访问算法实现判定树与判定树细节找到查找失败折半查找过程可用判定树二叉查找树描述树中第层结点的比较次数为设表长满二叉树高度成功失败时间复杂度对一般折半查找的判定树构造规则根为左子树含个元素右子树含个元素失败结点方形有个位于最后两层查找失败比较次数失败结点所在层数或层数取决于定义提示真题常考查找失败时的最多比较次数判定树的高度分块查找索引顺序查找分块查找将查找表分为若干块块内元素无序块间元素有序前一块的最大值后一块的最小值另建索引表存储每块最大值及起始位置查找过程在索引表中确定目标所在块顺序查找或折半查找在对应块内进行顺序查找分析设个元素分为块每块个元素索引表用顺序查找令时最优索引表用折半查找查找方式时间复杂度特点顺序查找无序无额外空间折半查找需有序顺序存储分块查找块间有序块内无序灵活常考点顺序查找折半查找分块查找哨兵让循环条件只需判断一次尤其适合顺序表下标从开始的写法有序顺序查找一旦遇到第一个大于的元素即可失败返回必须是有序的顺序表数组链表不能折半判定树高度常用于求查找失败的最多比较次数拟合量级成功与失败的都是块间有序块内无序先定位块再块内顺序找索引顺序查找的经典最优令块数索引用顺序查找时动态查找树形结构二叉排序树与树二叉排序树和平衡二叉树已在第章详细讨论此处仅做查找性能总结结构查找成功查找时间备注最优平衡时形如完全二叉树最坏退化为单链有序插入树任何情况树树多路平衡查找树是一种自平衡的多路搜索树所有叶结点在同一层常用于外存磁盘索引阶树定义每个结点最多有棵子树即最多个关键字根结点非叶至少有棵子树即至少个关键字非根非叶结点至少有棵子树即至少个关键字所有叶结点在同一层失败结点不含信息结点关键字从左到右递增子树指针与关键字交替排列结点结构查找插入删除高度与结点数一个含个关键字的结点结构子树指针区间有序从根结点开始在当前结点关键字中顺序或折半比较找到返回若在和之间沿指针进入子树继续查找到达叶结点则查找失败每访问一个结点一次磁盘高度为的阶树查找最多需次磁盘访问个关键字的阶树高度插入规则查找插入位置必为最底层非叶结点插入关键字若该结点关键字数上溢则分裂取第个关键字上移到父结点剩余分裂为两个结点若父结点也上溢递归向上分裂最坏情况分裂到根示例阶树结点最多个关键字插入结点上溢分裂上移和分别为左右孩子删除分两种情况删除非终端结点关键字用其中序前驱或后继必为终端结点的关键字替换再删除终端结点中该关键字删除终端结点关键字若删后关键字数无下溢直接删除若删后下溢关键字数兄弟富余向兄弟借一个关键字通过父结点中转兄弟不富余与兄弟及父结点中的一个关键字合并父结点关键字减少可能引发递归合并高度与结点数关系考试常用已知条件结论阶树个关键字高度高度的阶树最少关键字数高度的阶树最多关键字数树树树的变体是实际数据库等索引的标准实现与树的核心区别在于数据只存在叶结点内部结点仅存关键字索引树树比较项树树数据存放位置所有结点仅叶结点内部结点作用索引数据纯索引叶结点失败结点无数据包含所有关键字和数据叶结点连接无用链表顺序相连支持范围查询关键字重复不重复内部结点关键字在叶中重复出现顺序遍历需中序遍历遍历叶结点链表结构特点数据库索引应用新增插入与删除阶树内部结点最多个子树最多个关键字与树不同树个非根内部结点至少个子树所有叶结点包含全部关键字按顺序排列相邻叶结点用双向链表连接查找路径从根到叶结点叶结点才是真正的数据树在数据库索引中的应用案例存储引擎使用树作为索引结构原因如下原因说明磁盘最优树高度低通常层每次查找最多次磁盘访问范围查询高效叶结点链表支持等范围操作内部结点更紧凑内部结点只存关键字不存数据单页能存更多关键字降低树高顺序访问友好遍历叶链表即可全表扫描无需回溯聚簇索引非聚簇索引聚簇索引叶结点直接存储完整行数据查找一次即可非聚簇索引叶结点存储主键值查找需回表两次树查找实际高度估算假设单页关键字指针约字节则单页约存个条目高度为的树可存约条记录支持数千万级别数据插入与树类似叶结点上溢时从中间关键字分裂但分裂时中间关键字同时保留在叶结点上移的是副本内部结点也获得该关键字删除直接删叶结点中的关键字下溢时从兄弟借或合并内部结点中的关键字不需删除仅起索引作用保留副本即可树删除与树的关键区别删除叶结点关键字后即使该关键字同时存在于内部结点作为分隔符也不必删除内部结点中的那份副本红黑树了解红黑树一种自平衡的二叉排序树每个结点附加一个颜色属性红或黑通过颜色约束保证树高五条性质每个结点是红色或黑色根结点是黑色每个叶结点空结点是黑色若一个结点是红色则其两个子结点都是黑色红结点的父子不能是红色对任意结点从该结点到其所有后代叶结点的路径上黑色结点数量相同黑高相同性质推论与对比插入规则删除规则树高含个内部结点的红黑树高度即黑高从任意结点到叶不含该结点的黑色结点数最短路径全黑与最长路径红黑交替之比不超过比更宽松比较项树红黑树平衡条件严格黑高相同宽松查找效率略高树更矮略低插入删除旋转次数较多最多次旋转适用场景查找频繁插删频繁如进程调度新结点默认红色插入不违反性质尽量少破坏平衡插入后可能违反性质父红子红通过变色旋转修复情况叔父结点颜色处理方法红色父叔变黑祖父变红祖父作为新结点递归处理黑色新结点在内侧对父做旋转转化为黑色新结点在外侧父变黑祖父变红对祖父做旋转删除步骤按方式删除结点若删除的是红色结点不影响黑高直接完成若删除的是黑色结点黑高失衡需通过变色旋转修复共种情况较复杂了解即可散列基本概念散列表哈希表根据关键字直接计算存储地址理想情况下查找插入删除均为散列函数将关键字映射到存储地址的函数冲突不同关键字映射到同一地址即但装填因子表中记录数散列表长度越大冲突概率越高散列函数除留余数法直接定址法数字分析法平方取中法通常选不大于表长且最接近表长的素数质数减少冲突最常用适用范围广为常数计算简单无冲突线性映射适合关键字分布连续且范围已知的场景关键字范围稀疏时浪费空间分析关键字的数字分布选取分布较均匀的若干位作为散列地址例手机号后位前位运营商前缀相似适合关键字已知且分布有规律的场景将关键字平方取中间若干位作为散列地址取中间位适合关键字位数较少每位取值均匀时冲突处理方法开放定址法链地址法两种方法对比开放定址法发生冲突时按某种探测序列在散列表中寻找下一个空槽存入三种探测方式方法探测序列特点线性探测易产生堆积群集现象严重二次探测减少堆积但不能探测所有槽双重散列最优减少聚集探测序列随变化注意线性探测产生的一次聚集是最严重的堆积问题连续占用的槽越长下一个元素落入该区域的概率越大形成正反馈链地址法拉链法将散列到同一地址的所有关键字用链表链接散列表中每个槽存储链表头指针散列表优点无堆积问题删除方便装填因子可缺点指针开销链表在内存中不连续缓存不友好比较项开放定址链地址冲突处理在表内探测链表外延装填因子必须可删除操作复杂需标记墓碑简单空间利用无额外指针有指针开销适用场景表大小已知较小元素数量未知频繁删除散列表的操作与查找删除分析散列表大小选择计算散列地址线性探测示例找到失败查找过程与插入路径完全相同只是插入时找到空槽存入开放定址法删除的问题不能直接置空否则会截断探测链导致后续元素找不到需使用墓碑标记查找时跳过插入时可复用链地址法删除直接删除链表中对应结点设散列表长装填因子线性探测开放定址法成功失败链地址法成功失败较小时注意考试中通常直接根据散列过程逐一计数而非代公式建议画出散列表并统计每个关键字的比较次数选择散列表长度的原则选素数尤其使用除留余数法时减少系统性冲突根据预期关键字数和期望装填因子确定一般控制在之间兼顾空间与效率常考点表长与函数开放定址计数除留余数法最常考往往取接近表长的素数题目同时给与时以题目给定为准不自行改表长查找与插入走同一条探测序列因此才有查找失败时比较次数一说删除不能直接置空必须用墓碑否则会断开探测链线性探测最容易出现一次聚集会随快速上升最稳的做法按插入顺序画表记录每个关键字的探测次数成功按平均比较次数求失败通常按从出发直到遇到空槽为一次失败查找的比较次数各查找方法综合对比方法平均时间最坏时间有序要求动态操作顺序查找否容易折半查找必须有序困难分块查找块间有序中等否容易红黑树否中等树否中等适合外存散列表否容易散列表查找为的前提装填因子合理散列函数均匀冲突少最坏情况退化为全部冲突到同一链表例题精选例题折半查找有序表共个元素求折半查找成功时的解判定树二叉查找树括号内为下标从开始根值为比较次数第层第层第层第层第层第层第层修正计算深度有个结点深度有个深度有个例题散列表构造与关键字序列散列函数线性探测解决冲突表长求查找成功的解计算各关键字散列地址及探测次数关键字实际存储位置比较次数冲突冲突冲突次冲突冲突冲突多次成功例题树高度一棵阶树共有个关键字问该树的最大高度和最小高度分别是多少解最大高度每个结点关键字数最少树尽可能高非根结点最少关键字数根至少个高度时最少关键字数令解得最小高度每个结点关键字数最多树尽可能矮每个结点最多个关键字高度最多关键字数解得即所以最大高度最小高度例题分块查找有个元素分为块每块个块间有序块内无序索引表用顺序查找求查找成功时的解本章疑难点的计算基准以比较次数为基准不同算法的一次比较含义可能不同如折半查找每次与中间元素比较可能等于大于小于三路务必区分查找成功和查找失败的两者计算方式不同折半查找判定树的失败结点失败结点方形有个表示个查找失败区间失败结点的比较次数其父结点所在层数即与父结点比较后判断失败树树核心区别树数据在所有结点树数据仅在叶结点内部结点是纯索引树叶结点有顺序链表支持高效范围查询这是数据库选择树的最重要原因开放定址法删除必须用墓碑直接置空会断链导致之后的查找失败本应存在的元素找不到墓碑标记的槽在插入时可以复用但查找时需跳过装填因子的影响越大冲突越多越高通常时性能急剧下降链地址法中可以大于链表可以很长但不推荐红黑树的插入默认红色新结点默认红色因为插入红结点只可能违反性质红红相邻而插入黑结点必然违反性质黑高不均修复代价更大本章小结静态查找的效率从低到高顺序分块折半折半要求有序顺序表动态查找树形结构平均但最坏退化保证红黑树适合频繁增删树适用于外存最小化磁盘树因叶链表支持范围查询成为数据库索引首选散列表理想性能依赖散列函数和冲突处理除留余数法链地址法是最常见组合是衡量所有查找算法的统一指标考试必须熟练计算各方法的成功失败',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-03-10 22:30:26',
+  postMainColor: '#194B88',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.min.css"><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/sparkle520?tab=repositories" title="github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="github"/><span class="back-menu-item-text">github</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">SPARKLE</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/408/" style="font-size: 1.05rem;">408<sup>21</sup></a><a href="/tags/AOP/" style="font-size: 1.05rem;">AOP<sup>1</sup></a><a href="/tags/Deep-Learning/" style="font-size: 1.05rem;">Deep Learning<sup>1</sup></a><a href="/tags/IoC/" style="font-size: 1.05rem;">IoC<sup>1</sup></a><a href="/tags/JSR303/" style="font-size: 1.05rem;">JSR303<sup>1</sup></a><a href="/tags/Matplotlib/" style="font-size: 1.05rem;">Matplotlib<sup>3</sup></a><a href="/tags/c/" style="font-size: 1.05rem;">c#<sup>2</sup></a><a href="/tags/java/" style="font-size: 1.05rem;">java<sup>4</sup></a><a href="/tags/python/" style="font-size: 1.05rem;">python<sup>5</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 1.05rem;">事务<sup>1</sup></a><a href="/tags/%E4%BA%8C%E6%AC%A1%E5%9E%8B/" style="font-size: 1.05rem;">二次型<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E3%80%82/" style="font-size: 1.05rem;">你的名字。<sup>3</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字同名小说<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%A4%96%E4%BC%A0%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字外传小说<sup>1</sup></a><a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size: 1.05rem;">写作<sup>4</sup></a><a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 1.05rem;">包管理<sup>1</sup></a><a href="/tags/%E5%8D%B7%E7%A7%AF%E5%85%AC%E5%BC%8F/" style="font-size: 1.05rem;">卷积公式<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90/" style="font-size: 1.05rem;">天气之子<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">天气之子同名小说<sup>1</sup></a><a href="/tags/%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">小说<sup>2</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">操作系统<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" style="font-size: 1.05rem;">数据校验<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" style="font-size: 1.05rem;">数据链路层<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 1.05rem;">概率论<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 1.05rem;">概率论与数理统计<sup>7</sup></a><a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 1.05rem;">汇编<sup>9</sup></a><a href="/tags/%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80/" style="font-size: 1.05rem;">泰勒展开<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/" style="font-size: 1.05rem;">物理层<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%80%BC/" style="font-size: 1.05rem;">特征值<sup>2</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F/" style="font-size: 1.05rem;">特征向量<sup>2</sup></a><a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">线性代数<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" style="font-size: 1.05rem;">网络体系结构<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" style="font-size: 1.05rem;">网络层<sup>2</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 1.05rem;">英语<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">英语语法<sup>24</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1.05rem;">计算机组成原理<sup>5</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.05rem;">计算机网络<sup>5</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">语法<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">高等代数<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" style="font-size: 1.05rem;">高等数学<sup>14</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">三月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">21</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/02/"><span class="card-archive-list-date">二月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/01/"><span class="card-archive-list-date">一月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/12/"><span class="card-archive-list-date">十二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">15</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/11/"><span class="card-archive-list-date">十一月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/10/"><span class="card-archive-list-date">十月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/09/"><span class="card-archive-list-date">九月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/08/"><span class="card-archive-list-date">八月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url">计算机</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/408/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>408</span></a><a class="article-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>数据结构</span></a></span></div></div><h1 class="post-title" itemprop="name headline">408-数据结构-6-查找</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-03-13T17:00:00.000Z" title="发表于 2026-03-14 01:00:00">2026-03-14</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-03-10T14:30:26.770Z" title="更新于 2026-03-10 22:30:26">2026-03-10</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">5.9k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>21分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="408-数据结构-6-查找"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为系守镇"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>系守镇</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%846/#post-comment" tabindex="-1"><span id="twikoo-count"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://pic1.imgdb.cn/item/69b022936738cb8aa129ade8.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%846/"><header><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url">计算机</a><a href="/tags/408/" tabindex="-1" itemprop="url">408</a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" tabindex="-1" itemprop="url">数据结构</a><h1 id="CrawlerTitle" itemprop="name headline">408-数据结构-6-查找</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">sparkle520</span><time itemprop="dateCreated datePublished" datetime="2026-03-13T17:00:00.000Z" title="发表于 2026-03-14 01:00:00">2026-03-14</time><time itemprop="dateCreated datePublished" datetime="2026-03-10T14:30:26.770Z" title="更新于 2026-03-10 22:30:26">2026-03-10</time></header><h1 id="第6章-查找-search">第6章 查找 ( Search )</h1>
+<h2 id="基本概念">6.1 基本概念</h2>
+<h3 id="核心术语">6.1.1 核心术语</h3>
+<div class="note info simple"><p><strong>查找</strong> 在数据集合中寻找满足某种条件的数据元素的过程.
+查找的结果是找到或找不到.</p>
+</div>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">术语</th>
+<th style="text-align: left;">定义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>查找表</strong></td>
+<td style="text-align: left;">由同一类型的数据元素 ( 或记录 )
+构成的集合</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>关键字</strong></td>
+<td
+style="text-align: left;">数据元素中唯一标识该元素的数据项，可以是主关键字或次关键字</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>静态查找</strong></td>
+<td
+style="text-align: left;">查找时不修改查找表，只做查找操作，如顺序查找、折半查找</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>动态查找</strong></td>
+<td
+style="text-align: left;">查找时可以插入或删除元素，如二叉排序树、散列表</td>
+</tr>
+</tbody>
+</table>
+<h3 id="平均查找长度-asl">6.1.2 平均查找长度 ( ASL )</h3>
+<div class="note info simple"><p><strong>平均查找长度 ASL ( Average Search Length )</strong>
+查找过程中 <strong>关键字比较次数</strong>
+的期望值，是衡量查找算法效率的核心指标.</p>
+</div>
+<p><span class="math display">\[\text{ASL} = \sum_{i=1}^{n} P_i \times
+C_i\]</span></p>
+<ul>
+<li><span class="math inline">\(P_i\)</span> 表示查找第 <span
+class="math inline">\(i\)</span> 个元素的概率，通常假定
+<strong>等概率</strong> <span class="math inline">\(P_i =
+\dfrac{1}{n}\)</span>.</li>
+<li><span class="math inline">\(C_i\)</span> 表示找到第 <span
+class="math inline">\(i\)</span> 个元素所需的比较次数.</li>
+<li>需分别计算 <strong>查找成功</strong> 和 <strong>查找失败</strong> 的
+ASL.</li>
+</ul>
+<h2 id="静态查找">6.2 静态查找</h2>
+<h3 id="顺序查找">6.2.1 顺序查找</h3>
+<div class="tabs" id="seq-search"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="seq-search-1">算法实现</button><button type="button" class="tab " data-href="seq-search-2">ASL 分析</button><button type="button" class="tab " data-href="seq-search-3">有序表优化</button></ul><div class="tab-contents"><div class="tab-item-content active" id="seq-search-1"><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 带哨兵的顺序查找 ( 下标从 1 开始 ) </span></span><br><span class="line"><span class="type">int</span> <span class="title function_">SeqSearch</span><span class="params">(SSTable ST, ElemType key)</span> &#123;</span><br><span class="line">    ST.elem[<span class="number">0</span>] = key;          <span class="comment">// 哨兵，避免越界判断</span></span><br><span class="line">    <span class="type">int</span> i = ST.TableLen;</span><br><span class="line">    <span class="keyword">while</span> (ST.elem[i] != key)</span><br><span class="line">        i--;</span><br><span class="line">    <span class="keyword">return</span> i;                  <span class="comment">// 返回 0 表示查找失败</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>哨兵的作用
+将”循环是否越界”与”是否找到”合并为一次判断，减少比较次数.</p></div><div class="tab-item-content" id="seq-search-2"><p>设表长为 <span class="math inline">\(n\)</span>，等概率查找</p>
+<p><span class="math display">\[\text{ASL}_{\text{成功}} =
+\frac{1}{n}\sum_{i=1}^{n}(n-i+1) = \frac{n+1}{2}\]</span></p>
+<p><span class="math display">\[\text{ASL}_{\text{失败}} = n +
+1\]</span></p>
+<ul>
+<li>时间复杂度 <span class="math inline">\(O(n)\)</span>，适用于
+<strong>无序表</strong> 或 <strong>链式存储</strong>.</li>
+</ul></div><div class="tab-item-content" id="seq-search-3"><p>若表有序，查找失败时不必扫描到尾：</p>
+<ul>
+<li>扫描到第一个大于 <code>key</code> 的元素即可判定失败.</li>
+<li>失败时平均比较次数降低，但成功 ASL 不变.</li>
+</ul>
+<p><span class="math display">\[\text{ASL}_{\text{失败 ( 有序 ) }} =
+\frac{1}{n+1}\sum_{i=1}^{n+1} i = \frac{n+2}{2}\]</span></p></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="折半查找-二分查找">6.2.2 折半查找 ( 二分查找 )</h3>
+<div class="note warning simple"><p>折半查找 <strong>仅适用于有序的顺序表</strong>，不适用于链表 (
+无法随机访问 ).</p>
+</div>
+<div class="tabs" id="binary-search"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="binary-search-1">算法实现</button><button type="button" class="tab " data-href="binary-search-2">判定树与 ASL</button><button type="button" class="tab " data-href="binary-search-3">判定树细节</button></ul><div class="tab-contents"><div class="tab-item-content active" id="binary-search-1"><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">BinarySearch</span><span class="params">(SSTable L, ElemType key)</span> &#123;</span><br><span class="line">    <span class="type">int</span> low = <span class="number">0</span>, high = L.TableLen - <span class="number">1</span>, mid;</span><br><span class="line">    <span class="keyword">while</span> (low &lt;= high) &#123;</span><br><span class="line">        mid = (low + high) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (L.elem[mid] == key)  <span class="keyword">return</span> mid;  <span class="comment">// 找到</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (L.elem[mid] &gt; key) high = mid - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span>                        low  = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;  <span class="comment">// 查找失败</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-item-content" id="binary-search-2"><p>折半查找过程可用 <strong>判定树</strong> ( 二叉查找树 ) 描述，树中第
+<span class="math inline">\(k\)</span> 层结点的比较次数为 <span
+class="math inline">\(k\)</span>.</p>
+<p>设表长 <span class="math inline">\(n = 2^h - 1\)</span> ( 满二叉树
+)，高度 <span class="math inline">\(h = \log_2(n+1)\)</span></p>
+<p><span class="math display">\[\text{ASL}_{\text{成功}} =
+\frac{1}{n}\sum_{j=1}^{h} j \times 2^{j-1} = \frac{n+1}{n}\log_2(n+1) -
+1 \approx \log_2(n+1) - 1\]</span></p>
+<p><span class="math display">\[\text{ASL}_{\text{失败}} \approx
+\log_2(n+1)\]</span></p>
+<ul>
+<li>时间复杂度 <span class="math inline">\(O(\log n)\)</span>.</li>
+</ul></div><div class="tab-item-content" id="binary-search-3"><p>对一般 <span
+class="math inline">\(n\)</span>，折半查找的判定树构造规则</p>
+<ul>
+<li>根为 <span class="math inline">\(\lfloor (1 + n) / 2
+\rfloor\)</span>，左子树含 <span class="math inline">\(\lfloor (n-1)/2
+\rfloor\)</span> 个元素，右子树含 <span class="math inline">\(n -
+\lfloor (n-1)/2 \rfloor - 1\)</span> 个元素.</li>
+<li><strong>失败结点</strong> ( 方形 ) 有 <span
+class="math inline">\(n+1\)</span> 个，位于最后两层.</li>
+<li>查找失败比较次数 = 失败结点所在层数 ( 或层数 <span
+class="math inline">\(-1\)</span>，取决于定义 ).</li>
+</ul>
+<div class="note info simple">
+<p>
+<strong>提示</strong>
+</p>
+<p>
+408 真题常考”查找失败时的最多比较次数”= 判定树的 <strong>高度</strong>
+<span class="math inline">(_2(n+1) )</span>.
+</p>
+</div></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="分块查找-索引顺序查找">6.2.3 分块查找 ( 索引顺序查找 )</h3>
+<div class="note info simple"><p><strong>分块查找</strong></p>
+<p>将查找表分为若干块，块内元素 <strong>无序</strong>，块间元素
+<strong>有序</strong> ( 前一块的最大值 &lt; 后一块的最小值 ).
+另建索引表存储每块最大值及起始位置.</p>
+</div>
+<p><strong>查找过程</strong></p>
+<ol type="1">
+<li>在 <strong>索引表</strong> 中确定目标所在块 ( 顺序查找或折半查找
+).</li>
+<li>在对应块内进行 <strong>顺序查找</strong>.</li>
+</ol>
+<p><strong>ASL 分析</strong> ( 设 <span class="math inline">\(n\)</span>
+个元素分为 <span class="math inline">\(b\)</span> 块，每块 <span
+class="math inline">\(s = n/b\)</span> 个元素 )</p>
+<ul>
+<li>索引表用 <strong>顺序查找</strong> <span
+class="math inline">\(\text{ASL} = \dfrac{b+1}{2} +
+\dfrac{s+1}{2}\)</span>，令 <span class="math inline">\(b =
+\sqrt{n}\)</span> 时最优，<span class="math inline">\(\text{ASL}_{\min}
+= \sqrt{n} + 1\)</span>.</li>
+<li>索引表用 <strong>折半查找</strong> <span
+class="math inline">\(\text{ASL} = \lceil \log_2(b+1) \rceil +
+\dfrac{s+1}{2}\)</span>.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">查找方式</th>
+<th style="text-align: center;">时间复杂度</th>
+<th style="text-align: left;">特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">顺序查找</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+<td style="text-align: left;">无序，无额外空间</td>
+</tr>
+<tr>
+<td style="text-align: left;">折半查找</td>
+<td style="text-align: center;"><span class="math inline">\(O(\log
+n)\)</span></td>
+<td style="text-align: left;">需有序顺序存储</td>
+</tr>
+<tr>
+<td style="text-align: left;">分块查找</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(\sqrt{n})\)</span></td>
+<td style="text-align: left;">块间有序，块内无序，灵活</td>
+</tr>
+</tbody>
+</table>
+<h3 id="常考点">6.2.4 408 常考点</h3>
+<div class="tabs" id="search-static-points"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="search-static-points-1">顺序查找</button><button type="button" class="tab " data-href="search-static-points-2">折半查找</button><button type="button" class="tab " data-href="search-static-points-3">分块查找</button></ul><div class="tab-contents"><div class="tab-item-content active" id="search-static-points-1"><ul>
+<li>哨兵让循环条件只需判断一次，尤其适合顺序表 ( 下标从 1 开始的写法
+)</li>
+<li>有序顺序查找：一旦遇到第一个大于 <code>key</code>
+的元素即可失败返回</li>
+</ul></div><div class="tab-item-content" id="search-static-points-2"><ul>
+<li>必须是有序的顺序表 ( 数组 )，链表不能折半</li>
+<li>判定树高度常用于求「查找失败的最多比较次数」：<span
+class="math inline">\(\lceil \log_2(n+1) \rceil\)</span></li>
+<li>拟合量级：成功与失败的 ASL 都是 <span class="math inline">\(O(\log
+n)\)</span></li>
+</ul></div><div class="tab-item-content" id="search-static-points-3"><ul>
+<li>块间有序 + 块内无序：先定位块，再块内顺序找</li>
+<li>索引顺序查找的经典最优：令块数 <span class="math inline">\(b \approx
+\sqrt{n}\)</span> ( 索引用顺序查找时 )</li>
+</ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<hr />
+<h2 id="动态查找-树形结构">6.3 动态查找 ( 树形结构 )</h2>
+<h3 id="二叉排序树与-avl-树">6.3.1 二叉排序树与 AVL 树</h3>
+<div class="note info simple"><p>二叉排序树 ( BST ) 和平衡二叉树 ( AVL ) 已在第 4
+章详细讨论，此处仅做查找性能总结.</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">结构</th>
+<th style="text-align: left;">查找 ASL ( 成功 )</th>
+<th style="text-align: center;">查找时间</th>
+<th style="text-align: left;">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">BST ( 最优 )</td>
+<td style="text-align: left;"><span class="math inline">\(O(\log
+n)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O(\log
+n)\)</span></td>
+<td style="text-align: left;">平衡时，形如完全二叉树</td>
+</tr>
+<tr>
+<td style="text-align: left;">BST ( 最坏 )</td>
+<td style="text-align: left;"><span
+class="math inline">\(O(n)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+<td style="text-align: left;">退化为单链 ( 有序插入 )</td>
+</tr>
+<tr>
+<td style="text-align: left;">AVL 树</td>
+<td style="text-align: left;"><span class="math inline">\(O(\log
+n)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O(\log
+n)\)</span></td>
+<td style="text-align: left;">任何情况，<span class="math inline">\(h =
+O(\log n)\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-树">6.3.2 B 树</h3>
+<div class="note info simple"><p><strong>B 树</strong> ( 多路平衡查找树 ) 是一种
+<strong>自平衡</strong> 的多路搜索树，所有叶结点在同一层，常用于外存 (
+磁盘 ) 索引.</p>
+</div>
+<p><strong><span class="math inline">\(m\)</span> 阶 B
+树定义</strong></p>
+<ul>
+<li>每个结点最多有 <span class="math inline">\(m\)</span> 棵子树，即最多
+<span class="math inline">\(m-1\)</span> 个关键字.</li>
+<li>根结点 ( 非叶 ) 至少有 2 棵子树，即至少 1 个关键字.</li>
+<li>非根非叶结点至少有 <span class="math inline">\(\lceil m/2
+\rceil\)</span> 棵子树，即至少 <span class="math inline">\(\lceil m/2
+\rceil - 1\)</span> 个关键字.</li>
+<li>所有 <strong>叶结点</strong> 在同一层 ( 失败结点，不含信息 ).</li>
+<li>结点关键字从左到右递增，子树指针与关键字交替排列.</li>
+</ul>
+<div class="tabs" id="b-tree"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="b-tree-1">结点结构</button><button type="button" class="tab " data-href="b-tree-2">查找</button><button type="button" class="tab " data-href="b-tree-3">插入</button><button type="button" class="tab " data-href="b-tree-4">删除</button><button type="button" class="tab " data-href="b-tree-5">高度与结点数</button></ul><div class="tab-contents"><div class="tab-item-content active" id="b-tree-1"><p>一个含 <span class="math inline">\(k\)</span> 个关键字的结点结构</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">| P0 | K1 | P1 | K2 | P2 | ... | Kk | Pk |</span><br></pre></td></tr></table></figure>
+<ul>
+<li><span class="math inline">\(P_0 &lt; K_1 &lt; P_1 &lt; K_2 &lt;
+\ldots &lt; K_k &lt; P_k\)</span> ( 子树指针区间有序 ).</li>
+<li><span class="math inline">\(\lceil m/2 \rceil - 1 \leq k \leq m -
+1\)</span>.</li>
+</ul></div><div class="tab-item-content" id="b-tree-2"><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">从根结点开始 </span><br><span class="line">1. 在当前结点关键字中顺序 ( 或折半 ) 比较，找到 key 返回.</span><br><span class="line">2. 若 key 在 Ki 和 Ki+1 之间，沿 Pi 指针进入子树继续查找.</span><br><span class="line">3. 到达叶结点 ( NULL ) 则查找失败.</span><br></pre></td></tr></table></figure>
+<ul>
+<li>每访问一个结点 = 一次磁盘 I/O.</li>
+<li>高度为 <span class="math inline">\(h\)</span> 的 <span
+class="math inline">\(m\)</span> 阶 B 树，查找最多需 <span
+class="math inline">\(h\)</span> 次磁盘访问.</li>
+<li><span class="math inline">\(n\)</span> 个关键字的 <span
+class="math inline">\(m\)</span> 阶 B 树高度 <span
+class="math inline">\(h \leq \log_{\lceil m/2
+\rceil}\left(\dfrac{n+1}{2}\right) + 1\)</span>.</li>
+</ul></div><div class="tab-item-content" id="b-tree-3"><p><strong>插入规则</strong></p>
+<ol type="1">
+<li>查找插入位置 ( 必为 <strong>最底层非叶结点</strong> ).</li>
+<li>插入关键字.</li>
+<li>若该结点关键字数 <span class="math inline">\(&gt; m-1\)</span> (
+<strong>上溢</strong> )，则 <strong>分裂</strong> :
+<ul>
+<li>取第 <span class="math inline">\(\lceil m/2 \rceil\)</span>
+个关键字上移到父结点.</li>
+<li>剩余分裂为两个结点.</li>
+</ul></li>
+<li>若父结点也上溢，递归向上分裂，最坏情况分裂到根.</li>
+</ol>
+<p><strong>示例</strong> ( 3 阶 B 树，结点最多 2 个关键字 )</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">插入 key=30，结点 [20, 40] → 上溢 [20, 30, 40]</span><br><span class="line">分裂 30 上移，[20] 和 [40] 分别为左右孩子</span><br></pre></td></tr></table></figure></div><div class="tab-item-content" id="b-tree-4"><p><strong>删除分两种情况</strong> :</p>
+<ol type="1">
+<li><p><strong>删除非终端结点关键字</strong> 用其
+<strong>中序前驱或后继</strong> ( 必为终端结点的关键字 )
+替换，再删除终端结点中该关键字.</p></li>
+<li><p><strong>删除终端结点关键字</strong></p>
+<ul>
+<li>若删后关键字数 <span class="math inline">\(\geq \lceil m/2 \rceil -
+1\)</span> ( <strong>无下溢</strong> ) 直接删除.</li>
+<li>若删后 <strong>下溢</strong> ( 关键字数 <span
+class="math inline">\(&lt; \lceil m/2 \rceil - 1\)</span> )
+<ul>
+<li><strong>兄弟富余</strong> 向兄弟借一个关键字 ( 通过父结点中转
+).</li>
+<li><strong>兄弟不富余</strong> 与兄弟及父结点中的一个关键字
+<strong>合并</strong>，父结点关键字减少，可能引发递归合并.</li>
+</ul></li>
+</ul></li>
+</ol></div><div class="tab-item-content" id="b-tree-5"><p><strong>高度与结点数关系</strong> ( 考试常用 )</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">已知条件</th>
+<th style="text-align: left;">结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="math inline">\(m\)</span> 阶
+B 树，<span class="math inline">\(n\)</span> 个关键字</td>
+<td style="text-align: left;">高度 <span class="math inline">\(h \leq
+\log_{\lceil m/2 \rceil}\dfrac{n+1}{2} + 1\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">高度 <span
+class="math inline">\(h\)</span> 的 <span
+class="math inline">\(m\)</span> 阶 B 树</td>
+<td style="text-align: left;">最少关键字数 <span class="math inline">\(n
+\geq 2\lceil m/2 \rceil^{h-1} - 1\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">高度 <span
+class="math inline">\(h\)</span> 的 <span
+class="math inline">\(m\)</span> 阶 B 树</td>
+<td style="text-align: left;">最多关键字数 <span class="math inline">\(n
+\leq m^h - 1\)</span></td>
+</tr>
+</tbody>
+</table></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="b-树-1">6.3.3 B+ 树</h3>
+<div class="note info simple"><p><strong>B+ 树</strong></p>
+<p>B 树的变体，是实际数据库 ( MySQL InnoDB 等 ) 索引的标准实现. 与 B
+树的核心区别在于数据只存在 <strong>叶结点</strong>，内部结点仅存关键字 (
+索引 ).</p>
+</div>
+<p><strong>B+ 树 vs B 树</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">比较项</th>
+<th style="text-align: left;">B 树</th>
+<th style="text-align: left;">B+ 树</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">数据存放位置</td>
+<td style="text-align: left;">所有结点</td>
+<td style="text-align: left;">仅叶结点</td>
+</tr>
+<tr>
+<td style="text-align: left;">内部结点作用</td>
+<td style="text-align: left;">索引 + 数据</td>
+<td style="text-align: left;">纯索引</td>
+</tr>
+<tr>
+<td style="text-align: left;">叶结点</td>
+<td style="text-align: left;">失败结点，无数据</td>
+<td style="text-align: left;">包含所有关键字和数据</td>
+</tr>
+<tr>
+<td style="text-align: left;">叶结点连接</td>
+<td style="text-align: left;">无</td>
+<td style="text-align: left;">用链表 <strong>顺序相连</strong> (
+支持范围查询 )</td>
+</tr>
+<tr>
+<td style="text-align: left;">关键字重复</td>
+<td style="text-align: left;">不重复</td>
+<td style="text-align: left;">内部结点关键字在叶中
+<strong>重复出现</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">顺序遍历</td>
+<td style="text-align: left;">需中序遍历</td>
+<td style="text-align: left;">遍历叶结点链表，<span
+class="math inline">\(O(n)\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="tabs" id="bplus-tree"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="bplus-tree-1">结构特点</button><button type="button" class="tab " data-href="bplus-tree-2">数据库索引应用 ( 2026 新增 )</button><button type="button" class="tab " data-href="bplus-tree-3">插入与删除</button></ul><div class="tab-contents"><div class="tab-item-content active" id="bplus-tree-1"><ul>
+<li><span class="math inline">\(m\)</span> 阶 B+ 树，内部结点最多 <span
+class="math inline">\(m\)</span> 个子树，最多 <span
+class="math inline">\(m\)</span> 个关键字 ( 与 B 树不同，B 树 <span
+class="math inline">\(m-1\)</span> 个 ).</li>
+<li>非根内部结点至少 <span class="math inline">\(\lceil m/2
+\rceil\)</span> 个子树.</li>
+<li>所有叶结点包含全部关键字，按顺序排列，相邻叶结点用
+<strong>双向链表</strong> 连接.</li>
+<li>查找路径：从根到叶结点，叶结点才是真正的数据.</li>
+</ul></div><div class="tab-item-content" id="bplus-tree-2"><p><strong>B+ 树在数据库索引中的应用案例</strong></p>
+<p>MySQL InnoDB 存储引擎使用 B+ 树作为索引结构，原因如下</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">原因</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>磁盘 I/O 最优</strong></td>
+<td style="text-align: left;">B+ 树高度低 ( 通常 3-4 层 )，每次查找最多
+3-4 次磁盘访问</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>范围查询高效</strong></td>
+<td style="text-align: left;">叶结点链表支持
+<code>BETWEEN</code>、<code>ORDER BY</code>、<code>LIMIT</code>
+等范围操作</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>内部结点更紧凑</strong></td>
+<td
+style="text-align: left;">内部结点只存关键字不存数据，单页能存更多关键字，降低树高</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>顺序访问友好</strong></td>
+<td style="text-align: left;">遍历叶链表即可全表扫描，无需回溯</td>
+</tr>
+</tbody>
+</table>
+<p><strong>聚簇索引 vs 非聚簇索引</strong></p>
+<ul>
+<li><strong>聚簇索引</strong> ( Primary Key )
+叶结点直接存储完整行数据，查找一次即可.</li>
+<li><strong>非聚簇索引</strong> ( Secondary Index )
+叶结点存储主键值，查找需回表 ( 两次 B+ 树查找 ).</li>
+</ul>
+<p><strong>实际高度估算</strong> 假设单页 16KB，关键字 + 指针约 14
+字节，则单页约存 <span class="math inline">\(16384 / 14 \approx
+1170\)</span> 个条目. 高度为 3 的 B+ 树可存约 <span
+class="math inline">\(1170^2 \times n\)</span>
+条记录，支持数千万级别数据.</p></div><div class="tab-item-content" id="bplus-tree-3"><p><strong>插入</strong> 与 B 树类似，叶结点上溢时从
+<strong>中间关键字</strong> 分裂，但分裂时
+<strong>中间关键字同时保留在叶结点</strong> ( 上移的是副本
+)，内部结点也获得该关键字.</p>
+<p><strong>删除</strong> 直接删叶结点中的关键字，下溢时从兄弟借或合并.
+内部结点中的关键字不需删除 ( 仅起索引作用，保留副本即可 ).</p>
+<div class="note warning simple">
+<p>
+<strong>B+ 树删除与 B 树的关键区别</strong>
+</p>
+<p>
+删除叶结点关键字后，即使该关键字同时存在于内部结点 ( 作为分隔符 )，也
+<strong>不必删除内部结点中的那份副本</strong>.
+</p>
+</div></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="红黑树-了解">6.3.4 红黑树 ( 了解 )</h3>
+<div class="note info simple"><p><strong>红黑树</strong> ( Red-Black Tree )</p>
+<p>一种 <strong>自平衡</strong> 的二叉排序树，每个结点附加一个颜色属性 (
+红或黑 )，通过颜色约束保证树高 <span class="math inline">\(O(\log
+n)\)</span>.</p>
+</div>
+<p><strong>五条性质</strong></p>
+<ol type="1">
+<li>每个结点是 <strong>红色</strong> 或 <strong>黑色</strong>.</li>
+<li>根结点是 <strong>黑色</strong>.</li>
+<li>每个 <strong>叶结点</strong> ( NIL 空结点 ) 是黑色.</li>
+<li>若一个结点是 <strong>红色</strong>，则其两个子结点都是
+<strong>黑色</strong> ( 红结点的父/子不能是红色 ).</li>
+<li>对任意结点，从该结点到其所有后代叶结点的路径上，<strong>黑色结点数量相同</strong>
+( 黑高相同 ).</li>
+</ol>
+<div class="tabs" id="rbt"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="rbt-1">性质推论</button><button type="button" class="tab " data-href="rbt-2">与 AVL 对比</button><button type="button" class="tab " data-href="rbt-3">插入规则</button><button type="button" class="tab " data-href="rbt-4">删除规则</button></ul><div class="tab-contents"><div class="tab-item-content active" id="rbt-1"><ul>
+<li><strong>树高</strong> 含 <span class="math inline">\(n\)</span>
+个内部结点的红黑树高度 <span class="math inline">\(h \leq
+2\log_2(n+1)\)</span>，即 <span class="math inline">\(O(\log
+n)\)</span>.</li>
+<li><strong>黑高</strong> <span class="math inline">\(bh(T)\)</span>
+从任意结点到叶 ( 不含该结点 ) 的黑色结点数.</li>
+<li>最短路径 ( 全黑 ) 与最长路径 ( 红黑交替 ) 之比不超过 <span
+class="math inline">\(1 : 2\)</span>，比 AVL 更宽松.</li>
+</ul></div><div class="tab-item-content" id="rbt-2"><table>
+<thead>
+<tr>
+<th style="text-align: left;">比较项</th>
+<th style="text-align: left;">AVL 树</th>
+<th style="text-align: left;">红黑树</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">平衡条件</td>
+<td style="text-align: left;"><span class="math inline">\(\|\text{BF}\|
+\leq 1\)</span>，严格</td>
+<td style="text-align: left;">黑高相同，宽松</td>
+</tr>
+<tr>
+<td style="text-align: left;">查找效率</td>
+<td style="text-align: left;">略高 ( 树更矮 )</td>
+<td style="text-align: left;">略低</td>
+</tr>
+<tr>
+<td style="text-align: left;">插入/删除旋转次数</td>
+<td style="text-align: left;">较多</td>
+<td style="text-align: left;">最多 <span
+class="math inline">\(O(1)\)</span> 次旋转</td>
+</tr>
+<tr>
+<td style="text-align: left;">适用场景</td>
+<td style="text-align: left;">查找频繁</td>
+<td style="text-align: left;">插删频繁 ( 如 Linux 进程调度、C++
+<code>map</code> )</td>
+</tr>
+</tbody>
+</table></div><div class="tab-item-content" id="rbt-3"><p>新结点默认 <strong>红色</strong> 插入 ( 不违反性质 5，尽量少破坏平衡
+).</p>
+<p>插入后可能违反性质 4 ( 父红子红 )，通过 <strong>变色 + 旋转</strong>
+修复</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">情况</th>
+<th style="text-align: center;">叔父结点颜色</th>
+<th style="text-align: left;">处理方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Case 1</td>
+<td style="text-align: center;">红色</td>
+<td
+style="text-align: left;">父、叔变黑，祖父变红，祖父作为新结点递归处理</td>
+</tr>
+<tr>
+<td style="text-align: left;">Case 2</td>
+<td style="text-align: center;">黑色，新结点在内侧</td>
+<td style="text-align: left;">对父做旋转，转化为 Case 3</td>
+</tr>
+<tr>
+<td style="text-align: left;">Case 3</td>
+<td style="text-align: center;">黑色，新结点在外侧</td>
+<td style="text-align: left;">父变黑，祖父变红，对祖父做旋转</td>
+</tr>
+</tbody>
+</table></div><div class="tab-item-content" id="rbt-4"><p>删除步骤</p>
+<ol type="1">
+<li>按 BST 方式删除结点.</li>
+<li>若删除的是 <strong>红色结点</strong>，不影响黑高，直接完成.</li>
+<li>若删除的是 <strong>黑色结点</strong>，黑高失衡，需通过 <strong>变色
++ 旋转</strong> 修复 ( 共 4 种情况，较复杂，了解即可 ).</li>
+</ol></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h2 id="散列-hash">6.4 散列 ( Hash )</h2>
+<h3 id="基本概念-1">6.4.1 基本概念</h3>
+<div class="note info simple"><p><strong>散列表 ( 哈希表 )</strong></p>
+<p>根据关键字直接计算存储地址，理想情况下查找、插入、删除均为 <span
+class="math inline">\(O(1)\)</span>.</p>
+</div>
+<ul>
+<li><strong>散列函数</strong> <span
+class="math inline">\(H(\text{key})\)</span>
+将关键字映射到存储地址的函数.</li>
+<li><strong>冲突</strong> 不同关键字映射到同一地址，即 <span
+class="math inline">\(H(k_1) = H(k_2)\)</span> 但 <span
+class="math inline">\(k_1 \neq k_2\)</span>.</li>
+<li><strong>装填因子</strong> <span class="math inline">\(\alpha =
+\dfrac{\text{表中记录数}}{\text{散列表长度}}\)</span>，<span
+class="math inline">\(\alpha\)</span> 越大冲突概率越高.</li>
+</ul>
+<h3 id="散列函数">6.4.2 散列函数</h3>
+<div class="tabs" id="hash-func"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="hash-func-1">除留余数法</button><button type="button" class="tab " data-href="hash-func-2">直接定址法</button><button type="button" class="tab " data-href="hash-func-3">数字分析法</button><button type="button" class="tab " data-href="hash-func-4">平方取中法</button></ul><div class="tab-contents"><div class="tab-item-content active" id="hash-func-1"><p><span class="math display">\[H(\text{key}) = \text{key} \bmod
+p\]</span></p>
+<ul>
+<li><span class="math inline">\(p\)</span> 通常选
+<strong>不大于表长且最接近表长的素数</strong> ( 质数 )，减少冲突.</li>
+<li><strong>最常用</strong>，适用范围广.</li>
+</ul></div><div class="tab-item-content" id="hash-func-2"><p><span class="math display">\[H(\text{key}) = a \times \text{key} + b
+\quad (a, b \text{ 为常数})\]</span></p>
+<ul>
+<li>计算简单，无冲突 ( 线性映射 ).</li>
+<li>适合关键字 <strong>分布连续且范围已知</strong> 的场景.</li>
+<li>关键字范围稀疏时浪费空间.</li>
+</ul></div><div class="tab-item-content" id="hash-func-3"><p>分析关键字的数字分布，选取 <strong>分布较均匀的若干位</strong>
+作为散列地址.</p>
+<ul>
+<li>例 手机号后 4 位 &gt; 前 3 位 ( 运营商前缀相似 ).</li>
+<li>适合关键字 <strong>已知且分布有规律</strong> 的场景.</li>
+</ul></div><div class="tab-item-content" id="hash-func-4"><p>将关键字 <strong>平方</strong>，取中间若干位作为散列地址.</p>
+<ul>
+<li><span class="math inline">\(\text{key} = 1234 \Rightarrow 1234^2 =
+1522756 \Rightarrow\)</span> 取中间 3 位 <span class="math inline">\(=
+227\)</span>.</li>
+<li>适合关键字位数较少、每位取值均匀时.</li>
+</ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="冲突处理方法">6.4.3 冲突处理方法</h3>
+<div class="tabs" id="collision"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="collision-1">开放定址法</button><button type="button" class="tab " data-href="collision-2">链地址法</button><button type="button" class="tab " data-href="collision-3">两种方法对比</button></ul><div class="tab-contents"><div class="tab-item-content active" id="collision-1"><p><strong>开放定址法</strong> 发生冲突时，按某种探测序列在散列表中
+<strong>寻找下一个空槽</strong> 存入.</p>
+<p><span class="math display">\[H_i = (H(\text{key}) + d_i) \bmod
+m\]</span></p>
+<p><strong>三种探测方式</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">方法</th>
+<th style="text-align: left;">探测序列 <span
+class="math inline">\(d_i\)</span></th>
+<th style="text-align: left;">特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>线性探测</strong></td>
+<td style="text-align: left;"><span class="math inline">\(1, 2, 3,
+\ldots, m-1\)</span></td>
+<td style="text-align: left;">易产生
+<strong>堆积</strong>，群集现象严重</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>二次探测</strong></td>
+<td style="text-align: left;"><span class="math inline">\(1^2, -1^2,
+2^2, -2^2, \ldots\)</span></td>
+<td style="text-align: left;">减少堆积，但不能探测所有槽</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>双重散列</strong></td>
+<td style="text-align: left;"><span class="math inline">\(d_i = i \times
+H_2(\text{key})\)</span></td>
+<td style="text-align: left;">最优，减少聚集，探测序列随 key 变化</td>
+</tr>
+</tbody>
+</table>
+<div class="note warning simple">
+<p>
+<strong>注意</strong>
+</p>
+<p>
+线性探测产生的 <strong>一次聚集</strong> 是最严重的堆积问题
+连续占用的槽越长，下一个元素落入该区域的概率越大，形成正反馈.
+</p>
+</div></div><div class="tab-item-content" id="collision-2"><p><strong>链地址法</strong> ( 拉链法 ) 将散列到同一地址的所有关键字用
+<strong>链表</strong> 链接，散列表中每个槽存储链表头指针.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">散列表 </span><br><span class="line">[0] → NULL</span><br><span class="line">[1] → 11 → 21 → NULL</span><br><span class="line">[2] → 42 → NULL</span><br><span class="line">[3] → NULL</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<ul>
+<li><span class="p green">优点</span> 无堆积问题，删除方便，装填因子可
+<span class="math inline">\(&gt; 1\)</span>.</li>
+<li><span class="p red">缺点</span>
+指针开销，链表在内存中不连续，缓存不友好.</li>
+</ul></div><div class="tab-item-content" id="collision-3"><table>
+<thead>
+<tr>
+<th style="text-align: left;">比较项</th>
+<th style="text-align: left;">开放定址</th>
+<th style="text-align: left;">链地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">冲突处理</td>
+<td style="text-align: left;">在表内探测</td>
+<td style="text-align: left;">链表外延</td>
+</tr>
+<tr>
+<td style="text-align: left;">装填因子 <span
+class="math inline">\(\alpha\)</span></td>
+<td style="text-align: left;">必须 <span class="math inline">\(&lt;
+1\)</span></td>
+<td style="text-align: left;">可 <span class="math inline">\(\geq
+1\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">删除操作</td>
+<td style="text-align: left;">复杂 ( 需标记墓碑 )</td>
+<td style="text-align: left;">简单</td>
+</tr>
+<tr>
+<td style="text-align: left;">空间利用</td>
+<td style="text-align: left;">无额外指针</td>
+<td style="text-align: left;">有指针开销</td>
+</tr>
+<tr>
+<td style="text-align: left;">适用场景</td>
+<td style="text-align: left;">表大小已知、<span
+class="math inline">\(\alpha\)</span> 较小</td>
+<td style="text-align: left;">元素数量未知、频繁删除</td>
+</tr>
+</tbody>
+</table></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="散列表的操作与-asl">6.4.4 散列表的操作与 ASL</h3>
+<div class="tabs" id="hash-ops"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="hash-ops-1">查找</button><button type="button" class="tab " data-href="hash-ops-2">删除</button><button type="button" class="tab " data-href="hash-ops-3">ASL 分析</button><button type="button" class="tab " data-href="hash-ops-4">散列表大小选择</button></ul><div class="tab-contents"><div class="tab-item-content active" id="hash-ops-1"><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">HashSearch</span><span class="params">(HashTable HT, ElemType key)</span> &#123;</span><br><span class="line">    <span class="type">int</span> h = H(key);                    <span class="comment">// 计算散列地址</span></span><br><span class="line">    <span class="keyword">while</span> (HT[h] != EMPTY &amp;&amp; HT[h] != key) &#123;</span><br><span class="line">        h = (h + <span class="number">1</span>) % m;              <span class="comment">// 线性探测 ( 示例 ) </span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (HT[h] == key) <span class="keyword">return</span> h;       <span class="comment">// 找到</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;                         <span class="comment">// 失败</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查找过程与插入路径完全相同，只是插入时找到空槽存入.</li>
+</ul></div><div class="tab-item-content" id="hash-ops-2"><p><strong>开放定址法删除的问题</strong></p>
+<ul>
+<li>不能直接置空，否则会截断探测链，导致后续元素找不到.</li>
+<li>需使用<strong>“墓碑”标记</strong> ( <code>DELETED</code>
+)，查找时跳过，插入时可复用.</li>
+</ul>
+<p><strong>链地址法删除</strong> 直接删除链表中对应结点，<span
+class="math inline">\(O(1)\)</span>.</p></div><div class="tab-item-content" id="hash-ops-3"><p>设散列表长 <span class="math inline">\(m\)</span>，装填因子 <span
+class="math inline">\(\alpha = n/m\)</span></p>
+<p><strong>线性探测开放定址法</strong></p>
+<p><span class="math display">\[\text{ASL}_{\text{成功}} \approx
+\frac{1}{2}\left(1 + \frac{1}{1-\alpha}\right)\]</span></p>
+<p><span class="math display">\[\text{ASL}_{\text{失败}} \approx
+\frac{1}{2}\left(1 + \frac{1}{(1-\alpha)^2}\right)\]</span></p>
+<p><strong>链地址法</strong></p>
+<p><span class="math display">\[\text{ASL}_{\text{成功}} \approx 1 +
+\frac{\alpha}{2}\]</span></p>
+<p><span class="math display">\[\text{ASL}_{\text{失败}} \approx \alpha
++ e^{-\alpha} \approx \alpha \quad (\alpha \text{ 较小时})\]</span></p>
+<div class="note warning simple">
+<p>
+<strong>注意</strong>
+</p>
+<p>
+408 考试中 ASL 通常直接根据散列过程
+<strong>逐一计数</strong>，而非代公式.
+建议画出散列表并统计每个关键字的比较次数.
+</p>
+</div></div><div class="tab-item-content" id="hash-ops-4"><p>选择散列表长度 <span class="math inline">\(m\)</span> 的原则</p>
+<ul>
+<li><span class="math inline">\(m\)</span> 选 <strong>素数</strong> (
+尤其使用除留余数法时 )，减少系统性冲突.</li>
+<li>根据预期关键字数 <span class="math inline">\(n\)</span>
+和期望装填因子 <span class="math inline">\(\alpha\)</span> 确定 <span
+class="math inline">\(m = \lceil n / \alpha \rceil\)</span>.</li>
+<li>一般 <span class="math inline">\(\alpha\)</span> 控制在 <span
+class="math inline">\(0.5 \sim 0.75\)</span> 之间，兼顾空间与效率.</li>
+</ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="常考点-1">6.4.5 408 常考点</h3>
+<div class="tabs" id="hash-points"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="hash-points-1">表长与函数</button><button type="button" class="tab " data-href="hash-points-2">开放定址</button><button type="button" class="tab " data-href="hash-points-3">ASL 计数</button></ul><div class="tab-contents"><div class="tab-item-content active" id="hash-points-1"><ul>
+<li>除留余数法最常考 <span class="math inline">\(H(k) = k \bmod
+p\)</span>，<span class="math inline">\(p\)</span>
+往往取接近表长的素数</li>
+<li>题目同时给 <span class="math inline">\(m\)</span> 与 <span
+class="math inline">\(p\)</span> 时，以题目给定为准，不自行改表长</li>
+</ul></div><div class="tab-item-content" id="hash-points-2"><ul>
+<li>查找与插入走同一条探测序列 ( 因此才有“查找失败时比较次数”一说 )</li>
+<li>删除不能直接置空 必须用墓碑
+<code>DELETED</code>，否则会断开探测链</li>
+<li>线性探测最容易出现一次聚集，ASL 会随 <span
+class="math inline">\(\alpha\)</span> 快速上升</li>
+</ul></div><div class="tab-item-content" id="hash-points-3"><ul>
+<li>最稳的做法 按插入顺序画表，记录每个关键字的探测次数 ( 成功 ASL
+按平均比较次数求 )</li>
+<li>失败 ASL 通常按“从 <span class="math inline">\(H(k)\)</span>
+出发直到遇到空槽”为一次失败查找的比较次数</li>
+</ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<hr />
+<h2 id="各查找方法综合对比">6.5 各查找方法综合对比</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">方法</th>
+<th style="text-align: center;">平均时间</th>
+<th style="text-align: center;">最坏时间</th>
+<th style="text-align: center;">有序要求</th>
+<th style="text-align: center;">动态操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">顺序查找</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+<td style="text-align: center;">否</td>
+<td style="text-align: center;">容易</td>
+</tr>
+<tr>
+<td style="text-align: left;">折半查找</td>
+<td style="text-align: center;"><span class="math inline">\(O(\log
+n)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O(\log
+n)\)</span></td>
+<td style="text-align: center;">必须有序</td>
+<td style="text-align: center;">困难</td>
+</tr>
+<tr>
+<td style="text-align: left;">分块查找</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(\sqrt{n})\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+<td style="text-align: center;">块间有序</td>
+<td style="text-align: center;">中等</td>
+</tr>
+<tr>
+<td style="text-align: left;">BST</td>
+<td style="text-align: center;"><span class="math inline">\(O(\log
+n)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+<td style="text-align: center;">否</td>
+<td style="text-align: center;">容易</td>
+</tr>
+<tr>
+<td style="text-align: left;">AVL / 红黑树</td>
+<td style="text-align: center;"><span class="math inline">\(O(\log
+n)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O(\log
+n)\)</span></td>
+<td style="text-align: center;">否</td>
+<td style="text-align: center;">中等</td>
+</tr>
+<tr>
+<td style="text-align: left;">B/B+ 树</td>
+<td style="text-align: center;"><span class="math inline">\(O(\log
+n)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O(\log
+n)\)</span></td>
+<td style="text-align: center;">否</td>
+<td style="text-align: center;">中等，适合外存</td>
+</tr>
+<tr>
+<td style="text-align: left;">散列表</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(1)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+<td style="text-align: center;">否</td>
+<td style="text-align: center;">容易</td>
+</tr>
+</tbody>
+</table>
+<div class="note warning simple"><p><strong>散列表查找为 <span class="math inline">\(O(1)\)</span>
+的前提</strong> 装填因子合理、散列函数均匀、冲突少. 最坏情况退化为 <span
+class="math inline">\(O(n)\)</span> ( 全部冲突到同一链表 ).</p>
+</div>
+<hr />
+<h2 id="例题精选">6.6 例题精选</h2>
+<div class="note success simple"><p><strong>例题 1 ( 折半查找 ASL )</strong> 有序表 <span
+class="math inline">\(\{1, 3, 5, 7, 9, 11, 13\}\)</span>，共 7
+个元素，求折半查找成功时的 ASL.</p>
+<p><strong>解</strong></p>
+<p>判定树 ( 二叉查找树 )</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">      7(4)</span><br><span class="line">    /      \</span><br><span class="line">  3(2)     11(6)</span><br><span class="line">  /  \     /   \</span><br><span class="line">1(1) 5(3) 9(5) 13(7)</span><br></pre></td></tr></table></figure>
+<p>括号内为下标 ( 从 1 开始，根 = <span
+class="math inline">\(\lfloor(1+7)/2\rfloor = 4\)</span>，值为 7 ).</p>
+<p>比较次数
+1→第3层，3→第2层，5→第3层，7→第1层，9→第3层，11→第2层，13→第3层.</p>
+<p>修正计算 深度 1 有 1 个结点，深度 2 有 2 个，深度 3 有 4 个.</p>
+<p><span class="math display">\[\text{ASL} = \frac{1}{7}(1 \times 1 + 2
+\times 2 + 3 \times 4) = \frac{1+4+12}{7} = \frac{17}{7} \approx
+2.43\]</span></p>
+</div>
+<div class="note success simple"><p><strong>例题 2 ( 散列表构造与 ASL )</strong></p>
+<p>关键字序列 <span class="math inline">\(\{19, 14, 23, 1, 68, 20, 84,
+27, 55, 11, 10, 79\}\)</span>，散列函数 <span class="math inline">\(H(k)
+= k \bmod 13\)</span>，线性探测解决冲突，表长 <span
+class="math inline">\(m = 13\)</span>. 求查找成功的 ASL.</p>
+<p><strong>解</strong></p>
+<p>计算各关键字散列地址及探测次数</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">关键字</th>
+<th style="text-align: center;"><span
+class="math inline">\(H(k)\)</span></th>
+<th style="text-align: center;">实际存储位置</th>
+<th style="text-align: center;">比较次数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">19</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr>
+<td style="text-align: center;">14</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr>
+<td style="text-align: center;">23</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2 ( 冲突 )</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr>
+<td style="text-align: center;">68</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr>
+<td style="text-align: center;">84</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">8 ( 冲突 )</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr>
+<td style="text-align: center;">27</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4 ( 冲突 2 次 )</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr>
+<td style="text-align: center;">55</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">5 ( 冲突 )</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">12 ( 冲突 )</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr>
+<td style="text-align: center;">79</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">9 ( 冲突多次 )</td>
+<td style="text-align: center;">9</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[\text{ASL}_{\text{成功}} =
+\frac{1}{12}(1+1+1+2+1+1+2+3+3+1+3+9) = \frac{28}{12} \approx
+2.33\]</span></p>
+</div>
+<div class="note success simple"><p><strong>例题 3 ( B 树高度 )</strong></p>
+<p>一棵 5 阶 B 树，共有 300
+个关键字，问该树的最大高度和最小高度分别是多少 ?</p>
+<p><strong>解</strong></p>
+<p><strong>最大高度</strong> ( 每个结点关键字数最少，树尽可能高 )</p>
+<p><span class="math inline">\(\lceil m/2 \rceil - 1 = \lceil 5/2 \rceil
+- 1 = 2\)</span> ( 非根结点最少关键字数 )，根至少 1 个.</p>
+<p>高度 <span class="math inline">\(h\)</span> 时最少关键字数 <span
+class="math inline">\(n \geq 1 + 2 \times (2 + 1) \times \ldots =
+2\lceil m/2\rceil^{h-1} - 1 = 2 \times 3^{h-1} - 1\)</span>.</p>
+<p>令 <span class="math inline">\(2 \times 3^{h-1} - 1 \leq
+300\)</span>，解得 <span class="math inline">\(3^{h-1} \leq
+150.5\)</span>，<span class="math inline">\(h-1 \leq 4\)</span>，<span
+class="math inline">\(h \leq 5\)</span>.</p>
+<p><strong>最小高度</strong> ( 每个结点关键字数最多，树尽可能矮 )</p>
+<p>每个结点最多 <span class="math inline">\(m-1 = 4\)</span>
+个关键字，高度 <span class="math inline">\(h\)</span> 最多关键字数 <span
+class="math inline">\(5^h - 1 \geq 300\)</span>，解得 <span
+class="math inline">\(h \geq \log_5 301 \approx 3.54\)</span>，即 <span
+class="math inline">\(h_{\min} = 4\)</span>.</p>
+<p>所以最大高度 = <strong>5</strong>，最小高度 = <strong>4</strong>.</p>
+</div>
+<div class="note success simple"><p><strong>例题 4 ( 分块查找 )</strong></p>
+<p>有 900 个元素分为 30 块，每块 30 个. 块间有序，块内无序.
+索引表用顺序查找，求查找成功时的 ASL.</p>
+<p><strong>解</strong></p>
+<p><span class="math display">\[\text{ASL} = \frac{b+1}{2} +
+\frac{s+1}{2} = \frac{30+1}{2} + \frac{30+1}{2} = 15.5 + 15.5 =
+31\]</span></p>
+</div>
+<h2 id="本章疑难点">6.7 本章疑难点</h2>
+<h4 id="asl-的计算基准">1. ASL 的计算基准</h4>
+<ul>
+<li>ASL 以 <strong>比较次数</strong>
+为基准，不同算法的”一次比较”含义可能不同 (
+如折半查找每次与中间元素比较，可能等于、大于、小于三路 ).</li>
+<li>务必区分 <strong>查找成功</strong> 和 <strong>查找失败</strong> 的
+ASL，两者计算方式不同.</li>
+</ul>
+<h4 id="折半查找判定树的失败结点">2. 折半查找判定树的失败结点</h4>
+<ul>
+<li>失败结点 ( 方形 ) 有 <span class="math inline">\(n+1\)</span>
+个，表示 <span class="math inline">\(n+1\)</span> 个查找失败区间.</li>
+<li>失败结点的比较次数 = 其父结点所在层数 ( 即与父结点比较后判断失败
+).</li>
+</ul>
+<h4 id="b-树-vs-b-树核心区别">3. B 树 vs B+ 树核心区别</h4>
+<ul>
+<li>B 树数据在 <strong>所有结点</strong>，B+ 树数据
+<strong>仅在叶结点</strong>，内部结点是纯索引.</li>
+<li>B+ 树叶结点有
+<strong>顺序链表</strong>，支持高效范围查询，这是数据库选择 B+
+树的最重要原因.</li>
+</ul>
+<h4 id="开放定址法删除必须用墓碑">4. 开放定址法删除必须用墓碑</h4>
+<ul>
+<li>直接置空会断链，导致之后的查找失败 ( 本应存在的元素找不到 ).</li>
+<li>墓碑标记的槽在插入时可以复用，但查找时需跳过.</li>
+</ul>
+<h4 id="装填因子-alpha-的影响">5. 装填因子 <span
+class="math inline">\(\alpha\)</span> 的影响</h4>
+<ul>
+<li><span class="math inline">\(\alpha\)</span> 越大，冲突越多，ASL
+越高. 通常 <span class="math inline">\(\alpha &gt; 0.8\)</span>
+时性能急剧下降.</li>
+<li>链地址法中 <span class="math inline">\(\alpha\)</span> 可以大于 1 (
+链表可以很长 )，但不推荐.</li>
+</ul>
+<h4 id="红黑树的插入默认红色">6. 红黑树的插入默认红色</h4>
+<ul>
+<li>新结点默认红色，因为插入红结点只可能违反性质 4 ( 红红相邻
+)，而插入黑结点必然违反性质 5 ( 黑高不均 )，修复代价更大.</li>
+</ul>
+<hr />
+<h2 id="本章小结">6.8 本章小结</h2>
+<ul>
+<li>静态查找的效率从低到高 顺序 <span
+class="math inline">\(O(n)\)</span> → 分块 <span
+class="math inline">\(O(\sqrt{n})\)</span> → 折半 <span
+class="math inline">\(O(\log n)\)</span>，折半要求有序顺序表.</li>
+<li>动态查找树形结构 BST 平均 <span class="math inline">\(O(\log
+n)\)</span> 但最坏退化，AVL 保证 <span class="math inline">\(O(\log
+n)\)</span>，红黑树适合频繁增删.</li>
+<li>B/B+ 树适用于外存，最小化磁盘 I/O. B+
+树因叶链表支持范围查询，成为数据库索引首选.</li>
+<li>散列表理想 <span
+class="math inline">\(O(1)\)</span>，性能依赖散列函数和冲突处理.
+除留余数法 + 链地址法是最常见组合.</li>
+<li>ASL 是衡量所有查找算法的统一指标，考试必须熟练计算各方法的成功 /
+失败 ASL.</li>
+</ul>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">sparkle520</div><div class="post-copyright__author_desc">我一直都在寻找着什么</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="http://example.com/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%846/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('http://example.com/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%846/')">408-数据结构-6-查找</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="http://example.com/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%846/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=408-数据结构-6-查找&amp;url=http://example.com/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%846/&amp;pic=https://pic1.imgdb.cn/item/69b022936738cb8aa129ade8.png" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">SPARKLE</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/408/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>408<span class="tagsPageCount">21</span></a><a class="post-meta__box__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>数据结构<span class="tagsPageCount">7</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://pic1.imgdb.cn/item/69b022ea6738cb8aa129ae4b.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%845/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b021cd6738cb8aa129acd7.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">408-数据结构-5-图</div></div></a></div><div class="next-post pull-right"><a href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%847/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b022ea6738cb8aa129ae4b.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">408-数据结构-7-内部排序</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%841/" title="408-数据结构-1-绪论"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b00e866738cb8aa1299045.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-13</div><div class="title">408-数据结构-1-绪论</div></div></a></div><div><a href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%842/" title="408-数据结构-2-线性表"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b00d556738cb8aa1298e3c.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-13</div><div class="title">408-数据结构-2-线性表</div></div></a></div><div><a href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%847/" title="408-数据结构-7-内部排序"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b022ea6738cb8aa129ae4b.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-14</div><div class="title">408-数据结构-7-内部排序</div></div></a></div><div><a href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%843/" title="408-数据结构-3-栈、队列和数组"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b00d9e6738cb8aa1298eb8.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-13</div><div class="title">408-数据结构-3-栈、队列和数组</div></div></a></div><div><a href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%844/" title="408-数据结构-4-树与二叉树"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b01e0c6738cb8aa129a777.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-13</div><div class="title">408-数据结构-4-树与二叉树</div></div></a></div><div><a href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%845/" title="408-数据结构-5-图"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b021cd6738cb8aa129acd7.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-14</div><div class="title">408-数据结构-5-图</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/671cfe2fd29ded1a8c5ffb0b.png" alt="status"/></div></div><div class="author-info__description">不管你在<strong style="color:white">这个世界</strong>的哪个地方，我一定<strong style="color:white">会</strong>，再次去<strong style="color:white">见</strong>你的!</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">sparkle520</h1><div class="author-info__desc">我一直都在寻找着什么</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/sparkle520" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/34882250" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">Hello World! 欢迎来到我的博客~</div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://pic.imgdb.cn/item/66c487f1d9c307b7e9ba5c7a.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://pic.imgdb.cn/item/66c487ebd9c307b7e9ba5725.png) center center / 100% no-repeat"></div></div></div></div><div class="card-widget card-countdown"><div class="item-headline"><i></i><span></span></div><div class="item-content"><div class="cd-count-left">
+  <span class="cd-text">距离</span>
+  <span class="cd-name" id="eventName"></span>
+  <span class="cd-time" id="daysUntil"></span>
+  <span class="cd-date" id="eventDate"></span>
+</div>
+<div id="countRight" class="cd-count-right"></div>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC6%E7%AB%A0-%E6%9F%A5%E6%89%BE-search"><span class="toc-number">1.</span> <span class="toc-text">第6章 查找 ( Search )</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">6.1 基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%9C%AF%E8%AF%AD"><span class="toc-number">1.1.1.</span> <span class="toc-text">6.1.1 核心术语</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B3%E5%9D%87%E6%9F%A5%E6%89%BE%E9%95%BF%E5%BA%A6-asl"><span class="toc-number">1.1.2.</span> <span class="toc-text">6.1.2 平均查找长度 ( ASL )</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%9F%A5%E6%89%BE"><span class="toc-number">1.2.</span> <span class="toc-text">6.2 静态查找</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E6%9F%A5%E6%89%BE"><span class="toc-number">1.2.1.</span> <span class="toc-text">6.2.1 顺序查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%98%E5%8D%8A%E6%9F%A5%E6%89%BE-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE"><span class="toc-number">1.2.2.</span> <span class="toc-text">6.2.2 折半查找 ( 二分查找 )</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%9D%97%E6%9F%A5%E6%89%BE-%E7%B4%A2%E5%BC%95%E9%A1%BA%E5%BA%8F%E6%9F%A5%E6%89%BE"><span class="toc-number">1.2.3.</span> <span class="toc-text">6.2.3 分块查找 ( 索引顺序查找 )</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%80%83%E7%82%B9"><span class="toc-number">1.2.4.</span> <span class="toc-text">6.2.4 408 常考点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E6%9F%A5%E6%89%BE-%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84"><span class="toc-number">1.3.</span> <span class="toc-text">6.3 动态查找 ( 树形结构 )</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91%E4%B8%8E-avl-%E6%A0%91"><span class="toc-number">1.3.1.</span> <span class="toc-text">6.3.1 二叉排序树与 AVL 树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#b-%E6%A0%91"><span class="toc-number">1.3.2.</span> <span class="toc-text">6.3.2 B 树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#b-%E6%A0%91-1"><span class="toc-number">1.3.3.</span> <span class="toc-text">6.3.3 B+ 树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91-%E4%BA%86%E8%A7%A3"><span class="toc-number">1.3.4.</span> <span class="toc-text">6.3.4 红黑树 ( 了解 )</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%A3%E5%88%97-hash"><span class="toc-number">1.4.</span> <span class="toc-text">6.4 散列 ( Hash )</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-1"><span class="toc-number">1.4.1.</span> <span class="toc-text">6.4.1 基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0"><span class="toc-number">1.4.2.</span> <span class="toc-text">6.4.2 散列函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%B2%E7%AA%81%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.3.</span> <span class="toc-text">6.4.3 冲突处理方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%A3%E5%88%97%E8%A1%A8%E7%9A%84%E6%93%8D%E4%BD%9C%E4%B8%8E-asl"><span class="toc-number">1.4.4.</span> <span class="toc-text">6.4.4 散列表的操作与 ASL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%80%83%E7%82%B9-1"><span class="toc-number">1.4.5.</span> <span class="toc-text">6.4.5 408 常考点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%84%E6%9F%A5%E6%89%BE%E6%96%B9%E6%B3%95%E7%BB%BC%E5%90%88%E5%AF%B9%E6%AF%94"><span class="toc-number">1.5.</span> <span class="toc-text">6.5 各查找方法综合对比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98%E7%B2%BE%E9%80%89"><span class="toc-number">1.6.</span> <span class="toc-text">6.6 例题精选</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E7%AB%A0%E7%96%91%E9%9A%BE%E7%82%B9"><span class="toc-number">1.7.</span> <span class="toc-text">6.7 本章疑难点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#asl-%E7%9A%84%E8%AE%A1%E7%AE%97%E5%9F%BA%E5%87%86"><span class="toc-number">1.7.0.1.</span> <span class="toc-text">1. ASL 的计算基准</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%98%E5%8D%8A%E6%9F%A5%E6%89%BE%E5%88%A4%E5%AE%9A%E6%A0%91%E7%9A%84%E5%A4%B1%E8%B4%A5%E7%BB%93%E7%82%B9"><span class="toc-number">1.7.0.2.</span> <span class="toc-text">2. 折半查找判定树的失败结点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-%E6%A0%91-vs-b-%E6%A0%91%E6%A0%B8%E5%BF%83%E5%8C%BA%E5%88%AB"><span class="toc-number">1.7.0.3.</span> <span class="toc-text">3. B 树 vs B+ 树核心区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%80%E6%94%BE%E5%AE%9A%E5%9D%80%E6%B3%95%E5%88%A0%E9%99%A4%E5%BF%85%E9%A1%BB%E7%94%A8%E5%A2%93%E7%A2%91"><span class="toc-number">1.7.0.4.</span> <span class="toc-text">4. 开放定址法删除必须用墓碑</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A3%85%E5%A1%AB%E5%9B%A0%E5%AD%90-alpha-%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-number">1.7.0.5.</span> <span class="toc-text">5. 装填因子 \(\alpha\) 的影响</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91%E7%9A%84%E6%8F%92%E5%85%A5%E9%BB%98%E8%AE%A4%E7%BA%A2%E8%89%B2"><span class="toc-number">1.7.0.6.</span> <span class="toc-text">6. 红黑树的插入默认红色</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93"><span class="toc-number">1.8.</span> <span class="toc-text">6.8 本章小结</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/03/16/%E8%8B%B1%E8%AF%AD-%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0-%E5%B7%B2%E5%8A%A0%E5%AF%86/" title="英语个人笔记 ( 已加密 )"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69ad99d2001548a02b697c75.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="英语个人笔记 ( 已加密 )"/></a><div class="content"><a class="title" href="/2026/03/16/%E8%8B%B1%E8%AF%AD-%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0-%E5%B7%B2%E5%8A%A0%E5%AF%86/" title="英语个人笔记 ( 已加密 )">英语个人笔记 ( 已加密 )</a><time datetime="2026-03-16T14:00:27.000Z" title="发表于 2026-03-16 22:00:27">2026-03-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%847/" title="408-数据结构-7-内部排序"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b022ea6738cb8aa129ae4b.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-数据结构-7-内部排序"/></a><div class="content"><a class="title" href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%847/" title="408-数据结构-7-内部排序">408-数据结构-7-内部排序</a><time datetime="2026-03-13T18:00:00.000Z" title="发表于 2026-03-14 02:00:00">2026-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%846/" title="408-数据结构-6-查找"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b022936738cb8aa129ade8.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-数据结构-6-查找"/></a><div class="content"><a class="title" href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%846/" title="408-数据结构-6-查找">408-数据结构-6-查找</a><time datetime="2026-03-13T17:00:00.000Z" title="发表于 2026-03-14 01:00:00">2026-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%845/" title="408-数据结构-5-图"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b021cd6738cb8aa129acd7.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-数据结构-5-图"/></a><div class="content"><a class="title" href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%845/" title="408-数据结构-5-图">408-数据结构-5-图</a><time datetime="2026-03-13T16:00:00.000Z" title="发表于 2026-03-14 00:00:00">2026-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%844/" title="408-数据结构-4-树与二叉树"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b01e0c6738cb8aa129a777.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-数据结构-4-树与二叉树"/></a><div class="content"><a class="title" href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%844/" title="408-数据结构-4-树与二叉树">408-数据结构-4-树与二叉树</a><time datetime="2026-03-13T15:00:00.000Z" title="发表于 2026-03-13 23:00:00">2026-03-13</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  if (true) { 
+    window.typed = new Typed("#footer-type-tips", {
+      strings: ["只要记住你的名字&#44; 不管你在世界的哪个地方&#44; 我一定&#44; 会去见你 !"],
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50
+    })
+  } else {
+    document.getElementById("footer-type-tips").innerHTML = '只要记住你的名字&#44; 不管你在世界的哪个地方&#44; 我一定&#44; 会去见你 !'
+  }
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.cbd.int/typed.js@2.1.0/dist/typed.umd.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/sparkle520" title="sparkle">sparkle</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">107</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">61</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">7</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/sparkle520?tab=repositories" title="github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="github"/><span class="back-menu-item-text">github</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/408/" style="font-size: 0.88rem;">408<sup>21</sup></a><a href="/tags/AOP/" style="font-size: 0.88rem;">AOP<sup>1</sup></a><a href="/tags/Deep-Learning/" style="font-size: 0.88rem;">Deep Learning<sup>1</sup></a><a href="/tags/IoC/" style="font-size: 0.88rem;">IoC<sup>1</sup></a><a href="/tags/JSR303/" style="font-size: 0.88rem;">JSR303<sup>1</sup></a><a href="/tags/Matplotlib/" style="font-size: 0.88rem;">Matplotlib<sup>3</sup></a><a href="/tags/c/" style="font-size: 0.88rem;">c#<sup>2</sup></a><a href="/tags/java/" style="font-size: 0.88rem;">java<sup>4</sup></a><a href="/tags/python/" style="font-size: 0.88rem;">python<sup>5</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 0.88rem;">事务<sup>1</sup></a><a href="/tags/%E4%BA%8C%E6%AC%A1%E5%9E%8B/" style="font-size: 0.88rem;">二次型<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E3%80%82/" style="font-size: 0.88rem;">你的名字。<sup>3</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">你的名字同名小说<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%A4%96%E4%BC%A0%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">你的名字外传小说<sup>1</sup></a><a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size: 0.88rem;">写作<sup>4</sup></a><a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 0.88rem;">包管理<sup>1</sup></a><a href="/tags/%E5%8D%B7%E7%A7%AF%E5%85%AC%E5%BC%8F/" style="font-size: 0.88rem;">卷积公式<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90/" style="font-size: 0.88rem;">天气之子<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">天气之子同名小说<sup>1</sup></a><a href="/tags/%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">小说<sup>2</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 0.88rem;">操作系统<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" style="font-size: 0.88rem;">数据校验<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" style="font-size: 0.88rem;">数据链路层<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 0.88rem;">概率论<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 0.88rem;">概率论与数理统计<sup>7</sup></a><a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 0.88rem;">汇编<sup>9</sup></a><a href="/tags/%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80/" style="font-size: 0.88rem;">泰勒展开<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/" style="font-size: 0.88rem;">物理层<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%80%BC/" style="font-size: 0.88rem;">特征值<sup>2</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F/" style="font-size: 0.88rem;">特征向量<sup>2</sup></a><a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 0.88rem;">线性代数<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" style="font-size: 0.88rem;">网络体系结构<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" style="font-size: 0.88rem;">网络层<sup>2</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 0.88rem;">英语<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95/" style="font-size: 0.88rem;">英语语法<sup>24</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 0.88rem;">计算机组成原理<sup>5</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 0.88rem;">计算机网络<sup>5</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 0.88rem;">语法<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/" style="font-size: 0.88rem;">高等代数<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" style="font-size: 0.88rem;">高等数学<sup>14</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script async src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.cbd.int/mathjax@3.2.2/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.cbd.int/mermaid@10.9.1/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  anzhiyu.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://sparkle521.xyz',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://cdn.cbd.int/twikoo@1.6.25/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://sparkle521.xyz',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"><script async src="/js/anzhiyu/comment_barrage.js"></script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://sparkle521.xyz',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.cbd.int/twikoo@1.6.25/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script async data-pjax src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.1/bubble/bubble.js"></script><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script>const notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));</script><script src="/custom/countdown.js"></script><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

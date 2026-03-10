@@ -1,0 +1,1403 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>408-数据结构-2-线性表 | SPARKLE</title><meta name="keywords" content="408,数据结构"><meta name="author" content="sparkle520"><meta name="copyright" content="sparkle520"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="408-数据结构-2-线性表"><meta name="application-name" content="408-数据结构-2-线性表"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="408-数据结构-2-线性表"><meta property="og:url" content="http://example.com/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%842/index.html"><meta property="og:site_name" content="SPARKLE"><meta property="og:description" content="第2章 线性表 2.1 定义与基本操作 线性表 ( Linear List ) 是具有 相同数据类型 的 \(n\) ( \(n \geq 0\) ) 个数据元素的 有限序列，记作 \(L &amp;#x3D; (a_1, a_2, \ldots, a_n)\).  基本特征  元素个数 \(n\"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://pic1.imgdb.cn/item/69b00d556738cb8aa1298e3c.png"><meta property="article:author" content="sparkle520"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://pic1.imgdb.cn/item/69b00d556738cb8aa1298e3c.png"><meta name="description" content="第2章 线性表 2.1 定义与基本操作 线性表 ( Linear List ) 是具有 相同数据类型 的 \(n\) ( \(n \geq 0\) ) 个数据元素的 有限序列，记作 \(L &amp;#x3D; (a_1, a_2, \ldots, a_n)\).  基本特征  元素个数 \(n\"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%842/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: 'https://sparkle521.xyz',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":4000,"accessToken":"","mailMd5":""},
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: {"mode":"api","api":"https://img2color-go.vercel.app/api?img=","cover_change":true},
+  authorStatus: {"skills":["(❤ ω ❤)"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: sparkle520","link":"链接: ","source":"来源: SPARKLE","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#883ced","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'SPARKLE',
+  title: '408-数据结构-2-线性表',
+  postAI: '',
+  pageFillDescription: '第2章 线性表, 2.1 定义与基本操作, 2.1.1 基本操作, 2.1.2 408 常考点, 2.2 顺序存储 ( 顺序表 ), 2.2.1 插入操作, 2.2.2 删除操作, 2.2.3 查找操作, 2.2.4 常考题型与技巧, 2.3 链式存储 ( 链表 ), 2.3.1 头结点与头指针, 2.3.2 单链表, 2.3.3 双链表, 2.3.4 循环链表, 2.3.5 静态链表, 2.3.6 高频题型与方法, 2.4 顺序表 vs. 链表 综合对比, 2.5 线性表的应用, 2.5.1 多项式表示与相加, 2.5.2 有序表合并, 2.6 例题精选, 2.7 本章疑难点, 1. 头插法与尾插法顺序问题, 2. 双链表插入指针顺序, 3. 静态链表与动态链表对比, 4. 顺序表插删的时间复杂度, 6. 判环后的入口定位, 7. 相交链表是地址相交, 2.8 本章小结第章线性表定义与基本操作线性表是具有相同数据类型的个数据元素的有限序列记作基本特征元素个数称为线性表的长度时为空表为表头元素为表尾元素除外每个元素有且仅有一个直接前驱除外每个元素有且仅有一个直接后继基本操作创建与销毁查找插入与删除遍历与输出操作功能说明初始化一个空线性表销毁线性表释放内存清空线性表将置为空表操作功能说明按位查找取第个元素赋给按值查找返回元素的位序返回线性表的长度判断线性表是否为空操作功能说明在第个位置插入元素删除第个元素并用返回其值操作功能说明按顺序输出线性表的所有元素遍历线性表对每个元素调用不同教材操作命名可能不同考试中重点掌握插入删除查找的实现逻辑与复杂度而非死记操作名称常考点位序与下标判空与边界复杂度速查位序通常从开始第个元素数组下标通常从开始题目里若写第个元素默认直接前驱直接后继是逻辑概念和存储方式无关顺序表判空通常看带头结点的链表判空通常看单链表中删除结点本身但不知道其前驱只能用后继覆盖法且不能是尾结点结构按位访问按值查找插入删除已定位结点插入删除需先定位顺序表单链表顺序存储顺序表顺序表用一组地址连续的存储单元依次存储线性表的数据元素逻辑相邻的元素物理地址也相邻存储地址公式实现方式对比方式特点静态分配数组大小固定简单可能溢出或浪费动态分配可扩容更灵活需手动管理内存插入操作步骤复杂度分析在第个位置插入元素判断的合法性表满则报错将第个元素依次后移一位将放入第个位置表长加设插入位置等概率每个位置概率为情况移动次数时间复杂度最好表尾插入最坏表头插入平均删除操作步骤复杂度分析删除第个元素判断的合法性表空则报错取出第个元素保存将第个元素依次前移一位表长减设删除位置等概率每个位置概率为情况移动次数时间复杂度最好删表尾最坏删表头平均查找操作类型时间复杂度说明按位查找直接计算地址随机访问按值查找顺序扫描比较顺序表的按位查找是这是顺序存储相较于链式存储最大的优势常考题型与技巧双指针压缩原地旋转有序表处理删除满足条件的元素且要求额外空间时优先考虑快慢指针设为写入位置慢指针为扫描位置快指针当保留时执行遍历结束后令线性表循环左移右移常用三次逆置实现时间空间将长度为的顺序表左移位逆置前个元素逆置后个元素逆置整个表有序顺序表删除重复元素可以一次扫描完成时间合并两个有序顺序表使用双指针时间求两个有序表的中位数通常用分治或双指针题目会明确是否允许额外空间链式存储链表链表用一组任意的存储单元存储线性表每个结点除数据域外还有指针域指向后继结点逻辑相邻的元素物理地址不一定相邻头结点与头指针头指针头结点对比表头指针指向链表第一个结点的指针链表必须有头指针是链表的唯一标识若链表有头结点头指针指向头结点否则指向第一个数据结点头指针不可为空表时指向头结点头结点链表第一个数据结点之前附设的一个额外结点数据域可不存有效数据头结点是可选的但引入后能简化操作有头结点时对第一个数据结点的插删与其他位置统一处理无需特判头结点的后继为时链表为空比较项头指针头结点是否必须必须可选空表判断操作统一性首元素需特判首元素无需特判单链表尾插法建表头插法建表插入操作删除操作查找逆置尾插法新结点插入到链表末尾建立的链表元素顺序与输入顺序相同头结点为尾指针更新尾指针头插法新结点插入到链表头部建立的链表元素顺序与输入顺序相反初始化空链表插入到头部提示头插法天然可以实现链表逆置常作为逆置算法的基础后插操作在结点之后插入结点前插操作在结点之前插入结点借助后插实现交换数据域时间复杂度均为已知前驱结点时删除结点的后继结点删除结点本身不知前驱借助后继实现用后继覆盖时间复杂度均为类型时间复杂度说明按位查找从头遍历第个结点按值查找从头遍历比较数据域单链表不支持随机访问按位查找必须从头遍历这是相较于顺序表的劣势头插法逆置取原链表每个结点头插入新链表时间复杂度空间复杂度双链表双链表每个结点有两个指针域指向前驱指向后继可从任意结点向前或向后遍历插入操作在结点之后插入结点插入时指针修改顺序很关键先处理的指针再修改的避免断链删除操作删除结点的后继结点操作时间复杂度按值查找按位查找已知结点的插入删除循环链表循环单链表循环双链表循环单链表尾结点的指向头结点而非判空条件判表尾任意结点出发可遍历整表适合约瑟夫问题等循环场景循环双链表头结点指向尾结点尾结点指向头结点判空条件且合并两个循环双链表只需修改个指针完成静态链表静态链表用数组模拟链表结点包含数据域和游标存放后继元素的数组下标而非指针适用于不支持指针的语言如早期数组第一个元素通常作为头结点游标指向第一个空闲结点优点插入删除不移动元素缺点容量固定不能随机访问比较项顺序表链表动态静态链表随机访问插删效率低高高存储连续容量可变高频题型与方法虚拟头结点快慢指针相交与共享尾原地操作对删除插入分割等操作先引入一个虚拟头结点往往能避免首结点特判用指向待删结点前驱删结点时做判环与入口时间空间找中间结点每次两步每次一步删除倒数第个结点先让领先步再同步移动共享尾意味着从某个结点开始地址相同不是值相同长度差法先对齐再同步走指针切换法两个指针分别走完自己的链表后切换到对方头部最终在相交点相遇或同时为逆置链表优先用迭代头插空间合并有序链表可直接复用原结点空间删结点但不知道前驱用后继覆盖法要求有后继顺序表链表综合对比存取方式插入删除空间性能类型按位存取按值查找顺序表随机存取链表顺序存取类型操作时间复杂度说明顺序表插入删除需移动大量元素链表插入删除已知前驱结点时链表插入删除需先查找目标位置类型空间分配存储密度适用场景顺序表预分配静态高无指针开销元素个数已知查找频繁链表按需分配动态低有指针域元素个数未知插删频繁选择原则频繁查找选顺序表频繁插删选链表元素个数变化大选链表存储密度要求高选顺序表线性表的应用多项式表示与相加多项式表示多项式相加算法设多项式顺序表表示下标对应系数适合稠密多项式链表表示每个结点存系数指数对按指数降序排列适合稀疏多项式结点结构示例设和均按指数降序存储双指针分别扫描若取结点后移若取结点后移若指数相等系数相加非零则保留为零则丢弃同时后移剩余部分直接链入结果链表时间复杂度为两多项式项数有序表合并顺序表合并链表合并将两个非递减有序顺序表合并为非递减有序顺序表时间复杂度空间复杂度将两个有序单链表合并为有序单链表利用原结点不申请新空间以头结点作为结果链表头释放头结点接入剩余部分时间复杂度空间复杂度原地合并例题精选例题顺序表删除设顺序表中元素递增有序请删除其中所有值为的元素要求时间复杂度空间复杂度解顺序表可用双指针压缩令为写入位置为扫描位置由于每个元素最多被访问与写入常数次时间复杂度为空间复杂度为例题链表逆置将单链表就地逆置不申请额外空间解迭代头插逆置时间复杂度为空间复杂度为例题找公共结点两个单链表共享一段尾部找到第一个公共结点解指针切换法更直接相交则为首个公共结点否则为两指针各自走过的路径长度都为因此会在相交点相遇或同时为时间复杂度为空间复杂度为例题判断循环链表判断单链表是否有环若有环返回环的入口结点解判圈每次走步每次走步若相遇则有环令从头结点出发与同步每次走步再次相遇点就是入口时间复杂度为空间复杂度为例题删除倒数第个结点已知带头结点的单链表删除倒数第个结点要求一次遍历完成解双指针令先走步然后与同步走直到到达表尾此时指向倒数第个结点的前驱时间复杂度为空间复杂度为例题有序顺序表删除重复元素设顺序表元素非递减有序删除所有重复元素使得每个值只保留一个要求时间复杂度空间复杂度解有序性意味着相同元素相邻可用双指针保留首个出现位置时间复杂度为空间复杂度为例题链表稳定分割给定单链表与值将链表分成两段使得小于的结点在前大于等于的结点在后并保持各段内部的相对顺序不变解用两个虚拟头结点分别维护两条链最后拼接每个结点仅处理一次时间复杂度为空间复杂度为例题两链表原地交错合并已知两个带头结点的单链表将的结点依次插入到中形成交错序列要求复用原结点且不申请新结点解同时扫描两表逐个摘下的结点插入到当前结点之后时间复杂度为空间复杂度为本章疑难点头插法与尾插法顺序问题头插法建表后链表顺序是输入的逆序常用于逆置尾插法建表需维护尾指针链表顺序与输入相同双链表插入指针顺序必须先完成的两个指针赋值再修改否则会丢失后继结点地址静态链表与动态链表对比静态链表游标是数组下标不是地址不能用遍历而是顺序表插删的时间复杂度时间复杂度是但若只在表尾操作则是栈的顺序实现正是利用这一点单链表删结点但不知道前驱的限制后继覆盖法本质是删除后继结点并拷贝数据因此要求不是尾结点若是尾结点必须从头遍历找到前驱才能删除判环后的入口定位判圈第一次相遇只说明有环从表头与相遇点分别出发同步走二者再次相遇的位置才是入口相交链表是地址相交共享尾部指的是两个指针最终指向同一块结点地址不是结点值相同指针切换法不需要显式求长度适合手写推导与代码实现本章小结线性表逻辑结构为一对一顺序存储和链式存储各有优劣顺序表随机访问效率高适合查找密集场景链表插删效率高适合频繁修改场景双链表循环链表在单链表基础上扩展静态链表是数组模拟链表多项式相加有序表合并是链表的经典应用双指针虚拟头结点快慢指针是高频方法',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-03-10 23:14:49',
+  postMainColor: '#ff7096',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.min.css"><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/sparkle520?tab=repositories" title="github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="github"/><span class="back-menu-item-text">github</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">SPARKLE</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/408/" style="font-size: 1.05rem;">408<sup>21</sup></a><a href="/tags/AOP/" style="font-size: 1.05rem;">AOP<sup>1</sup></a><a href="/tags/Deep-Learning/" style="font-size: 1.05rem;">Deep Learning<sup>1</sup></a><a href="/tags/IoC/" style="font-size: 1.05rem;">IoC<sup>1</sup></a><a href="/tags/JSR303/" style="font-size: 1.05rem;">JSR303<sup>1</sup></a><a href="/tags/Matplotlib/" style="font-size: 1.05rem;">Matplotlib<sup>3</sup></a><a href="/tags/c/" style="font-size: 1.05rem;">c#<sup>2</sup></a><a href="/tags/java/" style="font-size: 1.05rem;">java<sup>4</sup></a><a href="/tags/python/" style="font-size: 1.05rem;">python<sup>5</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 1.05rem;">事务<sup>1</sup></a><a href="/tags/%E4%BA%8C%E6%AC%A1%E5%9E%8B/" style="font-size: 1.05rem;">二次型<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E3%80%82/" style="font-size: 1.05rem;">你的名字。<sup>3</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字同名小说<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%A4%96%E4%BC%A0%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字外传小说<sup>1</sup></a><a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size: 1.05rem;">写作<sup>4</sup></a><a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 1.05rem;">包管理<sup>1</sup></a><a href="/tags/%E5%8D%B7%E7%A7%AF%E5%85%AC%E5%BC%8F/" style="font-size: 1.05rem;">卷积公式<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90/" style="font-size: 1.05rem;">天气之子<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">天气之子同名小说<sup>1</sup></a><a href="/tags/%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">小说<sup>2</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">操作系统<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" style="font-size: 1.05rem;">数据校验<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" style="font-size: 1.05rem;">数据链路层<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 1.05rem;">概率论<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 1.05rem;">概率论与数理统计<sup>7</sup></a><a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 1.05rem;">汇编<sup>9</sup></a><a href="/tags/%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80/" style="font-size: 1.05rem;">泰勒展开<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/" style="font-size: 1.05rem;">物理层<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%80%BC/" style="font-size: 1.05rem;">特征值<sup>2</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F/" style="font-size: 1.05rem;">特征向量<sup>2</sup></a><a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">线性代数<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" style="font-size: 1.05rem;">网络体系结构<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" style="font-size: 1.05rem;">网络层<sup>2</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 1.05rem;">英语<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">英语语法<sup>24</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1.05rem;">计算机组成原理<sup>5</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.05rem;">计算机网络<sup>5</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">语法<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">高等代数<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" style="font-size: 1.05rem;">高等数学<sup>14</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">三月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">21</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/02/"><span class="card-archive-list-date">二月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/01/"><span class="card-archive-list-date">一月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/12/"><span class="card-archive-list-date">十二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">15</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/11/"><span class="card-archive-list-date">十一月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/10/"><span class="card-archive-list-date">十月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/09/"><span class="card-archive-list-date">九月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/08/"><span class="card-archive-list-date">八月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url">计算机</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/408/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>408</span></a><a class="article-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>数据结构</span></a></span></div></div><h1 class="post-title" itemprop="name headline">408-数据结构-2-线性表</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-03-13T13:00:00.000Z" title="发表于 2026-03-13 21:00:00">2026-03-13</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-03-10T15:14:49.834Z" title="更新于 2026-03-10 23:14:49">2026-03-10</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">5.2k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>19分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="408-数据结构-2-线性表"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为系守镇"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>系守镇</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%842/#post-comment" tabindex="-1"><span id="twikoo-count"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://pic1.imgdb.cn/item/69b00d556738cb8aa1298e3c.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%842/"><header><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url">计算机</a><a href="/tags/408/" tabindex="-1" itemprop="url">408</a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" tabindex="-1" itemprop="url">数据结构</a><h1 id="CrawlerTitle" itemprop="name headline">408-数据结构-2-线性表</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">sparkle520</span><time itemprop="dateCreated datePublished" datetime="2026-03-13T13:00:00.000Z" title="发表于 2026-03-13 21:00:00">2026-03-13</time><time itemprop="dateCreated datePublished" datetime="2026-03-10T15:14:49.834Z" title="更新于 2026-03-10 23:14:49">2026-03-10</time></header><h1 id="第2章-线性表">第2章 线性表</h1>
+<h2 id="定义与基本操作">2.1 定义与基本操作</h2>
+<div class="note info simple"><p><strong>线性表</strong> ( Linear List ) 是具有
+<strong>相同数据类型</strong> 的 <span class="math inline">\(n\)</span>
+( <span class="math inline">\(n \geq 0\)</span> ) 个数据元素的
+<strong>有限序列</strong>，记作 <span class="math inline">\(L = (a_1,
+a_2, \ldots, a_n)\)</span>.</p>
+</div>
+<p><strong>基本特征</strong></p>
+<ul>
+<li>元素个数 <span class="math inline">\(n\)</span> 称为线性表的
+<strong>长度</strong>，<span class="math inline">\(n = 0\)</span> 时为
+<strong>空表</strong>.</li>
+<li><span class="math inline">\(a_1\)</span> 为
+<strong>表头元素</strong>，<span class="math inline">\(a_n\)</span> 为
+<strong>表尾元素</strong>.</li>
+<li>除 <span class="math inline">\(a_1\)</span> 外每个元素有且仅有一个
+<strong>直接前驱</strong>; 除 <span class="math inline">\(a_n\)</span>
+外每个元素有且仅有一个 <strong>直接后继</strong>.</li>
+</ul>
+<h3 id="基本操作">2.1.1 基本操作</h3>
+<div class="tabs" id="list-ops"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="list-ops-1">创建与销毁</button><button type="button" class="tab " data-href="list-ops-2">查找</button><button type="button" class="tab " data-href="list-ops-3">插入与删除</button><button type="button" class="tab " data-href="list-ops-4">遍历与输出</button></ul><div class="tab-contents"><div class="tab-item-content active" id="list-ops-1"><table>
+<thead>
+<tr>
+<th style="text-align: left;">操作</th>
+<th style="text-align: left;">功能说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>InitList(L)</code></td>
+<td style="text-align: left;">初始化一个空线性表 <span
+class="math inline">\(L\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>DestroyList(L)</code></td>
+<td style="text-align: left;">销毁线性表，释放内存</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>ClearList(L)</code></td>
+<td style="text-align: left;">清空线性表，将 <span
+class="math inline">\(L\)</span> 置为空表</td>
+</tr>
+</tbody>
+</table></div><div class="tab-item-content" id="list-ops-2"><table>
+<thead>
+<tr>
+<th style="text-align: left;">操作</th>
+<th style="text-align: left;">功能说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>GetElem(L, i, e)</code></td>
+<td style="text-align: left;">按位查找，取第 <span
+class="math inline">\(i\)</span> 个元素赋给 <span
+class="math inline">\(e\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>LocateElem(L, e)</code></td>
+<td style="text-align: left;">按值查找，返回元素 <span
+class="math inline">\(e\)</span> 的位序</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Length(L)</code></td>
+<td style="text-align: left;">返回线性表的长度</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Empty(L)</code></td>
+<td style="text-align: left;">判断线性表是否为空</td>
+</tr>
+</tbody>
+</table></div><div class="tab-item-content" id="list-ops-3"><table>
+<thead>
+<tr>
+<th style="text-align: left;">操作</th>
+<th style="text-align: left;">功能说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>ListInsert(L, i, e)</code></td>
+<td style="text-align: left;">在第 <span
+class="math inline">\(i\)</span> 个位置插入元素 <span
+class="math inline">\(e\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>ListDelete(L, i, e)</code></td>
+<td style="text-align: left;">删除第 <span
+class="math inline">\(i\)</span> 个元素，并用 <span
+class="math inline">\(e\)</span> 返回其值</td>
+</tr>
+</tbody>
+</table></div><div class="tab-item-content" id="list-ops-4"><table>
+<thead>
+<tr>
+<th style="text-align: left;">操作</th>
+<th style="text-align: left;">功能说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>PrintList(L)</code></td>
+<td style="text-align: left;">按顺序输出线性表的所有元素</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Traverse(L, visit())</code></td>
+<td style="text-align: left;">遍历线性表，对每个元素调用
+<code>visit()</code></td>
+</tr>
+</tbody>
+</table></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<div class="note warning simple"><p>不同教材操作命名可能不同，408 考试中重点掌握
+<strong>插入、删除、查找</strong>
+的实现逻辑与复杂度，而非死记操作名称.</p>
+</div>
+<h3 id="常考点">2.1.2 408 常考点</h3>
+<div class="tabs" id="list-points"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="list-points-1">位序与下标</button><button type="button" class="tab " data-href="list-points-2">判空与边界</button><button type="button" class="tab " data-href="list-points-3">复杂度速查</button></ul><div class="tab-contents"><div class="tab-item-content active" id="list-points-1"><ul>
+<li><strong>位序</strong> 通常从 1 开始 ( 第 <span
+class="math inline">\(i\)</span> 个元素 )， <strong>数组下标</strong>
+通常从 0 开始 ( <code>data[i-1]</code> )</li>
+<li>题目里若写「第 <span class="math inline">\(i\)</span> 个元素」，默认
+<span class="math inline">\(1 \le i \le n\)</span></li>
+<li>「直接前驱 / 直接后继」是逻辑概念，和存储方式无关</li>
+</ul></div><div class="tab-item-content" id="list-points-2"><ul>
+<li>顺序表判空通常看 <code>length == 0</code></li>
+<li>带头结点的链表判空通常看 <code>L-&gt;next == NULL</code></li>
+<li>单链表中「删除结点 p 本身但不知道其前驱」只能用后继覆盖法，且
+<strong>p 不能是尾结点</strong></li>
+</ul></div><div class="tab-item-content" id="list-points-3"><table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">结构</th>
+<th style="text-align: center;">按位访问</th>
+<th style="text-align: center;">按值查找</th>
+<th style="text-align: center;">插入删除 ( 已定位结点 )</th>
+<th style="text-align: center;">插入删除 ( 需先定位 )</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">顺序表</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(1)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">单链表</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(1)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+</tr>
+</tbody>
+</table></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<hr />
+<h2 id="顺序存储-顺序表">2.2 顺序存储 ( 顺序表 )</h2>
+<div class="note info simple"><p><strong>顺序表</strong> 用一组 <strong>地址连续</strong>
+的存储单元依次存储线性表的数据元素，逻辑相邻的元素物理地址也相邻.</p>
+</div>
+<p><strong>存储地址公式</strong></p>
+<p><span class="math display">\[\text{LOC}(a_i) = \text{LOC}(a_1) + (i -
+1) \times \text{sizeof}(\text{ElemType})\]</span></p>
+<p><strong>实现方式对比</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">方式</th>
+<th style="text-align: left;">特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">静态分配 ( 数组 )</td>
+<td style="text-align: left;">大小固定，简单，可能溢出或浪费</td>
+</tr>
+<tr>
+<td style="text-align: left;">动态分配 ( <code>malloc</code> )</td>
+<td style="text-align: left;">可扩容，更灵活，需手动管理内存</td>
+</tr>
+</tbody>
+</table>
+<h3 id="插入操作">2.2.1 插入操作</h3>
+<div class="tabs" id="seq-insert"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="seq-insert-1">步骤</button><button type="button" class="tab " data-href="seq-insert-2">复杂度分析</button></ul><div class="tab-contents"><div class="tab-item-content active" id="seq-insert-1"><p>在第 <span class="math inline">\(i\)</span> 个位置插入元素 <span
+class="math inline">\(e\)</span> ( <span class="math inline">\(1 \leq i
+\leq n+1\)</span> ) :</p>
+<ol type="1">
+<li>判断 <span class="math inline">\(i\)</span>
+的合法性，表满则报错.</li>
+<li>将第 <span class="math inline">\(i \sim n\)</span> 个元素
+<strong>依次后移</strong> 一位.</li>
+<li>将 <span class="math inline">\(e\)</span> 放入第 <span
+class="math inline">\(i\)</span> 个位置.</li>
+<li>表长加 1.</li>
+</ol></div><div class="tab-item-content" id="seq-insert-2"><p>设插入位置等概率，每个位置概率为 <span
+class="math inline">\(\dfrac{1}{n+1}\)</span>.</p>
+<p><span class="math display">\[E_{\text{insert}} = \sum_{i=1}^{n+1}
+\frac{1}{n+1}(n-i+1) = \frac{n}{2}\]</span></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">情况</th>
+<th style="text-align: center;">移动次数</th>
+<th style="text-align: center;">时间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="p green">最好 ( 表尾插入
+)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(0\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(1)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="p red">最坏 ( 表头插入
+)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(n\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="p yellow">平均</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(n/2\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+</tr>
+</tbody>
+</table></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="删除操作">2.2.2 删除操作</h3>
+<div class="tabs" id="seq-delete"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="seq-delete-1">步骤</button><button type="button" class="tab " data-href="seq-delete-2">复杂度分析</button></ul><div class="tab-contents"><div class="tab-item-content active" id="seq-delete-1"><p>删除第 <span class="math inline">\(i\)</span> 个元素 ( <span
+class="math inline">\(1 \leq i \leq n\)</span> )</p>
+<ol type="1">
+<li>判断 <span class="math inline">\(i\)</span>
+的合法性，表空则报错.</li>
+<li>取出第 <span class="math inline">\(i\)</span> 个元素保存.</li>
+<li>将第 <span class="math inline">\(i+1 \sim n\)</span> 个元素
+<strong>依次前移</strong> 一位.</li>
+<li>表长减 1.</li>
+</ol></div><div class="tab-item-content" id="seq-delete-2"><p>设删除位置等概率，每个位置概率为 <span
+class="math inline">\(\dfrac{1}{n}\)</span>.</p>
+<p><span class="math display">\[E_{\text{delete}} = \sum_{i=1}^{n}
+\frac{1}{n}(n-i) = \frac{n-1}{2}\]</span></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">情况</th>
+<th style="text-align: center;">移动次数</th>
+<th style="text-align: center;">时间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="p green">最好 ( 删表尾
+)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(0\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(1)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="p red">最坏 ( 删表头
+)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(n-1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="p yellow">平均</span></td>
+<td style="text-align: center;"><span
+class="math inline">\((n-1)/2\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+</tr>
+</tbody>
+</table></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="查找操作">2.2.3 查找操作</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">类型</th>
+<th style="text-align: center;">时间复杂度</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">按位查找</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(1)\)</span></td>
+<td style="text-align: left;">直接计算地址，随机访问</td>
+</tr>
+<tr>
+<td style="text-align: left;">按值查找</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+<td style="text-align: left;">顺序扫描比较</td>
+</tr>
+</tbody>
+</table>
+<div class="note warning simple"><p>顺序表的 <strong>按位查找</strong> 是 <span
+class="math inline">\(O(1)\)</span>，这是顺序存储相较于链式存储最大的优势.</p>
+</div>
+<h3 id="常考题型与技巧">2.2.4 常考题型与技巧</h3>
+<div class="tabs" id="seq-tips"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="seq-tips-1">双指针压缩</button><button type="button" class="tab " data-href="seq-tips-2">原地旋转</button><button type="button" class="tab " data-href="seq-tips-3">有序表处理</button></ul><div class="tab-contents"><div class="tab-item-content active" id="seq-tips-1"><div class="note info simple">
+<p>
+删除满足条件的元素且要求 <span class="math inline">(O(1))</span>
+额外空间时，优先考虑「快慢指针」.
+</p>
+</div>
+<ul>
+<li>设 <code>i</code> 为写入位置 ( 慢指针 )，<code>j</code> 为扫描位置 (
+快指针 )</li>
+<li>当 <code>data[j]</code> 保留时，执行
+<code>data[i++] = data[j]</code></li>
+<li>遍历结束后令 <code>length = i</code></li>
+</ul></div><div class="tab-item-content" id="seq-tips-2"><div class="note info simple">
+<p>
+线性表循环左移 / 右移常用「三次逆置」实现，时间 <span
+class="math inline">(O(n))</span>，空间 <span
+class="math inline">(O(1))</span>.
+</p>
+</div>
+<p>将长度为 <span class="math inline">\(n\)</span> 的顺序表左移 <span
+class="math inline">\(k\)</span> 位 ( <span class="math inline">\(0 \le
+k &lt; n\)</span> ).</p>
+<ol type="1">
+<li>逆置前 <span class="math inline">\(k\)</span> 个元素</li>
+<li>逆置后 <span class="math inline">\(n-k\)</span> 个元素</li>
+<li>逆置整个表</li>
+</ol></div><div class="tab-item-content" id="seq-tips-3"><ul>
+<li>有序顺序表删除重复元素可以一次扫描完成，时间 <span
+class="math inline">\(O(n)\)</span></li>
+<li>合并两个有序顺序表使用双指针，时间 <span
+class="math inline">\(O(m+n)\)</span></li>
+<li>求两个有序表的中位数通常用分治或双指针，题目会明确是否允许额外空间</li>
+</ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<hr />
+<h2 id="链式存储-链表">2.3 链式存储 ( 链表 )</h2>
+<div class="note info simple"><p>链表用一组 <strong>任意</strong>
+的存储单元存储线性表，每个结点除数据域外还有 <strong>指针域</strong>
+指向后继结点，逻辑相邻的元素物理地址不一定相邻.</p>
+</div>
+<h3 id="头结点与头指针">2.3.1 头结点与头指针</h3>
+<div class="tabs" id="head"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="head-1">头指针</button><button type="button" class="tab " data-href="head-2">头结点</button><button type="button" class="tab " data-href="head-3">对比表</button></ul><div class="tab-contents"><div class="tab-item-content active" id="head-1"><p><strong>头指针</strong> 指向链表第一个结点的指针.</p>
+<ul>
+<li>链表必须有头指针，是链表的 <strong>唯一标识</strong>.</li>
+<li>若链表有头结点，头指针指向 <strong>头结点</strong>;
+否则指向第一个数据结点.</li>
+<li>头指针不可为 <code>NULL</code> ( 空表时指向头结点 ).</li>
+</ul></div><div class="tab-item-content" id="head-2"><p><strong>头结点</strong>
+链表第一个数据结点之前附设的一个额外结点，数据域可不存有效数据.</p>
+<ul>
+<li>头结点是 <strong>可选的</strong>，但引入后能简化操作.</li>
+<li>有头结点时，对第一个数据结点的插删与其他位置
+<strong>统一处理</strong>，无需特判.</li>
+<li>头结点的后继为 <code>NULL</code> 时链表为空.</li>
+</ul></div><div class="tab-item-content" id="head-3"><table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">比较项</th>
+<th style="text-align: left;">头指针</th>
+<th style="text-align: left;">头结点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">是否必须</td>
+<td style="text-align: left;"><span class="p red">必须</span></td>
+<td style="text-align: left;"><span class="p green">可选</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">空表判断</td>
+<td style="text-align: left;"><code>L == NULL</code></td>
+<td style="text-align: left;"><code>L-&gt;next == NULL</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">操作统一性</td>
+<td style="text-align: left;">首元素需特判</td>
+<td style="text-align: left;">首元素无需特判</td>
+</tr>
+</tbody>
+</table></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="单链表">2.3.2 单链表</h3>
+<div class="tabs" id="single-linked"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="single-linked-1">尾插法建表</button><button type="button" class="tab " data-href="single-linked-2">头插法建表</button><button type="button" class="tab " data-href="single-linked-3">插入操作</button><button type="button" class="tab " data-href="single-linked-4">删除操作</button><button type="button" class="tab " data-href="single-linked-5">查找</button><button type="button" class="tab " data-href="single-linked-6">逆置</button></ul><div class="tab-contents"><div class="tab-item-content active" id="single-linked-1"><p><strong>尾插法</strong> 新结点插入到链表
+<strong>末尾</strong>，建立的链表元素顺序与输入顺序
+<strong>相同</strong>.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">LinkList <span class="title function_">TailInsert</span><span class="params">(LinkList &amp;L)</span> &#123;</span><br><span class="line">    L = (LNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LNode)); <span class="comment">// 头结点</span></span><br><span class="line">    LNode *s, *r = L;                 <span class="comment">// r 为尾指针</span></span><br><span class="line">    <span class="type">int</span> x;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x) != EOF) &#123;</span><br><span class="line">        s = (LNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LNode));</span><br><span class="line">        s-&gt;data = x;</span><br><span class="line">        r-&gt;next = s;</span><br><span class="line">        r = s;           <span class="comment">// 更新尾指针</span></span><br><span class="line">    &#125;</span><br><span class="line">    r-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> L;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-item-content" id="single-linked-2"><p><strong>头插法</strong> 新结点插入到链表
+<strong>头部</strong>，建立的链表元素顺序与输入顺序
+<strong>相反</strong>.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">LinkList <span class="title function_">HeadInsert</span><span class="params">(LinkList &amp;L)</span> &#123;</span><br><span class="line">    L = (LNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LNode));</span><br><span class="line">    L-&gt;next = <span class="literal">NULL</span>;   <span class="comment">// 初始化空链表</span></span><br><span class="line">    LNode *s;</span><br><span class="line">    <span class="type">int</span> x;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x) != EOF) &#123;</span><br><span class="line">        s = (LNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LNode));</span><br><span class="line">        s-&gt;data = x;</span><br><span class="line">        s-&gt;next = L-&gt;next; <span class="comment">// 插入到头部</span></span><br><span class="line">        L-&gt;next = s;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> L;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note info simple">
+<p>
+<strong>提示</strong>
+</p>
+<p>
+头插法天然可以实现 <strong>链表逆置</strong>，常作为逆置算法的基础.
+</p>
+</div></div><div class="tab-item-content" id="single-linked-3"><p><strong>后插操作</strong> 在结点 <span
+class="math inline">\(p\)</span> 之后插入结点 <span
+class="math inline">\(s\)</span></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s-&gt;next = p-&gt;next;</span><br><span class="line">p-&gt;next = s;</span><br></pre></td></tr></table></figure>
+<p><strong>前插操作</strong> 在结点 <span
+class="math inline">\(p\)</span> 之前插入结点 <span
+class="math inline">\(s\)</span> ( 借助后插实现 )</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s-&gt;next = p-&gt;next;</span><br><span class="line">p-&gt;next = s;</span><br><span class="line">swap(p-&gt;data, s-&gt;data); <span class="comment">// 交换数据域</span></span><br></pre></td></tr></table></figure>
+<p>时间复杂度均为 <span class="math inline">\(O(1)\)</span> (
+已知前驱结点时 ).</p></div><div class="tab-item-content" id="single-linked-4"><p><strong>删除结点 <span class="math inline">\(p\)</span>
+的后继结点</strong> :</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LNode *q = p-&gt;next;</span><br><span class="line">p-&gt;next = q-&gt;next;</span><br><span class="line"><span class="built_in">free</span>(q);</span><br></pre></td></tr></table></figure>
+<p><strong>删除结点 <span class="math inline">\(p\)</span> 本身</strong>
+( 不知前驱，借助后继实现 ) :</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LNode *q = p-&gt;next;</span><br><span class="line">p-&gt;data = q-&gt;data;   <span class="comment">// 用后继覆盖</span></span><br><span class="line">p-&gt;next = q-&gt;next;</span><br><span class="line"><span class="built_in">free</span>(q);</span><br></pre></td></tr></table></figure>
+<p>时间复杂度均为 <span class="math inline">\(O(1)\)</span>.</p></div><div class="tab-item-content" id="single-linked-5"><table>
+<thead>
+<tr>
+<th style="text-align: left;">类型</th>
+<th style="text-align: center;">时间复杂度</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">按位查找</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+<td style="text-align: left;">从头遍历，第 <span
+class="math inline">\(i\)</span> 个结点</td>
+</tr>
+<tr>
+<td style="text-align: left;">按值查找</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+<td style="text-align: left;">从头遍历，比较数据域</td>
+</tr>
+</tbody>
+</table>
+<p>单链表
+<strong>不支持随机访问</strong>，按位查找必须从头遍历，这是相较于顺序表的劣势.</p></div><div class="tab-item-content" id="single-linked-6"><p><strong>头插法逆置</strong> 取原链表每个结点头插入新链表.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">Reverse</span><span class="params">(LinkList &amp;L)</span> &#123;</span><br><span class="line">    LNode *p = L-&gt;next, *q;</span><br><span class="line">    L-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">while</span> (p) &#123;</span><br><span class="line">        q = p-&gt;next;</span><br><span class="line">        p-&gt;next = L-&gt;next;</span><br><span class="line">        L-&gt;next = p;</span><br><span class="line">        p = q;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>时间复杂度 <span class="math inline">\(O(n)\)</span>，空间复杂度
+<span class="math inline">\(O(1)\)</span>.</p></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="双链表">2.3.3 双链表</h3>
+<div class="note info simple"><p><strong>双链表</strong> 每个结点有两个指针域 <strong>prior</strong>
+指向前驱， <strong>next</strong> 指向后继.
+可从任意结点向前或向后遍历.</p>
+</div>
+<p><strong>插入操作</strong> 在结点 <span
+class="math inline">\(p\)</span> 之后插入结点 <span
+class="math inline">\(s\)</span></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s-&gt;next = p-&gt;next;</span><br><span class="line">s-&gt;prior = p;</span><br><span class="line"><span class="keyword">if</span> (p-&gt;next) p-&gt;next-&gt;prior = s;</span><br><span class="line">p-&gt;next = s;</span><br></pre></td></tr></table></figure>
+<div class="note warning simple"><p>插入时指针修改顺序很关键 <strong>先处理 <span
+class="math inline">\(s\)</span> 的指针</strong>，再修改 <span
+class="math inline">\(p\)</span> 的 <code>next</code>，避免断链.</p>
+</div>
+<p><strong>删除操作</strong> 删除结点 <span
+class="math inline">\(p\)</span> 的后继结点 <span
+class="math inline">\(q\)</span></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p-&gt;next = q-&gt;next;</span><br><span class="line"><span class="keyword">if</span> (q-&gt;next) q-&gt;next-&gt;prior = p;</span><br><span class="line"><span class="built_in">free</span>(q);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">操作</th>
+<th style="text-align: center;">时间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">按值查找</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">按位查找</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">已知结点的插入 / 删除</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(1)\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="循环链表">2.3.4 循环链表</h3>
+<div class="tabs" id="circular"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="circular-1">循环单链表</button><button type="button" class="tab " data-href="circular-2">循环双链表</button></ul><div class="tab-contents"><div class="tab-item-content active" id="circular-1"><p><strong>循环单链表</strong> 尾结点的 <code>next</code> 指向
+<strong>头结点</strong> 而非 <code>NULL</code>.</p>
+<ul>
+<li>判空条件 <code>L-&gt;next == L</code></li>
+<li>判表尾 <code>p-&gt;next == L</code></li>
+<li>任意结点出发可遍历整表，适合 <strong>约瑟夫问题</strong>
+等循环场景.</li>
+</ul></div><div class="tab-item-content" id="circular-2"><p><strong>循环双链表</strong> 头结点 <code>prior</code>
+指向尾结点，尾结点 <code>next</code> 指向头结点.</p>
+<ul>
+<li>判空条件 <code>L-&gt;next == L</code> 且
+<code>L-&gt;prior == L</code></li>
+<li>合并两个循环双链表只需修改 4 个指针，<span
+class="math inline">\(O(1)\)</span> 完成.</li>
+</ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="静态链表">2.3.5 静态链表</h3>
+<div class="note info simple"><p><strong>静态链表</strong> 用 <strong>数组</strong>
+模拟链表，结点包含数据域 <code>data</code> 和游标
+<code>next</code>，<code>next</code> 存放后继元素的
+<strong>数组下标</strong> 而非指针.</p>
+</div>
+<ul>
+<li>适用于 <strong>不支持指针</strong> 的语言 ( 如早期 Basic/Fortran
+).</li>
+<li>数组第一个元素通常作为
+<strong>头结点</strong>，游标指向第一个空闲结点.</li>
+<li>优点 插入删除不移动元素. 缺点 容量固定，不能随机访问.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">比较项</th>
+<th style="text-align: center;">顺序表</th>
+<th style="text-align: center;">链表 ( 动态 )</th>
+<th style="text-align: center;">静态链表</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">随机访问</td>
+<td style="text-align: center;"><span class='p green'>✓</span></td>
+<td style="text-align: center;"><span class='p red'>✗</span></td>
+<td style="text-align: center;"><span class='p red'>✗</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">插删效率</td>
+<td style="text-align: center;"><span class='p red'>低</span></td>
+<td style="text-align: center;"><span class='p green'>高</span></td>
+<td style="text-align: center;"><span class='p green'>高</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">存储连续</td>
+<td style="text-align: center;"><span class='p green'>✓</span></td>
+<td style="text-align: center;"><span class='p red'>✗</span></td>
+<td style="text-align: center;"><span class='p green'>✓</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">容量可变</td>
+<td style="text-align: center;"><span class='p red'>✗</span></td>
+<td style="text-align: center;"><span class='p green'>✓</span></td>
+<td style="text-align: center;"><span class='p red'>✗</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="高频题型与方法">2.3.6 高频题型与方法</h3>
+<div class="tabs" id="list-high"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="list-high-1">虚拟头结点</button><button type="button" class="tab " data-href="list-high-2">快慢指针</button><button type="button" class="tab " data-href="list-high-3">相交与共享尾</button><button type="button" class="tab " data-href="list-high-4">原地操作</button></ul><div class="tab-contents"><div class="tab-item-content active" id="list-high-1"><div class="note info simple">
+<p>
+对「删除」「插入」「分割」等操作，先引入一个虚拟头结点
+<code>dummy</code> 往往能避免首结点特判.
+</p>
+</div>
+<ul>
+<li><code>dummy-&gt;next = head</code></li>
+<li>用 <code>prev</code> 指向待删结点前驱，删结点时做
+<code>prev-&gt;next = cur-&gt;next</code></li>
+</ul></div><div class="tab-item-content" id="list-high-2"><ul>
+<li>判环与入口 Floyd，时间 <span
+class="math inline">\(O(n)\)</span>，空间 <span
+class="math inline">\(O(1)\)</span></li>
+<li>找中间结点，<code>fast</code> 每次两步，<code>slow</code>
+每次一步</li>
+<li>删除倒数第 <span class="math inline">\(k\)</span> 个结点，先让
+<code>fast</code> 领先 <span class="math inline">\(k\)</span>
+步，再同步移动</li>
+</ul></div><div class="tab-item-content" id="list-high-3"><div class="note info simple">
+<p>
+共享尾意味着从某个结点开始地址相同，不是值相同.
+</p>
+</div>
+<ul>
+<li>长度差法，先对齐再同步走</li>
+<li>指针切换法，两个指针分别走完自己的链表后切换到对方头部，最终在相交点相遇或同时为
+<code>NULL</code></li>
+</ul></div><div class="tab-item-content" id="list-high-4"><ul>
+<li>逆置链表优先用迭代头插，空间 <span
+class="math inline">\(O(1)\)</span></li>
+<li>合并有序链表可直接复用原结点，空间 <span
+class="math inline">\(O(1)\)</span></li>
+<li>「删结点 p 但不知道前驱」用后继覆盖法，要求 p 有后继</li>
+</ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<hr />
+<h2 id="顺序表-vs.-链表-综合对比">2.4 顺序表 vs. 链表 综合对比</h2>
+<div class="tabs" id="compare"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="compare-1">存取方式</button><button type="button" class="tab " data-href="compare-2">插入删除</button><button type="button" class="tab " data-href="compare-3">空间性能</button></ul><div class="tab-contents"><div class="tab-item-content active" id="compare-1"><table>
+<thead>
+<tr>
+<th style="text-align: left;">类型</th>
+<th style="text-align: center;">按位存取</th>
+<th style="text-align: center;">按值查找</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">顺序表</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(1)\)</span> 随机存取</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">链表</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span> 顺序存取</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+</tr>
+</tbody>
+</table></div><div class="tab-item-content" id="compare-2"><table>
+<thead>
+<tr>
+<th style="text-align: left;">类型</th>
+<th style="text-align: left;">操作</th>
+<th style="text-align: center;">时间复杂度</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">顺序表</td>
+<td style="text-align: left;">插入 / 删除</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+<td style="text-align: left;">需移动大量元素</td>
+</tr>
+<tr>
+<td style="text-align: left;">链表</td>
+<td style="text-align: left;">插入 / 删除</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(1)\)</span></td>
+<td style="text-align: left;">已知前驱结点时</td>
+</tr>
+<tr>
+<td style="text-align: left;">链表</td>
+<td style="text-align: left;">插入 / 删除</td>
+<td style="text-align: center;"><span
+class="math inline">\(O(n)\)</span></td>
+<td style="text-align: left;">需先查找目标位置</td>
+</tr>
+</tbody>
+</table></div><div class="tab-item-content" id="compare-3"><table>
+<thead>
+<tr>
+<th style="text-align: left;">类型</th>
+<th style="text-align: left;">空间分配</th>
+<th style="text-align: center;">存储密度</th>
+<th style="text-align: left;">适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">顺序表</td>
+<td style="text-align: left;">预分配，静态</td>
+<td style="text-align: center;">高 ( 无指针开销 )</td>
+<td style="text-align: left;">元素个数已知，查找频繁</td>
+</tr>
+<tr>
+<td style="text-align: left;">链表</td>
+<td style="text-align: left;">按需分配，动态</td>
+<td style="text-align: center;">低 ( 有指针域 )</td>
+<td style="text-align: left;">元素个数未知，插删频繁</td>
+</tr>
+</tbody>
+</table></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<div class="note warning simple"><p><strong>选择原则</strong> 频繁查找选顺序表; 频繁插删选链表;
+元素个数变化大选链表; 存储密度要求高选顺序表.</p>
+</div>
+<hr />
+<h2 id="线性表的应用">2.5 线性表的应用</h2>
+<h3 id="多项式表示与相加">2.5.1 多项式表示与相加</h3>
+<div class="tabs" id="polynomial"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="polynomial-1">多项式表示</button><button type="button" class="tab " data-href="polynomial-2">多项式相加算法</button></ul><div class="tab-contents"><div class="tab-item-content active" id="polynomial-1"><p>设多项式 <span class="math inline">\(P(x) = a_0 + a_1 x + a_2 x^2 +
+\cdots + a_n x^n\)</span>.</p>
+<p><strong>顺序表表示</strong> 下标 <span
+class="math inline">\(i\)</span> 对应系数 <span
+class="math inline">\(a_i\)</span>，适合
+<strong>稠密多项式</strong>.</p>
+<p><strong>链表表示</strong> 每个结点存 ( 系数，指数 )
+对，按指数降序排列，适合 <strong>稀疏多项式</strong>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">结点结构 | coef | exp | next |</span><br><span class="line">示例 3x^5 + 2x^2 + 1 →  (3,5) → (2,2) → (1,0) → NULL</span><br></pre></td></tr></table></figure></div><div class="tab-item-content" id="polynomial-2"><p>设 <span class="math inline">\(P_a\)</span> 和 <span
+class="math inline">\(P_b\)</span> 均按指数降序存储，双指针 <span
+class="math inline">\(p\)</span>、<span class="math inline">\(q\)</span>
+分别扫描</p>
+<ol type="1">
+<li>若 <span class="math inline">\(p \to \text{exp} &gt; q \to
+\text{exp}\)</span>，取 <span class="math inline">\(p\)</span>
+结点，<span class="math inline">\(p\)</span> 后移.</li>
+<li>若 <span class="math inline">\(p \to \text{exp} &lt; q \to
+\text{exp}\)</span>，取 <span class="math inline">\(q\)</span>
+结点，<span class="math inline">\(q\)</span> 后移.</li>
+<li>若指数相等，系数相加 非零则保留，为零则丢弃，<span
+class="math inline">\(p\)</span>、<span class="math inline">\(q\)</span>
+同时后移.</li>
+<li>剩余部分直接链入结果链表.</li>
+</ol>
+<p>时间复杂度 <span class="math inline">\(O(m + n)\)</span>，<span
+class="math inline">\(m\)</span>、<span class="math inline">\(n\)</span>
+为两多项式项数.</p></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="有序表合并">2.5.2 有序表合并</h3>
+<div class="tabs" id="merge-sorted"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="merge-sorted-1">顺序表合并</button><button type="button" class="tab " data-href="merge-sorted-2">链表合并</button></ul><div class="tab-contents"><div class="tab-item-content active" id="merge-sorted-1"><p>将两个非递减有序顺序表 <span class="math inline">\(A\)</span>、<span
+class="math inline">\(B\)</span> 合并为非递减有序顺序表 <span
+class="math inline">\(C\)</span></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">MergeList</span><span class="params">(SqList A, SqList B, SqList &amp;C)</span> &#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>, k = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; A.length &amp;&amp; j &lt; B.length) &#123;</span><br><span class="line">        <span class="keyword">if</span> (A.data[i] &lt;= B.data[j])</span><br><span class="line">            C.data[k++] = A.data[i++];</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            C.data[k++] = B.data[j++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; A.length) C.data[k++] = A.data[i++];</span><br><span class="line">    <span class="keyword">while</span> (j &lt; B.length) C.data[k++] = B.data[j++];</span><br><span class="line">    C.length = k;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>时间复杂度 <span class="math inline">\(O(m + n)\)</span>，空间复杂度
+<span class="math inline">\(O(m + n)\)</span>.</p></div><div class="tab-item-content" id="merge-sorted-2"><p>将两个有序单链表 <span class="math inline">\(L_a\)</span>、<span
+class="math inline">\(L_b\)</span> 合并为有序单链表 <span
+class="math inline">\(L_c\)</span>，
+<strong>利用原结点</strong>，不申请新空间</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">LinkList <span class="title function_">MergeList</span><span class="params">(LinkList La, LinkList Lb)</span> &#123;</span><br><span class="line">    LNode *pa = La-&gt;next, *pb = Lb-&gt;next;</span><br><span class="line">    LNode *pc = La;          <span class="comment">// 以 La 头结点作为结果链表头</span></span><br><span class="line">    <span class="built_in">free</span>(Lb);                <span class="comment">// 释放 Lb 头结点</span></span><br><span class="line">    <span class="keyword">while</span> (pa &amp;&amp; pb) &#123;</span><br><span class="line">        <span class="keyword">if</span> (pa-&gt;data &lt;= pb-&gt;data) &#123;</span><br><span class="line">            pc-&gt;next = pa; pc = pa; pa = pa-&gt;next;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            pc-&gt;next = pb; pc = pb; pb = pb-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    pc-&gt;next = pa ? pa : pb; <span class="comment">// 接入剩余部分</span></span><br><span class="line">    <span class="keyword">return</span> La;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>时间复杂度 <span class="math inline">\(O(m + n)\)</span>，空间复杂度
+<span class="math inline">\(O(1)\)</span> ( 原地合并 ).</p></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<hr />
+<h2 id="例题精选">2.6 例题精选</h2>
+<div class="note success simple"><p><strong>例题 1 ( 顺序表删除 )</strong>
+设顺序表中元素递增有序，请删除其中所有值为 <span
+class="math inline">\(x\)</span> 的元素，要求时间复杂度 <span
+class="math inline">\(O(n)\)</span>，空间复杂度 <span
+class="math inline">\(O(1)\)</span>.</p>
+<p><strong>解</strong> 顺序表可用双指针压缩.</p>
+<p>令 <code>i</code> 为写入位置，<code>j</code> 为扫描位置.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">DeleteX</span><span class="params">(SqList *L, ElemType x)</span> &#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; L-&gt;length; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (L-&gt;data[j] != x) &#123;</span><br><span class="line">            L-&gt;data[i++] = L-&gt;data[j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    L-&gt;length = i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于每个元素最多被访问与写入常数次，时间复杂度为 <span
+class="math inline">\(O(n)\)</span>，空间复杂度为 <span
+class="math inline">\(O(1)\)</span>.</p>
+</div>
+<div class="note success simple"><p><strong>例题 2 ( 链表逆置 )</strong> 将单链表 <span
+class="math inline">\(L\)</span> 就地逆置，不申请额外空间.</p>
+<p><strong>解</strong> 迭代头插逆置.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">Reverse</span><span class="params">(LinkList L)</span> &#123;</span><br><span class="line">    LNode *p = L-&gt;next, *q;</span><br><span class="line">    L-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">while</span> (p) &#123;</span><br><span class="line">        q = p-&gt;next;</span><br><span class="line">        p-&gt;next = L-&gt;next;</span><br><span class="line">        L-&gt;next = p;</span><br><span class="line">        p = q;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>时间复杂度为 <span class="math inline">\(O(n)\)</span>，空间复杂度为
+<span class="math inline">\(O(1)\)</span>.</p>
+</div>
+<div class="note success simple"><p><strong>例题 3 ( 找公共结点 )</strong> 两个单链表 <span
+class="math inline">\(L_a\)</span>、<span
+class="math inline">\(L_b\)</span> 共享一段尾部，找到第一个公共结点.</p>
+<p><strong>解</strong> 指针切换法更直接.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">LNode* <span class="title function_">FirstCommonNode</span><span class="params">(LNode* headA, LNode* headB)</span> &#123;</span><br><span class="line">    LNode *p = headA, *q = headB;</span><br><span class="line">    <span class="keyword">while</span> (p != q) &#123;</span><br><span class="line">        p = p ? p-&gt;next : headB;</span><br><span class="line">        q = q ? q-&gt;next : headA;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p; <span class="comment">// 相交则为首个公共结点，否则为 NULL</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>两指针各自走过的路径长度都为 <span
+class="math inline">\(m+n\)</span>，因此会在相交点相遇或同时为
+<code>NULL</code>. 时间复杂度为 <span
+class="math inline">\(O(m+n)\)</span>，空间复杂度为 <span
+class="math inline">\(O(1)\)</span>.</p>
+</div>
+<div class="note success simple"><p><strong>例题 4 ( 判断循环链表 )</strong>
+判断单链表是否有环，若有环，返回环的入口结点.</p>
+<p><strong>解</strong> Floyd 判圈.</p>
+<ol type="1">
+<li><code>slow</code> 每次走 1 步，<code>fast</code> 每次走 2
+步，若相遇则有环.</li>
+<li>令 <code>p</code> 从头结点出发，与 <code>slow</code> 同步每次走 1
+步，再次相遇点就是入口.</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">LNode* <span class="title function_">DetectCycleEntry</span><span class="params">(LNode* head)</span> &#123;</span><br><span class="line">    LNode *slow = head, *fast = head;</span><br><span class="line">    <span class="keyword">while</span> (fast &amp;&amp; fast-&gt;next) &#123;</span><br><span class="line">        slow = slow-&gt;next;</span><br><span class="line">        fast = fast-&gt;next-&gt;next;</span><br><span class="line">        <span class="keyword">if</span> (slow == fast) <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!fast || !fast-&gt;next) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    LNode *p = head;</span><br><span class="line">    <span class="keyword">while</span> (p != slow) &#123;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">        slow = slow-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>时间复杂度为 <span class="math inline">\(O(n)\)</span>，空间复杂度为
+<span class="math inline">\(O(1)\)</span>.</p>
+</div>
+<div class="note success simple"><p><strong>例题 5 ( 删除倒数第 k 个结点 )</strong> 已知带头结点的单链表
+<span class="math inline">\(L\)</span>，删除倒数第 <span
+class="math inline">\(k\)</span> 个结点 ( <span class="math inline">\(1
+\le k \le n\)</span> )，要求一次遍历完成.</p>
+<p><strong>解</strong> 双指针.</p>
+<p>令 <code>fast</code> 先走 <span class="math inline">\(k\)</span>
+步，然后 <code>fast</code> 与 <code>slow</code> 同步走，直到
+<code>fast</code> 到达表尾，此时 <code>slow</code> 指向倒数第 <span
+class="math inline">\(k\)</span> 个结点的前驱.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> <span class="title function_">DeleteKthFromEnd</span><span class="params">(LinkList L, <span class="type">int</span> k)</span> &#123;</span><br><span class="line">    LNode *fast = L-&gt;next, *slow = L;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; k; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!fast) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        fast = fast-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (fast) &#123;</span><br><span class="line">        fast = fast-&gt;next;</span><br><span class="line">        slow = slow-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    LNode *del = slow-&gt;next;</span><br><span class="line">    slow-&gt;next = del-&gt;next;</span><br><span class="line">    <span class="built_in">free</span>(del);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>时间复杂度为 <span class="math inline">\(O(n)\)</span>，空间复杂度为
+<span class="math inline">\(O(1)\)</span>.</p>
+</div>
+<div class="note success simple"><p><strong>例题 6 ( 有序顺序表删除重复元素 )</strong>
+设顺序表元素非递减有序，删除所有重复元素，使得每个值只保留一个，要求时间复杂度
+<span class="math inline">\(O(n)\)</span>，空间复杂度 <span
+class="math inline">\(O(1)\)</span>.</p>
+<p><strong>解</strong>
+有序性意味着相同元素相邻，可用双指针保留首个出现位置.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">UniqueSorted</span><span class="params">(SqList *L)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (L-&gt;length == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt; L-&gt;length; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (L-&gt;data[j] != L-&gt;data[i]) &#123;</span><br><span class="line">            L-&gt;data[++i] = L-&gt;data[j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    L-&gt;length = i + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>时间复杂度为 <span class="math inline">\(O(n)\)</span>，空间复杂度为
+<span class="math inline">\(O(1)\)</span>.</p>
+</div>
+<div class="note success simple"><p><strong>例题 7 ( 链表稳定分割 )</strong> 给定单链表 <code>head</code>
+与值 <span class="math inline">\(x\)</span>，将链表分成两段，使得小于
+<span class="math inline">\(x\)</span> 的结点在前，大于等于 <span
+class="math inline">\(x\)</span>
+的结点在后，并保持各段内部的相对顺序不变.</p>
+<p><strong>解</strong> 用两个虚拟头结点分别维护两条链，最后拼接.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">LNode* <span class="title function_">Partition</span><span class="params">(LNode* head, ElemType x)</span> &#123;</span><br><span class="line">    LNode lessDummy, geDummy;</span><br><span class="line">    LNode *lt = &amp;lessDummy, *ge = &amp;geDummy;</span><br><span class="line">    lt-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    ge-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (head) &#123;</span><br><span class="line">        LNode *next = head-&gt;next;</span><br><span class="line">        head-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">if</span> (head-&gt;data &lt; x) &#123;</span><br><span class="line">            lt-&gt;next = head;</span><br><span class="line">            lt = head;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            ge-&gt;next = head;</span><br><span class="line">            ge = head;</span><br><span class="line">        &#125;</span><br><span class="line">        head = next;</span><br><span class="line">    &#125;</span><br><span class="line">    lt-&gt;next = geDummy.next;</span><br><span class="line">    <span class="keyword">return</span> lessDummy.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每个结点仅处理一次，时间复杂度为 <span
+class="math inline">\(O(n)\)</span>，空间复杂度为 <span
+class="math inline">\(O(1)\)</span>.</p>
+</div>
+<div class="note success simple"><p><strong>例题 8 ( 两链表原地交错合并 )</strong>
+已知两个带头结点的单链表 <span class="math inline">\(A\)</span>、<span
+class="math inline">\(B\)</span>，将 <span
+class="math inline">\(B\)</span> 的结点依次插入到 <span
+class="math inline">\(A\)</span> 中形成交错序列 <span
+class="math inline">\(a_1,b_1,a_2,b_2,\ldots\)</span>，要求复用原结点且不申请新结点.</p>
+<p><strong>解</strong> 同时扫描两表，逐个摘下 <span
+class="math inline">\(B\)</span> 的结点插入到 <span
+class="math inline">\(A\)</span> 当前结点之后.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">InterleaveMerge</span><span class="params">(LinkList A, LinkList B)</span> &#123;</span><br><span class="line">    LNode *pa = A-&gt;next, *pb = B-&gt;next;</span><br><span class="line">    <span class="keyword">while</span> (pa &amp;&amp; pb) &#123;</span><br><span class="line">        LNode *pbNext = pb-&gt;next;</span><br><span class="line">        pb-&gt;next = pa-&gt;next;</span><br><span class="line">        pa-&gt;next = pb;</span><br><span class="line">        pa = pb-&gt;next;</span><br><span class="line">        pb = pbNext;</span><br><span class="line">    &#125;</span><br><span class="line">    B-&gt;next = pb;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>时间复杂度为 <span
+class="math inline">\(O(m+n)\)</span>，空间复杂度为 <span
+class="math inline">\(O(1)\)</span>.</p>
+</div>
+<hr />
+<h2 id="本章疑难点">2.7 本章疑难点</h2>
+<h4 id="头插法与尾插法顺序问题">1. 头插法与尾插法顺序问题</h4>
+<ul>
+<li>头插法建表后，链表顺序是输入的
+<strong>逆序</strong>，常用于逆置.</li>
+<li>尾插法建表需维护 <strong>尾指针</strong> <span
+class="math inline">\(r\)</span>，链表顺序与输入
+<strong>相同</strong>.</li>
+</ul>
+<h4 id="双链表插入指针顺序">2. 双链表插入指针顺序</h4>
+<ul>
+<li>必须先完成 <span class="math inline">\(s\)</span>
+的两个指针赋值，再修改 <span class="math inline">\(p-&gt;\)</span>
+<code>next</code>，否则会丢失后继结点地址.</li>
+</ul>
+<h4 id="静态链表与动态链表对比">3. 静态链表与动态链表对比</h4>
+<ul>
+<li>静态链表游标是 <strong>数组下标</strong>，不是地址，不能用
+<code>p = p-&gt;next</code> 遍历，而是 <code>p = A[p].next</code>.</li>
+</ul>
+<h4 id="顺序表插删的时间复杂度">4. 顺序表插删的时间复杂度</h4>
+<ul>
+<li>时间复杂度是 <span class="math inline">\(O(n)\)</span>，但若
+<strong>只在表尾操作</strong> 则是 <span
+class="math inline">\(O(1)\)</span>. 栈的顺序实现正是利用这一点.</li>
+</ul>
+<h4 id="单链表删结点但不知道前驱的限制">5.
+单链表删结点但不知道前驱的限制</h4>
+<ul>
+<li>后继覆盖法本质是删除后继结点并拷贝数据，因此要求 <span
+class="math inline">\(p\)</span> 不是尾结点.</li>
+<li>若 <span class="math inline">\(p\)</span>
+是尾结点，必须从头遍历找到前驱才能删除.</li>
+</ul>
+<h4 id="判环后的入口定位">6. 判环后的入口定位</h4>
+<ul>
+<li>Floyd 判圈第一次相遇只说明有环.</li>
+<li>从表头与相遇点分别出发同步走，二者再次相遇的位置才是入口.</li>
+</ul>
+<h4 id="相交链表是地址相交">7. 相交链表是地址相交</h4>
+<ul>
+<li>共享尾部指的是两个指针最终指向同一块结点地址，不是结点值相同.</li>
+<li>指针切换法不需要显式求长度，适合手写推导与代码实现.</li>
+</ul>
+<hr />
+<h2 id="本章小结">2.8 本章小结</h2>
+<ul>
+<li>线性表逻辑结构为
+<strong>一对一</strong>，顺序存储和链式存储各有优劣.</li>
+<li>顺序表 <strong>随机访问</strong> 效率高，适合查找密集场景; 链表
+<strong>插删</strong> 效率高，适合频繁修改场景.</li>
+<li>双链表、循环链表在单链表基础上扩展，静态链表是数组模拟链表.</li>
+<li>多项式相加、有序表合并是链表的经典应用，双指针、虚拟头结点、快慢指针是
+408 高频方法.</li>
+</ul>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">sparkle520</div><div class="post-copyright__author_desc">我一直都在寻找着什么</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="http://example.com/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%842/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('http://example.com/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%842/')">408-数据结构-2-线性表</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="http://example.com/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%842/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=408-数据结构-2-线性表&amp;url=http://example.com/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%842/&amp;pic=https://pic1.imgdb.cn/item/69b00d556738cb8aa1298e3c.png" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">SPARKLE</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/408/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>408<span class="tagsPageCount">21</span></a><a class="post-meta__box__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>数据结构<span class="tagsPageCount">7</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://pic1.imgdb.cn/item/69b022ea6738cb8aa129ae4b.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%841/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b00e866738cb8aa1299045.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">408-数据结构-1-绪论</div></div></a></div><div class="next-post pull-right"><a href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%843/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b00d9e6738cb8aa1298eb8.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">408-数据结构-3-栈、队列和数组</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%841/" title="408-数据结构-1-绪论"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b00e866738cb8aa1299045.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-13</div><div class="title">408-数据结构-1-绪论</div></div></a></div><div><a href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%847/" title="408-数据结构-7-内部排序"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b022ea6738cb8aa129ae4b.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-14</div><div class="title">408-数据结构-7-内部排序</div></div></a></div><div><a href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%843/" title="408-数据结构-3-栈、队列和数组"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b00d9e6738cb8aa1298eb8.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-13</div><div class="title">408-数据结构-3-栈、队列和数组</div></div></a></div><div><a href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%846/" title="408-数据结构-6-查找"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b022936738cb8aa129ade8.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-14</div><div class="title">408-数据结构-6-查找</div></div></a></div><div><a href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%844/" title="408-数据结构-4-树与二叉树"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b01e0c6738cb8aa129a777.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-13</div><div class="title">408-数据结构-4-树与二叉树</div></div></a></div><div><a href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%845/" title="408-数据结构-5-图"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b021cd6738cb8aa129acd7.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-14</div><div class="title">408-数据结构-5-图</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/671cfe2fd29ded1a8c5ffb0b.png" alt="status"/></div></div><div class="author-info__description">不管你在<strong style="color:white">这个世界</strong>的哪个地方，我一定<strong style="color:white">会</strong>，再次去<strong style="color:white">见</strong>你的!</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">sparkle520</h1><div class="author-info__desc">我一直都在寻找着什么</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/sparkle520" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/34882250" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">Hello World! 欢迎来到我的博客~</div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://pic.imgdb.cn/item/66c487f1d9c307b7e9ba5c7a.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://pic.imgdb.cn/item/66c487ebd9c307b7e9ba5725.png) center center / 100% no-repeat"></div></div></div></div><div class="card-widget card-countdown"><div class="item-headline"><i></i><span></span></div><div class="item-content"><div class="cd-count-left">
+  <span class="cd-text">距离</span>
+  <span class="cd-name" id="eventName"></span>
+  <span class="cd-time" id="daysUntil"></span>
+  <span class="cd-date" id="eventDate"></span>
+</div>
+<div id="countRight" class="cd-count-right"></div>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC2%E7%AB%A0-%E7%BA%BF%E6%80%A7%E8%A1%A8"><span class="toc-number">1.</span> <span class="toc-text">第2章 线性表</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">1.1.</span> <span class="toc-text">2.1 定义与基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">1.1.1.</span> <span class="toc-text">2.1.1 基本操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%80%83%E7%82%B9"><span class="toc-number">1.1.2.</span> <span class="toc-text">2.1.2 408 常考点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8-%E9%A1%BA%E5%BA%8F%E8%A1%A8"><span class="toc-number">1.2.</span> <span class="toc-text">2.2 顺序存储 ( 顺序表 )</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.2.1 插入操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2.2 删除操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E6%93%8D%E4%BD%9C"><span class="toc-number">1.2.3.</span> <span class="toc-text">2.2.3 查找操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%80%83%E9%A2%98%E5%9E%8B%E4%B8%8E%E6%8A%80%E5%B7%A7"><span class="toc-number">1.2.4.</span> <span class="toc-text">2.2.4 常考题型与技巧</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%93%BE%E5%BC%8F%E5%AD%98%E5%82%A8-%E9%93%BE%E8%A1%A8"><span class="toc-number">1.3.</span> <span class="toc-text">2.3 链式存储 ( 链表 )</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%B4%E7%BB%93%E7%82%B9%E4%B8%8E%E5%A4%B4%E6%8C%87%E9%92%88"><span class="toc-number">1.3.1.</span> <span class="toc-text">2.3.1 头结点与头指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E9%93%BE%E8%A1%A8"><span class="toc-number">1.3.2.</span> <span class="toc-text">2.3.2 单链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E9%93%BE%E8%A1%A8"><span class="toc-number">1.3.3.</span> <span class="toc-text">2.3.3 双链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8"><span class="toc-number">1.3.4.</span> <span class="toc-text">2.3.4 循环链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E9%93%BE%E8%A1%A8"><span class="toc-number">1.3.5.</span> <span class="toc-text">2.3.5 静态链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E9%A2%91%E9%A2%98%E5%9E%8B%E4%B8%8E%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.6.</span> <span class="toc-text">2.3.6 高频题型与方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E8%A1%A8-vs.-%E9%93%BE%E8%A1%A8-%E7%BB%BC%E5%90%88%E5%AF%B9%E6%AF%94"><span class="toc-number">1.4.</span> <span class="toc-text">2.4 顺序表 vs. 链表 综合对比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">1.5.</span> <span class="toc-text">2.5 线性表的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E9%A1%B9%E5%BC%8F%E8%A1%A8%E7%A4%BA%E4%B8%8E%E7%9B%B8%E5%8A%A0"><span class="toc-number">1.5.1.</span> <span class="toc-text">2.5.1 多项式表示与相加</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E5%BA%8F%E8%A1%A8%E5%90%88%E5%B9%B6"><span class="toc-number">1.5.2.</span> <span class="toc-text">2.5.2 有序表合并</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98%E7%B2%BE%E9%80%89"><span class="toc-number">1.6.</span> <span class="toc-text">2.6 例题精选</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E7%AB%A0%E7%96%91%E9%9A%BE%E7%82%B9"><span class="toc-number">1.7.</span> <span class="toc-text">2.7 本章疑难点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B4%E6%8F%92%E6%B3%95%E4%B8%8E%E5%B0%BE%E6%8F%92%E6%B3%95%E9%A1%BA%E5%BA%8F%E9%97%AE%E9%A2%98"><span class="toc-number">1.7.0.1.</span> <span class="toc-text">1. 头插法与尾插法顺序问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E9%93%BE%E8%A1%A8%E6%8F%92%E5%85%A5%E6%8C%87%E9%92%88%E9%A1%BA%E5%BA%8F"><span class="toc-number">1.7.0.2.</span> <span class="toc-text">2. 双链表插入指针顺序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E9%93%BE%E8%A1%A8%E4%B8%8E%E5%8A%A8%E6%80%81%E9%93%BE%E8%A1%A8%E5%AF%B9%E6%AF%94"><span class="toc-number">1.7.0.3.</span> <span class="toc-text">3. 静态链表与动态链表对比</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E8%A1%A8%E6%8F%92%E5%88%A0%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">1.7.0.4.</span> <span class="toc-text">4. 顺序表插删的时间复杂度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E9%93%BE%E8%A1%A8%E5%88%A0%E7%BB%93%E7%82%B9%E4%BD%86%E4%B8%8D%E7%9F%A5%E9%81%93%E5%89%8D%E9%A9%B1%E7%9A%84%E9%99%90%E5%88%B6"><span class="toc-number">1.7.0.5.</span> <span class="toc-text">5.
+单链表删结点但不知道前驱的限制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A4%E7%8E%AF%E5%90%8E%E7%9A%84%E5%85%A5%E5%8F%A3%E5%AE%9A%E4%BD%8D"><span class="toc-number">1.7.0.6.</span> <span class="toc-text">6. 判环后的入口定位</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8%E6%98%AF%E5%9C%B0%E5%9D%80%E7%9B%B8%E4%BA%A4"><span class="toc-number">1.7.0.7.</span> <span class="toc-text">7. 相交链表是地址相交</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93"><span class="toc-number">1.8.</span> <span class="toc-text">2.8 本章小结</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/03/16/%E8%8B%B1%E8%AF%AD-%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0-%E5%B7%B2%E5%8A%A0%E5%AF%86/" title="英语个人笔记 ( 已加密 )"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69ad99d2001548a02b697c75.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="英语个人笔记 ( 已加密 )"/></a><div class="content"><a class="title" href="/2026/03/16/%E8%8B%B1%E8%AF%AD-%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0-%E5%B7%B2%E5%8A%A0%E5%AF%86/" title="英语个人笔记 ( 已加密 )">英语个人笔记 ( 已加密 )</a><time datetime="2026-03-16T14:00:27.000Z" title="发表于 2026-03-16 22:00:27">2026-03-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%847/" title="408-数据结构-7-内部排序"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b022ea6738cb8aa129ae4b.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-数据结构-7-内部排序"/></a><div class="content"><a class="title" href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%847/" title="408-数据结构-7-内部排序">408-数据结构-7-内部排序</a><time datetime="2026-03-13T18:00:00.000Z" title="发表于 2026-03-14 02:00:00">2026-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%846/" title="408-数据结构-6-查找"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b022936738cb8aa129ade8.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-数据结构-6-查找"/></a><div class="content"><a class="title" href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%846/" title="408-数据结构-6-查找">408-数据结构-6-查找</a><time datetime="2026-03-13T17:00:00.000Z" title="发表于 2026-03-14 01:00:00">2026-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%845/" title="408-数据结构-5-图"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b021cd6738cb8aa129acd7.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-数据结构-5-图"/></a><div class="content"><a class="title" href="/2026/03/14/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%845/" title="408-数据结构-5-图">408-数据结构-5-图</a><time datetime="2026-03-13T16:00:00.000Z" title="发表于 2026-03-14 00:00:00">2026-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%844/" title="408-数据结构-4-树与二叉树"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69b01e0c6738cb8aa129a777.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-数据结构-4-树与二叉树"/></a><div class="content"><a class="title" href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%844/" title="408-数据结构-4-树与二叉树">408-数据结构-4-树与二叉树</a><time datetime="2026-03-13T15:00:00.000Z" title="发表于 2026-03-13 23:00:00">2026-03-13</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  if (true) { 
+    window.typed = new Typed("#footer-type-tips", {
+      strings: ["只要记住你的名字&#44; 不管你在世界的哪个地方&#44; 我一定&#44; 会去见你 !"],
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50
+    })
+  } else {
+    document.getElementById("footer-type-tips").innerHTML = '只要记住你的名字&#44; 不管你在世界的哪个地方&#44; 我一定&#44; 会去见你 !'
+  }
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.cbd.int/typed.js@2.1.0/dist/typed.umd.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/sparkle520" title="sparkle">sparkle</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">107</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">61</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">7</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/sparkle520?tab=repositories" title="github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="github"/><span class="back-menu-item-text">github</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/408/" style="font-size: 0.88rem;">408<sup>21</sup></a><a href="/tags/AOP/" style="font-size: 0.88rem;">AOP<sup>1</sup></a><a href="/tags/Deep-Learning/" style="font-size: 0.88rem;">Deep Learning<sup>1</sup></a><a href="/tags/IoC/" style="font-size: 0.88rem;">IoC<sup>1</sup></a><a href="/tags/JSR303/" style="font-size: 0.88rem;">JSR303<sup>1</sup></a><a href="/tags/Matplotlib/" style="font-size: 0.88rem;">Matplotlib<sup>3</sup></a><a href="/tags/c/" style="font-size: 0.88rem;">c#<sup>2</sup></a><a href="/tags/java/" style="font-size: 0.88rem;">java<sup>4</sup></a><a href="/tags/python/" style="font-size: 0.88rem;">python<sup>5</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 0.88rem;">事务<sup>1</sup></a><a href="/tags/%E4%BA%8C%E6%AC%A1%E5%9E%8B/" style="font-size: 0.88rem;">二次型<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E3%80%82/" style="font-size: 0.88rem;">你的名字。<sup>3</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">你的名字同名小说<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%A4%96%E4%BC%A0%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">你的名字外传小说<sup>1</sup></a><a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size: 0.88rem;">写作<sup>4</sup></a><a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 0.88rem;">包管理<sup>1</sup></a><a href="/tags/%E5%8D%B7%E7%A7%AF%E5%85%AC%E5%BC%8F/" style="font-size: 0.88rem;">卷积公式<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90/" style="font-size: 0.88rem;">天气之子<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">天气之子同名小说<sup>1</sup></a><a href="/tags/%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">小说<sup>2</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 0.88rem;">操作系统<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" style="font-size: 0.88rem;">数据校验<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" style="font-size: 0.88rem;">数据链路层<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 0.88rem;">概率论<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 0.88rem;">概率论与数理统计<sup>7</sup></a><a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 0.88rem;">汇编<sup>9</sup></a><a href="/tags/%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80/" style="font-size: 0.88rem;">泰勒展开<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/" style="font-size: 0.88rem;">物理层<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%80%BC/" style="font-size: 0.88rem;">特征值<sup>2</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F/" style="font-size: 0.88rem;">特征向量<sup>2</sup></a><a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 0.88rem;">线性代数<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" style="font-size: 0.88rem;">网络体系结构<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" style="font-size: 0.88rem;">网络层<sup>2</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 0.88rem;">英语<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95/" style="font-size: 0.88rem;">英语语法<sup>24</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 0.88rem;">计算机组成原理<sup>5</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 0.88rem;">计算机网络<sup>5</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 0.88rem;">语法<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/" style="font-size: 0.88rem;">高等代数<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" style="font-size: 0.88rem;">高等数学<sup>14</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script async src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.cbd.int/mathjax@3.2.2/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.cbd.int/mermaid@10.9.1/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  anzhiyu.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://sparkle521.xyz',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://cdn.cbd.int/twikoo@1.6.25/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://sparkle521.xyz',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"><script async src="/js/anzhiyu/comment_barrage.js"></script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://sparkle521.xyz',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.cbd.int/twikoo@1.6.25/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script async data-pjax src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.1/bubble/bubble.js"></script><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script>const notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));</script><script src="/custom/countdown.js"></script><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
