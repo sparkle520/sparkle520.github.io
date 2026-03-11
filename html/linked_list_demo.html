@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>线性表结构示意</title>
+  <style>
+    :root {
+      --bg: transparent;
+      --panel: #f8fafc;
+      --border: #cbd5e1;
+      --text: #0f172a;
+      --muted: #64748b;
+      --accent: #2563eb;
+      --accent2: #7c3aed;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 18px 16px 22px;
+    }
+    .header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .hint {
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      overflow: hidden;
+    }
+    .cardTitle {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .cardTitle b {
+      font-size: 14px;
+      letter-spacing: 0.3px;
+    }
+    .cardTitle span {
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .frame {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px;
+    }
+    svg { width: 100%; height: 220px; display: block; }
+    pre {
+      margin: 10px 0 0;
+      padding: 10px 12px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: auto;
+      font-size: 12px;
+      line-height: 1.45;
+      color: #0f172a;
+    }
+    @media (max-width: 520px) {
+      .hint { display: none; }
+      .grid { grid-template-columns: 1fr; }
+      svg { height: 240px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="header">
+      <div class="title">线性表结构示意</div>
+      <div class="hint">仅结构展示，不含操作演示</div>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="cardTitle">
+          <b>顺序表 ( 顺序存储 )</b>
+          <span>连续空间，随机访问</span>
+        </div>
+        <div class="frame">
+          <svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+                <path d="M0,0 L10,5 L0,10 z" fill="#64748b"/>
+              </marker>
+            </defs>
+            <text x="20" y="32" fill="#64748b" font-size="13">data[0..MaxSize-1]</text>
+            <g transform="translate(20,60)">
+              <rect x="0" y="0" width="80" height="44" rx="10" fill="#eff6ff" stroke="#94a3b8"/>
+              <rect x="88" y="0" width="80" height="44" rx="10" fill="#eff6ff" stroke="#94a3b8"/>
+              <rect x="176" y="0" width="80" height="44" rx="10" fill="#eff6ff" stroke="#94a3b8"/>
+              <rect x="264" y="0" width="80" height="44" rx="10" fill="#eff6ff" stroke="#94a3b8"/>
+              <rect x="352" y="0" width="80" height="44" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-dasharray="6 6"/>
+              <rect x="440" y="0" width="80" height="44" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-dasharray="6 6"/>
+              <rect x="528" y="0" width="80" height="44" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-dasharray="6 6"/>
+              <text x="40" y="28" text-anchor="middle" font-size="14" font-weight="700" fill="#1d4ed8">a0</text>
+              <text x="128" y="28" text-anchor="middle" font-size="14" font-weight="700" fill="#1d4ed8">a1</text>
+              <text x="216" y="28" text-anchor="middle" font-size="14" font-weight="700" fill="#1d4ed8">a2</text>
+              <text x="304" y="28" text-anchor="middle" font-size="14" font-weight="700" fill="#1d4ed8">a3</text>
+              <text x="392" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#64748b">空</text>
+              <text x="480" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#64748b">空</text>
+              <text x="568" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#64748b">空</text>
+              <text x="40" y="68" text-anchor="middle" font-size="12" fill="#64748b">0</text>
+              <text x="128" y="68" text-anchor="middle" font-size="12" fill="#64748b">1</text>
+              <text x="216" y="68" text-anchor="middle" font-size="12" fill="#64748b">2</text>
+              <text x="304" y="68" text-anchor="middle" font-size="12" fill="#64748b">3</text>
+              <text x="392" y="68" text-anchor="middle" font-size="12" fill="#64748b">4</text>
+              <text x="480" y="68" text-anchor="middle" font-size="12" fill="#64748b">5</text>
+              <text x="568" y="68" text-anchor="middle" font-size="12" fill="#64748b">6</text>
+            </g>
+            <text x="20" y="160" fill="#64748b" font-size="13">length = 4</text>
+            <text x="20" y="186" fill="#64748b" font-size="13">MaxSize = 7</text>
+            <path d="M180 150 C 250 110, 300 110, 370 150" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+            <text x="180" y="106" fill="#64748b" font-size="12">逻辑相邻 ⇔ 物理相邻</text>
+          </svg>
+        </div>
+        <pre>typedef struct {
+  ElemType data[MaxSize];
+  int length;
+} SqList;</pre>
+      </div>
+
+      <div class="card">
+        <div class="cardTitle">
+          <b>单链表 ( 带头结点 )</b>
+          <span>结点含 data 与 next</span>
+        </div>
+        <div class="frame">
+          <svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrow2" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+                <path d="M0,0 L10,5 L0,10 z" fill="#64748b"/>
+              </marker>
+            </defs>
+            <text x="18" y="32" fill="#64748b" font-size="13">head</text>
+            <path d="M56 28 L110 28" stroke="#64748b" stroke-width="2" marker-end="url(#arrow2)"/>
+            <g transform="translate(120,58)">
+              <rect x="0" y="0" width="118" height="50" rx="12" fill="#eff6ff" stroke="#94a3b8"/>
+              <rect x="118" y="0" width="70" height="50" rx="12" fill="#f1f5f9" stroke="#94a3b8"/>
+              <text x="58" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#1d4ed8">头结点</text>
+              <text x="152" y="32" text-anchor="middle" font-size="12" font-weight="700" fill="#64748b">next</text>
+            </g>
+            <path d="M308 83 L352 83" stroke="#64748b" stroke-width="2" marker-end="url(#arrow2)"/>
+            <g transform="translate(362,58)">
+              <rect x="0" y="0" width="118" height="50" rx="12" fill="#eff6ff" stroke="#94a3b8"/>
+              <rect x="118" y="0" width="70" height="50" rx="12" fill="#eff6ff" stroke="#94a3b8"/>
+              <text x="58" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#1d4ed8">data</text>
+              <text x="152" y="32" text-anchor="middle" font-size="12" font-weight="700" fill="#1d4ed8">next</text>
+            </g>
+            <path d="M550 83 L594 83" stroke="#64748b" stroke-width="2" marker-end="url(#arrow2)"/>
+            <g transform="translate(604,58)">
+              <rect x="0" y="0" width="84" height="50" rx="12" fill="#f1f5f9" stroke="#94a3b8"/>
+              <text x="42" y="32" text-anchor="middle" font-size="13" font-weight="700" fill="#64748b">NULL</text>
+            </g>
+            <text x="120" y="150" fill="#64748b" font-size="13">结点结构</text>
+            <g transform="translate(120,162)">
+              <rect x="0" y="0" width="146" height="44" rx="12" fill="#eff6ff" stroke="#94a3b8"/>
+              <rect x="146" y="0" width="146" height="44" rx="12" fill="#eff6ff" stroke="#94a3b8"/>
+              <text x="73" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#1d4ed8">data</text>
+              <text x="219" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#1d4ed8">next</text>
+            </g>
+          </svg>
+        </div>
+        <pre>typedef struct LNode {
+  ElemType data;
+  struct LNode* next;
+} LNode, *LinkList;</pre>
+      </div>
+
+      <div class="card">
+        <div class="cardTitle">
+          <b>双链表 ( 带头结点 )</b>
+          <span>prior 与 next</span>
+        </div>
+        <div class="frame">
+          <svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrow3" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+                <path d="M0,0 L10,5 L0,10 z" fill="#64748b"/>
+              </marker>
+            </defs>
+            <text x="18" y="32" fill="#64748b" font-size="13">head</text>
+            <path d="M56 28 L110 28" stroke="#64748b" stroke-width="2" marker-end="url(#arrow3)"/>
+            <g transform="translate(120,58)">
+              <rect x="0" y="0" width="80" height="50" rx="12" fill="#f1f5f9" stroke="#94a3b8"/>
+              <rect x="80" y="0" width="120" height="50" rx="12" fill="#eff6ff" stroke="#94a3b8"/>
+              <rect x="200" y="0" width="80" height="50" rx="12" fill="#f1f5f9" stroke="#94a3b8"/>
+              <text x="40" y="32" text-anchor="middle" font-size="12" font-weight="700" fill="#64748b">prior</text>
+              <text x="140" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#1d4ed8">头结点</text>
+              <text x="240" y="32" text-anchor="middle" font-size="12" font-weight="700" fill="#64748b">next</text>
+            </g>
+            <path d="M400 83 L444 83" stroke="#64748b" stroke-width="2" marker-end="url(#arrow3)"/>
+            <g transform="translate(454,58)">
+              <rect x="0" y="0" width="80" height="50" rx="12" fill="#eff6ff" stroke="#94a3b8"/>
+              <rect x="80" y="0" width="120" height="50" rx="12" fill="#eff6ff" stroke="#94a3b8"/>
+              <rect x="200" y="0" width="80" height="50" rx="12" fill="#eff6ff" stroke="#94a3b8"/>
+              <text x="40" y="32" text-anchor="middle" font-size="12" font-weight="700" fill="#1d4ed8">prior</text>
+              <text x="140" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#1d4ed8">data</text>
+              <text x="240" y="32" text-anchor="middle" font-size="12" font-weight="700" fill="#1d4ed8">next</text>
+            </g>
+            <path d="M454 120 L400 120" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow3)"/>
+            <text x="120" y="162" fill="#64748b" font-size="13">结点结构</text>
+            <g transform="translate(120,174)">
+              <rect x="0" y="0" width="140" height="36" rx="10" fill="#eff6ff" stroke="#94a3b8"/>
+              <rect x="140" y="0" width="200" height="36" rx="10" fill="#eff6ff" stroke="#94a3b8"/>
+              <rect x="340" y="0" width="140" height="36" rx="10" fill="#eff6ff" stroke="#94a3b8"/>
+              <text x="70" y="24" text-anchor="middle" font-size="12" font-weight="700" fill="#1d4ed8">prior</text>
+              <text x="240" y="24" text-anchor="middle" font-size="12" font-weight="700" fill="#1d4ed8">data</text>
+              <text x="410" y="24" text-anchor="middle" font-size="12" font-weight="700" fill="#1d4ed8">next</text>
+            </g>
+          </svg>
+        </div>
+        <pre>typedef struct DNode {
+  ElemType data;
+  struct DNode* prior;
+  struct DNode* next;
+} DNode, *DLinkList;</pre>
+      </div>
+
+      <div class="card">
+        <div class="cardTitle">
+          <b>循环单链表</b>
+          <span>尾结点 next 指回头结点</span>
+        </div>
+        <div class="frame">
+          <svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrow4" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+                <path d="M0,0 L10,5 L0,10 z" fill="#64748b"/>
+              </marker>
+            </defs>
+            <text x="18" y="32" fill="#64748b" font-size="13">head</text>
+            <path d="M56 28 L110 28" stroke="#64748b" stroke-width="2" marker-end="url(#arrow4)"/>
+            <g transform="translate(120,58)">
+              <rect x="0" y="0" width="118" height="50" rx="12" fill="#eff6ff" stroke="#94a3b8"/>
+              <rect x="118" y="0" width="70" height="50" rx="12" fill="#f1f5f9" stroke="#94a3b8"/>
+              <text x="58" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#1d4ed8">头结点</text>
+              <text x="152" y="32" text-anchor="middle" font-size="12" font-weight="700" fill="#64748b">next</text>
+            </g>
+            <path d="M308 83 L352 83" stroke="#64748b" stroke-width="2" marker-end="url(#arrow4)"/>
+            <g transform="translate(362,58)">
+              <rect x="0" y="0" width="118" height="50" rx="12" fill="#eff6ff" stroke="#94a3b8"/>
+              <rect x="118" y="0" width="70" height="50" rx="12" fill="#eff6ff" stroke="#94a3b8"/>
+              <text x="58" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#1d4ed8">data</text>
+              <text x="152" y="32" text-anchor="middle" font-size="12" font-weight="700" fill="#1d4ed8">next</text>
+            </g>
+            <path d="M550 83 L594 83" stroke="#64748b" stroke-width="2" marker-end="url(#arrow4)"/>
+            <g transform="translate(604,58)">
+              <rect x="0" y="0" width="92" height="50" rx="12" fill="#eff6ff" stroke="#94a3b8"/>
+              <rect x="92" y="0" width="66" height="50" rx="12" fill="#eff6ff" stroke="#94a3b8"/>
+              <text x="46" y="32" text-anchor="middle" font-size="13" font-weight="700" fill="#1d4ed8">tail</text>
+              <text x="125" y="32" text-anchor="middle" font-size="12" font-weight="700" fill="#1d4ed8">next</text>
+            </g>
+            <path d="M658 108 C 658 170, 170 170, 170 112" stroke="#7c3aed" stroke-width="3" fill="none" marker-end="url(#arrow4)"/>
+            <text x="270" y="186" fill="#7c3aed" font-size="12">next 回到头结点</text>
+          </svg>
+        </div>
+        <pre>判空: L-&gt;next == L
+判尾: p-&gt;next == L</pre>
+      </div>
+
+      <div class="card">
+        <div class="cardTitle">
+          <b>循环双链表</b>
+          <span>next 与 prior 都成环</span>
+        </div>
+        <div class="frame">
+          <svg viewBox="0 0 1000 220" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrow6" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+                <path d="M0,0 L10,5 L0,10 z" fill="#64748b"/>
+              </marker>
+            </defs>
+            <text x="18" y="32" fill="#64748b" font-size="13">head</text>
+            <path d="M56 28 L110 28" stroke="#64748b" stroke-width="2" marker-end="url(#arrow6)"/>
+
+            <g transform="translate(120,58)">
+              <rect x="0" y="0" width="70" height="50" rx="12" fill="#f1f5f9" stroke="#94a3b8"/>
+              <rect x="70" y="0" width="110" height="50" rx="12" fill="#eff6ff" stroke="#94a3b8"/>
+              <rect x="180" y="0" width="70" height="50" rx="12" fill="#f1f5f9" stroke="#94a3b8"/>
+              <text x="35" y="32" text-anchor="middle" font-size="12" font-weight="700" fill="#64748b">prior</text>
+              <text x="125" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#1d4ed8">头结点</text>
+              <text x="215" y="32" text-anchor="middle" font-size="12" font-weight="700" fill="#64748b">next</text>
+            </g>
+
+            <path d="M370 83 L418 83" stroke="#64748b" stroke-width="2" marker-end="url(#arrow6)"/>
+            <g transform="translate(430,58)">
+              <rect x="0" y="0" width="70" height="50" rx="12" fill="#eff6ff" stroke="#94a3b8"/>
+              <rect x="70" y="0" width="110" height="50" rx="12" fill="#eff6ff" stroke="#94a3b8"/>
+              <rect x="180" y="0" width="70" height="50" rx="12" fill="#eff6ff" stroke="#94a3b8"/>
+              <text x="35" y="32" text-anchor="middle" font-size="12" font-weight="700" fill="#1d4ed8">prior</text>
+              <text x="125" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#1d4ed8">data</text>
+              <text x="215" y="32" text-anchor="middle" font-size="12" font-weight="700" fill="#1d4ed8">next</text>
+            </g>
+
+            <path d="M680 83 L728 83" stroke="#64748b" stroke-width="2" marker-end="url(#arrow6)"/>
+            <g transform="translate(740,58)">
+              <rect x="0" y="0" width="70" height="50" rx="12" fill="#eff6ff" stroke="#94a3b8"/>
+              <rect x="70" y="0" width="110" height="50" rx="12" fill="#eff6ff" stroke="#94a3b8"/>
+              <rect x="180" y="0" width="70" height="50" rx="12" fill="#eff6ff" stroke="#94a3b8"/>
+              <text x="35" y="32" text-anchor="middle" font-size="12" font-weight="700" fill="#1d4ed8">prior</text>
+              <text x="125" y="32" text-anchor="middle" font-size="13" font-weight="800" fill="#1d4ed8">tail</text>
+              <text x="215" y="32" text-anchor="middle" font-size="12" font-weight="700" fill="#1d4ed8">next</text>
+            </g>
+
+            <path d="M430 120 L370 120" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow6)"/>
+            <path d="M740 120 L680 120" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow6)"/>
+
+            <path d="M955 108 C 980 170, 160 170, 180 112" stroke="#7c3aed" stroke-width="3" fill="none" marker-end="url(#arrow6)"/>
+            <path d="M180 58 C 160 170, 980 170, 775 108" stroke="#7c3aed" stroke-width="3" fill="none" marker-end="url(#arrow6)"/>
+            <text x="270" y="186" fill="#7c3aed" font-size="12">尾 next → 头，头 prior → 尾</text>
+          </svg>
+        </div>
+        <pre>判空: L-&gt;next == L &amp;&amp; L-&gt;prior == L
+判尾: p-&gt;next == L</pre>
+      </div>
+
+      <div class="card">
+        <div class="cardTitle">
+          <b>静态链表 ( 数组模拟链表 )</b>
+          <span>next 存数组下标</span>
+        </div>
+        <div class="frame">
+          <svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrow5" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+                <path d="M0,0 L10,5 L0,10 z" fill="#64748b"/>
+              </marker>
+            </defs>
+            <text x="18" y="32" fill="#64748b" font-size="13">S[ ] ( data, next )</text>
+            <g transform="translate(18,52)">
+              <rect x="0" y="0" width="216" height="44" rx="12" fill="#eff6ff" stroke="#94a3b8"/>
+              <line x1="126" y1="0" x2="126" y2="44" stroke="#94a3b8"/>
+              <text x="62" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#1d4ed8">data=7</text>
+              <text x="171" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#1d4ed8">next=5</text>
+              <text x="12" y="66" font-size="12" fill="#64748b">i=2</text>
+            </g>
+            <g transform="translate(18,114)">
+              <rect x="0" y="0" width="216" height="44" rx="12" fill="#eff6ff" stroke="#94a3b8"/>
+              <line x1="126" y1="0" x2="126" y2="44" stroke="#94a3b8"/>
+              <text x="62" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#1d4ed8">data=9</text>
+              <text x="171" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#1d4ed8">next=0</text>
+              <text x="12" y="66" font-size="12" fill="#64748b">i=5</text>
+            </g>
+            <path d="M250 74 L332 74" stroke="#64748b" stroke-width="2" marker-end="url(#arrow5)"/>
+            <text x="266" y="56" fill="#64748b" font-size="12">head = 2</text>
+            <path d="M240 74 C 320 74, 320 136, 240 136" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrow5)"/>
+            <text x="266" y="156" fill="#64748b" font-size="12">2 → 5 → 0</text>
+            <g transform="translate(360,52)">
+              <rect x="0" y="0" width="320" height="106" rx="14" fill="#f8fafc" stroke="#cbd5e1"/>
+              <text x="16" y="30" fill="#64748b" font-size="12">特点</text>
+              <text x="16" y="54" fill="#0f172a" font-size="12">1) 不用指针，next 是下标</text>
+              <text x="16" y="76" fill="#0f172a" font-size="12">2) 适合静态分配场景</text>
+              <text x="16" y="98" fill="#0f172a" font-size="12">3) 需要备用链表 ( avail ) 管理空位</text>
+            </g>
+          </svg>
+        </div>
+        <pre>typedef struct {
+  ElemType data;
+  int next;
+} SNode;
+
+SNode S[MaxSize];</pre>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

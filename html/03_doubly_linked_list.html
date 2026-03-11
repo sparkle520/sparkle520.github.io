@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>双链表 · 动态演示</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#f1f5fb; --surface:#fff; --panel:#f8fafd; --border:#dde3f0;
+    --accent:#7c3aed; --accent-bg:#f5f3ff; --accent-border:#ddd6fe;
+    --accent2:#dc2626; --accent2-bg:#fff1f2;
+    --accent3:#16a34a; --accent3-bg:#f0fdf4; --accent3-border:#bbf7d0;
+    --accent4:#b45309; --accent4-bg:#fffbeb;
+    --fwd:#2563eb; --fwd-bg:#eff6ff; --fwd-border:#93c5fd;
+    --bwd:#16a34a; --bwd-bg:#f0fdf4; --bwd-border:#86efac;
+    --text:#1a2035; --text2:#4a5680; --muted:#8b96b8;
+    --node-w:100px; --node-h:68px;
+    --conn-w:60px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',sans-serif;min-height:100vh;display:flex;flex-direction:column;}
+  header{background:var(--surface);border-bottom:2px solid var(--border);padding:18px 32px;display:flex;align-items:center;gap:14px;}
+  .hico{width:38px;height:38px;background:var(--accent-bg);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;color:var(--accent);border:1px solid var(--accent-border);}
+  header h1{font-size:21px;font-weight:900;color:var(--text);}
+  .sub{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:1px;display:block;margin-top:1px;}
+  .badge{margin-left:auto;background:var(--accent-bg);border:1px solid var(--accent-border);color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 13px;border-radius:20px;font-weight:700;}
+  main{flex:1;display:grid;grid-template-columns:264px 1fr;grid-template-rows:1fr auto;}
+  aside{background:var(--surface);border-right:1px solid var(--border);padding:18px 14px;display:flex;flex-direction:column;gap:5px;overflow-y:auto;}
+  .slabel{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin:10px 0 4px;}
+  .slabel:first-child{margin-top:0;}
+  .btn{display:flex;align-items:center;gap:7px;padding:8px 12px;border-radius:7px;border:1.5px solid var(--border);background:var(--surface);color:var(--text2);font-family:'JetBrains Mono',monospace;font-size:11px;cursor:pointer;transition:all .15s;}
+  .btn:hover{background:var(--accent-bg);border-color:var(--accent-border);color:var(--accent);}
+  .btn.d:hover{background:var(--accent2-bg);border-color:#fca5a5;color:var(--accent2);}
+  .btn.g:hover{background:var(--accent3-bg);border-color:var(--accent3-border);color:var(--accent3);}
+  .btn:active{transform:scale(.98);}
+  .irow{display:flex;gap:5px;align-items:center;flex-wrap:wrap;}
+  .irow input{background:var(--bg);border:1.5px solid var(--border);color:var(--text);font-family:'JetBrains Mono',monospace;font-size:12px;padding:6px 8px;border-radius:6px;width:62px;outline:none;}
+  .irow input:focus{border-color:var(--accent);box-shadow:0 0 0 3px #ede9fe;}
+  .irow label{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+  .icard{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin-top:4px;}
+  .irow2{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:11px;}
+  .irow2:last-child{border-bottom:none;}
+  .ik{color:var(--muted);}.iv{color:var(--accent);font-weight:700;}
+  .warn-box{background:var(--accent4-bg);border:1px solid #fcd34d;border-radius:7px;padding:10px 12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent4);line-height:1.7;margin-top:4px;}
+  .warn-box strong{color:#92400e;font-weight:800;}
+  .cxcard{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin-top:auto;}
+  .cxrow{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 0;}
+  .ck{color:var(--text2);}.o1{color:var(--accent3);font-weight:700;}.on{color:var(--accent2);font-weight:700;}
+
+  /* ── Visualization ── */
+  .vis{padding:24px 28px;display:flex;flex-direction:column;gap:18px;overflow:hidden;}
+  .vlabel{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;}
+
+  /* Legend */
+  .legend{display:flex;gap:16px;flex-wrap:wrap;}
+  .leg-item{display:flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text2);}
+  .leg-line{height:2px;width:28px;border-radius:2px;}
+  .leg-fwd{background:var(--fwd);}
+  .leg-bwd{background:var(--bwd);}
+
+  /* ── Doubly-linked list display ── */
+  /*
+     Layout (3 rows):
+       Row 1 (fwd): gap | →  | gap | →  | gap | →  | NULL
+       Row 2 (node): HEAD | gap | node | gap | node | ...
+       Row 3 (bwd): NULL | ←  | gap | ←  | gap | ←  | gap
+  */
+  .dlist-wrap{overflow-x:auto;padding-bottom:4px;}
+
+  .dlist-grid{
+    display:inline-grid;
+    /* columns: for N nodes+HEAD: (2N+1) cols alternating node-col and conn-col */
+    grid-auto-rows:auto;
+    align-items:center;
+    row-gap:0;
+    column-gap:0;
+  }
+
+  /* row helpers */
+  .row-fwd{display:contents;}
+  .row-nodes{display:contents;}
+  .row-bwd{display:contents;}
+
+  /* Node cell */
+  .dc-node{
+    width:var(--node-w);
+    height:var(--node-h);
+    border:2px solid var(--border);
+    border-radius:9px;
+    background:var(--surface);
+    display:grid;
+    grid-template-columns:26px 1fr 26px;
+    overflow:hidden;
+    box-shadow:0 1px 4px rgba(0,0,0,.07);
+    transition:all .3s;
+    grid-row:2;
+  }
+  .dc-node.head-node{border-color:var(--fwd-border);background:var(--fwd-bg);}
+
+  .npior,.nnext{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  }
+  .npior{border-right:1.5px solid var(--border);}
+  .nnext{border-left:1.5px solid var(--border);}
+
+  .pdot-prior{width:8px;height:8px;border-radius:50%;background:var(--bwd);border:1.5px solid var(--accent3-border);}
+  .pdot-next{width:8px;height:8px;border-radius:50%;background:var(--fwd);border:1.5px solid var(--fwd-border);}
+  .pfield{font-family:'JetBrains Mono',monospace;font-size:7px;color:var(--muted);text-align:center;}
+  .pnull{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--accent2);font-weight:700;}
+
+  .ncenter{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;}
+  .nval{font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;color:var(--text);line-height:1;}
+  .nidx{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);}
+  .head-node .nval{font-size:10px;color:var(--fwd);letter-spacing:.5px;font-weight:800;}
+
+  /* Connector cell */
+  .dc-conn{
+    width:var(--conn-w);
+    display:flex;flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    grid-row:1/4; /* span all 3 rows */
+    padding:4px 0;
+    position:relative;
+  }
+
+  /* fwd arrow (→) */
+  .arr-fwd{
+    display:flex;align-items:center;width:100%;position:relative;height:12px;
+  }
+  .arr-fwd::before{
+    content:'';position:absolute;top:50%;left:4px;
+    width:calc(100% - 16px);height:1.5px;
+    background:var(--fwd);transform:translateY(-50%);
+  }
+  .arr-fwd::after{
+    content:'';position:absolute;top:50%;right:4px;
+    width:0;height:0;
+    border-top:4px solid transparent;border-bottom:4px solid transparent;
+    border-left:7px solid var(--fwd);
+    transform:translateY(-50%);
+  }
+  /* bwd arrow (←) */
+  .arr-bwd{
+    display:flex;align-items:center;width:100%;position:relative;height:12px;
+  }
+  .arr-bwd::before{
+    content:'';position:absolute;top:50%;left:4px;
+    width:calc(100% - 16px);height:1.5px;
+    background:var(--bwd);transform:translateY(-50%);
+  }
+  .arr-bwd::after{
+    content:'';position:absolute;top:50%;left:4px;
+    width:0;height:0;
+    border-top:4px solid transparent;border-bottom:4px solid transparent;
+    border-right:7px solid var(--bwd);
+    transform:translateY(-50%);
+  }
+
+  .null-tag{
+    font-family:'JetBrains Mono',monospace;font-size:9px;
+    color:var(--accent2);font-weight:700;
+    width:var(--conn-w);display:flex;
+    flex-direction:column;align-items:center;justify-content:center;
+    gap:10px;grid-row:1/4;padding:4px 0;
+  }
+
+  /* Highlights */
+  .dc-node.hn{border-color:var(--accent)!important;box-shadow:0 0 0 3px var(--accent-bg);}
+  .dc-node.hdl{border-color:var(--accent2)!important;box-shadow:0 0 0 3px var(--accent2-bg);}
+  .dc-node.hf{border-color:var(--accent3)!important;box-shadow:0 0 0 3px var(--accent3-bg);}
+  .dc-node.ht{border-color:#6ea8fe!important;background:#f5f8ff!important;}
+
+  .acard{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.06);}
+  .atitle{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+  .astep{font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 10px;border-radius:5px;color:var(--muted);transition:all .2s;border-left:2px solid transparent;}
+  .astep.active{color:var(--accent);background:var(--accent-bg);border-left-color:var(--accent);font-weight:700;}
+  .astep.done{color:var(--accent3);}
+
+  .logbar{grid-column:1/-1;border-top:1px solid var(--border);background:var(--surface);padding:12px 32px;display:flex;gap:10px;align-items:center;min-height:50px;}
+  .lico{font-size:15px;flex-shrink:0;}
+  .lmsg{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text2);flex:1;}
+  .lmsg .hl{color:var(--accent);font-weight:700;}.lmsg .warn{color:var(--accent2);font-weight:600;}.lmsg .ok{color:var(--accent3);font-weight:600;}
+  .spill{font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--bg);border:1px solid var(--border);color:var(--muted);padding:3px 11px;border-radius:20px;min-width:76px;text-align:center;}
+</style>
+</head>
+<body>
+<header>
+  <div class="hico">⇆</div>
+  <div><h1>双链表</h1><span class="sub">Doubly Linked List · prior + data + next</span></div>
+  <span class="badge">§ 2.3.3</span>
+</header>
+<main>
+  <aside>
+    <div class="slabel">后插操作</div>
+    <div class="irow"><label>位序 i（在其后插）</label><input type="number" id="afterPos" value="2" min="0" max="20"><label>值 e</label><input type="number" id="afterVal" value="66" min="0" max="99"></div>
+    <button class="btn" onclick="doInsertAfter()">＋ InsertAfter(p, s)</button>
+    <div class="slabel">删除操作</div>
+    <div class="irow"><label>位序 i</label><input type="number" id="deletePos" value="2" min="1" max="20"></div>
+    <button class="btn d" onclick="doDelete()">－ DeleteNode(i)</button>
+    <div class="slabel">查找 / 遍历</div>
+    <div class="irow"><label>值 e</label><input type="number" id="findVal" value="37" min="0" max="99"></div>
+    <button class="btn" onclick="doFind(true)">→ 正向查找</button>
+    <button class="btn g" onclick="doFind(false)">← 逆向查找</button>
+    <div class="slabel">控制</div>
+    <button class="btn" onclick="resetList()">↺ 重置</button>
+    <div class="icard">
+      <div class="slabel" style="margin-top:0;margin-bottom:4px;">状态</div>
+      <div class="irow2"><span class="ik">length</span><span class="iv" id="infoLen">4</span></div>
+      <div class="irow2"><span class="ik">head→next</span><span class="iv" id="infoHead">[15]</span></div>
+    </div>
+    <div class="warn-box">
+      <strong>⚠ 插入指针顺序</strong><br>
+      ① s→next = p→next<br>
+      ② s→prior = p<br>
+      ③ p→next→prior = s<br>
+      ④ p→next = s &nbsp;← 最后改！
+    </div>
+    <div class="cxcard">
+      <div class="slabel" style="margin-top:0;margin-bottom:4px;">时间复杂度</div>
+      <div class="cxrow"><span class="ck">按值查找</span><span class="on">O(n)</span></div>
+      <div class="cxrow"><span class="ck">按位查找</span><span class="on">O(n)</span></div>
+      <div class="cxrow"><span class="ck">已知结点插删</span><span class="o1">O(1)</span></div>
+    </div>
+  </aside>
+
+  <div class="vis">
+    <div>
+      <div class="vlabel" style="margin-bottom:10px;">双链表结构（prior ← data → next）</div>
+      <div class="legend">
+        <div class="leg-item"><div class="leg-line leg-fwd"></div>next 指针（蓝色 →）</div>
+        <div class="leg-item"><div class="leg-line leg-bwd"></div>prior 指针（绿色 ←）</div>
+      </div>
+    </div>
+    <div class="dlist-wrap">
+      <div class="dlist-grid" id="dlistGrid"></div>
+    </div>
+    <div class="acard">
+      <div class="atitle">当前算法步骤</div>
+      <div id="algoSteps"><div class="astep">等待操作...</div></div>
+    </div>
+  </div>
+
+  <div class="logbar">
+    <span class="lico" id="logIcon">ℹ️</span>
+    <span class="lmsg" id="logMsg">初始化双链表，length = 4</span>
+    <span class="spill" id="stepCounter">IDLE</span>
+  </div>
+</main>
+<script>
+let list=[15,28,37,52];let busy=false;
+function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
+function log(ico,msg,s){document.getElementById('logIcon').textContent=ico;document.getElementById('logMsg').innerHTML=msg;document.getElementById('stepCounter').textContent=s||'RUN';}
+function steps(arr,ai){document.getElementById('algoSteps').innerHTML=arr.map((s,i)=>`<div class="astep ${i<ai?'done':i===ai?'active':''}">${i+1}. ${s}</div>`).join('');}
+function upInfo(){document.getElementById('infoLen').textContent=list.length;document.getElementById('infoHead').textContent=list.length>0?`[${list[0]}]`:'NULL';}
+
+/*
+  Grid layout for N+1 cells (1 HEAD + N data):
+  We use CSS grid with explicit column template.
+  Columns: node0 | conn0 | node1 | conn1 | ... | nodeN | null-tag
+
+  Each conn spans rows 1-3.
+  Row 1: fwd arrows in conn cells
+  Row 2: nodes in node cells
+  Row 3: bwd arrows in conn cells
+*/
+
+function buildList(){
+  const grid=document.getElementById('dlistGrid');
+  grid.innerHTML='';
+
+  const total=list.length+1; // HEAD + data nodes
+  // total nodes, total-1 connectors between them, 1 null-tag at end
+  // Columns: node, conn, node, conn, ..., node, null-tag
+  const cols=[];
+  for(let i=0;i<total;i++){
+    cols.push('var(--node-w)');
+    if(i<total-1) cols.push('var(--conn-w)');
+  }
+  cols.push('var(--conn-w)'); // null-tag
+  grid.style.gridTemplateColumns=cols.join(' ');
+  grid.style.gridTemplateRows='1fr auto 1fr';
+
+  for(let i=0;i<total;i++){
+    const isHead=i===0;
+    const isLast=i===total-1;
+    const val=isHead?'HEAD':list[i-1];
+    const idx=isHead?'[head]':`[${i-1}]`;
+
+    // Prior indicator (NULL for head)
+    const priorHTML=isHead?`<span class="pnull">∅</span><span class="pfield">prior</span>`:`<div class="pdot-prior"></div><span class="pfield">prior</span>`;
+    // Next indicator (always has next, last data node → null handled in null-tag)
+    const nextHTML=`<div class="pdot-next"></div><span class="pfield">next</span>`;
+
+    const nodeEl=document.createElement('div');
+    nodeEl.className='dc-node'+(isHead?' head-node':'');
+    nodeEl.id=`dn${i}`;
+    nodeEl.style.gridRow='2';
+    nodeEl.style.gridColumn=String(i*2+1);
+    nodeEl.innerHTML=`
+      <div class="npior">${priorHTML}</div>
+      <div class="ncenter"><span class="nval">${val}</span><span class="nidx">${idx}</span></div>
+      <div class="nnext">${nextHTML}</div>
+    `;
+    grid.appendChild(nodeEl);
+
+    // Connector between node i and node i+1
+    if(i<total-1){
+      const connEl=document.createElement('div');
+      connEl.className='dc-conn';
+      connEl.style.gridColumn=String(i*2+2);
+      connEl.style.gridRow='1/4';
+      connEl.innerHTML=`<div class="arr-fwd"></div><div class="arr-bwd"></div>`;
+      grid.appendChild(connEl);
+    }
+  }
+
+  // Null tag after last node
+  const nullEl=document.createElement('div');
+  nullEl.className='null-tag';
+  nullEl.style.gridColumn=String(total*2);
+  nullEl.style.gridRow='1/4';
+  nullEl.innerHTML=`<span style="color:var(--fwd);font-size:9px;">→</span><span>NULL</span>`;
+  grid.appendChild(nullEl);
+
+  upInfo();
+}
+
+function gdn(i){return document.getElementById(`dn${i}`);}// i=0 head, i=1..n data
+
+async function doInsertAfter(){
+  if(busy)return;busy=true;
+  const i=parseInt(document.getElementById('afterPos').value);
+  const e=parseInt(document.getElementById('afterVal').value);
+  if(i<0||i>list.length){log('⚠️',`<span class="warn">位序 ${i} 越界！合法 [0,${list.length}]（0=头结点后）</span>`,'ERROR');busy=false;return;}
+  const ss=['①  s→next = p→next','②  s→prior = p','③  p→next→prior = s（若存在）','④  p→next = s（最后修改！）'];
+  const p=gdn(i);if(p)p.classList.add('hf');
+  log('⚙️',`找到前驱 p = <span class="hl">${i===0?'HEAD':list[i-1]}</span>，准备在其后插入 [${e}]`,'LOCATE');
+  await sleep(600);if(p)p.classList.remove('hf');
+  steps(ss,0);log('⚙️',`① <span class="hl">s→next = p→next</span>`,'STEP 1');await sleep(500);
+  steps(ss,1);log('⚙️',`② <span class="hl">s→prior = p</span>`,'STEP 2');await sleep(500);
+  steps(ss,2);log('⚙️',i<list.length?`③ <span class="hl">p→next→prior = s</span>`:`③ p→next 为 NULL，跳过`,'STEP 3');await sleep(500);
+  steps(ss,3);
+  list.splice(i,0,e);buildList();
+  const nn=gdn(i+1);if(nn)nn.classList.add('hn');
+  log('⚙️',`④ <span class="hl">p→next = s</span>（最后修改，避免断链）`,'STEP 4');await sleep(700);
+  steps(ss,4);if(nn)nn.classList.remove('hn');
+  log('✅',`<span class="ok">后插成功！位序 ${i} 后插入 [${e}]，length=${list.length}</span>`,'DONE');busy=false;
+}
+
+async function doDelete(){
+  if(busy)return;busy=true;
+  const i=parseInt(document.getElementById('deletePos').value);
+  if(i<1||i>list.length){log('⚠️',`<span class="warn">位序 ${i} 越界！合法 [1,${list.length}]</span>`,'ERROR');busy=false;return;}
+  const val=list[i-1];
+  const ss=[`找到目标 q = a[${i-1}] = ${val}，其前驱 p`,'p→next = q→next（绕过 q）','q→next→prior = p（若存在）','free(q)'];
+  steps(ss,0);const qn=gdn(i);if(qn)qn.classList.add('hdl');
+  log('⚙️',`找到目标 <span class="hl">q = a[${i-1}] = ${val}</span>`,'STEP 1');await sleep(700);
+  steps(ss,1);log('⚙️',`<span class="hl">p→next = q→next</span>`,'STEP 2');await sleep(500);
+  steps(ss,2);log('⚙️',i<list.length?`<span class="hl">q→next→prior = p</span>`:`q→next 为 NULL，跳过`,'STEP 3');await sleep(500);
+  steps(ss,3);if(qn)qn.classList.remove('hdl');
+  list.splice(i-1,1);buildList();
+  log('✅',`<span class="ok">删除成功！释放 [${val}]，length=${list.length}</span>`,'DONE');busy=false;
+}
+
+async function doFind(forward){
+  if(busy)return;busy=true;
+  const e=parseInt(document.getElementById('findVal').value);
+  const dir=forward?'正向（→ next）':'逆向（← prior）';
+  log('⚙️',`${dir} 查找 <span class="hl">e=${e}</span>...`,'SCAN');await sleep(300);
+  const idxs=forward?[...Array(list.length).keys()]:[...Array(list.length).keys()].reverse();
+  for(const j of idxs){
+    const n=gdn(j+1);if(n)n.classList.add('ht');
+    log('⚙️',`访问: <span class="hl">a[${j}]=${list[j]}</span>`,`[${j}]`);
+    await sleep(320);
+    if(list[j]===e){if(n){n.classList.remove('ht');n.classList.add('hf');}log('✅',`<span class="ok">找到！a[${j}]=${e}，位序=${j+1}</span>`,'FOUND');await sleep(900);if(n)n.classList.remove('hf');busy=false;return;}
+    if(n)n.classList.remove('ht');await sleep(60);
+  }
+  log('⚠️',`<span class="warn">未找到 e=${e}</span>`,'NOT FOUND');busy=false;
+}
+
+function resetList(){busy=false;list=[15,28,37,52];buildList();steps(['等待操作...'],0);log('ℹ️','双链表已重置，length=4','IDLE');document.getElementById('stepCounter').textContent='IDLE';}
+buildList();
+</script>
+</body>
+</html>

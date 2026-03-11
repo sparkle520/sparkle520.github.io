@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>顺序表 · 动态演示</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f1f5fb;
+    --surface: #ffffff;
+    --panel: #f8fafd;
+    --border: #dde3f0;
+    --accent: #2563eb;
+    --accent-bg: #eff6ff;
+    --accent2: #dc2626;
+    --accent2-bg: #fff1f2;
+    --accent3: #16a34a;
+    --accent3-bg: #f0fdf4;
+    --accent4: #b45309;
+    --accent4-bg: #fffbeb;
+    --text: #1a2035;
+    --text2: #4a5680;
+    --muted: #8b96b8;
+    --cell-w: 64px;
+    --cell-h: 60px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Noto Sans SC',sans-serif; min-height:100vh; display:flex; flex-direction:column; }
+
+  header { background:var(--surface); border-bottom:2px solid var(--border); padding:18px 32px; display:flex; align-items:center; gap:14px; }
+  .hico { width:38px; height:38px; background:var(--accent-bg); border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:17px; color:var(--accent); border:1px solid #bfdbfe; }
+  header h1 { font-size:21px; font-weight:900; color:var(--text); }
+  .sub { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); letter-spacing:1px; display:block; margin-top:1px; }
+  .badge { margin-left:auto; background:var(--accent-bg); border:1px solid #bfdbfe; color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:11px; padding:4px 13px; border-radius:20px; font-weight:700; }
+
+  main { flex:1; display:grid; grid-template-columns:264px 1fr; grid-template-rows:1fr auto; }
+
+  aside { background:var(--surface); border-right:1px solid var(--border); padding:18px 14px; display:flex; flex-direction:column; gap:5px; overflow-y:auto; }
+  .slabel { font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--muted); letter-spacing:2px; text-transform:uppercase; margin:10px 0 4px; }
+  .slabel:first-child { margin-top:0; }
+
+  .btn { display:flex; align-items:center; gap:7px; padding:8px 12px; border-radius:7px; border:1.5px solid var(--border); background:var(--surface); color:var(--text2); font-family:'JetBrains Mono',monospace; font-size:11px; cursor:pointer; transition:all .15s; }
+  .btn:hover { background:var(--accent-bg); border-color:#93c5fd; color:var(--accent); }
+  .btn.d:hover { background:var(--accent2-bg); border-color:#fca5a5; color:var(--accent2); }
+  .btn.g:hover { background:var(--accent3-bg); border-color:#86efac; color:var(--accent3); }
+  .btn:active { transform:scale(.98); }
+  .btn:disabled { opacity:.4; cursor:not-allowed; }
+
+  .irow { display:flex; gap:5px; align-items:center; flex-wrap:wrap; }
+  .irow input { background:var(--bg); border:1.5px solid var(--border); color:var(--text); font-family:'JetBrains Mono',monospace; font-size:12px; padding:6px 8px; border-radius:6px; width:62px; outline:none; }
+  .irow input:focus { border-color:var(--accent); box-shadow:0 0 0 3px #dbeafe; }
+  .irow label { font-size:11px; color:var(--muted); font-family:'JetBrains Mono',monospace; }
+
+  .icard { background:var(--panel); border:1px solid var(--border); border-radius:8px; padding:10px 12px; margin-top:4px; }
+  .irow2 { display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid var(--border); font-family:'JetBrains Mono',monospace; font-size:11px; }
+  .irow2:last-child { border-bottom:none; }
+  .ik { color:var(--muted); } .iv { color:var(--accent); font-weight:700; }
+
+  .cxcard { background:var(--panel); border:1px solid var(--border); border-radius:8px; padding:10px 12px; margin-top:auto; }
+  .cxrow { display:flex; justify-content:space-between; font-family:'JetBrains Mono',monospace; font-size:11px; padding:3px 0; }
+  .ck { color:var(--text2); } .o1 { color:var(--accent3); font-weight:700; } .on { color:var(--accent2); font-weight:700; }
+
+  .vis { padding:28px 32px; display:flex; flex-direction:column; gap:22px; }
+  .vlabel { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); letter-spacing:2px; text-transform:uppercase; }
+  .addr-ruler { display:flex; }
+  .acell { width:var(--cell-w); text-align:center; font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--muted); }
+  .atrack { display:flex; border-radius:8px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+
+  .cell { width:var(--cell-w); height:var(--cell-h); border-right:1.5px solid var(--border); display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; background:var(--surface); transition:all .3s cubic-bezier(.34,1.56,.64,1); }
+  .cell:last-child { border-right:none; }
+  .cell.occ { background:#fff; }
+  .cell.emp { background:var(--bg); opacity:.65; }
+  .cval { font-family:'JetBrains Mono',monospace; font-size:19px; font-weight:700; color:var(--text); }
+  .cidx { position:absolute; bottom:4px; font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--muted); }
+
+  .cell.hi { background:var(--accent-bg)!important; box-shadow:inset 0 0 0 2px var(--accent); transform:scale(1.07); z-index:2; }
+  .cell.hd { background:var(--accent2-bg)!important; box-shadow:inset 0 0 0 2px var(--accent2); transform:scale(1.07); z-index:2; }
+  .cell.hf { background:var(--accent3-bg)!important; box-shadow:inset 0 0 0 2px var(--accent3); transform:scale(1.05); z-index:2; }
+  .cell.hs { background:var(--accent4-bg)!important; box-shadow:inset 0 0 0 2px var(--accent4); transform:translateX(3px); }
+  .cell.hsc { background:#f0f4ff!important; box-shadow:inset 0 0 0 2px #93c5fd; }
+
+  .prow { display:flex; height:30px; align-items:flex-start; margin-top:2px; }
+  .pslot { width:var(--cell-w); display:flex; flex-direction:column; align-items:center; }
+  .parrow { width:1.5px; height:14px; background:var(--accent3); position:relative; }
+  .parrow::before { content:''; position:absolute; top:-1px; left:-3.5px; border-left:4.5px solid transparent; border-right:4.5px solid transparent; border-bottom:7px solid var(--accent3); }
+  .plabel { font-family:'JetBrains Mono',monospace; font-size:8px; color:var(--accent3); font-weight:700; margin-top:1px; }
+
+  .acard { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:14px 16px; box-shadow:0 1px 3px rgba(0,0,0,.06); }
+  .atitle { font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--muted); letter-spacing:2px; text-transform:uppercase; margin-bottom:8px; }
+  .astep { font-family:'JetBrains Mono',monospace; font-size:11px; padding:4px 10px; border-radius:5px; color:var(--muted); transition:all .2s; border-left:2px solid transparent; }
+  .astep.active { color:var(--accent); background:var(--accent-bg); border-left-color:var(--accent); font-weight:700; }
+  .astep.done { color:var(--accent3); }
+
+  .logbar { grid-column:1/-1; border-top:1px solid var(--border); background:var(--surface); padding:12px 32px; display:flex; gap:10px; align-items:center; min-height:50px; }
+  .lico { font-size:15px; flex-shrink:0; }
+  .lmsg { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text2); flex:1; }
+  .lmsg .hl { color:var(--accent); font-weight:700; }
+  .lmsg .warn { color:var(--accent2); font-weight:600; }
+  .lmsg .ok { color:var(--accent3); font-weight:600; }
+  .spill { font-family:'JetBrains Mono',monospace; font-size:10px; background:var(--bg); border:1px solid var(--border); color:var(--muted); padding:3px 11px; border-radius:20px; min-width:76px; text-align:center; }
+</style>
+</head>
+<body>
+<header>
+  <div class="hico">▦</div>
+  <div><h1>顺序表</h1><span class="sub">Sequential List · Array-based</span></div>
+  <span class="badge">§ 2.2</span>
+</header>
+<main>
+  <aside>
+    <div class="slabel">插入操作</div>
+    <div class="irow"><label>位序 i</label><input type="number" id="insertPos" value="2" min="1" max="10"><label>值 e</label><input type="number" id="insertVal" value="42" min="0" max="99"></div>
+    <button class="btn" onclick="doInsert()">＋ &nbsp;ListInsert(L, i, e)</button>
+    <div class="slabel">删除操作</div>
+    <div class="irow"><label>位序 i</label><input type="number" id="deletePos" value="2" min="1" max="10"></div>
+    <button class="btn d" onclick="doDelete()">－ &nbsp;ListDelete(L, i)</button>
+    <div class="slabel">查找操作</div>
+    <div class="irow"><label>值 e</label><input type="number" id="findVal" value="25" min="0" max="99"></div>
+    <button class="btn g" onclick="doFind()">⌕ &nbsp;LocateElem(L, e)</button>
+    <div class="slabel">控制</div>
+    <button class="btn" onclick="resetList()">↺ &nbsp;重置</button>
+    <div class="icard">
+      <div class="slabel" style="margin-top:0;margin-bottom:4px;">状态</div>
+      <div class="irow2"><span class="ik">length</span><span class="iv" id="infoLen">5</span></div>
+      <div class="irow2"><span class="ik">maxSize</span><span class="iv">10</span></div>
+      <div class="irow2"><span class="ik">isEmpty</span><span class="iv" id="infoEmpty">false</span></div>
+    </div>
+    <div class="cxcard">
+      <div class="slabel" style="margin-top:0;margin-bottom:4px;">时间复杂度</div>
+      <div class="cxrow"><span class="ck">按位访问</span><span class="o1">O(1)</span></div>
+      <div class="cxrow"><span class="ck">按值查找</span><span class="on">O(n)</span></div>
+      <div class="cxrow"><span class="ck">插入 / 删除</span><span class="on">O(n)</span></div>
+    </div>
+  </aside>
+
+  <div class="vis">
+    <div>
+      <div class="vlabel" style="margin-bottom:6px;">内存连续地址</div>
+      <div class="addr-ruler" id="addrRuler"></div>
+      <div class="atrack" id="arrayTrack"></div>
+      <div class="prow" id="pointerRow"></div>
+    </div>
+    <div class="acard">
+      <div class="atitle">当前算法步骤</div>
+      <div id="algoSteps"><div class="astep">等待操作...</div></div>
+    </div>
+  </div>
+
+  <div class="logbar">
+    <span class="lico" id="logIcon">ℹ️</span>
+    <span class="lmsg" id="logMsg">初始化顺序表，maxSize = 10，当前 length = 5</span>
+    <span class="spill" id="stepCounter">IDLE</span>
+  </div>
+</main>
+<script>
+const MAX=10; let arr=[12,25,37,49,63]; let busy=false;
+function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
+function log(ico,msg,s){document.getElementById('logIcon').textContent=ico;document.getElementById('logMsg').innerHTML=msg;document.getElementById('stepCounter').textContent=s||'RUN';}
+function steps(arr,ai){document.getElementById('algoSteps').innerHTML=arr.map((s,i)=>`<div class="astep ${i<ai?'done':i===ai?'active':''}">${i+1}. ${s}</div>`).join('');}
+function upInfo(){document.getElementById('infoLen').textContent=arr.length;document.getElementById('infoEmpty').textContent=arr.length===0?'true':'false';}
+function buildAddr(){const r=document.getElementById('addrRuler');r.innerHTML='';for(let i=0;i<MAX;i++){const d=document.createElement('div');d.className='acell';d.textContent=`0x${(0x200+i*4).toString(16).toUpperCase()}`;r.appendChild(d);}}
+function buildArray(){
+  const t=document.getElementById('arrayTrack');t.innerHTML='';
+  for(let i=0;i<MAX;i++){
+    const c=document.createElement('div');c.className='cell '+(i<arr.length?'occ':'emp');c.id=`c${i}`;
+    if(i<arr.length)c.innerHTML=`<span class="cval">${arr[i]}</span><span class="cidx">[${i}]</span>`;
+    else c.innerHTML=`<span class="cidx">[${i}]</span>`;
+    t.appendChild(c);
+  }
+  buildPtr(); upInfo();
+}
+function buildPtr(){
+  const r=document.getElementById('pointerRow');r.innerHTML='';
+  for(let i=0;i<=MAX;i++){
+    const s=document.createElement('div');s.className='pslot';
+    if(i===arr.length)s.innerHTML=`<div class="parrow"></div><div class="plabel">len=${arr.length}</div>`;
+    r.appendChild(s);
+  }
+}
+function gc(i){return document.getElementById(`c${i}`);}
+
+async function doInsert(){
+  if(busy)return;busy=true;
+  const i=parseInt(document.getElementById('insertPos').value);
+  const e=parseInt(document.getElementById('insertVal').value);
+  const ss=['判断 i 合法性 (1≤i≤length+1)','检查表满 (length<maxSize)',`后移 a[${i-1}]…a[length-1]`,`写入 a[${i-1}]=${e}`,'length++'];
+  steps(ss,0);
+  if(i<1||i>arr.length+1){log('⚠️',`<span class="warn">位序 ${i} 越界！合法 [1,${arr.length+1}]</span>`,'ERROR');busy=false;return;}
+  if(arr.length>=MAX){log('⚠️',`<span class="warn">表已满！</span>`,'ERROR');busy=false;return;}
+  log('⚙️',`执行 <span class="hl">ListInsert(L,${i},${e})</span>`,'STEP 1');await sleep(400);
+  steps(ss,2);
+  for(let j=arr.length-1;j>=i-1;j--){
+    const c=gc(j);c.classList.add('hs');
+    log('⚙️',`后移 <span class="hl">a[${j}]→a[${j+1}]</span>`,'SHIFT');
+    await sleep(210);c.classList.remove('hs');arr[j+1]=arr[j];buildArray();await sleep(60);
+  }
+  steps(ss,3);arr[i-1]=e;buildArray();
+  const nc=gc(i-1);nc.classList.add('hi');
+  log('⚙️',`写入 <span class="hl">a[${i-1}]=${e}</span>`,'STEP 4');await sleep(600);
+  nc.classList.remove('hi');steps(ss,4);buildArray();
+  log('✅',`<span class="ok">插入成功！位序 ${i} 插入 [${e}]，length=${arr.length}</span>`,'DONE');busy=false;
+}
+
+async function doDelete(){
+  if(busy)return;busy=true;
+  const i=parseInt(document.getElementById('deletePos').value);
+  const ss=['判断 i 合法性 (1≤i≤length)',`保存 a[${i-1}] 的值`,`前移 a[${i}]…a[length-1]`,'length--'];
+  steps(ss,0);
+  if(i<1||i>arr.length){log('⚠️',`<span class="warn">位序 ${i} 越界！</span>`,'ERROR');busy=false;return;}
+  const val=arr[i-1];steps(ss,1);
+  const dc=gc(i-1);dc.classList.add('hd');
+  log('⚙️',`保存 <span class="hl">e=a[${i-1}]=${val}</span>`,'STEP 2');await sleep(600);
+  dc.classList.remove('hd');steps(ss,2);
+  for(let j=i-1;j<arr.length-1;j++){
+    arr[j]=arr[j+1];buildArray();
+    const c=gc(j);c.classList.add('hs');
+    log('⚙️',`前移 <span class="hl">a[${j}]←a[${j+1}]</span>`,'SHIFT');
+    await sleep(200);c.classList.remove('hs');await sleep(60);
+  }
+  arr.pop();steps(ss,3);buildArray();
+  log('✅',`<span class="ok">删除成功！e=${val}，length=${arr.length}</span>`,'DONE');busy=false;
+}
+
+async function doFind(){
+  if(busy)return;busy=true;
+  const e=parseInt(document.getElementById('findVal').value);
+  steps(['从 i=0 顺序扫描','比较 a[i] 与 e','相等返回位序 i+1','未找到返回 0'],0);
+  log('⚙️',`顺序查找 <span class="hl">e=${e}</span>...`,'SCAN');await sleep(300);
+  for(let j=0;j<arr.length;j++){
+    const c=gc(j);c.classList.add('hsc');
+    log('⚙️',`比较 <span class="hl">a[${j}]=${arr[j]}</span> 与 ${e}`,`[${j}]`);
+    await sleep(280);
+    if(arr[j]===e){c.classList.remove('hsc');c.classList.add('hf');log('✅',`<span class="ok">找到！a[${j}]=${e}，位序=${j+1}</span>`,'FOUND');await sleep(900);c.classList.remove('hf');buildArray();busy=false;return;}
+    c.classList.remove('hsc');await sleep(60);
+  }
+  log('⚠️',`<span class="warn">未找到 e=${e}，返回 0</span>`,'NOT FOUND');busy=false;
+}
+
+function resetList(){busy=false;arr=[12,25,37,49,63];buildAddr();buildArray();steps(['等待操作...'],0);log('ℹ️','顺序表已重置，length=5','IDLE');document.getElementById('stepCounter').textContent='IDLE';}
+buildAddr();buildArray();
+</script>
+</body>
+</html>

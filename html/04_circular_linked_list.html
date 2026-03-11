@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>循环链表 · 动态演示</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#f1f5fb; --surface:#fff; --panel:#f8fafd; --border:#dde3f0;
+    --accent:#0369a1; --accent-bg:#f0f9ff; --accent-border:#bae6fd;
+    --accent2:#dc2626; --accent2-bg:#fff1f2;
+    --accent3:#16a34a; --accent3-bg:#f0fdf4; --accent3-border:#bbf7d0;
+    --accent4:#7c3aed; --accent4-bg:#f5f3ff; --accent4-border:#ddd6fe;
+    --slow:#7c3aed; --fast:#dc2626; --meet:#16a34a; --entry:#0369a1;
+    --text:#1a2035; --text2:#4a5680; --muted:#8b96b8;
+    --node-r:32px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',sans-serif;min-height:100vh;display:flex;flex-direction:column;}
+  header{background:var(--surface);border-bottom:2px solid var(--border);padding:18px 32px;display:flex;align-items:center;gap:14px;}
+  .hico{width:38px;height:38px;background:var(--accent-bg);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:19px;color:var(--accent);border:1px solid var(--accent-border);}
+  header h1{font-size:21px;font-weight:900;color:var(--text);}
+  .sub{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:1px;display:block;margin-top:1px;}
+  .badge{margin-left:auto;background:var(--accent-bg);border:1px solid var(--accent-border);color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 13px;border-radius:20px;font-weight:700;}
+  main{flex:1;display:grid;grid-template-columns:264px 1fr;grid-template-rows:1fr auto;}
+  aside{background:var(--surface);border-right:1px solid var(--border);padding:18px 14px;display:flex;flex-direction:column;gap:5px;overflow-y:auto;}
+  .slabel{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin:10px 0 4px;}
+  .slabel:first-child{margin-top:0;}
+  .btn{display:flex;align-items:center;gap:7px;padding:8px 12px;border-radius:7px;border:1.5px solid var(--border);background:var(--surface);color:var(--text2);font-family:'JetBrains Mono',monospace;font-size:11px;cursor:pointer;transition:all .15s;}
+  .btn:hover{background:var(--accent-bg);border-color:var(--accent-border);color:var(--accent);}
+  .btn.d:hover{background:var(--accent2-bg);border-color:#fca5a5;color:var(--accent2);}
+  .btn.g:hover{background:var(--accent3-bg);border-color:var(--accent3-border);color:var(--accent3);}
+  .btn.p:hover{background:var(--accent4-bg);border-color:var(--accent4-border);color:var(--accent4);}
+  .btn:active{transform:scale(.98);}
+  .irow{display:flex;gap:5px;align-items:center;flex-wrap:wrap;}
+  .irow input{background:var(--bg);border:1.5px solid var(--border);color:var(--text);font-family:'JetBrains Mono',monospace;font-size:12px;padding:6px 8px;border-radius:6px;width:62px;outline:none;}
+  .irow input:focus{border-color:var(--accent);box-shadow:0 0 0 3px #e0f2fe;}
+  .irow label{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+  .icard{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin-top:4px;}
+  .irow2{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:11px;}
+  .irow2:last-child{border-bottom:none;}
+  .ik{color:var(--muted);}.iv{color:var(--accent);font-weight:700;}
+  .floyd-box{background:var(--accent4-bg);border:1px solid var(--accent4-border);border-radius:7px;padding:10px 12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text2);line-height:1.8;margin-top:4px;}
+  .floyd-box strong{color:var(--slow);font-weight:800;}
+  .legend{display:flex;flex-direction:column;gap:4px;margin-top:6px;}
+  .leg{display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text2);}
+  .ldot{width:11px;height:11px;border-radius:50%;border:2px solid rgba(0,0,0,.1);}
+  .cxcard{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin-top:auto;}
+  .cxrow{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 0;}
+  .ck{color:var(--text2);}.o1{color:var(--accent3);font-weight:700;}.on{color:var(--accent2);font-weight:700;}
+
+  /* Vis */
+  .vis{padding:20px 28px;display:flex;flex-direction:column;gap:16px;}
+  .vlabel{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;}
+
+  .ring-wrap{display:flex;justify-content:center;align-items:center;position:relative;height:300px;flex-shrink:0;}
+  .ring-wrap svg{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;}
+
+  .cnode{
+    position:absolute;
+    width:64px;height:64px;
+    border-radius:50%;
+    border:2.5px solid var(--border);
+    background:var(--surface);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    transform:translate(-50%,-50%);
+    transition:all .35s;
+    box-shadow:0 2px 6px rgba(0,0,0,.08);
+    z-index:2;
+  }
+  .cnode.head-c{border-color:var(--accent-border);background:var(--accent-bg);width:68px;height:68px;}
+  .cnval{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:var(--text);line-height:1;}
+  .head-c .cnval{font-size:10px;color:var(--accent);font-weight:800;letter-spacing:.5px;}
+  .cnidx{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:2px;}
+
+  /* Highlight states */
+  .cnode.h-new{border-color:var(--accent)!important;box-shadow:0 0 0 4px var(--accent-bg)!important;}
+  .cnode.h-del{border-color:var(--accent2)!important;box-shadow:0 0 0 4px var(--accent2-bg)!important;}
+  .cnode.h-find{border-color:var(--accent3)!important;box-shadow:0 0 0 4px var(--accent3-bg)!important;}
+  .cnode.h-trav{border-color:#93c5fd!important;background:#f0f6ff!important;}
+  .cnode.h-slow{border-color:var(--slow)!important;background:var(--accent4-bg)!important;box-shadow:0 0 0 4px #ede9fe!important;}
+  .cnode.h-fast{border-color:var(--fast)!important;background:var(--accent2-bg)!important;box-shadow:0 0 0 4px #fee2e2!important;}
+  .cnode.h-meet{border-color:var(--meet)!important;background:var(--accent3-bg)!important;box-shadow:0 0 0 5px #dcfce7!important;}
+  .cnode.h-entry{border-color:var(--entry)!important;background:var(--accent-bg)!important;box-shadow:0 0 0 5px #e0f2fe!important;}
+
+  /* Pointer badge on node */
+  .ptr-badge{
+    position:absolute;
+    font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;
+    padding:1px 5px;border-radius:3px;white-space:nowrap;
+    transform:translate(-50%,-50%);z-index:5;pointer-events:none;
+    border:1px solid;
+  }
+  .pb-slow{background:var(--accent4-bg);border-color:var(--accent4-border);color:var(--slow);}
+  .pb-fast{background:var(--accent2-bg);border-color:#fca5a5;color:var(--fast);}
+  .pb-p{background:var(--accent-bg);border-color:var(--accent-border);color:var(--entry);}
+
+  .acard{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.06);}
+  .atitle{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+  .astep{font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 10px;border-radius:5px;color:var(--muted);transition:all .2s;border-left:2px solid transparent;}
+  .astep.active{color:var(--accent);background:var(--accent-bg);border-left-color:var(--accent);font-weight:700;}
+  .astep.done{color:var(--accent3);}
+
+  .logbar{grid-column:1/-1;border-top:1px solid var(--border);background:var(--surface);padding:12px 32px;display:flex;gap:10px;align-items:center;min-height:50px;}
+  .lico{font-size:15px;flex-shrink:0;}
+  .lmsg{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text2);flex:1;}
+  .lmsg .hl{color:var(--accent);font-weight:700;}.lmsg .warn{color:var(--accent2);font-weight:600;}.lmsg .ok{color:var(--accent3);font-weight:600;}.lmsg .sp{color:var(--slow);font-weight:700;}
+  .spill{font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--bg);border:1px solid var(--border);color:var(--muted);padding:3px 11px;border-radius:20px;min-width:76px;text-align:center;}
+</style>
+</head>
+<body>
+<header>
+  <div class="hico">○</div>
+  <div><h1>循环链表</h1><span class="sub">Circular Linked List · Floyd's Cycle Detection</span></div>
+  <span class="badge">§ 2.3.4</span>
+</header>
+<main>
+  <aside>
+    <div class="slabel">插入 / 删除</div>
+    <div class="irow"><label>值 e</label><input type="number" id="insertVal" value="77" min="0" max="99"></div>
+    <button class="btn" onclick="doInsertTail()">⊕ 尾部插入</button>
+    <button class="btn" onclick="doInsertHead()">⊕ 头部插入</button>
+    <div class="irow"><label>位序 i</label><input type="number" id="deletePos" value="2" min="1" max="20"></div>
+    <button class="btn d" onclick="doDelete()">⊖ 删除结点</button>
+    <div class="slabel">遍历 / 查找</div>
+    <div class="irow"><label>值 e</label><input type="number" id="findVal" value="30" min="0" max="99"></div>
+    <button class="btn g" onclick="doTraverse()">○ 环形遍历查找</button>
+    <div class="slabel">Floyd 判环演示</div>
+    <button class="btn p" onclick="doFloyd()">⟳ Floyd 判圈算法</button>
+    <div class="slabel">控制</div>
+    <button class="btn" onclick="resetList()">↺ 重置</button>
+    <div class="icard">
+      <div class="slabel" style="margin-top:0;margin-bottom:4px;">状态</div>
+      <div class="irow2"><span class="ik">length</span><span class="iv" id="infoLen">5</span></div>
+      <div class="irow2"><span class="ik">isEmpty</span><span class="iv" id="infoEmpty">false</span></div>
+      <div class="irow2"><span class="ik">tail→next</span><span class="iv">= L (头结点)</span></div>
+    </div>
+    <div class="floyd-box">
+      <strong>Floyd 判圈算法</strong><br>
+      slow 每次走 1 步<br>
+      fast 每次走 2 步<br>
+      相遇 → 有环<br>
+      p 从 head 同步走 → 入口
+    </div>
+    <div class="legend">
+      <div class="slabel" style="margin-top:2px;">图例</div>
+      <div class="leg"><div class="ldot" style="background:var(--slow);"></div>slow 指针</div>
+      <div class="leg"><div class="ldot" style="background:var(--fast);"></div>fast 指针</div>
+      <div class="leg"><div class="ldot" style="background:var(--meet);"></div>相遇 / 找到</div>
+      <div class="leg"><div class="ldot" style="background:var(--entry);"></div>环入口</div>
+    </div>
+    <div class="cxcard">
+      <div class="slabel" style="margin-top:0;margin-bottom:4px;">复杂度</div>
+      <div class="cxrow"><span class="ck">遍历</span><span class="on">O(n)</span></div>
+      <div class="cxrow"><span class="ck">首/尾插删</span><span class="o1">O(1)</span></div>
+      <div class="cxrow"><span class="ck">Floyd 判环</span><span class="o1">O(n)/O(1)</span></div>
+    </div>
+  </aside>
+
+  <div class="vis">
+    <div class="vlabel">循环单链表（tail→next = L 头结点）</div>
+    <div class="ring-wrap" id="ringWrap">
+      <svg id="ringSvg"></svg>
+    </div>
+    <div class="acard">
+      <div class="atitle">当前算法步骤</div>
+      <div id="algoSteps"><div class="astep">等待操作...</div></div>
+    </div>
+  </div>
+
+  <div class="logbar">
+    <span class="lico" id="logIcon">ℹ️</span>
+    <span class="lmsg" id="logMsg">初始化循环单链表，tail→next = L（头结点），length = 5</span>
+    <span class="spill" id="stepCounter">IDLE</span>
+  </div>
+</main>
+<script>
+let list=[10,20,30,40,50];let busy=false;
+const RING_R=115;
+function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
+function log(ico,msg,s){document.getElementById('logIcon').textContent=ico;document.getElementById('logMsg').innerHTML=msg;document.getElementById('stepCounter').textContent=s||'RUN';}
+function steps(arr,ai){document.getElementById('algoSteps').innerHTML=arr.map((s,i)=>`<div class="astep ${i<ai?'done':i===ai?'active':''}">${i+1}. ${s}</div>`).join('');}
+function upInfo(){document.getElementById('infoLen').textContent=list.length;document.getElementById('infoEmpty').textContent=list.length===0?'true':'false';}
+
+function getPos(idx,total,wrap){
+  const cx=wrap.clientWidth/2||320,cy=wrap.clientHeight/2||150;
+  const ang=(idx/total)*2*Math.PI-Math.PI/2;
+  return{x:cx+RING_R*Math.cos(ang),y:cy+RING_R*Math.sin(ang)};
+}
+
+function buildList(slowIdx=-1,fastIdx=-1,pIdx=-1){
+  const wrap=document.getElementById('ringWrap');
+  wrap.querySelectorAll('.cnode,.ptr-badge').forEach(e=>e.remove());
+  const svg=document.getElementById('ringSvg');
+  svg.innerHTML='';
+  const total=list.length+1;
+  const cx=wrap.clientWidth/2||320,cy=wrap.clientHeight/2||150;
+
+  // Guide circle
+  const ns='http://www.w3.org/2000/svg';
+  const circ=document.createElementNS(ns,'circle');
+  circ.setAttribute('cx',cx);circ.setAttribute('cy',cy);circ.setAttribute('r',RING_R);
+  circ.setAttribute('fill','none');circ.setAttribute('stroke','#e0e7f5');circ.setAttribute('stroke-width','1.5');circ.setAttribute('stroke-dasharray','5 4');
+  svg.appendChild(circ);
+
+  // Defs for arrowhead
+  const defs=document.createElementNS(ns,'defs');
+  const mk=document.createElementNS(ns,'marker');
+  mk.setAttribute('id','ah');mk.setAttribute('markerWidth','7');mk.setAttribute('markerHeight','5');
+  mk.setAttribute('refX','3.5');mk.setAttribute('refY','2.5');mk.setAttribute('orient','auto');
+  const poly=document.createElementNS(ns,'polygon');
+  poly.setAttribute('points','0 0, 7 2.5, 0 5');poly.setAttribute('fill','#0369a1');
+  mk.appendChild(poly);defs.appendChild(mk);svg.insertBefore(defs,svg.firstChild);
+
+  // Draw arrows
+  const NR=32;
+  for(let i=0;i<total;i++){
+    const from=getPos(i,total,wrap);
+    const to=getPos((i+1)%total,total,wrap);
+    const dx=to.x-from.x,dy=to.y-from.y,dist=Math.sqrt(dx*dx+dy*dy);
+    const nx=dx/dist,ny=dy/dist;
+    const sx=from.x+nx*NR,sy=from.y+ny*NR;
+    const ex=to.x-nx*(NR+5),ey=to.y-ny*(NR+5);
+    const ln=document.createElementNS(ns,'line');
+    ln.setAttribute('x1',sx);ln.setAttribute('y1',sy);ln.setAttribute('x2',ex);ln.setAttribute('y2',ey);
+    ln.setAttribute('stroke',i===total-1?'#0369a1':'#93c5fd');
+    ln.setAttribute('stroke-width',i===total-1?'2':'1.5');
+    ln.setAttribute('marker-end','url(#ah)');
+    svg.appendChild(ln);
+  }
+
+  // Create nodes
+  for(let i=0;i<total;i++){
+    const isHead=i===0;
+    const pos=getPos(i,total,wrap);
+    const el=document.createElement('div');
+    el.className='cnode'+(isHead?' head-c':'');
+    el.id=`cn${i}`;
+    el.style.left=pos.x+'px';el.style.top=pos.y+'px';
+    const val=isHead?'HEAD':list[i-1];
+    const idx=isHead?'':(`[${i-1}]`);
+    el.innerHTML=`<span class="cnval">${val}</span><span class="cnidx">${idx}</span>`;
+    // Floyd highlights
+    if(!isHead){
+      const di=i-1;
+      if(di===slowIdx&&di===fastIdx)el.classList.add('h-meet');
+      else if(di===slowIdx)el.classList.add('h-slow');
+      else if(di===fastIdx)el.classList.add('h-fast');
+      else if(di===pIdx)el.classList.add('h-entry');
+    }
+    wrap.appendChild(el);
+  }
+  upInfo();
+}
+
+function gcn(i){return document.getElementById(`cn${i}`);}
+
+let resT;window.addEventListener('resize',()=>{clearTimeout(resT);resT=setTimeout(()=>buildList(),80);});
+
+async function doInsertTail(){
+  if(busy)return;busy=true;
+  const e=parseInt(document.getElementById('insertVal').value);
+  list.push(e);buildList();
+  const n=gcn(list.length);if(n)n.classList.add('h-new');
+  log('✅',`<span class="ok">尾部插入 [${e}]，tail→next 仍指向头结点，length=${list.length}</span>`,'DONE');
+  steps(['找到尾结点 r','r→next=s（新结点）','s→next=L（保持循环）','更新尾指针 r=s'],3);
+  await sleep(900);if(n)n.classList.remove('h-new');busy=false;
+}
+
+async function doInsertHead(){
+  if(busy)return;busy=true;
+  const e=parseInt(document.getElementById('insertVal').value);
+  list.unshift(e);buildList();
+  const n=gcn(1);if(n)n.classList.add('h-new');
+  log('✅',`<span class="ok">头部插入 [${e}]，成为首元素，length=${list.length}</span>`,'DONE');
+  steps(['s→next=L→next（原首元素）','L→next=s','尾结点 prior 无需改动（已指向 L）'],2);
+  await sleep(900);if(n)n.classList.remove('h-new');busy=false;
+}
+
+async function doDelete(){
+  if(busy)return;busy=true;
+  const i=parseInt(document.getElementById('deletePos').value);
+  if(i<1||i>list.length){log('⚠️',`<span class="warn">位序 ${i} 越界！合法 [1,${list.length}]</span>`,'ERROR');busy=false;return;}
+  const val=list[i-1];
+  const n=gcn(i);if(n)n.classList.add('h-del');
+  log('⚙️',`删除位序 ${i} 结点 <span class="hl">[${val}]</span>...`,'DEL');await sleep(700);
+  if(n)n.classList.remove('h-del');list.splice(i-1,1);buildList();
+  log('✅',`<span class="ok">删除成功！[${val}] 已移除，环形结构保持，length=${list.length}</span>`,'DONE');
+  steps(['遍历找前驱 p','q=p→next（目标）','p→next=q→next（循环保持）','free(q)'],3);
+  busy=false;
+}
+
+async function doTraverse(){
+  if(busy)return;busy=true;
+  const e=parseInt(document.getElementById('findVal').value);
+  steps(['p=L→next（从首元素出发）','比较 p→data 与 e','相等返回位序','p==L 遍历完毕'],0);
+  log('⚙️',`环形遍历查找 <span class="hl">e=${e}</span>...`,'SCAN');await sleep(300);
+  for(let j=0;j<list.length;j++){
+    const n=gcn(j+1);if(n)n.classList.add('h-trav');
+    log('⚙️',`访问: <span class="hl">a[${j}]=${list[j]}</span>`,`[${j}]`);await sleep(340);
+    if(list[j]===e){if(n){n.classList.remove('h-trav');n.classList.add('h-find');}log('✅',`<span class="ok">找到！a[${j}]=${e}，位序=${j+1}</span>`,'FOUND');await sleep(900);if(n)n.classList.remove('h-find');busy=false;return;}
+    if(n)n.classList.remove('h-trav');await sleep(60);
+  }
+  log('⚠️',`<span class="warn">遍历回到头结点，未找到 ${e}</span>`,'NOT FOUND');busy=false;
+}
+
+async function doFloyd(){
+  if(busy)return;busy=true;
+  const ss=['slow=head，fast=head，开始追逐','slow 走1步，fast 走2步','slow==fast → 有环！','p 从 head 与 slow 同步走','p==slow 即为环入口'];
+  steps(ss,0);log('⚙️',`<span class="sp">Floyd 判圈</span>：在循环链表上模拟快慢指针`,'FLOYD');await sleep(600);
+  const n=list.length;if(n===0){log('⚠️','<span class="warn">链表为空</span>','ERROR');busy=false;return;}
+  let slow=0,fast=0;
+  steps(ss,1);
+  let meetStep=-1;
+  for(let step=0;step<n*3;step++){
+    slow=(slow+1)%n;fast=(fast+2)%n;
+    buildList(slow,fast);
+    log('⚙️',`<span class="sp">slow=[${list[slow]}]</span>  <span style="color:var(--fast);font-weight:700;">fast=[${list[fast]}]</span>${slow===fast?' ← 相遇！':''}`,'STEP '+(step+1));
+    await sleep(420);
+    if(slow===fast){meetStep=slow;break;}
+  }
+  if(meetStep===-1){log('ℹ️','模拟结束','DONE');buildList();busy=false;return;}
+  steps(ss,2);buildList(meetStep,meetStep);
+  log('⚙️',`<span class="sp">slow=fast=[${list[meetStep]}]</span>，确认有环！`,'MEET');await sleep(900);
+  steps(ss,3);
+  let p=0,s=meetStep;
+  log('⚙️',`p 从 [${list[p]}] 出发，slow 从 [${list[s]}] 出发，同步走...`,'ENTRY');await sleep(500);
+  for(let step=0;step<n;step++){
+    buildList(s,-1,p);
+    log('⚙️',`p=[${list[p]}]  slow=[${list[s]}]${p===s?' ← p==slow，入口！':''}`,`SYNC ${step+1}`);
+    await sleep(450);
+    if(p===s){steps(ss,4);buildList(-1,-1,p);log('✅',`<span class="ok">环入口 = [${list[p]}]，位序 ${p+1}。O(n) 时间，O(1) 空间</span>`,'FOUND');await sleep(1200);buildList();busy=false;return;}
+    p=(p+1)%n;s=(s+1)%n;
+  }
+  buildList();log('✅',`<span class="ok">Floyd 演示完成！</span>`,'DONE');busy=false;
+}
+
+function resetList(){busy=false;list=[10,20,30,40,50];buildList();steps(['等待操作...'],0);log('ℹ️','循环链表已重置，length=5','IDLE');document.getElementById('stepCounter').textContent='IDLE';}
+setTimeout(()=>buildList(),50);
+</script>
+</body>
+</html>

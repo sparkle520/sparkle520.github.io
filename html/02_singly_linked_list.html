@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>单链表 · 动态演示</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#f1f5fb; --surface:#fff; --panel:#f8fafd; --border:#dde3f0;
+    --accent:#2563eb; --accent-bg:#eff6ff;
+    --accent2:#dc2626; --accent2-bg:#fff1f2;
+    --accent3:#16a34a; --accent3-bg:#f0fdf4;
+    --accent4:#b45309; --accent4-bg:#fffbeb;
+    --text:#1a2035; --text2:#4a5680; --muted:#8b96b8;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',sans-serif;min-height:100vh;display:flex;flex-direction:column;}
+  header{background:var(--surface);border-bottom:2px solid var(--border);padding:18px 32px;display:flex;align-items:center;gap:14px;}
+  .hico{width:38px;height:38px;background:var(--accent3-bg);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;color:var(--accent3);border:1px solid #bbf7d0;}
+  header h1{font-size:21px;font-weight:900;color:var(--text);}
+  .sub{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:1px;display:block;margin-top:1px;}
+  .badge{margin-left:auto;background:var(--accent3-bg);border:1px solid #bbf7d0;color:var(--accent3);font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 13px;border-radius:20px;font-weight:700;}
+  main{flex:1;display:grid;grid-template-columns:264px 1fr;grid-template-rows:1fr auto;}
+  aside{background:var(--surface);border-right:1px solid var(--border);padding:18px 14px;display:flex;flex-direction:column;gap:5px;overflow-y:auto;}
+  .slabel{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin:10px 0 4px;}
+  .slabel:first-child{margin-top:0;}
+  .btn{display:flex;align-items:center;gap:7px;padding:8px 12px;border-radius:7px;border:1.5px solid var(--border);background:var(--surface);color:var(--text2);font-family:'JetBrains Mono',monospace;font-size:11px;cursor:pointer;transition:all .15s;}
+  .btn:hover{background:var(--accent-bg);border-color:#93c5fd;color:var(--accent);}
+  .btn.d:hover{background:var(--accent2-bg);border-color:#fca5a5;color:var(--accent2);}
+  .btn.g:hover{background:var(--accent3-bg);border-color:#86efac;color:var(--accent3);}
+  .btn.y:hover{background:var(--accent4-bg);border-color:#fcd34d;color:var(--accent4);}
+  .btn:active{transform:scale(.98);}
+  .irow{display:flex;gap:5px;align-items:center;flex-wrap:wrap;}
+  .irow input{background:var(--bg);border:1.5px solid var(--border);color:var(--text);font-family:'JetBrains Mono',monospace;font-size:12px;padding:6px 8px;border-radius:6px;width:62px;outline:none;}
+  .irow input:focus{border-color:var(--accent);box-shadow:0 0 0 3px #dbeafe;}
+  .irow label{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+  .icard{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin-top:4px;}
+  .irow2{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:11px;}
+  .irow2:last-child{border-bottom:none;}
+  .ik{color:var(--muted);}.iv{color:var(--accent);font-weight:700;}
+  .cxcard{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin-top:auto;}
+  .cxrow{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 0;}
+  .ck{color:var(--text2);}.o1{color:var(--accent3);font-weight:700;}.on{color:var(--accent2);font-weight:700;}
+
+  .vis{padding:24px 32px;display:flex;flex-direction:column;gap:20px;}
+  .vlabel{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;}
+
+  /* Linked list nodes */
+  .llist{display:flex;align-items:center;flex-wrap:wrap;gap:0;padding:16px 0;min-height:110px;overflow-x:auto;}
+
+  .head-blk{display:flex;flex-direction:column;align-items:center;gap:5px;margin-right:4px;flex-shrink:0;}
+  .head-box{background:var(--accent-bg);border:2px solid #93c5fd;border-radius:7px;padding:8px 14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);font-weight:800;letter-spacing:1px;}
+  .head-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);}
+
+  .nwrap{display:flex;align-items:center;flex-shrink:0;}
+
+  /* Arrow between nodes */
+  .arrow{width:32px;height:20px;display:flex;align-items:center;flex-shrink:0;position:relative;}
+  .arrow::before{content:'';position:absolute;top:50%;left:0;width:26px;height:1.5px;background:var(--accent3);transform:translateY(-50%);}
+  .arrow::after{content:'';position:absolute;top:50%;left:22px;width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:8px solid var(--accent3);transform:translateY(-50%);}
+
+  .node{display:flex;border:2px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.06);transition:all .3s;flex-shrink:0;}
+  .ndata{width:52px;height:60px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:1.5px solid var(--border);}
+  .nval{font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:700;color:var(--text);line-height:1;}
+  .nflabel{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-top:3px;}
+  .nptr{width:40px;height:60px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;}
+  .pdot{width:9px;height:9px;border-radius:50%;background:var(--accent);border:2px solid #bfdbfe;}
+  .pnull{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent2);font-weight:700;}
+
+  .node.hd-node{border-color:#93c5fd;background:var(--accent-bg);}
+  .node.hd-node .nval{font-size:11px;color:var(--accent);letter-spacing:.5px;}
+  .node.hn{border-color:var(--accent)!important;box-shadow:0 0 0 3px var(--accent-bg);}
+  .node.hdl{border-color:var(--accent2)!important;box-shadow:0 0 0 3px var(--accent2-bg);}
+  .node.hf{border-color:var(--accent3)!important;box-shadow:0 0 0 3px var(--accent3-bg);}
+  .node.ht{border-color:#6ea8fe!important;background:#f5f8ff!important;}
+
+  .acard{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.06);}
+  .atitle{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+  .astep{font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 10px;border-radius:5px;color:var(--muted);transition:all .2s;border-left:2px solid transparent;}
+  .astep.active{color:var(--accent);background:var(--accent-bg);border-left-color:var(--accent);font-weight:700;}
+  .astep.done{color:var(--accent3);}
+
+  .logbar{grid-column:1/-1;border-top:1px solid var(--border);background:var(--surface);padding:12px 32px;display:flex;gap:10px;align-items:center;min-height:50px;}
+  .lico{font-size:15px;flex-shrink:0;}
+  .lmsg{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text2);flex:1;}
+  .lmsg .hl{color:var(--accent);font-weight:700;} .lmsg .warn{color:var(--accent2);font-weight:600;} .lmsg .ok{color:var(--accent3);font-weight:600;}
+  .spill{font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--bg);border:1px solid var(--border);color:var(--muted);padding:3px 11px;border-radius:20px;min-width:76px;text-align:center;}
+</style>
+</head>
+<body>
+<header>
+  <div class="hico">⟶</div>
+  <div><h1>单链表</h1><span class="sub">Singly Linked List · Pointer-based</span></div>
+  <span class="badge">§ 2.3.2</span>
+</header>
+<main>
+  <aside>
+    <div class="slabel">头插 / 尾插</div>
+    <div class="irow"><label>值 e</label><input type="number" id="headVal" value="88" min="0" max="99"></div>
+    <button class="btn" onclick="doHeadInsert()">⬆ 头插 HeadInsert</button>
+    <button class="btn y" onclick="doTailInsert()">⬇ 尾插 TailInsert</button>
+    <div class="slabel">按位插入</div>
+    <div class="irow"><label>位序 i</label><input type="number" id="insPos" value="2" min="1" max="20"><label>值 e</label><input type="number" id="insVal" value="55" min="0" max="99"></div>
+    <button class="btn" onclick="doInsert()">＋ ListInsert(L,i,e)</button>
+    <div class="slabel">删除</div>
+    <div class="irow"><label>位序 i</label><input type="number" id="delPos" value="2" min="1" max="20"></div>
+    <button class="btn d" onclick="doDelete()">－ ListDelete(L,i)</button>
+    <div class="slabel">查找 / 逆置</div>
+    <div class="irow"><label>值 e</label><input type="number" id="findVal" value="25" min="0" max="99"></div>
+    <button class="btn g" onclick="doFind()">⌕ LocateElem(L,e)</button>
+    <button class="btn" onclick="doReverse()">↔ 原地逆置</button>
+    <div class="slabel">控制</div>
+    <button class="btn" onclick="resetList()">↺ 重置</button>
+    <div class="icard">
+      <div class="slabel" style="margin-top:0;margin-bottom:4px;">状态</div>
+      <div class="irow2"><span class="ik">length</span><span class="iv" id="infoLen">5</span></div>
+      <div class="irow2"><span class="ik">head→next</span><span class="iv" id="infoHead">[12]</span></div>
+      <div class="irow2"><span class="ik">isEmpty</span><span class="iv" id="infoEmpty">false</span></div>
+    </div>
+    <div class="cxcard">
+      <div class="slabel" style="margin-top:0;margin-bottom:4px;">时间复杂度</div>
+      <div class="cxrow"><span class="ck">按位访问</span><span class="on">O(n)</span></div>
+      <div class="cxrow"><span class="ck">按值查找</span><span class="on">O(n)</span></div>
+      <div class="cxrow"><span class="ck">已知前驱插删</span><span class="o1">O(1)</span></div>
+    </div>
+  </aside>
+
+  <div class="vis">
+    <div class="vlabel">链表结构（带头结点）</div>
+    <div class="llist" id="listDisplay"></div>
+    <div class="acard">
+      <div class="atitle">当前算法步骤</div>
+      <div id="algoSteps"><div class="astep">等待操作...</div></div>
+    </div>
+  </div>
+
+  <div class="logbar">
+    <span class="lico" id="logIcon">ℹ️</span>
+    <span class="lmsg" id="logMsg">初始化带头结点的单链表，length = 5</span>
+    <span class="spill" id="stepCounter">IDLE</span>
+  </div>
+</main>
+<script>
+let list=[12,25,37,49,63];let busy=false;
+function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
+function log(ico,msg,s){document.getElementById('logIcon').textContent=ico;document.getElementById('logMsg').innerHTML=msg;document.getElementById('stepCounter').textContent=s||'RUN';}
+function steps(arr,ai){document.getElementById('algoSteps').innerHTML=arr.map((s,i)=>`<div class="astep ${i<ai?'done':i===ai?'active':''}">${i+1}. ${s}</div>`).join('');}
+function upInfo(){document.getElementById('infoLen').textContent=list.length;document.getElementById('infoEmpty').textContent=list.length===0?'true':'false';document.getElementById('infoHead').textContent=list.length>0?`[${list[0]}]`:'NULL';}
+
+function buildList(){
+  const d=document.getElementById('listDisplay');d.innerHTML='';
+  // HEAD node
+  const hw=document.createElement('div');hw.className='nwrap';
+  hw.innerHTML=`<div class="node hd-node"><div class="ndata"><span class="nval">HEAD</span><span class="nflabel">data</span></div><div class="nptr">${list.length>0?'<div class="pdot"></div>':'<span class="pnull">NULL</span>'}<span class="nflabel">next</span></div></div>`;
+  d.appendChild(hw);
+  for(let i=0;i<list.length;i++){
+    const isLast=i===list.length-1;
+    const aw=document.createElement('div');aw.className='arrow';d.appendChild(aw);
+    const nw=document.createElement('div');nw.className='nwrap';
+    nw.innerHTML=`<div class="node" id="nd${i}"><div class="ndata"><span class="nval">${list[i]}</span><span class="nflabel">data</span></div><div class="nptr">${isLast?'<span class="pnull">∅</span>':'<div class="pdot"></div>'}<span class="nflabel">next</span></div></div>`;
+    d.appendChild(nw);
+  }
+  upInfo();
+}
+function gn(i){return document.getElementById(`nd${i}`);}
+
+async function doHeadInsert(){
+  if(busy)return;busy=true;
+  const e=parseInt(document.getElementById('headVal').value);
+  steps(['创建 s，s->data=e','s->next=L->next（指向原首结点）','L->next=s'],0);
+  log('⚙️',`头插: 创建结点 <span class="hl">s->data=${e}</span>`,'STEP 1');await sleep(500);
+  steps(['创建 s，s->data=e','s->next=L->next（指向原首结点）','L->next=s'],1);
+  log('⚙️',`<span class="hl">s->next=L->next</span>，指向原首结点`,'STEP 2');await sleep(500);
+  steps(['创建 s，s->data=e','s->next=L->next（指向原首结点）','L->next=s'],2);
+  list.unshift(e);buildList();
+  const n=gn(0);if(n)n.classList.add('hn');
+  log('⚙️',`<span class="hl">L->next=s</span>，更新头指针`,'STEP 3');await sleep(700);
+  if(n)n.classList.remove('hn');
+  log('✅',`<span class="ok">头插完成！[${e}] 成为新首元素，length=${list.length}</span>`,'DONE');busy=false;
+}
+
+async function doTailInsert(){
+  if(busy)return;busy=true;
+  const e=parseInt(document.getElementById('headVal').value);
+  if(list.length>0){const last=gn(list.length-1);if(last)last.classList.add('ht');log('⚙️',`找到尾结点 <span class="hl">r=a[${list.length-1}]=${list[list.length-1]}]</span>`,'STEP 1');await sleep(500);if(last)last.classList.remove('ht');}
+  list.push(e);buildList();
+  const n=gn(list.length-1);if(n)n.classList.add('hn');
+  log('⚙️',`<span class="hl">r->next=s，s->next=NULL</span>`,'STEP 3');await sleep(700);
+  if(n)n.classList.remove('hn');
+  log('✅',`<span class="ok">尾插完成！[${e}] 成为新末元素，length=${list.length}</span>`,'DONE');busy=false;
+}
+
+async function doInsert(){
+  if(busy)return;busy=true;
+  const i=parseInt(document.getElementById('insPos').value);
+  const e=parseInt(document.getElementById('insVal').value);
+  if(i<1||i>list.length+1){log('⚠️',`<span class="warn">位序 ${i} 越界！合法 [1,${list.length+1}]</span>`,'ERROR');busy=false;return;}
+  steps([`遍历到第 ${i-1} 个结点（前驱 p）`,'创建 s，s->data=e','s->next=p->next','p->next=s'],0);
+  log('⚙️',`遍历找前驱...`,'SCAN');
+  for(let j=0;j<i-1&&j<list.length;j++){
+    const n=gn(j);if(n)n.classList.add('ht');
+    log('⚙️',`访问: <span class="hl">a[${j}]=${list[j]}</span>`,`[${j}]`);
+    await sleep(260);if(n)n.classList.remove('ht');
+  }
+  steps([`遍历到第 ${i-1} 个结点（前驱 p）`,'创建 s，s->data=e','s->next=p->next','p->next=s'],2);
+  log('⚙️',`<span class="hl">s->next=p->next</span>`,'STEP 3');await sleep(400);
+  list.splice(i-1,0,e);buildList();
+  const n=gn(i-1);if(n)n.classList.add('hn');
+  log('⚙️',`<span class="hl">p->next=s</span>`,'STEP 4');await sleep(600);
+  if(n)n.classList.remove('hn');
+  log('✅',`<span class="ok">插入成功！位序 ${i} 插入 [${e}]，length=${list.length}</span>`,'DONE');busy=false;
+}
+
+async function doDelete(){
+  if(busy)return;busy=true;
+  const i=parseInt(document.getElementById('delPos').value);
+  if(i<1||i>list.length){log('⚠️',`<span class="warn">位序 ${i} 越界！</span>`,'ERROR');busy=false;return;}
+  log('⚙️',`遍历找第 ${i-1} 个前驱...`,'SCAN');
+  for(let j=0;j<i-1&&j<list.length;j++){
+    const n=gn(j);if(n)n.classList.add('ht');
+    log('⚙️',`访问: <span class="hl">a[${j}]=${list[j]}</span>`,`[${j}]`);
+    await sleep(260);if(n)n.classList.remove('ht');
+  }
+  const val=list[i-1];
+  const n=gn(i-1);if(n)n.classList.add('hdl');
+  log('⚙️',`找到目标 <span class="hl">q=a[${i-1}]=${val}</span>，p->next=q->next`,'STEP 2');await sleep(700);
+  if(n)n.classList.remove('hdl');
+  list.splice(i-1,1);buildList();
+  log('✅',`<span class="ok">删除成功！释放 [${val}]，length=${list.length}</span>`,'DONE');busy=false;
+}
+
+async function doFind(){
+  if(busy)return;busy=true;
+  const e=parseInt(document.getElementById('findVal').value);
+  steps(['p=L->next，从首元素出发','比较 p->data 与 e','相等返回位序','p==NULL 未找到'],0);
+  log('⚙️',`顺序查找 <span class="hl">e=${e}</span>...`,'SCAN');await sleep(300);
+  for(let j=0;j<list.length;j++){
+    const n=gn(j);if(n)n.classList.add('ht');
+    log('⚙️',`访问: <span class="hl">a[${j}]=${list[j]}</span>`,`[${j}]`);
+    await sleep(320);
+    if(list[j]===e){if(n){n.classList.remove('ht');n.classList.add('hf');}log('✅',`<span class="ok">找到！a[${j}]=${e}，位序=${j+1}</span>`,'FOUND');await sleep(900);if(n)n.classList.remove('hf');busy=false;return;}
+    if(n)n.classList.remove('ht');await sleep(60);
+  }
+  log('⚠️',`<span class="warn">未找到 e=${e}，返回 0</span>`,'NOT FOUND');busy=false;
+}
+
+async function doReverse(){
+  if(busy)return;busy=true;
+  steps(['p=L->next，L->next=NULL（断开）','循环取 p，头插入新链','p->next=L->next, L->next=p','p=q 继续'],0);
+  log('⚙️',`头插法逆置 ${list.length} 个结点...`,'REV');
+  for(let k=0;k<list.length;k++){
+    const n=gn(k);if(n)n.classList.add('ht');
+    log('⚙️',`处理 <span class="hl">a[${k}]=${list[k]}</span>，头插`,`[${k}]`);
+    await sleep(280);if(n)n.classList.remove('ht');
+  }
+  list.reverse();buildList();
+  for(let k=0;k<list.length;k++){const n=gn(k);if(n)n.classList.add('hn');}
+  log('✅',`<span class="ok">逆置完成！时间 O(n)，空间 O(1)</span>`,'DONE');
+  await sleep(700);for(let k=0;k<list.length;k++){const n=gn(k);if(n)n.classList.remove('hn');}
+  busy=false;
+}
+
+function resetList(){busy=false;list=[12,25,37,49,63];buildList();steps(['等待操作...'],0);log('ℹ️','单链表已重置，length=5','IDLE');document.getElementById('stepCounter').textContent='IDLE';}
+buildList();
+</script>
+</body>
+</html>

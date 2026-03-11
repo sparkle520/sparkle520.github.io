@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>链表逆置 · 算法动画</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;0,700;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #f4f6fb;
+  --surface:   #ffffff;
+  --surface2:  #f0f2f8;
+  --panel-bg:  #1e2233;
+  --border:    #dde1ec;
+  --border-dk: #2d3250;
+  --blue:      #3b6ef8;
+  --blue-lt:   #ebf0ff;
+  --red:       #ef4565;
+  --red-lt:    #fff0f3;
+  --green:     #0db870;
+  --green-lt:  #e8fdf4;
+  --amber:     #f59e0b;
+  --purple:    #8b5cf6;
+  --purple-lt: #f3f0ff;
+  --text:      #1a1f36;
+  --text-2:    #4a5278;
+  --muted:     #8a93b8;
+  --syn-kw:    #c792ea;
+  --syn-ty:    #82aaff;
+  --syn-fn:    #ffcb6b;
+  --syn-op:    #f07178;
+  --syn-cm:    #546e7a;
+  --syn-va:    #80cbc4;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'JetBrains Mono', monospace;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── HEADER ── */
+header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 13px 28px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  box-shadow: 0 1px 4px rgba(30,34,51,0.06);
+}
+.title-block h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1;
+  letter-spacing: -0.3px;
+}
+.title-block h1 span { color: var(--blue); }
+.title-block .sub {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+.header-badges { margin-left: auto; display: flex; gap: 8px; }
+.badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+}
+.badge-time  { background: var(--blue-lt);  color: var(--blue); }
+.badge-space { background: var(--green-lt); color: var(--green); }
+
+/* ── LAYOUT ── */
+.workspace {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 308px 1fr;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* ── CODE PANEL ── */
+.code-panel {
+  background: var(--panel-bg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-right: 1px solid var(--border-dk);
+}
+.panel-label {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--syn-cm);
+  padding: 10px 20px 8px;
+  border-bottom: 1px solid var(--border-dk);
+  background: #171b2e;
+}
+.code-scroll { flex: 1; overflow-y: auto; padding: 10px 0; }
+.code-scroll::-webkit-scrollbar { width: 3px; }
+.code-scroll::-webkit-scrollbar-thumb { background: #3a3f5c; border-radius: 2px; }
+
+.code-line {
+  display: flex;
+  align-items: center;
+  padding: 3px 18px;
+  border-left: 3px solid transparent;
+  transition: background 0.2s, border-left-color 0.2s;
+  position: relative;
+}
+.code-line.active {
+  background: rgba(255,203,107,0.09);
+  border-left-color: var(--syn-fn);
+}
+.code-line.done { opacity: 0.35; }
+.ln {
+  font-size: 10px;
+  color: #384060;
+  width: 20px;
+  flex-shrink: 0;
+  text-align: right;
+  margin-right: 16px;
+  user-select: none;
+}
+.code-line.active .ln { color: var(--syn-fn); }
+.code-text { font-size: 12.5px; line-height: 1.85; white-space: pre; color: #cdd3de; }
+.kw { color: var(--syn-kw); }
+.ty { color: var(--syn-ty); }
+.fn { color: var(--syn-fn); }
+.op { color: var(--syn-op); }
+.cm { color: var(--syn-cm); font-style: italic; }
+.va { color: var(--syn-va); }
+
+.code-line.active::after {
+  content: '';
+  position: absolute;
+  right: 14px; top: 50%;
+  transform: translateY(-50%);
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--syn-fn);
+  box-shadow: 0 0 7px var(--syn-fn);
+  animation: blink 0.85s ease-in-out infinite alternate;
+}
+@keyframes blink { from { opacity:0.3; } to { opacity:1; } }
+
+/* ── VIS PANEL ── */
+.vis-panel {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* Variable strip */
+.var-strip {
+  display: flex;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.var-box {
+  flex: 1;
+  padding: 9px 16px 8px;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: relative;
+  overflow: hidden;
+}
+.var-box:last-child { border-right: none; }
+.var-box::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  border-radius: 2px 2px 0 0;
+  transform: scaleX(0);
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  transform-origin: left;
+}
+.vb-iter::after { background: var(--blue); }
+.vb-p::after    { background: var(--red); }
+.vb-q::after    { background: var(--green); }
+.vb-ln::after   { background: var(--purple); }
+.var-box.lit::after { transform: scaleX(1); }
+
+.var-name {
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.var-name em { font-style: normal; font-size: 8px; opacity: 0.7; letter-spacing: 0; }
+.var-val {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  min-height: 20px;
+}
+.var-val.c-blue   { color: var(--blue); }
+.var-val.c-red    { color: var(--red); }
+.var-val.c-green  { color: var(--green); }
+.var-val.c-purple { color: var(--purple); }
+.var-val.pop { animation: varPop 0.4s cubic-bezier(0.34,1.56,0.64,1); }
+@keyframes varPop { 0% { transform:scale(1.3); } 100% { transform:scale(1); } }
+
+/* Chain area */
+.lists-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 28px;
+  gap: 0;
+  overflow: hidden;
+  min-height: 0;
+}
+.list-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+.list-row:last-child { border-bottom: none; }
+.list-row-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.orig-dot { background: var(--red); }
+.res-dot  { background: var(--green); }
+
+.chain {
+  display: flex;
+  align-items: center;
+  min-height: 68px;
+  overflow-x: auto;
+  padding: 4px 0 6px;
+}
+.chain::-webkit-scrollbar { height: 3px; }
+.chain::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* HEAD */
+.head-box { display:flex; flex-direction:column; align-items:center; gap:3px; flex-shrink:0; }
+.head-rect {
+  background: var(--blue-lt);
+  border: 1.5px solid rgba(59,110,248,0.3);
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--blue);
+  letter-spacing: 0.5px;
+}
+.head-sub { font-size: 8px; color: var(--muted); }
+
+/* Arrow */
+.arrow {
+  width: 26px; height: 2px;
+  background: linear-gradient(90deg, var(--blue), rgba(59,110,248,0.25));
+  position: relative;
+  flex-shrink: 0;
+}
+.arrow::after {
+  content: '';
+  position: absolute;
+  right: -5px; top: -4px;
+  border-left: 6px solid var(--blue);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+.green-arrow { background: linear-gradient(90deg, var(--green), rgba(13,184,112,0.25)); }
+.green-arrow::after { border-left-color: var(--green); }
+
+/* NULL terminal */
+.null-term {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--red);
+  background: var(--red-lt);
+  border: 1px solid rgba(239,69,101,0.2);
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-left: 6px;
+  flex-shrink: 0;
+}
+
+/* Node */
+.node-wrap { display:flex; align-items:center; flex-shrink:0; position:relative; }
+.node {
+  display: flex;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  overflow: visible;
+  background: var(--surface);
+  transition: border-color 0.28s, box-shadow 0.28s;
+  position: relative;
+  box-shadow: 0 1px 4px rgba(30,34,51,0.07);
+}
+.node-data {
+  width: 50px; height: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid var(--border);
+  border-radius: 9px 0 0 9px;
+}
+.node-data .val { font-size: 20px; font-weight: 700; color: var(--text); line-height: 1; }
+.node-data .lbl { font-size: 8px; color: var(--muted); margin-top: 3px; }
+.node-ptr {
+  width: 34px; height: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  border-radius: 0 9px 9px 0;
+  background: var(--surface2);
+}
+.ptr-dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 0 3px var(--blue-lt);
+}
+.null-txt { font-size: 7.5px; color: var(--red); font-weight: 700; }
+.ptr-lbl  { font-size: 7px; color: var(--muted); }
+
+/* Node states */
+.node.state-p {
+  border-color: var(--red) !important;
+  box-shadow: 0 0 0 3px var(--red-lt), 0 2px 10px rgba(239,69,101,0.18) !important;
+}
+.node.state-p .node-data .val { color: var(--red); }
+.node.state-result {
+  border-color: var(--green) !important;
+  box-shadow: 0 0 0 3px var(--green-lt), 0 2px 8px rgba(13,184,112,0.14) !important;
+}
+.node.state-result .ptr-dot { background: var(--green); box-shadow: 0 0 0 3px var(--green-lt); }
+.node.state-new { animation: nodeIn 0.45s cubic-bezier(0.34,1.56,0.64,1) both; }
+@keyframes nodeIn {
+  from { transform:scale(0.4) translateY(-14px); opacity:0; }
+  to   { transform:scale(1)   translateY(0);     opacity:1; }
+}
+
+/* Pointer tags */
+.ptr-tag {
+  position: absolute;
+  top: -26px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: tagIn 0.28s ease both;
+  z-index: 5;
+}
+@keyframes tagIn {
+  from { opacity:0; transform:translateX(-50%) translateY(-5px); }
+  to   { opacity:1; transform:translateX(-50%) translateY(0); }
+}
+.t-p  { background:var(--red-lt);  color:var(--red);  border:1px solid rgba(239,69,101,0.3); }
+.t-ok { background:var(--blue-lt); color:var(--blue); border:1px solid rgba(59,110,248,0.3); }
+
+/* ── LOG BAR ── */
+.log-bar {
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  min-height: 50px;
+  box-shadow: 0 -1px 3px rgba(30,34,51,0.04);
+}
+.log-icon {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.log-text { flex:1; font-size:11.5px; color:var(--text-2); line-height:1.5; }
+.log-text .hl    { color:var(--blue);   font-weight:700; }
+.log-text .hot   { color:var(--red);    font-weight:700; }
+.log-text .cool  { color:var(--green);  font-weight:700; }
+.log-text .faint { color:var(--muted); }
+
+/* ── CONTROLS ── */
+.controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 10px 24px;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: 7px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text-2);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s;
+  box-shadow: 0 1px 3px rgba(30,34,51,0.07);
+  white-space: nowrap;
+}
+.btn:hover:not(:disabled) {
+  border-color: var(--blue);
+  color: var(--blue);
+  background: var(--blue-lt);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(59,110,248,0.14);
+}
+.btn:active:not(:disabled) { transform: translateY(0); }
+.btn.primary {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(59,110,248,0.28);
+}
+.btn.primary:hover:not(:disabled) {
+  background: #2d5ef0;
+  border-color: #2d5ef0;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(59,110,248,0.38);
+}
+.btn:disabled { opacity:0.35; cursor:not-allowed; transform:none !important; box-shadow:none !important; }
+
+.step-disp {
+  font-size: 10px;
+  color: var(--muted);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  padding: 5px 14px;
+  border-radius: 6px;
+  min-width: 100px;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+.speed-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+  font-size: 10px;
+  color: var(--muted);
+}
+.speed-btn {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.speed-btn:hover { border-color: var(--blue); color: var(--blue); }
+.speed-btn.active { background: var(--blue-lt); border-color: var(--blue); color: var(--blue); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="title-block">
+    <h1>链表<span>逆置</span></h1>
+    <div class="sub">Reverse Linked List · In-place Head Insertion</div>
+  </div>
+  <div class="header-badges">
+    <span class="badge badge-time">Time O(n)</span>
+    <span class="badge badge-space">Space O(1)</span>
+  </div>
+</header>
+
+<div class="workspace">
+  <!-- CODE -->
+  <div class="code-panel">
+    <div class="panel-label">source · reverse.c</div>
+    <div class="code-scroll">
+      <div class="code-line" id="cl-0"><span class="ln">1</span><span class="code-text"><span class="kw">void</span> <span class="fn">Reverse</span>(<span class="ty">LinkList</span> <span class="va">L</span>) {</span></div>
+      <div class="code-line" id="cl-1"><span class="ln">2</span><span class="code-text">    <span class="ty">LNode</span> *<span class="va">p</span> = <span class="va">L</span>-><span class="va">next</span>, *<span class="va">q</span>;</span></div>
+      <div class="code-line" id="cl-2"><span class="ln">3</span><span class="code-text">    <span class="va">L</span>-><span class="va">next</span> <span class="op">=</span> <span class="kw">NULL</span>; <span class="cm">// 断开头结点</span></span></div>
+      <div class="code-line" id="cl-3"><span class="ln">4</span><span class="code-text">    <span class="kw">while</span> (<span class="va">p</span>) {</span></div>
+      <div class="code-line" id="cl-4"><span class="ln">5</span><span class="code-text">        <span class="va">q</span> <span class="op">=</span> <span class="va">p</span>-><span class="va">next</span>;   <span class="cm">// 暂存后继</span></span></div>
+      <div class="code-line" id="cl-5"><span class="ln">6</span><span class="code-text">        <span class="va">p</span>-><span class="va">next</span> <span class="op">=</span> <span class="va">L</span>-><span class="va">next</span>; <span class="cm">// 插入头部</span></span></div>
+      <div class="code-line" id="cl-6"><span class="ln">7</span><span class="code-text">        <span class="va">L</span>-><span class="va">next</span> <span class="op">=</span> <span class="va">p</span>;      <span class="cm">// 更新头</span></span></div>
+      <div class="code-line" id="cl-7"><span class="ln">8</span><span class="code-text">        <span class="va">p</span> <span class="op">=</span> <span class="va">q</span>;          <span class="cm">// 推进 p</span></span></div>
+      <div class="code-line" id="cl-8"><span class="ln">9</span><span class="code-text">    }</span></div>
+      <div class="code-line" id="cl-9"><span class="ln">10</span><span class="code-text">} <span class="cm">// ✓ 逆置完成</span></span></div>
+    </div>
+  </div>
+
+  <!-- VIS -->
+  <div class="vis-panel">
+    <div class="var-strip">
+      <div class="var-box vb-iter" id="vbox-iter">
+        <div class="var-name">iteration</div>
+        <div class="var-val c-blue" id="vIter">—</div>
+      </div>
+      <div class="var-box vb-p" id="vbox-p">
+        <div class="var-name">p <em>当前处理结点</em></div>
+        <div class="var-val c-red" id="vP">—</div>
+      </div>
+      <div class="var-box vb-q" id="vbox-q">
+        <div class="var-name">q <em>暂存后继</em></div>
+        <div class="var-val c-green" id="vQ">—</div>
+      </div>
+      <div class="var-box vb-ln" id="vbox-ln">
+        <div class="var-name">L→next <em>新首元</em></div>
+        <div class="var-val c-purple" id="vLnext">—</div>
+      </div>
+    </div>
+
+    <div class="lists-area">
+      <div class="list-row">
+        <div class="list-row-label"><span class="dot orig-dot"></span>原链表 · p 从左向右扫描</div>
+        <div class="chain" id="chainOrig"></div>
+      </div>
+      <div class="list-row">
+        <div class="list-row-label"><span class="dot res-dot"></span>结果链表 · 头插法构建（逐步逆序）</div>
+        <div class="chain" id="chainResult"></div>
+      </div>
+    </div>
+
+    <div class="log-bar">
+      <div class="log-icon" id="logIcon">▷</div>
+      <div class="log-text" id="logText">点击 <strong>开始演示</strong> 查看链表逆置全过程，每步操作实时高亮代码行 · 支持单步调试</div>
+    </div>
+
+    <div class="controls">
+      <button class="btn primary" id="btnStart" onclick="startAnim()">▶&nbsp;开始演示</button>
+      <button class="btn" id="btnStep" onclick="stepOnce()" disabled>⏭&nbsp;单步</button>
+      <button class="btn" id="btnReset" onclick="resetAnim()">↺&nbsp;重置</button>
+      <div class="step-disp" id="stepDisp">READY</div>
+      <div class="speed-row">
+        速度&nbsp;
+        <button class="speed-btn" onclick="setSpd(900,this)">慢</button>
+        <button class="speed-btn active" onclick="setSpd(520,this)">中</button>
+        <button class="speed-btn" onclick="setSpd(200,this)">快</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const INIT = [1, 2, 3, 4, 5];
+let speed = 520, running = false, stepResolve = null, singleStep = false;
+let origList = [], resultList = [], iteration = 0;
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const waitStep = () => new Promise(r => {
+  stepResolve = r;
+  if (!singleStep) setTimeout(r, speed);
+});
+
+function buildChain(id, nodes, markP, isResult) {
+  const el = document.getElementById(id);
+  el.innerHTML = '';
+
+  const hb = document.createElement('div');
+  hb.className = 'head-box';
+  hb.innerHTML = `<div class="head-rect">HEAD</div><div class="head-sub">L</div>`;
+  el.appendChild(hb);
+
+  if (nodes.length === 0) {
+    const a = document.createElement('div');
+    a.className = 'arrow' + (isResult ? ' green-arrow' : '');
+    el.appendChild(a);
+    const n = document.createElement('span');
+    n.className = 'null-term';
+    n.textContent = 'NULL';
+    el.appendChild(n);
+    return;
+  }
+
+  for (let i = 0; i < nodes.length; i++) {
+    const isLast = i === nodes.length - 1;
+    const a = document.createElement('div');
+    a.className = 'arrow' + (isResult ? ' green-arrow' : '');
+    el.appendChild(a);
+
+    const wrap = document.createElement('div');
+    wrap.className = 'node-wrap';
+
+    const node = document.createElement('div');
+    node.className = 'node';
+    if (!isResult && i === 0 && markP) node.classList.add('state-p');
+    if (isResult) { node.classList.add('state-result'); if (i === 0) node.classList.add('state-new'); }
+
+    if (!isResult && i === 0 && markP) {
+      const t = document.createElement('div');
+      t.className = 'ptr-tag t-p';
+      t.textContent = 'p';
+      node.appendChild(t);
+    }
+    if (isResult && i === 0 && resultList.length > 0) {
+      const t = document.createElement('div');
+      t.className = 'ptr-tag t-ok';
+      t.textContent = '← 刚插入';
+      node.appendChild(t);
+    }
+
+    node.innerHTML += `
+      <div class="node-data">
+        <span class="val">${nodes[i]}</span>
+        <span class="lbl">data</span>
+      </div>
+      <div class="node-ptr">
+        ${isLast ? '<span class="null-txt">NULL</span>' : '<div class="ptr-dot"></div>'}
+        <span class="ptr-lbl">next</span>
+      </div>`;
+
+    wrap.appendChild(node);
+    el.appendChild(wrap);
+  }
+}
+
+function render(markP = true) {
+  buildChain('chainOrig',   origList,   markP, false);
+  buildChain('chainResult', resultList, false, true);
+}
+
+function setVar(id, val, cls, boxId) {
+  const el = document.getElementById(id);
+  const was = el.textContent;
+  el.textContent = val;
+  el.className = 'var-val ' + cls;
+  if (was !== String(val)) {
+    el.classList.add('pop');
+    el.addEventListener('animationend', () => el.classList.remove('pop'), { once: true });
+  }
+  if (boxId) document.getElementById(boxId).classList.toggle('lit', val !== '—');
+}
+
+function setLine(idx) {
+  document.querySelectorAll('.code-line').forEach((el, i) => {
+    el.classList.toggle('active', i === idx);
+    el.classList.toggle('done',   i < idx);
+  });
+}
+
+function log(icon, html) {
+  document.getElementById('logIcon').textContent = icon;
+  document.getElementById('logText').innerHTML = html;
+}
+function setStep(t) { document.getElementById('stepDisp').textContent = t; }
+function setSpd(ms, btn) {
+  speed = ms;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+async function startAnim() {
+  if (running) return;
+  running = true; singleStep = false;
+  document.getElementById('btnStart').disabled = true;
+  document.getElementById('btnStep').disabled = false;
+  await runAlgorithm();
+  document.getElementById('btnStart').disabled = false;
+  document.getElementById('btnStep').disabled = true;
+  running = false;
+}
+
+function stepOnce() {
+  if (stepResolve) {
+    singleStep = true;
+    const r = stepResolve; stepResolve = null; r();
+  }
+}
+
+function resetAnim() {
+  running = false; singleStep = false; stepResolve = null;
+  origList = [...INIT]; resultList = []; iteration = 0;
+  document.querySelectorAll('.code-line').forEach(el => el.classList.remove('active','done'));
+  setVar('vIter',  '—',    'c-blue',   'vbox-iter');
+  setVar('vP',     '—',    'c-red',    'vbox-p');
+  setVar('vQ',     '—',    'c-green',  'vbox-q');
+  setVar('vLnext', 'NULL', 'c-purple', 'vbox-ln');
+  render(false);
+  log('▷', '点击 <strong>开始演示</strong> 查看链表逆置全过程，每步操作实时高亮代码行 · 支持单步调试');
+  setStep('READY');
+  document.getElementById('btnStart').disabled = false;
+  document.getElementById('btnStep').disabled = true;
+}
+
+async function runAlgorithm() {
+  setLine(0);
+  log('ℹ', `执行 <span class="hl">Reverse(L)</span>，原链表：${INIT.join(' → ')} → NULL`);
+  setStep('START'); await waitStep();
+
+  setLine(1);
+  setVar('vP', `[${origList[0]}]`, 'c-red',   'vbox-p');
+  setVar('vQ', '—',                'c-green',  'vbox-q');
+  log('⚙', `<span class="hot">p = L→next = [${origList[0]}]</span>，p 指向原链表首元素 <span class="faint">· q 声明但未赋值</span>`);
+  setStep('INIT p'); render(true); await waitStep();
+
+  setLine(2);
+  setVar('vLnext', 'NULL', 'c-purple', 'vbox-ln');
+  log('⚙', `<span class="hl">L→next = NULL</span>，断开头结点与原链的连接，结果链表初始为空`);
+  setStep('BREAK HEAD'); render(true); await waitStep();
+
+  while (origList.length > 0) {
+    iteration++;
+    setVar('vIter', `第 ${iteration} 轮`, 'c-blue', 'vbox-iter');
+
+    setLine(3);
+    log('⚙', `while 条件：<span class="hot">p = [${origList[0]}]</span> ≠ NULL，进入循环体`);
+    setStep(`ITER ${iteration} · CHECK`); render(true); await waitStep();
+
+    setLine(4);
+    const qVal = origList.length > 1 ? origList[1] : null;
+    setVar('vQ', qVal !== null ? `[${qVal}]` : 'NULL', 'c-green', 'vbox-q');
+    log('⚙', `<span class="cool">q = p→next = ${qVal !== null ? '['+qVal+']' : 'NULL'}</span>，先暂存后继，否则断链后找不到下一个结点`);
+    setStep(`ITER ${iteration} · SAVE q`); await waitStep();
+
+    setLine(5);
+    const lnPrev = resultList.length > 0 ? `[${resultList[0]}]` : 'NULL';
+    log('⚙', `<span class="hot">p→next = L→next = ${lnPrev}</span>，让 p 的 next 指向结果链当前头部`);
+    setStep(`ITER ${iteration} · RELINK`); await waitStep();
+
+    setLine(6);
+    const moved = origList.shift();
+    resultList.unshift(moved);
+    setVar('vLnext', `[${moved}]`, 'c-purple', 'vbox-ln');
+    log('⚙', `<span class="hl">L→next = p = [${moved}]</span>，[${moved}] 头插入结果链 ✓`);
+    setStep(`ITER ${iteration} · INSERT`); render(true); await waitStep();
+
+    setLine(7);
+    const newP = origList.length > 0 ? origList[0] : null;
+    setVar('vP', newP !== null ? `[${newP}]` : 'NULL', 'c-red', 'vbox-p');
+    log('⚙', `<span class="hot">p = q = ${newP !== null ? '['+newP+']' : 'NULL'}</span>，p 推进到下一结点`);
+    setStep(`ITER ${iteration} · ADVANCE`); render(true); await waitStep();
+  }
+
+  setLine(8);
+  log('⚙', `p = NULL，while 条件不满足，退出循环`);
+  setStep('LOOP END'); render(false); await waitStep();
+
+  setLine(9);
+  setVar('vIter', `共 ${iteration} 轮`, 'c-blue',   'vbox-iter');
+  setVar('vP',    'NULL',               'c-red',    'vbox-p');
+  log('✓', `<span class="cool">逆置完成！</span>结果：${resultList.join(' → ')} → NULL &emsp;<span class="faint">时间 O(n) · 空间 O(1)</span>`);
+  setStep('DONE ✓');
+
+  document.querySelectorAll('#chainResult .node').forEach((n, i) => {
+    setTimeout(() => {
+      n.style.background = 'var(--green-lt)';
+      setTimeout(() => n.style.background = '', 600);
+    }, i * 65);
+  });
+}
+
+resetAnim();
+</script>
+</body>
+</html>
