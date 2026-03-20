@@ -1,0 +1,152 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+@keyframes popin{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+@keyframes flow{from{stroke-dashoffset:20}to{stroke-dashoffset:0}}
+.root{display:flex;gap:10px;align-items:stretch;padding:8px 0}
+.panel{flex:1;border-radius:14px;padding:16px 14px 14px;display:flex;flex-direction:column}
+.pw{background:#EFF6FF;border:1.5px solid #93C5FD}
+.pp{background:#F8FAFC;border:1.5px solid #CBD5E1}
+.pr{background:#F0FDF4;border:1.5px solid #86EFAC}
+.plabel{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px}
+.lw{color:#2563EB}.lp{color:#475569}.lr{color:#16A34A}
+.ptitle{font-size:15px;font-weight:600;margin-bottom:10px}
+.tw{color:#1E40AF}.tp{color:#334155}.tr{color:#166534}
+.slots{display:flex;flex-direction:column;gap:5px;flex:1;min-height:110px}
+.hint{font-size:11px;color:#A8A29E;text-align:center;padding:14px 0;font-style:italic}
+.pill{display:flex;align-items:center;gap:7px;padding:6px 10px;border-radius:8px;border:1.5px solid;font-size:12px;font-weight:500;animation:popin .18s ease-out both}
+.pip{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.pid{font-size:10px;margin-left:auto;opacity:.4}
+.btns{display:flex;flex-direction:column;gap:6px;margin-top:12px}
+.btn{display:block;width:100%;padding:9px 12px;border-radius:9px;border:1.5px solid;font-size:12px;font-weight:600;cursor:pointer;text-align:center;transition:opacity .12s;z-index: 100;}
+.btn:hover{opacity:.78}.btn:active{opacity:.55}.btn:disabled{opacity:.3;cursor:default}
+.bw{background:#DBEAFE;border-color:#93C5FD;color:#1D4ED8}
+.br2{background:#DCFCE7;border-color:#86EFAC;color:#15803D}
+.pfoot{font-size:11px;color:#64748B;border-top:1px solid #E2E8F0;padding-top:8px;margin-top:8px;display:flex;justify-content:space-between}
+.pfoot b{color:#334155}
+.arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;flex-shrink:0;width:24px;padding-top:56px}
+.aline{width:1px;height:28px;background:#CBD5E1}
+.ahead{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:7px solid #94A3B8}
+.albl{font-size:9px;font-weight:700;letter-spacing:.05em;color:#94A3B8;text-transform:uppercase;writing-mode:vertical-rl;transform:rotate(180deg)}
+.statusbar{font-size:12px;color:#78716C;text-align:center;padding:10px 0 2px;min-height:26px}
+</style>
+
+<div class="root">
+
+  <!-- 写端 -->
+  <div class="panel pw">
+    <div class="plabel lw">写端</div>
+    <div class="ptitle tw">写进程</div>
+    <div class="slots" id="staged">
+      <div class="hint" id="staged-mt">暂存区空</div>
+    </div>
+    <div class="btns">
+      <button class="btn bw" onclick="compose()">＋ 准备数据</button>
+      <button class="btn" style="background:#FEE2E2;border-color:#FCA5A5;color:#B91C1C" id="btn-write" onclick="doWrite()" disabled>write() →</button>
+    </div>
+  </div>
+
+  <!-- 左连接器 -->
+  <div class="arrow">
+    <div class="albl">write</div>
+    <div class="aline"></div>
+    <div class="ahead"></div>
+  </div>
+
+  <!-- 管道缓冲区 -->
+  <div class="panel pp">
+    <div class="plabel lp">内核缓冲区</div>
+    <div class="ptitle tp">管道 pipe</div>
+    <div class="slots" id="pipebuf">
+      <div class="hint" id="pipe-mt">管道为空</div>
+    </div>
+    <div class="pfoot">
+      <span>容量 <b id="pdepth">0</b>/8</span>
+      <span>FIFO 读取</span>
+    </div>
+  </div>
+
+  <!-- 右连接器 -->
+  <div class="arrow">
+    <div class="albl">read</div>
+    <div class="aline"></div>
+    <div class="ahead"></div>
+  </div>
+
+  <!-- 读端 -->
+  <div class="panel pr">
+    <div class="plabel lr">读端</div>
+    <div class="ptitle tr">读进程</div>
+    <div class="slots" id="recvd">
+      <div class="hint">等待数据…</div>
+    </div>
+    <div class="btns">
+      <button class="btn br2" id="btn-read" onclick="doRead()" disabled>← read()</button>
+    </div>
+  </div>
+
+</div>
+<div class="statusbar" id="status">点击「准备数据」开始</div>
+
+<script>
+const TYPES=[
+  {tag:'data',bg:'#FEF3C7',bc:'#FCD34D',pip:'#D97706',tc:'#78350F'},
+  {tag:'msg', bg:'#FCE7F3',bc:'#F9A8D4',pip:'#DB2777',tc:'#831843'},
+  {tag:'buf', bg:'#E0F2FE',bc:'#7DD3FC',pip:'#0284C7',tc:'#0C4A6E'},
+  {tag:'pkt', bg:'#EDE9FE',bc:'#C4B5FD',pip:'#7C3AED',tc:'#3B0764'},
+  {tag:'evt', bg:'#DCFCE7',bc:'#86EFAC',pip:'#16A34A',tc:'#14532D'},
+  {tag:'cmd', bg:'#FFEDD5',bc:'#FDBA74',pip:'#EA580C',tc:'#7C2D12'},
+];
+const SIZES=['4B','16B','64B','256B','1KB'];
+let staged=[],pipe=[],recvd=[],seq=0,si=0;
+const $=id=>document.getElementById(id);
+
+function mkPill(m){
+  const t=TYPES[m.type];
+  const d=document.createElement('div');
+  d.className='pill';
+  d.style.cssText=`background:${t.bg};border-color:${t.bc};color:${t.tc}`;
+  d.innerHTML=`<span class="pip" style="background:${t.pip}"></span><span>${t.tag} · ${m.size}</span><span class="pid">#${m.id}</span>`;
+  return d;
+}
+
+function renderStaged(){
+  const el=$('staged');
+  [...el.querySelectorAll('.pill')].forEach(n=>n.remove());
+  $('staged-mt').style.display=staged.length?'none':'';
+  staged.forEach(m=>el.appendChild(mkPill(m)));
+  $('btn-write').disabled=staged.length===0;
+}
+function renderPipe(){
+  const el=$('pipebuf');
+  [...el.querySelectorAll('.pill')].forEach(n=>n.remove());
+  $('pipe-mt').style.display=pipe.length?'none':'';
+  pipe.forEach(m=>el.appendChild(mkPill(m)));
+  $('pdepth').textContent=pipe.length;
+  $('btn-read').disabled=pipe.length===0;
+}
+function renderRecvd(){
+  const el=$('recvd');el.innerHTML='';
+  if(!recvd.length){el.innerHTML='<div class="hint">等待数据…</div>';return;}
+  recvd.slice(0,4).forEach(m=>el.appendChild(mkPill(m)));
+}
+
+function compose(){
+  if(staged.length>=3){$('status').textContent='暂存区最多 3 块，请先写入管道';return;}
+  seq++;
+  staged.push({id:seq,type:seq%6,size:SIZES[si++%5]});
+  renderStaged();
+  $('status').textContent=`#${seq} 数据块已准备，点「write()」写入管道`;
+}
+function doWrite(){
+  if(!staged.length||pipe.length>=8){$('status').textContent=pipe.length>=8?'管道已满，读端需先 read()':'无数据';return;}
+  const m=staged.shift();pipe.push(m);
+  renderStaged();renderPipe();
+  $('status').textContent=`write() → #${m.id}「${m.tag} ${m.size}」写入内核缓冲区`;
+}
+function doRead(){
+  if(!pipe.length)return;
+  const m=pipe.shift();recvd.unshift(m);
+  renderPipe();renderRecvd();
+  $('status').textContent=`read() → #${m.id}「${m.tag} ${m.size}」已读出（FIFO）`;
+}
+</script>

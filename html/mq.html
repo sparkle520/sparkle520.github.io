@@ -1,0 +1,144 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+@keyframes popin{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.root{display:flex;gap:10px;align-items:stretch;padding:8px 0}
+.panel{flex:1;border-radius:14px;padding:16px 14px 14px;display:flex;flex-direction:column}
+.pa{background:#EFF6FF;border:1.5px solid #93C5FD}
+.pq{background:#FAF5FF;border:1.5px solid #C4B5FD}
+.pb{background:#F0FDF4;border:1.5px solid #86EFAC}
+.plabel{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px}
+.la{color:#2563EB}.lq{color:#7C3AED}.lb{color:#16A34A}
+.ptitle{font-size:15px;font-weight:600;margin-bottom:10px}
+.ta{color:#1E40AF}.tq{color:#5B21B6}.tb{color:#166534}
+.slots{display:flex;flex-direction:column;gap:5px;flex:1;min-height:110px}
+.hint{font-size:11px;color:#A8A29E;text-align:center;padding:14px 0;font-style:italic}
+.pill{display:flex;align-items:center;gap:7px;padding:6px 10px;border-radius:8px;border:1.5px solid;font-size:12px;font-weight:500;animation:popin .18s ease-out both}
+.pip{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.pid{font-size:10px;margin-left:auto;opacity:.4}
+.btns{display:flex;flex-direction:column;gap:6px;margin-top:12px}
+.btn{display:block;width:100%;padding:9px 12px;border-radius:9px;border:1.5px solid;font-size:12px;font-weight:600;cursor:pointer;text-align:center;transition:opacity .12s;visibility:visible;opacity:1;z-index: 100;}
+.btn:hover{opacity:.78}.btn:active{opacity:.55}
+.btn:disabled{opacity:.32;cursor:default}
+.bc{background:#DBEAFE;border-color:#93C5FD;color:#1D4ED8}
+.bs{background:#FEE2E2;border-color:#FCA5A5;color:#B91C1C}
+.br{background:#DCFCE7;border-color:#86EFAC;color:#15803D}
+.qfoot{font-size:11px;color:#A78BFA;border-top:1px solid #DDD6FE;padding-top:8px;margin-top:8px;display:flex;justify-content:space-between}
+.qfoot b{color:#7C3AED}
+.arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;flex-shrink:0;width:24px;padding-top:56px}
+.aline{width:1px;height:28px;background:#C4B5FD}
+.ahead{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:7px solid #A78BFA}
+.albl{font-size:9px;font-weight:700;letter-spacing:.05em;color:#A78BFA;text-transform:uppercase;writing-mode:vertical-rl;transform:rotate(180deg)}
+.statusbar{font-size:12px;color:#78716C;text-align:center;padding:10px 0 2px;min-height:26px}
+</style>
+
+<div class="root">
+  <div class="panel pa">
+    <div class="plabel la">发送方</div>
+    <div class="ptitle ta">进程 A</div>
+    <div class="slots" id="pool">
+      <div class="hint" id="pool-mt">草稿箱空</div>
+    </div>
+    <div class="btns">
+      <button class="btn bc" onclick="compose()">＋ 撰写</button>
+      <button class="btn bs" id="btn-send" onclick="doSend()" disabled>发送 →</button>
+    </div>
+  </div>
+
+  <div class="arrow">
+    <div class="albl">write</div>
+    <div class="aline"></div>
+    <div class="ahead"></div>
+  </div>
+
+  <div class="panel pq">
+    <div class="plabel lq">信箱</div>
+    <div class="ptitle tq">消息队列</div>
+    <div class="slots" id="qlist">
+      <div class="hint" id="q-mt">队列为空</div>
+    </div>
+    <div class="qfoot">
+      <span>深度 <b id="qdepth">0</b>/5</span>
+      <span>已处理 <b id="qtotal">0</b></span>
+    </div>
+  </div>
+
+  <div class="arrow">
+    <div class="albl">read</div>
+    <div class="aline"></div>
+    <div class="ahead"></div>
+  </div>
+
+  <div class="panel pb">
+    <div class="plabel lb">接收方</div>
+    <div class="ptitle tb">进程 B</div>
+    <div class="slots" id="recvd">
+      <div class="hint">等待消息…</div>
+    </div>
+    <div class="btns">
+      <button class="btn br" id="btn-recv" onclick="doRecv()" disabled>← 取出</button>
+    </div>
+  </div>
+</div>
+
+<div class="statusbar" id="status">点击「撰写」开始</div>
+
+<script>
+const TYPES=[
+  {tag:'MSG',bg:'#FEF3C7',bc:'#FCD34D',pip:'#D97706',tc:'#78350F'},
+  {tag:'CMD',bg:'#FCE7F3',bc:'#F9A8D4',pip:'#DB2777',tc:'#831843'},
+  {tag:'EVT',bg:'#E0F2FE',bc:'#7DD3FC',pip:'#0284C7',tc:'#0C4A6E'},
+  {tag:'SIG',bg:'#DCFCE7',bc:'#86EFAC',pip:'#16A34A',tc:'#14532D'},
+  {tag:'DAT',bg:'#EDE9FE',bc:'#C4B5FD',pip:'#7C3AED',tc:'#3B0764'},
+  {tag:'ACK',bg:'#FFEDD5',bc:'#FDBA74',pip:'#EA580C',tc:'#7C2D12'},
+];
+const WORDS=['更新状态','请求资源','心跳包','任务分配','同步信号','释放锁','查询结果','确认回执','广播事件','优先调度'];
+let pool=[],queue=[],recvd=[],total=0,seq=0,wi=0;
+const $=id=>document.getElementById(id);
+
+function mkPill(m){
+  const t=TYPES[m.type];
+  const d=document.createElement('div');
+  d.className='pill';
+  d.style.cssText=`background:${t.bg};border-color:${t.bc};color:${t.tc}`;
+  d.innerHTML=`<span class="pip" style="background:${t.pip}"></span><span>${t.tag} · ${m.text}</span><span class="pid">#${m.id}</span>`;
+  return d;
+}
+
+function renderPool(){
+  const el=$('pool');
+  [...el.querySelectorAll('.pill')].forEach(n=>n.remove());
+  $('pool-mt').style.display=pool.length?'none':'';
+  pool.forEach(m=>el.appendChild(mkPill(m)));
+  $('btn-send').disabled=pool.length===0;
+}
+function renderQ(){
+  const el=$('qlist');
+  [...el.querySelectorAll('.pill')].forEach(n=>n.remove());
+  $('q-mt').style.display=queue.length?'none':'';
+  queue.forEach(m=>el.appendChild(mkPill(m)));
+  $('qdepth').textContent=queue.length;
+  $('btn-recv').disabled=queue.length===0;
+}
+function renderRecv(){
+  const el=$('recvd');el.innerHTML='';
+  if(!recvd.length){el.innerHTML='<div class="hint">等待消息…</div>';return;}
+  recvd.slice(0,4).forEach(m=>el.appendChild(mkPill(m)));
+}
+
+function compose(){
+  if(pool.length>=3){$('status').textContent='草稿箱最多 3 条';return;}
+  seq++;pool.push({id:seq,type:seq%6,text:WORDS[wi++%WORDS.length]});
+  renderPool();$('status').textContent=`#${seq} 已撰写 — 点「发送」推入队列`;
+}
+function doSend(){
+  if(!pool.length||queue.length>=5){$('status').textContent=queue.length>=5?'队列已满':'无消息';return;}
+  const m=pool.shift();queue.push(m);renderPool();renderQ();
+  $('status').textContent=`#${m.id}「${m.text}」已写入信箱`;
+}
+function doRecv(){
+  if(!queue.length)return;
+  const m=queue.shift();total++;recvd.unshift(m);
+  $('qtotal').textContent=total;renderQ();renderRecv();
+  $('status').textContent=`进程 B 取出 #${m.id}「${m.text}」`;
+}
+</script>
