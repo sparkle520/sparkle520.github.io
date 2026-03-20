@@ -247,7 +247,7 @@ svg text{font-family:'JetBrains Mono',monospace;}
         </div>
         <div class="ib" style="border-left:3px solid #f59e0b;background:#f1f5f9;">
           <div style="color:#b45309;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px;">行 / 列译码器</div>
-          将 n 位地址译为 2ⁿ 条选择线。<strong>行译码器</strong>激活 WL 选定行；<strong>列译码器</strong>选定 BL 列接入 SA。
+          将 n 位地址译为 2ⁿ 条选择线。<strong>行译码器</strong>激活 WL 选定行; <strong>列译码器</strong>选定 BL 列接入 SA。
         </div>
         <div class="ib" style="border-left:3px solid #2563eb;background:#f1f5f9;">
           <div style="color:#1d4ed8;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px;">存储矩阵 Cell Array</div>
@@ -269,7 +269,7 @@ svg text{font-family:'JetBrains Mono',monospace;}
       <div style="display:flex;flex-direction:column;gap:8px;font-size:12px;margin-bottom:16px;">
         <div style="padding:10px;background:#fff7ed;border-radius:8px;display:flex;gap:12px;align-items:center;">
           <div style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#c2410c;font-size:18px;min-width:48px;">CS̄</div>
-          <div><div style="color:#1e293b;font-weight:600;">片选（Chip Select）</div><div style="color:#64748b;margin-top:2px;">低有效。仅 CS̄=0 时芯片工作；多片组合时由高位地址控制各片 CS̄。</div></div>
+          <div><div style="color:#1e293b;font-weight:600;">片选（Chip Select）</div><div style="color:#64748b;margin-top:2px;">低有效。仅 CS̄=0 时芯片工作; 多片组合时由高位地址控制各片 CS̄。</div></div>
         </div>
         <div style="padding:10px;background:#eff6ff;border-radius:8px;display:flex;gap:12px;align-items:center;">
           <div style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#0369a1;font-size:18px;min-width:48px;">WĒ</div>
@@ -277,7 +277,7 @@ svg text{font-family:'JetBrains Mono',monospace;}
         </div>
         <div style="padding:10px;background:#f0fdf4;border-radius:8px;display:flex;gap:12px;align-items:center;">
           <div style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#15803d;font-size:18px;min-width:48px;">OĒ</div>
-          <div><div style="color:#1e293b;font-weight:600;">输出使能（Output Enable）</div><div style="color:#64748b;margin-top:2px;">OĒ=0 数据输出到总线；否则呈高阻抗（三态门断开）。</div></div>
+          <div><div style="color:#1e293b;font-weight:600;">输出使能（Output Enable）</div><div style="color:#64748b;margin-top:2px;">OĒ=0 数据输出到总线; 否则呈高阻抗（三态门断开）。</div></div>
         </div>
         <div style="padding:10px;background:#fdf4ff;border-radius:8px;display:flex;gap:12px;align-items:center;">
           <div style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#7e22ce;font-size:18px;min-width:48px;">A[n]</div>
@@ -397,7 +397,7 @@ svg text{font-family:'JetBrains Mono',monospace;}
         <line x1="514" y1="171" x2="514" y2="177" stroke="#ef4444" stroke-width="1.5"/>
         <text x="507" y="186" fill="#ef4444" font-size="7" text-anchor="middle">tDH</text>
 
-        <text x="354" y="205" fill="#94a3b8" font-size="7" text-anchor="middle">tDS 建立时间：WĒ↓ 前数据需稳定；tDH 保持时间：WĒ↑ 后数据继续保持</text>
+        <text x="354" y="205" fill="#94a3b8" font-size="7" text-anchor="middle">tDS 建立时间：WĒ↓ 前数据需稳定; tDH 保持时间：WĒ↑ 后数据继续保持</text>
       </svg>
     </div>
   </div>
@@ -601,11 +601,11 @@ svg text{font-family:'JetBrains Mono',monospace;}
       <div style="flex:1;min-width:240px;display:flex;flex-direction:column;gap:10px;">
         <div class="ib" style="background:#dcfce7;border-left:3px solid #16a34a;">
           <div style="color:#15803d;font-weight:700;margin-bottom:4px;">位扩展要点</div>
-          地址线、CS̄、WĒ 并联共享；数据线各自独立拼接。所有芯片同时被选中同时工作。
+          地址线、CS̄、WĒ 并联共享; 数据线各自独立拼接。所有芯片同时被选中同时工作。
         </div>
         <div class="ib" style="background:#eff6ff;border-left:3px solid #0284c7;">
           <div style="color:#0369a1;font-weight:700;margin-bottom:4px;">字扩展要点</div>
-          低位地址、数据线、WĒ 共享；高位地址经译码器控制各片 CS̄，每次仅一片工作。
+          低位地址、数据线、WĒ 共享; 高位地址经译码器控制各片 CS̄，每次仅一片工作。
         </div>
         <div class="ib" style="background:#fdf4ff;border-left:3px solid #a855f7;">
           <div style="color:#7e22ce;font-weight:700;margin-bottom:4px;">三态门的作用</div>
