@@ -1,0 +1,178 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#fff;color:#334155;padding:20px}
+.demo-box{border:1px solid #e2e8f0;border-radius:12px;background:#f8fafc;padding:20px;max-width:800px;margin:0 auto;box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);display:flex;flex-direction:column;gap:20px}
+.header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e2e8f0;padding-bottom:12px}
+.title{font-size:18px;font-weight:600;color:#0f172a}
+.status{font-size:14px;color:#64748b;background:#f1f5f9;padding:4px 10px;border-radius:20px}
+.msg-box{min-height:48px;font-size:15px;line-height:1.5;color:#334155;background:#eff6ff;padding:12px 16px;border-radius:8px;border-left:4px solid #3b82f6}
+.tag{display:inline-block;padding:2px 6px;border-radius:4px;font-size:12px;font-weight:600;margin:0 2px}
+.tag-err{background:#fee2e2;color:#991b1b}
+.tag-c{background:#dcfce7;color:#166534}
+.tag-w{background:#fef3c7;color:#b45309}
+.main-area{display:flex;gap:30px}
+.seq-col{flex:1}
+.seq-title{font-size:14px;font-weight:600;color:#64748b;margin-bottom:10px}
+.seq-row{display:flex;flex-wrap:wrap;gap:8px}
+.seq-item{width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#fff;border:2px solid #cbd5e1;border-radius:8px;font-weight:600;color:#64748b;transition:all .3s}
+.seq-item.active{border-color:#3b82f6;background:#eff6ff;color:#1d4ed8;transform:scale(1.1);box-shadow:0 0 0 3px rgba(59,130,246,.2)}
+.seq-item.done{border-color:#e2e8f0;background:#f1f5f9;color:#94a3b8}
+.mem-col{width:380px;background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:20px;position:relative}
+.mem-title{font-size:14px;font-weight:600;color:#64748b;margin-bottom:15px;text-align:center}
+.mem-queue{display:flex;gap:12px;width:max-content;margin:0 auto 50px;position:relative}
+.mem-slot{display:flex;flex-direction:column;align-items:center;width:64px}
+.mem-block{width:100%;height:64px;background:#f8fafc;border:2px dashed #cbd5e1;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;color:#cbd5e1;transition:all .3s;position:relative}
+.mem-block.filled{background:#fff;border-style:solid;border-color:#94a3b8;color:#334155}
+.mem-block.hit{border-color:#10b981;background:#ecfdf5;color:#047857;box-shadow:0 0 0 4px rgba(16,185,129,.2)}
+.mem-block.replaced{border-color:#f59e0b;background:#fffbeb;color:#b45309;animation:pop .4s ease-out}
+.mem-block.scan{border-color:#3b82f6;box-shadow:0 0 8px rgba(59,130,246,.5)}
+.mem-lbl{font-size:11px;color:#64748b;margin-top:6px;font-weight:600;padding:2px 4px;border-radius:4px;background:#f1f5f9;transition:all .3s;white-space:nowrap}
+.mem-lbl.am-00{color:#166534;background:#dcfce7}
+.mem-lbl.am-01{color:#b45309;background:#fef3c7}
+.mem-lbl.am-10{color:#c2410c;background:#ffedd5}
+.mem-lbl.am-11{color:#991b1b;background:#fee2e2}
+.ptr-container{position:absolute;bottom:-45px;left:0;width:100%;height:40px;pointer-events:none}
+.ptr{position:absolute;bottom:0;left:0;width:64px;display:flex;flex-direction:column;align-items:center;transition:transform .4s cubic-bezier(0.34,1.56,0.64,1);color:#3b82f6;font-size:12px;font-weight:700}
+.ptr svg{width:20px;height:20px;fill:currentColor;animation:bounce 1.5s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.controls{display:flex;align-items:center;gap:12px;margin-top:10px}
+.btn{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border:none;border-radius:50%;background:#f1f5f9;color:#475569;cursor:pointer;transition:all .2s}
+.btn:hover:not(:disabled){background:#e2e8f0;color:#0f172a}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn svg{width:20px;height:20px;fill:currentColor}
+.progress{flex:1;display:flex;align-items:center;gap:12px}
+.track{flex:1;height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden;cursor:pointer;position:relative}
+.fill{height:100%;background:#3b82f6;transition:width .3s}
+.ctr{font-size:13px;color:#64748b;font-variant-numeric:tabular-nums;width:50px;text-align:right}
+@keyframes pop{0%{transform:scale(.8);opacity:0}50%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
+@keyframes fadein{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+</style>
+<div class="demo-box">
+  <div class="header">
+    <div class="title">改进型 CLOCK 算法演示 ( 寻找 (A,M) )</div>
+    <div class="status" id="sbadge">1/1</div>
+  </div>
+  <div class="msg-box" id="msg"></div>
+  <div class="main-area">
+    <div class="seq-col">
+      <div class="seq-title">访问序列 ( 读写 )</div>
+      <div class="seq-row" id="seq-row"></div>
+    </div>
+    <div class="mem-col">
+      <div class="mem-title">内存页框 ( 容量: 4, 循环队列 )</div>
+      <div class="mem-queue" id="mem-q">
+        <div class="mem-slot"><div class="mem-block filled" id="blk-0"><span id="val-0"></span></div><div class="mem-lbl" id="lbl-0"></div></div>
+        <div class="mem-slot"><div class="mem-block filled" id="blk-1"><span id="val-1"></span></div><div class="mem-lbl" id="lbl-1"></div></div>
+        <div class="mem-slot"><div class="mem-block filled" id="blk-2"><span id="val-2"></span></div><div class="mem-lbl" id="lbl-2"></div></div>
+        <div class="mem-slot"><div class="mem-block filled" id="blk-3"><span id="val-3"></span></div><div class="mem-lbl" id="lbl-3"></div></div>
+        <div class="ptr-container">
+          <div class="ptr" id="ptr">
+            <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h6v8h4v-8h6z"/></svg>
+            <div>指针</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="controls">
+    <button class="btn" id="btn-prev" onclick="goPrev()"><svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg></button>
+    <button class="btn" id="btn-play" onclick="togglePlay()"><svg viewBox="0 0 24 24" id="play-ico"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></button>
+    <button class="btn" id="btn-next" onclick="goNext()"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg></button>
+    <div class="progress">
+      <div class="track" onclick="scrub(event)"><div class="fill" id="fill" style="width:0%"></div></div>
+      <div class="ctr" id="ctr">0 / 0</div>
+    </div>
+  </div>
+</div>
+<script>
+const SEQUENCE = [5];
+const FRAMES = [
+  { msg: '<b>初始状态</b> — 内存满，指针指向页框 0. 各页带有 <b>(访问位A, 修改位M)</b>. ', seqIdx: -1, mem: [1, 2, 3, 4], a: [1, 1, 1, 1], m: [1, 1, 0, 1], ptr: 0, state: ['', '', '', ''] },
+  { msg: '访问页面 <b>5</b> — <span class="tag tag-err">缺页中断</span> 开始<b>第一轮扫描</b> : 寻找最佳淘汰页 (0, 0)，本轮不修改 A 位. ', seqIdx: 0, mem: [1, 2, 3, 4], a: [1, 1, 1, 1], m: [1, 1, 0, 1], ptr: 0, state: ['', '', '', ''] },
+  
+  { msg: '<b>第1轮 扫描页框 0</b> — 状态 (1, 1) ≠ (0, 0)，跳过，指针下移. ', seqIdx: 0, mem: [1, 2, 3, 4], a: [1, 1, 1, 1], m: [1, 1, 0, 1], ptr: 0, state: ['scan', '', '', ''] },
+  { msg: '<b>第1轮 扫描页框 1</b> — 状态 (1, 1) ≠ (0, 0)，跳过，指针下移. ', seqIdx: 0, mem: [1, 2, 3, 4], a: [1, 1, 1, 1], m: [1, 1, 0, 1], ptr: 1, state: ['', 'scan', '', ''] },
+  { msg: '<b>第1轮 扫描页框 2</b> — 状态 (1, 0) ≠ (0, 0)，跳过，指针下移. ', seqIdx: 0, mem: [1, 2, 3, 4], a: [1, 1, 1, 1], m: [1, 1, 0, 1], ptr: 2, state: ['', '', 'scan', ''] },
+  { msg: '<b>第1轮 扫描页框 3</b> — 状态 (1, 1) ≠ (0, 0)，跳过，指针下移. 第一轮未找到目标. ', seqIdx: 0, mem: [1, 2, 3, 4], a: [1, 1, 1, 1], m: [1, 1, 0, 1], ptr: 3, state: ['', '', '', 'scan'] },
+  
+  { msg: '开始<b>第二轮扫描</b> : 寻找 (0, 1) 的页面，同时将经过的页面 <b>A位置0</b>. ', seqIdx: 0, mem: [1, 2, 3, 4], a: [1, 1, 1, 1], m: [1, 1, 0, 1], ptr: 0, state: ['', '', '', ''] },
+  
+  { msg: '<b>第2轮 扫描页框 0</b> — 状态 (1, 1) ≠ (0, 1)，将其 A 置 0 变为 <span class="tag tag-w">(0, 1)</span>，指针下移. ', seqIdx: 0, mem: [1, 2, 3, 4], a: [0, 1, 1, 1], m: [1, 1, 0, 1], ptr: 0, state: ['scan', '', '', ''] },
+  { msg: '<b>第2轮 扫描页框 1</b> — 状态 (1, 1) ≠ (0, 1)，将其 A 置 0 变为 <span class="tag tag-w">(0, 1)</span>，指针下移. ', seqIdx: 0, mem: [1, 2, 3, 4], a: [0, 0, 1, 1], m: [1, 1, 0, 1], ptr: 1, state: ['', 'scan', '', ''] },
+  { msg: '<b>第2轮 扫描页框 2</b> — 状态 (1, 0) ≠ (0, 1)，将其 A 置 0 变为 <span class="tag tag-c">(0, 0)</span>，指针下移. ', seqIdx: 0, mem: [1, 2, 3, 4], a: [0, 0, 0, 1], m: [1, 1, 0, 1], ptr: 2, state: ['', '', 'scan', ''] },
+  { msg: '<b>第2轮 扫描页框 3</b> — 状态 (1, 1) ≠ (0, 1)，将其 A 置 0 变为 <span class="tag tag-w">(0, 1)</span>，指针下移. 第二轮仍未找到目标. ', seqIdx: 0, mem: [1, 2, 3, 4], a: [0, 0, 0, 0], m: [1, 1, 0, 1], ptr: 3, state: ['', '', '', 'scan'] },
+  
+  { msg: '开始<b>第三轮扫描</b> : 重新寻找 (0, 0) 的页面. 由于第二轮修改了A位，一定能找到. ', seqIdx: 0, mem: [1, 2, 3, 4], a: [0, 0, 0, 0], m: [1, 1, 0, 1], ptr: 0, state: ['', '', '', ''] },
+  
+  { msg: '<b>第3轮 扫描页框 0</b> — 状态 (0, 1) ≠ (0, 0)，跳过，指针下移. ', seqIdx: 0, mem: [1, 2, 3, 4], a: [0, 0, 0, 0], m: [1, 1, 0, 1], ptr: 0, state: ['scan', '', '', ''] },
+  { msg: '<b>第3轮 扫描页框 1</b> — 状态 (0, 1) ≠ (0, 0)，跳过，指针下移. ', seqIdx: 0, mem: [1, 2, 3, 4], a: [0, 0, 0, 0], m: [1, 1, 0, 1], ptr: 1, state: ['', 'scan', '', ''] },
+  { msg: '<b>第3轮 扫描页框 2</b> — 状态 (0, 0) == (0, 0)! <span class="tag tag-c">找到最佳淘汰对象</span>', seqIdx: 0, mem: [1, 2, 3, 4], a: [0, 0, 0, 0], m: [1, 1, 0, 1], ptr: 2, state: ['', '', 'hit', ''] },
+  
+  { msg: '<b>替换完成</b> — 淘汰 3，调入页面 <b>5</b>. 新页面 (A=1, M=0)，指针移至下一页. ', seqIdx: 0, mem: [1, 2, 5, 4], a: [0, 0, 1, 0], m: [1, 1, 0, 1], ptr: 3, state: ['', '', 'replaced', ''] },
+  { msg: '<b>演示结束</b> — 改进型 CLOCK 优先淘汰未修改的页面，有效减少了写回磁盘的开销. ', seqIdx: 1, mem: [1, 2, 5, 4], a: [0, 0, 1, 0], m: [1, 1, 0, 1], ptr: 3, state: ['', '', '', ''] }
+];
+
+const N = FRAMES.length;
+let idx = 0; let playing = false, timer = null;
+
+const seqRow = document.getElementById('seq-row');
+SEQUENCE.forEach(val => {
+  const div = document.createElement('div');
+  div.className = 'seq-item';
+  div.textContent = val;
+  seqRow.appendChild(div);
+});
+const seqItems = seqRow.querySelectorAll('.seq-item');
+
+function renderFrame(i) {
+  const f = FRAMES[i];
+  
+  seqItems.forEach((item, index) => {
+    item.className = 'seq-item';
+    if (index < f.seqIdx) item.classList.add('done');
+    else if (index === f.seqIdx) item.classList.add('active');
+  });
+  
+  for (let k = 0; k < 4; k++) {
+    const valEl = document.getElementById('val-'+k);
+    const lblEl = document.getElementById('lbl-'+k);
+    const blkEl = document.getElementById('blk-'+k);
+    
+    if (valEl.textContent !== String(f.mem[k])) valEl.textContent = f.mem[k];
+    
+    const amText = 'A=' + f.a[k] + ', M=' + f.m[k];
+    if (lblEl.textContent !== amText) {
+        lblEl.textContent = amText;
+    }
+    
+    if (f.a[k] === 0 && f.m[k] === 0) lblEl.className = 'mem-lbl am-00';
+    else if (f.a[k] === 0 && f.m[k] === 1) lblEl.className = 'mem-lbl am-01';
+    else if (f.a[k] === 1 && f.m[k] === 0) lblEl.className = 'mem-lbl am-10';
+    else lblEl.className = 'mem-lbl am-11';
+    
+    blkEl.className = 'mem-block filled ' + f.state[k];
+    if (f.state[k]) { blkEl.style.animation = 'none'; void blkEl.offsetWidth; blkEl.style.animation = 'pop .3s ease-out'; }
+  }
+  
+  const ptrEl = document.getElementById('ptr');
+  ptrEl.style.transform = `translateX(${f.ptr * 76}px)`;
+  
+  const m = document.getElementById('msg');
+  m.innerHTML = f.msg; m.style.animation = 'none'; void m.offsetWidth; m.style.animation = 'fadein .2s ease-out both';
+  
+  const shown = i + 1;
+  document.getElementById('sbadge').textContent = shown + '/' + N;
+  document.getElementById('fill').style.width = (shown / N * 100) + '%';
+  document.getElementById('ctr').textContent = shown + ' / ' + N;
+  document.getElementById('btn-prev').disabled = i <= 0;
+  document.getElementById('btn-next').disabled = i >= N - 1;
+}
+
+function goNext() { if (idx < N - 1) { idx++; renderFrame(idx); } else pause(); }
+function goPrev() { if (idx > 0) { idx--; renderFrame(idx); } }
+function togglePlay() { if (playing) pause(); else play(); }
+function play() { playing = true; document.getElementById('play-ico').innerHTML = '<rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect>'; if (idx >= N - 1) idx = 0; renderFrame(idx); timer = setInterval(goNext, 1800); }
+function pause() { playing = false; clearInterval(timer); document.getElementById('play-ico').innerHTML = '<polygon points="5 3 19 12 5 21 5 3"></polygon>'; }
+function scrub(e) { const rect = e.currentTarget.getBoundingClientRect(); let pct = (e.clientX - rect.left) / rect.width; pct = Math.max(0, Math.min(1, pct)); idx = Math.floor(pct * N); if (idx >= N) idx = N - 1; renderFrame(idx); if (playing) { pause(); play(); } }
+renderFrame(0);
+</script>

@@ -154,7 +154,7 @@
       animate.start = timestamp;
       if (indexI < aiStrLength - 1) {
         let char = aiStr.charAt(indexI + 1);
-        let delay = /[,.，。!?！？]/.test(char) ? 150 : 20;
+        let delay = /[,.，。!?! ？]/.test(char) ? 150 : 20;
         if (explanation.firstElementChild) {
           explanation.removeChild(explanation.firstElementChild);
         }

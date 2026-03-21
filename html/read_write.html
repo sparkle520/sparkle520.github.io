@@ -1,0 +1,252 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+@keyframes fly-r{0%{clip-path:inset(0 100% 0 0)}100%{clip-path:inset(0 0 0 0)}}
+@keyframes fly-l{0%{clip-path:inset(0 0 0 100%)}100%{clip-path:inset(0 0 0 0)}}
+@keyframes pop{0%{transform:scale(0);opacity:0}70%{transform:scale(1.2)}100%{transform:scale(1);opacity:1}}
+@keyframes fadein{0%{opacity:0;transform:translateY(4px)}100%{opacity:1;transform:translateY(0)}}
+@keyframes blink-red{0%,100%{outline:2px solid transparent}40%{outline:3px solid #EF4444;outline-offset:2px}}
+@keyframes pulse-sem{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+body,html{font-family:system-ui,"Noto Sans SC",sans-serif}
+.root{padding:10px 0 6px}
+.sbar{display:flex;align-items:center;justify-content:center;gap:18px;padding:10px 20px;background:var(--color-background-secondary);border-radius:14px;margin-bottom:12px}
+.sem-wrap{display:flex;flex-direction:column;align-items:center;gap:4px}
+.sem-lbl{font-size:9px;font-weight:700;letter-spacing:.08em;color:var(--color-text-tertiary);text-transform:uppercase}
+.sem-val{width:40px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;transition:all .3s}
+.se{background:#FEF9C3;border:1.5px solid #FACC15;color:#78350F}
+.sf{background:#D1FAE5;border:1.5px solid #34D399;color:#064E3B}
+.sz{background:#FEE2E2;border:1.5px solid #F87171;color:#7F1D1D}
+.sem-changed{animation:pulse-sem .3s ease-out}
+.buf-wrap{display:flex;flex-direction:column;align-items:center;gap:5px}
+.buf-lbl{font-size:9px;font-weight:700;letter-spacing:.08em;color:var(--color-text-tertiary);text-transform:uppercase}
+.buf-slots{display:flex;gap:6px}
+.slot{width:44px;height:32px;border-radius:8px;border:1.5px solid var(--color-border-secondary);background:var(--color-background-primary);display:flex;align-items:center;justify-content:center;font-size:15px;transition:all .25s}
+.slot.reading{background:#DBEAFE;border-color:#60A5FA;animation:pop .3s ease-out}
+.slot.writing{background:#FEE2E2;border-color:#F87171;animation:pop .3s ease-out}
+.seq{position:relative;height:340px;margin-bottom:12px}
+.actor-row{position:absolute;top:0;left:0;right:0;display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;z-index:2}
+.actor{border-radius:10px;padding:8px 6px;text-align:center}
+.actor-p{background:#EFF6FF;border:1.5px solid #BFDBFE}
+.actor-s{background:#FFFBEB;border:1.5px solid #FDE68A}
+.actor-c{background:#FEF2F2;border:1.5px solid #FECACA}
+.aname{font-size:12px;font-weight:600}
+.anp{color:#1D4ED8}.ans{color:#B45309}.anc{color:#B91C1C}
+.asub{font-size:9px;color:var(--color-text-tertiary);margin-top:1px}
+.lifelines{position:absolute;top:56px;left:0;right:0;bottom:0;display:grid;grid-template-columns:1fr 1fr 1fr;pointer-events:none}
+.ll{display:flex;justify-content:center}
+.ll-line{width:1.5px}
+.arrow-layer{position:absolute;top:56px;left:0;right:0;bottom:0;pointer-events:none}
+.info-row{display:flex;gap:8px;margin-bottom:10px;align-items:stretch}
+.step-badge{flex-shrink:0;width:40px;display:flex;align-items:center;justify-content:center;border-radius:9px;background:var(--color-background-secondary);font-size:11px;font-weight:600;color:var(--color-text-secondary)}
+.msgbox{flex:1;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:10px;padding:9px 14px;display:flex;align-items:center}
+.msg{font-size:11px;color:var(--color-text-secondary);line-height:1.55;animation:fadein .2s ease-out both}
+.msg b{color:var(--color-text-primary);font-weight:500}
+.tag{display:inline-block;padding:1px 7px;border-radius:10px;font-size:9px;font-weight:700;margin-right:4px;vertical-align:middle}
+.tag-p{background:#DBEAFE;color:#1E40AF}
+.tag-c{background:#FEE2E2;color:#991B1B}
+.tag-err{background:#FEE2E2;color:#991B1B}
+.controls{display:flex;align-items:center;gap:8px}
+.btn-nav{width:32px;height:32px;border-radius:8px;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .1s;flex-shrink:0}
+.btn-nav:hover{background:var(--color-background-secondary)}
+.btn-nav:disabled{opacity:.3;cursor:default}
+.btn-nav svg{width:12px;height:12px;color:var(--color-text-primary)}
+.btn-play{width:36px;height:36px;border-radius:50%;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .1s;flex-shrink:0}
+.btn-play:hover{background:var(--color-background-secondary)}
+.btn-play svg{width:13px;height:13px;color:var(--color-text-primary)}
+.track{flex:1;height:3px;background:var(--color-background-secondary);border-radius:2px;overflow:hidden;cursor:pointer}
+.fill{height:100%;background:#818CF8;border-radius:2px;transition:width .2s}
+.ctr{font-size:10px;color:var(--color-text-tertiary);min-width:42px;text-align:right}
+</style>
+
+<div class="root">
+<div class="sbar">
+  <div class="sem-wrap"><div class="sem-lbl">count_mutex</div><div class="sem-val se" id="sv-cm">1</div></div>
+  <div class="sem-wrap"><div class="sem-lbl">count</div><div class="sem-val sz" id="sv-c">0</div></div>
+  <div class="sem-wrap"><div class="sem-lbl">rw_mutex</div><div class="sem-val se" id="sv-rw">1</div></div>
+  <div class="buf-wrap">
+    <div class="buf-lbl">Data</div>
+    <div class="buf-slots">
+      <div class="slot" id="data-slot">📄</div>
+    </div>
+  </div>
+</div>
+
+<div class="seq" id="seq">
+  <div class="actor-row">
+    <div class="actor actor-p"><div class="aname anp">读者</div><div class="asub">Reader</div></div>
+    <div class="actor actor-s"><div class="aname ans">状态与锁</div><div class="asub">Semaphores</div></div>
+    <div class="actor actor-c"><div class="aname anc">写者</div><div class="asub">Writer</div></div>
+  </div>
+  <div class="lifelines">
+    <div class="ll"><div class="ll-line" style="background:repeating-linear-gradient(to bottom,#BFDBFE 0,#BFDBFE 4px,transparent 4px,transparent 10px)"></div></div>
+    <div class="ll"><div class="ll-line" style="background:repeating-linear-gradient(to bottom,#FDE68A 0,#FDE68A 4px,transparent 4px,transparent 10px)"></div></div>
+    <div class="ll"><div class="ll-line" style="background:repeating-linear-gradient(to bottom,#FECACA 0,#FECACA 4px,transparent 4px,transparent 10px)"></div></div>
+  </div>
+  <div class="arrow-layer" id="alayer"></div>
+</div>
+
+<div class="info-row">
+  <div class="step-badge" id="sbadge">—</div>
+  <div class="msgbox"><div class="msg" id="msg">按 ▶ 逐步播放，或用 ‹ › 手动跳转</div></div>
+</div>
+
+<div class="controls">
+  <button class="btn-nav" id="btn-prev" onclick="goPrev()" disabled>
+    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2L4 6l4 4"/></svg>
+  </button>
+  <button class="btn-play" id="btn-play" onclick="togglePlay()">
+    <svg id="play-ico" viewBox="0 0 13 13" fill="currentColor"><path d="M2.5 1.5l9 5-9 5z"/></svg>
+  </button>
+  <button class="btn-nav" id="btn-next" onclick="goNext()">
+    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 2l4 4-4 4"/></svg>
+  </button>
+  <div class="track" onclick="scrub(event)"><div class="fill" id="fill" style="width:0%"></div></div>
+  <div class="ctr" id="ctr">0 / 0</div>
+</div>
+</div>
+
+<script>
+const FRAMES = [
+  {msg:'<span class="tag tag-p">读者 1</span> 调用 <b>P(count_mutex)</b> — 获准进入，准备更新读者数量',arrow:{from:'P',to:'S',color:'#3B82F6',label:'P(count_mutex)'},y:40,cm:0,c:0,rw:1,state:'idle'},
+  {msg:'<span class="tag tag-p">读者 1</span> 更新 count=1. 由于是第一个读者，调用 <b>P(rw_mutex)</b> 加写锁',arrow:{from:'P',to:'S',color:'#3B82F6',label:'count++; P(rw_mutex)'},y:80,cm:0,c:1,rw:0,state:'idle'},
+  {msg:'<span class="tag tag-p">读者 1</span> 调用 <b>V(count_mutex)</b> 释放计数器锁，<b>开始阅读</b> 📖',arrow:{from:'S',to:'P',color:'#16A34A',label:'V(count_mutex) → Read'},y:120,cm:1,c:1,rw:0,state:'reading'},
+  {msg:'<span class="tag tag-c">写者 1</span> 想要写入，调用 <b>P(rw_mutex)</b> — 已被读者锁定，<b style="color:#EF4444">⚠ 阻塞</b>',arrow:{from:'C',to:'S',color:'#EF4444',label:'P(rw_mutex) 阻塞!'},y:160,cm:1,c:1,rw:0,state:'reading'},
+  {msg:'<span class="tag tag-p">读者 2</span> 到来，调用 <b>P(count_mutex)</b> 获准，更新 count=2，再 <b>V(count_mutex)</b>. 加入阅读 📖',arrow:{from:'P',to:'S',color:'#8B5CF6',label:'count=2 → Read'},y:200,cm:1,c:2,rw:0,state:'reading'},
+  {msg:'<span class="tag tag-p">读者 1</span> 离开，调用 <b>P(count_mutex)</b>，count=1，再 <b>V(count_mutex)</b>',arrow:{from:'P',to:'S',color:'#8B5CF6',label:'count=1'},y:240,cm:1,c:1,rw:0,state:'reading'},
+  {msg:'<span class="tag tag-p">读者 2</span> 离开，调用 <b>P(count_mutex)</b>，count=0. 最后一个读者，调用 <b>V(rw_mutex)</b> 释放写锁! ',arrow:{from:'P',to:'S',color:'#F59E0B',label:'count=0; V(rw_mutex)'},y:80,cm:1,c:0,rw:1,state:'idle'},
+  {msg:'<span class="tag tag-c">写者 1</span> 被唤醒! 获取到 <b>rw_mutex</b> 写锁，<b>开始写入</b> 📝',arrow:{from:'S',to:'C',color:'#16A34A',label:'唤醒 → 获锁 W'},y:140,cm:1,c:0,rw:0,state:'writing'},
+  {msg:'<span class="tag tag-c">写者 1</span> 完成写入，调用 <b>V(rw_mutex)</b> 释放写锁',arrow:{from:'C',to:'S',color:'#F59E0B',label:'V(rw_mutex)'},y:200,cm:1,c:0,rw:1,state:'idle'}
+];
+
+const N = FRAMES.length;
+let idx = 0;
+let playing = false, timer = null;
+
+function drawArrow(f) {
+  const layer = document.getElementById('alayer');
+  layer.innerHTML = '';
+  const W = document.getElementById('seq').offsetWidth || 400;
+  const col = {P: W/6, S: W/2, C: W*5/6};
+  const x1 = col[f.arrow.from], x2 = col[f.arrow.to];
+  const goR = x2 > x1;
+  const lx1 = Math.min(x1,x2), lx2 = Math.max(x1,x2);
+  const color = f.arrow.color;
+  const LINE_Y = 26, LABEL_Y = LINE_Y - 5;
+
+  const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+  svg.setAttribute('width', W);
+  svg.setAttribute('height', '32');
+  svg.style.cssText = `position:absolute;top:${f.y}px;left:0;overflow:visible;animation:${goR?'fly-r':'fly-l'} .32s ease-out both`;
+
+  const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+  line.setAttribute('x1', lx1); line.setAttribute('y1', LINE_Y);
+  line.setAttribute('x2', lx2); line.setAttribute('y2', LINE_Y);
+  line.setAttribute('stroke', color); line.setAttribute('stroke-width','2');
+  svg.appendChild(line);
+
+  const head = document.createElementNS('http://www.w3.org/2000/svg','polygon');
+  const tx = goR ? lx2 : lx1;
+  head.setAttribute('points', goR
+    ? `${tx-9},${LINE_Y-5} ${tx+1},${LINE_Y} ${tx-9},${LINE_Y+5}`
+    : `${tx+9},${LINE_Y-5} ${tx-1},${LINE_Y} ${tx+9},${LINE_Y+5}`);
+  head.setAttribute('fill', color);
+  svg.appendChild(head);
+
+  const txt = document.createElementNS('http://www.w3.org/2000/svg','text');
+  txt.setAttribute('x', (lx1+lx2)/2); txt.setAttribute('y', LABEL_Y);
+  txt.setAttribute('text-anchor','middle'); txt.setAttribute('dominant-baseline','auto');
+  txt.setAttribute('font-size','10'); txt.setAttribute('font-weight','600');
+  txt.setAttribute('fill', color); txt.setAttribute('font-family','system-ui,sans-serif');
+  txt.textContent = f.arrow.label;
+  svg.appendChild(txt);
+
+  layer.appendChild(svg);
+}
+
+function renderFrame(i) {
+  const f = FRAMES[i];
+  drawArrow(f);
+
+  const cm = document.getElementById('sv-cm');
+  const c = document.getElementById('sv-c');
+  const rw = document.getElementById('sv-rw');
+  
+  cm.textContent = f.cm; cm.className = 'sem-val '+(f.cm===0?'sz':'se');
+  cm.classList.add('sem-changed'); setTimeout(()=>cm.classList.remove('sem-changed'),300);
+  
+  c.textContent = f.c; c.className = 'sem-val '+(f.c===0?'sz':'se');
+  c.classList.add('sem-changed'); setTimeout(()=>c.classList.remove('sem-changed'),300);
+  
+  rw.textContent = f.rw; rw.className = 'sem-val '+(f.rw===0?'sz':'se');
+  rw.classList.add('sem-changed'); setTimeout(()=>rw.classList.remove('sem-changed'),300);
+
+  const ds = document.getElementById('data-slot');
+  if (f.state === 'reading') { ds.className = 'slot reading'; ds.textContent = '📖'; }
+  else if (f.state === 'writing') { ds.className = 'slot writing'; ds.textContent = '📝'; }
+  else { ds.className = 'slot'; ds.textContent = '📄'; }
+
+  const m = document.getElementById('msg');
+  m.innerHTML = f.msg; m.style.animation='none'; void m.offsetWidth; m.style.animation='fadein .2s ease-out both';
+
+  const shown = i+1;
+  document.getElementById('sbadge').textContent = shown+'/'+N;
+  document.getElementById('fill').style.width = (shown/N*100)+'%';
+  document.getElementById('ctr').textContent = shown+' / '+N;
+  document.getElementById('btn-prev').disabled = i <= 0;
+  document.getElementById('btn-next').disabled = i >= N-1;
+}
+
+function updateIdx(i) {
+  idx = Math.max(0, Math.min(N-1, i));
+  renderFrame(idx);
+}
+
+function goNext() {
+  if (idx >= N-1) { stopPlay(); return; }
+  updateIdx(idx+1);
+}
+
+function goPrev() {
+  if (idx <= 0) return;
+  updateIdx(idx-1);
+}
+
+function scrub(e) {
+  const t = e.currentTarget;
+  const r = (e.clientX - t.getBoundingClientRect().left) / t.offsetWidth;
+  updateIdx(Math.round(r*(N-1)));
+}
+
+function togglePlay() { playing ? stopPlay() : startPlay(); }
+
+function startPlay() {
+  playing = true;
+  document.getElementById('play-ico').innerHTML = '<rect x="1.5" y="1" width="4" height="11" rx="1"/><rect x="7.5" y="1" width="4" height="11" rx="1"/>';
+  if (idx >= N-1) { resetState(); }
+  timer = setInterval(() => {
+    if (idx >= N-1) { stopPlay(); return; }
+    updateIdx(idx+1);
+  }, 2500);
+  if (idx === 0 && FRAMES.length > 0) { renderFrame(0); }
+}
+
+function stopPlay() {
+  playing = false;
+  clearInterval(timer); timer = null;
+  document.getElementById('play-ico').innerHTML = '<path d="M2.5 1.5l9 5-9 5z"/>';
+}
+
+function resetState() {
+  idx = 0;
+  document.getElementById('sv-cm').textContent='1'; document.getElementById('sv-cm').className='sem-val se';
+  document.getElementById('sv-c').textContent='0'; document.getElementById('sv-c').className='sem-val sz';
+  document.getElementById('sv-rw').textContent='1'; document.getElementById('sv-rw').className='sem-val se';
+  const ds = document.getElementById('data-slot'); ds.className = 'slot'; ds.textContent = '📄';
+  document.getElementById('alayer').innerHTML='';
+  document.getElementById('msg').innerHTML='按 ▶ 逐步播放，或用 ‹ › 手动跳转';
+  document.getElementById('sbadge').textContent='—';
+  document.getElementById('fill').style.width='0%';
+  document.getElementById('ctr').textContent='0 / '+N;
+  document.getElementById('btn-prev').disabled=true;
+  document.getElementById('btn-next').disabled=false;
+}
+</script>

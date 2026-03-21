@@ -1,0 +1,61 @@
+<svg width="680" viewBox="0 0 680 360" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+  <style>text{font-family:system-ui,"Noto Sans SC",sans-serif}</style>
+</defs>
+
+<!-- ══ TOP: 模式切换 ══ -->
+<rect x="16" y="16" width="648" height="152" rx="14" fill="#F0F9FF" stroke="#BAE6FD" stroke-width="1" stroke-dasharray="6 3"/>
+<text x="340" y="36" text-anchor="middle" font-size="11" font-weight="700" fill="#0284C7" letter-spacing=".05em">模式切换  Mode Switch</text>
+
+<rect x="60" y="52" width="200" height="60" rx="10" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.5"/>
+<text x="160" y="75" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#0369A1">用户态</text>
+<text x="160" y="96" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#0284C7">User Mode</text>
+
+<rect x="420" y="52" width="200" height="60" rx="10" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.5"/>
+<text x="520" y="75" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#0369A1">内核态</text>
+<text x="520" y="96" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#0284C7">Kernel Mode</text>
+
+<line x1="261" y1="72" x2="418" y2="72" stroke="#DC2626" stroke-width="2" marker-end="url(#arr)"/>
+<text x="340" y="64" text-anchor="middle" font-size="10" font-weight="600" fill="#DC2626">中断 / 系统调用</text>
+
+<line x1="418" y1="100" x2="261" y2="100" stroke="#16A34A" stroke-width="2" marker-end="url(#arr)"/>
+<text x="340" y="116" text-anchor="middle" font-size="10" font-weight="600" fill="#16A34A">IRET / 返回用户态</text>
+
+<rect x="200" y="130" width="280" height="22" rx="6" fill="#DBEAFE" stroke="#93C5FD" stroke-width="1"/>
+<text x="340" y="141" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#1E40AF">仅切换特权级，不切换页表，开销小</text>
+
+<!-- 可能触发 -->
+<line x1="340" y1="168" x2="340" y2="190" stroke="#9333EA" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#arr)"/>
+<text x="348" y="181" text-anchor="start" font-size="10" fill="#9333EA">可能触发</text>
+
+<!-- ══ BOTTOM: 进程切换 ══ -->
+<rect x="16" y="192" width="648" height="152" rx="14" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1" stroke-dasharray="6 3"/>
+<text x="340" y="212" text-anchor="middle" font-size="11" font-weight="700" fill="#D97706" letter-spacing=".05em">进程切换  Context Switch</text>
+
+<rect x="40" y="228" width="160" height="60" rx="10" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="120" y="251" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#B45309">进程 A</text>
+<text x="120" y="272" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#D97706">Process A</text>
+
+<rect x="260" y="228" width="160" height="60" rx="10" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.5"/>
+<text x="340" y="251" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#334155">调度器</text>
+<text x="340" y="272" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#64748B">Scheduler</text>
+
+<rect x="480" y="228" width="160" height="60" rx="10" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="560" y="251" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#B45309">进程 B</text>
+<text x="560" y="272" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#D97706">Process B</text>
+
+<line x1="200" y1="255" x2="258" y2="255" stroke="#D97706" stroke-width="2" marker-end="url(#arr)"/>
+<text x="229" y="247" text-anchor="middle" font-size="10" font-weight="600" fill="#D97706">保存上下文</text>
+<text x="229" y="273" text-anchor="middle" font-size="10" fill="#94A3B8">Save PCB</text>
+
+<line x1="420" y1="255" x2="478" y2="255" stroke="#16A34A" stroke-width="2" marker-end="url(#arr)"/>
+<text x="449" y="247" text-anchor="middle" font-size="10" font-weight="600" fill="#16A34A">恢复上下文</text>
+<text x="449" y="273" text-anchor="middle" font-size="10" fill="#94A3B8">切换页表</text>
+
+<rect x="140" y="304" width="400" height="22" rx="6" fill="#FEF3C7" stroke="#FCD34D" stroke-width="1"/>
+<text x="340" y="315" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#92400E">包含模式切换 + 保存/恢复寄存器 + 切换页表，开销大</text>
+
+</svg>

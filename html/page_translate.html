@@ -1,0 +1,310 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+@keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
+
+.root{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;padding:8px;color:#334155;max-width:800px;margin:0 auto}
+
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:12px}
+.step-pill{font-size:11px;color:#475569;font-weight:600;background:#F1F5F9;padding:3px 12px;border-radius:999px;border:1px solid #E2E8F0;flex-shrink:0}
+.progress-wrap{flex:1;height:5px;background:#F1F5F9;border-radius:999px;overflow:hidden;box-shadow:inset 0 1px 2px rgba(0,0,0,0.02)}
+.progress-fill{height:100%;background:linear-gradient(90deg,#3B82F6,#60A5FA);border-radius:999px;transition:width .3s ease-out}
+.scene-pill{font-size:11px;font-weight:600;padding:3px 12px;border-radius:999px;flex-shrink:0}
+.sc-a{background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE}
+.sc-b{background:#FEF2F2;color:#B91C1C;border:1px solid #FECACA}
+
+.msg-card{background:#FFFFFF;border:1px solid #E2E8F0;box-shadow:0 2px 8px -2px rgba(0,0,0,0.03);border-left:4px solid #3B82F6;padding:12px 16px;border-radius:10px;margin-bottom:12px;font-size:13px;line-height:1.6;color:#334155;min-height:72px;display:flex;align-items:center;animation:fadein .22s ease-out both}
+.msg-inner{display:block;width:100%}
+.msg-card b{font-weight:600;color:#0F172A}
+.msg-card code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;background:#EFF6FF;padding:1px 5px;border-radius:5px;color:#1D4ED8;border:1px solid #DBEAFE}
+.badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;vertical-align:middle;margin:0 2px}
+.b-ok{background:#DCFCE7;color:#166534;border:1px solid #86EFAC}
+.b-err{background:#FEE2E2;color:#991B1B;border:1px solid #FCA5A5}
+.b-info{background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE}
+
+.diagram{display:grid;grid-template-columns:180px 1fr;gap:16px;background:#FFFFFF;border:1px solid #E2E8F0;border-radius:12px;padding:16px;box-shadow:0 2px 6px -2px rgba(0,0,0,0.02);margin-bottom:12px}
+.sec-label{font-size:10px;color:#64748B;font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px;text-align:center}
+
+.addr-box{display:flex;border-radius:8px;background:#F8FAFC;border:1px solid #E2E8F0;overflow:hidden;transition:all .3s ease}
+.addr-box.active{border-color:#3B82F6;box-shadow:0 0 0 2px rgba(59,130,246,0.15)}
+.addr-box.success{border-color:#16A34A;box-shadow:0 0 0 2px rgba(22,163,74,0.15)}
+.addr-cell{flex:1;padding:10px;font-size:13px;font-weight:600;color:#334155;text-align:center;transition:all .3s ease;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+.addr-cell.active{background:#EFF6FF;color:#1D4ED8}
+.addr-cell.success{background:#DCFCE7;color:#166534}
+.addr-cell.muted{color:#94A3B8;font-weight:500}
+.addr-sep{width:1px;background:#E2E8F0;flex-shrink:0}
+
+.region{border:1px dashed #CBD5E1;border-radius:10px;padding:16px 12px 12px;position:relative;display:flex;flex-direction:column;gap:10px;transition:all .3s ease;background:#FAFAF9}
+.region.active{border-color:#93C5FD;background:#EFF6FF}
+.region-lbl{position:absolute;top:-9px;left:12px;background:#FFFFFF;border:1px solid #E2E8F0;border-radius:6px;padding:1px 8px;font-size:10px;color:#64748B;font-weight:600;letter-spacing:.05em;white-space:nowrap;box-shadow:0 1px 2px rgba(0,0,0,0.02)}
+
+.node{border-radius:8px;border:1px solid #E2E8F0;background:#FFFFFF;padding:8px 12px;font-size:12px;font-weight:600;color:#374151;text-align:center;transition:all .3s ease;line-height:1.4;box-shadow:0 1px 2px rgba(0,0,0,0.02)}
+.node.active{background:#EFF6FF;border-color:#3B82F6;color:#1D4ED8;box-shadow:0 2px 6px rgba(59,130,246,0.15)}
+.node.success{background:#DCFCE7;border-color:#16A34A;color:#166534;box-shadow:0 2px 6px rgba(22,163,74,0.15)}
+.node.dim{color:#94A3B8;font-weight:500}
+
+.cmp-circle{width:48px;height:48px;border-radius:50%;background:#FFFFFF;border:2px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#374151;transition:all .3s ease;flex-shrink:0;font-family:system-ui,sans-serif;box-shadow:0 2px 4px rgba(0,0,0,0.04)}
+.cmp-circle.active{border-color:#3B82F6;color:#1D4ED8;background:#EFF6FF;box-shadow:0 0 0 3px rgba(59,130,246,0.15)}
+.cmp-circle.success{border-color:#16A34A;color:#166534;background:#DCFCE7;box-shadow:0 0 0 3px rgba(22,163,74,0.15)}
+.cmp-circle.danger{background:#FEF2F2;border-color:#F87171;color:#B91C1C;box-shadow:0 0 0 3px rgba(248,113,113,0.15);animation:pulse .7s ease-in-out 4}
+
+.flow-main{display:flex;flex-direction:column;gap:12px}
+.flow-row{display:flex;align-items:center;gap:10px}
+.arrow{font-size:18px;color:#D1D5DB;transition:color .3s ease;flex-shrink:0;line-height:1;font-weight:700}
+.arrow.active{color:#3B82F6}
+.arrow.success{color:#16A34A}
+.arrow.danger{color:#EF4444}
+.elabel{font-size:11px;font-weight:700;min-width:24px;flex-shrink:0;transition:color .3s ease}
+.el-ok{color:#166534}
+.el-err{color:#B91C1C}
+
+.calc-box{flex:1;border-radius:8px;border:1px solid #E2E8F0;background:#FFFFFF;padding:10px 14px;font-size:12px;font-weight:600;color:#374151;text-align:center;transition:all .3s ease;box-shadow:0 1px 2px rgba(0,0,0,0.02)}
+.calc-box.active{background:#EFF6FF;border-color:#3B82F6;color:#1D4ED8;box-shadow:0 2px 6px rgba(59,130,246,0.15)}
+
+.trap-wrap{overflow:hidden;max-width:0;opacity:0;transition:all .3s ease;flex-shrink:0}
+.trap-wrap.show{max-width:200px;opacity:1}
+.trap-box{border-radius:8px;border:1px solid #FCA5A5;background:#FEF2F2;padding:10px 14px;font-size:12px;font-weight:700;color:#B91C1C;white-space:nowrap;box-shadow:0 2px 6px rgba(248,113,113,0.15)}
+
+.pt-region{border:1px dashed #CBD5E1;border-radius:10px;padding:16px 12px 12px;position:relative;transition:all .3s ease;background:#FAFAF9}
+.pt-region.active{border-color:#93C5FD;background:#EFF6FF}
+.pt-region-lbl{position:absolute;top:-9px;left:12px;background:#FFFFFF;border:1px solid #E2E8F0;border-radius:6px;padding:1px 8px;font-size:10px;color:#64748B;font-weight:600;letter-spacing:.05em;white-space:nowrap;box-shadow:0 1px 2px rgba(0,0,0,0.02)}
+
+.pt-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:2px}
+.pt-table th{font-size:10px;color:#64748B;font-weight:600;letter-spacing:.05em;padding:6px 8px;text-align:center;border-bottom:1px solid #E2E8F0;text-transform:uppercase}
+.pt-table td{padding:7px 8px;text-align:center;color:#475569;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;border-bottom:1px solid #F1F5F9;transition:all .3s ease}
+.pt-table tr:last-child td{border-bottom:none}
+.pt-table tr.hl td{background:#EFF6FF;color:#1D4ED8;font-weight:700}
+
+.ctrls{display:flex;align-items:center;gap:10px;background:#FFFFFF;padding:10px 14px;border-radius:12px;border:1px solid #E2E8F0;box-shadow:0 2px 6px -2px rgba(0,0,0,0.02)}
+.cbtn{width:32px;height:32px;border-radius:50%;border:1px solid #E2E8F0;background:#FFFFFF;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s ease;box-shadow:0 1px 2px rgba(0,0,0,0.02)}
+.cbtn:hover:not(:disabled){background:#F8FAFC;border-color:#CBD5E1}
+.cbtn:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}
+.pbtn{width:38px;height:38px;border-radius:50%;border:1px solid #3B82F6;background:#EFF6FF;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s ease;color:#3B82F6;box-shadow:0 2px 4px rgba(59,130,246,0.15)}
+.pbtn:hover{background:#DBEAFE;transform:scale(1.05)}
+.trk{flex:1;height:5px;background:#F1F5F9;border-radius:999px;overflow:hidden;cursor:pointer;box-shadow:inset 0 1px 2px rgba(0,0,0,0.02)}
+.prog{height:100%;background:linear-gradient(90deg,#3B82F6,#60A5FA);border-radius:999px;transition:width .3s ease-out}
+.ct{font-size:11px;color:#64748B;font-weight:600;min-width:44px;text-align:right}
+
+@media (max-width: 500px) {
+  .diagram { grid-template-columns: 1fr; gap: 12px; padding: 12px; }
+  .flow-main { flex-direction: row; flex-wrap: wrap; }
+}
+</style>
+
+<div class="root">
+<div class="topbar">
+  <div class="step-pill" id="step-pill">1 / 13</div>
+  <div class="progress-wrap"><div class="progress-fill" id="pfill" style="width:0%"></div></div>
+  <div class="scene-pill sc-a" id="scene-pill">场景 A — 正常变换</div>
+</div>
+
+<div class="msg-card" id="msg">加载中...</div>
+
+<div class="diagram">
+  <div style="grid-column:1/-1">
+    <div class="sec-label">逻辑地址 ( CPU )</div>
+    <div class="addr-box" id="nd-cpu">
+      <div class="addr-cell" id="nd-p">P = 2</div>
+      <div class="addr-sep"></div>
+      <div class="addr-cell" id="nd-w">W = 100</div>
+    </div>
+  </div>
+
+  <div class="region" id="region-ptr">
+    <div class="region-lbl">PTR 页表寄存器</div>
+    <div class="node" id="nd-m">页表长 M = 5</div>
+    <div class="node" id="nd-f">始址 F = 1000</div>
+    <div class="node dim" id="nd-pte">PTE 大小 = 4 B</div>
+  </div>
+
+  <div class="flow-main">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;flex-shrink:0">
+        <div class="sec-label">比较器</div>
+        <div class="cmp-circle" id="nd-cmp">≥</div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:8px">
+        <div class="flow-row">
+          <span class="arrow" id="arr-no">→</span>
+          <span class="elabel el-ok" id="lbl-no" style="opacity:0">No</span>
+          <div class="calc-box" id="nd-calc">F + P × PTE_size</div>
+        </div>
+        <div class="flow-row">
+          <span class="arrow" id="arr-yes" style="opacity:0">↓</span>
+          <span class="elabel el-err" id="lbl-yes" style="opacity:0">Yes</span>
+          <div class="trap-wrap" id="trap-wrap"><div class="trap-box">越界中断</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-region" id="nd-pt">
+      <div class="pt-region-lbl">主存 — 页表 ( Page Table )</div>
+      <table class="pt-table">
+        <thead><tr><th>页号</th><th>物理块号 b</th></tr></thead>
+        <tbody>
+          <tr id="pt0"><td>0</td><td>3</td></tr>
+          <tr id="pt1"><td>1</td><td>6</td></tr>
+          <tr id="pt2"><td>2</td><td>8</td></tr>
+          <tr id="pt3"><td>3</td><td>12</td></tr>
+          <tr id="pt4"><td>4</td><td>15</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div style="grid-column:1/-1">
+    <div class="sec-label" style="margin-top:2px">物理地址</div>
+    <div class="addr-box" id="nd-phy">
+      <div class="addr-cell muted" id="nd-pb">块号 b : ?</div>
+      <div class="addr-sep"></div>
+      <div class="addr-cell muted" id="nd-pw">W : ?</div>
+    </div>
+  </div>
+</div>
+
+<div class="ctrls">
+  <button class="cbtn" id="bp" onclick="go(-1)" disabled>
+    <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2L5 7l4 5"/></svg>
+  </button>
+  <button class="pbtn" id="bplay" onclick="tp()">
+    <svg id="pio" width="12" height="12" viewBox="0 0 14 14" fill="currentColor"><path d="M3 2l9 5-9 5z"/></svg>
+  </button>
+  <button class="cbtn" id="bn" onclick="go(1)">
+    <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2l4 5-4 5"/></svg>
+  </button>
+  <div class="trk" onclick="sc(event)"><div class="prog" id="prog" style="width:0%"></div></div>
+  <div class="ct" id="ct">1 / 13</div>
+</div>
+</div>
+
+<script>
+const CMP_STATES = {
+  '≥': '≥',
+  '2≥5?': '2≥5?',
+  'No': 'No',
+  '6≥5?': '6≥5?',
+  '6≥5': '6≥5',
+  'Yes !': 'Yes !'
+};
+
+const FS=[
+  {sc:'a', cmpTxt:'≥',
+   m:'<b>初始状态</b> - 系统参数 : 页面大小 <span class="badge b-info">L = 4096 B</span>, 每个页表项占 <span class="badge b-info">PTE_size = 4 B</span>.<br>逻辑地址 : 页号 P = 2, 偏移量 W = 100.',
+   p:'P = 2',w:'W = 100',calc:'F + P × PTE_size',pb:'块号 b : ?',pw:'W : ?',
+   hiP:'',hiW:'',hiM:'',hiF:'',hiPte:'',cs:'',ch:'',ph:'',ps:'',trap:0,row:-1,no:0,yes:0,ptrActive:0},
+  {sc:'a', cmpTxt:'2≥5?',
+   m:'<b>步骤 1 - 越界检查</b> : MMU 从 PTR 读取 <b> 页表长度 M = 5</b>,<br>将逻辑地址中的 <b> 页号 P = 2</b> 与 M 比较.',
+   p:'P = 2',w:'W = 100',calc:'F + P × PTE_size',pb:'块号 b : ?',pw:'W : ?',
+   hiP:'active',hiW:'',hiM:'active',hiF:'',hiPte:'',cs:'active',ch:'',ph:'',ps:'',trap:0,row:-1,no:0,yes:0,ptrActive:1},
+  {sc:'a', cmpTxt:'No',
+   m:'<b>检查通过</b> : P ( 2 ) < M ( 5 ), 页号合法, 不触发越界中断. <span class="badge b-ok">合法</span>',
+   p:'P = 2',w:'W = 100',calc:'F + P × PTE_size',pb:'块号 b : ?',pw:'W : ?',
+   hiP:'',hiW:'',hiM:'',hiF:'',hiPte:'',cs:'success',ch:'',ph:'',ps:'',trap:0,row:-1,no:1,yes:0,ptrActive:0},
+  {sc:'a', cmpTxt:'No',
+   m:'<b>步骤 2a - 读取 PTR 参数</b> : 从 PTR 中取出 <b>始址 F = 1000</b> ( 页表在内存中的起始地址 )<br>和 <b>PTE_size = 4 B</b> ( 每个页表项占 4 字节 ).',
+   p:'P = 2',w:'W = 100',calc:'F + P × PTE_size',pb:'块号 b : ?',pw:'W : ?',
+   hiP:'',hiW:'',hiM:'',hiF:'active',hiPte:'active',cs:'',ch:'',ph:'',ps:'',trap:0,row:-1,no:0,yes:0,ptrActive:1},
+  {sc:'a', cmpTxt:'No',
+   m:'<b>步骤 2b - 计算页表项地址</b> : 公式 <code>PTE_addr = F + P × PTE_size</code>. 代入 : <code>1000 + 2 × 4 = 1008</code>.<br>含义 : 页表从地址 1000 开始, 每项 4 B, 第 2 项跳过 2 × 4 = 8 B, 所以在地址 1008.',
+   p:'P = 2',w:'W = 100',calc:'1000 + 2 × 4 = 1008',pb:'块号 b : ?',pw:'W : ?',
+   hiP:'active',hiW:'',hiM:'',hiF:'active',hiPte:'active',cs:'',ch:'active',ph:'',ps:'',trap:0,row:-1,no:0,yes:0,ptrActive:1},
+  {sc:'a', cmpTxt:'No',
+   m:'<b>步骤 3 - 访问内存页表</b> : MMU 用地址 <b>1008</b> 访问主存,<br>读取第 2 号页表项的内容.',
+   p:'P = 2',w:'W = 100',calc:'1000 + 2 × 4 = 1008',pb:'块号 b : ?',pw:'W : ?',
+   hiP:'',hiW:'',hiM:'',hiF:'',hiPte:'',cs:'',ch:'active',ph:'active',ps:'',trap:0,row:2,no:0,yes:0,ptrActive:0},
+  {sc:'a', cmpTxt:'No',
+   m:'<b>步骤 4 - 取出物理块号</b> : 第 2 号页表项存储的物理块号为 <b>b = 8</b>.<br>该进程的第 2 页被加载到了物理内存的第 8 块.',
+   p:'P = 2',w:'W = 100',calc:'1000 + 2 × 4 = 1008',pb:'块号 b : 8',pw:'W : ?',
+   hiP:'',hiW:'',hiM:'',hiF:'',hiPte:'',cs:'',ch:'',ph:'active',ps:'',trap:0,row:2,no:0,yes:0,ptrActive:0},
+  {sc:'a', cmpTxt:'No',
+   m:'<b>步骤 5 - 拼接物理地址</b> : 公式 <strong>物理地址 = b × L + W</strong>. 代入 : <strong>8 × 4096 + 100 = 32868</strong>.<br>块号 b 决定起始位置, 偏移量 W 在块内精确定位.',
+   p:'P = 2',w:'W = 100',calc:'1000 + 2 × 4 = 1008',pb:'块号 b : 8',pw:'W : 100',
+   hiP:'',hiW:'active',hiM:'',hiF:'',hiPte:'',cs:'',ch:'',ph:'',ps:'active',trap:0,row:-1,no:0,yes:0,ptrActive:0},
+  {sc:'a', cmpTxt:'No',
+   m:'<b>变换完成</b> - 物理地址 <b>32868</b>.<br>整个过程共访存 <b>2 次</b> : 第 1 次取页表项, 第 2 次才是真正的数据访问. <span class="badge b-ok">成功</span>',
+   p:'P = 2',w:'W = 100',calc:'1000 + 2 × 4 = 1008',pb:'块号 b : 8',pw:'W : 100',
+   hiP:'',hiW:'',hiM:'',hiF:'',hiPte:'',cs:'',ch:'',ph:'',ps:'success',trap:0,row:-1,no:0,yes:0,ptrActive:0},
+  {sc:'b', cmpTxt:'≥',
+   m:'<b>异常场景 - 越界</b> : 系统参数不变 ( M = 5, PTE_size = 4 ).<br>换一条访问 <b>页号 P = 6</b> 的指令, 偏移量 W = 50.',
+   p:'P = 6',w:'W = 50',calc:'F + P × PTE_size',pb:'块号 b : ?',pw:'W : ?',
+   hiP:'',hiW:'',hiM:'',hiF:'',hiPte:'',cs:'',ch:'',ph:'',ps:'',trap:0,row:-1,no:0,yes:0,ptrActive:0},
+  {sc:'b', cmpTxt:'6≥5?',
+   m:'<b>步骤 1 - 越界检查</b> : 同样从 PTR 读取 <b>M = 5</b>,<br>将 <b>P = 6</b> 送入比较器比较.',
+   p:'P = 6',w:'W = 50',calc:'F + P × PTE_size',pb:'块号 b : ?',pw:'W : ?',
+   hiP:'active',hiW:'',hiM:'active',hiF:'',hiPte:'',cs:'active',ch:'',ph:'',ps:'',trap:0,row:-1,no:0,yes:0,ptrActive:1},
+  {sc:'b', cmpTxt:'6 ≥ 5',
+   m:'<b>越界检测触发</b> : P ( 6 ) >= M ( 5 ) 成立,<br>该进程根本没有第 6 页, 属于非法访问.',
+   p:'P = 6',w:'W = 50',calc:'F + P × PTE_size',pb:'块号 b : ?',pw:'W : ?',
+   hiP:'',hiW:'',hiM:'',hiF:'',hiPte:'',cs:'danger',ch:'',ph:'',ps:'',trap:0,row:-1,no:0,yes:1,ptrActive:0},
+  {sc:'b', cmpTxt:'Yes !',
+   m:'<b>硬件触发越界中断</b> : MMU 拒绝继续变换, 向 CPU 发出中断信号, 陷入操作系统处理.<br><span class="badge b-err">越界中断</span> 变换终止, 不会有任何内存访问.',
+   p:'P = 6',w:'W = 50',calc:'F + P × PTE_size',pb:'块号 b : ?',pw:'W : ?',
+   hiP:'',hiW:'',hiM:'',hiF:'',hiPte:'',cs:'danger',ch:'',ph:'',ps:'',trap:1,row:-1,no:0,yes:1,ptrActive:0},
+];
+
+const N=FS.length;
+let idx=0,playing=false,tmr=null;
+
+function cls(id,...c){const e=document.getElementById(id);if(!e)return;e.classList.remove('active','success','danger','muted','dim');c.forEach(x=>{if(x)e.classList.add(x);});}
+function vis(id,show){const e=document.getElementById(id);if(!e)return;e.style.opacity=show?'1':'0';}
+
+function render(i){
+  const f=FS[i];
+  document.getElementById('nd-p').textContent=f.p;
+  document.getElementById('nd-w').textContent=f.w;
+  document.getElementById('nd-cmp').textContent=f.cmpTxt;
+  document.getElementById('nd-calc').textContent=f.calc;
+  document.getElementById('nd-pb').textContent=f.pb;
+  document.getElementById('nd-pw').textContent=f.pw;
+
+  cls('nd-p',f.hiP); cls('nd-w',f.hiW);
+  cls('nd-cpu',(f.hiP||f.hiW)?'active':'');
+  cls('nd-m',f.hiM); cls('nd-f',f.hiF);
+  cls('nd-pte',f.hiPte?'active':'dim');
+  cls('region-ptr',f.ptrActive?'active':'');
+  cls('nd-cmp',f.cs);
+  cls('nd-calc',f.ch);
+  cls('nd-pt',f.ph?'active':'');
+
+  const pbSt=f.ps||'muted';
+  cls('nd-pb',pbSt); cls('nd-pw',pbSt);
+  cls('nd-phy',f.ps);
+
+  for(let r=0;r<5;r++){const row=document.getElementById('pt'+r);if(row)row.classList.toggle('hl',r===f.row);}
+
+  document.getElementById('trap-wrap').classList.toggle('show',!!f.trap);
+  vis('arr-yes',f.yes||f.trap);
+  vis('lbl-yes',f.yes||f.trap);
+  vis('lbl-no',f.no);
+
+  const an=document.getElementById('arr-no');
+  const ay=document.getElementById('arr-yes');
+  if(an) an.className='arrow'+(f.ch?' active':'');
+  if(ay){ay.className='arrow'+(f.yes||f.trap?' danger':'');ay.style.opacity=(f.yes||f.trap)?'1':'0';}
+
+  const sp=document.getElementById('scene-pill');
+  sp.textContent=f.sc==='b'?'场景 B — 越界中断':'场景 A — 正常变换';
+  sp.className='scene-pill '+(f.sc==='b'?'sc-b':'sc-a');
+
+  const el=document.getElementById('msg');
+  el.innerHTML='<span class="msg-inner">'+f.m+'</span>';el.style.animation='none';void el.offsetWidth;el.style.animation='fadein .22s ease-out both';
+
+  const s=i+1;
+  document.getElementById('pfill').style.width=(s/N*100)+'%';
+  document.getElementById('prog').style.width=(s/N*100)+'%';
+  document.getElementById('ct').textContent=s+' / '+N;
+  document.getElementById('step-pill').textContent=s+' / '+N;
+  document.getElementById('bp').disabled=i<=0;
+  document.getElementById('bn').disabled=i>=N-1;
+}
+
+function go(d){const n=idx+d;if(n>=0&&n<N){idx=n;render(idx);}if(idx>=N-1&&playing)tp();}
+function sc(e){const t=e.currentTarget,r=Math.max(0,Math.min(1,(e.clientX-t.getBoundingClientRect().left)/t.offsetWidth));idx=Math.min(N-1,Math.floor(r*N));render(idx);}
+function tp(){
+  playing=!playing;
+  document.getElementById('pio').innerHTML=playing?'<rect x="2" y="1" width="4" height="12" rx="1"/><rect x="8" y="1" width="4" height="12" rx="1"/>':'<path d="M3 2l9 5-9 5z"/>';
+  if(playing){if(idx>=N-1){idx=0;render(idx);}tmr=setInterval(()=>{if(idx<N-1)go(1);else tp();},2600);}
+  else clearInterval(tmr);
+}
+render(0);
+</script>

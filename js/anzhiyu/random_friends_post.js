@@ -14,7 +14,7 @@ if (typeof fdataUser !== "undefined") {
 var randomPostTimes = 0;
 var randomPostWorking = false;
 var randomPostTips = [
-  "钓到了绝世好文！",
+  "钓到了绝世好文! ",
   "在河边打了个喷嚏，吓跑了",
   "你和小伙伴抢夺着",
   "你击败了巨龙，在巢穴中发现了",
@@ -69,10 +69,10 @@ var randomPostTips = [
   "上百祖境高手在天威湖大战三天三夜为了抢夺",
   "这化仙池水乃上古真仙对后人的考校，要求熟读并背诵",
   "庆氏三千年根基差点竟被你小子毁于一旦，能够被我拯救全是因为我看了",
-  "我就是神奇宝贝大师！我这只皮卡丘可是",
-  "我就是神奇宝贝大师！我这只小火龙可是",
-  "我就是神奇宝贝大师！我这只可达鸭可是",
-  "我就是神奇宝贝大师！我这只杰尼龟可是",
+  "我就是神奇宝贝大师! 我这只皮卡丘可是",
+  "我就是神奇宝贝大师! 我这只小火龙可是",
+  "我就是神奇宝贝大师! 我这只可达鸭可是",
+  "我就是神奇宝贝大师! 我这只杰尼龟可是",
   "上古遗迹中写道，只要习得此书，便得成功。你定睛一看，原来是",
   "奶奶的，玩阴的是吧，我就是双料特工代号穿山甲，",
   "你的背景太假了，我的就逼真多了，学到这个技术全是因为看了",
@@ -84,9 +84,9 @@ var randomPostTips = [
   "你收到了稀有文章，它是",
   "你抽到了金色普通文章，它是",
   "你抽到了金色稀有文章，它是",
-  "你抽到了传说文章！它是",
-  "哇！金色传说！你抽到了金色传说文章，它是",
-  "报告！侦察兵说在前往300米有一个男子在偷偷看一本书，上面赫然写着",
+  "你抽到了传说文章! 它是",
+  "哇! 金色传说! 你抽到了金色传说文章，它是",
+  "报告! 侦察兵说在前往300米有一个男子在偷偷看一本书，上面赫然写着",
   "芷莲姑娘大摆擂台，谁若是能读完此书，便可娶了她。然后从背后掏出了",
   "请问你的梦想是什么？我的梦想是能读到",
   "读什么才能增智慧？当然是读",
@@ -125,7 +125,7 @@ function fetchRandomPost() {
     }
     if (randomPostTimes >= 5) {
       document.getElementById("random-post").innerHTML =
-        `钓鱼中... （Lv.` + randomPostTimes + ` 当前称号：` + randomPostLevel + `）`;
+        `钓鱼中...  ( Lv.` + randomPostTimes + ` 当前称号：` + randomPostLevel + ` ) `;
     } else {
       document.getElementById("random-post").innerHTML = `钓鱼中...`;
     }
@@ -147,7 +147,7 @@ function fetchRandomPost() {
       Math.round(Math.random()) == 0
     ) {
       document.getElementById("random-post").innerHTML =
-        "因为只钓鱼不吃鱼，过分饥饿导致本次钓鱼失败...(点击任意一篇钓鱼获得的文章即可恢复）";
+        "因为只钓鱼不吃鱼，过分饥饿导致本次钓鱼失败...(点击任意一篇钓鱼获得的文章即可恢复 ) ";
       randomPostWorking = false;
     } else {
       var fetchUrl = fdata.apiurl + "randompost";

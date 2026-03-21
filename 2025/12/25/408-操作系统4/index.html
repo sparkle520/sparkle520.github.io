@@ -1,10 +1,10 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>408-操作系统-4-文件管理 | SPARKLE</title><meta name="keywords" content="操作系统,408"><meta name="author" content="sparkle520"><meta name="copyright" content="sparkle520"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="408-操作系统-4-文件管理"><meta name="application-name" content="408-操作系统-4-文件管理"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="408-操作系统-4-文件管理"><meta property="og:url" content="http://example.com/2025/12/25/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F4/index.html"><meta property="og:site_name" content="SPARKLE"><meta property="og:description" content="第4章 文件管理 4.1 文件系统基础 4.1.1 文件的基本概念 1. 文件的定义  文件 ( File ) : 是以计算机硬盘为载体存储在计算机上的信息集合. 逻辑结构 : 在用户看来, 文件是 记录 的集合 ( 逻辑文件 ). 物理结构 : 在操作系统看来, 文件是 物理块"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://pic1.imgdb.cn/item/6951243ca0c391c56de5e622.png"><meta property="article:author" content="sparkle520"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://pic1.imgdb.cn/item/6951243ca0c391c56de5e622.png"><meta name="description" content="第4章 文件管理 4.1 文件系统基础 4.1.1 文件的基本概念 1. 文件的定义  文件 ( File ) : 是以计算机硬盘为载体存储在计算机上的信息集合. 逻辑结构 : 在用户看来, 文件是 记录 的集合 ( 逻辑文件 ). 物理结构 : 在操作系统看来, 文件是 物理块"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2025/12/25/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F4/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>408-操作系统-4-文件管理 | SPARKLE</title><meta name="keywords" content="操作系统,408"><meta name="author" content="sparkle520"><meta name="copyright" content="sparkle520"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="408-操作系统-4-文件管理"><meta name="application-name" content="408-操作系统-4-文件管理"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="408-操作系统-4-文件管理"><meta property="og:url" content="http://example.com/2025/12/25/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F4/index.html"><meta property="og:site_name" content="SPARKLE"><meta property="og:description" content="第4章 文件管理 4.1 文件系统基础 4.1.1 文件的基本概念 1. 文件的定义  文件 ( File ) 是以计算机硬盘为载体存储在计算机上的信息集合. 逻辑结构 在用户看来, 文件是 记录 的集合 ( 逻辑文件 ). 物理结构 在操作系统看来, 文件是 物理块 ( Blo"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://pic1.imgdb.cn/item/6951243ca0c391c56de5e622.png"><meta property="article:author" content="sparkle520"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://pic1.imgdb.cn/item/6951243ca0c391c56de5e622.png"><meta name="description" content="第4章 文件管理 4.1 文件系统基础 4.1.1 文件的基本概念 1. 文件的定义  文件 ( File ) 是以计算机硬盘为载体存储在计算机上的信息集合. 逻辑结构 在用户看来, 文件是 记录 的集合 ( 逻辑文件 ). 物理结构 在操作系统看来, 文件是 物理块 ( Blo"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2025/12/25/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F4/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
   linkPageTop: undefined,
   peoplecanvas: undefined,
   postHeadAiDescription: undefined,
-  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走! 再看看嘛!","backTitle":"♪(^∇^*)欢迎肥来!"},
   LA51: undefined,
-  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情!","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦!","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
   twikooEnvId: 'https://sparkle521.xyz',
   commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":4000,"accessToken":"","mailMd5":""},
   root: '/',
@@ -59,7 +59,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2026-03-20 16:58:00',
+  postUpdate: '2026-03-21 17:47:21',
   postMainColor: '#10B981',
 }</script><noscript><style type="text/css">
   #nav {
@@ -203,31 +203,31 @@ if (true) {
   document.addEventListener('pjax:send', () => { preloader.initLoading() })
   document.addEventListener('pjax:complete', () => { preloader.endLoading() })
 }</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/sparkle520?tab=repositories" title="github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="github"/><span class="back-menu-item-text">github</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">SPARKLE</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/408/" style="font-size: 1.05rem;">408<sup>21</sup></a><a href="/tags/AOP/" style="font-size: 1.05rem;">AOP<sup>1</sup></a><a href="/tags/Deep-Learning/" style="font-size: 1.05rem;">Deep Learning<sup>1</sup></a><a href="/tags/IoC/" style="font-size: 1.05rem;">IoC<sup>1</sup></a><a href="/tags/JSR303/" style="font-size: 1.05rem;">JSR303<sup>1</sup></a><a href="/tags/Matplotlib/" style="font-size: 1.05rem;">Matplotlib<sup>3</sup></a><a href="/tags/c/" style="font-size: 1.05rem;">c#<sup>2</sup></a><a href="/tags/java/" style="font-size: 1.05rem;">java<sup>4</sup></a><a href="/tags/python/" style="font-size: 1.05rem;">python<sup>5</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 1.05rem;">事务<sup>1</sup></a><a href="/tags/%E4%BA%8C%E6%AC%A1%E5%9E%8B/" style="font-size: 1.05rem;">二次型<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E3%80%82/" style="font-size: 1.05rem;">你的名字。<sup>3</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字同名小说<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%A4%96%E4%BC%A0%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字外传小说<sup>1</sup></a><a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size: 1.05rem;">写作<sup>4</sup></a><a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 1.05rem;">包管理<sup>1</sup></a><a href="/tags/%E5%8D%B7%E7%A7%AF%E5%85%AC%E5%BC%8F/" style="font-size: 1.05rem;">卷积公式<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90/" style="font-size: 1.05rem;">天气之子<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">天气之子同名小说<sup>1</sup></a><a href="/tags/%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">小说<sup>2</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">操作系统<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" style="font-size: 1.05rem;">数据校验<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" style="font-size: 1.05rem;">数据链路层<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 1.05rem;">概率论<sup>2</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 1.05rem;">概率论与数理统计<sup>7</sup></a><a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 1.05rem;">汇编<sup>9</sup></a><a href="/tags/%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80/" style="font-size: 1.05rem;">泰勒展开<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/" style="font-size: 1.05rem;">物理层<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%80%BC/" style="font-size: 1.05rem;">特征值<sup>2</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F/" style="font-size: 1.05rem;">特征向量<sup>2</sup></a><a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">线性代数<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" style="font-size: 1.05rem;">网络体系结构<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" style="font-size: 1.05rem;">网络层<sup>2</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 1.05rem;">英语<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">英语语法<sup>24</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1.05rem;">计算机组成原理<sup>5</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.05rem;">计算机网络<sup>5</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">语法<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">高等代数<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" style="font-size: 1.05rem;">高等数学<sup>18</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
-    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">三月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">26</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/02/"><span class="card-archive-list-date">二月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/01/"><span class="card-archive-list-date">一月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/12/"><span class="card-archive-list-date">十二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">15</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/11/"><span class="card-archive-list-date">十一月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/10/"><span class="card-archive-list-date">十月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/09/"><span class="card-archive-list-date">九月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/08/"><span class="card-archive-list-date">八月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/OS/" itemprop="url">OS</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>操作系统</span></a><a class="article-meta__tags" href="/tags/408/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>408</span></a></span></div></div><h1 class="post-title" itemprop="name headline">408-操作系统-4-文件管理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2025-12-25T15:00:27.000Z" title="发表于 2025-12-25 23:00:27">2025-12-25</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-03-20T08:58:00.834Z" title="更新于 2026-03-20 16:58:00">2026-03-20</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">17.4k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>69分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="408-操作系统-4-文件管理"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为系守镇"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>系守镇</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2025/12/25/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F4/#post-comment" tabindex="-1"><span id="twikoo-count"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://pic1.imgdb.cn/item/6951243ca0c391c56de5e622.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2025/12/25/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F4/"><header><a class="post-meta-categories" href="/categories/OS/" itemprop="url">OS</a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" tabindex="-1" itemprop="url">操作系统</a><a href="/tags/408/" tabindex="-1" itemprop="url">408</a><h1 id="CrawlerTitle" itemprop="name headline">408-操作系统-4-文件管理</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">sparkle520</span><time itemprop="dateCreated datePublished" datetime="2025-12-25T15:00:27.000Z" title="发表于 2025-12-25 23:00:27">2025-12-25</time><time itemprop="dateCreated datePublished" datetime="2026-03-20T08:58:00.834Z" title="更新于 2026-03-20 16:58:00">2026-03-20</time></header><h1 id="第4章-文件管理">第4章 文件管理</h1>
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">三月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">26</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/02/"><span class="card-archive-list-date">二月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/01/"><span class="card-archive-list-date">一月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/12/"><span class="card-archive-list-date">十二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">15</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/11/"><span class="card-archive-list-date">十一月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/10/"><span class="card-archive-list-date">十月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/09/"><span class="card-archive-list-date">九月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/08/"><span class="card-archive-list-date">八月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/OS/" itemprop="url">OS</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>操作系统</span></a><a class="article-meta__tags" href="/tags/408/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>408</span></a></span></div></div><h1 class="post-title" itemprop="name headline">408-操作系统-4-文件管理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2025-12-25T15:00:27.000Z" title="发表于 2025-12-25 23:00:27">2025-12-25</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-03-21T09:47:21.279Z" title="更新于 2026-03-21 17:47:21">2026-03-21</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">17.4k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>69分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="408-操作系统-4-文件管理"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为系守镇"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>系守镇</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2025/12/25/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F4/#post-comment" tabindex="-1"><span id="twikoo-count"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://pic1.imgdb.cn/item/6951243ca0c391c56de5e622.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2025/12/25/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F4/"><header><a class="post-meta-categories" href="/categories/OS/" itemprop="url">OS</a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" tabindex="-1" itemprop="url">操作系统</a><a href="/tags/408/" tabindex="-1" itemprop="url">408</a><h1 id="CrawlerTitle" itemprop="name headline">408-操作系统-4-文件管理</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">sparkle520</span><time itemprop="dateCreated datePublished" datetime="2025-12-25T15:00:27.000Z" title="发表于 2025-12-25 23:00:27">2025-12-25</time><time itemprop="dateCreated datePublished" datetime="2026-03-21T09:47:21.279Z" title="更新于 2026-03-21 17:47:21">2026-03-21</time></header><h1 id="第4章-文件管理">第4章 文件管理</h1>
 <h2 id="文件系统基础">4.1 文件系统基础</h2>
 <h3 id="文件的基本概念">4.1.1 文件的基本概念</h3>
 <h4 id="文件的定义">1. 文件的定义</h4>
 <ul>
-<li><strong>文件 ( File )</strong> :
+<li><strong>文件 ( File )</strong>
 是以计算机硬盘为载体存储在计算机上的信息集合.</li>
-<li><strong>逻辑结构</strong> : 在用户看来, 文件是 <strong>记录</strong>
+<li><strong>逻辑结构</strong> 在用户看来, 文件是 <strong>记录</strong>
 的集合 ( 逻辑文件 ).</li>
-<li><strong>物理结构</strong> : 在操作系统看来, 文件是 <strong>物理块 (
+<li><strong>物理结构</strong> 在操作系统看来, 文件是 <strong>物理块 (
 Block / Cluster )</strong> 的集合 ( 物理文件 ).
 <ul>
-<li><strong>文件块 ( File Block )</strong> :
+<li><strong>文件块 ( File Block )</strong>
 <ul>
-<li><strong>定义</strong> : 文件的逻辑地址空间被划分为若干个等长的块 (
+<li><strong>定义</strong> 文件的逻辑地址空间被划分为若干个等长的块 (
 逻辑块 ), 通常与物理块大小一致.</li>
-<li><strong>作用</strong> : 作为 <strong>信息存储</strong> 和
+<li><strong>作用</strong> 作为 <strong>信息存储</strong> 和
 <strong>传输</strong> ( I/O ) 的基本单位.</li>
 </ul></li>
-<li><strong>簇 ( Cluster )</strong> :
+<li><strong>簇 ( Cluster )</strong>
 <ul>
-<li><strong>定义</strong> : 操作系统分配磁盘空间 ( 和进行磁盘 I/O ) 的
+<li><strong>定义</strong> 操作系统分配磁盘空间 ( 和进行磁盘 I/O ) 的
 <strong>最小单位</strong>. ( 在 Windows 中称为簇, 在 Linux 中称为块
 Block ).</li>
-<li><strong>关系</strong> :
+<li><strong>关系</strong>
 <ul>
 <li><strong>逻辑块</strong> <span
 class="math inline">\(\leftrightarrow\)</span> <strong>物理块 ( 簇
@@ -236,22 +236,22 @@ class="math inline">\(\leftrightarrow\)</span> <strong>物理块 ( 簇
 <li>1 个簇 = <span class="math inline">\(2^k\)</span> 个物理扇区 (
 Sector ). ( 如 1 Cluster = 4KB = 8 Sectors ).</li>
 </ul></li>
-<li><strong>大小权衡</strong> :
+<li><strong>大小权衡</strong>
 <ul>
-<li><strong>块太小</strong> : 索引表过大 ( 管理开销大 ); 磁盘 I/O 次数多
-( 寻道时间占比高 ); 空间利用率高 ( 碎片少 ).</li>
-<li><strong>块太大</strong> : 索引表小; I/O 效率高;
+<li><strong>块太小</strong> 索引表过大 ( 管理开销大 ); 磁盘 I/O 次数多 (
+寻道时间占比高 ); 空间利用率高 ( 碎片少 ).</li>
+<li><strong>块太大</strong> 索引表小; I/O 效率高;
 <strong>内部碎片</strong> 大 ( 空间利用率低 ).</li>
 </ul></li>
 </ul></li>
 </ul></li>
-<li><strong>组成</strong> : 文件通常由 <strong>数据项</strong>,
+<li><strong>组成</strong> 文件通常由 <strong>数据项</strong>,
 <strong>记录</strong> 和 <strong>文件</strong> 三级组成.
 <ul>
-<li><strong>数据项</strong> : 基本数据项 ( 原子数据, 如姓名 ),
-组合数据项 ( 组项, 如工资 ).</li>
-<li><strong>记录</strong> : 一组相关数据项的集合.</li>
-<li><strong>文件</strong> : 由创建者定义的,
+<li><strong>数据项</strong> 基本数据项 ( 原子数据, 如姓名 ), 组合数据项
+( 组项, 如工资 ).</li>
+<li><strong>记录</strong> 一组相关数据项的集合.</li>
+<li><strong>文件</strong> 由创建者定义的,
 具有文件名的一组相关元素的集合.</li>
 </ul></li>
 </ul>
@@ -314,76 +314,72 @@ Sector ). ( 如 1 Cluster = 4KB = 8 Sectors ).</li>
 <ul>
 <li><strong>重点辨析 : 文件名 vs 标识符</strong>
 <ul>
-<li><strong>文件名 ( Filename )</strong> :
+<li><strong>文件名 ( Filename )</strong>
 <ul>
-<li><strong>面向用户</strong> : 字符串形式, 方便记忆 ( 如
+<li><strong>面向用户</strong> 字符串形式, 方便记忆 ( 如
 <code>report.docx</code> ).</li>
-<li><strong>可变性</strong> : 用户可以随时修改文件名,
+<li><strong>可变性</strong> 用户可以随时修改文件名,
 但不影响文件内容.</li>
-<li><strong>非唯一性</strong> : 不同目录下的文件可以同名; 硬链接机制下,
+<li><strong>非唯一性</strong> 不同目录下的文件可以同名; 硬链接机制下,
 一个文件可以有多个文件名.</li>
 </ul></li>
-<li><strong>标识符 ( Identifier )</strong> :
+<li><strong>标识符 ( Identifier )</strong>
 <ul>
-<li><strong>面向系统</strong> : 通常是数字 ( 如 Inode Number ),
+<li><strong>面向系统</strong> 通常是数字 ( 如 Inode Number ),
 系统内部使用.</li>
-<li><strong>唯一性</strong> : 在整个文件系统 ( 或分区 )
+<li><strong>唯一性</strong> 在整个文件系统 ( 或分区 )
 中唯一标识一个文件.</li>
-<li><strong>不可变性</strong> : 文件创建时分配,
+<li><strong>不可变性</strong> 文件创建时分配,
 直到文件被彻底删除才回收.</li>
 </ul></li>
 </ul></li>
 </ul>
 <h4 id="文件的分类">3. 文件的分类</h4>
 <ul>
-<li><strong>按性质和用途分类</strong> :
+<li><strong>按性质和用途分类</strong>
 <ul>
-<li><strong>系统文件</strong> : 操作系统核心文件,
+<li><strong>系统文件</strong> 操作系统核心文件,
 通常只允许通过系统调用访问.</li>
-<li><strong>用户文件</strong> : 用户创建的文件, 归属于特定用户.</li>
-<li><strong>库文件</strong> : 标准子程序库或函数库,
+<li><strong>用户文件</strong> 用户创建的文件, 归属于特定用户.</li>
+<li><strong>库文件</strong> 标准子程序库或函数库,
 允许用户调用但不允许修改.</li>
 </ul></li>
-<li><strong>按数据的组织形式分类</strong> :
+<li><strong>按数据的组织形式分类</strong>
 <ul>
-<li><strong>普通文件</strong> : 存储用户数据 ( 如文本文件, 二进制文件
+<li><strong>普通文件</strong> 存储用户数据 ( 如文本文件, 二进制文件
 ).</li>
-<li><strong>目录文件</strong> : 存储文件目录信息, 由文件系统管理.</li>
-<li><strong>特殊文件</strong> : 设备文件 ( 如 I/O 设备 ),
+<li><strong>目录文件</strong> 存储文件目录信息, 由文件系统管理.</li>
+<li><strong>特殊文件</strong> 设备文件 ( 如 I/O 设备 ),
 通常作为文件处理.</li>
 </ul></li>
-<li><strong>按保护级别分类</strong> :
+<li><strong>按保护级别分类</strong>
 <ul>
-<li><strong>只读文件</strong> : 仅允许读取.</li>
-<li><strong>读写文件</strong> : 允许读取和修改.</li>
-<li><strong>可执行文件</strong> : 允许加载执行.</li>
+<li><strong>只读文件</strong> 仅允许读取.</li>
+<li><strong>读写文件</strong> 允许读取和修改.</li>
+<li><strong>可执行文件</strong> 允许加载执行.</li>
 </ul></li>
-<li><strong>按流式/记录式分类</strong> :
+<li><strong>按流式/记录式分类</strong>
 <ul>
-<li><strong>流式文件</strong> : 无结构字节流 ( 如 UNIX/Linux 文件
-).</li>
-<li><strong>记录式文件</strong> : 有结构的记录集合 ( 如 数据库文件
-).</li>
+<li><strong>流式文件</strong> 无结构字节流 ( 如 UNIX/Linux 文件 ).</li>
+<li><strong>记录式文件</strong> 有结构的记录集合 ( 如 数据库文件 ).</li>
 </ul></li>
 </ul>
 <h4 id="文件的基本操作">4. 文件的基本操作</h4>
 <p>操作系统提供了一组 <strong>系统调用</strong> ( System Calls )
 来对文件进行操作.</p>
 <ul>
-<li><strong>创建文件 ( Create )</strong> : 分配外存空间,
+<li><strong>创建文件 ( Create )</strong> 分配外存空间,
 在目录中创建目录项.</li>
-<li><strong>删除文件 ( Delete )</strong> : 释放外存空间,
-删除目录项.</li>
-<li><strong>打开文件 ( Open )</strong> : 将文件属性 ( FCB )
+<li><strong>删除文件 ( Delete )</strong> 释放外存空间, 删除目录项.</li>
+<li><strong>打开文件 ( Open )</strong> 将文件属性 ( FCB )
 从外存复制到内存打开文件表, 返回文件描述符/句柄. ( 避免多次检索目录
 ).</li>
-<li><strong>关闭文件 ( Close )</strong> : 将内存中的 FCB
-及其修改写回外存, 释放内存表项.</li>
-<li><strong>读文件 ( Read )</strong> : 根据读指针,
+<li><strong>关闭文件 ( Close )</strong> 将内存中的 FCB 及其修改写回外存,
+释放内存表项.</li>
+<li><strong>读文件 ( Read )</strong> 根据读指针,
 将文件数据从外存读入内存缓冲区.</li>
-<li><strong>写文件 ( Write )</strong> :
-将内存缓冲区数据写入外存文件.</li>
-<li><strong>截断文件 ( Truncate )</strong> : 将文件长度设为 0,
+<li><strong>写文件 ( Write )</strong> 将内存缓冲区数据写入外存文件.</li>
+<li><strong>截断文件 ( Truncate )</strong> 将文件长度设为 0,
 保留文件名和属性, 释放空间.</li>
 </ul>
 <h3 id="文件控制块和索引节点">4.1.2 文件控制块和索引节点</h3>
@@ -392,36 +388,34 @@ Sector ). ( 如 1 Cluster = 4KB = 8 Sectors ).</li>
 操作系统必须为文件设置用于描述和控制文件的数据结构, 称之为
 <strong>文件控制块 ( FCB )</strong>.</p>
 <ul>
-<li><strong>FCB 与 文件</strong> : 一一对应.</li>
-<li><strong>目录项</strong> : 文件目录通常是由有序的 FCB 集合组成的.
-一个 FCB 就是一个文件目录项.</li>
-<li><strong>包含信息</strong> :
+<li><strong>FCB 与 文件</strong> 一一对应.</li>
+<li><strong>目录项</strong> 文件目录通常是由有序的 FCB 集合组成的. 一个
+FCB 就是一个文件目录项.</li>
+<li><strong>包含信息</strong>
 <ul>
-<li><strong>基本信息</strong> : 文件名, 物理位置 ( 起始块号, 块数 ),
+<li><strong>基本信息</strong> 文件名, 物理位置 ( 起始块号, 块数 ),
 逻辑结构, 物理结构.</li>
-<li><strong>存取控制信息</strong> : 文件主, 核准用户, 读写权限 ( R/W/X
+<li><strong>存取控制信息</strong> 文件主, 核准用户, 读写权限 ( R/W/X
 ).</li>
-<li><strong>使用信息</strong> : 创建时间, 上次修改时间,
-当前打开计数.</li>
+<li><strong>使用信息</strong> 创建时间, 上次修改时间, 当前打开计数.</li>
 </ul></li>
-<li><strong>缺点</strong> : FCB 包含了文件名和文件描述信息.
-在检索目录时, 我们只需要匹配文件名, 但不得不将整个 FCB 读入内存. 若 FCB
-较大, 一个磁盘块能容纳的目录项就少, 导致检索文件时磁盘 I/O
-次数增加.</li>
+<li><strong>缺点</strong> FCB 包含了文件名和文件描述信息. 在检索目录时,
+我们只需要匹配文件名, 但不得不将整个 FCB 读入内存. 若 FCB 较大,
+一个磁盘块能容纳的目录项就少, 导致检索文件时磁盘 I/O 次数增加.</li>
 </ul>
 <h4 id="索引节点-inode">2. 索引节点 ( Inode )</h4>
 <p>为了解决 FCB 过大导致的目录检索效率低的问题, 现代操作系统 ( 如
 UNIX/Linux ) 采用了 <strong>索引节点</strong> 结构.</p>
 <ul>
-<li><strong>设计思想</strong> : <strong>瘦身</strong>. 将
+<li><strong>设计思想</strong> <strong>瘦身</strong>. 将
 <strong>文件名</strong> 与 <strong>文件描述信息</strong> 分离.
 <ul>
-<li><strong>目录项</strong> : 仅包含 <strong>文件名</strong> 和
+<li><strong>目录项</strong> 仅包含 <strong>文件名</strong> 和
 <strong>索引节点号 ( Inode Number )</strong>. ( 体积变得非常小 ).</li>
-<li><strong>索引节点</strong> : 包含除文件名之外的所有文件描述信息 (
+<li><strong>索引节点</strong> 包含除文件名之外的所有文件描述信息 (
 如文件大小, 物理地址, 权限等 ).</li>
 </ul></li>
-<li><strong>优势</strong> : 目录项变小 <span
+<li><strong>优势</strong> 目录项变小 <span
 class="math inline">\(\to\)</span> 每个磁盘块能存更多目录项 <span
 class="math inline">\(\to\)</span> 检索文件时所需的磁盘 I/O
 次数显著减少.</li>
@@ -461,84 +455,83 @@ class="math inline">\(\to\)</span> 检索文件时所需的磁盘 I/O
 </tbody>
 </table>
 <ul>
-<li><strong>磁盘索引节点 ( Disk Inode )</strong> :
+<li><strong>磁盘索引节点 ( Disk Inode )</strong>
 <ul>
-<li><strong>文件主标识符</strong> : 拥有该文件的用户 ID ( uid ).</li>
-<li><strong>文件类型</strong> : 普通文件、目录文件或特别文件.</li>
-<li><strong>文件存取权限</strong> : 各类用户对该文件的存取权限 ( rwx
+<li><strong>文件主标识符</strong> 拥有该文件的用户 ID ( uid ).</li>
+<li><strong>文件类型</strong> 普通文件、目录文件或特别文件.</li>
+<li><strong>文件存取权限</strong> 各类用户对该文件的存取权限 ( rwx
 ).</li>
-<li><strong>物理地址指针</strong> : 每个指针指向一个磁盘块 (
+<li><strong>物理地址指针</strong> 每个指针指向一个磁盘块 (
 直接索引/间接索引 ).</li>
-<li><strong>文件长度</strong> : 文件字节数.</li>
-<li><strong>链接计数 ( nlink )</strong> : 硬链接数量. 当此值为 0 时,
+<li><strong>文件长度</strong> 文件字节数.</li>
+<li><strong>链接计数 ( nlink )</strong> 硬链接数量. 当此值为 0 时,
 回收文件空间.</li>
 </ul></li>
-<li><strong>内存索引节点 ( Memory Inode )</strong> :
+<li><strong>内存索引节点 ( Memory Inode )</strong>
 <ul>
-<li><strong>索引节点编号</strong> : 标识该 Inode.</li>
-<li><strong>状态标识 ( state )</strong> : 指示 Inode
+<li><strong>索引节点编号</strong> 标识该 Inode.</li>
+<li><strong>状态标识 ( state )</strong> 指示 Inode
 是否被上锁、是否被修改 ( dirty ).</li>
-<li><strong>访问计数 ( count )</strong> : 当前有多少个进程打开了该文件.
-( count=0 时才真正从内存释放 ).</li>
-<li><strong>逻辑设备号</strong> : 文件所在设备的设备号.</li>
-<li><strong>链接指针</strong> : 用于将内存 Inode
+<li><strong>访问计数 ( count )</strong> 当前有多少个进程打开了该文件. (
+count=0 时才真正从内存释放 ).</li>
+<li><strong>逻辑设备号</strong> 文件所在设备的设备号.</li>
+<li><strong>链接指针</strong> 用于将内存 Inode
 链接成空闲链表或哈希队列.</li>
 <li><em>( 包含磁盘 Inode 的所有信息 )</em></li>
 </ul></li>
 </ul>
 <h4 id="示例对比">4. 示例对比</h4>
 <ul>
-<li><strong>传统 FCB</strong> : 假设一个 FCB 占 64B, 盘块 1KB.
-一个盘块存 <span class="math inline">\(1024/64 = 16\)</span>
+<li><strong>传统 FCB</strong> 假设一个 FCB 占 64B, 盘块 1KB. 一个盘块存
+<span class="math inline">\(1024/64 = 16\)</span> 个目录项.</li>
+<li><strong>Inode 法</strong> 假设目录项 ( 文件名 + 索引节点号 ) 占 16B.
+一个盘块存 <span class="math inline">\(1024/16 = 64\)</span>
 个目录项.</li>
-<li><strong>Inode 法</strong> : 假设目录项 ( 文件名 + 索引节点号 ) 占
-16B. 一个盘块存 <span class="math inline">\(1024/16 = 64\)</span>
-个目录项.</li>
-<li><strong>结论</strong> : 同等条件下, Inode 法检索目录的平均 I/O
+<li><strong>结论</strong> 同等条件下, Inode 法检索目录的平均 I/O
 次数约为传统 FCB 的 <span class="math inline">\(1/4\)</span>.</li>
 </ul>
 <h3 id="文件的操作">4.1.3 文件的操作</h3>
 <h4 id="创建文件-create">1. 创建文件 ( Create )</h4>
 <ul>
-<li><strong>系统调用</strong> : <code>create(filename, mode)</code></li>
-<li><strong>核心工作</strong> :
+<li><strong>系统调用</strong> <code>create(filename, mode)</code></li>
+<li><strong>核心工作</strong>
 <ol type="1">
-<li><strong>分配外存</strong> : 在外存中寻找空闲块 ( 如空闲链表、位示图
+<li><strong>分配外存</strong> 在外存中寻找空闲块 ( 如空闲链表、位示图
 ).</li>
-<li><strong>创建目录项</strong> : 在父目录中增加一项,
+<li><strong>创建目录项</strong> 在父目录中增加一项,
 记录文件名、外存地址等信息.</li>
-<li><strong>初始化</strong> : 建立 FCB/Inode, 设置默认属性 (
+<li><strong>初始化</strong> 建立 FCB/Inode, 设置默认属性 (
 如所有者、权限 ).</li>
 </ol></li>
 </ul>
 <h4 id="删除文件-delete">2. 删除文件 ( Delete )</h4>
 <ul>
-<li><strong>系统调用</strong> : <code>delete(filename)</code></li>
-<li><strong>核心工作</strong> :
+<li><strong>系统调用</strong> <code>delete(filename)</code></li>
+<li><strong>核心工作</strong>
 <ol type="1">
-<li><strong>查找目录</strong> : 根据文件名找到对应的目录项.</li>
-<li><strong>回收资源</strong> : 释放文件占用的外存块 ( 修改位示图/FAT
+<li><strong>查找目录</strong> 根据文件名找到对应的目录项.</li>
+<li><strong>回收资源</strong> 释放文件占用的外存块 ( 修改位示图/FAT
 ).</li>
-<li><strong>删除目录项</strong> :
+<li><strong>删除目录项</strong>
 将该目录项标记为无效或从目录文件中移除.</li>
-<li><strong>回收 Inode</strong> : 若引用计数 ( nlink ) 为 0, 则回收
+<li><strong>回收 Inode</strong> 若引用计数 ( nlink ) 为 0, 则回收
 Inode.</li>
 </ol></li>
 </ul>
 <h4 id="打开文件-open">3. 打开文件 ( Open )</h4>
 <ul>
-<li><p><strong>系统调用</strong> :
+<li><p><strong>系统调用</strong>
 <code>fd = open(filename, flags)</code></p></li>
-<li><p><strong>核心工作</strong> : 将文件的控制信息 ( FCB/Inode )
+<li><p><strong>核心工作</strong> 将文件的控制信息 ( FCB/Inode )
 从外存读入内存, 建立相关数据结构.</p></li>
-<li><p><strong>打开文件表结构</strong> :</p>
+<li><p><strong>打开文件表结构</strong></p>
 <ul>
-<li><strong>进程打开文件表</strong> : 每个进程独有 ( PCB 中 ). 记录
+<li><strong>进程打开文件表</strong> 每个进程独有 ( PCB 中 ). 记录
 <strong>当前读写指针</strong>, <strong>系统表索引</strong>.</li>
-<li><strong>系统打开文件表</strong> : 整个系统只有一张. 记录
-<strong>Inode 信息</strong>, <strong>打开计数 ( count )</strong>.</li>
+<li><strong>系统打开文件表</strong> 整个系统只有一张. 记录 <strong>Inode
+信息</strong>, <strong>打开计数 ( count )</strong>.</li>
 </ul></li>
-<li><p><strong>流程图解</strong> :</p>
+<li><p><strong>流程图解</strong></p>
 <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
   %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;lineColor&#39;: &#39;#64748b&#39;, &#39;fontFamily&#39;: &#39;arial&#39;, &#39;fontSize&#39;: &#39;16px&#39; }}}%%
 flowchart TB
@@ -584,48 +577,48 @@ flowchart TB
 </div>
 <h4 id="关闭文件-close">4. 关闭文件 ( Close )</h4>
 <ul>
-<li><strong>系统调用</strong> : <code>close(fd)</code></li>
-<li><strong>核心工作</strong> :
+<li><strong>系统调用</strong> <code>close(fd)</code></li>
+<li><strong>核心工作</strong>
 <ol type="1">
-<li><strong>删除进程表项</strong> : 释放进程打开文件表中的对应项.</li>
-<li><strong>减少引用计数</strong> : 系统打开文件表中对应项的 count 减
+<li><strong>删除进程表项</strong> 释放进程打开文件表中的对应项.</li>
+<li><strong>减少引用计数</strong> 系统打开文件表中对应项的 count 减
 1.</li>
-<li><strong>写回/释放</strong> : 若 count = 0, 将内存 Inode ( 若修改 )
+<li><strong>写回/释放</strong> 若 count = 0, 将内存 Inode ( 若修改 )
 写回磁盘, 并释放系统表项.</li>
 </ol></li>
 </ul>
 <h4 id="读写文件-readwrite">5. 读/写文件 ( Read/Write )</h4>
 <ul>
-<li><strong>系统调用</strong> : <code>read(fd, buf, size)</code>,
+<li><strong>系统调用</strong> <code>read(fd, buf, size)</code>,
 <code>write(fd, buf, size)</code></li>
-<li><strong>核心工作</strong> :
+<li><strong>核心工作</strong>
 <ol type="1">
-<li><strong>定位</strong> : 根据 fd 找到进程表项 <span
+<li><strong>定位</strong> 根据 fd 找到进程表项 <span
 class="math inline">\(\to\)</span> 系统表项 <span
 class="math inline">\(\to\)</span> 内存 Inode <span
 class="math inline">\(\to\)</span> 物理地址.</li>
-<li><strong>转换</strong> : 将逻辑地址 ( 偏移量 ) 转换为物理地址 ( 块号
-+ 块内偏移 ).</li>
-<li><strong>传输</strong> : 在内存缓冲区和磁盘之间传输数据.</li>
-<li><strong>更新</strong> : 修改读写指针位置.</li>
+<li><strong>转换</strong> 将逻辑地址 ( 偏移量 ) 转换为物理地址 ( 块号 +
+块内偏移 ).</li>
+<li><strong>传输</strong> 在内存缓冲区和磁盘之间传输数据.</li>
+<li><strong>更新</strong> 修改读写指针位置.</li>
 </ol></li>
 </ul>
 <h4 id="文件重定位-seek">6. 文件重定位 ( Seek )</h4>
 <ul>
-<li><strong>系统调用</strong> :
+<li><strong>系统调用</strong>
 <code>lseek(fd, offset, whence)</code></li>
-<li><strong>核心工作</strong> : 修改进程打开文件表中该文件的
+<li><strong>核心工作</strong> 修改进程打开文件表中该文件的
 <strong>读写指针</strong> 位置. ( 不涉及 I/O 操作 ).</li>
 </ul>
 <h3 id="文件的逻辑结构">4.1.4 文件的逻辑结构</h3>
 <p>指在用户看来，文件内部的数据是如何组织的.</p>
 <h4 id="无结构文件-流式文件">1. 无结构文件 ( 流式文件 )</h4>
 <ul>
-<li><strong>定义</strong> : 文件内部没有结构，看作是一串字符流.</li>
-<li><strong>特点</strong> : 管理简单，用户方便.</li>
-<li><strong>应用</strong> : 源程序文件、目标代码文件、UNIX/Linux
+<li><strong>定义</strong> 文件内部没有结构，看作是一串字符流.</li>
+<li><strong>特点</strong> 管理简单，用户方便.</li>
+<li><strong>应用</strong> 源程序文件、目标代码文件、UNIX/Linux
 的所有文件.</li>
-<li><strong>访问</strong> : 只能利用读写指针按 <strong>字节</strong>
+<li><strong>访问</strong> 只能利用读写指针按 <strong>字节</strong>
 依次读写.</li>
 </ul>
 <h4 id="有结构文件-记录式文件">2. 有结构文件 ( 记录式文件 )</h4>
@@ -706,17 +699,17 @@ NextGroupBlock=当前组原组头位置, 重置当前组 ( 实现有差异 ).</l
 </ul>
 <h5 id="顺序文件-sequential-file">1. 顺序文件 ( Sequential File )</h5>
 <ul>
-<li><strong>定义</strong> : 记录按某种顺序排列.</li>
-<li><strong>分类</strong> :
+<li><strong>定义</strong> 记录按某种顺序排列.</li>
+<li><strong>分类</strong>
 <ul>
-<li><strong>串结构</strong> : 记录顺序与关键字无关 ( 通常按时间 ).
-查找需 <span class="math inline">\(O(n)\)</span>.</li>
-<li><strong>顺序结构</strong> : 记录按关键字顺序排列.
+<li><strong>串结构</strong> 记录顺序与关键字无关 ( 通常按时间 ). 查找需
+<span class="math inline">\(O(n)\)</span>.</li>
+<li><strong>顺序结构</strong> 记录按关键字顺序排列.
 <strong>定长记录</strong> 可实现 <strong>随机访问</strong> ( 下标计算 );
 <strong>变长记录</strong> 只能顺序查找.</li>
 </ul></li>
-<li><strong>优点</strong> : 批量存取效率高 ( 磁带机 ).</li>
-<li><strong>缺点</strong> : 增删记录困难 ( 需移动大量记录 ).</li>
+<li><strong>优点</strong> 批量存取效率高 ( 磁带机 ).</li>
+<li><strong>缺点</strong> 增删记录困难 ( 需移动大量记录 ).</li>
 </ul>
 <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
   %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;lineColor&#39;: &#39;#64748b&#39;, &#39;fontFamily&#39;: &#39;arial&#39;, &#39;fontSize&#39;: &#39;16px&#39; }}}%%
@@ -735,13 +728,13 @@ flowchart LR
   </pre></div>
 <h5 id="索引文件-indexed-file">2. 索引文件 ( Indexed File )</h5>
 <ul>
-<li><strong>定义</strong> : 为变长记录文件建立一张
+<li><strong>定义</strong> 为变长记录文件建立一张
 <strong>索引表</strong>，记录指向记录的指针 ( 逻辑地址 ).</li>
-<li><strong>结构</strong> : 索引表本身是 <strong>定长记录</strong>
+<li><strong>结构</strong> 索引表本身是 <strong>定长记录</strong>
 的顺序文件.</li>
-<li><strong>优点</strong> : 支持 <strong>随机访问</strong> (
-即使记录变长 ); 易于增删.</li>
-<li><strong>缺点</strong> : 索引表占用额外的存储空间.</li>
+<li><strong>优点</strong> 支持 <strong>随机访问</strong> ( 即使记录变长
+); 易于增删.</li>
+<li><strong>缺点</strong> 索引表占用额外的存储空间.</li>
 </ul>
 <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
   %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;lineColor&#39;: &#39;#64748b&#39;, &#39;fontFamily&#39;: &#39;arial&#39;, &#39;fontSize&#39;: &#39;16px&#39; }}}%%
@@ -774,13 +767,12 @@ flowchart LR
 <h5 id="索引顺序文件-indexed-sequential-file">3. 索引顺序文件 ( Indexed
 Sequential File )</h5>
 <ul>
-<li><strong>定义</strong> : 将顺序文件中的记录
+<li><strong>定义</strong> 将顺序文件中的记录
 <strong>分组</strong>，为每组建立一个索引项. ( 类似多级页表 / 字典目录
 ).</li>
-<li><strong>特点</strong> : 是顺序文件和索引文件的结合.</li>
-<li><strong>优势</strong> : 既支持随机访问,
-又减少了索引表的占用空间.</li>
-<li><strong>效率</strong> : 若 <span class="math inline">\(N\)</span>
+<li><strong>特点</strong> 是顺序文件和索引文件的结合.</li>
+<li><strong>优势</strong> 既支持随机访问, 又减少了索引表的占用空间.</li>
+<li><strong>效率</strong> 若 <span class="math inline">\(N\)</span>
 条记录, 分 <span class="math inline">\(\sqrt{N}\)</span> 组, 每组 <span
 class="math inline">\(\sqrt{N}\)</span> 条. 平均查找次数由 <span
 class="math inline">\(N/2\)</span> 降为 <span
@@ -820,12 +812,12 @@ flowchart LR
 <h5 id="直接文件-direct-file-散列文件-hash-file">4. 直接文件 ( Direct
 File ) / 散列文件 ( Hash File )</h5>
 <ul>
-<li><strong>定义</strong> :
+<li><strong>定义</strong>
 给定记录的键值或通过散列函数转换的键值直接决定记录的物理地址.</li>
-<li><strong>特点</strong> : 没有顺序的特性.</li>
-<li><strong>优点</strong> : 存取速度很高 ( <span
+<li><strong>特点</strong> 没有顺序的特性.</li>
+<li><strong>优点</strong> 存取速度很高 ( <span
 class="math inline">\(O(1)\)</span> ).</li>
-<li><strong>缺点</strong> : 会产生冲突 ( 不同关键字映射到同一地址 ),
+<li><strong>缺点</strong> 会产生冲突 ( 不同关键字映射到同一地址 ),
 需要处理冲突.</li>
 </ul>
 <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
@@ -877,9 +869,9 @@ flowchart LR
 <h4 id="连续分配-continuous-allocation">1. 连续分配 ( Continuous
 Allocation )</h4>
 <ul>
-<li><strong>定义</strong> : 每个文件在磁盘上占有一组
-<strong>连续</strong> 的块.</li>
-<li><strong>示意图</strong> : <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
+<li><strong>定义</strong> 每个文件在磁盘上占有一组 <strong>连续</strong>
+的块.</li>
+<li><strong>示意图</strong> <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
   %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;lineColor&#39;: &#39;#64748b&#39;, &#39;fontFamily&#39;: &#39;arial&#39;, &#39;fontSize&#39;: &#39;16px&#39; }}}%%
 flowchart LR
     %% 样式定义
@@ -897,43 +889,43 @@ flowchart LR
     
     class Disk container
   </pre></div></li>
-<li><strong>优点</strong> :
+<li><strong>优点</strong>
 <ul>
-<li><strong>速度快</strong> : 支持顺序访问和直接访问 ( 随机访问 ).
+<li><strong>速度快</strong> 支持顺序访问和直接访问 ( 随机访问 ).
 顺序读写速度 <strong>最快</strong> ( 磁头移动少 ).</li>
 </ul></li>
-<li><strong>磁盘 I/O 次数</strong> :
+<li><strong>磁盘 I/O 次数</strong>
 <ul>
-<li><strong>访问第 <span class="math inline">\(i\)</span> 块</strong> :
+<li><strong>访问第 <span class="math inline">\(i\)</span> 块</strong>
 仅需 <strong>1 次</strong> I/O. ( FCB 中记录了 <code>Start</code>,
 物理地址 <span class="math inline">\(= \text{Start} + i\)</span>,
 直接定位读取 ).</li>
 <li><strong>插入 (Insert at <span
-class="math inline">\(i\)</span>)</strong> : 需将 <span
+class="math inline">\(i\)</span>)</strong> 需将 <span
 class="math inline">\(i\)</span> 之后的 <span
 class="math inline">\(N-i\)</span> 个块依次后移. 总 I/O <span
 class="math inline">\(\approx 2 \times (N-i) + 1\)</span>. ( 读旧+写新
 ).</li>
 <li><strong>删除 (Delete at <span
-class="math inline">\(i\)</span>)</strong> : 需将 <span
+class="math inline">\(i\)</span>)</strong> 需将 <span
 class="math inline">\(i\)</span> 之后的 <span
 class="math inline">\(N-i\)</span> 个块依次前移. 总 I/O <span
 class="math inline">\(\approx 2 \times (N-i)\)</span>.</li>
 <li><strong>修改 (Modify <span
-class="math inline">\(i\)</span>)</strong> : 定位后, 1 次读 + 1 次写 (
+class="math inline">\(i\)</span>)</strong> 定位后, 1 次读 + 1 次写 (
 覆盖 ). 总 I/O = 2.</li>
 </ul></li>
-<li><strong>文件最大长度</strong> :
+<li><strong>文件最大长度</strong>
 <ul>
 <li>受 <strong>FCB 中文件长度字段位数</strong> 或
 <strong>磁盘总容量</strong> 限制.</li>
 <li>( 例如: 若长度字段为 32 位, 单位为字节, 则最大文件为 4GB ).</li>
 </ul></li>
-<li><strong>缺点</strong> :
+<li><strong>缺点</strong>
 <ul>
-<li><strong>碎片</strong> : 产生 <strong>外部碎片</strong> (
+<li><strong>碎片</strong> 产生 <strong>外部碎片</strong> (
 类似动态分区分配 ).</li>
-<li><strong>扩展难</strong> : 文件长度扩展时, 若后方无空闲块,
+<li><strong>扩展难</strong> 文件长度扩展时, 若后方无空闲块,
 需整体迁移.</li>
 </ul></li>
 </ul>
@@ -941,46 +933,46 @@ class="math inline">\(i\)</span>)</strong> : 定位后, 1 次读 + 1 次写 (
 )</h4>
 <p>采用 <strong>离散分配</strong>, 消除外部碎片.</p>
 <ul>
-<li><strong>隐式链接 ( Implicit Linking )</strong> :
+<li><strong>隐式链接 ( Implicit Linking )</strong>
 <ul>
-<li><strong>定义</strong> : 目录项指向第一块和最后一块,
+<li><strong>定义</strong> 目录项指向第一块和最后一块,
 每个磁盘块中隐含指向下一块的指针.</li>
-<li><strong>优点</strong> : 无外部碎片, 方便扩展.</li>
-<li><strong>缺点</strong> : <strong>只支持顺序访问</strong> ( 必须从头读
+<li><strong>优点</strong> 无外部碎片, 方便扩展.</li>
+<li><strong>缺点</strong> <strong>只支持顺序访问</strong> ( 必须从头读
 ); 可靠性差 ( 指针丢失导致文件断裂 ).</li>
-<li><strong>磁盘 I/O 次数</strong> :
+<li><strong>磁盘 I/O 次数</strong>
 <ul>
-<li><strong>访问第 <span class="math inline">\(i\)</span> 块</strong> :
-需 <strong><span class="math inline">\(i+1\)</span> 次</strong> I/O. (
+<li><strong>访问第 <span class="math inline">\(i\)</span> 块</strong> 需
+<strong><span class="math inline">\(i+1\)</span> 次</strong> I/O. (
 必须读取前 <span class="math inline">\(i\)</span> 个块才能获得第 <span
 class="math inline">\(i\)</span> 块的物理指针 ).</li>
 <li><strong>插入 ( Insert after <span class="math inline">\(i\)</span>
-)</strong> : 需读 <span class="math inline">\(0 \sim i\)</span> 块 (
-<span class="math inline">\(i+1\)</span> 次 ). 修改 block <span
+)</strong> 需读 <span class="math inline">\(0 \sim i\)</span> 块 ( <span
+class="math inline">\(i+1\)</span> 次 ). 修改 block <span
 class="math inline">\(i\)</span> 指针 ( 1 写 ) + 写入新块 ( 1 写 ). 总
 I/O <span class="math inline">\(= i + 3\)</span>.</li>
 <li><strong>删除 ( Delete after <span class="math inline">\(i\)</span>
-)</strong> : 需读 <span class="math inline">\(0 \sim i\)</span> 块 (
-<span class="math inline">\(i+1\)</span> 次 ). 修改 block <span
+)</strong> 需读 <span class="math inline">\(0 \sim i\)</span> 块 ( <span
+class="math inline">\(i+1\)</span> 次 ). 修改 block <span
 class="math inline">\(i\)</span> 指针 ( 1 写 ). 总 I/O <span
 class="math inline">\(= i + 2\)</span>.</li>
 <li><strong>修改 ( Modify <span class="math inline">\(i\)</span>
-)</strong> : 读 <span class="math inline">\(0 \sim i\)</span> 块 ( <span
+)</strong> 读 <span class="math inline">\(0 \sim i\)</span> 块 ( <span
 class="math inline">\(i+1\)</span> 次 ) + 1 次写. 总 I/O <span
 class="math inline">\(= i + 2\)</span>.</li>
 </ul></li>
-<li><strong>文件最大长度</strong> :
+<li><strong>文件最大长度</strong>
 <ul>
 <li>理论上受 <strong>磁盘总容量</strong> 限制. ( 只要有空闲块即可链接
 ).</li>
 <li>( 实际上受 FCB/Inode 中文件大小字段位数限制 ).</li>
 </ul></li>
 </ul></li>
-<li><strong>显式链接 ( Explicit Linking ) - FAT</strong> :
+<li><strong>显式链接 ( Explicit Linking ) - FAT</strong>
 <ul>
-<li><strong>定义</strong> : 将链接指针集中存放在内存的一张表中 (
+<li><strong>定义</strong> 将链接指针集中存放在内存的一张表中 (
 <strong>文件分配表 FAT</strong> ).</li>
-<li><strong>特点</strong> :
+<li><strong>特点</strong>
 <ul>
 <li>一个磁盘仅设置 <strong>一张</strong> FAT 表.</li>
 <li>FAT 表项与磁盘块 <strong>一一对应</strong>. ( 物理块号 <span
@@ -989,25 +981,25 @@ class="math inline">\(\leftrightarrow\)</span> FAT 索引 ).</li>
 表示文件结束 ).</li>
 <li><strong>开机</strong> 时, FAT 表被读入 <strong>内存</strong>.</li>
 </ul></li>
-<li><strong>访问机制</strong> :
+<li><strong>访问机制</strong>
 <ul>
 <li><strong>逻辑块号 <span class="math inline">\(i\)</span> <span
-class="math inline">\(\to\)</span> 物理块号</strong> : 不需要读磁盘,
+class="math inline">\(\to\)</span> 物理块号</strong> 不需要读磁盘,
 直接在内存查询 FAT 链表 <span class="math inline">\(i\)</span> 次.</li>
 <li>虽是链式查找, 但完全在内存进行, 速度很快, 故称
 <strong>支持随机访问</strong>.</li>
 </ul></li>
-<li><strong>磁盘 I/O 次数</strong> :
+<li><strong>磁盘 I/O 次数</strong>
 <ul>
-<li><strong>访问第 <span class="math inline">\(i\)</span> 块</strong> :
+<li><strong>访问第 <span class="math inline">\(i\)</span> 块</strong>
 仅需 <strong>1 次</strong> 磁盘 I/O. ( 查 FAT 表在内存进行,
 找到物理块号后, 直接读盘 ).</li>
-<li><strong>插入</strong> : 查内存 FAT 找空闲块, 修改内存 FAT 链表 ( 0
-I/O ). 仅需写入新数据块 ( 1 I/O ). ( FAT 表周期性回写 ).</li>
-<li><strong>删除</strong> : 修改内存 FAT 表项为 Free ( 0 I/O ).</li>
-<li><strong>修改</strong> : 定位后, 1 次读 + 1 次写. 总 I/O = 2.</li>
+<li><strong>插入</strong> 查内存 FAT 找空闲块, 修改内存 FAT 链表 ( 0 I/O
+). 仅需写入新数据块 ( 1 I/O ). ( FAT 表周期性回写 ).</li>
+<li><strong>删除</strong> 修改内存 FAT 表项为 Free ( 0 I/O ).</li>
+<li><strong>修改</strong> 定位后, 1 次读 + 1 次写. 总 I/O = 2.</li>
 </ul></li>
-<li><strong>计算示例</strong> :
+<li><strong>计算示例</strong>
 <ul>
 <li>若硬盘 1TB, 块大小 4KB. 总块数 <span class="math inline">\(= 2^{40}
 / 2^{12} = 2^{28}\)</span>.</li>
@@ -1015,20 +1007,19 @@ I/O ). 仅需写入新数据块 ( 1 I/O ). ( FAT 表周期性回写 ).</li>
 <li>FAT 表大小 <span class="math inline">\(= 2^{28} \times 4B =
 1GB\)</span>. ( <strong>占用内存过大</strong> ).</li>
 </ul></li>
-<li><strong>文件最大长度</strong> :
+<li><strong>文件最大长度</strong>
 <ul>
 <li>受 <strong>FAT 表项位数</strong> ( 决定最大簇数 ) 和
 <strong>簇大小</strong> 限制.</li>
-<li><strong>公式</strong> : <span
-class="math inline">\(\text{MaxFileSize} = 2^K \times
-\text{ClusterSize}\)</span>. ( <span class="math inline">\(K\)</span> 为
-FAT 位数, 如 FAT32, <span class="math inline">\(K \approx 28 \sim
-32\)</span> ).</li>
+<li><strong>公式</strong> <span class="math inline">\(\text{MaxFileSize}
+= 2^K \times \text{ClusterSize}\)</span>. ( <span
+class="math inline">\(K\)</span> 为 FAT 位数, 如 FAT32, <span
+class="math inline">\(K \approx 28 \sim 32\)</span> ).</li>
 <li>( 例如: FAT32, 簇大小 4KB, 理论上限 <span
 class="math inline">\(2^{32} \times 4KB = 16TB\)</span>. <em>注: 实际
 FAT32 实现通常限制单文件 4GB</em> ).</li>
 </ul></li>
-<li><strong>示意图</strong> : <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
+<li><strong>示意图</strong> <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
   %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;lineColor&#39;: &#39;#64748b&#39;, &#39;fontFamily&#39;: &#39;arial&#39;, &#39;fontSize&#39;: &#39;16px&#39; }}}%%
 flowchart LR
     %% 样式定义
@@ -1057,40 +1048,39 @@ flowchart LR
     
     class FAT,Disk container
   </pre></div></li>
-<li><strong>优点</strong> : 支持 <strong>随机访问</strong> ( 查内存 FAT
+<li><strong>优点</strong> 支持 <strong>随机访问</strong> ( 查内存 FAT
 表即可 ); 无外部碎片; 方便文件扩展.</li>
-<li><strong>缺点</strong> : FAT 表占用较大的
+<li><strong>缺点</strong> FAT 表占用较大的
 <strong>内存空间</strong>.</li>
 </ul></li>
 </ul>
 <h4 id="索引分配-indexed-allocation">3. 索引分配 ( Indexed Allocation
 )</h4>
 <ul>
-<li><p><strong>定义</strong> : 系统为每个文件建立一张 <strong>索引表 (
+<li><p><strong>定义</strong> 系统为每个文件建立一张 <strong>索引表 (
 Index Table )</strong>, 记录逻辑块号到物理块号的映射.
 索引表存放的磁盘块称为 <strong>索引块</strong>.</p></li>
-<li><p><strong>特点</strong> :</p>
+<li><p><strong>特点</strong></p>
 <ul>
 <li>索引表可以直接映射 ( <span class="math inline">\(i \to
 \text{Physical Block}\)</span> ), 支持 <strong>随机访问</strong>.</li>
 <li>索引块通常存在 <strong>磁盘</strong> 上 ( 访问文件需先读索引块
 ).</li>
 </ul></li>
-<li><p><strong>磁盘 I/O 次数 ( 单级索引 )</strong> :</p>
+<li><p><strong>磁盘 I/O 次数 ( 单级索引 )</strong></p>
 <ul>
-<li><strong>访问第 <span class="math inline">\(i\)</span> 块</strong> :
-需 <strong>2 次</strong> I/O ( 1次读索引块 + 1次读数据块 ). (
+<li><strong>访问第 <span class="math inline">\(i\)</span> 块</strong> 需
+<strong>2 次</strong> I/O ( 1次读索引块 + 1次读数据块 ). (
 若索引块已调入内存, 则只需 1 次 ).</li>
-<li><strong>插入</strong> : 读索引块 ( 1 I/O ) + 修改内存索引 +
-写回索引块 ( 1 I/O ) + 写新数据块 ( 1 I/O ). 总 I/O <span
-class="math inline">\(= 3\)</span>.</li>
-<li><strong>删除</strong> : 读索引块 ( 1 I/O ) + 修改内存索引 +
-写回索引块 ( 1 I/O ). 总 I/O <span class="math inline">\(=
-2\)</span>.</li>
-<li><strong>修改</strong> : 读索引块 ( 1 I/O ) + 读数据 ( 1 I/O ) +
-写数据 ( 1 I/O ). 总 I/O <span class="math inline">\(= 3\)</span>.</li>
+<li><strong>插入</strong> 读索引块 ( 1 I/O ) + 修改内存索引 + 写回索引块
+( 1 I/O ) + 写新数据块 ( 1 I/O ). 总 I/O <span class="math inline">\(=
+3\)</span>.</li>
+<li><strong>删除</strong> 读索引块 ( 1 I/O ) + 修改内存索引 + 写回索引块
+( 1 I/O ). 总 I/O <span class="math inline">\(= 2\)</span>.</li>
+<li><strong>修改</strong> 读索引块 ( 1 I/O ) + 读数据 ( 1 I/O ) + 写数据
+( 1 I/O ). 总 I/O <span class="math inline">\(= 3\)</span>.</li>
 </ul></li>
-<li><p><strong>示意图</strong> : <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
+<li><p><strong>示意图</strong> <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
   %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;lineColor&#39;: &#39;#64748b&#39;, &#39;fontFamily&#39;: &#39;arial&#39;, &#39;fontSize&#39;: &#39;16px&#39; }}}%%
 flowchart LR
     %% 样式定义
@@ -1115,47 +1105,47 @@ flowchart LR
     
     class Disk container
   </pre></div></p></li>
-<li><p><strong>解决索引块不够用的方案</strong> :</p>
+<li><p><strong>解决索引块不够用的方案</strong></p>
 <ol type="1">
-<li><strong>链接索引 ( Linked Indexing )</strong> :
+<li><strong>链接索引 ( Linked Indexing )</strong>
 <ul>
 <li>将多个索引块链接起来.</li>
-<li><strong>缺点</strong> : 若文件很大, 需顺序查找索引块,
+<li><strong>缺点</strong> 若文件很大, 需顺序查找索引块,
 无法直接定位.</li>
 </ul></li>
-<li><strong>多级索引 ( Multi-Level Indexing )</strong> :
+<li><strong>多级索引 ( Multi-Level Indexing )</strong>
 <ul>
 <li>建立索引的索引 ( 类似多级页表 ).</li>
-<li><strong>二级索引</strong> : 顶级索引块 <span
+<li><strong>二级索引</strong> 顶级索引块 <span
 class="math inline">\(\to\)</span> 二级索引块 <span
 class="math inline">\(\to\)</span> 数据块.</li>
-<li><strong>访问次数</strong> : <span class="math inline">\(K\)</span>
+<li><strong>访问次数</strong> <span class="math inline">\(K\)</span>
 级索引需 <span class="math inline">\(K+1\)</span> 次磁盘 I/O (
 假设索引未缓存 ).</li>
-<li><strong>容量计算</strong> : 若块大小 4KB, 指针 4B. 一个块存 <span
+<li><strong>容量计算</strong> 若块大小 4KB, 指针 4B. 一个块存 <span
 class="math inline">\(1024\)</span> 个指针.
 <ul>
 <li>二级索引最大文件 : <span class="math inline">\(1024 \times 1024
 \times 4KB = 4GB\)</span>.</li>
 </ul></li>
 </ul></li>
-<li><strong>混合索引 ( Hybrid Indexing ) - UNIX/Linux 常用</strong> :
+<li><strong>混合索引 ( Hybrid Indexing ) - UNIX/Linux 常用</strong>
 <ul>
-<li><strong>结构</strong> : Inode 中包含 <strong>直接地址指针</strong> +
+<li><strong>结构</strong> Inode 中包含 <strong>直接地址指针</strong> +
 <strong>一级间接</strong> + <strong>二级间接</strong> +
 <strong>三级间接</strong>.</li>
-<li><strong>优势</strong> : 兼顾了小文件 ( 绝大多数 )
+<li><strong>优势</strong> 兼顾了小文件 ( 绝大多数 )
 的访问速度和大文件的容量.</li>
-<li><strong>举例 ( 假设 10个直接, 1个一级, 1个二级, 1个三级 )</strong> :
+<li><strong>举例 ( 假设 10个直接, 1个一级, 1个二级, 1个三级 )</strong>
 <ul>
 <li><strong>小文件</strong> ( <span class="math inline">\(\le
 10\)</span> 块 ) : 直接访问, 0 次额外 I/O.</li>
-<li><strong>中文件</strong> : 用一级间接.</li>
-<li><strong>大文件</strong> : 用二/三级间接.</li>
+<li><strong>中文件</strong> 用一级间接.</li>
+<li><strong>大文件</strong> 用二/三级间接.</li>
 </ul></li>
-<li><strong>文件最大长度</strong> :
+<li><strong>文件最大长度</strong>
 <ul>
-<li><strong>公式</strong> : <span class="math inline">\(\text{Max} =
+<li><strong>公式</strong> <span class="math inline">\(\text{Max} =
 (N_{direct} + N_1 \times M + N_2 \times M^2 + N_3 \times M^3) \times
 \text{BlockSize}\)</span>.</li>
 <li>( 其中 <span class="math inline">\(M =
@@ -1202,12 +1192,12 @@ flowchart LR
     class InodeStruct,Level1,Level2 container
   </pre></div></li>
 </ol></li>
-<li><p><strong>优点</strong> : 支持 <strong>随机访问</strong>;
+<li><p><strong>优点</strong> 支持 <strong>随机访问</strong>;
 易于文件扩展 ( 只需分配新块并更新索引 ).</p></li>
-<li><p><strong>缺点</strong> : 索引表需占用额外的存储空间 (
+<li><p><strong>缺点</strong> 索引表需占用额外的存储空间 (
 对极小文件而言开销比例大 ).</p></li>
 </ul>
-<p><strong>总结对比</strong> :</p>
+<p><strong>总结对比</strong></p>
 <table>
 <thead>
 <tr>
@@ -1255,39 +1245,39 @@ flowchart LR
 <h4 id="口令保护-password-protection">1. 口令保护 ( Password Protection
 )</h4>
 <ul>
-<li><strong>机制</strong> : 用户在建立文件时设置一个口令,
+<li><strong>机制</strong> 用户在建立文件时设置一个口令,
 系统将口令附在文件的 FCB / Inode 中.</li>
-<li><strong>访问</strong> : 用户请求访问时需提供口令,
+<li><strong>访问</strong> 用户请求访问时需提供口令,
 验证通过后方可访问.</li>
-<li><strong>优点</strong> :
+<li><strong>优点</strong>
 <ul>
-<li><strong>开销小</strong> : 验证速度快.</li>
-<li><strong>存储少</strong> : 仅需存储一个口令字段.</li>
+<li><strong>开销小</strong> 验证速度快.</li>
+<li><strong>存储少</strong> 仅需存储一个口令字段.</li>
 </ul></li>
-<li><strong>缺点</strong> :
+<li><strong>缺点</strong>
 <ul>
-<li><strong>安全性差</strong> : 口令直接存于系统内部 ( FCB ),
+<li><strong>安全性差</strong> 口令直接存于系统内部 ( FCB ),
 若系统管理员或黑客读取了 FCB, 口令即泄露. ( 改进: 存储口令的哈希值
 ).</li>
-<li><strong>不够灵活</strong> : 只要知道口令,
+<li><strong>不够灵活</strong> 只要知道口令,
 任何用户都能拥有完全权限.</li>
 </ul></li>
 </ul>
 <h4 id="加密保护-cryptography-protection">2. 加密保护 ( Cryptography
 Protection )</h4>
 <ul>
-<li><strong>机制</strong> : 使用 <strong>密码算法</strong> ( 如 DES, AES
-) 对文件内容进行加密.</li>
-<li><strong>访问</strong> : 只有持有正确 <strong>密钥</strong>
+<li><strong>机制</strong> 使用 <strong>密码算法</strong> ( 如 DES, AES )
+对文件内容进行加密.</li>
+<li><strong>访问</strong> 只有持有正确 <strong>密钥</strong>
 的用户才能将文件解密并读取.</li>
-<li><strong>优点</strong> :
+<li><strong>优点</strong>
 <ul>
-<li><strong>保密性极强</strong> : 即使文件被拷贝或物理窃取,
+<li><strong>保密性极强</strong> 即使文件被拷贝或物理窃取,
 没有密钥也无法获取内容.</li>
 </ul></li>
-<li><strong>缺点</strong> :
+<li><strong>缺点</strong>
 <ul>
-<li><strong>效率低</strong> : 加密/解密需要消耗大量的 CPU 时间.</li>
+<li><strong>效率低</strong> 加密/解密需要消耗大量的 CPU 时间.</li>
 </ul></li>
 </ul>
 <h4 id="访问控制-access-control">3. 访问控制 ( Access Control )</h4>
@@ -1295,45 +1285,45 @@ Protection )</h4>
 <strong>什么 ( Object )</strong> 可以进行 <strong>何种操作 ( Access
 Right )</strong>.</p>
 <ul>
-<li><strong>访问控制矩阵 ( Access Control Matrix )</strong> :
+<li><strong>访问控制矩阵 ( Access Control Matrix )</strong>
 <ul>
 <li>二维矩阵. <strong>行</strong> 代表用户 ( 进程 ), <strong>列</strong>
 代表文件. 矩阵项 <span class="math inline">\(A[i, j]\)</span> 表示用户
 <span class="math inline">\(i\)</span> 对文件 <span
 class="math inline">\(j\)</span> 的权限.</li>
-<li><strong>缺点</strong> : 矩阵非常稀疏, 浪费存储空间.</li>
+<li><strong>缺点</strong> 矩阵非常稀疏, 浪费存储空间.</li>
 </ul></li>
 <li><strong>实现方式 1 : 访问控制列表 ( ACL - Access Control List
-)</strong> :
+)</strong>
 <ul>
 <li><strong>基于列 ( 文件 )</strong> 的划分.</li>
-<li><strong>机制</strong> : 为每个文件设置一张表, 记录
+<li><strong>机制</strong> 为每个文件设置一张表, 记录
 <strong>哪些用户</strong> 对该文件有什么权限.</li>
-<li><strong>示例</strong> :
+<li><strong>示例</strong>
 <code>File1: (UserA, RW), (UserB, R)</code>.</li>
-<li><strong>优点</strong> : 方便查看某个文件的权限情况.</li>
+<li><strong>优点</strong> 方便查看某个文件的权限情况.</li>
 </ul></li>
-<li><strong>实现方式 2 : 用户权限表 ( Capability List )</strong> :
+<li><strong>实现方式 2 : 用户权限表 ( Capability List )</strong>
 <ul>
 <li><strong>基于行 ( 用户 )</strong> 的划分.</li>
-<li><strong>机制</strong> : 为每个用户设置一张表, 记录该用户对
+<li><strong>机制</strong> 为每个用户设置一张表, 记录该用户对
 <strong>哪些文件</strong> 有什么权限.</li>
-<li><strong>示例</strong> :
+<li><strong>示例</strong>
 <code>UserA: (File1, RW), (File2, R)</code>.</li>
-<li><strong>优点</strong> : 方便查看某个用户的权限集合.</li>
+<li><strong>优点</strong> 方便查看某个用户的权限集合.</li>
 </ul></li>
-<li><strong>实现方式 3 : 精简的访问列表 ( UNIX/Linux 模式 )</strong> :
+<li><strong>实现方式 3 : 精简的访问列表 ( UNIX/Linux 模式 )</strong>
 <ul>
 <li>将用户分为三类, 并用 <strong>9个二进制位</strong> 记录权限.</li>
-<li><strong>用户分类</strong> :
+<li><strong>用户分类</strong>
 <ul>
-<li><strong>拥有者 ( Owner )</strong> : 创建文件的用户.</li>
-<li><strong>同组用户 ( Group )</strong> : 与拥有者在同一组的用户.</li>
-<li><strong>其他用户 ( Other )</strong> : 系统内的其他用户.</li>
+<li><strong>拥有者 ( Owner )</strong> 创建文件的用户.</li>
+<li><strong>同组用户 ( Group )</strong> 与拥有者在同一组的用户.</li>
+<li><strong>其他用户 ( Other )</strong> 系统内的其他用户.</li>
 </ul></li>
-<li><strong>权限位</strong> : <strong>r ( 读 )</strong>, <strong>w ( 写
+<li><strong>权限位</strong> <strong>r ( 读 )</strong>, <strong>w ( 写
 )</strong>, <strong>x ( 执行 )</strong>.</li>
-<li><strong>示例</strong> : <code>-rwxr-xr--</code> ( 754 ) <span
+<li><strong>示例</strong> <code>-rwxr-xr--</code> ( 754 ) <span
 class="math inline">\(\to\)</span> Owner( RWX ), Group( R-X ), Other( R–
 ).</li>
 </ul></li>
@@ -1372,52 +1362,51 @@ flowchart LR
 <h3 id="目录的基本概念">4.2.1 目录的基本概念</h3>
 <h4 id="目录的定义">1. 目录的定义</h4>
 <ul>
-<li><strong>目录 ( Directory )</strong> : 是一种特殊的
+<li><strong>目录 ( Directory )</strong> 是一种特殊的
 <strong>文件</strong> ( 目录文件 ).</li>
-<li><strong>内容</strong> : 由若干 <strong>目录项 ( Directory Entry
+<li><strong>内容</strong> 由若干 <strong>目录项 ( Directory Entry
 )</strong> 组成.</li>
-<li><strong>目录项</strong> :
+<li><strong>目录项</strong>
 <ul>
-<li><strong>FCB</strong> : 在传统文件系统中, 目录项就是 FCB.</li>
-<li><strong>文件名 + Inode 号</strong> : 在现代文件系统 ( 如 UNIX ) 中,
+<li><strong>FCB</strong> 在传统文件系统中, 目录项就是 FCB.</li>
+<li><strong>文件名 + Inode 号</strong> 在现代文件系统 ( 如 UNIX ) 中,
 目录项仅包含文件名和索引节点号.</li>
 </ul></li>
 </ul>
 <h4 id="目录管理的要求-目标">2. 目录管理的要求 ( 目标 )</h4>
 <ol type="1">
-<li><strong>实现”按名存取”</strong> : 用户只需提供文件名,
+<li><strong>实现”按名存取”</strong> 用户只需提供文件名,
 系统即可找到对应文件. ( 最基本功能 ).</li>
-<li><strong>提高检索速度</strong> : 合理组织目录结构 ( 如 树形结构, Hash
+<li><strong>提高检索速度</strong> 合理组织目录结构 ( 如 树形结构, Hash
 ), 减少磁盘 I/O 次数.</li>
-<li><strong>提供访问控制</strong> : 目录也需要保护,
+<li><strong>提供访问控制</strong> 目录也需要保护,
 不同用户对不同目录有不同的权限.</li>
-<li><strong>允许文件重名</strong> : 允许不同用户 ( 或不同目录下 )
+<li><strong>允许文件重名</strong> 允许不同用户 ( 或不同目录下 )
 使用相同的文件名.</li>
-<li><strong>实现文件共享</strong> : 允许多个用户共享同一个文件.</li>
+<li><strong>实现文件共享</strong> 允许多个用户共享同一个文件.</li>
 </ol>
 <h3 id="目录的操作">4.2.2 目录的操作</h3>
 <ol type="1">
-<li><strong>搜索 ( Search )</strong> : 当用户使用一个文件时,
+<li><strong>搜索 ( Search )</strong> 当用户使用一个文件时,
 需要根据文件名搜索目录, 找到该文件对应的目录项.</li>
-<li><strong>创建文件 ( Create File )</strong> : 当创建一个新文件时,
+<li><strong>创建文件 ( Create File )</strong> 当创建一个新文件时,
 需要在目录中增加一个目录项.</li>
-<li><strong>删除文件 ( Delete File )</strong> : 当删除一个文件时,
+<li><strong>删除文件 ( Delete File )</strong> 当删除一个文件时,
 需要在目录中删除相应的目录项.</li>
-<li><strong>创建目录 ( Create Directory )</strong> :
+<li><strong>创建目录 ( Create Directory )</strong>
 在当前目录中创建一个新的空目录. ( 如 <code>mkdir</code> ).</li>
-<li><strong>删除目录 ( Delete Directory )</strong> :
-删除一个已存在的目录. ( 如 <code>rmdir</code> ). 若目录不为空,
-可能需要递归删除.</li>
-<li><strong>显示目录 ( Show / List Directory )</strong> :
+<li><strong>删除目录 ( Delete Directory )</strong> 删除一个已存在的目录.
+( 如 <code>rmdir</code> ). 若目录不为空, 可能需要递归删除.</li>
+<li><strong>显示目录 ( Show / List Directory )</strong>
 列出目录中的所有文件项和子目录. ( 如 <code>ls</code>, <code>dir</code>
 ).</li>
-<li><strong>修改目录 ( Modify Directory )</strong> : 修改目录的属性 (
+<li><strong>修改目录 ( Modify Directory )</strong> 修改目录的属性 (
 如文件名, 访问权限等 ). ( 重命名通常看作是修改的一种 ).</li>
-<li><strong>移动目录 ( Move Directory )</strong> : 将目录 ( 及其内容 )
+<li><strong>移动目录 ( Move Directory )</strong> 将目录 ( 及其内容 )
 从一个位置移动到另一个位置. ( 如 <code>mv</code> ).</li>
-<li><strong>改变当前目录 ( Change Directory )</strong> :
+<li><strong>改变当前目录 ( Change Directory )</strong>
 改变进程的当前工作目录. ( 如 <code>cd</code> ).</li>
-<li><strong>遍历文件系统 ( Traverse )</strong> : 从根目录出发,
+<li><strong>遍历文件系统 ( Traverse )</strong> 从根目录出发,
 访问文件系统中的每一个目录和文件. ( 常用于文件备份 ).</li>
 </ol>
 <h3 id="目录结构">4.2.3 目录结构</h3>
@@ -1425,9 +1414,9 @@ flowchart LR
 <h4 id="单级目录结构-single-level-directory">1. 单级目录结构 (
 Single-Level Directory )</h4>
 <ul>
-<li><strong>定义</strong> : 整个文件系统只建立 <strong>一张</strong>
+<li><strong>定义</strong> 整个文件系统只建立 <strong>一张</strong>
 目录表, 每个文件占一个目录项.</li>
-<li><strong>示意图</strong> : <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
+<li><strong>示意图</strong> <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
   %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;lineColor&#39;: &#39;#64748b&#39;, &#39;fontFamily&#39;: &#39;arial&#39;, &#39;fontSize&#39;: &#39;16px&#39; }}}%%
 flowchart TB
     %% 样式定义
@@ -1438,29 +1427,29 @@ flowchart TB
     Root --&gt; F2[文件 B]:::file
     Root --&gt; F3[文件 C]:::file
   </pre></div></li>
-<li><strong>特点</strong> :
+<li><strong>特点</strong>
 <ul>
-<li><strong>线性结构</strong> : 所有文件都在同一层级.</li>
+<li><strong>线性结构</strong> 所有文件都在同一层级.</li>
 </ul></li>
-<li><strong>缺点</strong> :
+<li><strong>缺点</strong>
 <ul>
-<li><strong>命名冲突</strong> : 不同用户不能使用相同文件名.</li>
-<li><strong>限制多</strong> : 文件多时查找速度慢; 不便于文件分类.</li>
+<li><strong>命名冲突</strong> 不同用户不能使用相同文件名.</li>
+<li><strong>限制多</strong> 文件多时查找速度慢; 不便于文件分类.</li>
 </ul></li>
 </ul>
 <h4 id="两级目录结构-two-level-directory">2. 两级目录结构 ( Two-Level
 Directory )</h4>
 <ul>
-<li><strong>定义</strong> : 将目录分为 <strong>主文件目录 ( MFD
-)</strong> 和 <strong>用户文件目录 ( UFD )</strong>.</li>
-<li><strong>结构</strong> :
+<li><strong>定义</strong> 将目录分为 <strong>主文件目录 ( MFD )</strong>
+和 <strong>用户文件目录 ( UFD )</strong>.</li>
+<li><strong>结构</strong>
 <ul>
-<li><strong>MFD ( Master File Directory )</strong> :
+<li><strong>MFD ( Master File Directory )</strong>
 记录用户名及指向该用户 UFD 的指针.</li>
-<li><strong>UFD ( User File Directory )</strong> : 记录该用户所有文件的
+<li><strong>UFD ( User File Directory )</strong> 记录该用户所有文件的
 FCB.</li>
 </ul></li>
-<li><strong>示意图</strong> : <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
+<li><strong>示意图</strong> <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
   %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;lineColor&#39;: &#39;#64748b&#39;, &#39;fontFamily&#39;: &#39;arial&#39;, &#39;fontSize&#39;: &#39;16px&#39; }}}%%
 flowchart TB
     %% 样式定义
@@ -1485,32 +1474,32 @@ flowchart TB
     
     class UFD_A,UFD_B container
   </pre></div></li>
-<li><strong>优点</strong> :
+<li><strong>优点</strong>
 <ul>
-<li><strong>解决重名</strong> : 不同用户可使用相同文件名 ( 隔离 ).</li>
-<li><strong>访问控制</strong> : 易于实现访问限制.</li>
+<li><strong>解决重名</strong> 不同用户可使用相同文件名 ( 隔离 ).</li>
+<li><strong>访问控制</strong> 易于实现访问限制.</li>
 </ul></li>
-<li><strong>缺点</strong> :
+<li><strong>缺点</strong>
 <ul>
-<li><strong>缺乏灵活</strong> : 用户不能对自己文件再分类 ( 无子目录
+<li><strong>缺乏灵活</strong> 用户不能对自己文件再分类 ( 无子目录
 ).</li>
 </ul></li>
 </ul>
 <h4 id="多级目录结构-树形目录-tree-structured-directory">3. 多级目录结构
 ( 树形目录 / Tree-Structured Directory )</h4>
 <ul>
-<li><strong>定义</strong> : 允许目录中包含子目录, 形成树状结构. ( 现代
-OS 通用 ).</li>
-<li><strong>路径 ( Path )</strong> :
+<li><strong>定义</strong> 允许目录中包含子目录, 形成树状结构. ( 现代 OS
+通用 ).</li>
+<li><strong>路径 ( Path )</strong>
 <ul>
-<li><strong>绝对路径</strong> : 从 <strong>根目录 ( / )</strong> 出发. (
+<li><strong>绝对路径</strong> 从 <strong>根目录 ( / )</strong> 出发. (
 如 <code>/usr/bin/gcc</code> ).</li>
-<li><strong>相对路径</strong> : 从 <strong>当前目录 ( . )</strong> 出发.
-( 如 <code>./gcc</code> ).</li>
-<li><strong>当前目录 ( Current Directory )</strong> :
+<li><strong>相对路径</strong> 从 <strong>当前目录 ( . )</strong> 出发. (
+如 <code>./gcc</code> ).</li>
+<li><strong>当前目录 ( Current Directory )</strong>
 为每个进程设置一个”当前工作目录”, 减少路径检索长度.</li>
 </ul></li>
-<li><strong>示意图</strong> : <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
+<li><strong>示意图</strong> <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
   %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;lineColor&#39;: &#39;#64748b&#39;, &#39;fontFamily&#39;: &#39;arial&#39;, &#39;fontSize&#39;: &#39;16px&#39; }}}%%
 flowchart TB
     %% 样式定义
@@ -1529,23 +1518,23 @@ flowchart TB
     
     Doc --&gt; F1[file.txt]:::file
   </pre></div></li>
-<li><strong>优点</strong> : 层次清晰, 解决重名, 便于分类.</li>
-<li><strong>缺点</strong> : 查找文件需逐级访问磁盘 ( I/O
-次数随着层级增加 ).</li>
+<li><strong>优点</strong> 层次清晰, 解决重名, 便于分类.</li>
+<li><strong>缺点</strong> 查找文件需逐级访问磁盘 ( I/O 次数随着层级增加
+).</li>
 </ul>
 <h4 id="无环图目录结构-acyclic-graph-directory">4. 无环图目录结构 (
 Acyclic-Graph Directory )</h4>
 <ul>
-<li><strong>定义</strong> : 在树形结构基础上,
+<li><strong>定义</strong> 在树形结构基础上,
 允许目录项指向已存在的文件/目录. ( 实现 <strong>文件共享</strong>
 ).</li>
-<li><strong>特点</strong> : 允许一个文件有多个父目录.</li>
-<li><strong>共享方式</strong> :
+<li><strong>特点</strong> 允许一个文件有多个父目录.</li>
+<li><strong>共享方式</strong>
 <ul>
-<li><strong>硬链接</strong> : 多个目录项指向同一个 Inode.</li>
-<li><strong>软链接 ( 符号链接 )</strong> : 创建新文件记录目标路径.</li>
+<li><strong>硬链接</strong> 多个目录项指向同一个 Inode.</li>
+<li><strong>软链接 ( 符号链接 )</strong> 创建新文件记录目标路径.</li>
 </ul></li>
-<li><strong>示意图</strong> : <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
+<li><strong>示意图</strong> <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
   %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;lineColor&#39;: &#39;#64748b&#39;, &#39;fontFamily&#39;: &#39;arial&#39;, &#39;fontSize&#39;: &#39;16px&#39; }}}%%
 flowchart TB
     %% 样式定义
@@ -1560,7 +1549,7 @@ flowchart TB
     U1 --&gt; F1[Shared File]:::shared
     U2 --&gt; F1
   </pre></div></li>
-<li><strong>删除问题</strong> :
+<li><strong>删除问题</strong>
 <ul>
 <li>需维护 <strong>引用计数</strong>. 只有当所有用户都删除引用 ( count=0
 ) 时, 才真正删除文件.</li>
@@ -1569,11 +1558,11 @@ flowchart TB
 <h4 id="通用图目录结构-general-graph-directory">5. 通用图目录结构 (
 General Graph Directory )</h4>
 <ul>
-<li><strong>定义</strong> : 允许图中出现 <strong>环路</strong>.</li>
-<li><strong>问题</strong> : 搜索时可能产生无限循环;
+<li><strong>定义</strong> 允许图中出现 <strong>环路</strong>.</li>
+<li><strong>问题</strong> 搜索时可能产生无限循环;
 删除时引用计数可能无法归零 ( 孤岛 ).</li>
-<li><strong>解决</strong> : 需垃圾回收机制 ( Garbage Collection ),
-开销大. 一般 OS 不采用.</li>
+<li><strong>解决</strong> 需垃圾回收机制 ( Garbage Collection ), 开销大.
+一般 OS 不采用.</li>
 </ul>
 <h4 id="目录结构检索效率对比">6. 目录结构检索效率对比</h4>
 <p>不同目录结构在查找文件时的磁盘 I/O 开销对比. ( 假设目录已在磁盘,
@@ -1655,18 +1644,18 @@ class="math inline">\(O(1)\)</span> 直接定位 )</td>
 <strong>哈希表</strong> 两种, 决定了目录检索的效率.</p>
 <h4 id="线性列表-linear-list">1. 线性列表 ( Linear List )</h4>
 <ul>
-<li><strong>定义</strong> : 将目录项 ( 文件名 + FCB/Inode号 )
-按顺序排列, 形成一个线性表.</li>
-<li><strong>实现</strong> : 可以使用数组或链表.</li>
-<li><strong>操作</strong> :
+<li><strong>定义</strong> 将目录项 ( 文件名 + FCB/Inode号 ) 按顺序排列,
+形成一个线性表.</li>
+<li><strong>实现</strong> 可以使用数组或链表.</li>
+<li><strong>操作</strong>
 <ul>
-<li><strong>查找</strong> : 顺序遍历目录项, 匹配文件名.</li>
-<li><strong>创建</strong> : 扫描列表检查重名 -&gt; 寻找空闲项 -&gt;
+<li><strong>查找</strong> 顺序遍历目录项, 匹配文件名.</li>
+<li><strong>创建</strong> 扫描列表检查重名 -&gt; 寻找空闲项 -&gt;
 插入.</li>
-<li><strong>删除</strong> : 扫描列表找到目标 -&gt; 释放 -&gt; ( 可选:
+<li><strong>删除</strong> 扫描列表找到目标 -&gt; 释放 -&gt; ( 可选:
 移动最后一种覆盖 或 标记为无效 ).</li>
 </ul></li>
-<li><strong>示意图</strong> : <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
+<li><strong>示意图</strong> <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
   %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;lineColor&#39;: &#39;#64748b&#39;, &#39;fontFamily&#39;: &#39;arial&#39;, &#39;fontSize&#39;: &#39;16px&#39; }}}%%
 flowchart LR
     %% 样式定义
@@ -1679,36 +1668,36 @@ flowchart LR
     E2 --&gt; E3[&quot;Entry 3&lt;br&#x2F;&gt;( prog.c, 301 )&quot;]:::entry
     E3 --&gt; E4[&quot;...&quot;]:::dots
   </pre></div></li>
-<li><strong>优点</strong> :
+<li><strong>优点</strong>
 <ul>
-<li><strong>实现简单</strong> : 逻辑清晰, 易于编程.</li>
+<li><strong>实现简单</strong> 逻辑清晰, 易于编程.</li>
 </ul></li>
-<li><strong>缺点</strong> :
+<li><strong>缺点</strong>
 <ul>
-<li><strong>检索慢</strong> : 线性查找时间复杂度为 <span
+<li><strong>检索慢</strong> 线性查找时间复杂度为 <span
 class="math inline">\(O(N)\)</span>. 当目录中文件很多时,
 效率显著下降.</li>
 </ul></li>
-<li><strong>优化</strong> :
+<li><strong>优化</strong>
 <ul>
-<li><strong>排序</strong> : 将目录项按文件名排序, 可使用
+<li><strong>排序</strong> 将目录项按文件名排序, 可使用
 <strong>二分查找</strong> ( <span class="math inline">\(O(\log
 N)\)</span> ). 但插入/删除时维护顺序开销大.</li>
-<li><strong>B+树</strong> : 现代文件系统 ( 如 NTFS, XFS ) 常使用 B+
+<li><strong>B+树</strong> 现代文件系统 ( 如 NTFS, XFS ) 常使用 B+
 树来管理目录, 大幅提高大规模目录的检索速度.</li>
 </ul></li>
 </ul>
 <h4 id="哈希表-hash-table">2. 哈希表 ( Hash Table )</h4>
 <ul>
-<li><strong>定义</strong> : 根据文件名, 通过 <strong>哈希函数 ( Hash
+<li><strong>定义</strong> 根据文件名, 通过 <strong>哈希函数 ( Hash
 Function )</strong> 计算出目录项在表中的位置 ( 桶/Bucket ).</li>
-<li><strong>实现</strong> :
+<li><strong>实现</strong>
 <ul>
 <li><strong>Hash(文件名) <span class="math inline">\(\to\)</span>
 索引值</strong>.</li>
 <li>哈希表中的每一项指向一个线性列表 ( 解决冲突 ).</li>
 </ul></li>
-<li><strong>示意图</strong> : <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
+<li><strong>示意图</strong> <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
   %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;lineColor&#39;: &#39;#64748b&#39;, &#39;fontFamily&#39;: &#39;arial&#39;, &#39;fontSize&#39;: &#39;16px&#39; }}}%%
 flowchart LR
     %% 样式定义
@@ -1736,17 +1725,17 @@ flowchart LR
     
     class Table container
   </pre></div></li>
-<li><strong>优点</strong> :
+<li><strong>优点</strong>
 <ul>
-<li><strong>检索快</strong> : 平均查找时间为 <span
+<li><strong>检索快</strong> 平均查找时间为 <span
 class="math inline">\(O(1)\)</span>.</li>
 </ul></li>
-<li><strong>缺点</strong> :
+<li><strong>缺点</strong>
 <ul>
-<li><strong>哈希冲突</strong> : 需要机制解决冲突 ( 如链地址法 ).</li>
-<li><strong>定长限制</strong> : 哈希表大小通常固定, 扩展需重哈希 (
-Rehash ).</li>
-<li><strong>管理复杂</strong> : 需设计良好的哈希函数.</li>
+<li><strong>哈希冲突</strong> 需要机制解决冲突 ( 如链地址法 ).</li>
+<li><strong>定长限制</strong> 哈希表大小通常固定, 扩展需重哈希 ( Rehash
+).</li>
+<li><strong>管理复杂</strong> 需设计良好的哈希函数.</li>
 </ul></li>
 </ul>
 <h4 id="对比总结">3. 对比总结</h4>
@@ -1790,24 +1779,24 @@ class="math inline">\(O(1)\)</span></td>
 <h4 id="基于索引节点的共享-硬链接-hard-link">1. 基于索引节点的共享 (
 硬链接 / Hard Link )</h4>
 <ul>
-<li><strong>定义</strong> : 在目录中创建一个新的目录项,
-直接指向目标文件的 <strong>索引节点 ( Inode )</strong>.</li>
-<li><strong>原理</strong> :
+<li><strong>定义</strong> 在目录中创建一个新的目录项, 直接指向目标文件的
+<strong>索引节点 ( Inode )</strong>.</li>
+<li><strong>原理</strong>
 <ul>
 <li>两个目录项 ( 文件名不同 ) 指向 <strong>同一个 Inode</strong>.</li>
 <li>Inode 中维护一个 <strong>链接计数 ( nlink / count )</strong>.</li>
 </ul></li>
-<li><strong>操作</strong> :
+<li><strong>操作</strong>
 <ul>
-<li><strong>创建 ( Link )</strong> :
+<li><strong>创建 ( Link )</strong>
 <code>link(old_path, new_path)</code>. 增加目录项, Inode
 <code>count++</code>.</li>
-<li><strong>删除 ( Unlink )</strong> : <code>unlink(path)</code>.
+<li><strong>删除 ( Unlink )</strong> <code>unlink(path)</code>.
 删除目录项, Inode <code>count--</code>.</li>
-<li><strong>真正删除</strong> : 当且仅当 <code>count == 0</code> 时,
+<li><strong>真正删除</strong> 当且仅当 <code>count == 0</code> 时,
 才释放 Inode 和 数据块.</li>
 </ul></li>
-<li><strong>示意图</strong> : <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
+<li><strong>示意图</strong> <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
   %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;lineColor&#39;: &#39;#64748b&#39;, &#39;fontFamily&#39;: &#39;arial&#39;, &#39;fontSize&#39;: &#39;16px&#39; }}}%%
 flowchart TB
     %% 样式定义
@@ -1835,31 +1824,31 @@ flowchart TB
     
     class UserA,UserB container
   </pre></div></li>
-<li><strong>优点</strong> :
+<li><strong>优点</strong>
 <ul>
-<li><strong>速度快</strong> : 直接访问 Inode, 无额外开销.</li>
-<li><strong>同步</strong> : 修改其中一个, 另一个立即可见 (
-实际是同一文件 ).</li>
+<li><strong>速度快</strong> 直接访问 Inode, 无额外开销.</li>
+<li><strong>同步</strong> 修改其中一个, 另一个立即可见 ( 实际是同一文件
+).</li>
 </ul></li>
-<li><strong>缺点</strong> :
+<li><strong>缺点</strong>
 <ul>
-<li><strong>不可跨文件系统</strong> : Inode 编号仅在当前分区唯一.</li>
-<li><strong>不可链接目录</strong> : 防止形成环路 ( 导致文件遍历死循环
+<li><strong>不可跨文件系统</strong> Inode 编号仅在当前分区唯一.</li>
+<li><strong>不可链接目录</strong> 防止形成环路 ( 导致文件遍历死循环
 ).</li>
 </ul></li>
 </ul>
 <h4 id="基于符号链的共享-软链接-symbolic-link">2. 基于符号链的共享 (
 软链接 / Symbolic Link )</h4>
 <ul>
-<li><strong>定义</strong> : 创建一个特殊的 <strong>LINK 类型</strong>
+<li><strong>定义</strong> 创建一个特殊的 <strong>LINK 类型</strong>
 文件, 其内容是目标文件的 <strong>完整路径名</strong>. ( 类似 Windows
 的快捷方式 ).</li>
-<li><strong>原理</strong> :
+<li><strong>原理</strong>
 <ul>
 <li>系统访问软链接时, 发现是 LINK 类型, 读取其内容 ( 路径 ),
 然后根据路径重新查找文件.</li>
 </ul></li>
-<li><strong>示意图</strong> : <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
+<li><strong>示意图</strong> <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
   %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;lineColor&#39;: &#39;#64748b&#39;, &#39;fontFamily&#39;: &#39;arial&#39;, &#39;fontSize&#39;: &#39;16px&#39; }}}%%
 flowchart TB
     %% 样式定义
@@ -1891,19 +1880,18 @@ flowchart TB
     
     class UserA,UserB container
   </pre></div></li>
-<li><strong>优点</strong> :
+<li><strong>优点</strong>
 <ul>
-<li><strong>跨文件系统</strong> : 可以链接网络文件系统 ( NFS )
+<li><strong>跨文件系统</strong> 可以链接网络文件系统 ( NFS )
 或其他分区的文件.</li>
-<li><strong>可链接目录</strong> : 不会造成死循环 ( 系统可检测层级
-).</li>
+<li><strong>可链接目录</strong> 不会造成死循环 ( 系统可检测层级 ).</li>
 </ul></li>
-<li><strong>缺点</strong> :
+<li><strong>缺点</strong>
 <ul>
-<li><strong>访问慢</strong> : 需要多次读盘 ( 读软链接 -&gt; 解析路径
--&gt; 读原文件 ).</li>
-<li><strong>空间开销</strong> : 需要额外的 Inode 和数据块存储路径.</li>
-<li><strong>悬空指针</strong> : 若原文件被删除/移动, 软链接失效 (
+<li><strong>访问慢</strong> 需要多次读盘 ( 读软链接 -&gt; 解析路径 -&gt;
+读原文件 ).</li>
+<li><strong>空间开销</strong> 需要额外的 Inode 和数据块存储路径.</li>
+<li><strong>悬空指针</strong> 若原文件被删除/移动, 软链接失效 (
 找不到目标 ).</li>
 </ul></li>
 </ul>
@@ -1960,14 +1948,13 @@ flowchart TB
 <h3 id="文件系统结构">4.3.1 文件系统结构</h3>
 <p>从上到下层次结构 :</p>
 <ol type="1">
-<li><strong>用户接口</strong> : 命令/系统调用.</li>
-<li><strong>文件目录系统</strong> : 目录管理与检索.</li>
-<li><strong>存取控制与保护</strong> : 权限与访问控制.</li>
-<li><strong>逻辑文件系统与文件信息缓冲区</strong> :
-逻辑记录到逻辑块.</li>
-<li><strong>物理文件系统</strong> : 逻辑块到物理块.</li>
-<li><strong>I/O 子系统</strong> : 设备管理与调度.</li>
-<li><strong>设备驱动程序</strong> : 与硬件交互.</li>
+<li><strong>用户接口</strong> 命令/系统调用.</li>
+<li><strong>文件目录系统</strong> 目录管理与检索.</li>
+<li><strong>存取控制与保护</strong> 权限与访问控制.</li>
+<li><strong>逻辑文件系统与文件信息缓冲区</strong> 逻辑记录到逻辑块.</li>
+<li><strong>物理文件系统</strong> 逻辑块到物理块.</li>
+<li><strong>I/O 子系统</strong> 设备管理与调度.</li>
+<li><strong>设备驱动程序</strong> 与硬件交互.</li>
 </ol>
 <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
   %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;lineColor&#39;: &#39;#64748b&#39;, &#39;fontFamily&#39;: &#39;arial&#39;, &#39;fontSize&#39;: &#39;16px&#39; }}}%%
@@ -2084,23 +2071,23 @@ LOOK; 减少寻道与旋转延迟.</li>
 <h3 id="文件系统布局">4.3.2 文件系统布局</h3>
 <h4 id="磁盘分区-partition">1. 磁盘分区 ( Partition ) :</h4>
 <ul>
-<li><strong>引导块 ( Boot Block )</strong> : 存放操作系统引导程序.</li>
-<li><strong>超级块 ( Super Block )</strong> : 记录文件系统的整体信息
+<li><strong>引导块 ( Boot Block )</strong> 存放操作系统引导程序.</li>
+<li><strong>超级块 ( Super Block )</strong> 记录文件系统的整体信息
 (空闲块数、Inode 数等).</li>
-<li><strong>空闲空间管理信息</strong> : 位示图或空闲链表.</li>
-<li><strong>Inode 区域</strong> : 存放所有的 Inode.</li>
-<li><strong>数据区域</strong> : 存放文件数据.</li>
-<li><strong>主引导记录 ( MBR )</strong> : 位于磁盘 LBA0 ( 第 0 扇区 ),
+<li><strong>空闲空间管理信息</strong> 位示图或空闲链表.</li>
+<li><strong>Inode 区域</strong> 存放所有的 Inode.</li>
+<li><strong>数据区域</strong> 存放文件数据.</li>
+<li><strong>主引导记录 ( MBR )</strong> 位于磁盘 LBA0 ( 第 0 扇区 ),
 包含 <strong>引导代码 446B</strong> + <strong>分区表 64B</strong> ( 4 项
 × 16B ) + <strong>签名 2B ( 0x55AA )</strong>. 支持 <strong>最多 4
 个主分区</strong>，通过 <strong>扩展分区 + EBR 链</strong>
 组织多个逻辑分区.</li>
-<li><strong>GUID 分区表 ( GPT )</strong> : 现代分区方案. 包含
+<li><strong>GUID 分区表 ( GPT )</strong> 现代分区方案. 包含
 <strong>保护性 MBR ( LBA0 )</strong>、<strong>GPT 头 ( LBA1
 )</strong>、<strong>分区项表 ( LBA2 起 )</strong>. 分区项通常
 <strong>128B</strong>，默认可记录 <strong>128 项</strong>;
 支持分区冗余与更强的一致性.</li>
-<li><strong>卷引导记录 ( VBR / Boot Sector )</strong> :
+<li><strong>卷引导记录 ( VBR / Boot Sector )</strong>
 位于分区内的文件系统引导区 ( FAT/NTFS/EXT 等 ). 与 <strong>MBR
 属于磁盘级</strong> 不同，<strong>VBR 属于分区/卷级</strong>.</li>
 </ul>
@@ -2190,10 +2177,10 @@ block_size、blocks_count、free_blocks、inodes_count、mount_time、state.</li
   </pre></div>
 <h4 id="内存结构">4. 内存结构 :</h4>
 <ul>
-<li><strong>系统打开文件表</strong> :
-整个系统一张，记录所有打开文件的信息 ( 引用计数 ).</li>
-<li><strong>进程打开文件表</strong> : 每个进程一张，记录该进程打开的文件
-( 指向系统表的指针 ).</li>
+<li><strong>系统打开文件表</strong> 整个系统一张，记录所有打开文件的信息
+( 引用计数 ).</li>
+<li><strong>进程打开文件表</strong> 每个进程一张，记录该进程打开的文件 (
+指向系统表的指针 ).</li>
 </ul>
 <h4 id="计算与实践要点">5. 计算与实践要点</h4>
 <ul>
@@ -2239,8 +2226,8 @@ block_size、blocks_count、free_blocks、inodes_count、mount_time、state.</li
   </pre></div>
 <h4 id="空闲链表法">2. 空闲链表法 :</h4>
 <ul>
-<li><strong>空闲盘块链</strong> : 以盘块为单位链接.</li>
-<li><strong>空闲盘区链</strong> : 以盘区为单位链接.</li>
+<li><strong>空闲盘块链</strong> 以盘块为单位链接.</li>
+<li><strong>空闲盘区链</strong> 以盘区为单位链接.</li>
 <li>分配 : 盘块链支持按块逐个取用;
 盘区链支持一次取连续区，常配合首次/最佳适应.</li>
 <li>回收 : 插入链表并尝试与相邻合并 ( 盘区链 );
@@ -2296,9 +2283,8 @@ prev.length = cur.start ) 或 ( cur.start + cur.length = next.start ),
 <h4 id="位示图法-bitmap">3. 位示图法 ( Bitmap ) :</h4>
 <ul>
 <li>用二进制位表示盘块的使用情况 ( 0为空闲，1为占用 ).</li>
-<li><strong>优点</strong> : 容易找到连续空闲块;
-位示图小，可常驻内存.</li>
-<li><strong>盘块号与行列号转换</strong> :
+<li><strong>优点</strong> 容易找到连续空闲块; 位示图小，可常驻内存.</li>
+<li><strong>盘块号与行列号转换</strong>
 <ul>
 <li><span class="math inline">\(b = n(i-1) + j\)</span> ( 字长 <span
 class="math inline">\(n\)</span>，行号 <span
@@ -2329,7 +2315,7 @@ class="math inline">\(j\)</span> )</li>
 <ul>
 <li>UNIX 系统采用.</li>
 <li>将空闲块分组，每组的第一个块记录下一组的空闲块号.</li>
-<li><strong>优点</strong> : 适合大型文件系统.</li>
+<li><strong>优点</strong> 适合大型文件系统.</li>
 <li>结构与操作 : 每组保存若干可用块号;
 当当前组耗尽时，使用组头信息加载下一组，减少磁盘访问次数.</li>
 <li>适用场景 : 超大磁盘/高并发环境，降低维护与读盘开销.</li>
@@ -2462,12 +2448,12 @@ class="math inline">\(j\)</span> )</li>
 </ul>
 <h3 id="虚拟文件系统">4.3.4 虚拟文件系统</h3>
 <ul>
-<li><strong>VFS ( Virtual File System )</strong> :
+<li><strong>VFS ( Virtual File System )</strong>
 <ul>
 <li>OS 内核的一层抽象层，位于用户程序和具体文件系统之间.</li>
-<li><strong>作用</strong> : 屏蔽底层具体文件系统 (FAT, NTFS, EXT4)
+<li><strong>作用</strong> 屏蔽底层具体文件系统 (FAT, NTFS, EXT4)
 的差异，提供统一的接口 ( open, read, write ).</li>
-<li><strong>实现</strong> : 定义了一组对象 ( superblock, inode, dentry,
+<li><strong>实现</strong> 定义了一组对象 ( superblock, inode, dentry,
 file ) 和操作函数指针.</li>
 </ul></li>
 </ul>
@@ -2568,8 +2554,8 @@ I/O.</li>
 </ul>
 <h3 id="文件系统挂载">4.3.5 文件系统挂载</h3>
 <ul>
-<li><strong>Mount</strong> : 将一个文件系统安装到目录树的某个节点 (
-挂载点 ) 上.</li>
+<li><strong>Mount</strong> 将一个文件系统安装到目录树的某个节点 ( 挂载点
+) 上.</li>
 <li>挂载后，该节点成为新文件系统的根目录.</li>
 </ul>
 <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
@@ -2648,7 +2634,7 @@ fd ).之后的操作直接利用内存中的信息，避免重复查目录.</li>
   input.setSelectionRange(0, 99999);
   document.execCommand("copy");
   document.body.removeChild(input);
-}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">SPARKLE</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>操作系统<span class="tagsPageCount">5</span></a><a class="post-meta__box__tags" href="/tags/408/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>408<span class="tagsPageCount">21</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://pic1.imgdb.cn/item/69bcf9a40fd75e0c1776d878.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2025/12/25/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F3/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492cd6c154427986d9b19e.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">408-操作系统-3-内存管理</div></div></a></div><div class="next-post pull-right"><a href="/2025/12/26/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F5/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492e4cc154427986d9be8f.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">408-操作系统-5-输入/输出管理</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2025/12/22/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F1/" title="408-操作系统-1-计算机系统概述"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492a76c154427986d991c5.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-22</div><div class="title">408-操作系统-1-计算机系统概述</div></div></a></div><div><a href="/2025/12/25/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F3/" title="408-操作系统-3-内存管理"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492cd6c154427986d9b19e.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-25</div><div class="title">408-操作系统-3-内存管理</div></div></a></div><div><a href="/2025/12/26/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F5/" title="408-操作系统-5-输入&#x2F;输出管理"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492e4cc154427986d9be8f.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-26</div><div class="title">408-操作系统-5-输入&#x2F;输出管理</div></div></a></div><div><a href="/2025/12/23/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F2/" title="408-操作系统-2-进程与线程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492ebfc154427986d9c262.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-23</div><div class="title">408-操作系统-2-进程与线程</div></div></a></div><div><a href="/2025/12/31/408-%E8%AE%A1%E7%BB%841/" title="408-计算机组成原理-1-计算机系统概述"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/6954ea8a8801094e3ab4fd8b.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-31</div><div class="title">408-计算机组成原理-1-计算机系统概述</div></div></a></div><div><a href="/2026/01/26/408-%E8%AE%A1%E7%BB%844/" title="408-计算机组成原理-4-指令系统"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69872ac742b1cbeca1f88f3a.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-01-26</div><div class="title">408-计算机组成原理-4-指令系统</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/671cfe2fd29ded1a8c5ffb0b.png" alt="status"/></div></div><div class="author-info__description">不管你在<strong style="color:white">这个世界</strong>的哪个地方，我一定<strong style="color:white">会</strong>，再次去<strong style="color:white">见</strong>你的!</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">sparkle520</h1><div class="author-info__desc">我一直都在寻找着什么</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/sparkle520" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/34882250" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">Hello World! 欢迎来到我的博客~</div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://pic.imgdb.cn/item/66c487f1d9c307b7e9ba5c7a.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://pic.imgdb.cn/item/66c487ebd9c307b7e9ba5725.png) center center / 100% no-repeat"></div></div></div></div><div class="card-widget card-countdown"><div class="item-headline"><i></i><span></span></div><div class="item-content"><div class="cd-count-left">
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">SPARKLE</a>! </span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>操作系统<span class="tagsPageCount">5</span></a><a class="post-meta__box__tags" href="/tags/408/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>408<span class="tagsPageCount">21</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://pic1.imgdb.cn/item/69bcf9a40fd75e0c1776d878.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2025/12/25/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F3/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492cd6c154427986d9b19e.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">408-操作系统-3-内存管理</div></div></a></div><div class="next-post pull-right"><a href="/2025/12/26/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F5/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492e4cc154427986d9be8f.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">408-操作系统-5-输入/输出管理</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2025/12/22/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F1/" title="408-操作系统-1-计算机系统概述"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492a76c154427986d991c5.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-22</div><div class="title">408-操作系统-1-计算机系统概述</div></div></a></div><div><a href="/2025/12/25/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F3/" title="408-操作系统-3-内存管理"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492cd6c154427986d9b19e.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-25</div><div class="title">408-操作系统-3-内存管理</div></div></a></div><div><a href="/2025/12/26/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F5/" title="408-操作系统-5-输入&#x2F;输出管理"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492e4cc154427986d9be8f.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-26</div><div class="title">408-操作系统-5-输入&#x2F;输出管理</div></div></a></div><div><a href="/2025/12/23/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F2/" title="408-操作系统-2-进程与线程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492ebfc154427986d9c262.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-23</div><div class="title">408-操作系统-2-进程与线程</div></div></a></div><div><a href="/2025/12/31/408-%E8%AE%A1%E7%BB%841/" title="408-计算机组成原理-1-计算机系统概述"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/6954ea8a8801094e3ab4fd8b.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-31</div><div class="title">408-计算机组成原理-1-计算机系统概述</div></div></a></div><div><a href="/2026/01/26/408-%E8%AE%A1%E7%BB%844/" title="408-计算机组成原理-4-指令系统"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69872ac742b1cbeca1f88f3a.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-01-26</div><div class="title">408-计算机组成原理-4-指令系统</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/671cfe2fd29ded1a8c5ffb0b.png" alt="status"/></div></div><div class="author-info__description">不管你在<strong style="color:white">这个世界</strong>的哪个地方，我一定<strong style="color:white">会</strong>，再次去<strong style="color:white">见</strong>你的!</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">sparkle520</h1><div class="author-info__desc">我一直都在寻找着什么</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/sparkle520" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/34882250" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">Hello World! 欢迎来到我的博客~</div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://pic.imgdb.cn/item/66c487f1d9c307b7e9ba5c7a.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://pic.imgdb.cn/item/66c487ebd9c307b7e9ba5725.png) center center / 100% no-repeat"></div></div></div></div><div class="card-widget card-countdown"><div class="item-headline"><i></i><span></span></div><div class="item-content"><div class="cd-count-left">
   <span class="cd-text">距离</span>
   <span class="cd-name" id="eventName"></span>
   <span class="cd-time" id="daysUntil"></span>

@@ -1,0 +1,253 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+@keyframes fly-r{0%{clip-path:inset(0 100% 0 0)}100%{clip-path:inset(0 0 0 0)}}
+@keyframes fly-l{0%{clip-path:inset(0 0 0 100%)}100%{clip-path:inset(0 0 0 0)}}
+@keyframes pop{0%{transform:scale(0);opacity:0}70%{transform:scale(1.2)}100%{transform:scale(1);opacity:1}}
+@keyframes fadein{0%{opacity:0;transform:translateY(4px)}100%{opacity:1;transform:translateY(0)}}
+@keyframes blink-red{0%,100%{outline:2px solid transparent}40%{outline:3px solid #EF4444;outline-offset:2px}}
+@keyframes pulse-sem{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+body,html{font-family:system-ui,"Noto Sans SC",sans-serif}
+.root{padding:10px 0 6px}
+.sbar{display:flex;align-items:center;justify-content:center;gap:18px;padding:10px 20px;background:var(--color-background-secondary);border-radius:14px;margin-bottom:12px}
+.sem-wrap{display:flex;flex-direction:column;align-items:center;gap:4px}
+.sem-lbl{font-size:9px;font-weight:700;letter-spacing:.08em;color:var(--color-text-tertiary);text-transform:uppercase}
+.sem-val{width:40px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;transition:all .3s}
+.se{background:#FEF9C3;border:1.5px solid #FACC15;color:#78350F}
+.sf{background:#D1FAE5;border:1.5px solid #34D399;color:#064E3B}
+.sz{background:#FEE2E2;border:1.5px solid #F87171;color:#7F1D1D}
+.sem-changed{animation:pulse-sem .3s ease-out}
+.buf-wrap{display:flex;flex-direction:column;align-items:center;gap:5px}
+.buf-lbl{font-size:9px;font-weight:700;letter-spacing:.08em;color:var(--color-text-tertiary);text-transform:uppercase}
+.buf-slots{display:flex;gap:6px}
+.slot{width:34px;height:32px;border-radius:8px;border:1.5px solid var(--color-border-secondary);background:var(--color-background-primary);display:flex;align-items:center;justify-content:center;font-size:15px;transition:all .25s}
+.slot.filled{background:#FEF9C3;border-color:#FACC15;animation:pop .3s ease-out}
+.slot.done{background:#D1FAE5;border-color:#34D399}
+.slot.blocked{animation:blink-red .5s ease-in-out 4}
+.seq{position:relative;height:320px;margin-bottom:12px}
+.actor-row{position:absolute;top:0;left:0;right:0;display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;z-index:2}
+.actor{border-radius:10px;padding:8px 6px;text-align:center}
+.actor-p{background:#EFF6FF;border:1.5px solid #BFDBFE}
+.actor-s{background:#FFFBEB;border:1.5px solid #FDE68A}
+.actor-c{background:#F0FDF4;border:1.5px solid #BBF7D0}
+.aname{font-size:12px;font-weight:600}
+.anp{color:#1D4ED8}.ans{color:#B45309}.anc{color:#15803D}
+.asub{font-size:9px;color:var(--color-text-tertiary);margin-top:1px}
+.lifelines{position:absolute;top:56px;left:0;right:0;bottom:0;display:grid;grid-template-columns:1fr 1fr 1fr;pointer-events:none}
+.ll{display:flex;justify-content:center}
+.ll-line{width:1.5px}
+.arrow-layer{position:absolute;top:56px;left:0;right:0;bottom:0;pointer-events:none}
+.info-row{display:flex;gap:8px;margin-bottom:10px;align-items:stretch}
+.step-badge{flex-shrink:0;width:40px;display:flex;align-items:center;justify-content:center;border-radius:9px;background:var(--color-background-secondary);font-size:11px;font-weight:600;color:var(--color-text-secondary)}
+.msgbox{flex:1;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:10px;padding:9px 14px;display:flex;align-items:center}
+.msg{font-size:11px;color:var(--color-text-secondary);line-height:1.55;animation:fadein .2s ease-out both}
+.msg b{color:var(--color-text-primary);font-weight:500}
+.tag{display:inline-block;padding:1px 7px;border-radius:10px;font-size:9px;font-weight:700;margin-right:4px;vertical-align:middle}
+.tag-p{background:#DBEAFE;color:#1E40AF}
+.tag-c{background:#DCFCE7;color:#166534}
+.tag-err{background:#FEE2E2;color:#991B1B}
+.controls{display:flex;align-items:center;gap:8px}
+.btn-nav{width:32px;height:32px;border-radius:8px;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .1s;flex-shrink:0}
+.btn-nav:hover{background:var(--color-background-secondary)}
+.btn-nav:disabled{opacity:.3;cursor:default}
+.btn-nav svg{width:12px;height:12px;color:var(--color-text-primary)}
+.btn-play{width:36px;height:36px;border-radius:50%;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .1s;flex-shrink:0}
+.btn-play:hover{background:var(--color-background-secondary)}
+.btn-play svg{width:13px;height:13px;color:var(--color-text-primary)}
+.track{flex:1;height:3px;background:var(--color-background-secondary);border-radius:2px;overflow:hidden;cursor:pointer}
+.fill{height:100%;background:#818CF8;border-radius:2px;transition:width .2s}
+.ctr{font-size:10px;color:var(--color-text-tertiary);min-width:42px;text-align:right}
+</style>
+
+<div class="root">
+<div class="sbar">
+  <div class="sem-wrap"><div class="sem-lbl">Empty</div><div class="sem-val se" id="sv-e">3</div></div>
+  <div class="buf-wrap">
+    <div class="buf-lbl">Buffer</div>
+    <div class="buf-slots">
+      <div class="slot" id="b0"></div>
+      <div class="slot" id="b1"></div>
+      <div class="slot" id="b2"></div>
+    </div>
+  </div>
+  <div class="sem-wrap"><div class="sem-lbl">Full</div><div class="sem-val sz" id="sv-f">0</div></div>
+</div>
+
+<div class="seq" id="seq">
+  <div class="actor-row">
+    <div class="actor actor-p"><div class="aname anp">生产者</div><div class="asub">Producer</div></div>
+    <div class="actor actor-s"><div class="aname ans">信号量 S</div><div class="asub">empty / full</div></div>
+    <div class="actor actor-c"><div class="aname anc">消费者</div><div class="asub">Consumer</div></div>
+  </div>
+  <div class="lifelines">
+    <div class="ll"><div class="ll-line" style="background:repeating-linear-gradient(to bottom,#BFDBFE 0,#BFDBFE 4px,transparent 4px,transparent 10px)"></div></div>
+    <div class="ll"><div class="ll-line" style="background:repeating-linear-gradient(to bottom,#FDE68A 0,#FDE68A 4px,transparent 4px,transparent 10px)"></div></div>
+    <div class="ll"><div class="ll-line" style="background:repeating-linear-gradient(to bottom,#BBF7D0 0,#BBF7D0 4px,transparent 4px,transparent 10px)"></div></div>
+  </div>
+  <div class="arrow-layer" id="alayer"></div>
+</div>
+
+<div class="info-row">
+  <div class="step-badge" id="sbadge">—</div>
+  <div class="msgbox"><div class="msg" id="msg">按 ▶ 逐步播放，或用 ‹ › 手动跳转</div></div>
+</div>
+
+<div class="controls">
+  <button class="btn-nav" id="btn-prev" onclick="goPrev()" disabled>
+    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2L4 6l4 4"/></svg>
+  </button>
+  <button class="btn-play" id="btn-play" onclick="togglePlay()">
+    <svg id="play-ico" viewBox="0 0 13 13" fill="currentColor"><path d="M2.5 1.5l9 5-9 5z"/></svg>
+  </button>
+  <button class="btn-nav" id="btn-next" onclick="goNext()">
+    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 2l4 4-4 4"/></svg>
+  </button>
+  <div class="track" onclick="scrub(event)"><div class="fill" id="fill" style="width:0%"></div></div>
+  <div class="ctr" id="ctr">0 / 0</div>
+</div>
+</div>
+
+<script>
+const FRAMES = [
+  {msg:'<span class="tag tag-p">生产者</span> 调用 <b>wait(empty)</b> — empty=3，有空槽，获准继续',arrow:{from:'P',to:'S',color:'#3B82F6',label:'wait(empty)'},y:60,semE:2,semF:0,buf:[0,0,0]},
+  {msg:'<span class="tag tag-p">生产者</span> 写入数据到 <b>缓冲区槽①</b>',arrow:{from:'S',to:'P',color:'#16A34A',label:'OK → 写入槽①'},y:110,semE:2,semF:0,buf:[1,0,0]},
+  {msg:'<span class="tag tag-p">生产者</span> 调用 <b>signal(full)</b> — 通知消费者 ( full: 0→1 ) ',arrow:{from:'P',to:'S',color:'#F59E0B',label:'signal(full)'},y:160,semE:2,semF:1,buf:[1,0,0]},
+  {msg:'<span class="tag tag-c">消费者</span> 调用 <b>wait(full)</b> — full=1，有数据，获准消费',arrow:{from:'C',to:'S',color:'#22C55E',label:'wait(full)'},y:60,semE:2,semF:0,buf:[1,0,0]},
+  {msg:'<span class="tag tag-c">消费者</span> 从 <b>槽①</b> 读取数据并消费',arrow:{from:'S',to:'C',color:'#16A34A',label:'OK → 读取槽①'},y:110,semE:2,semF:0,buf:[2,0,0]},
+  {msg:'<span class="tag tag-c">消费者</span> 调用 <b>signal(empty)</b> — 释放槽位 ( empty: 2→3 ) ',arrow:{from:'C',to:'S',color:'#F59E0B',label:'signal(empty)'},y:160,semE:3,semF:0,buf:[2,0,0]},
+  {msg:'<span class="tag tag-p">生产者</span> 写入 <b>槽②③</b>，signal(full)×2，缓冲区趋满',arrow:{from:'P',to:'S',color:'#3B82F6',label:'wait(empty)×2 + signal(full)×2'},y:60,semE:1,semF:2,buf:[2,1,1]},
+  {msg:'<span class="tag tag-err">⚠ 阻塞</span> empty=0，缓冲区 <b>全满</b>! 生产者被挂起',arrow:{from:'P',to:'S',color:'#EF4444',label:'wait(empty)  阻塞!'},y:110,semE:0,semF:3,buf:[1,1,1],blocked:true},
+  {msg:'<span class="tag tag-c">消费者</span> 消费槽②，signal(empty) <b>唤醒生产者</b>',arrow:{from:'C',to:'S',color:'#16A34A',label:'signal(empty) → 唤醒 P'},y:170,semE:1,semF:2,buf:[2,1,1]},
+  {msg:'<span class="tag tag-p">生产者</span> 被唤醒，继续写入. empty/full 精确同步 <b>↻ 循环</b>',arrow:{from:'P',to:'S',color:'#8B5CF6',label:'继续生产 ↻'},y:220,semE:0,semF:3,buf:[1,1,1]},
+];
+
+const N = FRAMES.length;
+let idx = 0;   // next frame to show (0-based). shown frames = [0, idx)
+let playing = false, timer = null;
+
+function drawArrow(f) {
+  const layer = document.getElementById('alayer');
+  layer.innerHTML = '';
+  const W = document.getElementById('seq').offsetWidth || 400;
+  const col = {P: W/6, S: W/2, C: W*5/6};
+  const x1 = col[f.arrow.from], x2 = col[f.arrow.to];
+  const goR = x2 > x1;
+  const lx1 = Math.min(x1,x2), lx2 = Math.max(x1,x2);
+  const color = f.arrow.color;
+  const LINE_Y = 26, LABEL_Y = LINE_Y - 5;
+
+  const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+  svg.setAttribute('width', W);
+  svg.setAttribute('height', '32');
+  svg.style.cssText = `position:absolute;top:${f.y}px;left:0;overflow:visible;animation:${goR?'fly-r':'fly-l'} .32s ease-out both`;
+
+  const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+  line.setAttribute('x1', lx1); line.setAttribute('y1', LINE_Y);
+  line.setAttribute('x2', lx2); line.setAttribute('y2', LINE_Y);
+  line.setAttribute('stroke', color); line.setAttribute('stroke-width','2');
+  svg.appendChild(line);
+
+  const head = document.createElementNS('http://www.w3.org/2000/svg','polygon');
+  const tx = goR ? lx2 : lx1;
+  head.setAttribute('points', goR
+    ? `${tx-9},${LINE_Y-5} ${tx+1},${LINE_Y} ${tx-9},${LINE_Y+5}`
+    : `${tx+9},${LINE_Y-5} ${tx-1},${LINE_Y} ${tx+9},${LINE_Y+5}`);
+  head.setAttribute('fill', color);
+  svg.appendChild(head);
+
+  const txt = document.createElementNS('http://www.w3.org/2000/svg','text');
+  txt.setAttribute('x', (lx1+lx2)/2); txt.setAttribute('y', LABEL_Y);
+  txt.setAttribute('text-anchor','middle'); txt.setAttribute('dominant-baseline','auto');
+  txt.setAttribute('font-size','10'); txt.setAttribute('font-weight','600');
+  txt.setAttribute('fill', color); txt.setAttribute('font-family','system-ui,sans-serif');
+  txt.textContent = f.arrow.label;
+  svg.appendChild(txt);
+
+  layer.appendChild(svg);
+}
+
+function renderFrame(i) {
+  // i is 0-based frame index
+  const f = FRAMES[i];
+  drawArrow(f);
+
+  const se = document.getElementById('sv-e');
+  const sf = document.getElementById('sv-f');
+  se.textContent = f.semE; se.className = 'sem-val '+(f.semE===0?'sz':'se');
+  se.classList.add('sem-changed'); setTimeout(()=>se.classList.remove('sem-changed'),300);
+  sf.textContent = f.semF; sf.className = 'sem-val '+(f.semF===0?'sz':'sf');
+  sf.classList.add('sem-changed'); setTimeout(()=>sf.classList.remove('sem-changed'),300);
+
+  for (let k=0; k<3; k++) {
+    const s = document.getElementById('b'+k), v = f.buf[k];
+    s.className = 'slot'+(v===1?' filled':v===2?' done':'');
+    s.textContent = v===1?'📦':v===2?'✓':'';
+    if (f.blocked && v===1) { s.classList.remove('blocked'); void s.offsetWidth; s.classList.add('blocked'); }
+  }
+
+  const m = document.getElementById('msg');
+  m.innerHTML = f.msg; m.style.animation='none'; void m.offsetWidth; m.style.animation='fadein .2s ease-out both';
+
+  const shown = i+1;
+  document.getElementById('sbadge').textContent = shown+'/'+N;
+  document.getElementById('fill').style.width = (shown/N*100)+'%';
+  document.getElementById('ctr').textContent = shown+' / '+N;
+  document.getElementById('btn-prev').disabled = i <= 0;
+  document.getElementById('btn-next').disabled = i >= N-1;
+}
+
+function updateIdx(i) {
+  idx = Math.max(0, Math.min(N-1, i));
+  renderFrame(idx);
+}
+
+function goNext() {
+  if (idx >= N-1) { stopPlay(); return; }
+  updateIdx(idx+1);
+}
+
+function goPrev() {
+  if (idx <= 0) return;
+  updateIdx(idx-1);
+}
+
+function scrub(e) {
+  const t = e.currentTarget;
+  const r = (e.clientX - t.getBoundingClientRect().left) / t.offsetWidth;
+  updateIdx(Math.round(r*(N-1)));
+}
+
+function togglePlay() { playing ? stopPlay() : startPlay(); }
+
+function startPlay() {
+  playing = true;
+  document.getElementById('play-ico').innerHTML = '<rect x="1.5" y="1" width="4" height="11" rx="1"/><rect x="7.5" y="1" width="4" height="11" rx="1"/>';
+  // if already at end, restart
+  if (idx >= N-1) { resetState(); }
+  timer = setInterval(() => {
+    if (idx >= N-1) { stopPlay(); return; }
+    updateIdx(idx+1);
+  }, 2200);
+  // show first frame immediately if at start
+  if (idx === 0 && FRAMES.length > 0) { renderFrame(0); }
+}
+
+function stopPlay() {
+  playing = false;
+  clearInterval(timer); timer = null;
+  document.getElementById('play-ico').innerHTML = '<path d="M2.5 1.5l9 5-9 5z"/>';
+}
+
+function resetState() {
+  idx = 0;
+  document.getElementById('sv-e').textContent='3'; document.getElementById('sv-e').className='sem-val se';
+  document.getElementById('sv-f').textContent='0'; document.getElementById('sv-f').className='sem-val sz';
+  for(let k=0;k<3;k++){const s=document.getElementById('b'+k);s.className='slot';s.textContent='';}
+  document.getElementById('alayer').innerHTML='';
+  document.getElementById('msg').innerHTML='按 ▶ 逐步播放，或用 ‹ › 手动跳转';
+  document.getElementById('sbadge').textContent='—';
+  document.getElementById('fill').style.width='0%';
+  document.getElementById('ctr').textContent='0 / '+N;
+  document.getElementById('btn-prev').disabled=true;
+  document.getElementById('btn-next').disabled=false;
+}
+</script>

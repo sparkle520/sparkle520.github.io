@@ -1,0 +1,401 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+@keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+.root{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;padding:8px;color:#334155;max-width:800px;margin:0 auto}
+
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:12px}
+.step-pill{font-size:11px;color:#475569;font-weight:600;background:#F1F5F9;padding:3px 12px;border-radius:999px;border:1px solid #E2E8F0;flex-shrink:0}
+.pw{flex:1;height:5px;background:#F1F5F9;border-radius:999px;overflow:hidden;box-shadow:inset 0 1px 2px rgba(0,0,0,0.02)}
+.pf{height:100%;background:linear-gradient(90deg,#3B82F6,#60A5FA);border-radius:999px;transition:width .3s ease-out}
+.scene-pill{font-size:11px;font-weight:600;padding:3px 12px;border-radius:999px;flex-shrink:0}
+.sc-a{background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE}
+.sc-b{background:#FEF2F2;color:#B91C1C;border:1px solid #FECACA}
+.sc-c{background:#FEF9C3;color:#92400E;border:1px solid #FDE68A}
+
+.msg-card{background:#FFFFFF;border:1px solid #E2E8F0;box-shadow:0 2px 8px -2px rgba(0,0,0,0.03);border-left:4px solid #3B82F6;padding:12px 16px;border-radius:10px;margin-bottom:12px;font-size:13px;line-height:1.6;color:#334155;min-height:72px;display:flex;align-items:center;animation:fadein .22s ease-out both}
+.msg-inner{display:block;width:100%}
+.msg-card b{font-weight:600;color:#0F172A}
+.msg-card code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;background:#EFF6FF;padding:1px 5px;border-radius:5px;color:#1D4ED8;border:1px solid #DBEAFE}
+.badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;vertical-align:middle;margin:0 2px}
+.b-ok{background:#DCFCE7;color:#166534;border:1px solid #86EFAC}
+.b-err{background:#FEE2E2;color:#991B1B;border:1px solid #FCA5A5}
+.b-info{background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE}
+.b-warn{background:#FEF9C3;color:#92400E;border:1px solid #FDE68A}
+
+.diagram{display:grid;grid-template-columns:180px 1fr;gap:16px;background:#FFFFFF;border:1px solid #E2E8F0;border-radius:12px;padding:16px;box-shadow:0 2px 6px -2px rgba(0,0,0,0.02);margin-bottom:12px}
+.sec-label{font-size:10px;color:#64748B;font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px;text-align:center}
+
+.addr-box{display:flex;border-radius:8px;background:#F8FAFC;border:1px solid #E2E8F0;overflow:hidden;transition:all .3s ease}
+.addr-box.active{border-color:#3B82F6;box-shadow:0 0 0 2px rgba(59,130,246,0.15)}
+.addr-box.success{border-color:#16A34A;box-shadow:0 0 0 2px rgba(22,163,74,0.15)}
+.addr-cell{flex:1;padding:10px;font-size:13px;font-weight:600;color:#334155;text-align:center;transition:all .3s ease;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+.addr-cell.active{background:#EFF6FF;color:#1D4ED8}
+.addr-cell.success{background:#DCFCE7;color:#166534}
+.addr-cell.muted{color:#94A3B8;font-weight:500}
+.addr-sep{width:1px;background:#E2E8F0;flex-shrink:0}
+
+.region{border:1px dashed #CBD5E1;border-radius:10px;padding:16px 12px 12px;position:relative;display:flex;flex-direction:column;gap:10px;transition:all .3s ease;background:#FAFAF9}
+.region.active{border-color:#93C5FD;background:#EFF6FF}
+.region-lbl{position:absolute;top:-9px;left:12px;background:#FFFFFF;border:1px solid #E2E8F0;border-radius:6px;padding:1px 8px;font-size:10px;color:#64748B;font-weight:600;letter-spacing:.05em;white-space:nowrap;box-shadow:0 1px 2px rgba(0,0,0,0.02)}
+
+.node{border-radius:8px;border:1px solid #E2E8F0;background:#FFFFFF;padding:8px 12px;font-size:12px;font-weight:600;color:#374151;text-align:center;transition:all .3s ease;line-height:1.4;box-shadow:0 1px 2px rgba(0,0,0,0.02)}
+.node.active{background:#EFF6FF;border-color:#3B82F6;color:#1D4ED8;box-shadow:0 2px 6px rgba(59,130,246,0.15)}
+.node.success{background:#DCFCE7;border-color:#16A34A;color:#166534;box-shadow:0 2px 6px rgba(22,163,74,0.15)}
+.node.dim{color:#94A3B8;font-weight:500;border-style:dashed}
+
+.cmp-circle{width:48px;height:48px;border-radius:50%;background:#FFFFFF;border:2px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#374151;transition:all .3s ease;flex-shrink:0;font-family:system-ui,sans-serif;box-shadow:0 2px 4px rgba(0,0,0,0.04)}
+.cmp-circle.active{border-color:#3B82F6;color:#1D4ED8;background:#EFF6FF;box-shadow:0 0 0 3px rgba(59,130,246,0.15)}
+.cmp-circle.success{border-color:#16A34A;color:#166534;background:#DCFCE7;box-shadow:0 0 0 3px rgba(22,163,74,0.15)}
+.cmp-circle.warn{border-color:#D97706;color:#92400E;background:#FEF9C3;box-shadow:0 0 0 3px rgba(217,119,6,0.15)}
+.cmp-circle.danger{background:#FEF2F2;border-color:#F87171;color:#B91C1C;box-shadow:0 0 0 3px rgba(248,113,113,0.15);animation:pulse .7s ease-in-out 4}
+
+.flow-col{display:flex;flex-direction:column;gap:12px}
+.flow-row{display:flex;align-items:center;gap:10px}
+.arrow{font-size:18px;color:#D1D5DB;transition:color .3s ease;flex-shrink:0;line-height:1;font-weight:700}
+.arrow.active{color:#3B82F6}
+.arrow.success{color:#16A34A}
+.arrow.danger{color:#EF4444}
+.arrow.warn{color:#D97706}
+.elabel{font-size:11px;font-weight:700;min-width:24px;flex-shrink:0;transition:color .3s ease}
+.el-ok{color:#166534}
+.el-err{color:#B91C1C}
+
+.step-box{flex:1;border-radius:8px;border:1px solid #E2E8F0;background:#FFFFFF;padding:10px 14px;font-size:12px;font-weight:600;color:#374151;text-align:center;transition:all .3s ease;box-shadow:0 1px 2px rgba(0,0,0,0.02)}
+.step-box.active{background:#EFF6FF;border-color:#3B82F6;color:#1D4ED8;box-shadow:0 2px 6px rgba(59,130,246,0.15)}
+.step-box.success{background:#DCFCE7;border-color:#16A34A;color:#166534;box-shadow:0 2px 6px rgba(22,163,74,0.15)}
+
+.trap-wrap{overflow:hidden;max-width:0;opacity:0;transition:all .3s ease;flex-shrink:0}
+.trap-wrap.show{max-width:200px;opacity:1}
+.trap-box{border-radius:8px;border:1px solid #FCA5A5;background:#FEF2F2;padding:10px 14px;font-size:12px;font-weight:700;color:#B91C1C;white-space:nowrap;box-shadow:0 2px 6px rgba(248,113,113,0.15)}
+
+.seg-region{border:1px dashed #CBD5E1;border-radius:10px;padding:16px 12px 12px;position:relative;transition:all .3s ease;background:#FAFAF9}
+.seg-region.active{border-color:#93C5FD;background:#EFF6FF}
+.seg-region-lbl{position:absolute;top:-9px;left:12px;background:#FFFFFF;border:1px solid #E2E8F0;border-radius:6px;padding:1px 8px;font-size:10px;color:#64748B;font-weight:600;letter-spacing:.05em;white-space:nowrap;box-shadow:0 1px 2px rgba(0,0,0,0.02)}
+
+.seg-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:2px}
+.seg-table th{font-size:10px;color:#64748B;font-weight:600;letter-spacing:.05em;padding:6px 8px;text-align:center;border-bottom:1px solid #E2E8F0;text-transform:uppercase}
+.seg-table td{padding:7px 8px;text-align:center;color:#475569;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;border-bottom:1px solid #F1F5F9;transition:all .3s ease}
+.seg-table tr:last-child td{border-bottom:none}
+.seg-table tr.hl td{background:#EFF6FF;color:#1D4ED8;font-weight:700}
+
+.ctrls{display:flex;align-items:center;gap:10px;background:#FFFFFF;padding:10px 14px;border-radius:12px;border:1px solid #E2E8F0;box-shadow:0 2px 6px -2px rgba(0,0,0,0.02)}
+.cbtn{width:32px;height:32px;border-radius:50%;border:1px solid #E2E8F0;background:#FFFFFF;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s ease;box-shadow:0 1px 2px rgba(0,0,0,0.02)}
+.cbtn:hover:not(:disabled){background:#F8FAFC;border-color:#CBD5E1}
+.cbtn:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}
+.pbtn{width:38px;height:38px;border-radius:50%;border:1px solid #3B82F6;background:#EFF6FF;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s ease;color:#3B82F6;box-shadow:0 2px 4px rgba(59,130,246,0.15)}
+.pbtn:hover{background:#DBEAFE;transform:scale(1.05)}
+.trk{flex:1;height:5px;background:#F1F5F9;border-radius:999px;overflow:hidden;cursor:pointer;box-shadow:inset 0 1px 2px rgba(0,0,0,0.02)}
+.prog{height:100%;background:linear-gradient(90deg,#3B82F6,#60A5FA);border-radius:999px;transition:width .3s ease-out}
+.ct{font-size:11px;color:#64748B;font-weight:600;min-width:44px;text-align:right}
+
+@media (max-width: 500px) {
+  .diagram { grid-template-columns: 1fr; gap: 12px; padding: 12px; }
+}
+</style>
+
+<div class="root">
+<div class="topbar">
+  <div class="step-pill" id="step-pill">1 / 1</div>
+  <div class="pw"><div class="pf" id="pfill" style="width:0%"></div></div>
+  <div class="scene-pill sc-a" id="scene-pill">场景 A</div>
+</div>
+
+<div class="msg-card" id="msg">加载中...</div>
+
+<div class="diagram">
+
+  <div style="grid-column:1/-1">
+    <div class="sec-label">逻辑地址 ( CPU )</div>
+    <div class="addr-box" id="nd-cpu">
+      <div class="addr-cell" id="nd-s">S = 2</div>
+      <div class="addr-sep"></div>
+      <div class="addr-cell" id="nd-w">W = 200</div>
+    </div>
+  </div>
+
+  <div class="region" id="region-str">
+    <div class="region-lbl">段表寄存器 STR</div>
+    <div class="node" id="nd-m">段表长度 M = 4</div>
+    <div class="node" id="nd-f">始址 F = 2000</div>
+    <div class="node dim" id="nd-ste">STE 大小 = 8 B</div>
+  </div>
+
+  <div class="flow-col">
+
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;flex-shrink:0">
+        <div class="sec-label">检查 1</div>
+        <div class="cmp-circle" id="nd-cmp1">≥</div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:7px">
+        <div class="flow-row">
+          <span class="arrow" id="arr-no1">→</span>
+          <span class="elabel el-ok" id="lbl-no1" style="opacity:0">No</span>
+          <div class="step-box" id="nd-lookup">查段表 F + S × STE_size</div>
+        </div>
+        <div class="flow-row">
+          <span class="arrow" id="arr-yes1" style="opacity:0">↓</span>
+          <span class="elabel el-err" id="lbl-yes1" style="opacity:0">Yes</span>
+          <div class="trap-wrap" id="trap1"><div class="trap-box">段号越界中断</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="seg-region" id="nd-segtab">
+      <div class="seg-region-lbl">主存 — 段表 ( Segment Table )</div>
+      <table class="seg-table">
+        <thead><tr><th>段号</th><th>段长 L</th><th>基址 b</th></tr></thead>
+        <tbody>
+          <tr id="st0"><td>0</td><td>500</td><td>1000</td></tr>
+          <tr id="st1"><td>1</td><td>800</td><td>3000</td></tr>
+          <tr id="st2"><td>2</td><td>600</td><td>5000</td></tr>
+          <tr id="st3"><td>3</td><td>400</td><td>7000</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;flex-shrink:0">
+        <div class="sec-label">检查 2</div>
+        <div class="cmp-circle" id="nd-cmp2">≥</div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:7px">
+        <div class="flow-row">
+          <span class="arrow" id="arr-no2">→</span>
+          <span class="elabel el-ok" id="lbl-no2" style="opacity:0">No</span>
+          <div class="step-box" id="nd-calc">E = b + W</div>
+        </div>
+        <div class="flow-row">
+          <span class="arrow" id="arr-yes2" style="opacity:0">↓</span>
+          <span class="elabel el-err" id="lbl-yes2" style="opacity:0">Yes</span>
+          <div class="trap-wrap" id="trap2"><div class="trap-box">偏移越界中断</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="grid-column:1/-1">
+    <div class="sec-label" style="margin-top:2px">物理地址</div>
+    <div class="addr-box" id="nd-phy">
+      <div class="addr-cell muted" id="nd-pb">基址 b + W = ?</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="ctrls">
+  <button class="cbtn" id="bp" onclick="go(-1)" disabled>
+    <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2L5 7l4 5"/></svg>
+  </button>
+  <button class="pbtn" id="bplay" onclick="tp()">
+    <svg id="pio" width="12" height="12" viewBox="0 0 14 14" fill="currentColor"><path d="M3 2l9 5-9 5z"/></svg>
+  </button>
+  <button class="cbtn" id="bn" onclick="go(1)">
+    <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2l4 5-4 5"/></svg>
+  </button>
+  <div class="trk" onclick="sc(event)"><div class="prog" id="prog" style="width:0%"></div></div>
+  <div class="ct" id="ct">1 / 1</div>
+</div>
+</div>
+
+<script>
+const FS = [
+  // ── Scene A: 正常变换 S=2 W=200 ──────────────────────────────
+  { sc:'a', label:'场景 A — 正常变换',
+    m:'<b>初始状态</b> - 系统参数 : 段表项大小 <span class="badge b-info">STE_size = 8 B</span>.<br>逻辑地址 : <b>段号 S = 2</b>, <b>段内偏移 W = 200</b>.',
+    s:'S = 2', w:'W = 200', lup:'查段表  F + S × STE_size', calc:'E = b + W', pb:'基址 b + W = ?',
+    hiS:'', hiW:'', hiM:'', hiF:'', hiSte:'', strActive:0,
+    c1:'', c2:'', lup_hi:'', seg_hi:'', calc_hi:'',
+    t1:0, t2:0, row:-1, no1:0, yes1:0, no2:0, yes2:0, phySt:'' },
+
+  { sc:'a', label:'场景 A — 正常变换',
+    m:'<b>步骤 1 - 段号越界检查</b> : 从 STR 读取段表长度 <b>M = 4</b>,<br>将 <b>S ( 2 )</b> 与 M 比较. S < M 则合法.',
+    s:'S = 2', w:'W = 200', lup:'查段表  F + S × STE_size', calc:'E = b + W', pb:'基址 b + W = ?',
+    hiS:'active', hiW:'', hiM:'active', hiF:'', hiSte:'', strActive:1,
+    c1:'active', c2:'', lup_hi:'', seg_hi:'', calc_hi:'',
+    t1:0, t2:0, row:-1, no1:0, yes1:0, no2:0, yes2:0, phySt:'' },
+
+  { sc:'a', label:'场景 A — 正常变换',
+    m:'<b>段号检查通过</b> : S ( 2 ) < M ( 4 ), 合法. <span class="badge b-ok">合法</span><br>继续查询段表.',
+    s:'S = 2', w:'W = 200', lup:'查段表  F + S × STE_size', calc:'E = b + W', pb:'基址 b + W = ?',
+    hiS:'', hiW:'', hiM:'', hiF:'', hiSte:'', strActive:0,
+    c1:'success', c2:'', lup_hi:'', seg_hi:'', calc_hi:'',
+    t1:0, t2:0, row:-1, no1:1, yes1:0, no2:0, yes2:0, phySt:'' },
+
+  { sc:'a', label:'场景 A — 正常变换',
+    m:'<b>步骤 2 - 查询段表</b> : 段表项地址 = <code>F ( 2000 ) + S ( 2 ) × 8 = 2016</code>.<br>访问主存地址 2016, 取出第 2 号段的 <b>段长 L</b> 和 <b>基址 b</b>.',
+    s:'S = 2', w:'W = 200', lup:'2000 + 2 × 8 = 2016', calc:'E = b + W', pb:'基址 b + W = ?',
+    hiS:'active', hiW:'', hiM:'', hiF:'active', hiSte:'active', strActive:1,
+    c1:'', c2:'', lup_hi:'active', seg_hi:'active', calc_hi:'',
+    t1:0, t2:0, row:2, no1:0, yes1:0, no2:0, yes2:0, phySt:'' },
+
+  { sc:'a', label:'场景 A — 正常变换',
+    m:'<b>取出段表项</b> : 第 2 号段的 <b>段长 L = 600</b>, <b>基址 b = 5000</b>.<br>接下来检查偏移量 W 是否超出段长.',
+    s:'S = 2', w:'W = 200', lup:'2000 + 2 × 8 = 2016', calc:'E = b + W', pb:'基址 b + W = ?',
+    hiS:'', hiW:'', hiM:'', hiF:'', hiSte:'', strActive:0,
+    c1:'', c2:'', lup_hi:'', seg_hi:'active', calc_hi:'',
+    t1:0, t2:0, row:2, no1:0, yes1:0, no2:0, yes2:0, phySt:'' },
+
+  { sc:'a', label:'场景 A — 正常变换',
+    m:'<b>步骤 3 - 偏移越界检查</b> : 将 <b>W ( 200 )</b> 与段长 <b>L ( 600 )</b> 比较.<br>W < L 则合法, 否则段内越界.',
+    s:'S = 2', w:'W = 200', lup:'2000 + 2 × 8 = 2016', calc:'E = b + W', pb:'基址 b + W = ?',
+    hiS:'', hiW:'active', hiM:'', hiF:'', hiSte:'', strActive:0,
+    c1:'', c2:'active', lup_hi:'', seg_hi:'', calc_hi:'',
+    t1:0, t2:0, row:2, no1:0, yes1:0, no2:0, yes2:0, phySt:'' },
+
+  { sc:'a', label:'场景 A — 正常变换',
+    m:'<b>偏移检查通过</b> : W ( 200 ) < L ( 600 ), 合法. <span class="badge b-ok">合法</span><br>继续计算物理地址.',
+    s:'S = 2', w:'W = 200', lup:'2000 + 2 × 8 = 2016', calc:'E = b + W', pb:'基址 b + W = ?',
+    hiS:'', hiW:'', hiM:'', hiF:'', hiSte:'', strActive:0,
+    c1:'', c2:'success', lup_hi:'', seg_hi:'', calc_hi:'',
+    t1:0, t2:0, row:2, no1:0, yes1:0, no2:1, yes2:0, phySt:'' },
+
+  { sc:'a', label:'场景 A — 正常变换',
+    m:'<b>步骤 4 - 计算物理地址</b> : 公式 <code>E = b + W</code>. 代入 : <code>5000 + 200 = 5200</code>.<br>与分页不同, 分段直接相加, 无需乘以块大小.',
+    s:'S = 2', w:'W = 200', lup:'2000 + 2 × 8 = 2016', calc:'E = 5000 + 200 = 5200', pb:'5000 + 200 = 5200',
+    hiS:'', hiW:'active', hiM:'', hiF:'', hiSte:'', strActive:0,
+    c1:'', c2:'', lup_hi:'', seg_hi:'', calc_hi:'active',
+    t1:0, t2:0, row:-1, no1:0, yes1:0, no2:0, yes2:0, phySt:'active' },
+
+  { sc:'a', label:'场景 A — 正常变换',
+    m:'<b>变换完成</b> - 物理地址 <b>5200</b>. <span class="badge b-ok">成功</span><br>共访存 <b>2 次</b> : 第 1 次取段表项, 第 2 次访问实际数据.',
+    s:'S = 2', w:'W = 200', lup:'2000 + 2 × 8 = 2016', calc:'E = 5000 + 200 = 5200', pb:'物理地址  E = 5200',
+    hiS:'', hiW:'', hiM:'', hiF:'', hiSte:'', strActive:0,
+    c1:'', c2:'', lup_hi:'', seg_hi:'', calc_hi:'success',
+    t1:0, t2:0, row:-1, no1:0, yes1:0, no2:0, yes2:0, phySt:'success' },
+
+  // ── Scene B: 段号越界 S=5 ──────────────────────────────────────
+  { sc:'b', label:'场景 B — 段号越界',
+    m:'<b>异常场景 B - 段号越界</b> : 系统参数不变 ( M = 4 ). 指令访问 <b>段号 S = 5</b>,<br>W = 100. 该进程只有 4 个段 ( 0 ~ 3 ).',
+    s:'S = 5', w:'W = 100', lup:'查段表  F + S × STE_size', calc:'E = b + W', pb:'基址 b + W = ?',
+    hiS:'', hiW:'', hiM:'', hiF:'', hiSte:'', strActive:0,
+    c1:'', c2:'', lup_hi:'', seg_hi:'', calc_hi:'',
+    t1:0, t2:0, row:-1, no1:0, yes1:0, no2:0, yes2:0, phySt:'' },
+
+  { sc:'b', label:'场景 B — 段号越界',
+    m:'<b>步骤 1 - 段号越界检查</b> : S ( 5 ) 与 M ( 4 ) 比较.',
+    s:'S = 5', w:'W = 100', lup:'查段表  F + S × STE_size', calc:'E = b + W', pb:'基址 b + W = ?',
+    hiS:'active', hiW:'', hiM:'active', hiF:'', hiSte:'', strActive:1,
+    c1:'active', c2:'', lup_hi:'', seg_hi:'', calc_hi:'',
+    t1:0, t2:0, row:-1, no1:0, yes1:0, no2:0, yes2:0, phySt:'' },
+
+  { sc:'b', label:'场景 B — 段号越界',
+    m:'<b>段号越界</b> : S ( 5 ) >= M ( 4 ), 非法访问. <span class="badge b-err">段号越界中断</span><br>硬件触发中断, 陷入 OS, 变换终止.',
+    s:'S = 5', w:'W = 100', lup:'查段表  F + S × STE_size', calc:'E = b + W', pb:'基址 b + W = ?',
+    hiS:'', hiW:'', hiM:'', hiF:'', hiSte:'', strActive:0,
+    c1:'danger', c2:'', lup_hi:'', seg_hi:'', calc_hi:'',
+    t1:1, t2:0, row:-1, no1:0, yes1:1, no2:0, yes2:0, phySt:'' },
+
+  // ── Scene C: 偏移越界 S=2 W=700 ───────────────────────────────
+  { sc:'c', label:'场景 C — 偏移越界',
+    m:'<b>异常场景 C - 偏移越界</b> : 段号 S = 2 合法,<br>但偏移量 <b>W = 700</b> 超过第 2 段的段长 L = 600.',
+    s:'S = 2', w:'W = 700', lup:'查段表  F + S × STE_size', calc:'E = b + W', pb:'基址 b + W = ?',
+    hiS:'', hiW:'', hiM:'', hiF:'', hiSte:'', strActive:0,
+    c1:'', c2:'', lup_hi:'', seg_hi:'', calc_hi:'',
+    t1:0, t2:0, row:-1, no1:0, yes1:0, no2:0, yes2:0, phySt:'' },
+
+  { sc:'c', label:'场景 C — 偏移越界',
+    m:'<b>段号检查通过</b> : S ( 2 ) < M ( 4 ), 合法. <span class="badge b-ok">合法</span><br>查询段表取出第 2 段 : L = 600, b = 5000.',
+    s:'S = 2', w:'W = 700', lup:'2000 + 2 × 8 = 2016', calc:'E = b + W', pb:'基址 b + W = ?',
+    hiS:'', hiW:'', hiM:'', hiF:'', hiSte:'', strActive:0,
+    c1:'success', c2:'', lup_hi:'', seg_hi:'active', calc_hi:'',
+    t1:0, t2:0, row:2, no1:1, yes1:0, no2:0, yes2:0, phySt:'' },
+
+  { sc:'c', label:'场景 C — 偏移越界',
+    m:'<b>偏移越界检查</b> : W ( 700 ) 与段长 L ( 600 ) 比较.',
+    s:'S = 2', w:'W = 700', lup:'2000 + 2 × 8 = 2016', calc:'E = b + W', pb:'基址 b + W = ?',
+    hiS:'', hiW:'active', hiM:'', hiF:'', hiSte:'', strActive:0,
+    c1:'', c2:'warn', lup_hi:'', seg_hi:'', calc_hi:'',
+    t1:0, t2:0, row:2, no1:0, yes1:0, no2:0, yes2:0, phySt:'' },
+
+  { sc:'c', label:'场景 C — 偏移越界',
+    m:'<b>偏移越界</b> : W ( 700 ) >= L ( 600 ), 超出段边界. <span class="badge b-err">偏移越界中断</span><br>硬件触发中断, 陷入 OS, 变换终止.',
+    s:'S = 2', w:'W = 700', lup:'2000 + 2 × 8 = 2016', calc:'E = b + W', pb:'基址 b + W = ?',
+    hiS:'', hiW:'', hiM:'', hiF:'', hiSte:'', strActive:0,
+    c1:'', c2:'danger', lup_hi:'', seg_hi:'', calc_hi:'',
+    t1:0, t2:1, row:-1, no1:0, yes1:0, no2:0, yes2:1, phySt:'' },
+];
+
+const N = FS.length;
+let idx = 0, playing = false, tmr = null;
+
+function cl(id, ...cs) {
+  const e = document.getElementById(id); if (!e) return;
+  e.classList.remove('active','success','danger','warn','muted','dim');
+  cs.forEach(c => { if (c) e.classList.add(c); });
+}
+function vis(id, show) { const e = document.getElementById(id); if (e) e.style.opacity = show ? '1' : '0'; }
+
+function render(i) {
+  const f = FS[i];
+  document.getElementById('nd-s').textContent   = f.s;
+  document.getElementById('nd-w').textContent   = f.w;
+  document.getElementById('nd-lookup').textContent = f.lup;
+  document.getElementById('nd-calc').textContent  = f.calc;
+  document.getElementById('nd-pb').textContent   = f.pb;
+
+  cl('nd-s', f.hiS); cl('nd-w', f.hiW);
+  cl('nd-cpu', (f.hiS||f.hiW) ? 'active' : '');
+  cl('nd-m', f.hiM); cl('nd-f', f.hiF);
+  cl('nd-ste', f.hiSte ? 'active' : 'dim');
+  cl('region-str', f.strActive ? 'active' : '');
+  cl('nd-cmp1', f.c1);
+  cl('nd-cmp2', f.c2);
+  cl('nd-lookup', f.lup_hi);
+  cl('nd-segtab', f.seg_hi);
+  cl('nd-calc', f.calc_hi);
+  cl('nd-pb', f.phySt || 'muted');
+  cl('nd-phy', f.phySt);
+
+  for (let r = 0; r < 4; r++) {
+    const row = document.getElementById('st' + r);
+    if (row) row.classList.toggle('hl', r === f.row);
+  }
+
+  document.getElementById('trap1').classList.toggle('show', !!f.t1);
+  document.getElementById('trap2').classList.toggle('show', !!f.t2);
+
+  vis('arr-yes1', f.yes1); vis('lbl-yes1', f.yes1);
+  vis('arr-yes2', f.yes2); vis('lbl-yes2', f.yes2);
+  vis('lbl-no1', f.no1);   vis('lbl-no2', f.no2);
+
+  const an1 = document.getElementById('arr-no1');
+  const ay1 = document.getElementById('arr-yes1');
+  const an2 = document.getElementById('arr-no2');
+  const ay2 = document.getElementById('arr-yes2');
+  if (an1) an1.className = 'arrow' + (f.lup_hi ? ' active' : '');
+  if (ay1) { ay1.className = 'arrow' + (f.yes1 ? ' danger' : ''); ay1.style.opacity = f.yes1 ? '1' : '0'; }
+  if (an2) an2.className = 'arrow' + (f.calc_hi ? (f.calc_hi === 'success' ? ' success' : ' active') : '');
+  if (ay2) { ay2.className = 'arrow' + (f.yes2 ? ' danger' : ''); ay2.style.opacity = f.yes2 ? '1' : '0'; }
+
+  const sp = document.getElementById('scene-pill');
+  sp.textContent = f.label;
+  sp.className = 'scene-pill ' + (f.sc === 'b' ? 'sc-b' : f.sc === 'c' ? 'sc-c' : 'sc-a');
+
+  const el = document.getElementById('msg');
+  el.innerHTML = '<span class="msg-inner">' + f.m + '</span>'; el.style.animation = 'none'; void el.offsetWidth; el.style.animation = 'fadein .22s ease-out both';
+
+  const s = i + 1;
+  document.getElementById('pfill').style.width = (s/N*100) + '%';
+  document.getElementById('prog').style.width  = (s/N*100) + '%';
+  document.getElementById('ct').textContent    = s + ' / ' + N;
+  document.getElementById('step-pill').textContent = s + ' / ' + N;
+  document.getElementById('bp').disabled = i <= 0;
+  document.getElementById('bn').disabled = i >= N - 1;
+}
+
+function go(d) { const n=idx+d; if(n>=0&&n<N){idx=n;render(idx);} if(idx>=N-1&&playing)tp(); }
+function sc(e) { const t=e.currentTarget, r=Math.max(0,Math.min(1,(e.clientX-t.getBoundingClientRect().left)/t.offsetWidth)); idx=Math.min(N-1,Math.floor(r*N)); render(idx); }
+function tp() {
+  playing = !playing;
+  document.getElementById('pio').innerHTML = playing
+    ? '<rect x="2" y="1" width="4" height="12" rx="1"/><rect x="8" y="1" width="4" height="12" rx="1"/>'
+    : '<path d="M3 2l9 5-9 5z"/>';
+  if (playing) { if(idx>=N-1){idx=0;render(idx);} tmr=setInterval(()=>{if(idx<N-1)go(1);else tp();},2400); }
+  else clearInterval(tmr);
+}
+render(0);
+</script>

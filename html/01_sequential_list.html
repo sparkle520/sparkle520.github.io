@@ -186,8 +186,8 @@ async function doInsert(){
   const e=parseInt(document.getElementById('insertVal').value);
   const ss=['判断 i 合法性 (1≤i≤length+1)','检查表满 (length<maxSize)',`后移 a[${i-1}]…a[length-1]`,`写入 a[${i-1}]=${e}`,'length++'];
   steps(ss,0);
-  if(i<1||i>arr.length+1){log('⚠️',`<span class="warn">位序 ${i} 越界！合法 [1,${arr.length+1}]</span>`,'ERROR');busy=false;return;}
-  if(arr.length>=MAX){log('⚠️',`<span class="warn">表已满！</span>`,'ERROR');busy=false;return;}
+  if(i<1||i>arr.length+1){log('⚠️',`<span class="warn">位序 ${i} 越界! 合法 [1,${arr.length+1}]</span>`,'ERROR');busy=false;return;}
+  if(arr.length>=MAX){log('⚠️',`<span class="warn">表已满! </span>`,'ERROR');busy=false;return;}
   log('⚙️',`执行 <span class="hl">ListInsert(L,${i},${e})</span>`,'STEP 1');await sleep(400);
   steps(ss,2);
   for(let j=arr.length-1;j>=i-1;j--){
@@ -199,7 +199,7 @@ async function doInsert(){
   const nc=gc(i-1);nc.classList.add('hi');
   log('⚙️',`写入 <span class="hl">a[${i-1}]=${e}</span>`,'STEP 4');await sleep(600);
   nc.classList.remove('hi');steps(ss,4);buildArray();
-  log('✅',`<span class="ok">插入成功！位序 ${i} 插入 [${e}]，length=${arr.length}</span>`,'DONE');busy=false;
+  log('✅',`<span class="ok">插入成功! 位序 ${i} 插入 [${e}]，length=${arr.length}</span>`,'DONE');busy=false;
 }
 
 async function doDelete(){
@@ -207,7 +207,7 @@ async function doDelete(){
   const i=parseInt(document.getElementById('deletePos').value);
   const ss=['判断 i 合法性 (1≤i≤length)',`保存 a[${i-1}] 的值`,`前移 a[${i}]…a[length-1]`,'length--'];
   steps(ss,0);
-  if(i<1||i>arr.length){log('⚠️',`<span class="warn">位序 ${i} 越界！</span>`,'ERROR');busy=false;return;}
+  if(i<1||i>arr.length){log('⚠️',`<span class="warn">位序 ${i} 越界! </span>`,'ERROR');busy=false;return;}
   const val=arr[i-1];steps(ss,1);
   const dc=gc(i-1);dc.classList.add('hd');
   log('⚙️',`保存 <span class="hl">e=a[${i-1}]=${val}</span>`,'STEP 2');await sleep(600);
@@ -219,7 +219,7 @@ async function doDelete(){
     await sleep(200);c.classList.remove('hs');await sleep(60);
   }
   arr.pop();steps(ss,3);buildArray();
-  log('✅',`<span class="ok">删除成功！e=${val}，length=${arr.length}</span>`,'DONE');busy=false;
+  log('✅',`<span class="ok">删除成功! e=${val}，length=${arr.length}</span>`,'DONE');busy=false;
 }
 
 async function doFind(){
@@ -231,7 +231,7 @@ async function doFind(){
     const c=gc(j);c.classList.add('hsc');
     log('⚙️',`比较 <span class="hl">a[${j}]=${arr[j]}</span> 与 ${e}`,`[${j}]`);
     await sleep(280);
-    if(arr[j]===e){c.classList.remove('hsc');c.classList.add('hf');log('✅',`<span class="ok">找到！a[${j}]=${e}，位序=${j+1}</span>`,'FOUND');await sleep(900);c.classList.remove('hf');buildArray();busy=false;return;}
+    if(arr[j]===e){c.classList.remove('hsc');c.classList.add('hf');log('✅',`<span class="ok">找到! a[${j}]=${e}，位序=${j+1}</span>`,'FOUND');await sleep(900);c.classList.remove('hf');buildArray();busy=false;return;}
     c.classList.remove('hsc');await sleep(60);
   }
   log('⚠️',`<span class="warn">未找到 e=${e}，返回 0</span>`,'NOT FOUND');busy=false;

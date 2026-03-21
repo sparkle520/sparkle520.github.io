@@ -95,6 +95,6 @@
 <rect x="290" y="256" width="14" height="10" rx="2" fill="#FEE2E2" stroke="#F87171" stroke-width="1"/>
 <text x="309" y="261" dominant-baseline="central" font-size="10" fill="#475569">P1 高优先级</text>
 <rect x="420" y="256" width="14" height="10" rx="2" fill="#FEE2E2" stroke="#FCA5A5" stroke-width="1" stroke-dasharray="3 2"/>
-<text x="439" y="261" dominant-baseline="central" font-size="10" fill="#475569">P1 等待（非抢占）</text>
+<text x="439" y="261" dominant-baseline="central" font-size="10" fill="#475569">P1 等待 ( 非抢占 ) </text>
 
 </svg>

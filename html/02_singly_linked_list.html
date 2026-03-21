@@ -127,7 +127,7 @@
   </aside>
 
   <div class="vis">
-    <div class="vlabel">链表结构（带头结点）</div>
+    <div class="vlabel">链表结构 ( 带头结点 ) </div>
     <div class="llist" id="listDisplay"></div>
     <div class="acard">
       <div class="atitle">当前算法步骤</div>
@@ -168,16 +168,16 @@ function gn(i){return document.getElementById(`nd${i}`);}
 async function doHeadInsert(){
   if(busy)return;busy=true;
   const e=parseInt(document.getElementById('headVal').value);
-  steps(['创建 s，s->data=e','s->next=L->next（指向原首结点）','L->next=s'],0);
+  steps(['创建 s，s->data=e','s->next=L->next ( 指向原首结点 ) ','L->next=s'],0);
   log('⚙️',`头插: 创建结点 <span class="hl">s->data=${e}</span>`,'STEP 1');await sleep(500);
-  steps(['创建 s，s->data=e','s->next=L->next（指向原首结点）','L->next=s'],1);
+  steps(['创建 s，s->data=e','s->next=L->next ( 指向原首结点 ) ','L->next=s'],1);
   log('⚙️',`<span class="hl">s->next=L->next</span>，指向原首结点`,'STEP 2');await sleep(500);
-  steps(['创建 s，s->data=e','s->next=L->next（指向原首结点）','L->next=s'],2);
+  steps(['创建 s，s->data=e','s->next=L->next ( 指向原首结点 ) ','L->next=s'],2);
   list.unshift(e);buildList();
   const n=gn(0);if(n)n.classList.add('hn');
   log('⚙️',`<span class="hl">L->next=s</span>，更新头指针`,'STEP 3');await sleep(700);
   if(n)n.classList.remove('hn');
-  log('✅',`<span class="ok">头插完成！[${e}] 成为新首元素，length=${list.length}</span>`,'DONE');busy=false;
+  log('✅',`<span class="ok">头插完成! [${e}] 成为新首元素，length=${list.length}</span>`,'DONE');busy=false;
 }
 
 async function doTailInsert(){
@@ -188,34 +188,34 @@ async function doTailInsert(){
   const n=gn(list.length-1);if(n)n.classList.add('hn');
   log('⚙️',`<span class="hl">r->next=s，s->next=NULL</span>`,'STEP 3');await sleep(700);
   if(n)n.classList.remove('hn');
-  log('✅',`<span class="ok">尾插完成！[${e}] 成为新末元素，length=${list.length}</span>`,'DONE');busy=false;
+  log('✅',`<span class="ok">尾插完成! [${e}] 成为新末元素，length=${list.length}</span>`,'DONE');busy=false;
 }
 
 async function doInsert(){
   if(busy)return;busy=true;
   const i=parseInt(document.getElementById('insPos').value);
   const e=parseInt(document.getElementById('insVal').value);
-  if(i<1||i>list.length+1){log('⚠️',`<span class="warn">位序 ${i} 越界！合法 [1,${list.length+1}]</span>`,'ERROR');busy=false;return;}
-  steps([`遍历到第 ${i-1} 个结点（前驱 p）`,'创建 s，s->data=e','s->next=p->next','p->next=s'],0);
+  if(i<1||i>list.length+1){log('⚠️',`<span class="warn">位序 ${i} 越界! 合法 [1,${list.length+1}]</span>`,'ERROR');busy=false;return;}
+  steps([`遍历到第 ${i-1} 个结点 ( 前驱 p ) `,'创建 s，s->data=e','s->next=p->next','p->next=s'],0);
   log('⚙️',`遍历找前驱...`,'SCAN');
   for(let j=0;j<i-1&&j<list.length;j++){
     const n=gn(j);if(n)n.classList.add('ht');
     log('⚙️',`访问: <span class="hl">a[${j}]=${list[j]}</span>`,`[${j}]`);
     await sleep(260);if(n)n.classList.remove('ht');
   }
-  steps([`遍历到第 ${i-1} 个结点（前驱 p）`,'创建 s，s->data=e','s->next=p->next','p->next=s'],2);
+  steps([`遍历到第 ${i-1} 个结点 ( 前驱 p ) `,'创建 s，s->data=e','s->next=p->next','p->next=s'],2);
   log('⚙️',`<span class="hl">s->next=p->next</span>`,'STEP 3');await sleep(400);
   list.splice(i-1,0,e);buildList();
   const n=gn(i-1);if(n)n.classList.add('hn');
   log('⚙️',`<span class="hl">p->next=s</span>`,'STEP 4');await sleep(600);
   if(n)n.classList.remove('hn');
-  log('✅',`<span class="ok">插入成功！位序 ${i} 插入 [${e}]，length=${list.length}</span>`,'DONE');busy=false;
+  log('✅',`<span class="ok">插入成功! 位序 ${i} 插入 [${e}]，length=${list.length}</span>`,'DONE');busy=false;
 }
 
 async function doDelete(){
   if(busy)return;busy=true;
   const i=parseInt(document.getElementById('delPos').value);
-  if(i<1||i>list.length){log('⚠️',`<span class="warn">位序 ${i} 越界！</span>`,'ERROR');busy=false;return;}
+  if(i<1||i>list.length){log('⚠️',`<span class="warn">位序 ${i} 越界! </span>`,'ERROR');busy=false;return;}
   log('⚙️',`遍历找第 ${i-1} 个前驱...`,'SCAN');
   for(let j=0;j<i-1&&j<list.length;j++){
     const n=gn(j);if(n)n.classList.add('ht');
@@ -227,7 +227,7 @@ async function doDelete(){
   log('⚙️',`找到目标 <span class="hl">q=a[${i-1}]=${val}</span>，p->next=q->next`,'STEP 2');await sleep(700);
   if(n)n.classList.remove('hdl');
   list.splice(i-1,1);buildList();
-  log('✅',`<span class="ok">删除成功！释放 [${val}]，length=${list.length}</span>`,'DONE');busy=false;
+  log('✅',`<span class="ok">删除成功! 释放 [${val}]，length=${list.length}</span>`,'DONE');busy=false;
 }
 
 async function doFind(){
@@ -239,7 +239,7 @@ async function doFind(){
     const n=gn(j);if(n)n.classList.add('ht');
     log('⚙️',`访问: <span class="hl">a[${j}]=${list[j]}</span>`,`[${j}]`);
     await sleep(320);
-    if(list[j]===e){if(n){n.classList.remove('ht');n.classList.add('hf');}log('✅',`<span class="ok">找到！a[${j}]=${e}，位序=${j+1}</span>`,'FOUND');await sleep(900);if(n)n.classList.remove('hf');busy=false;return;}
+    if(list[j]===e){if(n){n.classList.remove('ht');n.classList.add('hf');}log('✅',`<span class="ok">找到! a[${j}]=${e}，位序=${j+1}</span>`,'FOUND');await sleep(900);if(n)n.classList.remove('hf');busy=false;return;}
     if(n)n.classList.remove('ht');await sleep(60);
   }
   log('⚠️',`<span class="warn">未找到 e=${e}，返回 0</span>`,'NOT FOUND');busy=false;
@@ -247,7 +247,7 @@ async function doFind(){
 
 async function doReverse(){
   if(busy)return;busy=true;
-  steps(['p=L->next，L->next=NULL（断开）','循环取 p，头插入新链','p->next=L->next, L->next=p','p=q 继续'],0);
+  steps(['p=L->next，L->next=NULL ( 断开 ) ','循环取 p，头插入新链','p->next=L->next, L->next=p','p=q 继续'],0);
   log('⚙️',`头插法逆置 ${list.length} 个结点...`,'REV');
   for(let k=0;k<list.length;k++){
     const n=gn(k);if(n)n.classList.add('ht');
@@ -256,7 +256,7 @@ async function doReverse(){
   }
   list.reverse();buildList();
   for(let k=0;k<list.length;k++){const n=gn(k);if(n)n.classList.add('hn');}
-  log('✅',`<span class="ok">逆置完成！时间 O(n)，空间 O(1)</span>`,'DONE');
+  log('✅',`<span class="ok">逆置完成! 时间 O(n)，空间 O(1)</span>`,'DONE');
   await sleep(700);for(let k=0;k<list.length;k++){const n=gn(k);if(n)n.classList.remove('hn');}
   busy=false;
 }

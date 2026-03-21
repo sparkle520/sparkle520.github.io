@@ -557,7 +557,7 @@ header {
         <div class="chain" id="chainOrig"></div>
       </div>
       <div class="list-row">
-        <div class="list-row-label"><span class="dot res-dot"></span>结果链表 · 头插法构建（逐步逆序）</div>
+        <div class="list-row-label"><span class="dot res-dot"></span>结果链表 · 头插法构建 ( 逐步逆序 ) </div>
         <div class="chain" id="chainResult"></div>
       </div>
     </div>
@@ -779,7 +779,7 @@ async function runAlgorithm() {
   setLine(9);
   setVar('vIter', `共 ${iteration} 轮`, 'c-blue',   'vbox-iter');
   setVar('vP',    'NULL',               'c-red',    'vbox-p');
-  log('✓', `<span class="cool">逆置完成！</span>结果：${resultList.join(' → ')} → NULL &emsp;<span class="faint">时间 O(n) · 空间 O(1)</span>`);
+  log('✓', `<span class="cool">逆置完成! </span>结果：${resultList.join(' → ')} → NULL &emsp;<span class="faint">时间 O(n) · 空间 O(1)</span>`);
   setStep('DONE ✓');
 
   document.querySelectorAll('#chainResult .node').forEach((n, i) => {

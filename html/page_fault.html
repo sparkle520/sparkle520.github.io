@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#fff;color:#334155;padding:20px}
+.demo-box{border:1px solid #e2e8f0;border-radius:12px;background:#f8fafc;padding:20px;max-width:850px;margin:0 auto;box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);display:flex;flex-direction:column;gap:20px}
+.header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e2e8f0;padding-bottom:12px}
+.title{font-size:18px;font-weight:600;color:#0f172a}
+.status{font-size:14px;color:#64748b;background:#f1f5f9;padding:4px 10px;border-radius:20px}
+.msg-box{min-height:48px;font-size:15px;line-height:1.5;color:#334155;background:#eff6ff;padding:12px 16px;border-radius:8px;border-left:4px solid #3b82f6}
+.tag{display:inline-block;padding:2px 6px;border-radius:4px;font-size:12px;font-weight:600;margin:0 2px}
+.tag-err{background:#fee2e2;color:#991b1b}
+.tag-c{background:#dcfce7;color:#166534}
+.tag-w{background:#fef3c7;color:#b45309}
+
+/* Layout */
+.main-area{display:flex;gap:20px}
+.flow-col{width:220px;display:flex;flex-direction:column;gap:6px;border-right:2px solid #e2e8f0;padding-right:16px;position:relative}
+.hw-col{flex:1;display:flex;flex-direction:column;gap:16px}
+
+/* Flow Steps */
+.flow-step{padding:8px 10px;border-radius:6px;background:#f1f5f9;color:#64748b;font-size:13px;font-weight:600;border:1px solid transparent;transition:all .3s}
+.flow-step.active{background:#eff6ff;color:#1d4ed8;border-color:#3b82f6;transform:translateX(6px);box-shadow:0 2px 4px rgba(59,130,246,.1)}
+.flow-step.done{background:#fff;color:#94a3b8;border-color:#e2e8f0}
+
+/* HW Boxes */
+.hw-row{display:flex;gap:16px}
+.hw-box{background:#fff;border:2px solid #cbd5e1;border-radius:8px;padding:12px;position:relative;transition:all .3s;display:flex;flex-direction:column}
+.hw-box.active{border-color:#3b82f6;box-shadow:0 0 0 4px rgba(59,130,246,.2)}
+.hw-title{font-size:12px;font-weight:700;color:#64748b;margin-bottom:10px;text-align:center;text-transform:uppercase;letter-spacing:0.5px}
+
+/* CPU */
+.cpu-addr{background:#f8fafc;border:1px dashed #94a3b8;padding:8px;text-align:center;border-radius:6px;font-family:monospace;font-size:15px;color:#0f172a;font-weight:600;transition:all .3s}
+.cpu-addr.active{background:#eff6ff;border-color:#3b82f6;color:#1d4ed8;transform:scale(1.02)}
+
+/* Tables */
+.pt-table{width:100%;border-collapse:collapse;font-size:12px;text-align:center}
+.pt-table th{color:#64748b;padding-bottom:6px;border-bottom:1px solid #e2e8f0;font-weight:600}
+.pt-table td{padding:6px 2px;border-bottom:1px solid #f1f5f9;font-family:monospace;font-size:14px}
+.pt-row{transition:all .2s}
+.pt-row.hl{background:#fef9c3;color:#b45309;font-weight:700}
+.pt-row.hl td{border-bottom-color:#fde047}
+
+/* Mem & Disk */
+.block-container{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;flex:1;align-items:center}
+.data-block{width:60px;height:60px;border-radius:8px;border:2px solid #cbd5e1;background:#f8fafc;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:all .3s}
+.data-block .lbl{font-size:11px;color:#64748b;font-weight:600;margin-bottom:2px}
+.data-block .val{font-size:16px;font-weight:700;color:#334155}
+.data-block.filled{background:#fff;border-color:#94a3b8}
+.data-block.active{border-color:#10b981;background:#ecfdf5;color:#047857;transform:scale(1.1);box-shadow:0 0 0 3px rgba(16,185,129,.2)}
+.data-block.evict{border-color:#ef4444;background:#fef2f2;color:#b91c1c;transform:scale(0.95);opacity:0.8}
+
+/* Controls */
+.controls{display:flex;align-items:center;gap:12px;margin-top:10px}
+.btn{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border:none;border-radius:50%;background:#f1f5f9;color:#475569;cursor:pointer;transition:all .2s}
+.btn:hover:not(:disabled){background:#e2e8f0;color:#0f172a}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn svg{width:20px;height:20px;fill:currentColor}
+.progress{flex:1;display:flex;align-items:center;gap:12px}
+.track{flex:1;height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden;cursor:pointer;position:relative}
+.fill{height:100%;background:#3b82f6;transition:width .3s}
+.ctr{font-size:13px;color:#64748b;font-variant-numeric:tabular-nums;width:50px;text-align:right}
+@keyframes fadein{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<div class="demo-box">
+  <div class="header">
+    <div class="title">缺页中断与地址变换过程演示</div>
+    <div class="status" id="sbadge">1/N</div>
+  </div>
+  
+  <div class="msg-box" id="msg"></div>
+
+  <div class="main-area">
+    <div class="flow-col" id="flow-col">
+      <!-- Generated via JS -->
+    </div>
+    
+    <div class="hw-col">
+      <div class="hw-box" id="hw-cpu">
+        <div class="hw-title">CPU</div>
+        <div class="cpu-addr" id="cpu-addr"></div>
+      </div>
+      
+      <div class="hw-row">
+        <div class="hw-box" id="hw-tlb" style="flex:1">
+          <div class="hw-title">TLB ( 快表 )</div>
+          <table class="pt-table">
+            <tr><th>页号</th><th>块号</th></tr>
+            <tr><td colspan="2" style="color:#94a3b8; font-size:12px;">未命中 / 空</td></tr>
+          </table>
+        </div>
+        <div class="hw-box" id="hw-pt" style="flex:2">
+          <div class="hw-title">Page Table ( 内存页表 )</div>
+          <table class="pt-table" id="pt-table">
+            <!-- Generated via JS -->
+          </table>
+        </div>
+      </div>
+      
+      <div class="hw-row">
+        <div class="hw-box" id="hw-mem" style="flex:1">
+          <div class="hw-title">Main Memory ( 物理内存 )</div>
+          <div class="block-container" id="mem-container">
+            <!-- Generated via JS -->
+          </div>
+        </div>
+        <div class="hw-box" id="hw-disk" style="flex:1">
+          <div class="hw-title">Disk ( 外存/交换区 )</div>
+          <div class="block-container" id="disk-container">
+            <!-- Generated via JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="btn" id="btn-prev" onclick="step(-1)" title="上一步">
+      <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>
+    </button>
+    <button class="btn" id="btn-play" onclick="togglePlay()" title="播放/暂停">
+      <svg id="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+    </button>
+    <button class="btn" id="btn-next" onclick="step(1)" title="下一步">
+      <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+    </button>
+    <div class="progress">
+      <div class="track" id="track" onclick="scrub(event)">
+        <div class="fill" id="fill"></div>
+      </div>
+      <div class="ctr" id="ctr">1 / 1</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const FLOW_STEPS = [
+  { id: 'fs-start', text: '1. CPU 发出逻辑地址' },
+  { id: 'fs-check', text: '2. 越界检查' },
+  { id: 'fs-tlb', text: '3. 查 TLB ( 快表 )' },
+  { id: 'fs-pt', text: '4. 查内存页表' },
+  { id: 'fs-int', text: '5. 发出缺页中断' },
+  { id: 'fs-full', text: '6. 检查内存是否满' },
+  { id: 'fs-swap', text: '7. 置换算法换出页面' },
+  { id: 'fs-write', text: '8. 页面修改，写回外存' },
+  { id: 'fs-in', text: '9. 启动 I/O 调入新页' },
+  { id: 'fs-upd', text: '10. 修改页表' },
+  { id: 'fs-ret', text: '11. 重新执行指令' },
+  { id: 'fs-phy', text: '12. 形成物理地址并访问' }
+];
+
+const FRAMES = [
+  {
+    msg: '<b>初始状态</b> — CPU 准备访问 <b>页号 0</b> 的数据. 此时系统分配的物理内存已满 ( 页框 0, 1 被占用 ).',
+    flow: null, hw: [],
+    cpu: '[ 页号 0 | 偏移 100 ]', cpuHl: false,
+    pt: [
+      { p: 0, f: '-', v: 0, m: 0, hl: false },
+      { p: 1, f: 0, v: 1, m: 1, hl: false },
+      { p: 2, f: 1, v: 1, m: 0, hl: false }
+    ],
+    mem: [ { f: 0, p: 1, st: 'filled' }, { f: 1, p: 2, st: 'filled' } ],
+    disk: [ { p: 0, st: 'filled' } ]
+  },
+  {
+    msg: '<b>步骤 1 : </b> CPU 发出逻辑地址，包含所需访问的 <b>页号 0</b>.',
+    flow: 'fs-start', hw: ['cpu'],
+    cpu: '[ 页号 0 | 偏移 100 ]', cpuHl: true,
+    pt: [ { p: 0, f: '-', v: 0, m: 0, hl: false }, { p: 1, f: 0, v: 1, m: 1, hl: false }, { p: 2, f: 1, v: 1, m: 0, hl: false } ],
+    mem: [ { f: 0, p: 1, st: 'filled' }, { f: 1, p: 2, st: 'filled' } ],
+    disk: [ { p: 0, st: 'filled' } ]
+  },
+  {
+    msg: '<b>步骤 2 : </b> 硬件检查页号是否越界. 页号 0 未超过页表长度，合法.',
+    flow: 'fs-check', hw: ['cpu'],
+    cpu: '[ 页号 0 | 偏移 100 ]', cpuHl: false,
+    pt: [ { p: 0, f: '-', v: 0, m: 0, hl: false }, { p: 1, f: 0, v: 1, m: 1, hl: false }, { p: 2, f: 1, v: 1, m: 0, hl: false } ],
+    mem: [ { f: 0, p: 1, st: 'filled' }, { f: 1, p: 2, st: 'filled' } ],
+    disk: [ { p: 0, st: 'filled' } ]
+  },
+  {
+    msg: '<b>步骤 3 : </b> 查询 TLB. 此时 TLB 中未缓存页号 0 的映射表项，发生 <span class="tag tag-err">TLB 缺失</span>.',
+    flow: 'fs-tlb', hw: ['tlb'],
+    cpu: '[ 页号 0 | 偏移 100 ]', cpuHl: false,
+    pt: [ { p: 0, f: '-', v: 0, m: 0, hl: false }, { p: 1, f: 0, v: 1, m: 1, hl: false }, { p: 2, f: 1, v: 1, m: 0, hl: false } ],
+    mem: [ { f: 0, p: 1, st: 'filled' }, { f: 1, p: 2, st: 'filled' } ],
+    disk: [ { p: 0, st: 'filled' } ]
+  },
+  {
+    msg: '<b>步骤 4 : </b> 查询内存中的页表. 发现页号 0 的有效位为 0，表示该页 <span class="tag tag-err">不在内存中</span>.',
+    flow: 'fs-pt', hw: ['pt'],
+    cpu: '[ 页号 0 | 偏移 100 ]', cpuHl: false,
+    pt: [ { p: 0, f: '-', v: 0, m: 0, hl: true }, { p: 1, f: 0, v: 1, m: 1, hl: false }, { p: 2, f: 1, v: 1, m: 0, hl: false } ],
+    mem: [ { f: 0, p: 1, st: 'filled' }, { f: 1, p: 2, st: 'filled' } ],
+    disk: [ { p: 0, st: 'filled' } ]
+  },
+  {
+    msg: '<b>步骤 5 : </b> 硬件触发 <span class="tag tag-err">缺页中断</span>! OS 介入处理，暂停当前指令执行.',
+    flow: 'fs-int', hw: ['cpu'],
+    cpu: '缺页中断 (OS 介入)', cpuHl: true,
+    pt: [ { p: 0, f: '-', v: 0, m: 0, hl: false }, { p: 1, f: 0, v: 1, m: 1, hl: false }, { p: 2, f: 1, v: 1, m: 0, hl: false } ],
+    mem: [ { f: 0, p: 1, st: 'filled' }, { f: 1, p: 2, st: 'filled' } ],
+    disk: [ { p: 0, st: 'filled' } ]
+  },
+  {
+    msg: '<b>步骤 6 : </b> OS 检查物理内存，发现仅有的 2 个页框均已被占用，<span class="tag tag-w">内存已满</span>.',
+    flow: 'fs-full', hw: ['mem'],
+    cpu: '缺页处理中...', cpuHl: false,
+    pt: [ { p: 0, f: '-', v: 0, m: 0, hl: false }, { p: 1, f: 0, v: 1, m: 1, hl: false }, { p: 2, f: 1, v: 1, m: 0, hl: false } ],
+    mem: [ { f: 0, p: 1, st: 'filled active' }, { f: 1, p: 2, st: 'filled active' } ],
+    disk: [ { p: 0, st: 'filled' } ]
+  },
+  {
+    msg: '<b>步骤 7 : </b> 执行置换算法 ( 如 LRU 等 ). 决定淘汰 <b>页框 0</b> 中的 <b>页面 1</b>.',
+    flow: 'fs-swap', hw: ['pt', 'mem'],
+    cpu: '缺页处理中...', cpuHl: false,
+    pt: [ { p: 0, f: '-', v: 0, m: 0, hl: false }, { p: 1, f: 0, v: 1, m: 1, hl: true }, { p: 2, f: 1, v: 1, m: 0, hl: false } ],
+    mem: [ { f: 0, p: 1, st: 'filled evict' }, { f: 1, p: 2, st: 'filled' } ],
+    disk: [ { p: 0, st: 'filled' } ]
+  },
+  {
+    msg: '<b>步骤 8 : </b> 检查淘汰页的修改位 ( M=1 ). 页面已被修改过，必须 <span class="tag tag-w">写回外存</span> 以保存数据.',
+    flow: 'fs-write', hw: ['pt', 'mem', 'disk'],
+    cpu: '缺页处理中...', cpuHl: false,
+    pt: [ { p: 0, f: '-', v: 0, m: 0, hl: false }, { p: 1, f: 0, v: 1, m: 1, hl: true }, { p: 2, f: 1, v: 1, m: 0, hl: false } ],
+    mem: [ { f: 0, p: '-', st: '' }, { f: 1, p: 2, st: 'filled' } ],
+    disk: [ { p: 0, st: 'filled' }, { p: 1, st: 'filled active' } ]
+  },
+  {
+    msg: '<b>步骤 9 : </b> 启动 I/O，将所需的 <b>页面 0</b> 从外存调入刚腾出的 <b>页框 0</b> 中.',
+    flow: 'fs-in', hw: ['mem', 'disk'],
+    cpu: '缺页处理中...', cpuHl: false,
+    pt: [ { p: 0, f: '-', v: 0, m: 0, hl: false }, { p: 1, f: 0, v: 1, m: 1, hl: false }, { p: 2, f: 1, v: 1, m: 0, hl: false } ],
+    mem: [ { f: 0, p: 0, st: 'filled active' }, { f: 1, p: 2, st: 'filled' } ],
+    disk: [ { p: 0, st: 'filled active' }, { p: 1, st: 'filled' } ]
+  },
+  {
+    msg: '<b>步骤 10 : </b> 修改页表. 页面 0 状态置 1，分配块号 0; 原页面 1 状态置 0.',
+    flow: 'fs-upd', hw: ['pt'],
+    cpu: '缺页处理中...', cpuHl: false,
+    pt: [ { p: 0, f: 0, v: 1, m: 0, hl: true }, { p: 1, f: '-', v: 0, m: 0, hl: true }, { p: 2, f: 1, v: 1, m: 0, hl: false } ],
+    mem: [ { f: 0, p: 0, st: 'filled' }, { f: 1, p: 2, st: 'filled' } ],
+    disk: [ { p: 0, st: 'filled' }, { p: 1, st: 'filled' } ]
+  },
+  {
+    msg: '<b>步骤 11 : </b> 缺页中断处理完成. 恢复进程，<span class="tag tag-c">重新执行</span> 刚才被中断的指令.',
+    flow: 'fs-ret', hw: ['cpu'],
+    cpu: '[ 页号 0 | 偏移 100 ]', cpuHl: true,
+    pt: [ { p: 0, f: 0, v: 1, m: 0, hl: false }, { p: 1, f: '-', v: 0, m: 0, hl: false }, { p: 2, f: 1, v: 1, m: 0, hl: false } ],
+    mem: [ { f: 0, p: 0, st: 'filled' }, { f: 1, p: 2, st: 'filled' } ],
+    disk: [ { p: 0, st: 'filled' }, { p: 1, st: 'filled' } ]
+  },
+  {
+    msg: '<b>(重试)</b> 再次查 TLB (缺失)，接着查页表，此时页号 0 有效位为 1，<span class="tag tag-c">成功命中</span>! ',
+    flow: 'fs-pt', hw: ['pt', 'tlb'],
+    cpu: '[ 页号 0 | 偏移 100 ]', cpuHl: false,
+    pt: [ { p: 0, f: 0, v: 1, m: 0, hl: true }, { p: 1, f: '-', v: 0, m: 0, hl: false }, { p: 2, f: 1, v: 1, m: 0, hl: false } ],
+    mem: [ { f: 0, p: 0, st: 'filled' }, { f: 1, p: 2, st: 'filled' } ],
+    disk: [ { p: 0, st: 'filled' }, { p: 1, st: 'filled' } ]
+  },
+  {
+    msg: '<b>步骤 12 : </b> 拼接得到物理地址，成功访问内存数据. 整个地址变换与缺页处理流程结束.',
+    flow: 'fs-phy', hw: ['cpu', 'mem'],
+    cpu: '[ 块号 0 | 偏移 100 ]', cpuHl: true,
+    pt: [ { p: 0, f: 0, v: 1, m: 0, hl: false }, { p: 1, f: '-', v: 0, m: 0, hl: false }, { p: 2, f: 1, v: 1, m: 0, hl: false } ],
+    mem: [ { f: 0, p: 0, st: 'filled active' }, { f: 1, p: 2, st: 'filled' } ],
+    disk: [ { p: 0, st: 'filled' }, { p: 1, st: 'filled' } ]
+  }
+];
+
+const N = FRAMES.length;
+let idx = 0; let playing = false, timer = null;
+
+function renderFrame(i) {
+  const f = FRAMES[i];
+  
+  // Render Flow Steps
+  let activeFound = false;
+  document.getElementById('flow-col').innerHTML = FLOW_STEPS.map(s => {
+    let cls = 'flow-step';
+    if (s.id === f.flow) {
+      cls += ' active';
+      activeFound = true;
+    } else if (f.flow === 'fs-pt' && f.msg.includes('(重试)') && ['fs-start', 'fs-check'].includes(s.id)) {
+      cls += ' done';
+    } else if (f.flow === 'fs-phy' && s.id !== 'fs-phy') {
+      cls += ' done';
+    } else if (!activeFound && f.flow !== null) {
+      cls += ' done';
+    }
+    return `<div class="${cls}" id="${s.id}">${s.text}</div>`;
+  }).join('');
+
+  // Render HW Highlights
+  ['cpu', 'tlb', 'pt', 'mem', 'disk'].forEach(id => {
+    const el = document.getElementById('hw-' + id);
+    if (f.hw.includes(id)) el.classList.add('active');
+    else el.classList.remove('active');
+  });
+
+  // Render CPU
+  const cpuEl = document.getElementById('cpu-addr');
+  cpuEl.textContent = f.cpu;
+  cpuEl.className = 'cpu-addr' + (f.cpuHl ? ' active' : '');
+
+  // Render PT
+  document.getElementById('pt-table').innerHTML = `
+    <tr><th>页号</th><th>块号</th><th>有效位</th><th>修改位</th></tr>
+    ${f.pt.map(row => `
+      <tr class="pt-row ${row.hl ? 'hl' : ''}">
+        <td>${row.p}</td>
+        <td>${row.f}</td>
+        <td>${row.v}</td>
+        <td>${row.m}</td>
+      </tr>
+    `).join('')}
+  `;
+
+  // Render Mem
+  document.getElementById('mem-container').innerHTML = f.mem.map(m => `
+    <div class="data-block ${m.st}">
+      <div class="lbl">页框 ${m.f}</div>
+      <div class="val">${m.p !== '-' ? '页 ' + m.p : '-'}</div>
+    </div>
+  `).join('');
+
+  // Render Disk
+  document.getElementById('disk-container').innerHTML = f.disk.map(d => `
+    <div class="data-block ${d.st}">
+      <div class="lbl">外存</div>
+      <div class="val">页 ${d.p}</div>
+    </div>
+  `).join('');
+
+  // Update Messages and Controls
+  const m = document.getElementById('msg');
+  m.innerHTML = f.msg;
+  m.style.animation = 'none'; void m.offsetWidth; m.style.animation = 'fadein .2s ease-out both';
+  
+  const shown = i + 1;
+  document.getElementById('sbadge').textContent = shown + '/' + N;
+  document.getElementById('fill').style.width = (shown / N * 100) + '%';
+  document.getElementById('ctr').textContent = shown + ' / ' + N;
+  document.getElementById('btn-prev').disabled = i <= 0;
+  document.getElementById('btn-next').disabled = i >= N - 1;
+}
+
+function step(dir) {
+  let next = idx + dir;
+  if (next >= 0 && next < N) {
+    idx = next;
+    renderFrame(idx);
+    if (idx === N - 1 && playing) togglePlay();
+  }
+}
+
+function togglePlay() {
+  playing = !playing;
+  document.getElementById('icon-play').innerHTML = playing ? '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>' : '<path d="M8 5v14l11-7z"/>';
+  if (playing) {
+    if (idx === N - 1) { idx = 0; renderFrame(idx); }
+    timer = setInterval(() => {
+      if (idx < N - 1) step(1);
+      else togglePlay();
+    }, 1500);
+  } else {
+    clearInterval(timer);
+  }
+}
+
+function scrub(e) {
+  const track = document.getElementById('track');
+  const rect = track.getBoundingClientRect();
+  let pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+  idx = Math.min(N - 1, Math.floor(pct * N));
+  renderFrame(idx);
+}
+
+renderFrame(idx);
+</script>
+</body>
+</html>

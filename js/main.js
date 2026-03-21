@@ -1169,7 +1169,7 @@ document.addEventListener("DOMContentLoaded", function () {
             !node.classList.contains("comment-barrage")
           ) {
             const owo_body = node;
-            // 禁用右键（手机端长按会出现右键菜单，为了体验给禁用掉）
+            // 禁用右键 ( 手机端长按会出现右键菜单，为了体验给禁用掉 ) 
             owo_body.addEventListener("contextmenu", e => e.preventDefault());
             // 鼠标移入
             owo_body.addEventListener("mouseover", handleMouseOver);

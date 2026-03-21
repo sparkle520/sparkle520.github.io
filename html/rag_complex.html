@@ -1,0 +1,432 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+@keyframes fadein{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
+body,html{font-family:system-ui,"Noto Sans SC",sans-serif}
+.root{padding:8px 0 4px}
+.topbar{display:flex;gap:8px;margin-bottom:10px;align-items:stretch}
+.infocard{background:var(--color-background-secondary);border-radius:10px;padding:8px 12px}
+.ic-label{font-size:9px;font-weight:700;letter-spacing:.07em;color:var(--color-text-tertiary);margin-bottom:3px;text-transform:uppercase}
+.ic-body{font-size:10px;color:var(--color-text-secondary);line-height:1.6}
+.ic-body b{color:var(--color-text-primary);font-weight:500}
+.scenario-tabs{display:flex;gap:6px;margin-bottom:10px}
+.tab{flex:1;padding:7px;border-radius:9px;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);font-size:11px;font-weight:500;cursor:pointer;text-align:center;transition:all .15s;color:var(--color-text-secondary)}
+.tab.active-safe{background:#DCFCE7;border-color:#86EFAC;color:#166534}
+.tab.active-dead{background:#FEE2E2;border-color:#FCA5A5;color:#991B1B}
+.canvas{position:relative;height:280px;background:var(--color-background-secondary);border-radius:14px;margin-bottom:10px;overflow:hidden}
+canvas{position:absolute;inset:0}
+.logbox{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:10px;padding:8px 12px;min-height:44px;margin-bottom:10px}
+.log-step{font-size:9px;font-weight:700;letter-spacing:.06em;color:var(--color-text-tertiary);margin-bottom:3px;text-transform:uppercase}
+.log-msg{font-size:11px;color:var(--color-text-secondary);line-height:1.55;animation:fadein .2s ease-out both}
+.log-msg b{color:var(--color-text-primary);font-weight:500}
+.tag{display:inline-block;padding:1px 7px;border-radius:8px;font-size:9px;font-weight:700;margin-right:3px}
+.t-safe{background:#DCFCE7;color:#166534}
+.t-dead{background:#FEE2E2;color:#991B1B}
+.t-proc{background:#DBEAFE;color:#1E40AF}
+.t-res{background:#FEF3C7;color:#92400E}
+.t-rm{background:#F3F4F6;color:#6B7280;text-decoration:line-through}
+.t-hi{background:#EDE9FE;color:#5B21B6}
+.controls{display:flex;align-items:center;gap:8px}
+.btn-nav{width:32px;height:32px;border-radius:8px;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .1s}
+.btn-nav:hover{background:var(--color-background-secondary)}
+.btn-nav:disabled{opacity:.28;cursor:default}
+.btn-nav svg{width:12px;height:12px;color:var(--color-text-primary)}
+.btn-play{width:36px;height:36px;border-radius:50%;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .1s}
+.btn-play:hover{background:var(--color-background-secondary)}
+.btn-play svg{width:13px;height:13px;color:var(--color-text-primary)}
+.track{flex:1;height:3px;background:var(--color-background-secondary);border-radius:2px;overflow:hidden;cursor:pointer}
+.tfill{height:100%;background:#818CF8;border-radius:2px;transition:width .2s}
+.ctr{font-size:10px;color:var(--color-text-tertiary);min-width:42px;text-align:right}
+.verdict-bar{text-align:center;font-size:13px;font-weight:600;padding:6px;border-radius:8px;margin-bottom:8px;transition:all .3s;display:none}
+.verdict-bar.show{display:block}
+</style>
+
+<div class="root">
+<div class="scenario-tabs">
+  <button class="tab active-safe" id="tab-safe" onclick="loadScenario('safe')">场景 A : 可化简 ( 无死锁 ) </button>
+  <button class="tab" id="tab-dead" onclick="loadScenario('dead')">场景 B : 不可化简 ( 存在死锁 ) </button>
+</div>
+
+<div class="topbar">
+  <div class="infocard" style="flex:2">
+    <div class="ic-label">当前场景</div>
+    <div class="ic-body" id="scene-desc"></div>
+  </div>
+  <div class="infocard" style="flex:1;text-align:center">
+    <div class="ic-label">结论</div>
+    <div style="font-size:14px;font-weight:600;margin-top:2px" id="verdict-inline">待判断…</div>
+  </div>
+</div>
+
+<div class="canvas"><canvas id="c"></canvas></div>
+<div class="verdict-bar" id="verdict-bar"></div>
+
+<div class="logbox">
+  <div class="log-step" id="log-step">步骤 0</div>
+  <div class="log-msg" id="log-msg">选择场景后按 ▶ 开始演示</div>
+</div>
+
+<div class="controls">
+  <button class="btn-nav" id="btn-prev" onclick="goPrev()" disabled>
+    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2L4 6l4 4"/></svg>
+  </button>
+  <button class="btn-play" id="btn-play" onclick="togglePlay()">
+    <svg id="play-ico" viewBox="0 0 13 13" fill="currentColor"><path d="M2.5 1.5l9 5-9 5z"/></svg>
+  </button>
+  <button class="btn-nav" id="btn-next" onclick="goNext()">
+    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 2l4 4-4 4"/></svg>
+  </button>
+  <div class="track" onclick="scrub(event)"><div class="tfill" id="tfill" style="width:0%"></div></div>
+  <div class="ctr" id="ctr">0 / 0</div>
+</div>
+</div>
+
+<script>
+// ── Node positions (for 680×280 virtual canvas) ──────────────────
+// Processes: left column   Resources: right column
+// P1(100,70) P2(100,150) P3(100,230) P4(560,150)
+// R1(300,70) R2(300,150) R3(300,230)
+
+const NODES = {
+  P1:{x:100,y:70, type:'proc',label:'P1'},
+  P2:{x:100,y:150,type:'proc',label:'P2'},
+  P3:{x:100,y:230,type:'proc',label:'P3'},
+  P4:{x:560,y:150,type:'proc',label:'P4'},
+  R1:{x:310,y:70, type:'res', label:'R1',slots:2},
+  R2:{x:310,y:150,type:'res', label:'R2',slots:1},
+  R3:{x:310,y:230,type:'res', label:'R3',slots:2},
+};
+
+// ── Scenario A: safely reducible ─────────────────────────────────
+// Initial:  R1→P1(alloc), R1→P4(alloc), P1→R2(req), R2→P2(alloc),
+//           P2→R3(req), R3→P3(alloc), P4→R3(req)
+// P3 has no request → remove first
+const SAFE = {
+  desc:'4进程 3资源 ( R1有2实例，R3有2实例 ). <b>P3</b>无请求边，可先化简；逐步消除所有进程. ',
+  frames:[
+    {edges:[
+      {f:'R1',t:'P1',type:'alloc'},{f:'R1',t:'P4',type:'alloc'},
+      {f:'P1',t:'R2',type:'req'},{f:'R2',t:'P2',type:'alloc'},
+      {f:'P2',t:'R3',type:'req'},{f:'R3',t:'P3',type:'alloc'},
+      {f:'P4',t:'R3',type:'req'},
+    ],removed:new Set(),hi:null,
+     step:'初始状态',
+     msg:'初始图 : <b>R1(2实例)→P1, R1→P4</b>，<b>R2→P2</b>，<b>R3(2实例)→P3</b>；请求边 : P1→R2，P2→R3，P4→R3. <br>开始寻找<b>无请求边</b>的进程. ',verdict:''},
+    {edges:[
+      {f:'R1',t:'P1',type:'alloc'},{f:'R1',t:'P4',type:'alloc'},
+      {f:'P1',t:'R2',type:'req'},{f:'R2',t:'P2',type:'alloc'},
+      {f:'P2',t:'R3',type:'req'},{f:'R3',t:'P3',type:'alloc'},
+      {f:'P4',t:'R3',type:'req'},
+    ],removed:new Set(),hi:'P3',
+     step:'步骤 1 — 检查 P3',
+     msg:'<span class="tag t-proc">P3</span> 持有 R3 一个实例，<b>没有任何请求边</b>，可以正常结束. <br>移除 P3，释放其持有的 R3 实例. ',verdict:''},
+    {edges:[
+      {f:'R1',t:'P1',type:'alloc'},{f:'R1',t:'P4',type:'alloc'},
+      {f:'P1',t:'R2',type:'req'},{f:'R2',t:'P2',type:'alloc'},
+      {f:'P2',t:'R3',type:'req'},
+      {f:'P4',t:'R3',type:'req'},
+    ],removed:new Set(['P3']),hi:'R3',
+     step:'步骤 2 — P3 移除，R3 部分释放',
+     msg:'<span class="tag t-rm">P3</span> 已化简，R3 释放 1 个实例. <br>现在 R3 有 1 个空闲实例，<b>P2 的请求可被满足</b> ( P2 请求 R3 ). ',verdict:''},
+    {edges:[
+      {f:'R1',t:'P1',type:'alloc'},{f:'R1',t:'P4',type:'alloc'},
+      {f:'P1',t:'R2',type:'req'},{f:'R2',t:'P2',type:'alloc'},
+      {f:'R3',t:'P2',type:'alloc2'},
+      {f:'P4',t:'R3',type:'req'},
+    ],removed:new Set(['P3']),hi:'P2',
+     step:'步骤 3 — 满足 P2，检查 P2',
+     msg:'R3 分配给 <span class="tag t-proc">P2</span>，P2 现在持有 R2 和 R3，<b>无请求边</b>，可结束. <br>移除 P2，释放 R2、R3. ',verdict:''},
+    {edges:[
+      {f:'R1',t:'P1',type:'alloc'},{f:'R1',t:'P4',type:'alloc'},
+      {f:'P1',t:'R2',type:'req'},
+      {f:'P4',t:'R3',type:'req'},
+    ],removed:new Set(['P3','P2']),hi:'R2',
+     step:'步骤 4 — P2 移除，R2/R3 释放',
+     msg:'<span class="tag t-rm">P2</span> 移除后，R2 和 R3 完全空闲. <br><b>P1 请求 R2</b> 可立即被满足；<b>P4 请求 R3</b> 也可被满足. ',verdict:''},
+    {edges:[
+      {f:'R1',t:'P1',type:'alloc'},{f:'R1',t:'P4',type:'alloc'},
+      {f:'R2',t:'P1',type:'alloc2'},
+    ],removed:new Set(['P3','P2']),hi:'P1',
+     step:'步骤 5 — 满足 P1，检查 P1',
+     msg:'R2 分配给 <span class="tag t-proc">P1</span>，P1 持有 R1 和 R2，<b>无请求边</b>，可结束. <br>同时满足 P4 ( R3 已分配 ). ',verdict:''},
+    {edges:[
+      {f:'R3',t:'P4',type:'alloc2'},
+    ],removed:new Set(['P3','P2','P1']),hi:'P4',
+     step:'步骤 6 — P1 移除，检查 P4',
+     msg:'<span class="tag t-rm">P1</span> 移除，R1 释放. P4 已持有 R3，<b>无请求边</b>，可结束. ',verdict:''},
+    {edges:[],removed:new Set(['P3','P2','P1','P4']),hi:null,
+     step:'化简完成 ✓',
+     msg:'所有进程均已化简! 资源分配图<b>可完全化简</b>. <br><span class="tag t-safe">结论 : 无死锁</span> — 系统处于安全状态，化简序列为 P3→P2→P1→P4. ',verdict:'safe'},
+  ]
+};
+
+// ── Scenario B: deadlock ──────────────────────────────────────────
+// P1→R1(req), R1→P2(alloc), P2→R2(req), R2→P3(alloc), P3→R3(req), R3→P1(alloc)
+// P4 holds R2 extra instance and has no request → remove P4 first
+// Then stuck: P1,P2,P3 form cycle
+const DEAD = {
+  desc:'4进程 3资源 ( 各1实例 ). <b>P4</b>无请求可先化简；但 P1→P2→P3 形成环形等待，<b>无法继续化简</b>. ',
+  frames:[
+    {edges:[
+      {f:'R3',t:'P1',type:'alloc'},{f:'P1',t:'R1',type:'req'},
+      {f:'R1',t:'P2',type:'alloc'},{f:'P2',t:'R2',type:'req'},
+      {f:'R2',t:'P3',type:'alloc'},{f:'P3',t:'R3',type:'req'},
+      {f:'R2',t:'P4',type:'alloc'},
+    ],removed:new Set(),hi:null,
+     step:'初始状态',
+     msg:'初始图 : R3→P1，P1→R1 ( 请求 ) ；R1→P2，P2→R2 ( 请求 ) ；R2→P3，P3→R3 ( 请求 ) ；<b>R2→P4 ( P4还持有R2的另一实例 ) </b>. <br>开始化简 : 寻找无请求边的进程. ',verdict:''},
+    {edges:[
+      {f:'R3',t:'P1',type:'alloc'},{f:'P1',t:'R1',type:'req'},
+      {f:'R1',t:'P2',type:'alloc'},{f:'P2',t:'R2',type:'req'},
+      {f:'R2',t:'P3',type:'alloc'},{f:'P3',t:'R3',type:'req'},
+      {f:'R2',t:'P4',type:'alloc'},
+    ],removed:new Set(),hi:'P4',
+     step:'步骤 1 — 检查 P4',
+     msg:'<span class="tag t-proc">P4</span> 持有 R2 一个实例，<b>没有请求边</b>，可以结束. <br>移除 P4，释放 R2 的一个实例 ( R2 另一实例仍被 P3 持有 ). ',verdict:''},
+    {edges:[
+      {f:'R3',t:'P1',type:'alloc'},{f:'P1',t:'R1',type:'req'},
+      {f:'R1',t:'P2',type:'alloc'},{f:'P2',t:'R2',type:'req'},
+      {f:'R2',t:'P3',type:'alloc'},{f:'P3',t:'R3',type:'req'},
+    ],removed:new Set(['P4']),hi:null,
+     step:'步骤 2 — P4 移除后重新检查',
+     msg:'<span class="tag t-rm">P4</span> 已移除，R2 释放 1 实例. <br>但 R2 的剩余实例已被 P3 持有，而 P2 请求 R2 仍需等待 P3 释放. <br>检查剩余进程是否有<b>无请求边</b>的进程…',verdict:''},
+    {edges:[
+      {f:'R3',t:'P1',type:'alloc'},{f:'P1',t:'R1',type:'req'},
+      {f:'R1',t:'P2',type:'alloc'},{f:'P2',t:'R2',type:'req'},
+      {f:'R2',t:'P3',type:'alloc'},{f:'P3',t:'R3',type:'req'},
+    ],removed:new Set(['P4']),hi:'P1',
+     step:'步骤 3 — 检查 P1',
+     msg:'<span class="tag t-proc">P1</span> 持有 R3，但<b>请求 R1</b>. R1 被 P2 持有，P2 无法释放 ( 因为 P2 在等 R2 ). <br>P1 不可化简. ',verdict:''},
+    {edges:[
+      {f:'R3',t:'P1',type:'alloc'},{f:'P1',t:'R1',type:'req'},
+      {f:'R1',t:'P2',type:'alloc'},{f:'P2',t:'R2',type:'req'},
+      {f:'R2',t:'P3',type:'alloc'},{f:'P3',t:'R3',type:'req'},
+    ],removed:new Set(['P4']),hi:'P2',
+     step:'步骤 4 — 检查 P2',
+     msg:'<span class="tag t-proc">P2</span> 持有 R1，但<b>请求 R2</b>. R2 被 P3 持有，P3 无法释放 ( 因为 P3 在等 R3 ). <br>P2 不可化简. ',verdict:''},
+    {edges:[
+      {f:'R3',t:'P1',type:'alloc'},{f:'P1',t:'R1',type:'req'},
+      {f:'R1',t:'P2',type:'alloc'},{f:'P2',t:'R2',type:'req'},
+      {f:'R2',t:'P3',type:'alloc'},{f:'P3',t:'R3',type:'req'},
+    ],removed:new Set(['P4']),hi:'P3',
+     step:'步骤 5 — 检查 P3',
+     msg:'<span class="tag t-proc">P3</span> 持有 R2，但<b>请求 R3</b>. R3 被 P1 持有，P1 无法释放 ( 因为 P1 在等 R1 ). <br>P3 不可化简. <b>环形等待 : P1→R1→P2→R2→P3→R3→P1</b>',verdict:''},
+    {edges:[
+      {f:'R3',t:'P1',type:'alloc'},{f:'P1',t:'R1',type:'req'},
+      {f:'R1',t:'P2',type:'alloc'},{f:'P2',t:'R2',type:'req'},
+      {f:'R2',t:'P3',type:'alloc'},{f:'P3',t:'R3',type:'req'},
+    ],removed:new Set(['P4']),hi:null,cycle:true,
+     step:'化简失败 ✗',
+     msg:'图<b>不可完全化简</b>! P1、P2、P3 形成<b>环形等待</b>，无法继续化简. <br><span class="tag t-dead">结论 : 存在死锁</span> — 死锁进程集合 : {P1, P2, P3}. ',verdict:'dead'},
+  ]
+};
+
+let currentScenario = 'safe';
+let FRAMES = SAFE.frames;
+const N_fn = ()=>FRAMES.length;
+let idx=0, playing=false, timer=null;
+
+function loadScenario(s){
+  stopPlay(); idx=0;
+  currentScenario = s;
+  FRAMES = s==='safe' ? SAFE.frames : DEAD.frames;
+  document.getElementById('tab-safe').className = 'tab'+(s==='safe'?' active-safe':'');
+  document.getElementById('tab-dead').className = 'tab'+(s==='dead'?' active-dead':'');
+  document.getElementById('scene-desc').innerHTML = (s==='safe'?SAFE:DEAD).desc;
+  document.getElementById('verdict-inline').innerHTML='<span style="color:var(--color-text-tertiary)">待判断…</span>';
+  document.getElementById('verdict-bar').className='verdict-bar';
+  applyFrame(0);
+}
+
+// ── Canvas drawing ───────────────────────────────────────────────
+const C=document.getElementById('c');
+let W,H,dpr;
+function initCanvas(){
+  const r=C.parentElement.getBoundingClientRect();
+  dpr=window.devicePixelRatio||1; W=r.width; H=r.height;
+  C.width=W*dpr; C.height=H*dpr;
+  C.style.width=W+'px'; C.style.height=H+'px';
+}
+const sx=x=>x*W/680, sy=y=>y*H/280;
+
+function drawArrow(ctx,x1,y1,x2,y2,color,dashed){
+  ctx.strokeStyle=color; ctx.lineWidth=2.2;
+  ctx.setLineDash(dashed?[5,3]:[]);
+  ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+  ctx.setLineDash([]);
+  const ang=Math.atan2(y2-y1,x2-x1), hl=9*W/680;
+  ctx.fillStyle=color;
+  ctx.beginPath();
+  ctx.moveTo(x2-hl*Math.cos(ang-0.38),y2-hl*Math.sin(ang-0.38));
+  ctx.lineTo(x2,y2);
+  ctx.lineTo(x2-hl*Math.cos(ang+0.38),y2-hl*Math.sin(ang+0.38));
+  ctx.closePath(); ctx.fill();
+}
+
+function edgeEndpoints(n, isSource){
+  // get the point on the node boundary toward the other node
+  // for simplicity return center; caller will shorten
+  return [sx(n.x), sy(n.y)];
+}
+
+function shortenToEdge(x1,y1,x2,y2,n){
+  const dx=x2-x1, dy=y2-y1, len=Math.hypot(dx,dy);
+  if(n.type==='proc'){
+    const r=30*W/680;
+    return [x1+dx/len*r, y1+dy/len*r];
+  } else {
+    const rw=60*W/680, rh=36*H/280;
+    const tx=Math.abs(dx/rw), ty=Math.abs(dy/rh);
+    const t=Math.max(tx,ty), scale=0.5;
+    const ex=dx/len/t*scale, ey=dy/len/t*scale;
+    return [x1+ex*rw, y1+ey*rh];
+  }
+}
+
+function drawFrame(f){
+  initCanvas();
+  const ctx=C.getContext('2d');
+  ctx.scale(dpr,dpr);
+  ctx.clearRect(0,0,W,H);
+
+  const rem=f.removed||new Set();
+  const hi=f.hi;
+  const isCycle=f.cycle||false;
+
+  // cycle glow
+  if(isCycle){
+    ctx.beginPath();
+    ctx.arc(sx(310),sy(150),sy(110),0,Math.PI*2);
+    ctx.fillStyle='rgba(254,226,226,0.5)'; ctx.fill();
+    ctx.strokeStyle='#FCA5A5'; ctx.lineWidth=1.5; ctx.setLineDash([6,4]);
+    ctx.stroke(); ctx.setLineDash([]);
+  }
+
+  // edges
+  f.edges.forEach(e=>{
+    const A=NODES[e.f], B=NODES[e.t]; if(!A||!B)return;
+    const isReq=e.type==='req';
+    const color=isReq?'#EF4444':'#16A34A';
+    const ax=sx(A.x),ay=sy(A.y),bx=sx(B.x),by=sy(B.y);
+    // shorten both ends
+    const [sx1,sy1]=shortenToEdge(bx,by,ax,ay,A);
+    const [sx2,sy2]=shortenToEdge(ax,ay,bx,by,B);
+    ctx.globalAlpha=(rem.has(e.f)||rem.has(e.t))?0.12:1;
+    drawArrow(ctx,sx1,sy1,sx2,sy2,color,isReq);
+    ctx.globalAlpha=1;
+  });
+
+  // nodes
+  Object.entries(NODES).forEach(([key,n])=>{
+    const nx=sx(n.x),ny=sy(n.y);
+    const isRem=rem.has(key), isHi=key===hi;
+    ctx.globalAlpha=isRem?0.18:1;
+
+    if(n.type==='proc'){
+      const r=30*W/680;
+      if(isHi&&!isRem){
+        ctx.beginPath(); ctx.arc(nx,ny,r+6,0,Math.PI*2);
+        ctx.fillStyle=isCycle?'#FEE2E2':'#BFDBFE'; ctx.fill();
+      }
+      ctx.beginPath(); ctx.arc(nx,ny,r,0,Math.PI*2);
+      ctx.fillStyle='#EFF6FF';
+      ctx.strokeStyle=isCycle&&!isRem?'#EF4444':isHi?'#2563EB':'#3B82F6';
+      ctx.lineWidth=isHi?2.5:1.5; ctx.fill(); ctx.stroke();
+      ctx.fillStyle='#1D4ED8';
+      ctx.font=`700 ${13*W/680}px system-ui,sans-serif`;
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillText(n.label,nx,ny-3);
+      ctx.fillStyle='#60A5FA';
+      ctx.font=`${9*W/680}px system-ui,sans-serif`;
+      ctx.fillText('进程',nx,ny+10);
+    } else {
+      const rw=60*W/680,rh=36*H/280;
+      if(isHi&&!isRem){
+        ctx.beginPath(); ctx.roundRect(nx-rw/2-5,ny-rh/2-5,rw+10,rh+10,10);
+        ctx.fillStyle='#FDE68A'; ctx.fill();
+      }
+      ctx.beginPath(); ctx.roundRect(nx-rw/2,ny-rh/2,rw,rh,7);
+      ctx.fillStyle='#FEFCE8';
+      ctx.strokeStyle=isHi?'#D97706':'#F59E0B';
+      ctx.lineWidth=isHi?2.5:1.5; ctx.fill(); ctx.stroke();
+
+      // slot dots
+      const slots=n.slots||1, spacing=12*W/680;
+      const startX=nx-(slots-1)*spacing/2;
+      for(let i=0;i<slots;i++){
+        ctx.beginPath(); ctx.arc(startX+i*spacing,ny+7*H/280,3.5*W/680,0,Math.PI*2);
+        ctx.fillStyle='#FCD34D'; ctx.fill();
+      }
+      ctx.fillStyle='#92400E';
+      ctx.font=`700 ${12*W/680}px system-ui,sans-serif`;
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillText(n.label,nx,ny-7);
+    }
+
+    ctx.globalAlpha=1;
+    if(isRem){
+      ctx.strokeStyle='#EF4444'; ctx.lineWidth=2.5; ctx.globalAlpha=0.5;
+      ctx.beginPath();
+      ctx.moveTo(nx-22*W/680,ny-12*H/280); ctx.lineTo(nx+22*W/680,ny+12*H/280);
+      ctx.stroke(); ctx.globalAlpha=1;
+    }
+  });
+
+  // legend
+  const lx=sx(490),ly=sy(14);
+  ctx.globalAlpha=0.7;
+  drawArrow(ctx,lx,ly,lx+30*W/680,ly,'#16A34A',false);
+  ctx.fillStyle='#374151'; ctx.font=`${9*W/680}px system-ui,sans-serif`;
+  ctx.textAlign='left'; ctx.textBaseline='middle';
+  ctx.fillText('已分配',lx+34*W/680,ly);
+  drawArrow(ctx,lx,ly+14*H/280,lx+30*W/680,ly+14*H/280,'#EF4444',true);
+  ctx.fillText('请求',lx+34*W/680,ly+14*H/280);
+  ctx.globalAlpha=1;
+}
+
+function applyFrame(i){
+  const f=FRAMES[i];
+  drawFrame(f);
+  document.getElementById('log-step').textContent=f.step;
+  const lm=document.getElementById('log-msg');
+  lm.innerHTML=f.msg; lm.style.animation='none'; void lm.offsetWidth; lm.style.animation='fadein .2s ease-out both';
+
+  const vi=document.getElementById('verdict-inline');
+  const vb=document.getElementById('verdict-bar');
+  if(f.verdict==='safe'){
+    vi.innerHTML='<span style="color:#16A34A;font-weight:600">✓ 无死锁</span>';
+    vb.className='verdict-bar show'; vb.style.cssText='display:block;background:#DCFCE7;color:#166534;font-size:12px;font-weight:600;padding:6px;border-radius:8px;margin-bottom:8px;text-align:center;animation:fadein .3s ease-out';
+    vb.textContent='✓ 图可完全化简，系统安全，化简序列 : P3 → P2 → P1 → P4';
+  } else if(f.verdict==='dead'){
+    vi.innerHTML='<span style="color:#DC2626;font-weight:600">✗ 存在死锁</span>';
+    vb.className='verdict-bar show'; vb.style.cssText='display:block;background:#FEE2E2;color:#991B1B;font-size:12px;font-weight:600;padding:6px;border-radius:8px;margin-bottom:8px;text-align:center;animation:fadein .3s ease-out';
+    vb.textContent='✗ 图不可完全化简，死锁进程集合 : {P1, P2, P3}';
+  } else {
+    vi.innerHTML='<span style="color:var(--color-text-tertiary)">待判断…</span>';
+    vb.className='verdict-bar';
+  }
+
+  const N=N_fn();
+  document.getElementById('tfill').style.width=((i+1)/N*100)+'%';
+  document.getElementById('ctr').textContent=(i+1)+' / '+N;
+  document.getElementById('btn-prev').disabled=i<=0;
+  document.getElementById('btn-next').disabled=i>=N-1;
+}
+
+function updateIdx(i){ idx=Math.max(0,Math.min(N_fn()-1,i)); applyFrame(idx); }
+function goNext(){ if(idx>=N_fn()-1){stopPlay();return;} updateIdx(idx+1); }
+function goPrev(){ if(idx<=0)return; updateIdx(idx-1); }
+function scrub(e){ const t=e.currentTarget,r=(e.clientX-t.getBoundingClientRect().left)/t.offsetWidth; updateIdx(Math.round(r*(N_fn()-1))); }
+function togglePlay(){ playing?stopPlay():startPlay(); }
+function startPlay(){
+  playing=true;
+  document.getElementById('play-ico').innerHTML='<rect x="1.5" y="1" width="4" height="11" rx="1"/><rect x="7.5" y="1" width="4" height="11" rx="1"/>';
+  if(idx>=N_fn()-1) updateIdx(0);
+  timer=setInterval(()=>{ if(idx>=N_fn()-1){stopPlay();return;} updateIdx(idx+1); },2000);
+}
+function stopPlay(){
+  playing=false; clearInterval(timer); timer=null;
+  document.getElementById('play-ico').innerHTML='<path d="M2.5 1.5l9 5-9 5z"/>';
+}
+window.addEventListener('resize',()=>drawFrame(FRAMES[idx]));
+loadScenario('safe');
+</script>

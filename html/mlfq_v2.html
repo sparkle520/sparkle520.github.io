@@ -1,0 +1,168 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+@keyframes pin{from{opacity:0;transform:scale(.75) translateY(-5px)}to{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes fmsg{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
+@keyframes bglow{0%,100%{outline:2px solid transparent}50%{outline:2px solid #FDE047;outline-offset:2px}}
+
+.wrap{padding:12px 0 4px}
+.layout{display:grid;grid-template-columns:80px 1fr;gap:12px;align-items:start;margin-bottom:12px}
+
+.cpu-col{display:flex;flex-direction:column;align-items:center;gap:4px}
+.cpu-box{width:72px;height:64px;border-radius:12px;background:#F0FDF4;border:1.5px solid #86EFAC;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
+.cpu-tag{font-size:9px;font-weight:700;letter-spacing:.08em;color:#16A34A}
+.cpu-inner{min-height:26px;display:flex;align-items:center;justify-content:center}
+.cpu-idle{font-size:10px;color:#86EFAC;font-style:italic}
+
+.qs{display:flex;flex-direction:column;gap:7px}
+.qrow{border-radius:10px;padding:7px 10px;display:flex;align-items:center;gap:8px;transition:outline .1s}
+.qr0{background:#F0FDF4;border:1.5px solid #86EFAC}
+.qr1{background:#EFF6FF;border:1.5px solid #93C5FD}
+.qr2{background:#F8FAFC;border:1.5px solid #CBD5E1}
+.qlbl{font-size:11px;font-weight:700;width:60px;flex-shrink:0}
+.qr0 .qlbl{color:#166534}.qr1 .qlbl{color:#1E40AF}.qr2 .qlbl{color:#475569}
+.qbadge{font-size:9px;padding:2px 6px;border-radius:8px;flex-shrink:0}
+.qr0 .qbadge{background:#DCFCE7;color:#166534}
+.qr1 .qbadge{background:#DBEAFE;color:#1D4ED8}
+.qr2 .qbadge{background:#F1F5F9;color:#64748B}
+.pills{display:flex;gap:4px;flex-wrap:wrap;flex:1;min-height:24px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:14px;border:1.5px solid;font-size:11px;font-weight:600;animation:pin .2s ease-out both}
+.dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.empty{font-size:10px;color:#D1D5DB;font-style:italic}
+.glowing{animation:bglow .45s ease-in-out 3}
+
+.msgbox{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:10px;padding:10px 14px;min-height:40px;margin-bottom:12px;display:flex;align-items:center;justify-content:center}
+.msg{font-size:12px;color:var(--color-text-secondary);text-align:center;animation:fmsg .18s ease-out both;line-height:1.6}
+.msg b{color:var(--color-text-primary);font-weight:500}
+
+.bar{display:flex;align-items:center;gap:10px}
+.playbtn{width:38px;height:38px;border-radius:50%;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .1s}
+.playbtn:hover{background:var(--color-background-secondary)}
+.playbtn svg{width:14px;height:14px;color:var(--color-text-primary)}
+.resetbtn{padding:7px 12px;border-radius:8px;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);font-size:11px;cursor:pointer;color:var(--color-text-secondary);transition:background .1s;white-space:nowrap}
+.resetbtn:hover{background:var(--color-background-secondary)}
+.track{flex:1;height:3px;background:var(--color-background-secondary);border-radius:2px;overflow:hidden}
+.fill{height:100%;background:#818CF8;border-radius:2px;transition:width .28s}
+.ctr{font-size:10px;color:var(--color-text-tertiary);min-width:40px;text-align:right}
+</style>
+
+<div class="wrap">
+<div class="layout">
+  <div class="cpu-col">
+    <div class="cpu-box">
+      <div class="cpu-tag">CPU</div>
+      <div class="cpu-inner" id="cpu-inner"><span class="cpu-idle">空闲</span></div>
+    </div>
+    <span style="font-size:9px;color:var(--color-text-tertiary)">处理器</span>
+  </div>
+  <div class="qs">
+    <div class="qrow qr0" id="qr0"><span class="qlbl">Q1 高优</span><span class="qbadge">2ms</span><div class="pills" id="p0"><span class="empty">空</span></div></div>
+    <div class="qrow qr1" id="qr1"><span class="qlbl">Q2 中优</span><span class="qbadge">8ms</span><div class="pills" id="p1"><span class="empty">空</span></div></div>
+    <div class="qrow qr2" id="qr2"><span class="qlbl">Q3 低优</span><span class="qbadge">32ms</span><div class="pills" id="p2"><span class="empty">空</span></div></div>
+  </div>
+</div>
+<div class="msgbox"><div class="msg" id="msg">按 ▶ 开始演示 MLFQ 调度过程</div></div>
+<div class="bar">
+  <button class="playbtn" id="pbtn" onclick="toggle()">
+    <svg id="ico" viewBox="0 0 14 14" fill="currentColor"><path d="M3 2l9 5-9 5V2z"/></svg>
+  </button>
+  <button class="resetbtn" onclick="reset()">重置</button>
+  <div class="track"><div class="fill" id="fill" style="width:0%"></div></div>
+  <div class="ctr" id="ctr">0/0</div>
+</div>
+</div>
+
+<script>
+const T=[
+  {bg:'#FEF3C7',bc:'#FCD34D',dot:'#D97706',tc:'#78350F'},
+  {bg:'#FCE7F3',bc:'#F9A8D4',dot:'#DB2777',tc:'#831843'},
+  {bg:'#DBEAFE',bc:'#93C5FD',dot:'#2563EB',tc:'#1E3A8A'},
+  {bg:'#EDE9FE',bc:'#C4B5FD',dot:'#7C3AED',tc:'#4C1D95'},
+];
+const PI={P1:0,P2:1,P3:2,P4:3};
+
+// Each frame: msg, cpu (null or name), qs [[],[],[]], boost (opt bool)
+const F=[
+  {msg:'<b>P1</b> 新建 — 所有新进程默认进入 <b>Q1</b> ( 最高优先级 ) ',cpu:null,qs:[['P1'],[],[]]},
+  {msg:'<b>P2</b> 新建 — 同样进入 <b>Q1</b>',cpu:null,qs:[['P1','P2'],[],[]]},
+  {msg:'调度器选取 Q1 队首 <b>P1</b> → 上 CPU 运行',cpu:'P1',qs:[['P2'],[],[]]},
+  {msg:'<b>P1</b> 用完 2ms 时间片 — 超时，降级到 <b>Q2</b>',cpu:null,qs:[['P2'],['P1'],[]]},
+  {msg:'Q1 还有 <b>P2</b>，高优先级优先 — 调度 <b>P2</b> 上 CPU',cpu:'P2',qs:[[],['P1'],[]]},
+  {msg:'<b>P3</b> 新建进入 Q1 — 比正在运行的 P2 ( Q2 级别 ) 优先级更高',cpu:'P2',qs:[['P3'],['P1'],[]]},
+  {msg:'<b>P2</b> 触发 I/O 让出 CPU — I/O 友好型进程留在 <b>Q1</b>',cpu:null,qs:[['P3','P2'],['P1'],[]]},
+  {msg:'调度 <b>P3</b> ( Q1 队首 ) 上 CPU',cpu:'P3',qs:[['P2'],['P1'],[]]},
+  {msg:'<b>P3</b> 2ms 用完 — 降级到 <b>Q2</b>',cpu:null,qs:[['P2'],['P1','P3'],[]]},
+  {msg:'Q1 有 <b>P2</b>，继续高优先 — 调度 <b>P2</b>',cpu:'P2',qs:[[],['P1','P3'],[]]},
+  {msg:'<b>P2</b> 2ms 用完 — 降级到 <b>Q2</b>',cpu:null,qs:[[],['P1','P3','P2'],[]]},
+  {msg:'Q1 空，调度 Q2 队首 <b>P1</b> ( 8ms 时间片 ) ',cpu:'P1',qs:[[],['P3','P2'],[]]},
+  {msg:'<b>P1</b> 8ms 用完 — 再次降级到 <b>Q3</b> ( 最低优先级 ) ',cpu:null,qs:[[],['P3','P2'],['P1']]},
+  {msg:'<b>P4</b> 新建进入 Q1',cpu:null,qs:[['P4'],['P3','P2'],['P1']]},
+  {msg:'调度 <b>P4</b> ( Q1 最高优先 ) — P3/P2/P1 继续等待',cpu:'P4',qs:[[],['P3','P2'],['P1']]},
+  {msg:'<b>P4</b> I/O 密集，快速让出 — 保留在 Q1 高优先级队列',cpu:null,qs:[['P4'],['P3','P2'],['P1']]},
+  {msg:'⏰ 周期性优先级提升! 防止低优先级进程饥饿 — 全部重置至 Q1',cpu:null,qs:[['P4','P3','P2','P1'],[],[]], boost:true},
+  {msg:'新一轮：所有进程在 Q1 公平竞争，调度循环重新开始',cpu:null,qs:[['P4','P3','P2','P1'],[],[]]},
+];
+
+let cur=0,running=false,tmr=null;
+
+function pill(name){
+  const t=T[PI[name]??0];
+  const d=document.createElement('div');
+  d.className='pill';
+  d.style.cssText=`background:${t.bg};border-color:${t.bc};color:${t.tc}`;
+  d.innerHTML=`<span class="dot" style="background:${t.dot}"></span>${name}`;
+  return d;
+}
+
+function apply(f){
+  // cpu
+  const ci=document.getElementById('cpu-inner');
+  ci.innerHTML='';
+  if(f.cpu){ci.appendChild(pill(f.cpu))}else{ci.innerHTML='<span class="cpu-idle">空闲</span>'}
+  // queues
+  for(let i=0;i<3;i++){
+    const el=document.getElementById(`p${i}`);
+    el.innerHTML='';
+    const arr=f.qs[i]||[];
+    if(!arr.length){el.innerHTML='<span class="empty">空</span>';continue;}
+    arr.forEach((n,j)=>{const p=pill(n);p.style.animationDelay=(j*.05)+'s';el.appendChild(p);});
+    if(f.boost){
+      const row=document.getElementById(`qr${i}`);
+      row.classList.remove('glowing');void row.offsetWidth;row.classList.add('glowing');
+    }
+  }
+  // msg
+  const m=document.getElementById('msg');
+  m.innerHTML=f.msg;m.style.animation='none';void m.offsetWidth;m.style.animation='fmsg .18s ease-out both';
+  // bar
+  document.getElementById('fill').style.width=((cur)/F.length*100)+'%';
+  document.getElementById('ctr').textContent=`${cur}/${F.length}`;
+}
+
+function step(){
+  if(cur>=F.length){stop();return;}
+  apply(F[cur]);cur++;
+  document.getElementById('fill').style.width=((cur)/F.length*100)+'%';
+  document.getElementById('ctr').textContent=`${cur}/${F.length}`;
+  if(cur>=F.length)stop();
+}
+
+function toggle(){running?stop():start()}
+function start(){
+  running=true;
+  document.getElementById('ico').innerHTML='<rect x="2" y="1" width="4" height="12" rx="1"/><rect x="8" y="1" width="4" height="12" rx="1"/>';
+  step();
+  tmr=setInterval(step,1800);
+}
+function stop(){
+  running=false;clearInterval(tmr);
+  document.getElementById('ico').innerHTML='<path d="M3 2l9 5-9 5V2z"/>';
+}
+function reset(){
+  stop();cur=0;
+  document.getElementById('cpu-inner').innerHTML='<span class="cpu-idle">空闲</span>';
+  for(let i=0;i<3;i++)document.getElementById(`p${i}`).innerHTML='<span class="empty">空</span>';
+  document.getElementById('msg').innerHTML='按 ▶ 开始演示 MLFQ 调度过程';
+  document.getElementById('fill').style.width='0%';
+  document.getElementById('ctr').textContent=`0/${F.length}`;
+}
+</script>

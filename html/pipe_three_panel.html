@@ -147,6 +147,6 @@ function doRead(){
   if(!pipe.length)return;
   const m=pipe.shift();recvd.unshift(m);
   renderPipe();renderRecvd();
-  $('status').textContent=`read() → #${m.id}「${m.tag} ${m.size}」已读出（FIFO）`;
+  $('status').textContent=`read() → #${m.id}「${m.tag} ${m.size}」已读出 ( FIFO ) `;
 }
 </script>

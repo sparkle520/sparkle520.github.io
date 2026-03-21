@@ -111,11 +111,11 @@ svg text{font-family:'JetBrains Mono',monospace;}
 
         <!-- 芯片外框 -->
         <rect x="130" y="8" width="460" height="430" rx="14" fill="#f8fafc" stroke="#0284c7" stroke-width="2.5"/>
-        <text x="360" y="30" fill="#0284c7" font-size="12" text-anchor="middle" font-weight="bold">存储芯片（Memory Chip）</text>
+        <text x="360" y="30" fill="#0284c7" font-size="12" text-anchor="middle" font-weight="bold">存储芯片 ( Memory Chip ) </text>
 
         <!-- MAR -->
         <rect x="150" y="44" width="420" height="34" rx="7" fill="#fff7ed" stroke="#f97316" stroke-width="1.5"/>
-        <text x="360" y="58" fill="#c2410c" font-size="10" text-anchor="middle" font-weight="bold">地址寄存器（MAR）</text>
+        <text x="360" y="58" fill="#c2410c" font-size="10" text-anchor="middle" font-weight="bold">地址寄存器 ( MAR ) </text>
         <text x="360" y="72" fill="#94a3b8" font-size="8" text-anchor="middle">锁存外部地址总线输入的地址码，保持稳定供内部译码</text>
 
         <!-- 行译码器 -->
@@ -137,7 +137,7 @@ svg text{font-family:'JetBrains Mono',monospace;}
 
         <!-- 存储矩阵 -->
         <rect x="258" y="90" width="254" height="210" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
-        <text x="385" y="110" fill="#0369a1" font-size="10" text-anchor="middle" font-weight="bold">存储矩阵（Cell Array）</text>
+        <text x="385" y="110" fill="#0369a1" font-size="10" text-anchor="middle" font-weight="bold">存储矩阵 ( Cell Array ) </text>
         <!-- 行0 -->
         <rect x="268" y="120" width="32" height="20" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
         <rect x="306" y="120" width="32" height="20" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
@@ -195,7 +195,7 @@ svg text{font-family:'JetBrains Mono',monospace;}
 
         <!-- 灵敏放大器 SA -->
         <rect x="258" y="312" width="254" height="32" rx="7" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
-        <text x="385" y="325" fill="#15803d" font-size="10" text-anchor="middle" font-weight="bold">灵敏放大器（Sense Amplifier）</text>
+        <text x="385" y="325" fill="#15803d" font-size="10" text-anchor="middle" font-weight="bold">灵敏放大器 ( Sense Amplifier ) </text>
         <text x="385" y="338" fill="#64748b" font-size="7.5" text-anchor="middle">差分检测 BL/BL̄ 微弱电压差，放大为完整逻辑电平</text>
         <!-- 列译码→SA -->
         <line x1="552" y1="300" x2="552" y2="328" stroke="#16a34a" stroke-width="1.5" marker-end="url(#mg)"/>
@@ -209,7 +209,7 @@ svg text{font-family:'JetBrains Mono',monospace;}
 
         <!-- 数据缓冲器 MDR -->
         <rect x="258" y="358" width="254" height="32" rx="7" fill="#fdf4ff" stroke="#a855f7" stroke-width="1.5"/>
-        <text x="385" y="371" fill="#7e22ce" font-size="10" text-anchor="middle" font-weight="bold">数据缓冲器（I/O Buffer / MDR）</text>
+        <text x="385" y="371" fill="#7e22ce" font-size="10" text-anchor="middle" font-weight="bold">数据缓冲器 ( I/O Buffer / MDR ) </text>
         <text x="385" y="384" fill="#64748b" font-size="7.5" text-anchor="middle">读出数据暂存并驱动总线 / 接收写入数据</text>
         <!-- SA→MDR -->
         <line x1="385" y1="344" x2="385" y2="356" stroke="#16a34a" stroke-width="1.5" marker-end="url(#mg)"/>
@@ -222,7 +222,7 @@ svg text{font-family:'JetBrains Mono',monospace;}
 
         <!-- D[m] -->
         <line x1="385" y1="390" x2="385" y2="440" stroke="#7c3aed" stroke-width="2" marker-end="url(#mp)"/>
-        <text x="385" y="448" fill="#7e22ce" font-size="9" text-anchor="middle" font-weight="bold">D[m-1:0]  数据总线（双向）</text>
+        <text x="385" y="448" fill="#7e22ce" font-size="9" text-anchor="middle" font-weight="bold">D[m-1:0]  数据总线 ( 双向 ) </text>
 
         <!-- 控制 -->
         <line x1="40"  y1="348" x2="148" y2="348" stroke="#ea580c" stroke-width="1.5" marker-end="url(#mo)"/>
@@ -243,23 +243,23 @@ svg text{font-family:'JetBrains Mono',monospace;}
       <div style="display:flex;flex-direction:column;gap:10px;">
         <div class="ib" style="border-left:3px solid #f59e0b;background:#fef9c3;">
           <div style="color:#b45309;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px;">地址寄存器 MAR</div>
-          锁存 CPU 送来的地址码，保证整个存储周期内地址稳定，避免总线变化影响内部操作。
+          锁存 CPU 送来的地址码，保证整个存储周期内地址稳定，避免总线变化影响内部操作. 
         </div>
         <div class="ib" style="border-left:3px solid #f59e0b;background:#f1f5f9;">
           <div style="color:#b45309;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px;">行 / 列译码器</div>
-          将 n 位地址译为 2ⁿ 条选择线。<strong>行译码器</strong>激活 WL 选定行; <strong>列译码器</strong>选定 BL 列接入 SA。
+          将 n 位地址译为 2ⁿ 条选择线. <strong>行译码器</strong>激活 WL 选定行; <strong>列译码器</strong>选定 BL 列接入 SA. 
         </div>
         <div class="ib" style="border-left:3px solid #2563eb;background:#f1f5f9;">
           <div style="color:#1d4ed8;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px;">存储矩阵 Cell Array</div>
-          核心存储体。SRAM 用双稳态触发器（6T），DRAM 用电容（1T1C）。行激活整行，列选具体单元。
+          核心存储体. SRAM 用双稳态触发器 ( 6T ) ，DRAM 用电容 ( 1T1C ). 行激活整行，列选具体单元. 
         </div>
         <div class="ib" style="border-left:3px solid #22c55e;background:#f1f5f9;">
           <div style="color:#15803d;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px;">灵敏放大器 SA</div>
-          检测 BL 与 BL̄ 间微弱电压差（几十 mV），放大为完整 VDD/GND 电平。DRAM 读后还负责回写。
+          检测 BL 与 BL̄ 间微弱电压差 ( 几十 mV ) ，放大为完整 VDD/GND 电平. DRAM 读后还负责回写. 
         </div>
         <div class="ib" style="border-left:3px solid #a855f7;background:#f1f5f9;">
           <div style="color:#7e22ce;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px;">数据缓冲器 MDR / I/O Buffer</div>
-          读：暂存 SA 读出的数据并驱动数据总线。写：接收外部总线数据，准备写入存储矩阵。
+          读：暂存 SA 读出的数据并驱动数据总线. 写：接收外部总线数据，准备写入存储矩阵. 
         </div>
       </div>
     </div>
@@ -269,19 +269,19 @@ svg text{font-family:'JetBrains Mono',monospace;}
       <div style="display:flex;flex-direction:column;gap:8px;font-size:12px;margin-bottom:16px;">
         <div style="padding:10px;background:#fff7ed;border-radius:8px;display:flex;gap:12px;align-items:center;">
           <div style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#c2410c;font-size:18px;min-width:48px;">CS̄</div>
-          <div><div style="color:#1e293b;font-weight:600;">片选（Chip Select）</div><div style="color:#64748b;margin-top:2px;">低有效。仅 CS̄=0 时芯片工作; 多片组合时由高位地址控制各片 CS̄。</div></div>
+          <div><div style="color:#1e293b;font-weight:600;">片选 ( Chip Select ) </div><div style="color:#64748b;margin-top:2px;">低有效. 仅 CS̄=0 时芯片工作; 多片组合时由高位地址控制各片 CS̄. </div></div>
         </div>
         <div style="padding:10px;background:#eff6ff;border-radius:8px;display:flex;gap:12px;align-items:center;">
           <div style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#0369a1;font-size:18px;min-width:48px;">WĒ</div>
-          <div><div style="color:#1e293b;font-weight:600;">写使能（Write Enable）</div><div style="color:#64748b;margin-top:2px;">WĒ=0 写操作，WĒ=1 读操作，决定数据流方向。</div></div>
+          <div><div style="color:#1e293b;font-weight:600;">写使能 ( Write Enable ) </div><div style="color:#64748b;margin-top:2px;">WĒ=0 写操作，WĒ=1 读操作，决定数据流方向. </div></div>
         </div>
         <div style="padding:10px;background:#f0fdf4;border-radius:8px;display:flex;gap:12px;align-items:center;">
           <div style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#15803d;font-size:18px;min-width:48px;">OĒ</div>
-          <div><div style="color:#1e293b;font-weight:600;">输出使能（Output Enable）</div><div style="color:#64748b;margin-top:2px;">OĒ=0 数据输出到总线; 否则呈高阻抗（三态门断开）。</div></div>
+          <div><div style="color:#1e293b;font-weight:600;">输出使能 ( Output Enable ) </div><div style="color:#64748b;margin-top:2px;">OĒ=0 数据输出到总线; 否则呈高阻抗 ( 三态门断开 ). </div></div>
         </div>
         <div style="padding:10px;background:#fdf4ff;border-radius:8px;display:flex;gap:12px;align-items:center;">
           <div style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#7e22ce;font-size:18px;min-width:48px;">A[n]</div>
-          <div><div style="color:#1e293b;font-weight:600;">地址总线</div><div style="color:#64748b;margin-top:2px;">n 根寻址 2ⁿ 个单元。DRAM 行列复用，分两次传入（RAS↓/CAS↓）。</div></div>
+          <div><div style="color:#1e293b;font-weight:600;">地址总线</div><div style="color:#64748b;margin-top:2px;">n 根寻址 2ⁿ 个单元. DRAM 行列复用，分两次传入 ( RAS↓/CAS↓ ). </div></div>
         </div>
       </div>
       <div style="padding:14px;background:#f8fafc;border-radius:10px;border-left:4px solid #0284c7;font-size:12px;color:#475569;line-height:1.8;">
@@ -345,7 +345,7 @@ svg text{font-family:'JetBrains Mono',monospace;}
         <line x1="150" y1="193" x2="384" y2="193" stroke="#ef4444" stroke-width="1.5"/>
         <line x1="150" y1="190" x2="150" y2="196" stroke="#ef4444" stroke-width="1.5"/>
         <line x1="384" y1="190" x2="384" y2="196" stroke="#ef4444" stroke-width="1.5"/>
-        <text x="267" y="205" fill="#ef4444" font-size="7.5" text-anchor="middle">tACC（地址访问时间）</text>
+        <text x="267" y="205" fill="#ef4444" font-size="7.5" text-anchor="middle">tACC ( 地址访问时间 ) </text>
       </svg>
     </div>
   </div>
@@ -381,7 +381,7 @@ svg text{font-family:'JetBrains Mono',monospace;}
         <line x1="208" y1="128" x2="500" y2="128" stroke="#0284c7" stroke-width="1"/>
         <line x1="208" y1="125" x2="208" y2="131" stroke="#0284c7" stroke-width="1"/>
         <line x1="500" y1="125" x2="500" y2="131" stroke="#0284c7" stroke-width="1"/>
-        <text x="354" y="140" fill="#0284c7" font-size="7" text-anchor="middle">tWP（写脉冲宽度）</text>
+        <text x="354" y="140" fill="#0284c7" font-size="7" text-anchor="middle">tWP ( 写脉冲宽度 ) </text>
 
         <!-- D[m] -->
         <text x="54" y="170" fill="#7e22ce" font-size="9" text-anchor="end">D[m]</text>
@@ -441,7 +441,7 @@ svg text{font-family:'JetBrains Mono',monospace;}
           <line x1="245" y1="52" x2="245" y2="60" stroke="#ef4444" stroke-width="2"/>
           <text x="127" y="72" fill="#ef4444" font-size="10" text-anchor="middle" font-weight="bold">存储周期 tRC</text>
           <text x="127" y="86" fill="#94a3b8" font-size="8"  text-anchor="middle">tRC = tACC + 恢复时间 ≥ tACC</text>
-          <text x="127" y="100" fill="#64748b" font-size="8"  text-anchor="middle">DRAM 恢复更长（需预充电）</text>
+          <text x="127" y="100" fill="#64748b" font-size="8"  text-anchor="middle">DRAM 恢复更长 ( 需预充电 ) </text>
         </svg>
       </div>
       <div style="margin-top:12px;padding:12px;background:#fff7ed;border-radius:8px;border-left:3px solid #f97316;font-size:12px;color:#475569;line-height:1.7;">
@@ -459,12 +459,12 @@ svg text{font-family:'JetBrains Mono',monospace;}
 
   <!-- 位扩展 -->
   <div class="card">
-    <div class="ct">位扩展 — 增加字长（数据位宽）</div>
+    <div class="ct">位扩展 — 增加字长 ( 数据位宽 ) </div>
     <div class="sw">
       <svg width="600" height="210" viewBox="0 0 600 210">
         <!-- 说明文字：两行，中间空一行 -->
         <text x="300" y="13" fill="#64748b" font-size="9" text-anchor="middle">例：4 片 1K×4bit → 1K×16bit</text>
-        <text x="300" y="35" fill="#64748b" font-size="9" text-anchor="middle">（地址线共享，数据线并联）</text>
+        <text x="300" y="35" fill="#64748b" font-size="9" text-anchor="middle"> ( 地址线共享，数据线并联 ) </text>
 
         <!-- 4 芯片 -->
         <rect x="20"  y="44" width="108" height="88" rx="8" fill="#eff6ff" stroke="#0284c7" stroke-width="2"/>
@@ -493,7 +493,7 @@ svg text{font-family:'JetBrains Mono',monospace;}
         <line x1="350" y1="44" x2="350" y2="36" stroke="#f59e0b" stroke-width="1.5"/>
         <line x1="488" y1="44" x2="488" y2="36" stroke="#f59e0b" stroke-width="1.5"/>
         <line x1="74"  y1="36" x2="488" y2="36" stroke="#f59e0b" stroke-width="2"/>
-        <text x="281" y="32" fill="#b45309" font-size="8" text-anchor="middle">A[9:0] 地址线共享（10 根）</text>
+        <text x="281" y="32" fill="#b45309" font-size="8" text-anchor="middle">A[9:0] 地址线共享 ( 10 根 ) </text>
 
         <!-- CS̄ 共享 -->
         <line x1="74"  y1="132" x2="74"  y2="148" stroke="#f97316" stroke-width="1.5"/>
@@ -501,7 +501,7 @@ svg text{font-family:'JetBrains Mono',monospace;}
         <line x1="350" y1="132" x2="350" y2="148" stroke="#f97316" stroke-width="1.5"/>
         <line x1="488" y1="132" x2="488" y2="148" stroke="#f97316" stroke-width="1.5"/>
         <line x1="74"  y1="148" x2="488" y2="148" stroke="#f97316" stroke-width="2"/>
-        <text x="281" y="161" fill="#c2410c" font-size="8" text-anchor="middle">CS̄ 并联（同时选中，同时工作）</text>
+        <text x="281" y="161" fill="#c2410c" font-size="8" text-anchor="middle">CS̄ 并联 ( 同时选中，同时工作 ) </text>
 
         <!-- D[15:0] 数据线并联 -->
         <line x1="74"  y1="132" x2="74"  y2="178" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="4,2"/>
@@ -516,10 +516,10 @@ svg text{font-family:'JetBrains Mono',monospace;}
 
   <!-- 字扩展 -->
   <div class="card">
-    <div class="ct">字扩展 — 增加地址空间（存储容量）</div>
+    <div class="ct">字扩展 — 增加地址空间 ( 存储容量 ) </div>
     <div class="sw">
       <svg width="560" height="270" viewBox="0 0 560 270">
-        <text x="280" y="14" fill="#64748b" font-size="9" text-anchor="middle">例：4 片 1K×8bit → 4K×8bit（高位地址控制片选 CS̄）</text>
+        <text x="280" y="14" fill="#64748b" font-size="9" text-anchor="middle">例：4 片 1K×8bit → 4K×8bit ( 高位地址控制片选 CS̄ ) </text>
 
         <!-- 输入 & 译码器 -->
         <text x="8"   y="96"  fill="#b45309" font-size="8">A[11:10]</text>
@@ -557,7 +557,7 @@ svg text{font-family:'JetBrains Mono',monospace;}
         <text x="246" y="230" fill="#0369a1" font-size="9" text-anchor="middle" font-weight="bold">芯片 #3</text>
         <text x="246" y="244" fill="#64748b" font-size="7" text-anchor="middle">0C00H ～ 0FFFH</text>
 
-        <!-- A[9:0] 竖干线 + 标签框（完全内置） -->
+        <!-- A[9:0] 竖干线 + 标签框 ( 完全内置 )  -->
         <line x1="304" y1="51"  x2="352" y2="51"  stroke="#f59e0b" stroke-width="1.5"/>
         <line x1="304" y1="111" x2="352" y2="111" stroke="#f59e0b" stroke-width="1.5"/>
         <line x1="304" y1="171" x2="352" y2="171" stroke="#f59e0b" stroke-width="1.5"/>
@@ -566,9 +566,9 @@ svg text{font-family:'JetBrains Mono',monospace;}
         <line x1="352" y1="141" x2="380" y2="141" stroke="#f59e0b" stroke-width="2.5"/>
         <rect x="380" y="124" width="168" height="34" rx="7" fill="#fef9c3" stroke="#f59e0b" stroke-width="1.5"/>
         <text x="464" y="139" fill="#b45309" font-size="11" text-anchor="middle" font-weight="bold">A[9:0]</text>
-        <text x="464" y="152" fill="#b45309" font-size="8"  text-anchor="middle">低位地址共享（10 根）</text>
+        <text x="464" y="152" fill="#b45309" font-size="8"  text-anchor="middle">低位地址共享 ( 10 根 ) </text>
 
-        <!-- D[7:0] 竖干线 + 标签框（完全内置） -->
+        <!-- D[7:0] 竖干线 + 标签框 ( 完全内置 )  -->
         <line x1="304" y1="65"  x2="336" y2="65"  stroke="#a855f7" stroke-width="1.5"/>
         <line x1="304" y1="125" x2="336" y2="125" stroke="#a855f7" stroke-width="1.5"/>
         <line x1="304" y1="185" x2="336" y2="185" stroke="#a855f7" stroke-width="1.5"/>
@@ -577,9 +577,9 @@ svg text{font-family:'JetBrains Mono',monospace;}
         <line x1="336" y1="185" x2="380" y2="185" stroke="#a855f7" stroke-width="2.5"/>
         <rect x="380" y="169" width="168" height="34" rx="7" fill="#fdf4ff" stroke="#a855f7" stroke-width="1.5"/>
         <text x="464" y="184" fill="#7e22ce" font-size="11" text-anchor="middle" font-weight="bold">D[7:0]</text>
-        <text x="464" y="197" fill="#7e22ce" font-size="8"  text-anchor="middle">数据线共享（8 根）</text>
+        <text x="464" y="197" fill="#7e22ce" font-size="8"  text-anchor="middle">数据线共享 ( 8 根 ) </text>
 
-        <text x="280" y="262" fill="#64748b" font-size="8" text-anchor="middle">每次仅一片 CS̄=LOW，其余高阻（Hi-Z），三态门隔离，互不干扰</text>
+        <text x="280" y="262" fill="#64748b" font-size="8" text-anchor="middle">每次仅一片 CS̄=LOW，其余高阻 ( Hi-Z ) ，三态门隔离，互不干扰</text>
       </svg>
     </div>
   </div>
@@ -592,24 +592,24 @@ svg text{font-family:'JetBrains Mono',monospace;}
         <div style="color:#0369a1;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:10px;font-weight:700;">用 1K×4bit 芯片构建 4K×8bit 存储器</div>
         <ul class="sl">
           <li><span class="sn">①</span>位扩展：每组 2 片并联 → 每组 1K×8bit</li>
-          <li><span class="sn">②</span>字扩展：4 组串联（片选）→ 4K×8bit</li>
+          <li><span class="sn">②</span>字扩展：4 组串联 ( 片选 ) → 4K×8bit</li>
           <li><span class="sn">③</span>共需 2×4 = <strong style="color:#0284c7;">8 片</strong>芯片</li>
           <li><span class="sn">④</span>地址线：低 10 位寻址组内，高 2 位选组</li>
-          <li><span class="sn">⑤</span>数据线：8 根（2 片各出 4bit 并联）</li>
+          <li><span class="sn">⑤</span>数据线：8 根 ( 2 片各出 4bit 并联 ) </li>
         </ul>
       </div>
       <div style="flex:1;min-width:240px;display:flex;flex-direction:column;gap:10px;">
         <div class="ib" style="background:#dcfce7;border-left:3px solid #16a34a;">
           <div style="color:#15803d;font-weight:700;margin-bottom:4px;">位扩展要点</div>
-          地址线、CS̄、WĒ 并联共享; 数据线各自独立拼接。所有芯片同时被选中同时工作。
+          地址线、CS̄、WĒ 并联共享; 数据线各自独立拼接. 所有芯片同时被选中同时工作. 
         </div>
         <div class="ib" style="background:#eff6ff;border-left:3px solid #0284c7;">
           <div style="color:#0369a1;font-weight:700;margin-bottom:4px;">字扩展要点</div>
-          低位地址、数据线、WĒ 共享; 高位地址经译码器控制各片 CS̄，每次仅一片工作。
+          低位地址、数据线、WĒ 共享; 高位地址经译码器控制各片 CS̄，每次仅一片工作. 
         </div>
         <div class="ib" style="background:#fdf4ff;border-left:3px solid #a855f7;">
           <div style="color:#7e22ce;font-weight:700;margin-bottom:4px;">三态门的作用</div>
-          未被选中的芯片呈<strong>高阻抗（Hi-Z）</strong>，防止多片并接时互相驱动冲突，是总线复用的基础。
+          未被选中的芯片呈<strong>高阻抗 ( Hi-Z ) </strong>，防止多片并接时互相驱动冲突，是总线复用的基础. 
         </div>
       </div>
     </div>
@@ -643,18 +643,18 @@ svg text{font-family:'JetBrains Mono',monospace;}
 
         <!-- 地址总线 -->
         <rect x="176" y="112" width="320" height="26" rx="5" fill="#fef9c3" stroke="#f59e0b" stroke-width="2"/>
-        <text x="336" y="129" fill="#b45309" font-size="9.5" text-anchor="middle" font-weight="bold">地址总线（Address Bus）— 单向 →</text>
+        <text x="336" y="129" fill="#b45309" font-size="9.5" text-anchor="middle" font-weight="bold">地址总线 ( Address Bus ) — 单向 →</text>
         <line x1="132" y1="125" x2="174" y2="125" stroke="#f59e0b" stroke-width="2" marker-end="url(#ba)"/>
 
         <!-- 数据总线 -->
         <rect x="176" y="168" width="320" height="26" rx="5" fill="#fdf4ff" stroke="#a855f7" stroke-width="2"/>
-        <text x="336" y="185" fill="#7e22ce" font-size="9.5" text-anchor="middle" font-weight="bold">数据总线（Data Bus）— 双向 ↔</text>
+        <text x="336" y="185" fill="#7e22ce" font-size="9.5" text-anchor="middle" font-weight="bold">数据总线 ( Data Bus ) — 双向 ↔</text>
         <line x1="132" y1="181" x2="174" y2="181" stroke="#a855f7" stroke-width="2" marker-end="url(#bp)"/>
         <line x1="176" y1="183" x2="134"  y2="183" stroke="#a855f7" stroke-width="1.5" marker-end="url(#bpr)"/>
 
         <!-- 控制总线 -->
         <rect x="176" y="224" width="320" height="26" rx="5" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
-        <text x="336" y="241" fill="#c2410c" font-size="9.5" text-anchor="middle" font-weight="bold">控制总线（Control Bus）— R/W̄ · CS̄ · CLK</text>
+        <text x="336" y="241" fill="#c2410c" font-size="9.5" text-anchor="middle" font-weight="bold">控制总线 ( Control Bus ) — R/W̄ · CS̄ · CLK</text>
         <line x1="132" y1="237" x2="174" y2="237" stroke="#ea580c" stroke-width="2" marker-end="url(#bo)"/>
 
         <!-- ROM -->
@@ -684,7 +684,7 @@ svg text{font-family:'JetBrains Mono',monospace;}
 
         <!-- 地址空间分配 -->
         <rect x="148" y="290" width="360" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-        <text x="328" y="308" fill="#64748b" font-size="8.5" text-anchor="middle" font-weight="bold">存储器地址空间分配（示意）</text>
+        <text x="328" y="308" fill="#64748b" font-size="8.5" text-anchor="middle" font-weight="bold">存储器地址空间分配 ( 示意 ) </text>
         <rect x="158" y="316" width="58"  height="14" rx="3" fill="#dcfce7" stroke="#22c55e" stroke-width="1"/>
         <text x="187" y="327" fill="#15803d" font-size="7" text-anchor="middle">ROM 区</text>
         <rect x="220" y="316" width="106" height="14" rx="3" fill="#eff6ff" stroke="#0284c7" stroke-width="1"/>
@@ -706,15 +706,15 @@ svg text{font-family:'JetBrains Mono',monospace;}
       <div style="display:flex;flex-direction:column;gap:10px;">
         <div class="ib" style="background:#fef9c3;border-left:3px solid #f59e0b;">
           <div style="color:#b45309;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px;">地址总线 Address Bus</div>
-          <strong>单向</strong>（CPU→存储器）。宽度决定寻址空间：n 位 → 2ⁿ 地址单元。32 位→4GB，64 位→16EB。
+          <strong>单向</strong> ( CPU→存储器 ). 宽度决定寻址空间：n 位 → 2ⁿ 地址单元. 32 位→4GB，64 位→16EB. 
         </div>
         <div class="ib" style="background:#fdf4ff;border-left:3px solid #a855f7;">
           <div style="color:#7e22ce;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px;">数据总线 Data Bus</div>
-          <strong>双向</strong>（CPU↔存储器）。宽度决定每次传输量：8/16/32/64 bit。宽度越大带宽越高。
+          <strong>双向</strong> ( CPU↔存储器 ). 宽度决定每次传输量：8/16/32/64 bit. 宽度越大带宽越高. 
         </div>
         <div class="ib" style="background:#fff7ed;border-left:3px solid #f97316;">
           <div style="color:#c2410c;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px;">控制总线 Control Bus</div>
-          传递读写控制（R/W̄）、片选（CS̄）、时钟（CLK）、中断（INT）等，各线方向不同。
+          传递读写控制 ( R/W̄ ) 、片选 ( CS̄ ) 、时钟 ( CLK ) 、中断 ( INT ) 等，各线方向不同. 
         </div>
       </div>
     </div>
@@ -725,7 +725,7 @@ svg text{font-family:'JetBrains Mono',monospace;}
           <div style="color:#15803d;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:4px;">ROM 连接特点</div>
           <ul class="sl" style="margin-top:4px;">
             <li><span class="sn">•</span>地址总线、数据总线均接入</li>
-            <li><span class="sn">•</span>WĒ 悬空或接高（只读）</li>
+            <li><span class="sn">•</span>WĒ 悬空或接高 ( 只读 ) </li>
             <li><span class="sn">•</span>映射到低地址，启动时 PC 指向此处</li>
             <li><span class="sn">•</span>存 BIOS / 固件，掉电不丢</li>
           </ul>
@@ -735,7 +735,7 @@ svg text{font-family:'JetBrains Mono',monospace;}
           <ul class="sl" style="margin-top:4px;">
             <li><span class="sn">•</span>地址、数据、控制总线全接</li>
             <li><span class="sn">•</span>WĒ 由控制总线 R/W̄ 驱动</li>
-            <li><span class="sn">•</span>DRAM 还需刷新控制器（RAS/CAS）</li>
+            <li><span class="sn">•</span>DRAM 还需刷新控制器 ( RAS/CAS ) </li>
             <li><span class="sn">•</span>掉电丢失，运行时存程序和数据</li>
           </ul>
         </div>
@@ -820,8 +820,8 @@ svg text{font-family:'JetBrains Mono',monospace;}
 
         <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:10px;padding:14px;">
           <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#94a3b8;margin-bottom:8px;letter-spacing:2px;">SIGNAL STATE</div>
-          <div class="sr"><span class="sn2">MAR（地址）</span><span class="sv xx" id="smar">0x00A0</span></div>
-          <div class="sr"><span class="sn2">MDR（数据）</span><span class="sv xx" id="smdr">—</span></div>
+          <div class="sr"><span class="sn2">MAR ( 地址 ) </span><span class="sv xx" id="smar">0x00A0</span></div>
+          <div class="sr"><span class="sn2">MDR ( 数据 ) </span><span class="sv xx" id="smdr">—</span></div>
           <div class="sr"><span class="sn2">R/W̄</span>        <span class="sv xx" id="srw">待机</span></div>
           <div class="sr"><span class="sn2">CS̄</span>         <span class="sv lo" id="scs">HIGH</span></div>
           <div class="sr"><span class="sn2">地址总线</span>   <span class="sv xx" id="sab">—</span></div>
@@ -830,7 +830,7 @@ svg text{font-family:'JetBrains Mono',monospace;}
         </div>
 
         <div class="sb" id="opdesc">
-          <strong>待机：</strong>CPU 未发出访问请求，CS̄=HIGH，存储器不工作，三态门高阻，总线空闲。
+          <strong>待机：</strong>CPU 未发出访问请求，CS̄=HIGH，存储器不工作，三态门高阻，总线空闲. 
         </div>
       </div>
     </div>
@@ -840,7 +840,7 @@ svg text{font-family:'JetBrains Mono',monospace;}
     <div class="ct">完整读写步骤分解</div>
     <div class="g2">
       <div>
-        <div style="color:#0369a1;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:10px;">📖 读操作（8步）</div>
+        <div style="color:#0369a1;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:10px;">📖 读操作 ( 8步 ) </div>
         <ul class="sl">
           <li><span class="sn">①</span>CPU 将目标地址送入 MAR</li>
           <li><span class="sn">②</span>MAR 将地址送上地址总线，CS̄=0，R/W̄=1</li>
@@ -853,14 +853,14 @@ svg text{font-family:'JetBrains Mono',monospace;}
         </ul>
       </div>
       <div>
-        <div style="color:#c2410c;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:10px;">✏️ 写操作（7步）</div>
+        <div style="color:#c2410c;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:10px;">✏️ 写操作 ( 7步 ) </div>
         <ul class="sl">
           <li><span class="sn">①</span>CPU 将地址→MAR，数据→MDR，R/W̄=0</li>
           <li><span class="sn">②</span>地址送总线，CS̄=0，WĒ=0</li>
           <li><span class="sn">③</span>芯片锁存地址，译码选定目标单元</li>
           <li><span class="sn">④</span>MDR 数据经总线送入芯片 Buffer</li>
           <li><span class="sn">⑤</span>写驱动器强制 BL/BL̄ 为所需电平</li>
-          <li><span class="sn">⑥</span>数据写入存储单元（触发器翻转/电容充放电）</li>
+          <li><span class="sn">⑥</span>数据写入存储单元 ( 触发器翻转/电容充放电 ) </li>
           <li><span class="sn">⑦</span>WĒ 回高，CS̄ 回高，写操作完成</li>
         </ul>
       </div>
@@ -901,7 +901,7 @@ function upd(){
     s('smar',addr,'xx');s('smdr','—','xx');s('srw','待机','xx');s('scs','HIGH','lo');
     s('sab','—','xx');s('sdb','—','xx');s('ssa','—','xx');
     t('vst','待机状态');t('vsd1','CS̄=HIGH，芯片未被选中');t('vsd2','总线空闲，等待 CPU 请求');
-    document.getElementById('opdesc').innerHTML='<strong>待机：</strong>CPU 未发出访问请求，CS̄=HIGH，存储器不工作，三态门高阻，数据总线空闲。';
+    document.getElementById('opdesc').innerHTML='<strong>待机：</strong>CPU 未发出访问请求，CS̄=HIGH，存储器不工作，三态门高阻，数据总线空闲. ';
 
   }else if(op==='read'){
     const d=MEM[addr]||'0x??';
@@ -910,7 +910,7 @@ function upd(){
     s('smar',addr,'ac');s('smdr',d,'hi');s('srw','READ(1)','hi');s('scs','LOW','hi');
     s('sab',addr,'ac');s('sdb',d,'hi');s('ssa',d,'hi');
     t('vst','读操作进行中');t('vsd1','地址 '+addr+' → 数据 '+d);t('vsd2','SA 放大 → Buffer → 数据总线');
-    document.getElementById('opdesc').innerHTML=`<strong>读操作：</strong>MAR 送出地址 <strong>${addr}</strong>，CS̄=LOW，R/W̄=HIGH。译码→SA放大→数据 <strong>${d}</strong> 经总线送入 MDR。`;
+    document.getElementById('opdesc').innerHTML=`<strong>读操作：</strong>MAR 送出地址 <strong>${addr}</strong>，CS̄=LOW，R/W̄=HIGH. 译码→SA放大→数据 <strong>${d}</strong> 经总线送入 MDR. `;
 
   }else{
     MEM[addr]=wd;
@@ -919,7 +919,7 @@ function upd(){
     s('smar',addr,'ac');s('smdr',wd,'ac');s('srw','WRITE(0)','lo');s('scs','LOW','hi');
     s('sab',addr,'ac');s('sdb',wd,'ac');s('ssa','回写','ac');
     t('vst','写操作进行中');t('vsd1','写入 '+wd+' → 地址 '+addr);t('vsd2','WĒ=LOW → 数据写入存储单元');
-    document.getElementById('opdesc').innerHTML=`<strong>写操作：</strong>MDR 数据 <strong>${wd}</strong> 经总线送入芯片，CS̄=LOW，WĒ=LOW，写驱动翻转单元，新值锁存于 <strong>${addr}</strong>。`;
+    document.getElementById('opdesc').innerHTML=`<strong>写操作：</strong>MDR 数据 <strong>${wd}</strong> 经总线送入芯片，CS̄=LOW，WĒ=LOW，写驱动翻转单元，新值锁存于 <strong>${addr}</strong>. `;
   }
 }
 

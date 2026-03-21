@@ -1,0 +1,56 @@
+<svg width="680" viewBox="0 0 680 280" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+  <style>text{font-family:system-ui,"Noto Sans SC",sans-serif}</style>
+</defs>
+
+<!-- ── 非临界区 ── -->
+<rect x="18" y="80" width="84" height="52" rx="9" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.5"/>
+<text x="60" y="100" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="600" fill="#0369A1">非临界区</text>
+<text x="60" y="116" text-anchor="middle" dominant-baseline="central" font-size="9" fill="#0284C7">Non-critical</text>
+
+<!-- ── 尝试获取锁 ── -->
+<rect x="140" y="80" width="120" height="52" rx="9" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="200" y="98" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="600" fill="#92400E">尝试获取互斥锁</text>
+<text x="200" y="116" text-anchor="middle" dominant-baseline="central" font-size="9" fill="#D97706">acquire()</text>
+
+<!-- ── 临界区 ── -->
+<rect x="310" y="80" width="120" height="52" rx="9" fill="#CFFAFE" stroke="#0891B2" stroke-width="1.5"/>
+<text x="370" y="100" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="600" fill="#0E7490">临界区</text>
+<text x="370" y="116" text-anchor="middle" dominant-baseline="central" font-size="9" fill="#0891B2">Critical Section</text>
+
+<!-- ── 释放互斥锁 ── -->
+<rect x="470" y="80" width="120" height="52" rx="9" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="530" y="98" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="600" fill="#92400E">释放互斥锁</text>
+<text x="530" y="116" text-anchor="middle" dominant-baseline="central" font-size="9" fill="#D97706">release()</text>
+
+<!-- ── 等待/阻塞队列 ── -->
+<rect x="140" y="190" width="120" height="50" rx="9" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+<text x="200" y="209" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="600" fill="#92400E">等待队列</text>
+<text x="200" y="227" text-anchor="middle" dominant-baseline="central" font-size="9" fill="#D97706">Blocked Queue</text>
+
+<!-- A → ACQ -->
+<line x1="102" y1="106" x2="138" y2="106" stroke="#6B7280" stroke-width="1.8" marker-end="url(#arr)"/>
+
+<!-- ACQ → CS (成功) -->
+<line x1="260" y1="106" x2="308" y2="106" stroke="#0891B2" stroke-width="1.8" marker-end="url(#arr)"/>
+<text x="284" y="98" text-anchor="middle" font-size="9" font-weight="600" fill="#0891B2">成功</text>
+
+<!-- CS → REL -->
+<line x1="430" y1="106" x2="468" y2="106" stroke="#6B7280" stroke-width="1.8" marker-end="url(#arr)"/>
+
+<!-- REL → A (arc over top) -->
+<path d="M530 80 L530 48 L60 48 L60 78" fill="none" stroke="#16A34A" stroke-width="1.8" marker-end="url(#arr)"/>
+<text x="295" y="40" text-anchor="middle" font-size="9" font-weight="600" fill="#16A34A">释放，回到非临界区</text>
+
+<!-- ACQ → Q (失败, down) -->
+<line x1="200" y1="132" x2="200" y2="188" stroke="#DC2626" stroke-width="1.8" marker-end="url(#arr)"/>
+<text x="212" y="163" text-anchor="start" font-size="9" font-weight="600" fill="#DC2626">失败</text>
+
+<!-- Q → ACQ (left side loop) -->
+<path d="M140 215 L110 215 L110 106 L138 106" fill="none" stroke="#D97706" stroke-width="1.8" stroke-dasharray="5 3" marker-end="url(#arr)"/>
+<text x="72" y="200" text-anchor="middle" font-size="9" fill="#D97706">重试</text>
+
+</svg>

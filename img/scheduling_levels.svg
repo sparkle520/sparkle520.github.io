@@ -78,7 +78,7 @@
 
 <!-- ── legend ── -->
 <line x1="230" y1="408" x2="258" y2="408" stroke="#16A34A" stroke-width="2" marker-end="url(#arr)"/>
-<text x="264" y="408" dominant-baseline="central" font-size="10" fill="#64748B">低级调度（分派）</text>
+<text x="264" y="408" dominant-baseline="central" font-size="10" fill="#64748B">低级调度 ( 分派 ) </text>
 <line x1="370" y1="408" x2="398" y2="408" stroke="#D97706" stroke-width="2" marker-end="url(#arr)"/>
 <text x="404" y="408" dominant-baseline="central" font-size="10" fill="#64748B">高 / 中级调度</text>
 

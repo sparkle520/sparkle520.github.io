@@ -159,7 +159,7 @@
   </aside>
 
   <div class="vis">
-    <div class="vlabel">循环单链表（tail→next = L 头结点）</div>
+    <div class="vlabel">循环单链表 ( tail→next = L 头结点 ) </div>
     <div class="ring-wrap" id="ringWrap">
       <svg id="ringSvg"></svg>
     </div>
@@ -171,7 +171,7 @@
 
   <div class="logbar">
     <span class="lico" id="logIcon">ℹ️</span>
-    <span class="lmsg" id="logMsg">初始化循环单链表，tail→next = L（头结点），length = 5</span>
+    <span class="lmsg" id="logMsg">初始化循环单链表，tail→next = L ( 头结点 ) ，length = 5</span>
     <span class="spill" id="stepCounter">IDLE</span>
   </div>
 </main>
@@ -264,7 +264,7 @@ async function doInsertTail(){
   list.push(e);buildList();
   const n=gcn(list.length);if(n)n.classList.add('h-new');
   log('✅',`<span class="ok">尾部插入 [${e}]，tail→next 仍指向头结点，length=${list.length}</span>`,'DONE');
-  steps(['找到尾结点 r','r→next=s（新结点）','s→next=L（保持循环）','更新尾指针 r=s'],3);
+  steps(['找到尾结点 r','r→next=s ( 新结点 ) ','s→next=L ( 保持循环 ) ','更新尾指针 r=s'],3);
   await sleep(900);if(n)n.classList.remove('h-new');busy=false;
 }
 
@@ -274,32 +274,32 @@ async function doInsertHead(){
   list.unshift(e);buildList();
   const n=gcn(1);if(n)n.classList.add('h-new');
   log('✅',`<span class="ok">头部插入 [${e}]，成为首元素，length=${list.length}</span>`,'DONE');
-  steps(['s→next=L→next（原首元素）','L→next=s','尾结点 prior 无需改动（已指向 L）'],2);
+  steps(['s→next=L→next ( 原首元素 ) ','L→next=s','尾结点 prior 无需改动 ( 已指向 L ) '],2);
   await sleep(900);if(n)n.classList.remove('h-new');busy=false;
 }
 
 async function doDelete(){
   if(busy)return;busy=true;
   const i=parseInt(document.getElementById('deletePos').value);
-  if(i<1||i>list.length){log('⚠️',`<span class="warn">位序 ${i} 越界！合法 [1,${list.length}]</span>`,'ERROR');busy=false;return;}
+  if(i<1||i>list.length){log('⚠️',`<span class="warn">位序 ${i} 越界! 合法 [1,${list.length}]</span>`,'ERROR');busy=false;return;}
   const val=list[i-1];
   const n=gcn(i);if(n)n.classList.add('h-del');
   log('⚙️',`删除位序 ${i} 结点 <span class="hl">[${val}]</span>...`,'DEL');await sleep(700);
   if(n)n.classList.remove('h-del');list.splice(i-1,1);buildList();
-  log('✅',`<span class="ok">删除成功！[${val}] 已移除，环形结构保持，length=${list.length}</span>`,'DONE');
-  steps(['遍历找前驱 p','q=p→next（目标）','p→next=q→next（循环保持）','free(q)'],3);
+  log('✅',`<span class="ok">删除成功! [${val}] 已移除，环形结构保持，length=${list.length}</span>`,'DONE');
+  steps(['遍历找前驱 p','q=p→next ( 目标 ) ','p→next=q→next ( 循环保持 ) ','free(q)'],3);
   busy=false;
 }
 
 async function doTraverse(){
   if(busy)return;busy=true;
   const e=parseInt(document.getElementById('findVal').value);
-  steps(['p=L→next（从首元素出发）','比较 p→data 与 e','相等返回位序','p==L 遍历完毕'],0);
+  steps(['p=L→next ( 从首元素出发 ) ','比较 p→data 与 e','相等返回位序','p==L 遍历完毕'],0);
   log('⚙️',`环形遍历查找 <span class="hl">e=${e}</span>...`,'SCAN');await sleep(300);
   for(let j=0;j<list.length;j++){
     const n=gcn(j+1);if(n)n.classList.add('h-trav');
     log('⚙️',`访问: <span class="hl">a[${j}]=${list[j]}</span>`,`[${j}]`);await sleep(340);
-    if(list[j]===e){if(n){n.classList.remove('h-trav');n.classList.add('h-find');}log('✅',`<span class="ok">找到！a[${j}]=${e}，位序=${j+1}</span>`,'FOUND');await sleep(900);if(n)n.classList.remove('h-find');busy=false;return;}
+    if(list[j]===e){if(n){n.classList.remove('h-trav');n.classList.add('h-find');}log('✅',`<span class="ok">找到! a[${j}]=${e}，位序=${j+1}</span>`,'FOUND');await sleep(900);if(n)n.classList.remove('h-find');busy=false;return;}
     if(n)n.classList.remove('h-trav');await sleep(60);
   }
   log('⚠️',`<span class="warn">遍历回到头结点，未找到 ${e}</span>`,'NOT FOUND');busy=false;
@@ -307,7 +307,7 @@ async function doTraverse(){
 
 async function doFloyd(){
   if(busy)return;busy=true;
-  const ss=['slow=head，fast=head，开始追逐','slow 走1步，fast 走2步','slow==fast → 有环！','p 从 head 与 slow 同步走','p==slow 即为环入口'];
+  const ss=['slow=head，fast=head，开始追逐','slow 走1步，fast 走2步','slow==fast → 有环! ','p 从 head 与 slow 同步走','p==slow 即为环入口'];
   steps(ss,0);log('⚙️',`<span class="sp">Floyd 判圈</span>：在循环链表上模拟快慢指针`,'FLOYD');await sleep(600);
   const n=list.length;if(n===0){log('⚠️','<span class="warn">链表为空</span>','ERROR');busy=false;return;}
   let slow=0,fast=0;
@@ -316,24 +316,24 @@ async function doFloyd(){
   for(let step=0;step<n*3;step++){
     slow=(slow+1)%n;fast=(fast+2)%n;
     buildList(slow,fast);
-    log('⚙️',`<span class="sp">slow=[${list[slow]}]</span>  <span style="color:var(--fast);font-weight:700;">fast=[${list[fast]}]</span>${slow===fast?' ← 相遇！':''}`,'STEP '+(step+1));
+    log('⚙️',`<span class="sp">slow=[${list[slow]}]</span>  <span style="color:var(--fast);font-weight:700;">fast=[${list[fast]}]</span>${slow===fast?' ← 相遇! ':''}`,'STEP '+(step+1));
     await sleep(420);
     if(slow===fast){meetStep=slow;break;}
   }
   if(meetStep===-1){log('ℹ️','模拟结束','DONE');buildList();busy=false;return;}
   steps(ss,2);buildList(meetStep,meetStep);
-  log('⚙️',`<span class="sp">slow=fast=[${list[meetStep]}]</span>，确认有环！`,'MEET');await sleep(900);
+  log('⚙️',`<span class="sp">slow=fast=[${list[meetStep]}]</span>，确认有环! `,'MEET');await sleep(900);
   steps(ss,3);
   let p=0,s=meetStep;
   log('⚙️',`p 从 [${list[p]}] 出发，slow 从 [${list[s]}] 出发，同步走...`,'ENTRY');await sleep(500);
   for(let step=0;step<n;step++){
     buildList(s,-1,p);
-    log('⚙️',`p=[${list[p]}]  slow=[${list[s]}]${p===s?' ← p==slow，入口！':''}`,`SYNC ${step+1}`);
+    log('⚙️',`p=[${list[p]}]  slow=[${list[s]}]${p===s?' ← p==slow，入口! ':''}`,`SYNC ${step+1}`);
     await sleep(450);
-    if(p===s){steps(ss,4);buildList(-1,-1,p);log('✅',`<span class="ok">环入口 = [${list[p]}]，位序 ${p+1}。O(n) 时间，O(1) 空间</span>`,'FOUND');await sleep(1200);buildList();busy=false;return;}
+    if(p===s){steps(ss,4);buildList(-1,-1,p);log('✅',`<span class="ok">环入口 = [${list[p]}]，位序 ${p+1}. O(n) 时间，O(1) 空间</span>`,'FOUND');await sleep(1200);buildList();busy=false;return;}
     p=(p+1)%n;s=(s+1)%n;
   }
-  buildList();log('✅',`<span class="ok">Floyd 演示完成！</span>`,'DONE');busy=false;
+  buildList();log('✅',`<span class="ok">Floyd 演示完成! </span>`,'DONE');busy=false;
 }
 
 function resetList(){busy=false;list=[10,20,30,40,50];buildList();steps(['等待操作...'],0);log('ℹ️','循环链表已重置，length=5','IDLE');document.getElementById('stepCounter').textContent='IDLE';}

@@ -195,7 +195,7 @@
 <main>
   <aside>
     <div class="slabel">后插操作</div>
-    <div class="irow"><label>位序 i（在其后插）</label><input type="number" id="afterPos" value="2" min="0" max="20"><label>值 e</label><input type="number" id="afterVal" value="66" min="0" max="99"></div>
+    <div class="irow"><label>位序 i ( 在其后插 ) </label><input type="number" id="afterPos" value="2" min="0" max="20"><label>值 e</label><input type="number" id="afterVal" value="66" min="0" max="99"></div>
     <button class="btn" onclick="doInsertAfter()">＋ InsertAfter(p, s)</button>
     <div class="slabel">删除操作</div>
     <div class="irow"><label>位序 i</label><input type="number" id="deletePos" value="2" min="1" max="20"></div>
@@ -216,7 +216,7 @@
       ① s→next = p→next<br>
       ② s→prior = p<br>
       ③ p→next→prior = s<br>
-      ④ p→next = s &nbsp;← 最后改！
+      ④ p→next = s &nbsp;← 最后改! 
     </div>
     <div class="cxcard">
       <div class="slabel" style="margin-top:0;margin-bottom:4px;">时间复杂度</div>
@@ -228,10 +228,10 @@
 
   <div class="vis">
     <div>
-      <div class="vlabel" style="margin-bottom:10px;">双链表结构（prior ← data → next）</div>
+      <div class="vlabel" style="margin-bottom:10px;">双链表结构 ( prior ← data → next ) </div>
       <div class="legend">
-        <div class="leg-item"><div class="leg-line leg-fwd"></div>next 指针（蓝色 →）</div>
-        <div class="leg-item"><div class="leg-line leg-bwd"></div>prior 指针（绿色 ←）</div>
+        <div class="leg-item"><div class="leg-line leg-fwd"></div>next 指针 ( 蓝色 → ) </div>
+        <div class="leg-item"><div class="leg-line leg-bwd"></div>prior 指针 ( 绿色 ← ) </div>
       </div>
     </div>
     <div class="dlist-wrap">
@@ -334,8 +334,8 @@ async function doInsertAfter(){
   if(busy)return;busy=true;
   const i=parseInt(document.getElementById('afterPos').value);
   const e=parseInt(document.getElementById('afterVal').value);
-  if(i<0||i>list.length){log('⚠️',`<span class="warn">位序 ${i} 越界！合法 [0,${list.length}]（0=头结点后）</span>`,'ERROR');busy=false;return;}
-  const ss=['①  s→next = p→next','②  s→prior = p','③  p→next→prior = s（若存在）','④  p→next = s（最后修改！）'];
+  if(i<0||i>list.length){log('⚠️',`<span class="warn">位序 ${i} 越界! 合法 [0,${list.length}] ( 0=头结点后 ) </span>`,'ERROR');busy=false;return;}
+  const ss=['①  s→next = p→next','②  s→prior = p','③  p→next→prior = s ( 若存在 ) ','④  p→next = s ( 最后修改!  ) '];
   const p=gdn(i);if(p)p.classList.add('hf');
   log('⚙️',`找到前驱 p = <span class="hl">${i===0?'HEAD':list[i-1]}</span>，准备在其后插入 [${e}]`,'LOCATE');
   await sleep(600);if(p)p.classList.remove('hf');
@@ -345,37 +345,37 @@ async function doInsertAfter(){
   steps(ss,3);
   list.splice(i,0,e);buildList();
   const nn=gdn(i+1);if(nn)nn.classList.add('hn');
-  log('⚙️',`④ <span class="hl">p→next = s</span>（最后修改，避免断链）`,'STEP 4');await sleep(700);
+  log('⚙️',`④ <span class="hl">p→next = s</span> ( 最后修改，避免断链 ) `,'STEP 4');await sleep(700);
   steps(ss,4);if(nn)nn.classList.remove('hn');
-  log('✅',`<span class="ok">后插成功！位序 ${i} 后插入 [${e}]，length=${list.length}</span>`,'DONE');busy=false;
+  log('✅',`<span class="ok">后插成功! 位序 ${i} 后插入 [${e}]，length=${list.length}</span>`,'DONE');busy=false;
 }
 
 async function doDelete(){
   if(busy)return;busy=true;
   const i=parseInt(document.getElementById('deletePos').value);
-  if(i<1||i>list.length){log('⚠️',`<span class="warn">位序 ${i} 越界！合法 [1,${list.length}]</span>`,'ERROR');busy=false;return;}
+  if(i<1||i>list.length){log('⚠️',`<span class="warn">位序 ${i} 越界! 合法 [1,${list.length}]</span>`,'ERROR');busy=false;return;}
   const val=list[i-1];
-  const ss=[`找到目标 q = a[${i-1}] = ${val}，其前驱 p`,'p→next = q→next（绕过 q）','q→next→prior = p（若存在）','free(q)'];
+  const ss=[`找到目标 q = a[${i-1}] = ${val}，其前驱 p`,'p→next = q→next ( 绕过 q ) ','q→next→prior = p ( 若存在 ) ','free(q)'];
   steps(ss,0);const qn=gdn(i);if(qn)qn.classList.add('hdl');
   log('⚙️',`找到目标 <span class="hl">q = a[${i-1}] = ${val}</span>`,'STEP 1');await sleep(700);
   steps(ss,1);log('⚙️',`<span class="hl">p→next = q→next</span>`,'STEP 2');await sleep(500);
   steps(ss,2);log('⚙️',i<list.length?`<span class="hl">q→next→prior = p</span>`:`q→next 为 NULL，跳过`,'STEP 3');await sleep(500);
   steps(ss,3);if(qn)qn.classList.remove('hdl');
   list.splice(i-1,1);buildList();
-  log('✅',`<span class="ok">删除成功！释放 [${val}]，length=${list.length}</span>`,'DONE');busy=false;
+  log('✅',`<span class="ok">删除成功! 释放 [${val}]，length=${list.length}</span>`,'DONE');busy=false;
 }
 
 async function doFind(forward){
   if(busy)return;busy=true;
   const e=parseInt(document.getElementById('findVal').value);
-  const dir=forward?'正向（→ next）':'逆向（← prior）';
+  const dir=forward?'正向 ( → next ) ':'逆向 ( ← prior ) ';
   log('⚙️',`${dir} 查找 <span class="hl">e=${e}</span>...`,'SCAN');await sleep(300);
   const idxs=forward?[...Array(list.length).keys()]:[...Array(list.length).keys()].reverse();
   for(const j of idxs){
     const n=gdn(j+1);if(n)n.classList.add('ht');
     log('⚙️',`访问: <span class="hl">a[${j}]=${list[j]}</span>`,`[${j}]`);
     await sleep(320);
-    if(list[j]===e){if(n){n.classList.remove('ht');n.classList.add('hf');}log('✅',`<span class="ok">找到！a[${j}]=${e}，位序=${j+1}</span>`,'FOUND');await sleep(900);if(n)n.classList.remove('hf');busy=false;return;}
+    if(list[j]===e){if(n){n.classList.remove('ht');n.classList.add('hf');}log('✅',`<span class="ok">找到! a[${j}]=${e}，位序=${j+1}</span>`,'FOUND');await sleep(900);if(n)n.classList.remove('hf');busy=false;return;}
     if(n)n.classList.remove('ht');await sleep(60);
   }
   log('⚠️',`<span class="warn">未找到 e=${e}</span>`,'NOT FOUND');busy=false;

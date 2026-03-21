@@ -1,10 +1,10 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>408-计算机组成原理-4-指令系统 | SPARKLE</title><meta name="keywords" content="408,计算机组成原理"><meta name="author" content="sparkle520"><meta name="copyright" content="sparkle520"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="408-计算机组成原理-4-指令系统"><meta name="application-name" content="408-计算机组成原理-4-指令系统"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="408-计算机组成原理-4-指令系统"><meta property="og:url" content="http://example.com/2026/01/26/408-%E8%AE%A1%E7%BB%844/index.html"><meta property="og:site_name" content="SPARKLE"><meta property="og:description" content="第4章 指令系统 4.1 指令系统 4.1.1 指令集体系结构 ( ISA ) 指令集体系结构 ( ISA, Instruction Set Architecture ) 是软件和硬件之间的界面 ( Interface ).  软件视角 : 程序员 ( 或编译器 ) 能看到的计算机属性"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://pic1.imgdb.cn/item/69872ac742b1cbeca1f88f3a.png"><meta property="article:author" content="sparkle520"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://pic1.imgdb.cn/item/69872ac742b1cbeca1f88f3a.png"><meta name="description" content="第4章 指令系统 4.1 指令系统 4.1.1 指令集体系结构 ( ISA ) 指令集体系结构 ( ISA, Instruction Set Architecture ) 是软件和硬件之间的界面 ( Interface ).  软件视角 : 程序员 ( 或编译器 ) 能看到的计算机属性"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2026/01/26/408-%E8%AE%A1%E7%BB%844/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>408-计算机组成原理-4-指令系统 | SPARKLE</title><meta name="keywords" content="408,计算机组成原理"><meta name="author" content="sparkle520"><meta name="copyright" content="sparkle520"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="408-计算机组成原理-4-指令系统"><meta name="application-name" content="408-计算机组成原理-4-指令系统"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="408-计算机组成原理-4-指令系统"><meta property="og:url" content="http://example.com/2026/01/26/408-%E8%AE%A1%E7%BB%844/index.html"><meta property="og:site_name" content="SPARKLE"><meta property="og:description" content="第4章 指令系统 4.1 指令系统 4.1.1 指令集体系结构 ( ISA ) 指令集体系结构 ( ISA, Instruction Set Architecture ) 是软件和硬件之间的界面 ( Interface ).  软件视角 程序员 ( 或编译器 ) 能看到的计算机属性 ("><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://pic1.imgdb.cn/item/69872ac742b1cbeca1f88f3a.png"><meta property="article:author" content="sparkle520"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://pic1.imgdb.cn/item/69872ac742b1cbeca1f88f3a.png"><meta name="description" content="第4章 指令系统 4.1 指令系统 4.1.1 指令集体系结构 ( ISA ) 指令集体系结构 ( ISA, Instruction Set Architecture ) 是软件和硬件之间的界面 ( Interface ).  软件视角 程序员 ( 或编译器 ) 能看到的计算机属性 ("><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2026/01/26/408-%E8%AE%A1%E7%BB%844/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
   linkPageTop: undefined,
   peoplecanvas: undefined,
   postHeadAiDescription: undefined,
-  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走! 再看看嘛!","backTitle":"♪(^∇^*)欢迎肥来!"},
   LA51: undefined,
-  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情!","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦!","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
   twikooEnvId: 'https://sparkle521.xyz',
   commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":4000,"accessToken":"","mailMd5":""},
   root: '/',
@@ -59,7 +59,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2026-03-20 16:56:49',
+  postUpdate: '2026-03-21 17:47:21',
   postMainColor: '#F3785B',
 }</script><noscript><style type="text/css">
   #nav {
@@ -203,15 +203,15 @@ if (true) {
   document.addEventListener('pjax:send', () => { preloader.initLoading() })
   document.addEventListener('pjax:complete', () => { preloader.endLoading() })
 }</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/sparkle520?tab=repositories" title="github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="github"/><span class="back-menu-item-text">github</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">SPARKLE</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/408/" style="font-size: 1.05rem;">408<sup>21</sup></a><a href="/tags/AOP/" style="font-size: 1.05rem;">AOP<sup>1</sup></a><a href="/tags/Deep-Learning/" style="font-size: 1.05rem;">Deep Learning<sup>1</sup></a><a href="/tags/IoC/" style="font-size: 1.05rem;">IoC<sup>1</sup></a><a href="/tags/JSR303/" style="font-size: 1.05rem;">JSR303<sup>1</sup></a><a href="/tags/Matplotlib/" style="font-size: 1.05rem;">Matplotlib<sup>3</sup></a><a href="/tags/c/" style="font-size: 1.05rem;">c#<sup>2</sup></a><a href="/tags/java/" style="font-size: 1.05rem;">java<sup>4</sup></a><a href="/tags/python/" style="font-size: 1.05rem;">python<sup>5</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 1.05rem;">事务<sup>1</sup></a><a href="/tags/%E4%BA%8C%E6%AC%A1%E5%9E%8B/" style="font-size: 1.05rem;">二次型<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E3%80%82/" style="font-size: 1.05rem;">你的名字。<sup>3</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字同名小说<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%A4%96%E4%BC%A0%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字外传小说<sup>1</sup></a><a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size: 1.05rem;">写作<sup>4</sup></a><a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 1.05rem;">包管理<sup>1</sup></a><a href="/tags/%E5%8D%B7%E7%A7%AF%E5%85%AC%E5%BC%8F/" style="font-size: 1.05rem;">卷积公式<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90/" style="font-size: 1.05rem;">天气之子<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">天气之子同名小说<sup>1</sup></a><a href="/tags/%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">小说<sup>2</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">操作系统<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" style="font-size: 1.05rem;">数据校验<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" style="font-size: 1.05rem;">数据链路层<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 1.05rem;">概率论<sup>2</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 1.05rem;">概率论与数理统计<sup>7</sup></a><a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 1.05rem;">汇编<sup>9</sup></a><a href="/tags/%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80/" style="font-size: 1.05rem;">泰勒展开<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/" style="font-size: 1.05rem;">物理层<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%80%BC/" style="font-size: 1.05rem;">特征值<sup>2</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F/" style="font-size: 1.05rem;">特征向量<sup>2</sup></a><a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">线性代数<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" style="font-size: 1.05rem;">网络体系结构<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" style="font-size: 1.05rem;">网络层<sup>2</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 1.05rem;">英语<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">英语语法<sup>24</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1.05rem;">计算机组成原理<sup>5</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.05rem;">计算机网络<sup>5</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">语法<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">高等代数<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" style="font-size: 1.05rem;">高等数学<sup>18</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
-    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">三月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">26</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/02/"><span class="card-archive-list-date">二月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/01/"><span class="card-archive-list-date">一月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/12/"><span class="card-archive-list-date">十二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">15</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/11/"><span class="card-archive-list-date">十一月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/10/"><span class="card-archive-list-date">十月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/09/"><span class="card-archive-list-date">九月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/08/"><span class="card-archive-list-date">八月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%BB%84/" itemprop="url">计组</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/408/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>408</span></a><a class="article-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>计算机组成原理</span></a></span></div></div><h1 class="post-title" itemprop="name headline">408-计算机组成原理-4-指令系统</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-01-26T15:00:27.000Z" title="发表于 2026-01-26 23:00:27">2026-01-26</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-03-20T08:56:49.810Z" title="更新于 2026-03-20 16:56:49">2026-03-20</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">3k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>11分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="408-计算机组成原理-4-指令系统"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为系守镇"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>系守镇</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2026/01/26/408-%E8%AE%A1%E7%BB%844/#post-comment" tabindex="-1"><span id="twikoo-count"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://pic1.imgdb.cn/item/69872ac742b1cbeca1f88f3a.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2026/01/26/408-%E8%AE%A1%E7%BB%844/"><header><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%BB%84/" itemprop="url">计组</a><a href="/tags/408/" tabindex="-1" itemprop="url">408</a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" tabindex="-1" itemprop="url">计算机组成原理</a><h1 id="CrawlerTitle" itemprop="name headline">408-计算机组成原理-4-指令系统</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">sparkle520</span><time itemprop="dateCreated datePublished" datetime="2026-01-26T15:00:27.000Z" title="发表于 2026-01-26 23:00:27">2026-01-26</time><time itemprop="dateCreated datePublished" datetime="2026-03-20T08:56:49.810Z" title="更新于 2026-03-20 16:56:49">2026-03-20</time></header><h1 id="第4章-指令系统">第4章 指令系统</h1>
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">三月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">26</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/02/"><span class="card-archive-list-date">二月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/01/"><span class="card-archive-list-date">一月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/12/"><span class="card-archive-list-date">十二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">15</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/11/"><span class="card-archive-list-date">十一月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/10/"><span class="card-archive-list-date">十月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/09/"><span class="card-archive-list-date">九月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/08/"><span class="card-archive-list-date">八月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%BB%84/" itemprop="url">计组</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/408/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>408</span></a><a class="article-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>计算机组成原理</span></a></span></div></div><h1 class="post-title" itemprop="name headline">408-计算机组成原理-4-指令系统</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-01-26T15:00:27.000Z" title="发表于 2026-01-26 23:00:27">2026-01-26</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-03-21T09:47:21.371Z" title="更新于 2026-03-21 17:47:21">2026-03-21</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">3k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>11分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="408-计算机组成原理-4-指令系统"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为系守镇"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>系守镇</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2026/01/26/408-%E8%AE%A1%E7%BB%844/#post-comment" tabindex="-1"><span id="twikoo-count"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://pic1.imgdb.cn/item/69872ac742b1cbeca1f88f3a.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2026/01/26/408-%E8%AE%A1%E7%BB%844/"><header><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%BB%84/" itemprop="url">计组</a><a href="/tags/408/" tabindex="-1" itemprop="url">408</a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" tabindex="-1" itemprop="url">计算机组成原理</a><h1 id="CrawlerTitle" itemprop="name headline">408-计算机组成原理-4-指令系统</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">sparkle520</span><time itemprop="dateCreated datePublished" datetime="2026-01-26T15:00:27.000Z" title="发表于 2026-01-26 23:00:27">2026-01-26</time><time itemprop="dateCreated datePublished" datetime="2026-03-21T09:47:21.371Z" title="更新于 2026-03-21 17:47:21">2026-03-21</time></header><h1 id="第4章-指令系统">第4章 指令系统</h1>
 <h2 id="指令系统">4.1 指令系统</h2>
 <h3 id="指令集体系结构-isa">4.1.1 指令集体系结构 ( ISA )</h3>
 <p><strong>指令集体系结构 ( ISA, Instruction Set Architecture )</strong>
 是软件和硬件之间的界面 ( Interface ).</p>
 <ul>
-<li><strong>软件视角</strong> : 程序员 ( 或编译器 ) 能看到的计算机属性 (
+<li><strong>软件视角</strong> 程序员 ( 或编译器 ) 能看到的计算机属性 (
 指令格式、寻址方式、寄存器、中断机制等 ).</li>
-<li><strong>硬件视角</strong> : 处理器必须实现的逻辑规范.</li>
+<li><strong>硬件视角</strong> 处理器必须实现的逻辑规范.</li>
 </ul>
 <h3 id="指令的基本格式">4.1.2 指令的基本格式</h3>
 <p>一条指令通常由 <strong>操作码 ( Opcode )</strong> 和 <strong>地址码 (
@@ -219,9 +219,9 @@ Operand / Address )</strong> 两部分组成.</p>
 <p><span class="math display">\[ \text{指令} = \text{操作码 (OP)} +
 \text{地址码 (A)} \]</span></p>
 <ul>
-<li><strong>操作码 ( OP )</strong> : 指出指令中该进行什么操作 ( 如 ADD,
+<li><strong>操作码 ( OP )</strong> 指出指令中该进行什么操作 ( 如 ADD,
 MOV, JMP ).</li>
-<li><strong>地址码 ( A )</strong> : 指出被操作信息的地址 (
+<li><strong>地址码 ( A )</strong> 指出被操作信息的地址 (
 寄存器编号、内存地址、立即数 ).</li>
 </ul>
 <h4 id="按地址码数目分类">按地址码数目分类</h4>
@@ -280,17 +280,17 @@ A1 为目的操作数 ).</td>
 </table>
 <h3 id="定长操作码指令格式">4.1.3 定长操作码指令格式</h3>
 <ul>
-<li><strong>定义</strong> : 指令字长固定，且操作码长度固定.</li>
-<li><strong>优点</strong> : 译码电路简单，执行速度快.</li>
-<li><strong>缺点</strong> : 浪费信息位，指令灵活性差.</li>
-<li><strong>应用</strong> : <strong>RISC</strong> ( 精简指令集计算机 )
+<li><strong>定义</strong> 指令字长固定，且操作码长度固定.</li>
+<li><strong>优点</strong> 译码电路简单，执行速度快.</li>
+<li><strong>缺点</strong> 浪费信息位，指令灵活性差.</li>
+<li><strong>应用</strong> <strong>RISC</strong> ( 精简指令集计算机 )
 多采用定长操作码.</li>
 </ul>
 <h3 id="扩展操作码指令格式">4.1.4 扩展操作码指令格式</h3>
 <ul>
-<li><strong>定义</strong> : 指令字长固定，但操作码长度可变. (
+<li><strong>定义</strong> 指令字长固定，但操作码长度可变. (
 利用地址码的位来扩展操作码 ).</li>
-<li><strong>原则</strong> :
+<li><strong>原则</strong>
 <ol type="1">
 <li><strong>短码不能是长码的前缀</strong> ( 类似哈夫曼编码，保证唯一译码
 ).</li>
@@ -331,160 +331,159 @@ graph TD
   </pre></div>
 <h3 id="指令的操作类型">4.1.5 指令的操作类型</h3>
 <ol type="1">
-<li><strong>数据传送</strong> : <code>MOV</code>, <code>LOAD</code>,
+<li><strong>数据传送</strong> <code>MOV</code>, <code>LOAD</code>,
 <code>STORE</code>, <code>PUSH</code>, <code>POP</code>.</li>
-<li><strong>算术逻辑运算</strong> : <code>ADD</code>, <code>SUB</code>,
+<li><strong>算术逻辑运算</strong> <code>ADD</code>, <code>SUB</code>,
 <code>MUL</code>, <code>AND</code>, <code>OR</code>, <code>NOT</code>,
 <code>SHL</code> ( 移位 ).</li>
-<li><strong>移位操作</strong> : 算术移位、逻辑移位、循环移位.</li>
-<li><strong>程序控制</strong> :
+<li><strong>移位操作</strong> 算术移位、逻辑移位、循环移位.</li>
+<li><strong>程序控制</strong>
 <ul>
-<li><strong>无条件转移</strong> : <code>JMP</code>.</li>
-<li><strong>条件转移</strong> : <code>JZ</code> ( 结果为0转 ),
+<li><strong>无条件转移</strong> <code>JMP</code>.</li>
+<li><strong>条件转移</strong> <code>JZ</code> ( 结果为0转 ),
 <code>JO</code> ( 溢出转 ).</li>
-<li><strong>调用与返回</strong> : <code>CALL</code>,
+<li><strong>调用与返回</strong> <code>CALL</code>,
 <code>RET</code>.</li>
-<li><strong>陷阱 ( Trap )</strong> : 意外中断.</li>
+<li><strong>陷阱 ( Trap )</strong> 意外中断.</li>
 </ul></li>
-<li><strong>输入输出</strong> : <code>IN</code>, <code>OUT</code> (
+<li><strong>输入输出</strong> <code>IN</code>, <code>OUT</code> (
 独立编址时使用 ).</li>
 </ol>
 <hr />
 <h2 id="指令的寻址方式">4.2 指令的寻址方式</h2>
-<p><strong>寻址方式</strong> : 确定 <strong>本条指令</strong> 的数据地址
+<p><strong>寻址方式</strong> 确定 <strong>本条指令</strong> 的数据地址
 以及 <strong>下一条指令</strong> 的地址的方法.</p>
 <h3 id="指令寻址和数据寻址">4.2.1 指令寻址和数据寻址</h3>
 <ul>
-<li><strong>指令寻址</strong> : 寻找下一条将要执行的指令地址.
+<li><strong>指令寻址</strong> 寻找下一条将要执行的指令地址.
 <ul>
-<li><strong>顺序寻址</strong> : <code>PC = PC + 1</code> ( 1
-代表指令字长 ).</li>
-<li><strong>跳跃寻址</strong> : <code>PC = 目标地址</code> ( 由 JMP,
-CALL 等指令给出 ).</li>
+<li><strong>顺序寻址</strong> <code>PC = PC + 1</code> ( 1 代表指令字长
+).</li>
+<li><strong>跳跃寻址</strong> <code>PC = 目标地址</code> ( 由 JMP, CALL
+等指令给出 ).</li>
 </ul></li>
-<li><strong>数据寻址</strong> : 寻找操作数的地址.
+<li><strong>数据寻址</strong> 寻找操作数的地址.
 <ul>
 <li>格式 : <code>OP + 寻址特征 + 形式地址 (A)</code></li>
-<li><strong>有效地址 ( EA, Effective Address )</strong> :
+<li><strong>有效地址 ( EA, Effective Address )</strong>
 操作数的真实物理地址.</li>
 </ul></li>
 </ul>
 <h3 id="常见的数据寻址方式">4.2.2 常见的数据寻址方式</h3>
 <div class="tabs" id="数据寻址方式"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="数据寻址方式-1">1. 立即寻址</button><button type="button" class="tab " data-href="数据寻址方式-2">2. 直接寻址</button><button type="button" class="tab " data-href="数据寻址方式-3">3. 间接寻址</button><button type="button" class="tab " data-href="数据寻址方式-4">4. 寄存器寻址</button><button type="button" class="tab " data-href="数据寻址方式-5">5. 寄存器间接寻址</button><button type="button" class="tab " data-href="数据寻址方式-6">6. 偏移寻址 ( 相对/基址/变址 )</button><button type="button" class="tab " data-href="数据寻址方式-7">7. 堆栈寻址</button></ul><div class="tab-contents"><div class="tab-item-content active" id="数据寻址方式-1"><p><strong>Immediate Addressing</strong></p>
 <ul>
-<li><strong>格式</strong> : <code>OP #A</code></li>
-<li><strong>原理</strong> : 形式地址 A 就是操作数本身 ( 补码表示 ).</li>
-<li><strong>EA</strong> : 无需访存.</li>
-<li><strong>特点</strong> :
+<li><strong>格式</strong> <code>OP #A</code></li>
+<li><strong>原理</strong> 形式地址 A 就是操作数本身 ( 补码表示 ).</li>
+<li><strong>EA</strong> 无需访存.</li>
+<li><strong>特点</strong>
 <ul>
 <li>优点 : <strong>速度最快</strong> ( 取指即取数 )，不访存.</li>
 <li>缺点 : 位数受限，只能给常数.</li>
 </ul></li>
 </ul></div><div class="tab-item-content" id="数据寻址方式-2"><p><strong>Direct Addressing</strong></p>
 <ul>
-<li><strong>格式</strong> : <code>OP A</code></li>
-<li><strong>原理</strong> : A 即为操作数的有效地址.</li>
-<li><strong>EA</strong> : <span class="math inline">\(EA =
-A\)</span></li>
-<li><strong>特点</strong> :
+<li><strong>格式</strong> <code>OP A</code></li>
+<li><strong>原理</strong> A 即为操作数的有效地址.</li>
+<li><strong>EA</strong> <span class="math inline">\(EA = A\)</span></li>
+<li><strong>特点</strong>
 <ul>
 <li>优点 : 简单，无需计算 EA.</li>
 <li>缺点 : A 的位数限制了寻址范围.</li>
 </ul></li>
 </ul></div><div class="tab-item-content" id="数据寻址方式-3"><p><strong>Indirect Addressing</strong></p>
 <ul>
-<li><strong>格式</strong> : <code>OP @A</code> ( 或 <code>(A)</code>
+<li><strong>格式</strong> <code>OP @A</code> ( 或 <code>(A)</code>
 )</li>
-<li><strong>原理</strong> : A 指向内存单元，该单元的内容才是 EA.</li>
-<li><strong>EA</strong> : <span class="math inline">\(EA = (A)\)</span>
-( 一次间址 ) 或 <span class="math inline">\(EA = ((A))\)</span> (
-多次间址 ).</li>
-<li><strong>特点</strong> :
+<li><strong>原理</strong> A 指向内存单元，该单元的内容才是 EA.</li>
+<li><strong>EA</strong> <span class="math inline">\(EA = (A)\)</span> (
+一次间址 ) 或 <span class="math inline">\(EA = ((A))\)</span> ( 多次间址
+).</li>
+<li><strong>特点</strong>
 <ul>
 <li>优点 : 扩大寻址范围，便于编制程序 ( 如指针 ).</li>
 <li>缺点 : <strong>多次访存</strong>，速度慢.</li>
 </ul></li>
 </ul></div><div class="tab-item-content" id="数据寻址方式-4"><p><strong>Register Addressing</strong></p>
 <ul>
-<li><strong>格式</strong> : <code>OP Ri</code></li>
-<li><strong>原理</strong> : 操作数在寄存器 <span
+<li><strong>格式</strong> <code>OP Ri</code></li>
+<li><strong>原理</strong> 操作数在寄存器 <span
 class="math inline">\(R_i\)</span> 中.</li>
-<li><strong>EA</strong> : <span class="math inline">\(EA = R_i\)</span>
-( 这里的 EA 指寄存器编号 ).</li>
-<li><strong>特点</strong> :
+<li><strong>EA</strong> <span class="math inline">\(EA = R_i\)</span> (
+这里的 EA 指寄存器编号 ).</li>
+<li><strong>特点</strong>
 <ul>
 <li>优点 : <strong>速度快</strong> ( 不访存 )，指令字短.</li>
 <li>缺点 : 寄存器数量有限.</li>
 </ul></li>
 </ul></div><div class="tab-item-content" id="数据寻址方式-5"><p><strong>Register Indirect Addressing</strong></p>
 <ul>
-<li><strong>格式</strong> : <code>OP (Ri)</code></li>
-<li><strong>原理</strong> : 寄存器 <span
+<li><strong>格式</strong> <code>OP (Ri)</code></li>
+<li><strong>原理</strong> 寄存器 <span
 class="math inline">\(R_i\)</span> 的内容是操作数的内存地址.</li>
-<li><strong>EA</strong> : <span class="math inline">\(EA =
+<li><strong>EA</strong> <span class="math inline">\(EA =
 (R_i)\)</span></li>
-<li><strong>特点</strong> :
+<li><strong>特点</strong>
 <ul>
 <li>优点 : 比间接寻址快 ( 少访存一次 )，便于循环 ( 修改 <span
 class="math inline">\(R_i\)</span> ).</li>
 </ul></li>
 </ul></div><div class="tab-item-content" id="数据寻址方式-6"><p><strong>Displacement Addressing</strong></p>
 <ul>
-<li><strong>原理</strong> : <span class="math inline">\(EA = (R) +
+<li><strong>原理</strong> <span class="math inline">\(EA = (R) +
 A\)</span>. ( 寄存器内容 + 形式地址 ).</li>
 </ul>
 <ol type="1">
-<li><strong>相对寻址 ( Relative )</strong> :
+<li><strong>相对寻址 ( Relative )</strong>
 <ul>
-<li><strong>基准</strong> : <strong>程序计数器 PC</strong>.</li>
-<li><strong>EA</strong> : <span class="math inline">\(EA = (PC) +
+<li><strong>基准</strong> <strong>程序计数器 PC</strong>.</li>
+<li><strong>EA</strong> <span class="math inline">\(EA = (PC) +
 A\)</span>. ( A 为偏移量，可正可负 ).</li>
-<li><strong>用途</strong> : <strong>浮动程序</strong> (
+<li><strong>用途</strong> <strong>浮动程序</strong> (
 代码在内存中移动不影响执行 )，条件转移.</li>
 <li><em>( 注 : 取指后 PC 已自增，计算时用的是更新后的 PC )</em>.</li>
 </ul></li>
-<li><strong>基址寻址 ( Base )</strong> :
+<li><strong>基址寻址 ( Base )</strong>
 <ul>
-<li><strong>基准</strong> : <strong>基址寄存器 BR</strong> ( OS 管理
+<li><strong>基准</strong> <strong>基址寄存器 BR</strong> ( OS 管理
 ).</li>
-<li><strong>EA</strong> : <span class="math inline">\(EA = (BR) +
+<li><strong>EA</strong> <span class="math inline">\(EA = (BR) +
 A\)</span>.</li>
-<li><strong>用途</strong> : <strong>多道程序设计</strong> ( 逻辑地址
--&gt; 物理地址 )，用户不可修改 BR.</li>
+<li><strong>用途</strong> <strong>多道程序设计</strong> ( 逻辑地址 -&gt;
+物理地址 )，用户不可修改 BR.</li>
 </ul></li>
-<li><strong>变址寻址 ( Indexed )</strong> :
+<li><strong>变址寻址 ( Indexed )</strong>
 <ul>
-<li><strong>基准</strong> : <strong>变址寄存器 IX</strong> ( 用户管理
+<li><strong>基准</strong> <strong>变址寄存器 IX</strong> ( 用户管理
 ).</li>
-<li><strong>EA</strong> : <span class="math inline">\(EA = (IX) +
+<li><strong>EA</strong> <span class="math inline">\(EA = (IX) +
 A\)</span>.</li>
-<li><strong>用途</strong> : <strong>数组处理</strong>、循环 ( A
+<li><strong>用途</strong> <strong>数组处理</strong>、循环 ( A
 为数组首地址，IX 为下标 ).</li>
 </ul></li>
 </ol></div><div class="tab-item-content" id="数据寻址方式-7"><p><strong>Stack Addressing</strong></p>
 <ul>
-<li><strong>原理</strong> : 操作数在堆栈顶 ( 硬堆栈-寄存器 / 软堆栈-内存
+<li><strong>原理</strong> 操作数在堆栈顶 ( 硬堆栈-寄存器 / 软堆栈-内存
 ).</li>
-<li><strong>EA</strong> : 隐含在堆栈指针 SP 中.</li>
-<li><strong>特点</strong> : 0 地址指令.</li>
+<li><strong>EA</strong> 隐含在堆栈指针 SP 中.</li>
+<li><strong>特点</strong> 0 地址指令.</li>
 </ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
 <hr />
 <h2 id="程序的机器级代码表示">4.3 程序的机器级代码表示</h2>
 <h3 id="常用汇编指令介绍-x86">4.3.1 常用汇编指令介绍 ( x86 )</h3>
 <ul>
-<li><strong>数据传送</strong> :
+<li><strong>数据传送</strong>
 <ul>
 <li><code>mov eax, ebx</code> : 将 ebx 的值送入 eax.</li>
 <li><code>push eax</code> : 压栈 ( SP-4, 存入 eax ).</li>
 <li><code>pop eax</code> : 出栈 ( 弹出至 eax, SP+4 ).</li>
 </ul></li>
-<li><strong>算术运算</strong> :
+<li><strong>算术运算</strong>
 <ul>
 <li><code>add eax, 10</code> : <code>eax = eax + 10</code>.</li>
 <li><code>sub eax, ebx</code> : <code>eax = eax - ebx</code>.</li>
 <li><code>inc eax</code> : <code>eax++</code>.</li>
 </ul></li>
-<li><strong>逻辑运算</strong> : <code>and</code>, <code>or</code>,
+<li><strong>逻辑运算</strong> <code>and</code>, <code>or</code>,
 <code>xor</code>, <code>not</code>, <code>shl</code>,
 <code>shr</code>.</li>
 </ul>
@@ -492,16 +491,16 @@ A\)</span>.</li>
 <p>选择结构 ( if-else ) 通常通过 <strong>条件码 ( Flags )</strong> 和
 <strong>条件转移指令</strong> 实现.</p>
 <ol type="1">
-<li><strong>CMP 指令</strong> : <code>cmp a, b</code> ( 计算 <span
+<li><strong>CMP 指令</strong> <code>cmp a, b</code> ( 计算 <span
 class="math inline">\(a-b\)</span>，不保存结果，只更新标志位 ).
 <ul>
-<li><strong>ZF ( Zero Flag )</strong> : 结果为 0 ( 即 a=b ) 时置 1.</li>
-<li><strong>SF ( Sign Flag )</strong> : 结果为负 ( 即 a&lt;b ) 时置
+<li><strong>ZF ( Zero Flag )</strong> 结果为 0 ( 即 a=b ) 时置 1.</li>
+<li><strong>SF ( Sign Flag )</strong> 结果为负 ( 即 a&lt;b ) 时置
 1.</li>
-<li><strong>CF ( Carry Flag )</strong> : 无符号借位.</li>
-<li><strong>OF ( Overflow Flag )</strong> : 有符号溢出.</li>
+<li><strong>CF ( Carry Flag )</strong> 无符号借位.</li>
+<li><strong>OF ( Overflow Flag )</strong> 有符号溢出.</li>
 </ul></li>
-<li><strong>跳转指令</strong> :
+<li><strong>跳转指令</strong>
 <ul>
 <li><code>je</code> ( Jump if Equal ) : ZF=1 时跳.</li>
 <li><code>jg</code> ( Jump if Greater ) : <span
@@ -522,14 +521,14 @@ class="math inline">\(a&lt;b\)</span> 时跳.</li>
 <p>函数调用 ( Function Call ) 依赖 <strong>栈 ( Stack )</strong>
 来保存上下文.</p>
 <ul>
-<li><strong>调用者 ( Caller )</strong> :
+<li><strong>调用者 ( Caller )</strong>
 <ol type="1">
 <li>保存 <strong>调用者保存寄存器</strong>.</li>
 <li><strong>参数压栈</strong> ( 从右向左 ).</li>
 <li><code>call</code> 指令 : 将 <strong>返回地址</strong> (下一条指令)
 压栈，跳转到目标函数.</li>
 </ol></li>
-<li><strong>被调用者 ( Callee )</strong> :
+<li><strong>被调用者 ( Callee )</strong>
 <ol type="1">
 <li><code>push ebp</code> ; <code>mov ebp, esp</code> ( 建立新的栈帧
 ).</li>
@@ -545,21 +544,20 @@ class="math inline">\(a&lt;b\)</span> 时跳.</li>
 Set Computer, 复杂指令系统计算机 )</strong> 和 <strong>RISC ( Reduced
 Instruction Set Computer, 精简指令系统计算机 )</strong>.</p>
 <h3 id="设计理念对比">4.4.1 设计理念对比</h3>
-<div class="tabs" id="cisc_vs_risc"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="cisc_vs_risc-1">CISC ( 如 x86 )</button><button type="button" class="tab " data-href="cisc_vs_risc-2">RISC ( 如 ARM, MIPS )</button></ul><div class="tab-contents"><div class="tab-item-content active" id="cisc_vs_risc-1"><p><strong>核心理念</strong> : <strong>“以硬代软”</strong>.</p>
+<div class="tabs" id="cisc_vs_risc"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="cisc_vs_risc-1">CISC ( 如 x86 )</button><button type="button" class="tab " data-href="cisc_vs_risc-2">RISC ( 如 ARM, MIPS )</button></ul><div class="tab-contents"><div class="tab-item-content active" id="cisc_vs_risc-1"><p><strong>核心理念</strong> <strong>“以硬代软”</strong>.</p>
 <p>通过增加硬件的复杂性 ( 复杂的指令系统 ) 来简化编译器的设计工作.</p>
 <ul>
-<li><strong>初衷</strong> :
+<li><strong>初衷</strong>
 早期的存储资源昂贵，为了缩短目标程序长度，设计了功能强大的指令 (
 一条指令能完成高级语言的一句复杂语句 ).</li>
-<li><strong>代表架构</strong> : Intel x86 架构.</li>
-</ul></div><div class="tab-item-content" id="cisc_vs_risc-2"><p><strong>核心理念</strong> : <strong>“二八定律”</strong>.</p>
+<li><strong>代表架构</strong> Intel x86 架构.</li>
+</ul></div><div class="tab-item-content" id="cisc_vs_risc-2"><p><strong>核心理念</strong> <strong>“二八定律”</strong>.</p>
 <p>基于统计发现，程序中 <strong>80%</strong> 的时间在执行
 <strong>20%</strong> 的简单指令.</p>
 <ul>
-<li><strong>初衷</strong> : 简化指令系统，使其适合
-<strong>流水线</strong> 工作，从而提高主频和执行效率.
-复杂的任务通过组合多条简单指令完成.</li>
-<li><strong>代表架构</strong> : ARM, RISC-V, MIPS.</li>
+<li><strong>初衷</strong> 简化指令系统，使其适合 <strong>流水线</strong>
+工作，从而提高主频和执行效率. 复杂的任务通过组合多条简单指令完成.</li>
+<li><strong>代表架构</strong> ARM, RISC-V, MIPS.</li>
 </ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
 <h3 id="核心特性对比">4.4.2 核心特性对比</h3>
 <div class="mermaid-wrap"><pre class="mermaid-src" hidden>
@@ -677,10 +675,10 @@ graph LR
 <div class="note sparkle simple"><p><strong>知识拓展 : 界限模糊</strong></p>
 <p>现代高性能处理器往往融合了二者的优点</p>
 <ul>
-<li><strong>x86 ( CISC )</strong> : 内部将复杂指令翻译成微操作 (
-Micro-ops )，内核实际上是 RISC 架构.</li>
-<li><strong>ARM ( RISC )</strong> : 为了提高性能，也引入了复杂的专用指令
-( 如 NEON 向量指令 ).</li>
+<li><strong>x86 ( CISC )</strong> 内部将复杂指令翻译成微操作 ( Micro-ops
+)，内核实际上是 RISC 架构.</li>
+<li><strong>ARM ( RISC )</strong> 为了提高性能，也引入了复杂的专用指令 (
+如 NEON 向量指令 ).</li>
 </ul>
 </div>
 <hr />
@@ -689,20 +687,20 @@ Micro-ops )，内核实际上是 RISC 架构.</li>
 )、<strong>寻址方式</strong> ( 如何找到操作数 ) 以及
 <strong>CISC/RISC</strong> 的设计哲学.</p>
 <ul>
-<li><strong>计算题高频点</strong> : 扩展操作码的计算、相对寻址的 EA 计算
-( 注意 PC 自增 )、CISC/RISC 对比.</li>
-<li><strong>概念题高频点</strong> : 各种寻址方式的特点 (
+<li><strong>计算题高频点</strong> 扩展操作码的计算、相对寻址的 EA 计算 (
+注意 PC 自增 )、CISC/RISC 对比.</li>
+<li><strong>概念题高频点</strong> 各种寻址方式的特点 (
 谁最快，谁范围最大 ).</li>
 </ul>
 <h2 id="常见问题和易混淆知识点">4.6 常见问题和易混淆知识点</h2>
 <div class="note sparkle simple"><p><strong>1. 基址寻址 vs 变址寻址</strong></p>
 <ul>
-<li><strong>基址寻址 ( Base )</strong> : 面向 <strong>系统</strong> ( OS
+<li><strong>基址寻址 ( Base )</strong> 面向 <strong>系统</strong> ( OS
 ).用于程序重定位. 基址寄存器内容不变 ( 用户不可动 )，偏移量可变.</li>
-<li><strong>变址寻址 ( Index )</strong> : 面向
+<li><strong>变址寻址 ( Index )</strong> 面向
 <strong>用户</strong>.用于数组遍历. 变址寄存器内容可变 ( 用户自增
-)，偏移量不变 ( 数组首地址 ). <em>( 口诀 :
-基址不动偏移变，变址在变偏移定 )</em></li>
+)，偏移量不变 ( 数组首地址 ). <em>( 口诀 基址不动偏移变，变址在变偏移定
+)</em></li>
 </ul>
 </div>
 <div class="note sparkle simple"><p><strong>2. 相对寻址的 PC 值</strong></p>
@@ -720,7 +718,7 @@ Micro-ops )，内核实际上是 RISC 架构.</li>
   input.setSelectionRange(0, 99999);
   document.execCommand("copy");
   document.body.removeChild(input);
-}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">SPARKLE</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/408/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>408<span class="tagsPageCount">21</span></a><a class="post-meta__box__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>计算机组成原理<span class="tagsPageCount">5</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://pic1.imgdb.cn/item/69bcf9a40fd75e0c1776d878.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/01/26/408-%E8%AE%A1%E7%BB%845/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69872af342b1cbeca1f88f3d.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">408-计算机组成原理-5-中央处理器</div></div></a></div><div class="next-post pull-right"><a href="/2026/02/19/%E9%AB%98%E6%95%B0-%E9%AB%98%E9%98%B6%E5%AF%BC%E6%95%B0%E6%B1%82%E8%A7%A3/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69ac35434054872779ab39df.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">高等数学-难点-高阶导数求解</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2025/12/31/408-%E8%AE%A1%E7%BB%841/" title="408-计算机组成原理-1-计算机系统概述"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/6954ea8a8801094e3ab4fd8b.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-31</div><div class="title">408-计算机组成原理-1-计算机系统概述</div></div></a></div><div><a href="/2026/01/26/408-%E8%AE%A1%E7%BB%845/" title="408-计算机组成原理-5-中央处理器"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69872af342b1cbeca1f88f3d.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-01-26</div><div class="title">408-计算机组成原理-5-中央处理器</div></div></a></div><div><a href="/2026/01/07/408-%E8%AE%A1%E7%BB%842/" title="408-计算机组成原理-2-数据的表示和运算"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/695e4a10c1cee4b048c4e0a1.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-01-07</div><div class="title">408-计算机组成原理-2-数据的表示和运算</div></div></a></div><div><a href="/2026/01/14/408-%E8%AE%A1%E7%BB%843/" title="408-计算机组成原理-3-存储系统"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69677a4999f37a647f58e412.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-01-14</div><div class="title">408-计算机组成原理-3-存储系统</div></div></a></div><div><a href="/2025/12/22/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F1/" title="408-操作系统-1-计算机系统概述"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492a76c154427986d991c5.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-22</div><div class="title">408-操作系统-1-计算机系统概述</div></div></a></div><div><a href="/2025/12/25/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F3/" title="408-操作系统-3-内存管理"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492cd6c154427986d9b19e.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-25</div><div class="title">408-操作系统-3-内存管理</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/671cfe2fd29ded1a8c5ffb0b.png" alt="status"/></div></div><div class="author-info__description">不管你在<strong style="color:white">这个世界</strong>的哪个地方，我一定<strong style="color:white">会</strong>，再次去<strong style="color:white">见</strong>你的!</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">sparkle520</h1><div class="author-info__desc">我一直都在寻找着什么</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/sparkle520" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/34882250" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">Hello World! 欢迎来到我的博客~</div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://pic.imgdb.cn/item/66c487f1d9c307b7e9ba5c7a.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://pic.imgdb.cn/item/66c487ebd9c307b7e9ba5725.png) center center / 100% no-repeat"></div></div></div></div><div class="card-widget card-countdown"><div class="item-headline"><i></i><span></span></div><div class="item-content"><div class="cd-count-left">
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">SPARKLE</a>! </span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/408/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>408<span class="tagsPageCount">21</span></a><a class="post-meta__box__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>计算机组成原理<span class="tagsPageCount">5</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://pic1.imgdb.cn/item/69bcf9a40fd75e0c1776d878.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/01/26/408-%E8%AE%A1%E7%BB%845/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69872af342b1cbeca1f88f3d.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">408-计算机组成原理-5-中央处理器</div></div></a></div><div class="next-post pull-right"><a href="/2026/02/19/%E9%AB%98%E6%95%B0-%E9%AB%98%E9%98%B6%E5%AF%BC%E6%95%B0%E6%B1%82%E8%A7%A3/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69ac35434054872779ab39df.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">高等数学-难点-高阶导数求解</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2025/12/31/408-%E8%AE%A1%E7%BB%841/" title="408-计算机组成原理-1-计算机系统概述"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/6954ea8a8801094e3ab4fd8b.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-31</div><div class="title">408-计算机组成原理-1-计算机系统概述</div></div></a></div><div><a href="/2026/01/26/408-%E8%AE%A1%E7%BB%845/" title="408-计算机组成原理-5-中央处理器"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69872af342b1cbeca1f88f3d.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-01-26</div><div class="title">408-计算机组成原理-5-中央处理器</div></div></a></div><div><a href="/2026/01/07/408-%E8%AE%A1%E7%BB%842/" title="408-计算机组成原理-2-数据的表示和运算"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/695e4a10c1cee4b048c4e0a1.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-01-07</div><div class="title">408-计算机组成原理-2-数据的表示和运算</div></div></a></div><div><a href="/2026/01/14/408-%E8%AE%A1%E7%BB%843/" title="408-计算机组成原理-3-存储系统"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69677a4999f37a647f58e412.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-01-14</div><div class="title">408-计算机组成原理-3-存储系统</div></div></a></div><div><a href="/2025/12/22/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F1/" title="408-操作系统-1-计算机系统概述"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492a76c154427986d991c5.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-22</div><div class="title">408-操作系统-1-计算机系统概述</div></div></a></div><div><a href="/2025/12/25/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F3/" title="408-操作系统-3-内存管理"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492cd6c154427986d9b19e.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-25</div><div class="title">408-操作系统-3-内存管理</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/671cfe2fd29ded1a8c5ffb0b.png" alt="status"/></div></div><div class="author-info__description">不管你在<strong style="color:white">这个世界</strong>的哪个地方，我一定<strong style="color:white">会</strong>，再次去<strong style="color:white">见</strong>你的!</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">sparkle520</h1><div class="author-info__desc">我一直都在寻找着什么</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/sparkle520" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/34882250" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">Hello World! 欢迎来到我的博客~</div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://pic.imgdb.cn/item/66c487f1d9c307b7e9ba5c7a.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://pic.imgdb.cn/item/66c487ebd9c307b7e9ba5725.png) center center / 100% no-repeat"></div></div></div></div><div class="card-widget card-countdown"><div class="item-headline"><i></i><span></span></div><div class="item-content"><div class="cd-count-left">
   <span class="cd-text">距离</span>
   <span class="cd-name" id="eventName"></span>
   <span class="cd-time" id="daysUntil"></span>

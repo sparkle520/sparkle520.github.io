@@ -1,0 +1,150 @@
+<svg width="680" viewBox="0 0 680 360" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+  <style>text{font-family:system-ui,"Noto Sans SC",sans-serif}</style>
+</defs>
+
+<!--
+  Timeline: t=0..14  mapped to x=130..630  (500px / 14s ≈ 35.7px/s)
+  px(t) = 130 + t * 35.714
+
+  t=0  → 130    arrival
+  t=3  → 237    first run / response
+  t=5  → 309    end first run → blocked
+  t=9  → 452    end blocked → waiting again
+  t=11 → 523    end waiting → run again
+  t=14 → 630    completion
+
+  Row 1 (进程 P1)  y=76   bar h=36
+  Row 2 (指标)     y=168  bar h=26  (4 metrics stacked)
+-->
+
+<!-- ── title ── -->
+<text x="380" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#334155">进程生命周期与时间指标  Process Lifecycle Metrics</text>
+
+<!-- ── axis ── -->
+<line x1="130" y1="290" x2="638" y2="290" stroke="#CBD5E1" stroke-width="1"/>
+
+<!-- tick marks + labels -->
+<line x1="130" y1="286" x2="130" y2="294" stroke="#94A3B8" stroke-width="1"/>
+<text x="130" y="306" text-anchor="middle" font-size="10" fill="#94A3B8">0s</text>
+<line x1="166" y1="286" x2="166" y2="294" stroke="#94A3B8" stroke-width="1"/>
+<text x="166" y="306" text-anchor="middle" font-size="10" fill="#94A3B8">1s</text>
+<line x1="202" y1="286" x2="202" y2="294" stroke="#94A3B8" stroke-width="1"/>
+<text x="202" y="306" text-anchor="middle" font-size="10" fill="#94A3B8">2s</text>
+<line x1="237" y1="286" x2="237" y2="294" stroke="#94A3B8" stroke-width="1"/>
+<text x="237" y="306" text-anchor="middle" font-size="10" fill="#94A3B8">3s</text>
+<line x1="273" y1="286" x2="273" y2="294" stroke="#94A3B8" stroke-width="1"/>
+<text x="273" y="306" text-anchor="middle" font-size="10" fill="#94A3B8">4s</text>
+<line x1="309" y1="286" x2="309" y2="294" stroke="#94A3B8" stroke-width="1"/>
+<text x="309" y="306" text-anchor="middle" font-size="10" fill="#94A3B8">5s</text>
+<line x1="345" y1="286" x2="345" y2="294" stroke="#94A3B8" stroke-width="1"/>
+<text x="345" y="306" text-anchor="middle" font-size="10" fill="#94A3B8">6s</text>
+<line x1="380" y1="286" x2="380" y2="294" stroke="#94A3B8" stroke-width="1"/>
+<text x="380" y="306" text-anchor="middle" font-size="10" fill="#94A3B8">7s</text>
+<line x1="416" y1="286" x2="416" y2="294" stroke="#94A3B8" stroke-width="1"/>
+<text x="416" y="306" text-anchor="middle" font-size="10" fill="#94A3B8">8s</text>
+<line x1="452" y1="286" x2="452" y2="294" stroke="#94A3B8" stroke-width="1"/>
+<text x="452" y="306" text-anchor="middle" font-size="10" fill="#94A3B8">9s</text>
+<line x1="488" y1="286" x2="488" y2="294" stroke="#94A3B8" stroke-width="1"/>
+<text x="488" y="306" text-anchor="middle" font-size="10" fill="#94A3B8">10s</text>
+<line x1="523" y1="286" x2="523" y2="294" stroke="#94A3B8" stroke-width="1"/>
+<text x="523" y="306" text-anchor="middle" font-size="10" fill="#94A3B8">11s</text>
+<line x1="559" y1="286" x2="559" y2="294" stroke="#94A3B8" stroke-width="1"/>
+<text x="559" y="306" text-anchor="middle" font-size="10" fill="#94A3B8">12s</text>
+<line x1="595" y1="286" x2="595" y2="294" stroke="#94A3B8" stroke-width="1"/>
+<text x="595" y="306" text-anchor="middle" font-size="10" fill="#94A3B8">13s</text>
+<line x1="630" y1="286" x2="630" y2="294" stroke="#94A3B8" stroke-width="1"/>
+<text x="630" y="306" text-anchor="middle" font-size="10" fill="#94A3B8">14s</text>
+
+<!-- vertical grid lines (light) -->
+<line x1="130" y1="32" x2="130" y2="290" stroke="#F1F5F9" stroke-width="1"/>
+<line x1="237" y1="32" x2="237" y2="290" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="3 3"/>
+<line x1="309" y1="32" x2="309" y2="290" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="3 3"/>
+<line x1="452" y1="32" x2="452" y2="290" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="3 3"/>
+<line x1="523" y1="32" x2="523" y2="290" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="3 3"/>
+<line x1="630" y1="32" x2="630" y2="290" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="3 3"/>
+
+<!-- ── ROW LABELS ── -->
+<text x="122" y="98"  text-anchor="end" font-size="11" font-weight="600" fill="#334155">进程 P1</text>
+<text x="122" y="180" text-anchor="end" font-size="11" font-weight="600" fill="#334155">响应时间</text>
+<text x="122" y="206" text-anchor="end" font-size="11" font-weight="600" fill="#334155">周转时间</text>
+<text x="122" y="232" text-anchor="end" font-size="11" font-weight="600" fill="#334155">等待时间</text>
+<text x="122" y="258" text-anchor="end" font-size="11" font-weight="600" fill="#334155">运行时间</text>
+
+<!-- ══ ROW 1: 进程 P1  y=76 ══ -->
+
+<!-- 等待调度 t=0..3  x=130..237  w=107 -->
+<rect x="130" y="76" width="107" height="36" rx="6" fill="#DBEAFE" stroke="#93C5FD" stroke-width="1.5"/>
+<text x="183" y="94" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#1E40AF">等待调度</text>
+
+<!-- 首次运行 t=3..5  x=237..309  w=72 -->
+<rect x="237" y="76" width="72" height="36" rx="6" fill="#DCFCE7" stroke="#86EFAC" stroke-width="1.5"/>
+<text x="273" y="94" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#166534">运行</text>
+
+<!-- I/O 阻塞 t=5..9  x=309..452  w=143 -->
+<rect x="309" y="76" width="143" height="36" rx="6" fill="#FEF3C7" stroke="#FCD34D" stroke-width="1.5"/>
+<text x="380" y="94" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#92400E">I/O 阻塞</text>
+
+<!-- 再次等待 t=9..11  x=452..523  w=71 -->
+<rect x="452" y="76" width="71" height="36" rx="6" fill="#DBEAFE" stroke="#93C5FD" stroke-width="1.5"/>
+<text x="487" y="94" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#1E40AF">等待</text>
+
+<!-- 再次运行 t=11..14  x=523..630  w=107 -->
+<rect x="523" y="76" width="107" height="36" rx="6" fill="#DCFCE7" stroke="#86EFAC" stroke-width="1.5"/>
+<text x="576" y="94" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#166534">运行</text>
+
+<!-- milestones -->
+<!-- Arrival t=0 -->
+<polygon points="130,72 136,62 124,62" fill="#334155"/>
+<text x="130" y="58" text-anchor="middle" font-size="9" fill="#334155">提交</text>
+
+<!-- First response t=3 -->
+<polygon points="237,72 243,62 231,62" fill="#DC2626"/>
+<text x="237" y="58" text-anchor="middle" font-size="9" fill="#DC2626">首次响应</text>
+
+<!-- Completion t=14 -->
+<polygon points="630,72 636,62 624,62" fill="#7C3AED"/>
+<text x="630" y="58" text-anchor="middle" font-size="9" fill="#7C3AED">完成</text>
+
+<!-- ══ ROW 2: 指标度量 ══ -->
+
+<!-- 响应时间 t=0..3  x=130..237  w=107  y=168 -->
+<rect x="130" y="168" width="107" height="20" rx="4" fill="#FEE2E2" stroke="#FCA5A5" stroke-width="1"/>
+<text x="183" y="178" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#DC2626">响应时间 3s</text>
+
+<!-- 周转时间 t=0..14  x=130..630  w=500  y=194 -->
+<rect x="130" y="194" width="500" height="20" rx="4" fill="#F3E8FF" stroke="#D8B4FE" stroke-width="1"/>
+<text x="380" y="204" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#7C3AED">周转时间 14s</text>
+
+<!-- 等待时间 t=0..5 + gap visual  y=220
+     Segment 1: t=0..3  x=130..237  w=107
+     Segment 2: t=9..11 x=452..523  w=71  -->
+<rect x="130" y="220" width="107" height="20" rx="4" fill="#DBEAFE" stroke="#93C5FD" stroke-width="1"/>
+<text x="183" y="230" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#1E40AF">3s</text>
+<rect x="452" y="220" width="71"  height="20" rx="4" fill="#DBEAFE" stroke="#93C5FD" stroke-width="1"/>
+<text x="487" y="230" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#1E40AF">2s = 5s</text>
+
+<!-- 运行时间 segments  y=246
+     Segment 1: t=3..5  x=237..309  w=72
+     Segment 2: t=11..14 x=523..630 w=107 -->
+<rect x="237" y="246" width="72"  height="20" rx="4" fill="#DCFCE7" stroke="#86EFAC" stroke-width="1"/>
+<text x="273" y="256" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#166534">2s</text>
+<rect x="523" y="246" width="107" height="20" rx="4" fill="#DCFCE7" stroke="#86EFAC" stroke-width="1"/>
+<text x="576" y="256" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#166534">3s = 5s</text>
+
+<!-- ── legend ── -->
+<rect x="130" y="322" width="14" height="10" rx="2" fill="#DBEAFE" stroke="#93C5FD" stroke-width="1"/>
+<text x="149" y="327" dominant-baseline="central" font-size="10" fill="#475569">等待</text>
+<rect x="206" y="322" width="14" height="10" rx="2" fill="#DCFCE7" stroke="#86EFAC" stroke-width="1"/>
+<text x="225" y="327" dominant-baseline="central" font-size="10" fill="#475569">运行</text>
+<rect x="282" y="322" width="14" height="10" rx="2" fill="#FEF3C7" stroke="#FCD34D" stroke-width="1"/>
+<text x="301" y="327" dominant-baseline="central" font-size="10" fill="#475569">I/O 阻塞</text>
+<rect x="378" y="322" width="14" height="10" rx="2" fill="#F3E8FF" stroke="#D8B4FE" stroke-width="1"/>
+<text x="397" y="327" dominant-baseline="central" font-size="10" fill="#475569">周转时间</text>
+<rect x="474" y="322" width="14" height="10" rx="2" fill="#FEE2E2" stroke="#FCA5A5" stroke-width="1"/>
+<text x="493" y="327" dominant-baseline="central" font-size="10" fill="#475569">响应时间</text>
+
+</svg>

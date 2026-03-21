@@ -185,7 +185,7 @@ rm.writeClipImg = function (imgsrc) {
     rm.downloadimging = true;
     setTimeout(function () {
       copyImage(imgsrc);
-      anzhiyu.snackbarShow("复制成功！图片已添加盲水印，请遵守版权协议");
+      anzhiyu.snackbarShow("复制成功! 图片已添加盲水印，请遵守版权协议");
       rm.downloadimging = false;
     }, "10000");
   }
@@ -334,7 +334,7 @@ rm.rightMenuCommentText = function (txt) {
   const postCommentDom = document.getElementById("post-comment");
   var domTop = postCommentDom.offsetTop;
   window.scrollTo(0, domTop - 80);
-  if (txt == "undefined" || txt == "null") txt = "好棒！";
+  if (txt == "undefined" || txt == "null") txt = "好棒! ";
   function setText() {
     setTimeout(() => {
       var input = document.getElementsByClassName("el-textarea__inner")[0];
