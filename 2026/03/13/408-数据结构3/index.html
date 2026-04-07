@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>408-数据结构-3-栈、队列和数组 | SPARKLE</title><meta name="keywords" content="408,数据结构"><meta name="author" content="sparkle520"><meta name="copyright" content="sparkle520"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="408-数据结构-3-栈、队列和数组"><meta name="application-name" content="408-数据结构-3-栈、队列和数组"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="408-数据结构-3-栈、队列和数组"><meta property="og:url" content="http://example.com/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%843/index.html"><meta property="og:site_name" content="SPARKLE"><meta property="og:description" content="第3章 栈、队列和数组 3.1 栈 ( Stack ) 3.1.1 定义与特性 栈 是只允许在 一端 进行插入或删除操作的线性表. 允许操作的一端称为 栈顶 ( Top )，不允许操作的一端称为 栈底 ( Bottom ).   LIFO ( Last In First Out )"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://pic1.imgdb.cn/item/69b00d9e6738cb8aa1298eb8.png"><meta property="article:author" content="sparkle520"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://pic1.imgdb.cn/item/69b00d9e6738cb8aa1298eb8.png"><meta name="description" content="第3章 栈、队列和数组 3.1 栈 ( Stack ) 3.1.1 定义与特性 栈 是只允许在 一端 进行插入或删除操作的线性表. 允许操作的一端称为 栈顶 ( Top )，不允许操作的一端称为 栈底 ( Bottom ).   LIFO ( Last In First Out )"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%843/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>408-数据结构-3-栈、队列和数组 | SPARKLE</title><meta name="keywords" content="408,数据结构"><meta name="author" content="sparkle520"><meta name="copyright" content="sparkle520"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="408-数据结构-3-栈、队列和数组"><meta name="application-name" content="408-数据结构-3-栈、队列和数组"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="408-数据结构-3-栈、队列和数组"><meta property="og:url" content="http://example.com/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%843/index.html"><meta property="og:site_name" content="SPARKLE"><meta property="og:description" content="第3章 栈、队列和数组 3.1 栈 ( Stack ) 3.1.1 定义与特性 定义 栈 是只允许在 一端 进行插入或删除操作的线性表. 允许操作的一端称为 栈顶 ( Top )，不允许操作的一端称为 栈底 ( Bottom ).   LIFO ( Last In First Ou"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://pic1.imgdb.cn/item/69b00d9e6738cb8aa1298eb8.png"><meta property="article:author" content="sparkle520"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://pic1.imgdb.cn/item/69b00d9e6738cb8aa1298eb8.png"><meta name="description" content="第3章 栈、队列和数组 3.1 栈 ( Stack ) 3.1.1 定义与特性 定义 栈 是只允许在 一端 进行插入或删除操作的线性表. 允许操作的一端称为 栈顶 ( Top )，不允许操作的一端称为 栈底 ( Bottom ).   LIFO ( Last In First Ou"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%843/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
   linkPageTop: undefined,
   peoplecanvas: undefined,
   postHeadAiDescription: undefined,
@@ -54,12 +54,12 @@
   configTitle: 'SPARKLE',
   title: '408-数据结构-3-栈、队列和数组',
   postAI: '',
-  pageFillDescription: '第3章 栈、队列和数组, 3.1 栈 ( Stack ), 3.1.1 定义与特性, 3.1.2 基本操作, 3.1.3 顺序栈, 3.1.4 链栈, 3.1.5 栈的应用, 3.1.6 408 常考点, 3.2 队列 ( Queue ), 3.2.1 定义与特性, 3.2.2 基本操作, 3.2.3 顺序队列与假溢出, 3.2.4 循环队列, 3.2.5 链队列, 3.2.6 双端队列, 3.2.7 队列的应用, 3.2.8 408 常考点, 3.3 数组与特殊矩阵, 3.3.1 数组的存储与地址计算, 3.3.2 特殊矩阵压缩存储, 3.3.3 稀疏矩阵, 3.3.4 408 常考点, 3.4 例题精选, 3.5 本章疑难点, 1. 循环队列判空 / 判满, 2. 栈与递归的关系, 3. 后缀表达式求值与中缀转后缀, 4. 特殊矩阵压缩下标公式, 5. 十字链表 vs. 三元组, 3.6 本章小结第章栈队列和数组栈定义与特性栈是只允许在一端进行插入或删除操作的线性表允许操作的一端称为栈顶不允许操作的一端称为栈底后进先出最后入栈的元素最先出栈个不同元素入栈出栈序列共有种数基本操作操作功能说明初始化一个空栈判断栈是否为空空返回入栈将元素压入栈顶出栈弹出栈顶元素并用返回读栈顶将栈顶元素赋给但不弹出销毁栈释放内存与的区别只读取栈顶栈不变化会删除栈顶元素顺序栈结构定义入栈出栈共享栈栈顶指针初始化为时栈空时栈满栈顶元素为入栈栈满出栈栈空时间复杂度均为共享栈两个栈共享同一块数组空间栈的栈底在栈的栈底在分别向中间增长栈从向右增长栈从向左增长栈满条件优点两个栈的空间互补总存储利用率更高适合两栈大小互为消长的场景链栈链栈用单链表实现规定所有操作在链表头部进行无需头结点链栈不存在栈满问题入栈在链表头部插入结点出栈删除链表头部结点适合栈的大小无法预估的场景比较项顺序栈链栈空间预分配可能溢出或浪费按需分配灵活指针开销无每个结点有指针域访问速度稍快数组连续稍慢指针跳转栈的应用括号匹配中缀转后缀后缀表达式求值递归与算法思路遇到左括号入栈遇到右括号检查栈顶若匹配则出栈若不匹配或栈空则失败扫描结束后栈为空则匹配成功规则运算符栈遇到操作数直接输出遇到左括号入栈遇到右括号弹出并输出直到遇到左括号不输出遇到运算符弹出并输出所有优先级大于等于当前运算符的栈顶运算符再将当前运算符入栈扫描结束弹出并输出栈中所有运算符运算符优先级括号内的运算符暂时优先级视为最低示例算法思路操作数栈遇到操作数入栈遇到运算符弹出栈顶两个元素执行运算将结果入栈扫描结束栈中唯一元素即为结果示例弹出相乘得再弹出与相加得递归调用系统用调用栈保存每次函数调用的返回地址局部变量和参数递归调用本质是栈的隐式应用递归深度过大会导致栈溢出所有递归算法均可用栈显式模拟消除递归深度优先搜索将起始结点入栈弹出栈顶结点标记已访问将其未访问邻居依次入栈重复直到栈为空常考点出栈序列判定数共享栈表达式已知入栈序列判断某出栈序列是否合法核心是用栈模拟设入栈序列为待验证出栈序列为从到依次入栈每次入栈后只要栈顶等于当前需要输出的就持续出栈并令后移扫描结束后若成功输出完全部则合法常见误区是只看局部可出而不做全流程模拟个元素的合法出栈序列数为典型等价模型是括号匹配或路径常以小让你列举或判断序列数量两栈相向增长栈满条件是本质是把两个栈的空闲空间合并成一个池空间利用率优于两个独立顺序栈出题点常在于初始化与判满条件写错中缀转后缀用运算符栈后缀求值用操作数栈运算符处理看两件事优先级与结合性常按左结合处理遇到右括号只弹出到左括号为止左括号不输出队列定义与特性队列是只允许在一端插入在另一端删除的线性表允许插入的一端称为队尾允许删除的一端称为队头先进先出最先入队的元素最先出队基本操作操作功能说明初始化一个空队列判断队列是否为空入队将元素插入队尾出队删除队头元素并用返回读队头将队头元素赋给但不删除顺序队列与假溢出用数组实现队列时频繁入队出队后到达数组末尾而数组前端有空间这种现象称为假溢出解决假溢出的方法是使用循环队列将数组首尾相接下标运算采用取模循环队列结构定义入队出队队长与队满变体指向队头指向队尾的下一个位置初始化队空队满牺牲一个存储单元区分队空满入队队满出队队空队列长度区分队空满的三种方案方案说明牺牲一个存储单元队满最常用增加计数器队空队满增加标志位最后操作为删除且时队空最后操作为插入时队满链队列链队列用带头结点的单链表实现指向头结点指向尾结点不存在队满问题入队在链表尾部插入新结点出队删除头结点之后的第一个数据结点队空条件均指向头结点比较项顺序队列循环链队列空间预分配按需分配队满有容量固定无指针开销无每结点一个指针适用场景大小已知大小不定双端队列定义输入受限输出受限考点双端队列两端均可进行插入和删除操作的线性表可看作栈与队列的推广完全双端队列包含所有输入输出受限的情形输入受限双端队列只允许在一端插入两端均可删除该队列能输出的序列是普通队列的超集但不是所有栈能输出的序列都能输出输出受限双端队列两端均可插入只允许在一端删除该队列能输出的序列是普通队列的超集但不是所有栈能输出的序列都能输出双端队列考题常考以下判断若序列可由栈得到则一定能由双端队列得到双端队列更强大某序列不能由栈得到但能由输出受限双端队列得到典型区分点判断方法画出入队过程验证各时刻队列状态是否合法队列的应用广度优先搜索从起始结点出发逐层访问每层结点依次入队出队时将未访问邻居入队进程调度操作系统用队列管理等待的进程就绪队列打印缓冲区消息队列先到先服务典型应用层次遍历二叉树利用队列按层输出各结点常考点循环队列三方案假溢出与真溢出栈与队列互相模拟双端队列判定方案队空队满备注牺牲一格最常见加不浪费空间加易写错假溢出是数组前端有空但到末尾导致无法入队真溢出是容量确实不够循环队列解决的是假溢出不会改变固定容量的上限两个栈实现队列入队压入栈出队时若栈为空则把全部倒入再从弹出两个队列实现栈维持一个空队列作为辅助把除最后一个元素外的元素转移到辅助队列再弹出最后一个常问最坏与均摊复杂度两栈实现队列的出队均摊为题目通常给入队序列与出队序列要求判断能否由某类双端队列得到有效做法是画状态或做过程模拟避免凭直觉判断数组与特殊矩阵数组的存储与地址计算一维数组二维数组下标从开始设数组首地址为每个元素占字节设数组首地址为行优先存储语言默认列优先存储若数组行优先存储考题中下标起始值不固定务必仔细读题确认下标范围再套公式特殊矩阵压缩存储压缩存储对具有规律分布的特殊矩阵只存储有效元素其余元素通过计算得到以节省空间对称矩阵三角矩阵对角矩阵对称矩阵阶矩阵只需存储下三角部分含主对角线共个元素存入一维数组下标对应关系行优先存储下三角下三角上三角用下三角矩阵上三角区域不含对角线全为常数只存下三角对角线元素及常数共个元素存常数的位置上三角矩阵下三角区域全为常数类似处理只存上三角对角线常数对角矩阵带状矩阵非零元素集中在主对角线及其两侧共条对角线的带状区域内带宽为为半带宽以三对角矩阵为例只存储个非零元素反向推导已知求稀疏矩阵稀疏矩阵矩阵中非零元素个数远少于零元素个数通常非零元素个数时视为稀疏三元组表十字链表对比三元组表将每个非零元素用表示顺序存入一维数组同时记录矩阵规模和非零元素总数行列下标元素值行数列数非零元个数存储量为非零元个数转置算法按列扫描原矩阵时间复杂度普通转置或快速转置十字链表每个非零元素用一个结点表示结点含个域指向同行下一个非零元素指向同列下一个非零元素另有行头指针数组和列头指针数组优点插入删除非零元素方便无需移动大量数据缺点指针开销大结构复杂不如三元组直观表示方法存储量转置复杂度插删方便性适用场景三元组表一般静态稀疏矩阵十字链表好动态修改频繁常考点地址计算压缩存储快速转置先确认下标起始还是与存储方式行优先还是列优先地址公式里最容易错的是把写反题目常给元素大小与首地址最终答案常以字节偏移给出对称矩阵常让你算或反算三角矩阵会额外出现一个常数位存容易漏带状矩阵要先判断是否落在带内否则该位置为或常数快速转置把按列找元素改为一次统计前缀和定位把复杂度降到统计每列非零元个数记录该列在转置后数组中的起始位置前缀和扫描原三元组数组时直接把元素放到转置数组的目标下标例题精选例题循环队列队长循环队列求队列中元素个数解例题出栈序列合法性入栈序列为判断是否为合法出栈序列解模拟过程压压压弹此时栈为栈顶为但需弹出不合法因此不是合法出栈序列例题对称矩阵下标映射对称矩阵按行优先存储下三角于求对应中下标解属于下三角例题中缀转后缀将中缀表达式转换为后缀表达式解扫描过程运算符栈记为输出序列记为弹出直到输出丢弃弹出优先级不小于的运算符依次输出再将入栈输出入栈输出扫描结束弹出剩余运算符结果为例题出栈序列判定入栈序列为判断出栈序列是否合法解模拟入栈出栈依次压入弹出再压入弹出此时栈顶为弹出继续弹出可完成输出因此为合法序列例题出栈序列判定入栈序列为判断出栈序列是否合法解压入弹出此时栈顶为但下一次需要输出且被压住无法直接弹出继续入栈只能压入使更不可能弹出因此该序列不合法例题两栈实现队列的均摊用两个栈实现队列入队执行出队若栈为空则把全部倒入再证明出队操作均摊为解每个元素最多经历一次从栈到栈的转移入队时压入一次转移时从弹出一次并压入一次出队时从弹出一次因此每个元素总共参与常数次栈操作总成本为次队列操作的均摊时间复杂度为例题循环队列操作序列循环队列采用牺牲一格方案初始依次执行入队出队两次再入队求此时与队列长度解牺牲一格方案下队列长度模拟过程后队列中为此时因此例题地址计算二维数组行优先存储元素占字节求解下标从开始行优先代入例题三角矩阵压缩下三角矩阵的上三角元素均为常数按行优先压缩到一维数组求对应的存储下标解只存下三角含主对角线的个元素以及常数位例题快速转置定位稀疏矩阵三元组表中共有个非零元列数为说明快速转置中的含义并写出其递推关系解表示转置后三元组数组中第列转置后为第行的第一个非零元存放的位置若是原矩阵第列非零元个数则这样扫描原三元组数组时可以把每个元素直接放到目标位置并递增该列的当前位置指针本章疑难点循环队列判空判满牺牲一格方案最常用务必记住队满条件而非三种方案各有优缺点选择时结合题目要求栈与递归的关系每次函数调用都会在系统栈上开辟一个栈帧保存局部变量参数和返回地址递归深度过大会导致栈溢出可改用显式栈消除递归后缀表达式求值与中缀转后缀中缀转后缀用运算符栈后缀表达式求值用操作数栈两者使用的栈类型不同注意区分特殊矩阵压缩下标公式考试中常给出从开始的下标务必仔细读题后代入正确公式不要混淆行列十字链表三元组三元组转置更快快速转置十字链表插删更方便按照操作类型选择本章小结栈和队列都是操作受限的线性表本质上是特殊的线性表顺序栈链栈循环队列链队列是四种实现方式各有适用场景双端队列是栈和队列的推广输入输出受限双端队列是重要变体数组地址计算和特殊矩阵压缩存储是纯粹的计算题掌握公式即可稀疏矩阵三元组与十字链表是空间优化的重要思想十字链表插删优势明显',
+  pageFillDescription: '第3章 栈、队列和数组, 3.1 栈 ( Stack ), 3.1.1 定义与特性, 3.1.2 基本操作, 3.1.3 顺序栈, 3.1.4 链栈, 3.1.5 栈的应用, 3.1.6 408 常考点, 3.2 队列 ( Queue ), 3.2.1 定义与特性, 3.2.2 基本操作, 3.2.3 顺序队列与假溢出, 3.2.4 循环队列, 3.2.5 链队列, 3.2.6 双端队列, 3.2.7 队列的应用, 3.2.8 408 常考点, 3.3 数组与特殊矩阵, 3.3.1 数组的存储与地址计算, 3.3.2 特殊矩阵压缩存储, 3.3.3 稀疏矩阵存储方法, 3.3.4 408 常考点与解题技巧, 3.3.5 综合总结与学习建议, 3.4 例题精选, 3.5 本章疑难点, 1. 循环队列判空 / 判满, 2. 栈与递归的关系, 3. 后缀表达式求值与中缀转后缀, 4. 特殊矩阵压缩下标公式, 5. 十字链表 vs. 三元组, 3.6 本章小结第章栈队列和数组栈定义与特性定义栈是只允许在一端进行插入或删除操作的线性表允许操作的一端称为栈顶不允许操作的一端称为栈底后进先出最后入栈的元素最先出栈个不同元素入栈出栈序列共有种数基本操作操作功能说明初始化一个空栈判断栈是否为空空返回入栈将元素压入栈顶出栈弹出栈顶元素并用返回读栈顶将栈顶元素赋给但不弹出销毁栈释放内存区别与的区别只读取栈顶栈不变化会删除栈顶元素顺序栈结构定义入栈出栈共享栈栈顶指针初始化为时栈空时栈满栈顶元素为入栈栈满出栈栈空时间复杂度均为共享栈两个栈共享同一块数组空间栈的栈底在栈的栈底在分别向中间增长栈从向右增长栈从向左增长栈满条件优点两个栈的空间互补总存储利用率更高适合两栈大小互为消长的场景链栈链栈用单链表实现规定所有操作在链表头部进行无需头结点链栈不存在栈满问题入栈在链表头部插入结点出栈删除链表头部结点适合栈的大小无法预估的场景比较项顺序栈链栈空间预分配可能溢出或浪费按需分配灵活指针开销无每个结点有指针域访问速度稍快数组连续稍慢指针跳转栈的应用括号匹配中缀转后缀后缀表达式求值递归与数制转换行编辑与撤销功能迷宫求解单调栈问题描述检查表达式中的括号是否正确配对算法思路遇到左括号入栈遇到右括号检查栈顶若匹配则出栈若不匹配或栈空则失败扫描结束后栈为空则匹配成功算法复杂度分析时间复杂度其中为字符串长度每个字符最多入栈出栈各一次空间复杂度最坏情况下所有左括号都入栈应用扩展编译器语法检查检查括号引号是否配对标签匹配的嵌套检查表达式合法性验证数学表达式编程语言的语法分析问题描述将人类习惯的中缀表达式转换为计算机易于处理的后缀表达式逆波兰表达式规则运算符栈遇到操作数直接输出遇到左括号入栈遇到右括号弹出并输出直到遇到左括号不输出遇到运算符弹出并输出所有优先级大于等于当前运算符的栈顶运算符再将当前运算符入栈扫描结束弹出并输出栈中所有运算符运算符优先级括号内的运算符暂时优先级视为最低示例详细模拟过程扫描字符动作说明运算符栈底顶输出序列操作数直接输出空入栈操作数直接输出优先级高于入栈操作数直接输出优先级低于和弹出入栈操作数直接输出结束弹出栈中剩余运算符空扩展中缀转前缀算法思路从右向左扫描运算符栈遇到操作数直接输出到前缀表达式的前面遇到右括号入栈遇到左括号弹出并输出直到遇到右括号不输出遇到运算符弹出并输出所有优先级大于当前运算符的栈顶运算符再将当前运算符入栈扫描结束弹出并输出栈中所有运算符最终结果需要反转与中缀转后缀的区别扫描方向从右向左后缀是从左向右括号处理右括号入栈左括号触发弹出后缀是左括号入栈右括号触发弹出优先级比较只弹出优先级大于的运算符后缀是弹出优先级大于等于的结果处理需要反转最终结果示例详细模拟过程扫描字符动作说明运算符栈底顶前缀表达式当前最终操作数直接输出空入栈操作数直接输出优先级大于入栈操作数直接输出优先级小于弹出优先级小于弹出入栈操作数直接输出结束弹出栈中剩余运算符空反转结果反转整个表达式带括号的示例扫描字符动作说明运算符栈前缀表达式输出空入栈入栈输出入栈输出弹出直到遇到结束弹出栈中剩余运算符空反转结果反转整个表达式代码实现运算符栈输出栈用于反转从右向左扫描操作数直接压入输出栈右括号入栈左括号弹出直到遇到右括号运算符弹出栈中剩余运算符从输出栈构建前缀表达式获取运算符优先级更多示例中缀表达式前缀表达式说明简单加法乘法的优先级高于加法乘法的优先级高于加法括号改变优先级相同优先级从左向右结合减法不满足结合律注意顺序重要注意事项前缀表达式也称为波兰表达式前缀表达式的求值也是从右向左扫描对于不满足结合律的运算符如减法除法顺序很重要前缀表达式不需要括号因为运算符的位置已经明确了运算顺序问题描述计算后缀表达式逆波兰表达式的值算法思路操作数栈遇到操作数入栈遇到运算符弹出栈顶两个元素执行运算将结果入栈扫描结束栈中唯一元素即为结果示例弹出相乘得再弹出与相加得代码实现先弹出的是右操作数后弹出的是左操作数注意减法和除法不满足交换律先弹出的是右操作数后弹出的是左操作数顺序不能颠倒示例模拟计算步骤扫描动作栈内容底顶入栈入栈弹出计算入栈入栈弹出计算入栈入栈弹出计算入栈结果递归调用系统用调用栈保存每次函数调用的返回地址局部变量和参数递归调用本质是栈的隐式应用递归深度过大会导致栈溢出所有递归算法均可用栈显式模拟消除递归示例递归转非递归递归求阶乘用栈模拟深度优先搜索将起始结点入栈弹出栈顶结点标记已访问将其未访问邻居依次入栈重复直到栈为空栈在中的作用保存待访问的结点保证深入的特性即最后发现的结点最先被访问问题将十进制数转换为进制数算法思路除基取余法用栈保存余数最后逆序输出示例转八进制步骤栈内容底顶初始空输出为什么需要栈除基取余法得到的余数顺序是从低位到高位而输出需要从高位到低位栈的特性正好实现逆序行编辑器处理简单的退格符和清行符撤销功能文本编辑器的撤销操作本质是用栈保存历史状态每次修改前将当前状态压栈撤销时弹出栈顶状态并恢复现代编辑器的改进使用两个栈实现撤销重做功能撤销栈保存可撤销的状态重做栈撤销时弹出的状态存入重做栈重做时再压回撤销栈双栈实现撤销重做修改压入撤销栈撤销弹出撤销栈顶压入重做栈重做弹出重做栈顶压入撤销栈问题从迷宫入口到出口找一条路径算法思路用栈保存当前路径回溯时退栈坐标和当前探索方向右下左上下次从下一个方向继续回溯栈在迷宫中的作用保存从入口到当前位置的路径当遇到死胡同时回溯到上一个岔路口算法特点深度优先搜索策略栈中保存的是当前探索路径回溯时自动退回上一个决策点定义栈内元素保持单调递增或单调递减的栈典型应用寻找数组中每个元素左边右边第一个比它大小的元素示例每日温度问题给定温度数组求对于每一天下一次温度更高需要等待几天示例索引温度动作栈内容索引答案更新入栈弹出入栈弹出入栈入栈入栈弹出弹出入栈弹出弹出入栈入栈结果算法分析时间复杂度每个元素最多入栈出栈各一次空间复杂度栈的大小单调栈的核心思想维护一个单调的候选集合当遇到更大或更小元素时批量处理栈中元素常考点出栈序列判定数共享栈表达式已知入栈序列判断某出栈序列是否合法核心是用栈模拟设入栈序列为待验证出栈序列为从到依次入栈每次入栈后只要栈顶等于当前需要输出的就持续出栈并令后移扫描结束后若成功输出完全部则合法常见误区是只看局部可出而不做全流程模拟定义卡特兰数是组合数学中的重要序列描述了满足特定约束条件的组合结构的数量卡特兰数定义显式公式递归定义数学推导方法一反射原理经典推导问题计算个元素的合法出栈序列数步骤总序列数次和次的排列数为非法序列存在某个时刻次数次数的序列反射原理将第一个非法点后的操作取反一一对应每个非法序列对应一个次和次的序列非法序列数合法序列数方法二生成函数法设生成函数由递归关系解得展开得卡特兰数的显式公式组合含义详解卡特兰数计数的组合结构都具有递归分解和平衡约束的本质特征栈操作序列出栈序列约束任何时刻次数次数递归第一次将序列分为左右两部分意义描述了栈操作的合法性和有序性二叉树形态约束每个结点最多有两个孩子递归根结点左子树右子树意义反映了二叉树结构的组合多样性括号匹配约束任何位置左括号数右括号数递归最外层括号内的表达式意义语法结构的合法性检查路径约束路径不穿过对角线递归第一次触及对角线的点意义组合几何中的路径计数前几个卡特兰数含义空栈空树空表达式单元素栈单结点树单对括号两种出栈序列两种二叉树五种合法序列五种树形十四种组合结构四十二种可能性考试应用常见题型选择题给定选择对应的卡特兰数判断题判断序列是否合法栈操作验证计算题计算特定问题的组合数简答题解释卡特兰数的组合含义解题技巧记住前几个卡特兰数值理解递归关系的组合意义掌握栈操作验证的方法识别卡特兰数问题的模式深刻数学意义卡特兰数体现了组合数学的统一性递归结构问题可以分解为相似子问题平衡约束解必须满足某种平衡条件组合爆炸解空间随规模指数级增长算法复杂度许多递归算法的时间复杂度与卡特兰数相关增长速率这表明卡特兰数问题具有指数级复杂性但比纯指数增长稍慢两栈相向增长栈满条件是本质是把两个栈的空闲空间合并成一个池空间利用率优于两个独立顺序栈出题点常在于初始化与判满条件写错中缀转后缀用运算符栈后缀求值用操作数栈运算符处理看两件事优先级与结合性常按左结合处理遇到右括号只弹出到左括号为止左括号不输出队列定义与特性队列是只允许在一端插入在另一端删除的线性表允许插入的一端称为队尾允许删除的一端称为队头先进先出最先入队的元素最先出队基本操作操作功能说明初始化一个空队列判断队列是否为空入队将元素插入队尾出队删除队头元素并用返回读队头将队头元素赋给但不删除顺序队列与假溢出用数组实现队列时频繁入队出队后到达数组末尾而数组前端有空间这种现象称为假溢出解决假溢出的方法是使用循环队列将数组首尾相接下标运算采用取模循环队列结构定义入队出队队长与队满变体指向队头指向队尾的下一个位置初始化队空队满牺牲一个存储单元区分队空满入队队满出队队空队列长度区分队空满的三种方案方案说明牺牲一个存储单元队满最常用增加计数器队空队满增加标志位最后操作为删除且时队空最后操作为插入时队满链队列链队列用带头结点的单链表实现指向头结点指向尾结点不存在队满问题入队在链表尾部插入新结点出队删除头结点之后的第一个数据结点队空条件均指向头结点比较项顺序队列循环链队列空间预分配按需分配队满有容量固定无指针开销无每结点一个指针适用场景大小已知大小不定双端队列定义输入受限输出受限考点双端队列两端均可进行插入和删除操作的线性表可看作栈与队列的推广完全双端队列包含所有输入输出受限的情形输入受限双端队列只允许在一端插入两端均可删除该队列能输出的序列是普通队列的超集但不是所有栈能输出的序列都能输出输出受限双端队列两端均可插入只允许在一端删除该队列能输出的序列是普通队列的超集但不是所有栈能输出的序列都能输出双端队列考题常考以下判断若序列可由栈得到则一定能由双端队列得到双端队列更强大某序列不能由栈得到但能由输出受限双端队列得到典型区分点判断方法画出入队过程验证各时刻队列状态是否合法队列的应用广度优先搜索从起始结点出发逐层访问每层结点依次入队出队时将未访问邻居入队进程调度操作系统用队列管理等待的进程就绪队列打印缓冲区消息队列先到先服务典型应用层次遍历二叉树利用队列按层输出各结点常考点循环队列三方案假溢出与真溢出栈与队列互相模拟双端队列判定方案队空队满备注牺牲一格最常见加不浪费空间加易写错假溢出是数组前端有空但到末尾导致无法入队真溢出是容量确实不够循环队列解决的是假溢出不会改变固定容量的上限两个栈实现队列入队压入栈出队时若栈为空则把全部倒入再从弹出两个队列实现栈维持一个空队列作为辅助把除最后一个元素外的元素转移到辅助队列再弹出最后一个常问最坏与均摊复杂度两栈实现队列的出队均摊为题目通常给入队序列与出队序列要求判断能否由某类双端队列得到有效做法是画状态或做过程模拟避免凭直觉判断数组与特殊矩阵数组的存储与地址计算数组是线性表的推广由一组类型相同的数据元素构成的有序集合每个元素受个线性关系的约束每个元素在个线性关系中的序号称为该元素的下标数组是随机存取结构一维数组二维数组多维数组下标从开始定义数组首地址为每个元素占字节核心思想地址计算的核心是分析当前下标前面有多少个元素地址公式推导元素前面有个元素这些元素总共占用了字节因此直观理解内存布局首地址跳过个元素目标地址示例数组首地址为每个占字节前面有个元素占用字节前面有个元素占用字节代码实现时间复杂度随机访问定义数组首地址为核心思想分析前面有多少个元素行优先存储语言默认前面有多少行行完整行每行有个元素当前行前面有多少列个元素总共前面元素数地址公式列优先存储默认前面有多少列列完整列每列有个元素当前列前面有多少行个元素总共前面元素数地址公式示例数组首地址占字节行优先前面有整行个元素当前行前个元素个元素列优先前面有整列每列个元素当前列前个元素个元素内存布局对比行优先列优先定义维数组首地址核心思想逐维分析前面有多少个完整的超平面行优先存储第维前面个完整维超平面第维前面个完整维超平面第维前面个完整维超平面第维前面个元素地址公式列优先存储类似思想但从最后一维开始计算地址公式示例三维数组首地址占字节行优先前面有个完整元素的平面个完整元素的列个元素总共个元素若数组行优先存储核心思想将任意下标范围归一化到从开始计算公式推导将下标归一化这样就从映射到将下标归一化这样就从映射到前面元素数地址公式通用公式下标范围归一化思想将任意范围映射到从开始行数列数归一化下标地址公式示例数组首地址占字节归一化计算行数列数归一化前面元素数个元素考试重点下标起始值不固定务必仔细读题确认下标范围注意区分行优先和列优先存储方式题目常给元素大小与首地址最终答案常以字节偏移给出多维数组计算时注意各维度的乘积关系地址计算核心思想总结地址计算总结依靠分析当前下标前面有多少个元素来计算地址是数组地址计算的根本原理统一的计算框架确定存储顺序行优先还是列优先归一化下标将任意范围映射到从开始计算前面元素数按存储顺序逐维计算乘以元素大小得到字节偏移量加上首地址得到最终地址记忆技巧一维数组前面有个元素二维数组行优先前面有整行个元素二维数组列优先前面有整列个元素多维数组逐维计算完整的超平面避免的错误忘记归一化下标特别是下标从开始时混淆行优先和列优先的计算顺序忽略元素大小的单位转换特殊矩阵压缩存储压缩存储定义压缩存储对具有规律分布的特殊矩阵只存储有效元素其余元素通过计算得到以节省空间压缩存储的核心思想是用计算换空间对称矩阵三角矩阵对角矩阵稀疏矩阵定义定义阶方阵满足存储策略只需存储下三角部分含主对角线共个元素压缩数组下标映射公式行优先存储下三角下三角上三角用对称性示例阶对称矩阵求在压缩数组中的位置代码实现下三角上三角空间节省从压缩到节省约空间下三角矩阵上三角区域不含对角线全为常数存储策略存储下三角对角线元素及常数共个元素下标映射公式存常数的位置上三角矩阵下三角区域全为常数类似处理行优先存储上三角示例阶下三角矩阵求在压缩数组中的位置常数位空间节省从压缩到节省约空间定义带状矩阵非零元素集中在主对角线及其两侧共条对角线的带状区域内带宽为半带宽三对角矩阵只存储个非零元素下标映射公式反向推导已知求通用对角矩阵公式带宽示例阶三对角矩阵求在压缩数组中的位置空间节省从压缩到当时节省大量空间定义矩阵中非零元素个数远少于零元素个数稀疏度判断通常时视为稀疏稀疏因子当时通常认为稀疏常见稀疏矩阵类型对角占优矩阵主对角线元素绝对值大于同行其他元素绝对值之和矩阵图论中图的拉普拉斯矩阵有限差分矩阵数值计算中离散微分算子应用场景有限元分析电路网络分析社交网络分析图像处理稀疏矩阵存储方法稀疏矩阵存储方法的选择取决于操作类型和矩阵特性静态操作多用三元组表动态操作多用十字链表三元组表十字链表对比分析其他存储方法数据结构将每个非零元素用表示顺序存入一维数组行列下标从开始元素值行数列数非零元个数存储量为非零元个数转置算法普通转置时间复杂度快速转置时间复杂度优缺点分析优点结构简单存储效率高转置操作高效缺点插入删除操作需要移动大量元素数据结构每个非零元素用一个结点表示行列下标元素值同行同列下一个结点行列头指针数组行数列数非零元个数内存布局示例创建十字链表插入到行链表插入到列链表类似行链表优缺点分析优点插入删除方便动态操作高效缺点指针开销大结构复杂存储效率较低特性三元组表十字链表存储量但指针开销大转置复杂度快速转置插入复杂度需要移动删除复杂度需要移动空间效率高较低时间效率静态操作快动态操作快适用场景静态稀疏矩阵转置频繁动态修改频繁插入删除多选择建议科学计算多用三元组表快速转置图算法多用十字链表邻接表类似数据库系统根据操作类型选择非零元素值列索引行指针每行起始位置优点存储效率高行操作快缺点列操作慢类似但按列存储优点列操作快缺点行操作慢应用场景稀疏矩阵向量乘法矩阵转置列操作多的场景代码示例非零元素值列索引行指针行数列数非零元数常考点与解题技巧考试中数组与矩阵相关题目主要考察计算能力和公式应用能力需要熟练掌握各种公式和转换方法地址计算技巧压缩存储计算稀疏矩阵操作实际应用场景解题步骤确认下标范围仔细读题确定下标是从还是开始确定存储方式行优先还是列优先默认行优先套用公式选择正确的地址计算公式单位转换注意元素大小最终结果可能是字节偏移常见陷阱维度混淆和写反下标偏移忘记处理下标从开始的情况存储方式错误使用行优先列优先公式示例题目数组首地址占字节求地址行数列数对称矩阵正向计算给定求反向计算给定求关键判断还是三角矩阵注意常数位上下三角区域的元素映射到常数存储位置公式记忆上三角矩阵的行优先公式较复杂对角矩阵带内判断先判断是否成立通用公式掌握示例题目阶对称矩阵元素按行优先存储在下三角求的存储位置用对称性快速转置算法统计每列非零元个数前缀和每列在转置后的起始位置放置扫描原数组直接放到目标位置算法复杂度分析普通转置快速转置十字链表转置代码实现要点快速转置核心代码科学计算有限元分析刚度矩阵通常是对称稀疏矩阵电路分析导纳矩阵是大型稀疏矩阵图像处理图像拉普拉斯算子矩阵数据处理推荐系统用户物品评分矩阵文本分析文档词项矩阵社交网络邻接矩阵工程实践建议小规模稠密矩阵直接使用二维数组大规模稀疏矩阵根据操作类型选择存储结构数值计算优先考虑三元组表快速转置图算法优先考虑十字链表性能优化技巧缓存友好行优先存储更适合缓存预取内存对齐确保数据结构内存对齐以提高访问速度批量操作对稀疏矩阵尽量使用批量操作减少开销现代应用扩展计算稀疏矩阵在上的高效实现分布式存储大规模矩阵的分布式存储方案压缩感知利用矩阵稀疏性进行数据压缩综合总结与学习建议数组与特殊矩阵是数据结构中的重要基础掌握好这部分内容对于理解更复杂的数据结构和算法至关重要知识体系学习建议进阶学习核心知识点数组存储地址计算公式行优先列优先存储特殊矩阵对称矩阵三角矩阵对角矩阵的压缩存储稀疏矩阵三元组表十字链表等存储方法算法复杂度各种操作的时空复杂度分析知识关联与线性表数组是线性表的推广与图论稀疏矩阵与图的邻接矩阵密切相关与数值计算矩阵运算在科学计算中的核心地位与数据库稀疏矩阵存储与数据库索引技术类似理论学习公式记忆熟练掌握各种地址计算公式推导理解理解公式背后的数学原理对比分析对比不同存储方法的优缺点实践练习代码实现动手实现各种矩阵存储结构题目练习多做真题和模拟题性能测试测试不同存储结构的性能差异考试技巧仔细审题注意下标范围和存储方式分步计算复杂题目分步骤计算检查验证计算结果要回头验证扩展知识分块矩阵大规模矩阵的分块存储技术稀疏矩阵格式等工业级格式并行计算矩阵运算的并行化实现压缩算法基于矩阵稀疏性的数据压缩研究方向高性能计算稀疏矩阵在超级计算机上的优化机器学习大规模稀疏矩阵在深度学习中的应用图神经网络图结构与稀疏矩阵的深度融合量子计算量子态与矩阵表示的关系例题精选例题循环队列队长循环队列求队列中元素个数解例题出栈序列合法性入栈序列为判断是否为合法出栈序列解模拟过程压压压弹此时栈为栈顶为但需弹出不合法因此不是合法出栈序列例题对称矩阵下标映射对称矩阵按行优先存储下三角于求对应中下标解属于下三角例题中缀转后缀将中缀表达式转换为后缀表达式解扫描过程运算符栈记为输出序列记为弹出直到输出丢弃弹出优先级不小于的运算符依次输出再将入栈输出入栈输出扫描结束弹出剩余运算符结果为例题出栈序列判定入栈序列为判断出栈序列是否合法解模拟入栈出栈依次压入弹出再压入弹出此时栈顶为弹出继续弹出可完成输出因此为合法序列例题出栈序列判定入栈序列为判断出栈序列是否合法解压入弹出此时栈顶为但下一次需要输出且被压住无法直接弹出继续入栈只能压入使更不可能弹出因此该序列不合法例题两栈实现队列的均摊用两个栈实现队列入队执行出队若栈为空则把全部倒入再证明出队操作均摊为解每个元素最多经历一次从栈到栈的转移入队时压入一次转移时从弹出一次并压入一次出队时从弹出一次因此每个元素总共参与常数次栈操作总成本为次队列操作的均摊时间复杂度为例题循环队列操作序列循环队列采用牺牲一格方案初始依次执行入队出队两次再入队求此时与队列长度解牺牲一格方案下队列长度模拟过程后队列中为此时因此例题地址计算二维数组行优先存储元素占字节求解下标从开始行优先代入例题三角矩阵压缩下三角矩阵的上三角元素均为常数按行优先压缩到一维数组求对应的存储下标解只存下三角含主对角线的个元素以及常数位例题快速转置定位稀疏矩阵三元组表中共有个非零元列数为说明快速转置中的含义并写出其递推关系解表示转置后三元组数组中第列转置后为第行的第一个非零元存放的位置若是原矩阵第列非零元个数则这样扫描原三元组数组时可以把每个元素直接放到目标位置并递增该列的当前位置指针本章疑难点循环队列判空判满牺牲一格方案最常用务必记住队满条件而非三种方案各有优缺点选择时结合题目要求栈与递归的关系每次函数调用都会在系统栈上开辟一个栈帧保存局部变量参数和返回地址递归深度过大会导致栈溢出可改用显式栈消除递归后缀表达式求值与中缀转后缀中缀转后缀用运算符栈后缀表达式求值用操作数栈两者使用的栈类型不同注意区分特殊矩阵压缩下标公式考试中常给出从开始的下标务必仔细读题后代入正确公式不要混淆行列十字链表三元组三元组转置更快快速转置十字链表插删更方便按照操作类型选择本章小结栈和队列都是操作受限的线性表本质上是特殊的线性表顺序栈链栈循环队列链队列是四种实现方式各有适用场景双端队列是栈和队列的推广输入输出受限双端队列是重要变体数组地址计算和特殊矩阵压缩存储是纯粹的计算题掌握公式即可稀疏矩阵三元组与十字链表是空间优化的重要思想十字链表插删优势明显',
   isPost: true,
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2026-03-20 16:58:33',
+  postUpdate: '2026-04-07 23:08:16',
   postMainColor: '#92A9EF',
 }</script><noscript><style type="text/css">
   #nav {
@@ -203,10 +203,11 @@ if (true) {
   document.addEventListener('pjax:send', () => { preloader.initLoading() })
   document.addEventListener('pjax:complete', () => { preloader.endLoading() })
 }</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/sparkle520?tab=repositories" title="github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="github"/><span class="back-menu-item-text">github</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">SPARKLE</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/408/" style="font-size: 1.05rem;">408<sup>22</sup></a><a href="/tags/AOP/" style="font-size: 1.05rem;">AOP<sup>1</sup></a><a href="/tags/Deep-Learning/" style="font-size: 1.05rem;">Deep Learning<sup>1</sup></a><a href="/tags/IoC/" style="font-size: 1.05rem;">IoC<sup>1</sup></a><a href="/tags/JSR303/" style="font-size: 1.05rem;">JSR303<sup>1</sup></a><a href="/tags/Matplotlib/" style="font-size: 1.05rem;">Matplotlib<sup>3</sup></a><a href="/tags/c/" style="font-size: 1.05rem;">c#<sup>2</sup></a><a href="/tags/java/" style="font-size: 1.05rem;">java<sup>4</sup></a><a href="/tags/python/" style="font-size: 1.05rem;">python<sup>5</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 1.05rem;">事务<sup>1</sup></a><a href="/tags/%E4%BA%8C%E6%AC%A1%E5%9E%8B/" style="font-size: 1.05rem;">二次型<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E3%80%82/" style="font-size: 1.05rem;">你的名字。<sup>3</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字同名小说<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%A4%96%E4%BC%A0%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字外传小说<sup>1</sup></a><a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size: 1.05rem;">写作<sup>4</sup></a><a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 1.05rem;">包管理<sup>1</sup></a><a href="/tags/%E5%8D%B7%E7%A7%AF%E5%85%AC%E5%BC%8F/" style="font-size: 1.05rem;">卷积公式<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90/" style="font-size: 1.05rem;">天气之子<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">天气之子同名小说<sup>1</sup></a><a href="/tags/%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">小说<sup>2</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">操作系统<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" style="font-size: 1.05rem;">数据校验<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" style="font-size: 1.05rem;">数据链路层<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 1.05rem;">概率论<sup>2</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 1.05rem;">概率论与数理统计<sup>7</sup></a><a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 1.05rem;">汇编<sup>9</sup></a><a href="/tags/%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80/" style="font-size: 1.05rem;">泰勒展开<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/" style="font-size: 1.05rem;">物理层<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%80%BC/" style="font-size: 1.05rem;">特征值<sup>2</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F/" style="font-size: 1.05rem;">特征向量<sup>2</sup></a><a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">线性代数<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" style="font-size: 1.05rem;">网络体系结构<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" style="font-size: 1.05rem;">网络层<sup>2</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 1.05rem;">英语<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">英语语法<sup>24</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1.05rem;">计算机组成原理<sup>5</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.05rem;">计算机网络<sup>5</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">语法<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">高等代数<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" style="font-size: 1.05rem;">高等数学<sup>21</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
-    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/04/"><span class="card-archive-list-date">四月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">三月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">29</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/02/"><span class="card-archive-list-date">二月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/01/"><span class="card-archive-list-date">一月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/12/"><span class="card-archive-list-date">十二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">15</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/11/"><span class="card-archive-list-date">十一月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/10/"><span class="card-archive-list-date">十月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/09/"><span class="card-archive-list-date">九月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url">数据结构</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/408/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>408</span></a><a class="article-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>数据结构</span></a></span></div></div><h1 class="post-title" itemprop="name headline">408-数据结构-3-栈、队列和数组</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-03-13T14:00:00.000Z" title="发表于 2026-03-13 22:00:00">2026-03-13</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-03-20T08:58:33.408Z" title="更新于 2026-03-20 16:58:33">2026-03-20</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">5.4k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>19分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="408-数据结构-3-栈、队列和数组"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为系守镇"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>系守镇</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%843/#post-comment" tabindex="-1"><span id="twikoo-count"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://pic1.imgdb.cn/item/69b00d9e6738cb8aa1298eb8.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%843/"><header><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url">数据结构</a><a href="/tags/408/" tabindex="-1" itemprop="url">408</a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" tabindex="-1" itemprop="url">数据结构</a><h1 id="CrawlerTitle" itemprop="name headline">408-数据结构-3-栈、队列和数组</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">sparkle520</span><time itemprop="dateCreated datePublished" datetime="2026-03-13T14:00:00.000Z" title="发表于 2026-03-13 22:00:00">2026-03-13</time><time itemprop="dateCreated datePublished" datetime="2026-03-20T08:58:33.408Z" title="更新于 2026-03-20 16:58:33">2026-03-20</time></header><h1 id="第3章-栈队列和数组">第3章 栈、队列和数组</h1>
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/04/"><span class="card-archive-list-date">四月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">三月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">29</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/02/"><span class="card-archive-list-date">二月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/01/"><span class="card-archive-list-date">一月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/12/"><span class="card-archive-list-date">十二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">15</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/11/"><span class="card-archive-list-date">十一月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/10/"><span class="card-archive-list-date">十月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/09/"><span class="card-archive-list-date">九月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url">数据结构</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/408/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>408</span></a><a class="article-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>数据结构</span></a></span></div></div><h1 class="post-title" itemprop="name headline">408-数据结构-3-栈、队列和数组</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-03-13T14:00:00.000Z" title="发表于 2026-03-13 22:00:00">2026-03-13</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-04-07T15:08:16.750Z" title="更新于 2026-04-07 23:08:16">2026-04-07</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">12.5k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>48分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="408-数据结构-3-栈、队列和数组"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为系守镇"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>系守镇</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%843/#post-comment" tabindex="-1"><span id="twikoo-count"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://pic1.imgdb.cn/item/69b00d9e6738cb8aa1298eb8.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2026/03/13/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%843/"><header><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url">数据结构</a><a href="/tags/408/" tabindex="-1" itemprop="url">408</a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" tabindex="-1" itemprop="url">数据结构</a><h1 id="CrawlerTitle" itemprop="name headline">408-数据结构-3-栈、队列和数组</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">sparkle520</span><time itemprop="dateCreated datePublished" datetime="2026-03-13T14:00:00.000Z" title="发表于 2026-03-13 22:00:00">2026-03-13</time><time itemprop="dateCreated datePublished" datetime="2026-04-07T15:08:16.750Z" title="更新于 2026-04-07 23:08:16">2026-04-07</time></header><h1 id="第3章-栈队列和数组">第3章 栈、队列和数组</h1>
 <h2 id="栈-stack">3.1 栈 ( Stack )</h2>
 <h3 id="定义与特性">3.1.1 定义与特性</h3>
-<div class="note info simple"><p><strong>栈</strong> 是只允许在 <strong>一端</strong>
+<div class="note info simple"><p><strong>定义</strong></p>
+<p><strong>栈</strong> 是只允许在 <strong>一端</strong>
 进行插入或删除操作的线性表. 允许操作的一端称为 <strong>栈顶</strong> (
 Top )，不允许操作的一端称为 <strong>栈底</strong> ( Bottom ).</p>
 </div>
@@ -257,7 +258,8 @@ class="math inline">\(x\)</span> 但不弹出</td>
 </tr>
 </tbody>
 </table>
-<div class="note warning simple"><p><code>GetTop</code> 与 <code>Pop</code> 的区别 <code>GetTop</code> 只
+<div class="note warning simple"><p><strong>区别</strong></p>
+<p><code>GetTop</code> 与 <code>Pop</code> 的区别 <code>GetTop</code> 只
 <strong>读取</strong> 栈顶，栈不变化; <code>Pop</code> 会
 <strong>删除</strong> 栈顶元素.</p>
 </div>
@@ -316,14 +318,37 @@ class="math inline">\(O(1)\)</span>.</li>
 </tbody>
 </table>
 <h3 id="栈的应用">3.1.5 栈的应用</h3>
-<div class="tabs" id="stack-app"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="stack-app-1">括号匹配</button><button type="button" class="tab " data-href="stack-app-2">中缀转后缀</button><button type="button" class="tab " data-href="stack-app-3">后缀表达式求值</button><button type="button" class="tab " data-href="stack-app-4">递归与 DFS</button></ul><div class="tab-contents"><div class="tab-item-content active" id="stack-app-1"><p><strong>算法思路</strong></p>
+<div class="tabs" id="stack-app"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="stack-app-1">括号匹配</button><button type="button" class="tab " data-href="stack-app-2">中缀转后缀</button><button type="button" class="tab " data-href="stack-app-3">后缀表达式求值</button><button type="button" class="tab " data-href="stack-app-4">递归与 DFS</button><button type="button" class="tab " data-href="stack-app-5">数制转换</button><button type="button" class="tab " data-href="stack-app-6">行编辑与撤销功能</button><button type="button" class="tab " data-href="stack-app-7">迷宫求解</button><button type="button" class="tab " data-href="stack-app-8">单调栈</button></ul><div class="tab-contents"><div class="tab-item-content active" id="stack-app-1"><p><strong>问题描述</strong> 检查表达式中的括号是否正确配对.</p>
+<p><strong>算法思路</strong></p>
 <ol type="1">
 <li>遇到左括号 <code>(</code>、<code>[</code>、<code>{</code> →
 入栈.</li>
 <li>遇到右括号 → 检查栈顶 若匹配则出栈; 若不匹配或栈空则失败.</li>
 <li>扫描结束后栈为空则匹配成功.</li>
 </ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> <span class="title function_">bracketCheck</span><span class="params">(<span class="type">char</span> *str, <span class="type">int</span> len)</span> &#123;</span><br><span class="line">    SqStack S; InitStack(S);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (str[i] == <span class="string">&#x27;(&#x27;</span> || str[i] == <span class="string">&#x27;[&#x27;</span> || str[i] == <span class="string">&#x27;&#123;&#x27;</span>)</span><br><span class="line">            Push(S, str[i]);</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (StackEmpty(S)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="type">char</span> topElem; Pop(S, topElem);</span><br><span class="line">            <span class="keyword">if</span> (str[i] == <span class="string">&#x27;)&#x27;</span> &amp;&amp; topElem != <span class="string">&#x27;(&#x27;</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">if</span> (str[i] == <span class="string">&#x27;]&#x27;</span> &amp;&amp; topElem != <span class="string">&#x27;[&#x27;</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">if</span> (str[i] == <span class="string">&#x27;&#125;&#x27;</span> &amp;&amp; topElem != <span class="string">&#x27;&#123;&#x27;</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> StackEmpty(S);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-item-content" id="stack-app-2"><p><strong>规则</strong> ( 运算符栈 )</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> <span class="title function_">bracketCheck</span><span class="params">(<span class="type">char</span> *str, <span class="type">int</span> len)</span> &#123;</span><br><span class="line">    SqStack S; InitStack(S);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (str[i] == <span class="string">&#x27;(&#x27;</span> || str[i] == <span class="string">&#x27;[&#x27;</span> || str[i] == <span class="string">&#x27;&#123;&#x27;</span>)</span><br><span class="line">            Push(S, str[i]);</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (StackEmpty(S)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="type">char</span> topElem; Pop(S, topElem);</span><br><span class="line">            <span class="keyword">if</span> (str[i] == <span class="string">&#x27;)&#x27;</span> &amp;&amp; topElem != <span class="string">&#x27;(&#x27;</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">if</span> (str[i] == <span class="string">&#x27;]&#x27;</span> &amp;&amp; topElem != <span class="string">&#x27;[&#x27;</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">if</span> (str[i] == <span class="string">&#x27;&#125;&#x27;</span> &amp;&amp; topElem != <span class="string">&#x27;&#123;&#x27;</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> StackEmpty(S);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note warning simple">
+<p>
+<strong>算法复杂度分析</strong> <strong>时间复杂度</strong> <span
+class="math inline">(O(n))</span>，其中 <span
+class="math inline">(n)</span> 为字符串长度，每个字符最多入栈出栈各一次.
+</p>
+<p>
+<strong>空间复杂度</strong> <span
+class="math inline">(O(n))</span>，最坏情况下所有左括号都入栈.
+</p>
+</div>
+<p><strong>应用扩展</strong></p>
+<ul>
+<li><strong>编译器语法检查</strong> : 检查括号、引号是否配对</li>
+<li><strong>HTML/XML 标签匹配</strong> :
+<code>&lt;div&gt;...&lt;/div&gt;</code> 的嵌套检查</li>
+<li><strong>表达式合法性验证</strong> :
+数学表达式、编程语言的语法分析</li>
+</ul></div><div class="tab-item-content" id="stack-app-2"><p><strong>问题描述</strong>
+将人类习惯的中缀表达式转换为计算机易于处理的后缀表达式 ( 逆波兰表达式
+).</p>
+<p><strong>规则</strong> ( 运算符栈 )</p>
 <ol type="1">
 <li>遇到 <strong>操作数</strong> → 直接输出.</li>
 <li>遇到 <strong>左括号</strong> <code>(</code> → 入栈.</li>
@@ -342,7 +367,310 @@ class="math inline">\(O(1)\)</span>.</li>
 </p>
 </div>
 <p><strong>示例</strong> <code>A + B * C - D</code> →
-<code>A B C * + D -</code></p></div><div class="tab-item-content" id="stack-app-3"><p><strong>算法思路</strong> ( 操作数栈 )</p>
+<code>A B C * + D -</code></p>
+<p><strong>详细模拟过程</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">扫描字符</th>
+<th style="text-align: left;">动作说明</th>
+<th style="text-align: left;">运算符栈 ( 底→顶 )</th>
+<th style="text-align: left;">输出序列</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">操作数直接输出</td>
+<td style="text-align: left;">( 空 )</td>
+<td style="text-align: left;">A</td>
+</tr>
+<tr>
+<td style="text-align: left;">+</td>
+<td style="text-align: left;">入栈</td>
+<td style="text-align: left;">+</td>
+<td style="text-align: left;">A</td>
+</tr>
+<tr>
+<td style="text-align: left;">B</td>
+<td style="text-align: left;">操作数直接输出</td>
+<td style="text-align: left;">+</td>
+<td style="text-align: left;">A B</td>
+</tr>
+<tr>
+<td style="text-align: left;">*</td>
+<td style="text-align: left;">* 优先级高于 +，入栈</td>
+<td style="text-align: left;">+ *</td>
+<td style="text-align: left;">A B</td>
+</tr>
+<tr>
+<td style="text-align: left;">C</td>
+<td style="text-align: left;">操作数直接输出</td>
+<td style="text-align: left;">+ *</td>
+<td style="text-align: left;">A B C</td>
+</tr>
+<tr>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">- 优先级低于 * 和 +，弹出 *、+，-
+入栈</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">A B C * +</td>
+</tr>
+<tr>
+<td style="text-align: left;">D</td>
+<td style="text-align: left;">操作数直接输出</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">A B C * + D</td>
+</tr>
+<tr>
+<td style="text-align: left;">结束</td>
+<td style="text-align: left;">弹出栈中剩余运算符</td>
+<td style="text-align: left;">( 空 )</td>
+<td style="text-align: left;">A B C * + D -</td>
+</tr>
+</tbody>
+</table>
+<p><strong>扩展 : 中缀转前缀</strong></p>
+<p><strong>算法思路</strong> ( 从右向左扫描，运算符栈 )</p>
+<ol type="1">
+<li>遇到 <strong>操作数</strong> → 直接输出 ( 到前缀表达式的前面 )</li>
+<li>遇到 <strong>右括号</strong> <code>)</code> → 入栈</li>
+<li>遇到 <strong>左括号</strong> <code>(</code> → 弹出并输出直到遇到
+<code>)</code>，右括号不输出</li>
+<li>遇到 <strong>运算符</strong> → 弹出并输出所有优先级
+<strong>大于</strong> 当前运算符的栈顶运算符，再将当前运算符入栈</li>
+<li>扫描结束 → 弹出并输出栈中所有运算符</li>
+<li>最终结果需要反转</li>
+</ol>
+<div class="note info simple">
+<p>
+<strong>与中缀转后缀的区别</strong>
+</p>
+<ul>
+<li>
+<strong>扫描方向</strong> : 从右向左 ( 后缀是从左向右 )
+</li>
+<li>
+<strong>括号处理</strong> : 右括号入栈，左括号触发弹出 (
+后缀是左括号入栈，右括号触发弹出 )
+</li>
+<li>
+<strong>优先级比较</strong> : 只弹出优先级 <strong>大于</strong>
+的运算符 ( 后缀是弹出优先级 <strong>大于等于</strong> 的 )
+</li>
+<li>
+<strong>结果处理</strong> : 需要反转最终结果
+</li>
+</ul>
+</div>
+<p><strong>示例</strong> <code>A + B * C - D</code> →
+<code>- + A * B C D</code></p>
+<p><strong>详细模拟过程</strong></p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">扫描字符</th>
+<th style="text-align: left;">动作说明</th>
+<th style="text-align: left;">运算符栈 ( 底→顶 )</th>
+<th style="text-align: left;">前缀表达式 ( 当前→最终 )</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">D</td>
+<td style="text-align: left;">操作数直接输出</td>
+<td style="text-align: left;">( 空 )</td>
+<td style="text-align: left;">D</td>
+</tr>
+<tr>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">入栈</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">D</td>
+</tr>
+<tr>
+<td style="text-align: left;">C</td>
+<td style="text-align: left;">操作数直接输出</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">C D</td>
+</tr>
+<tr>
+<td style="text-align: left;">*</td>
+<td style="text-align: left;">* 优先级大于 -，入栈</td>
+<td style="text-align: left;">- *</td>
+<td style="text-align: left;">C D</td>
+</tr>
+<tr>
+<td style="text-align: left;">B</td>
+<td style="text-align: left;">操作数直接输出</td>
+<td style="text-align: left;">- *</td>
+<td style="text-align: left;">B C D</td>
+</tr>
+<tr>
+<td style="text-align: left;">+</td>
+<td style="text-align: left;">+ 优先级小于 <em>，弹出 </em>；+
+优先级小于 -，弹出 -；+ 入栈</td>
+<td style="text-align: left;">+</td>
+<td style="text-align: left;">* B C D</td>
+</tr>
+<tr>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">操作数直接输出</td>
+<td style="text-align: left;">+</td>
+<td style="text-align: left;">A * B C D</td>
+</tr>
+<tr>
+<td style="text-align: left;">结束</td>
+<td style="text-align: left;">弹出栈中剩余运算符</td>
+<td style="text-align: left;">( 空 )</td>
+<td style="text-align: left;">+ A * B C D</td>
+</tr>
+<tr>
+<td style="text-align: left;">反转结果</td>
+<td style="text-align: left;">反转整个表达式</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;"><code>- + A * B C D</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>带括号的示例</strong> <code>( A + B ) * C</code> →
+<code>* + A B C</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">扫描字符</th>
+<th style="text-align: left;">动作说明</th>
+<th style="text-align: left;">运算符栈</th>
+<th style="text-align: left;">前缀表达式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">C</td>
+<td style="text-align: left;">输出</td>
+<td style="text-align: left;">( 空 )</td>
+<td style="text-align: left;">C</td>
+</tr>
+<tr>
+<td style="text-align: left;">*</td>
+<td style="text-align: left;">入栈</td>
+<td style="text-align: left;">*</td>
+<td style="text-align: left;">C</td>
+</tr>
+<tr>
+<td style="text-align: left;">)</td>
+<td style="text-align: left;">入栈</td>
+<td style="text-align: left;">* )</td>
+<td style="text-align: left;">C</td>
+</tr>
+<tr>
+<td style="text-align: left;">B</td>
+<td style="text-align: left;">输出</td>
+<td style="text-align: left;">* )</td>
+<td style="text-align: left;">B C</td>
+</tr>
+<tr>
+<td style="text-align: left;">+</td>
+<td style="text-align: left;">入栈</td>
+<td style="text-align: left;">* ) +</td>
+<td style="text-align: left;">B C</td>
+</tr>
+<tr>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">输出</td>
+<td style="text-align: left;">* ) +</td>
+<td style="text-align: left;">A B C</td>
+</tr>
+<tr>
+<td style="text-align: left;">(</td>
+<td style="text-align: left;">弹出直到遇到 )</td>
+<td style="text-align: left;">*</td>
+<td style="text-align: left;">+ A B C</td>
+</tr>
+<tr>
+<td style="text-align: left;">结束</td>
+<td style="text-align: left;">弹出栈中剩余运算符</td>
+<td style="text-align: left;">( 空 )</td>
+<td style="text-align: left;">* + A B C</td>
+</tr>
+<tr>
+<td style="text-align: left;">反转结果</td>
+<td style="text-align: left;">反转整个表达式</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;"><code>* + A B C</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>代码实现</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">infixToPrefix</span><span class="params">(<span class="type">char</span> *infix, <span class="type">char</span> *prefix)</span> &#123;</span><br><span class="line">    SqStack opStack; InitStack(opStack);  <span class="comment">// 运算符栈</span></span><br><span class="line">    SqStack output; InitStack(output);    <span class="comment">// 输出栈 ( 用于反转 )</span></span><br><span class="line">    <span class="type">int</span> len = <span class="built_in">strlen</span>(infix);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 从右向左扫描</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = len - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">isalnum</span>(infix[i])) &#123;</span><br><span class="line">            <span class="comment">// 操作数直接压入输出栈</span></span><br><span class="line">            Push(output, infix[i]);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (infix[i] == <span class="string">&#x27;)&#x27;</span>) &#123;</span><br><span class="line">            <span class="comment">// 右括号入栈</span></span><br><span class="line">            Push(opStack, infix[i]);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (infix[i] == <span class="string">&#x27;(&#x27;</span>) &#123;</span><br><span class="line">            <span class="comment">// 左括号 : 弹出直到遇到右括号</span></span><br><span class="line">            <span class="keyword">while</span> (!StackEmpty(opStack)) &#123;</span><br><span class="line">                <span class="type">char</span> top; Pop(opStack, top);</span><br><span class="line">                <span class="keyword">if</span> (top == <span class="string">&#x27;)&#x27;</span>) <span class="keyword">break</span>;</span><br><span class="line">                Push(output, top);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 运算符</span></span><br><span class="line">            <span class="keyword">while</span> (!StackEmpty(opStack)) &#123;</span><br><span class="line">                <span class="type">char</span> top; GetTop(opStack, top);</span><br><span class="line">                <span class="keyword">if</span> (top == <span class="string">&#x27;)&#x27;</span>) <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">if</span> (getPriority(top) &gt; getPriority(infix[i])) &#123;</span><br><span class="line">                    Pop(opStack, top);</span><br><span class="line">                    Push(output, top);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            Push(opStack, infix[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 弹出栈中剩余运算符</span></span><br><span class="line">    <span class="keyword">while</span> (!StackEmpty(opStack)) &#123;</span><br><span class="line">        <span class="type">char</span> op; Pop(opStack, op);</span><br><span class="line">        Push(output, op);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 从输出栈构建前缀表达式</span></span><br><span class="line">    <span class="type">int</span> idx = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (!StackEmpty(output)) &#123;</span><br><span class="line">        <span class="type">char</span> ch; Pop(output, ch);</span><br><span class="line">        prefix[idx++] = ch;</span><br><span class="line">    &#125;</span><br><span class="line">    prefix[idx] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取运算符优先级</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">getPriority</span><span class="params">(<span class="type">char</span> op)</span> &#123;</span><br><span class="line">    <span class="keyword">switch</span> (op) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;+&#x27;</span>: <span class="keyword">case</span> <span class="string">&#x27;-&#x27;</span>: <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;*&#x27;</span>: <span class="keyword">case</span> <span class="string">&#x27;/&#x27;</span>: <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">default</span>: <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>更多示例</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">中缀表达式</th>
+<th style="text-align: left;">前缀表达式</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>A + B</code></td>
+<td style="text-align: left;"><code>+ A B</code></td>
+<td style="text-align: left;">简单加法</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>A * B + C</code></td>
+<td style="text-align: left;"><code>+ * A B C</code></td>
+<td style="text-align: left;">乘法的优先级高于加法</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>A + B * C</code></td>
+<td style="text-align: left;"><code>+ A * B C</code></td>
+<td style="text-align: left;">乘法的优先级高于加法</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>( A + B ) * C</code></td>
+<td style="text-align: left;"><code>* + A B C</code></td>
+<td style="text-align: left;">括号改变优先级</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>A + B + C</code></td>
+<td style="text-align: left;"><code>+ + A B C</code></td>
+<td style="text-align: left;">相同优先级从左向右结合</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>A - B - C</code></td>
+<td style="text-align: left;"><code>- - A B C</code></td>
+<td style="text-align: left;">减法不满足结合律，注意顺序</td>
+</tr>
+</tbody>
+</table>
+<div class="note warning simple">
+<p>
+<strong>重要注意事项</strong>
+</p>
+<ul>
+<li>
+前缀表达式也称为 <strong>波兰表达式</strong>
+</li>
+<li>
+前缀表达式的求值也是从右向左扫描
+</li>
+<li>
+对于不满足结合律的运算符 ( 如减法、除法 )，顺序很重要
+</li>
+<li>
+前缀表达式不需要括号，因为运算符的位置已经明确了运算顺序
+</li>
+</ul>
+</div></div><div class="tab-item-content" id="stack-app-3"><p><strong>问题描述</strong> 计算后缀表达式 ( 逆波兰表达式 ) 的值.</p>
+<p><strong>算法思路</strong> ( 操作数栈 )</p>
 <ol type="1">
 <li>遇到 <strong>操作数</strong> → 入栈.</li>
 <li>遇到 <strong>运算符</strong> →
@@ -350,19 +678,292 @@ class="math inline">\(O(1)\)</span>.</li>
 <li>扫描结束 → 栈中唯一元素即为结果.</li>
 </ol>
 <p><strong>示例</strong> <code>2 3 4 * +</code> → 弹出 3、4 相乘得
-12，再弹出 2 与 12 相加得 14.</p></div><div class="tab-item-content" id="stack-app-4"><p><strong>递归调用</strong> 系统用 <strong>调用栈</strong>
+12，再弹出 2 与 12 相加得 14.</p>
+<p><strong>代码实现</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">evaluateRPN</span><span class="params">(<span class="type">char</span> *tokens[], <span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="built_in">stack</span>[<span class="number">100</span>]; <span class="type">int</span> top = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">isdigit</span>(tokens[i][<span class="number">0</span>])) &#123;</span><br><span class="line">            <span class="built_in">stack</span>[++top] = atoi(tokens[i]);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="type">int</span> b = <span class="built_in">stack</span>[top--];  <span class="comment">// 先弹出的是右操作数</span></span><br><span class="line">            <span class="type">int</span> a = <span class="built_in">stack</span>[top--];  <span class="comment">// 后弹出的是左操作数</span></span><br><span class="line">            <span class="keyword">switch</span> (tokens[i][<span class="number">0</span>]) &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;+&#x27;</span>: <span class="built_in">stack</span>[++top] = a + b; <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;-&#x27;</span>: <span class="built_in">stack</span>[++top] = a - b; <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;*&#x27;</span>: <span class="built_in">stack</span>[++top] = a * b; <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;/&#x27;</span>: <span class="built_in">stack</span>[++top] = a / b; <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">stack</span>[top];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note warning simple">
+<p>
+<strong>注意</strong>
+减法和除法不满足交换律，先弹出的是右操作数，后弹出的是左操作数.
+顺序不能颠倒!
+</p>
+</div>
+<p><strong>示例模拟</strong> 计算 <code>3 4 + 2 * 7 /</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">步骤</th>
+<th style="text-align: left;">扫描</th>
+<th style="text-align: left;">动作</th>
+<th style="text-align: left;">栈内容 ( 底→顶 )</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">入栈</td>
+<td style="text-align: left;">[3]</td>
+</tr>
+<tr>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">入栈</td>
+<td style="text-align: left;">[3, 4]</td>
+</tr>
+<tr>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">+</td>
+<td style="text-align: left;">弹出 3,4，计算 3+4=7，入栈</td>
+<td style="text-align: left;">[7]</td>
+</tr>
+<tr>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">入栈</td>
+<td style="text-align: left;">[7, 2]</td>
+</tr>
+<tr>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">*</td>
+<td style="text-align: left;">弹出 7,2，计算 7*2=14，入栈</td>
+<td style="text-align: left;">[14]</td>
+</tr>
+<tr>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">入栈</td>
+<td style="text-align: left;">[14, 7]</td>
+</tr>
+<tr>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">/</td>
+<td style="text-align: left;">弹出 14,7，计算 14/7=2，入栈</td>
+<td style="text-align: left;">[2]</td>
+</tr>
+</tbody>
+</table>
+<p>结果 : 2</p></div><div class="tab-item-content" id="stack-app-4"><p><strong>递归调用</strong> 系统用 <strong>调用栈</strong>
 保存每次函数调用的返回地址、局部变量和参数.
 递归调用本质是栈的隐式应用.</p>
 <ul>
 <li>递归深度过大会导致 <strong>栈溢出</strong> ( Stack Overflow ).</li>
 <li>所有递归算法均可用栈显式模拟，消除递归.</li>
 </ul>
+<p><strong>示例 : 递归转非递归</strong></p>
+<p>递归求阶乘 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">factorial</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> n * factorial(n - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>用栈模拟 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">factorial_iter</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">    SqStack S; InitStack(S);</span><br><span class="line">    <span class="keyword">while</span> (n &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        Push(S, n);</span><br><span class="line">        n--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> result = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (!StackEmpty(S)) &#123;</span><br><span class="line">        <span class="type">int</span> x; Pop(S, x);</span><br><span class="line">        result *= x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><strong>深度优先搜索 ( DFS )</strong></p>
 <ol type="1">
 <li>将起始结点入栈.</li>
 <li>弹出栈顶结点，标记已访问，将其未访问邻居依次入栈.</li>
 <li>重复直到栈为空.</li>
-</ol></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">DFS</span><span class="params">(Graph G, <span class="type">int</span> v0)</span> &#123;</span><br><span class="line">    SqStack S; InitStack(S);</span><br><span class="line">    <span class="type">bool</span> visited[MAX]; <span class="built_in">memset</span>(visited, <span class="literal">false</span>, <span class="keyword">sizeof</span>(visited));</span><br><span class="line">    Push(S, v0);</span><br><span class="line">    <span class="keyword">while</span> (!StackEmpty(S)) &#123;</span><br><span class="line">        <span class="type">int</span> v; Pop(S, v);</span><br><span class="line">        <span class="keyword">if</span> (visited[v]) <span class="keyword">continue</span>;</span><br><span class="line">        visited[v] = <span class="literal">true</span>;</span><br><span class="line">        visit(v);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> w = FirstNeighbor(G, v); w &gt;= <span class="number">0</span>; w = NextNeighbor(G, v, w)) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!visited[w]) Push(S, w);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note info simple">
+<p>
+<strong>栈在 DFS 中的作用</strong>
+保存待访问的结点，保证”深入”的特性，即最后发现的结点最先被访问.
+</p>
+</div></div><div class="tab-item-content" id="stack-app-5"><p><strong>问题</strong> 将十进制数 <span
+class="math inline">\(N\)</span> 转换为 <span
+class="math inline">\(d\)</span> 进制数.</p>
+<p><strong>算法思路</strong> 除基取余法，用栈保存余数，最后逆序输出.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">conversion</span><span class="params">(<span class="type">int</span> N, <span class="type">int</span> d)</span> &#123;</span><br><span class="line">    SqStack S; InitStack(S);</span><br><span class="line">    <span class="keyword">while</span> (N &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        Push(S, N % d);</span><br><span class="line">        N /= d;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (!StackEmpty(S)) &#123;</span><br><span class="line">        <span class="type">int</span> x; Pop(S, x);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>示例</strong> <span class="math inline">\(1348\)</span>
+转八进制</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">步骤</th>
+<th style="text-align: left;">N</th>
+<th style="text-align: left;">N % 8</th>
+<th style="text-align: left;">栈内容 ( 底→顶 )</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">初始</td>
+<td style="text-align: left;">1348</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">( 空 )</td>
+</tr>
+<tr>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">168</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">[4]</td>
+</tr>
+<tr>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">21</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">[4, 0]</td>
+</tr>
+<tr>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">[4, 0, 5]</td>
+</tr>
+<tr>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">[4, 0, 5, 2]</td>
+</tr>
+</tbody>
+</table>
+<p>输出 : <span class="math inline">\(2504_8\)</span></p>
+<div class="note info simple">
+<p>
+<strong>为什么需要栈</strong>
+除基取余法得到的余数顺序是从低位到高位，而输出需要从高位到低位，栈的
+LIFO 特性正好实现逆序.
+</p>
+</div></div><div class="tab-item-content" id="stack-app-6"><p><strong>行编辑器</strong> 处理简单的退格符 <code>#</code> 和清行符
+<code>@</code>.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">lineEdit</span><span class="params">()</span> &#123;</span><br><span class="line">    SqStack S; InitStack(S);</span><br><span class="line">    <span class="type">char</span> ch, c;</span><br><span class="line">    <span class="keyword">while</span> ((ch = getchar()) != EOF) &#123;</span><br><span class="line">        <span class="keyword">if</span> (ch == <span class="string">&#x27;#&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!StackEmpty(S)) Pop(S, c);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ch == <span class="string">&#x27;@&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">while</span> (!StackEmpty(S)) Pop(S, c);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            Push(S, ch);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (!StackEmpty(S)) &#123;</span><br><span class="line">        Pop(S, c);</span><br><span class="line">        <span class="built_in">putchar</span>(c);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>撤销功能</strong>
+文本编辑器的”撤销”操作本质是用栈保存历史状态.</p>
+<ul>
+<li>每次修改前将当前状态压栈</li>
+<li>撤销时弹出栈顶状态并恢复</li>
+</ul>
+<div class="note info simple">
+<p>
+<strong>现代编辑器的改进</strong> 使用两个栈实现撤销/重做功能.
+</p>
+<ul>
+<li>
+<strong>撤销栈</strong> : 保存可撤销的状态
+</li>
+<li>
+<strong>重做栈</strong> : 撤销时弹出的状态存入重做栈，重做时再压回撤销栈
+</li>
+</ul>
+</div>
+<p><strong>双栈实现撤销/重做</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">修改 → 压入撤销栈</span><br><span class="line">撤销 → 弹出撤销栈顶，压入重做栈</span><br><span class="line">重做 → 弹出重做栈顶，压入撤销栈</span><br></pre></td></tr></table></figure></div><div class="tab-item-content" id="stack-app-7"><p><strong>问题</strong> 从迷宫入口到出口找一条路径.</p>
+<p><strong>算法思路</strong> 用栈保存当前路径，回溯时退栈.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> x, y, dir;  <span class="comment">// 坐标和当前探索方向</span></span><br><span class="line">&#125; Box;</span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> <span class="title function_">mazePath</span><span class="params">(Maze M, <span class="type">int</span> start_x, <span class="type">int</span> start_y, <span class="type">int</span> end_x, <span class="type">int</span> end_y)</span> &#123;</span><br><span class="line">    SqStack S; InitStack(S);</span><br><span class="line">    Box cur = &#123;start_x, start_y, <span class="number">0</span>&#125;;</span><br><span class="line">    M.visited[start_x][start_y] = <span class="literal">true</span>;</span><br><span class="line">    Push(S, cur);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> (!StackEmpty(S)) &#123;</span><br><span class="line">        Pop(S, cur);</span><br><span class="line">        <span class="keyword">if</span> (cur.x == end_x &amp;&amp; cur.y == end_y) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> dx[] = &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">-1</span>&#125;;  <span class="comment">// 右下左上</span></span><br><span class="line">        <span class="type">int</span> dy[] = &#123;<span class="number">1</span>, <span class="number">0</span>, <span class="number">-1</span>, <span class="number">0</span>&#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="type">bool</span> found = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> d = cur.dir; d &lt; <span class="number">4</span>; d++) &#123;</span><br><span class="line">            <span class="type">int</span> nx = cur.x + dx[d];</span><br><span class="line">            <span class="type">int</span> ny = cur.y + dy[d];</span><br><span class="line">            <span class="keyword">if</span> (isValid(M, nx, ny) &amp;&amp; !M.visited[nx][ny]) &#123;</span><br><span class="line">                cur.dir = d + <span class="number">1</span>;  <span class="comment">// 下次从下一个方向继续</span></span><br><span class="line">                Push(S, cur);</span><br><span class="line">                cur.x = nx; cur.y = ny; cur.dir = <span class="number">0</span>;</span><br><span class="line">                M.visited[nx][ny] = <span class="literal">true</span>;</span><br><span class="line">                found = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!found) <span class="keyword">continue</span>;  <span class="comment">// 回溯</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note warning simple">
+<p>
+<strong>栈在迷宫中的作用</strong>
+保存从入口到当前位置的路径，当遇到死胡同时回溯到上一个岔路口.
+</p>
+</div>
+<p><strong>算法特点</strong></p>
+<ul>
+<li>深度优先搜索策略</li>
+<li>栈中保存的是当前探索路径</li>
+<li>回溯时自动退回上一个决策点</li>
+</ul></div><div class="tab-item-content" id="stack-app-8"><p><strong>定义</strong> 栈内元素保持单调递增或单调递减的栈.</p>
+<p><strong>典型应用</strong>
+寻找数组中每个元素左边/右边第一个比它大/小的元素.</p>
+<p><strong>示例 : 每日温度问题</strong></p>
+<p>给定温度数组 <span
+class="math inline">\(T\)</span>，求对于每一天，下一次温度更高需要等待几天.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>* <span class="title function_">dailyTemperatures</span><span class="params">(<span class="type">int</span>* T, <span class="type">int</span> n, <span class="type">int</span>* returnSize)</span> &#123;</span><br><span class="line">    <span class="type">int</span>* ans = (<span class="type">int</span>*)<span class="built_in">calloc</span>(n, <span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">    <span class="type">int</span> <span class="built_in">stack</span>[<span class="number">100000</span>]; <span class="type">int</span> top = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">while</span> (top &gt;= <span class="number">0</span> &amp;&amp; T[i] &gt; T[<span class="built_in">stack</span>[top]]) &#123;</span><br><span class="line">            <span class="type">int</span> idx = <span class="built_in">stack</span>[top--];</span><br><span class="line">            ans[idx] = i - idx;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">stack</span>[++top] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    *returnSize = n;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>示例</strong> <span class="math inline">\(T = [73, 74, 75,
+71, 69, 72, 76, 73]\)</span></p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">索引</th>
+<th style="text-align: left;">温度</th>
+<th style="text-align: left;">动作</th>
+<th style="text-align: left;">栈内容 ( 索引 )</th>
+<th style="text-align: left;">答案更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">73</td>
+<td style="text-align: left;">入栈</td>
+<td style="text-align: left;">[0]</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">74</td>
+<td style="text-align: left;">74&gt;73，弹出 0，ans[0]=1，74 入栈</td>
+<td style="text-align: left;">[1]</td>
+<td style="text-align: left;">ans[0] = 1</td>
+</tr>
+<tr>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">75</td>
+<td style="text-align: left;">75&gt;74，弹出 1，ans[1]=1，75 入栈</td>
+<td style="text-align: left;">[2]</td>
+<td style="text-align: left;">ans[1] = 1</td>
+</tr>
+<tr>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">71</td>
+<td style="text-align: left;">71&lt;75，入栈</td>
+<td style="text-align: left;">[2, 3]</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">69</td>
+<td style="text-align: left;">69&lt;71，入栈</td>
+<td style="text-align: left;">[2, 3, 4]</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">72&gt;69，弹出 4，ans[4]=1；72&gt;71，弹出
+3，ans[3]=2；72&lt;75，入栈</td>
+<td style="text-align: left;">[2, 5]</td>
+<td style="text-align: left;">ans[4] = 1, ans[3] = 2</td>
+</tr>
+<tr>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">76</td>
+<td style="text-align: left;">76&gt;72，弹出 5，ans[5]=1；76&gt;75，弹出
+2，ans[2]=4；76 入栈</td>
+<td style="text-align: left;">[6]</td>
+<td style="text-align: left;">ans[5] = 1, ans[2] = 4</td>
+</tr>
+<tr>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">73</td>
+<td style="text-align: left;">73&lt;76，入栈</td>
+<td style="text-align: left;">[6, 7]</td>
+<td style="text-align: left;">-</td>
+</tr>
+</tbody>
+</table>
+<p>结果 : <span class="math inline">\([1, 1, 4, 2, 1, 1, 0,
+0]\)</span></p>
+<div class="note info simple">
+<p>
+<strong>算法分析</strong>
+</p>
+<p>
+<strong>时间复杂度</strong> <span
+class="math inline">(O(n))</span>，每个元素最多入栈出栈各一次.
+</p>
+<p>
+<strong>空间复杂度</strong> <span
+class="math inline">(O(n))</span>，栈的大小.
+</p>
+<p>
+<strong>单调栈的核心思想</strong> 维护一个单调的候选集合，当遇到更大 (
+或更小 ) 元素时，批量处理栈中元素.
+</p>
+</div></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
 <h3 id="常考点">3.1.6 408 常考点</h3>
 <div class="tabs" id="stack-points"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="stack-points-1">出栈序列判定</button><button type="button" class="tab " data-href="stack-points-2">Catalan 数</button><button type="button" class="tab " data-href="stack-points-3">共享栈</button><button type="button" class="tab " data-href="stack-points-4">表达式</button></ul><div class="tab-contents"><div class="tab-item-content active" id="stack-points-1"><div class="note info simple">
 <p>
@@ -380,14 +981,149 @@ class="math inline">\(k\)</span> 后移</li>
 <li>扫描结束后若成功输出完全部 <span
 class="math inline">\(b\)</span>，则合法</li>
 </ul>
-<p>常见误区是只看「局部可出」而不做全流程模拟.</p></div><div class="tab-item-content" id="stack-points-2"><ul>
-<li><span class="math inline">\(n\)</span> 个元素的合法出栈序列数为
-<span class="math display">\[C_n =
-\dfrac{1}{n+1}\dbinom{2n}{n}.\]</span></li>
-<li>典型等价模型是「括号匹配」或「Dyck 路径」</li>
-<li>408 常以小 <span class="math inline">\(n\)</span>
-让你列举或判断序列数量</li>
-</ul></div><div class="tab-item-content" id="stack-points-3"><ul>
+<p>常见误区是只看「局部可出」而不做全流程模拟.</p></div><div class="tab-item-content" id="stack-points-2"><div class="note info simple">
+<p>
+<strong>定义</strong>
+</p>
+<p>
+<strong>卡特兰数</strong> ( Catalan Number )
+是组合数学中的重要序列，描述了满足特定约束条件的组合结构的数量.
+</p>
+</div>
+<p><strong>卡特兰数定义</strong></p>
+<p><strong>显式公式</strong> <span class="math display">\[C_n =
+\dfrac{1}{n+1}\dbinom{2n}{n} = \dfrac{(2n)!}{(n+1)!n!}\]</span></p>
+<p><strong>递归定义</strong> <span class="math display">\[C_0 = 1,\quad
+C_{n+1} = \sum_{k=0}^{n} C_k C_{n-k}\]</span></p>
+<p><strong>数学推导</strong></p>
+<p><strong>方法一 : 反射原理 ( 经典推导 )</strong></p>
+<p><strong>问题</strong> : 计算 <span class="math inline">\(n\)</span>
+个元素的合法出栈序列数</p>
+<p><strong>步骤</strong></p>
+<ol type="1">
+<li><strong>总序列数</strong> : <span class="math inline">\(n\)</span>
+次 Push 和 <span class="math inline">\(n\)</span> 次 Pop 的排列数为
+<span class="math inline">\(\binom{2n}{n}\)</span></li>
+<li><strong>非法序列</strong> : 存在某个时刻 Pop 次数 &gt; Push
+次数的序列</li>
+<li><strong>反射原理</strong> : 将第一个非法点后的操作取反 ( Push ↔︎ Pop
+)</li>
+<li><strong>一一对应</strong> : 每个非法序列对应一个 <span
+class="math inline">\(n+1\)</span> 次 Push 和 <span
+class="math inline">\(n-1\)</span> 次 Pop 的序列</li>
+<li><strong>非法序列数</strong> : <span
+class="math inline">\(\binom{2n}{n+1}\)</span></li>
+<li><strong>合法序列数</strong> : <span
+class="math inline">\(\binom{2n}{n} - \binom{2n}{n+1} =
+\dfrac{1}{n+1}\dbinom{2n}{n}\)</span></li>
+</ol>
+<p><strong>方法二 : 生成函数法</strong></p>
+<p>设生成函数 <span class="math inline">\(C(x) =
+\displaystyle\sum_{n\geq 0} C_n x^n\)</span></p>
+<p>由递归关系 <span class="math display">\[C(x) = 1 +
+xC(x)^2\]</span></p>
+<p>解得 <span class="math display">\[C(x) = \dfrac{1 - \sqrt{1 -
+4x}}{2x}\]</span></p>
+<p>展开得卡特兰数的显式公式.</p>
+<p><strong>组合含义详解</strong></p>
+<p>卡特兰数计数的组合结构都具有 <strong>递归分解</strong> 和
+<strong>平衡约束</strong> 的本质特征.</p>
+<p><strong>1. 栈操作序列 ( 出栈序列 )</strong></p>
+<ul>
+<li><strong>约束</strong> : 任何时刻 Pop 次数 ≤ Push 次数</li>
+<li><strong>递归</strong> : 第一次 Pop 将序列分为左右两部分</li>
+<li><strong>意义</strong> : 描述了栈操作的合法性和有序性</li>
+</ul>
+<p><strong>2. 二叉树形态</strong></p>
+<ul>
+<li><strong>约束</strong> : 每个结点最多有两个孩子</li>
+<li><strong>递归</strong> : 根结点 + 左子树 + 右子树</li>
+<li><strong>意义</strong> : 反映了二叉树结构的组合多样性</li>
+</ul>
+<p><strong>3. 括号匹配</strong></p>
+<ul>
+<li><strong>约束</strong> : 任何位置左括号数 ≥ 右括号数</li>
+<li><strong>递归</strong> : 最外层括号内的表达式</li>
+<li><strong>意义</strong> : 语法结构的合法性检查</li>
+</ul>
+<p><strong>4. Dyck 路径</strong></p>
+<ul>
+<li><strong>约束</strong> : 路径不穿过对角线</li>
+<li><strong>递归</strong> : 第一次触及对角线的点</li>
+<li><strong>意义</strong> : 组合几何中的路径计数</li>
+</ul>
+<p><strong>前几个卡特兰数</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><span
+class="math inline">\(n\)</span></th>
+<th style="text-align: left;"><span
+class="math inline">\(C_n\)</span></th>
+<th style="text-align: left;">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">空栈 / 空树 / 空表达式</td>
+</tr>
+<tr>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">单元素栈 / 单结点树 / 单对括号</td>
+</tr>
+<tr>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">两种出栈序列 / 两种二叉树</td>
+</tr>
+<tr>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">五种合法序列 / 五种树形</td>
+</tr>
+<tr>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">14</td>
+<td style="text-align: left;">十四种组合结构</td>
+</tr>
+<tr>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">42</td>
+<td style="text-align: left;">四十二种可能性</td>
+</tr>
+</tbody>
+</table>
+<p><strong>408 考试应用</strong></p>
+<p><strong>常见题型</strong></p>
+<ol type="1">
+<li><strong>选择题</strong> : 给定 <span
+class="math inline">\(n\)</span>，选择对应的卡特兰数</li>
+<li><strong>判断题</strong> : 判断序列是否合法 ( 栈操作验证 )</li>
+<li><strong>计算题</strong> : 计算特定问题的组合数</li>
+<li><strong>简答题</strong> : 解释卡特兰数的组合含义</li>
+</ol>
+<p><strong>解题技巧</strong></p>
+<ul>
+<li>记住前几个卡特兰数值</li>
+<li>理解递归关系的组合意义</li>
+<li>掌握栈操作验证的方法</li>
+<li>识别卡特兰数问题的模式</li>
+</ul>
+<p><strong>深刻数学意义</strong></p>
+<p>卡特兰数体现了<strong>组合数学的统一性</strong></p>
+<ul>
+<li><strong>递归结构</strong> : 问题可以分解为相似子问题</li>
+<li><strong>平衡约束</strong> : 解必须满足某种平衡条件</li>
+<li><strong>组合爆炸</strong> : 解空间随规模指数级增长</li>
+<li><strong>算法复杂度</strong> :
+许多递归算法的时间复杂度与卡特兰数相关</li>
+</ul>
+<p><strong>增长速率</strong> <span class="math display">\[C_n \sim
+\dfrac{4^n}{n^{3/2}\sqrt{\pi}}\]</span>
+这表明卡特兰数问题具有<strong>指数级复杂性</strong>，但比纯指数增长稍慢.</p></div><div class="tab-item-content" id="stack-points-3"><ul>
 <li>两栈相向增长，栈满条件是 <code>top1 + 1 == top2</code></li>
 <li>本质是把两个栈的空闲空间合并成一个池，空间利用率优于两个独立顺序栈</li>
 <li>出题点常在于初始化与判满条件写错</li>
@@ -627,158 +1363,618 @@ class="math inline">\(O(1)\)</span></li>
 </ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
 <h2 id="数组与特殊矩阵">3.3 数组与特殊矩阵</h2>
 <h3 id="数组的存储与地址计算">3.3.1 数组的存储与地址计算</h3>
-<div class="tabs" id="array-addr"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="array-addr-1">一维数组</button><button type="button" class="tab " data-href="array-addr-2">二维数组</button><button type="button" class="tab " data-href="array-addr-3">下标从 1 开始</button></ul><div class="tab-contents"><div class="tab-item-content active" id="array-addr-1"><p>设数组 <span class="math inline">\(A[0 \ldots n-1]\)</span>，首地址为
-<span class="math inline">\(\text{LOC}(A[0])\)</span>，每个元素占 <span
-class="math inline">\(L\)</span> 字节</p>
-<p><span class="math display">\[\text{LOC}(A[i]) = \text{LOC}(A[0]) + i
-\times L\]</span></p></div><div class="tab-item-content" id="array-addr-2"><p>设数组 <span class="math inline">\(A[0 \ldots m-1][0 \ldots
+<div class="note info simple"><p><strong>数组</strong> 是线性表的推广，由一组
+<strong>类型相同</strong> 的数据元素构成的有序集合，每个元素受 <span
+class="math inline">\(n\)</span> ( <span class="math inline">\(n \geq
+1\)</span> ) 个线性关系的约束，每个元素在 <span
+class="math inline">\(n\)</span> 个线性关系中的序号称为该元素的
+<strong>下标</strong>. 数组是 <strong>随机存取</strong> 结构.</p>
+</div>
+<div class="tabs" id="array-addr"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="array-addr-1">一维数组</button><button type="button" class="tab " data-href="array-addr-2">二维数组</button><button type="button" class="tab " data-href="array-addr-3">多维数组</button><button type="button" class="tab " data-href="array-addr-4">下标从 1 开始</button></ul><div class="tab-contents"><div class="tab-item-content active" id="array-addr-1"><p><strong>定义</strong> 数组 <span class="math inline">\(A[0 \ldots
 n-1]\)</span>，首地址为 <span
-class="math inline">\(\text{LOC}(A[0][0])\)</span>.</p>
-<p><strong>行优先存储</strong> ( C 语言默认 )</p>
-<p><span class="math display">\[\text{LOC}(A[i][j]) =
-\text{LOC}(A[0][0]) + (i \times n + j) \times L\]</span></p>
-<p><strong>列优先存储</strong> ( Fortran )</p>
-<p><span class="math display">\[\text{LOC}(A[i][j]) =
-\text{LOC}(A[0][0]) + (j \times m + i) \times L\]</span></p></div><div class="tab-item-content" id="array-addr-3"><p>若数组 <span class="math inline">\(A[1 \ldots m][1 \ldots
-n]\)</span>，行优先存储 :</p>
-<p><span class="math display">\[\text{LOC}(A[i][j]) =
-\text{LOC}(A[1][1]) + [(i-1) \times n + (j-1)] \times L\]</span></p>
+class="math inline">\(\text{LOC}(A[0])\)</span>，每个元素占 <span
+class="math inline">\(L\)</span> 字节</p>
+<p><strong>核心思想</strong> 地址计算的核心是
+<strong>分析当前下标前面有多少个元素</strong></p>
+<p><strong>地址公式推导</strong></p>
+<ul>
+<li>元素 <span class="math inline">\(A[i]\)</span> 前面有 <span
+class="math inline">\(i\)</span> 个元素 : <span
+class="math inline">\(A[0], A[1], \ldots, A[i-1]\)</span></li>
+<li>这些元素总共占用了 <span class="math inline">\(i \times L\)</span>
+字节</li>
+<li>因此 : <span class="math inline">\(\text{LOC}(A[i]) =
+\text{LOC}(A[0]) + i \times L\)</span></li>
+</ul>
+<p><strong>直观理解</strong> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">内存布局 : </span><br><span class="line">A[0] | A[1] | A[2] | ... | A[i-1] | A[i] | ... | A[n-1]</span><br><span class="line">↑                    ↑                    ↑</span><br><span class="line">首地址               跳过i个元素        目标地址</span><br></pre></td></tr></table></figure></p>
+<p><strong>示例</strong> 数组 <code>int A[10]</code>，首地址为
+1000，每个 <code>int</code> 占 4 字节</p>
+<ul>
+<li><span class="math inline">\(\text{LOC}(A[5])\)</span> : 前面有 5
+个元素，占用 <span class="math inline">\(5 \times 4 = 20\)</span>
+字节</li>
+<li><span class="math inline">\(\text{LOC}(A[5]) = 1000 + 20 =
+1020\)</span></li>
+<li><span class="math inline">\(\text{LOC}(A[9])\)</span> : 前面有 9
+个元素，占用 <span class="math inline">\(9 \times 4 = 36\)</span>
+字节</li>
+<li><span class="math inline">\(\text{LOC}(A[9]) = 1000 + 36 =
+1036\)</span></li>
+</ul>
+<p><strong>代码实现</strong> <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>* <span class="title function_">getElementAddress</span><span class="params">(<span class="type">int</span>* base, <span class="type">int</span> index, <span class="type">int</span> elementSize)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="type">int</span>*)((<span class="type">char</span>*)base + index * elementSize);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>时间复杂度</strong> <span
+class="math inline">\(O(1)\)</span>，随机访问</p></div><div class="tab-item-content" id="array-addr-2"><p><strong>定义</strong> 数组 <span class="math inline">\(A[0 \ldots
+m-1][0 \ldots n-1]\)</span>，首地址为 <span
+class="math inline">\(\text{LOC}(A[0][0])\)</span></p>
+<p><strong>核心思想</strong> 分析 <span
+class="math inline">\(A[i][j]\)</span>
+<strong>前面有多少个元素</strong></p>
+<p><strong>行优先存储</strong> ( C 语言、Python、Java 默认 )</p>
+<ul>
+<li><strong>前面有多少行</strong> : <span
+class="math inline">\(i\)</span> 行完整行，每行有 <span
+class="math inline">\(n\)</span> 个元素</li>
+<li><strong>当前行前面有多少列</strong> : <span
+class="math inline">\(j\)</span> 个元素</li>
+<li><strong>总共前面元素数</strong> : <span class="math inline">\(i
+\times n + j\)</span></li>
+<li><strong>地址公式</strong> : <span
+class="math inline">\(\text{LOC}(A[i][j]) = \text{LOC}(A[0][0]) + (i
+\times n + j) \times L\)</span></li>
+</ul>
+<p><strong>列优先存储</strong> ( Fortran、MATLAB 默认 )</p>
+<ul>
+<li><strong>前面有多少列</strong> : <span
+class="math inline">\(j\)</span> 列完整列，每列有 <span
+class="math inline">\(m\)</span> 个元素</li>
+<li><strong>当前列前面有多少行</strong> : <span
+class="math inline">\(i\)</span> 个元素</li>
+<li><strong>总共前面元素数</strong> : <span class="math inline">\(j
+\times m + i\)</span></li>
+<li><strong>地址公式</strong> : <span
+class="math inline">\(\text{LOC}(A[i][j]) = \text{LOC}(A[0][0]) + (j
+\times m + i) \times L\)</span></li>
+</ul>
+<p><strong>示例</strong> 数组 <code>int A[3][4]</code>，首地址
+1000，<code>int</code> 占 4 字节</p>
+<ul>
+<li><strong>行优先</strong> : <span
+class="math inline">\(A[1][2]\)</span> 前面有 1 整行 (4个元素) +
+当前行前 2 个元素 = 6 个元素</li>
+<li><span class="math inline">\(\text{LOC}(A[1][2]) = 1000 + 6 \times 4
+= 1024\)</span></li>
+<li><strong>列优先</strong> : <span
+class="math inline">\(A[1][2]\)</span> 前面有 2 整列 (每列3个元素) +
+当前列前 1 个元素 = 7 个元素</li>
+<li><span class="math inline">\(\text{LOC}(A[1][2]) = 1000 + 7 \times 4
+= 1028\)</span></li>
+</ul>
+<p><strong>内存布局对比</strong> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">行优先 : A[0][0] A[0][1] A[0][2] A[0][3] A[1][0] A[1][1] A[1][2] A[1][3] ...</span><br><span class="line">列优先 : A[0][0] A[1][0] A[2][0] A[0][1] A[1][1] A[2][1] A[0][2] A[1][2] ...</span><br></pre></td></tr></table></figure></p></div><div class="tab-item-content" id="array-addr-3"><p><strong>定义</strong> <span class="math inline">\(n\)</span> 维数组
+<span class="math inline">\(A[d_1][d_2]\ldots[d_n]\)</span>，首地址
+<span class="math inline">\(\text{LOC}(A[0][0]\ldots[0])\)</span></p>
+<p><strong>核心思想</strong> 逐维分析
+<strong>前面有多少个完整的超平面</strong></p>
+<p><strong>行优先存储</strong></p>
+<ul>
+<li><strong>第1维前面</strong> : <span
+class="math inline">\(i_1\)</span> 个完整 <span
+class="math inline">\((d_2 \times d_3 \times \cdots \times d_n)\)</span>
+维超平面</li>
+<li><strong>第2维前面</strong> : <span
+class="math inline">\(i_2\)</span> 个完整 <span
+class="math inline">\((d_3 \times \cdots \times d_n)\)</span>
+维超平面</li>
+<li><strong>…</strong></li>
+<li><strong>第n-1维前面</strong> : <span
+class="math inline">\(i_{n-1}\)</span> 个完整 <span
+class="math inline">\(d_n\)</span> 维超平面</li>
+<li><strong>第n维前面</strong> : <span
+class="math inline">\(i_n\)</span> 个元素</li>
+<li><strong>地址公式</strong> : <span
+class="math inline">\(\text{LOC}(A[i_1][i_2]\ldots[i_n]) =
+\text{LOC}(A[0][0]\ldots[0]) + \left( i_1 \times d_2 \times d_3 \times
+\cdots \times d_n + i_2 \times d_3 \times \cdots \times d_n + \cdots +
+i_{n-1} \times d_n + i_n \right) \times L\)</span></li>
+</ul>
+<p><strong>列优先存储</strong></p>
+<ul>
+<li>类似思想，但从最后一维开始计算</li>
+<li><strong>地址公式</strong> : <span
+class="math inline">\(\text{LOC}(A[i_1][i_2]\ldots[i_n]) =
+\text{LOC}(A[0][0]\ldots[0]) + \left( i_n \times d_1 \times d_2 \times
+\cdots \times d_{n-1} + i_{n-1} \times d_1 \times d_2 \times \cdots
+\times d_{n-2} + \cdots + i_2 \times d_1 + i_1 \right) \times
+L\)</span></li>
+</ul>
+<p><strong>示例</strong> 三维数组 <code>int A[2][3][4]</code>，首地址
+1000，<code>int</code> 占 4 字节</p>
+<ul>
+<li><strong>行优先</strong> : <span
+class="math inline">\(A[1][2][3]\)</span> 前面有
+<ul>
+<li>1 个完整 <span class="math inline">\(3 \times 4 = 12\)</span>
+元素的平面</li>
+<li>2 个完整 <span class="math inline">\(4\)</span> 元素的列</li>
+<li>3 个元素</li>
+<li>总共 : <span class="math inline">\(12 + 8 + 3 = 23\)</span>
+个元素</li>
+</ul></li>
+<li><span class="math inline">\(\text{LOC}(A[1][2][3]) = 1000 + 23
+\times 4 = 1092\)</span></li>
+</ul></div><div class="tab-item-content" id="array-addr-4"><p>若数组 <span class="math inline">\(A[1 \ldots m][1 \ldots
+n]\)</span>，行优先存储</p>
+<p><strong>核心思想</strong> 将任意下标范围 <strong>归一化</strong> 到从
+0 开始计算</p>
+<p><strong>公式推导</strong></p>
+<ul>
+<li>将下标 <span class="math inline">\(i\)</span> 归一化 : <span
+class="math inline">\(i&#39; = i - 1\)</span>，这样就从 <span
+class="math inline">\([1,m]\)</span> 映射到 <span
+class="math inline">\([0,m-1]\)</span></li>
+<li>将下标 <span class="math inline">\(j\)</span> 归一化 : <span
+class="math inline">\(j&#39; = j - 1\)</span>，这样就从 <span
+class="math inline">\([1,n]\)</span> 映射到 <span
+class="math inline">\([0,n-1]\)</span></li>
+<li>前面元素数 : <span class="math inline">\(i&#39; \times n + j&#39; =
+(i-1) \times n + (j-1)\)</span></li>
+<li><strong>地址公式</strong> : <span
+class="math inline">\(\text{LOC}(A[i][j]) = \text{LOC}(A[1][1]) + [(i-1)
+\times n + (j-1)] \times L\)</span></li>
+</ul>
+<p><strong>通用公式</strong> ( 下标范围 <span class="math inline">\([l_1
+\ldots h_1][l_2 \ldots h_2]\)</span> )</p>
+<ul>
+<li><strong>归一化思想</strong> : 将任意范围映射到从 0 开始</li>
+<li><strong>行数</strong> : <span class="math inline">\(m = h_1 - l_1 +
+1\)</span></li>
+<li><strong>列数</strong> : <span class="math inline">\(n = h_2 - l_2 +
+1\)</span></li>
+<li><strong>归一化下标</strong> : <span class="math inline">\(i&#39; = i
+- l_1\)</span>，<span class="math inline">\(j&#39; = j -
+l_2\)</span></li>
+<li><strong>地址公式</strong> : <span
+class="math inline">\(\text{LOC}(A[i][j]) = \text{LOC}(A[l_1][l_2]) +
+[(i-l_1) \times n + (j-l_2)] \times L\)</span></li>
+</ul>
+<p><strong>示例</strong> 数组 <code>int A[5..10][3..8]</code>，首地址
+1000，<code>int</code> 占 4 字节</p>
+<ul>
+<li><strong>归一化计算</strong>
+<ul>
+<li>行数 <span class="math inline">\(m = 10-5+1 = 6\)</span>，列数 <span
+class="math inline">\(n = 8-3+1 = 6\)</span></li>
+<li><span class="math inline">\(A[7][5]\)</span> 归一化 : <span
+class="math inline">\(i&#39; = 7-5 = 2\)</span>，<span
+class="math inline">\(j&#39; = 5-3 = 2\)</span></li>
+<li>前面元素数 : <span class="math inline">\(2 \times 6 + 2 =
+14\)</span> 个元素</li>
+</ul></li>
+<li><span class="math inline">\(\text{LOC}(A[7][5]) = 1000 + 14 \times 4
+= 1056\)</span></li>
+</ul>
 <div class="note warning simple">
 <p>
-408 考题中下标起始值不固定，务必 <strong>仔细读题</strong>
-确认下标范围，再套公式.
+<strong>408 考试重点</strong>
 </p>
-</div></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
-<h3 id="特殊矩阵压缩存储">3.3.2 特殊矩阵压缩存储</h3>
-<div class="note info simple"><p><strong>压缩存储</strong> 对具有规律分布的特殊矩阵，只存储
-<strong>有效元素</strong>，其余元素通过计算得到，以节省空间.</p>
-</div>
-<div class="tabs" id="special-matrix"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="special-matrix-1">对称矩阵</button><button type="button" class="tab " data-href="special-matrix-2">三角矩阵</button><button type="button" class="tab " data-href="special-matrix-3">对角矩阵</button></ul><div class="tab-contents"><div class="tab-item-content active" id="special-matrix-1"><p><strong>对称矩阵</strong> <span class="math inline">\(A[i][j] =
-A[j][i]\)</span>，<span class="math inline">\(n\)</span> 阶矩阵只需存储
-<strong>下三角</strong> 部分 ( 含主对角线 )，共 <span
-class="math inline">\(\dfrac{n(n+1)}{2}\)</span> 个元素，存入一维数组
-<span class="math inline">\(B[0 \ldots \frac{n(n+1)}{2}-1]\)</span>.</p>
-<p>下标对应关系 ( <span class="math inline">\(1 \leq i,j \leq
-n\)</span>，行优先存储下三角 ) :</p>
-<p><span class="math display">\[k = \begin{cases} \dfrac{i(i-1)}{2} + j
-- 1 &amp; i \geq j \text{ ( 下三角 )} \\[6pt] \dfrac{j(j-1)}{2} + i - 1
-&amp; i &lt; j \text{ ( 上三角，用 } A[j][i] \text{ ) }
-\end{cases}\]</span></p></div><div class="tab-item-content" id="special-matrix-2"><p><strong>下三角矩阵</strong> 上三角区域 ( 不含对角线 ) 全为常数 <span
-class="math inline">\(c\)</span>，只存下三角 + 对角线元素及常数 <span
-class="math inline">\(c\)</span>，共 <span
-class="math inline">\(\dfrac{n(n+1)}{2} + 1\)</span> 个元素.</p>
-<p><span class="math display">\[k = \begin{cases} \dfrac{i(i-1)}{2} + j
-- 1 &amp; i \geq j \\[6pt] \dfrac{n(n+1)}{2} &amp; i &lt; j \text{ (
-存常数 } c \text{ 的位置 ) } \end{cases}\]</span></p>
-<p><strong>上三角矩阵</strong> 下三角区域全为常数，类似处理，只存上三角
-+ 对角线 + 常数.</p></div><div class="tab-item-content" id="special-matrix-3"><p><strong>对角矩阵</strong> ( 带状矩阵 )
-非零元素集中在主对角线及其两侧共 <span class="math inline">\(d\)</span>
-条对角线的带状区域内，带宽为 <span class="math inline">\(d =
-2b+1\)</span> ( <span class="math inline">\(b\)</span> 为半带宽 ).</p>
-<p>以三对角矩阵 ( <span class="math inline">\(b=1\)</span> )
-为例，只存储 <span class="math inline">\(3n-2\)</span> 个非零元素</p>
-<p><span class="math display">\[k = 2(i-1) + (j - i + 1) \quad (|i-j|
-\leq 1)\]</span></p>
-<p>反向推导 已知 <span class="math inline">\(k\)</span>，求 <span
-class="math inline">\((i,j)\)</span></p>
-<p><span class="math display">\[i = \left\lfloor \dfrac{k+1}{3}
-\right\rfloor + 1, \quad j = k - 2(i-1) + i - 1\]</span></p></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
-<h3 id="稀疏矩阵">3.3.3 稀疏矩阵</h3>
-<div class="note info simple"><p><strong>稀疏矩阵</strong> 矩阵中非零元素个数远少于零元素个数.
-通常非零元素个数 <span class="math inline">\(t \leq \dfrac{m \times
-n}{3}\)</span> 时视为稀疏.</p>
-</div>
-<div class="tabs" id="sparse-matrix"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="sparse-matrix-1">三元组表</button><button type="button" class="tab " data-href="sparse-matrix-2">十字链表</button><button type="button" class="tab " data-href="sparse-matrix-3">对比</button></ul><div class="tab-contents"><div class="tab-item-content active" id="sparse-matrix-1"><p><strong>三元组表</strong> ( Triple ) 将每个非零元素用 <span
-class="math inline">\((i,\ j,\ v)\)</span>
-表示，顺序存入一维数组，同时记录矩阵规模 <span
-class="math inline">\(m\)</span>、<span class="math inline">\(n\)</span>
-和非零元素总数 <span class="math inline">\(t\)</span>.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MaxSize 200</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> i, j;       <span class="comment">// 行列下标</span></span><br><span class="line">    ElemType v;     <span class="comment">// 元素值</span></span><br><span class="line">&#125; Triple;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    Triple data[MaxSize];</span><br><span class="line">    <span class="type">int</span> mu, nu, tu; <span class="comment">// 行数、列数、非零元个数</span></span><br><span class="line">&#125; TSMatrix;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>存储量 <span class="math inline">\(O(t)\)</span>，<span
-class="math inline">\(t\)</span> 为非零元个数.</li>
-<li>转置算法 按列扫描原矩阵，时间复杂度 <span class="math inline">\(O(n
-\times t)\)</span> ( 普通转置 ) 或 <span
-class="math inline">\(O(n+t)\)</span> ( 快速转置 ).</li>
-</ul></div><div class="tab-item-content" id="sparse-matrix-2"><p><strong>十字链表</strong> ( Orthogonal List )
-每个非零元素用一个结点表示，结点含 5 个域</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">| row | col | val | right | down |</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>right</code> 指向同行下一个非零元素.</li>
-<li><code>down</code> 指向同列下一个非零元素.</li>
-<li>另有 <code>rhead[]</code> 行头指针数组和 <code>chead[]</code>
-列头指针数组.</li>
+<li>
+下标起始值不固定，务必 <strong>仔细读题</strong> 确认下标范围
+</li>
+<li>
+注意区分行优先和列优先存储方式
+</li>
+<li>
+题目常给元素大小 <span class="math inline">(L)</span>
+与首地址，最终答案常以字节偏移给出
+</li>
+<li>
+多维数组计算时注意各维度的乘积关系
+</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">                  chead[1]  chead[2]  chead[3]</span><br><span class="line">rhead[1] ──→ (1,2,3) ──→ (1,3,5) ──→ NULL</span><br><span class="line">                ↓                    ↓</span><br><span class="line">rhead[2] ──→ (2,1,2) ──→ NULL    (2,3,4) ──→ NULL</span><br></pre></td></tr></table></figure>
+</div>
+<p><strong>地址计算核心思想总结</strong></p>
+<div class="note success simple">
+<p>
+<strong>地址计算总结</strong>
+</p>
+<p>
+<strong>“依靠分析当前下标前面有多少个元素来计算地址”</strong>
+是数组地址计算的 <strong>根本原理</strong>
+</p>
+</div>
+<p><strong>统一的计算框架</strong></p>
+<ol type="1">
+<li><strong>确定存储顺序</strong> : 行优先还是列优先</li>
+<li><strong>归一化下标</strong> : 将任意范围映射到从 0 开始</li>
+<li><strong>计算前面元素数</strong> : 按存储顺序逐维计算</li>
+<li><strong>乘以元素大小</strong> : 得到字节偏移量</li>
+<li><strong>加上首地址</strong> : 得到最终地址</li>
+</ol>
+<p><strong>记忆技巧</strong></p>
 <ul>
-<li><span class="p green">优点</span>
-插入、删除非零元素方便，无需移动大量数据.</li>
-<li><span class="p red">缺点</span>
-指针开销大，结构复杂，不如三元组直观.</li>
-</ul></div><div class="tab-item-content" id="sparse-matrix-3"><table style="width:100%;">
+<li><strong>一维数组</strong> : 前面有 <span
+class="math inline">\(i\)</span> 个元素</li>
+<li><strong>二维数组行优先</strong> : 前面有 <span
+class="math inline">\(i\)</span> 整行 + <span
+class="math inline">\(j\)</span> 个元素</li>
+<li><strong>二维数组列优先</strong> : 前面有 <span
+class="math inline">\(j\)</span> 整列 + <span
+class="math inline">\(i\)</span> 个元素</li>
+<li><strong>多维数组</strong> : 逐维计算完整的超平面</li>
+</ul>
+<p><strong>避免的错误</strong></p>
+<ul>
+<li>忘记归一化下标 ( 特别是下标从 1 开始时 )</li>
+<li>混淆行优先和列优先的计算顺序</li>
+<li>忽略元素大小 <span class="math inline">\(L\)</span> 的单位转换</li>
+</ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="特殊矩阵压缩存储">3.3.2 特殊矩阵压缩存储</h3>
+<div class="note info simple"><p><strong>压缩存储定义</strong></p>
+<p><strong>压缩存储</strong> 对具有规律分布的特殊矩阵，只存储
+<strong>有效元素</strong>，其余元素通过计算得到，以节省空间.
+压缩存储的核心思想是 <strong>用计算换空间</strong>.</p>
+</div>
+<div class="tabs" id="special-matrix"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="special-matrix-1">对称矩阵</button><button type="button" class="tab " data-href="special-matrix-2">三角矩阵</button><button type="button" class="tab " data-href="special-matrix-3">对角矩阵</button><button type="button" class="tab " data-href="special-matrix-4">稀疏矩阵定义</button></ul><div class="tab-contents"><div class="tab-item-content active" id="special-matrix-1"><p><strong>定义</strong> <span class="math inline">\(n\)</span>
+阶方阵满足 <span class="math inline">\(A[i][j] = A[j][i]\)</span>，<span
+class="math inline">\(\forall i,j \in [1,n]\)</span></p>
+<p><strong>存储策略</strong> 只需存储 <strong>下三角</strong> 部分 (
+含主对角线 )，共 <span class="math inline">\(\dfrac{n(n+1)}{2}\)</span>
+个元素</p>
+<p><strong>压缩数组</strong> <span class="math inline">\(B[0 \ldots
+\frac{n(n+1)}{2}-1]\)</span></p>
+<p><strong>下标映射公式</strong> ( <span class="math inline">\(1 \leq
+i,j \leq n\)</span>，行优先存储下三角 ) <span class="math display">\[k =
+\begin{cases} \dfrac{i(i-1)}{2} + j - 1 &amp; i \geq j \text{ ( 下三角
+)} \\[6pt] \dfrac{j(j-1)}{2} + i - 1 &amp; i &lt; j \text{ (
+上三角，用对称性 ) } \end{cases}\]</span></p>
+<p><strong>示例</strong> 4 阶对称矩阵，求 <span
+class="math inline">\(A[3][2]\)</span> 在压缩数组中的位置</p>
+<ul>
+<li><span class="math inline">\(i=3, j=2\)</span>，<span
+class="math inline">\(i \geq j\)</span>，<span class="math inline">\(k =
+\dfrac{3 \times 2}{2} + 2 - 1 = 3 + 1 = 4\)</span></li>
+</ul>
+<p><strong>代码实现</strong> <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">getSymmetricIndex</span><span class="params">(<span class="type">int</span> i, <span class="type">int</span> j, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (i &gt;= j) &#123;</span><br><span class="line">        <span class="keyword">return</span> i*(i<span class="number">-1</span>)/<span class="number">2</span> + j - <span class="number">1</span>;  <span class="comment">// 下三角</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> j*(j<span class="number">-1</span>)/<span class="number">2</span> + i - <span class="number">1</span>;  <span class="comment">// 上三角</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>空间节省</strong> 从 <span class="math inline">\(n^2\)</span>
+压缩到 <span class="math inline">\(\dfrac{n(n+1)}{2}\)</span>，节省约
+50% 空间</p></div><div class="tab-item-content" id="special-matrix-2"><p><strong>下三角矩阵</strong> 上三角区域 ( 不含对角线 ) 全为常数 <span
+class="math inline">\(c\)</span></p>
+<p><strong>存储策略</strong> 存储下三角 + 对角线元素及常数 <span
+class="math inline">\(c\)</span>，共 <span
+class="math inline">\(\dfrac{n(n+1)}{2} + 1\)</span> 个元素</p>
+<p><strong>下标映射公式</strong> <span class="math display">\[k =
+\begin{cases} \dfrac{i(i-1)}{2} + j - 1 &amp; i \geq j \\[6pt]
+\dfrac{n(n+1)}{2} &amp; i &lt; j \text{ ( 存常数 } c \text{ 的位置 ) }
+\end{cases}\]</span></p>
+<p><strong>上三角矩阵</strong> 下三角区域全为常数，类似处理</p>
+<p><strong>行优先存储上三角</strong> ( <span class="math inline">\(i
+\leq j\)</span> ) <span class="math display">\[k =
+\dfrac{(i-1)(2n-i+2)}{2} + (j-i)\]</span></p>
+<p><strong>示例</strong> 4 阶下三角矩阵，求 <span
+class="math inline">\(A[3][4]\)</span> 在压缩数组中的位置</p>
+<ul>
+<li><span class="math inline">\(i=3, j=4\)</span>，<span
+class="math inline">\(i &lt; j\)</span>，<span class="math inline">\(k =
+\dfrac{4 \times 5}{2} = 10\)</span> ( 常数位 )</li>
+</ul>
+<p><strong>空间节省</strong> 从 <span class="math inline">\(n^2\)</span>
+压缩到 <span class="math inline">\(\dfrac{n(n+1)}{2} +
+1\)</span>，节省约 50% 空间</p></div><div class="tab-item-content" id="special-matrix-3"><p><strong>定义</strong> ( 带状矩阵 ) 非零元素集中在主对角线及其两侧共
+<span class="math inline">\(d\)</span> 条对角线的带状区域内</p>
+<p><strong>带宽</strong> <span class="math inline">\(d = 2b+1\)</span> (
+<span class="math inline">\(b\)</span> 为半带宽 )</p>
+<p><strong>三对角矩阵</strong> ( <span
+class="math inline">\(b=1\)</span> ) 只存储 <span
+class="math inline">\(3n-2\)</span> 个非零元素</p>
+<p><strong>下标映射公式</strong> ( <span class="math inline">\(|i-j|
+\leq 1\)</span> ) <span class="math display">\[k = 2(i-1) + (j - i + 1)
+= 2i + j - 3\]</span></p>
+<p><strong>反向推导</strong> 已知 <span
+class="math inline">\(k\)</span>，求 <span
+class="math inline">\((i,j)\)</span> <span class="math display">\[i =
+\left\lfloor \dfrac{k+1}{3} \right\rfloor + 1, \quad j = k - 2(i-1) + i
+- 1\]</span></p>
+<p><strong>通用对角矩阵公式</strong> ( 带宽 <span
+class="math inline">\(d=2b+1\)</span> ) <span class="math display">\[k =
+(i-1) \times d + (j - i + b) \quad (|i-j| \leq b)\]</span></p>
+<p><strong>示例</strong> 5 阶三对角矩阵，求 <span
+class="math inline">\(A[3][2]\)</span> 在压缩数组中的位置</p>
+<ul>
+<li><span class="math inline">\(i=3, j=2\)</span>，<span
+class="math inline">\(|3-2|=1 \leq 1\)</span>，<span
+class="math inline">\(k = 2 \times 2 + (2 - 3 + 1) = 4 + 0 =
+4\)</span></li>
+</ul>
+<p><strong>空间节省</strong> 从 <span class="math inline">\(n^2\)</span>
+压缩到 <span class="math inline">\(n \times d\)</span>，当 <span
+class="math inline">\(d \ll n\)</span> 时节省大量空间</p></div><div class="tab-item-content" id="special-matrix-4"><p><strong>定义</strong> 矩阵中非零元素个数 <span
+class="math inline">\(t\)</span> 远少于零元素个数</p>
+<p><strong>稀疏度判断</strong> 通常 <span class="math inline">\(t \leq
+\dfrac{m \times n}{3}\)</span> 时视为稀疏</p>
+<p><strong>稀疏因子</strong> <span class="math inline">\(\delta =
+\dfrac{t}{m \times n}\)</span>，当 <span class="math inline">\(\delta
+&lt; 0.05\)</span> 时通常认为稀疏</p>
+<p><strong>常见稀疏矩阵类型</strong></p>
+<ul>
+<li><strong>对角占优矩阵</strong>
+主对角线元素绝对值大于同行其他元素绝对值之和</li>
+<li><strong>Laplacian 矩阵</strong> 图论中图的拉普拉斯矩阵</li>
+<li><strong>有限差分矩阵</strong> 数值计算中离散微分算子</li>
+</ul>
+<p><strong>应用场景</strong></p>
+<ul>
+<li>有限元分析</li>
+<li>电路网络分析</li>
+<li>社交网络分析</li>
+<li>图像处理</li>
+</ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="稀疏矩阵存储方法">3.3.3 稀疏矩阵存储方法</h3>
+<div class="note info simple"><p>稀疏矩阵存储方法的选择取决于 <strong>操作类型</strong> 和
+<strong>矩阵特性</strong>.
+静态操作多用三元组表，动态操作多用十字链表.</p>
+</div>
+<div class="tabs" id="sparse-matrix"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="sparse-matrix-1">三元组表</button><button type="button" class="tab " data-href="sparse-matrix-2">十字链表</button><button type="button" class="tab " data-href="sparse-matrix-3">对比分析</button><button type="button" class="tab " data-href="sparse-matrix-4">其他存储方法</button></ul><div class="tab-contents"><div class="tab-item-content active" id="sparse-matrix-1"><p><strong>数据结构</strong> 将每个非零元素用 <span
+class="math inline">\((i,\ j,\ v)\)</span> 表示，顺序存入一维数组</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MaxSize 1000</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> i, j;           <span class="comment">// 行列下标 ( 从 1 开始 )</span></span><br><span class="line">    ElemType v;         <span class="comment">// 元素值</span></span><br><span class="line">&#125; Triple;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    Triple data[MaxSize];</span><br><span class="line">    <span class="type">int</span> mu, nu, tu;     <span class="comment">// 行数、列数、非零元个数</span></span><br><span class="line">&#125; TSMatrix;</span><br></pre></td></tr></table></figure>
+<p><strong>存储量</strong> <span
+class="math inline">\(O(t)\)</span>，<span
+class="math inline">\(t\)</span> 为非零元个数</p>
+<p><strong>转置算法</strong></p>
+<p><strong>普通转置</strong> 时间复杂度 <span class="math inline">\(O(n
+\times t)\)</span> <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">TransposeTSMatrix</span><span class="params">(TSMatrix M, TSMatrix *T)</span> &#123;</span><br><span class="line">    T-&gt;mu = M.nu; T-&gt;nu = M.mu; T-&gt;tu = M.tu;</span><br><span class="line">    <span class="keyword">if</span> (T-&gt;tu == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> q = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> col = <span class="number">1</span>; col &lt;= M.nu; col++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> p = <span class="number">0</span>; p &lt; M.tu; p++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (M.data[p].j == col) &#123;</span><br><span class="line">                T-&gt;data[q].i = M.data[p].j;</span><br><span class="line">                T-&gt;data[q].j = M.data[p].i;</span><br><span class="line">                T-&gt;data[q].v = M.data[p].v;</span><br><span class="line">                q++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>快速转置</strong> 时间复杂度 <span
+class="math inline">\(O(n+t)\)</span> <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">FastTransposeTSMatrix</span><span class="params">(TSMatrix M, TSMatrix *T)</span> &#123;</span><br><span class="line">    T-&gt;mu = M.nu; T-&gt;nu = M.mu; T-&gt;tu = M.tu;</span><br><span class="line">    <span class="keyword">if</span> (T-&gt;tu == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> num[M.nu+<span class="number">1</span>], pos[M.nu+<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> col = <span class="number">1</span>; col &lt;= M.nu; col++) num[col] = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> t = <span class="number">0</span>; t &lt; M.tu; t++) num[M.data[t].j]++;</span><br><span class="line">    </span><br><span class="line">    pos[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> col = <span class="number">2</span>; col &lt;= M.nu; col++) &#123;</span><br><span class="line">        pos[col] = pos[col<span class="number">-1</span>] + num[col<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> p = <span class="number">0</span>; p &lt; M.tu; p++) &#123;</span><br><span class="line">        <span class="type">int</span> col = M.data[p].j;</span><br><span class="line">        <span class="type">int</span> q = pos[col];</span><br><span class="line">        T-&gt;data[q].i = M.data[p].j;</span><br><span class="line">        T-&gt;data[q].j = M.data[p].i;</span><br><span class="line">        T-&gt;data[q].v = M.data[p].v;</span><br><span class="line">        pos[col]++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>优缺点分析</strong></p>
+<ul>
+<li><strong>优点</strong> 结构简单，存储效率高，转置操作高效</li>
+<li><strong>缺点</strong> 插入删除操作需要移动大量元素</li>
+</ul></div><div class="tab-item-content" id="sparse-matrix-2"><p><strong>数据结构</strong> 每个非零元素用一个结点表示</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">OLNode</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> i, j;               <span class="comment">// 行列下标</span></span><br><span class="line">    ElemType e;             <span class="comment">// 元素值</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">OLNode</span> *<span class="title">right</span>, *<span class="title">down</span>;</span>  <span class="comment">// 同行、同列下一个结点</span></span><br><span class="line">&#125; OLNode, *OLink;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    OLink *rhead, *chead;   <span class="comment">// 行、列头指针数组</span></span><br><span class="line">    <span class="type">int</span> mu, nu, tu;         <span class="comment">// 行数、列数、非零元个数</span></span><br><span class="line">&#125; CrossList;</span><br></pre></td></tr></table></figure>
+<p><strong>内存布局示例</strong> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">                  chead[1]  chead[2]  chead[3]</span><br><span class="line">rhead[1] ──→ (1,2,3) ──→ (1,3,5) ──→ NULL</span><br><span class="line">                ↓                    ↓</span><br><span class="line">rhead[2] ──→ (2,1,2) ──→ NULL    (2,3,4) ──→ NULL</span><br><span class="line">                ↓                    ↓</span><br><span class="line">               NULL                 NULL</span><br></pre></td></tr></table></figure></p>
+<p><strong>创建十字链表</strong> <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">CreateCrossList</span><span class="params">(CrossList *M)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!M) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    M-&gt;rhead = (OLink*)<span class="built_in">malloc</span>((M-&gt;mu+<span class="number">1</span>)*<span class="keyword">sizeof</span>(OLink));</span><br><span class="line">    M-&gt;chead = (OLink*)<span class="built_in">malloc</span>((M-&gt;nu+<span class="number">1</span>)*<span class="keyword">sizeof</span>(OLink));</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= M-&gt;mu; i++) M-&gt;rhead[i] = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= M-&gt;nu; j++) M-&gt;chead[j] = <span class="literal">NULL</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt; M-&gt;tu; k++) &#123;</span><br><span class="line">        OLNode *p = (OLNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(OLNode));</span><br><span class="line">        p-&gt;i = ...; p-&gt;j = ...; p-&gt;e = ...;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 插入到行链表</span></span><br><span class="line">        <span class="keyword">if</span> (M-&gt;rhead[p-&gt;i] == <span class="literal">NULL</span> || M-&gt;rhead[p-&gt;i]-&gt;j &gt; p-&gt;j) &#123;</span><br><span class="line">            p-&gt;right = M-&gt;rhead[p-&gt;i];</span><br><span class="line">            M-&gt;rhead[p-&gt;i] = p;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            OLNode *q = M-&gt;rhead[p-&gt;i];</span><br><span class="line">            <span class="keyword">while</span> (q-&gt;right &amp;&amp; q-&gt;right-&gt;j &lt; p-&gt;j) q = q-&gt;right;</span><br><span class="line">            p-&gt;right = q-&gt;right;</span><br><span class="line">            q-&gt;right = p;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 插入到列链表 ( 类似行链表 )</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>优缺点分析</strong></p>
+<ul>
+<li><strong>优点</strong> 插入删除方便，动态操作高效</li>
+<li><strong>缺点</strong> 指针开销大，结构复杂，存储效率较低</li>
+</ul></div><div class="tab-item-content" id="sparse-matrix-3"><table>
 <colgroup>
-<col style="width: 17%" />
-<col style="width: 21%" />
-<col style="width: 21%" />
-<col style="width: 21%" />
-<col style="width: 17%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
 </colgroup>
 <thead>
 <tr>
-<th style="text-align: left;">表示方法</th>
-<th style="text-align: center;">存储量</th>
-<th style="text-align: center;">转置复杂度</th>
-<th style="text-align: center;">插删方便性</th>
-<th style="text-align: left;">适用场景</th>
+<th style="text-align: left;">特性</th>
+<th style="text-align: left;">三元组表</th>
+<th style="text-align: left;">十字链表</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;">三元组表</td>
-<td style="text-align: center;"><span
+<td style="text-align: left;"><strong>存储量</strong></td>
+<td style="text-align: left;"><span
 class="math inline">\(O(t)\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(O(n+t)\)</span></td>
-<td style="text-align: center;">一般</td>
-<td style="text-align: left;">静态稀疏矩阵</td>
+<td style="text-align: left;"><span class="math inline">\(O(t)\)</span>
+( 但指针开销大 )</td>
 </tr>
 <tr>
-<td style="text-align: left;">十字链表</td>
-<td style="text-align: center;"><span
+<td style="text-align: left;"><strong>转置复杂度</strong></td>
+<td style="text-align: left;"><span
+class="math inline">\(O(n+t)\)</span> ( 快速转置 )</td>
+<td style="text-align: left;"><span
 class="math inline">\(O(t)\)</span></td>
-<td style="text-align: center;"><span
-class="math inline">\(O(t)\)</span></td>
-<td style="text-align: center;"><span class="p green">好</span></td>
-<td style="text-align: left;">动态修改频繁</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>插入复杂度</strong></td>
+<td style="text-align: left;"><span class="math inline">\(O(t)\)</span>
+( 需要移动 )</td>
+<td style="text-align: left;"><span
+class="math inline">\(O(\max(m,n))\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>删除复杂度</strong></td>
+<td style="text-align: left;"><span class="math inline">\(O(t)\)</span>
+( 需要移动 )</td>
+<td style="text-align: left;"><span
+class="math inline">\(O(\max(m,n))\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>空间效率</strong></td>
+<td style="text-align: left;"><span class="p green">高</span></td>
+<td style="text-align: left;"><span class="p red">较低</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>时间效率</strong></td>
+<td style="text-align: left;">静态操作快</td>
+<td style="text-align: left;">动态操作快</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>适用场景</strong></td>
+<td style="text-align: left;">静态稀疏矩阵，转置频繁</td>
+<td style="text-align: left;">动态修改频繁，插入删除多</td>
 </tr>
 </tbody>
-</table></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
-<h3 id="常考点-2">3.3.4 408 常考点</h3>
-<div class="tabs" id="array-points"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="array-points-1">地址计算</button><button type="button" class="tab " data-href="array-points-2">压缩存储</button><button type="button" class="tab " data-href="array-points-3">快速转置</button></ul><div class="tab-contents"><div class="tab-item-content active" id="array-points-1"><ul>
-<li>先确认下标起始 ( 0 还是 1 ) 与存储方式 ( 行优先还是列优先 )</li>
-<li>地址公式里最容易错的是把 <span
-class="math inline">\(m\)</span>、<span class="math inline">\(n\)</span>
-写反</li>
-<li>题目常给元素大小 <span class="math inline">\(L\)</span>
-与首地址，最终答案常以字节偏移给出</li>
-</ul></div><div class="tab-item-content" id="array-points-2"><ul>
-<li>对称矩阵常让你算 <span class="math inline">\(k\)</span> 或反算 <span
-class="math inline">\((i,j)\)</span></li>
-<li>三角矩阵会额外出现一个「常数位」存 <span
-class="math inline">\(c\)</span>，容易漏</li>
-<li>带状矩阵要先判断 <span class="math inline">\((i,j)\)</span>
-是否落在带内，否则该位置为 0 或常数</li>
-</ul></div><div class="tab-item-content" id="array-points-3"><div class="note info simple">
-<p>
-快速转置把「按列找元素」改为「一次统计 + 前缀和定位」，把复杂度降到
-<span class="math inline">(O(n+t))</span>.
-</p>
-</div>
+</table>
+<p><strong>选择建议</strong></p>
 <ul>
-<li><code>num[col]</code> 统计每列非零元个数</li>
-<li><code>pos[col]</code> 记录该列在转置后数组中的起始位置 ( 前缀和
-)</li>
-<li>扫描原三元组数组时直接把元素放到转置数组的目标下标</li>
+<li><strong>科学计算</strong> 多用三元组表 + 快速转置</li>
+<li><strong>图算法</strong> 多用十字链表 ( 邻接表类似 )</li>
+<li><strong>数据库系统</strong> 根据操作类型选择</li>
+</ul></div><div class="tab-item-content" id="sparse-matrix-4"><p><strong>CSR ( Compressed Sparse Row )</strong></p>
+<ul>
+<li><code>values[]</code> 非零元素值</li>
+<li><code>col_indices[]</code> 列索引</li>
+<li><code>row_ptr[]</code> 行指针 ( 每行起始位置 )</li>
+<li><strong>优点</strong> 存储效率高，行操作快</li>
+<li><strong>缺点</strong> 列操作慢</li>
+</ul>
+<p><strong>CSC ( Compressed Sparse Column )</strong></p>
+<ul>
+<li>类似 CSR 但按列存储</li>
+<li><strong>优点</strong> 列操作快</li>
+<li><strong>缺点</strong> 行操作慢</li>
+</ul>
+<p><strong>应用场景</strong></p>
+<ul>
+<li><strong>CSR</strong> 稀疏矩阵向量乘法</li>
+<li><strong>CSC</strong> 矩阵转置，列操作多的场景</li>
+</ul>
+<p><strong>代码示例 ( CSR )</strong> <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="type">double</span> *values;        <span class="comment">// 非零元素值</span></span><br><span class="line">    <span class="type">int</span> *col_indices;     <span class="comment">// 列索引</span></span><br><span class="line">    <span class="type">int</span> *row_ptr;         <span class="comment">// 行指针</span></span><br><span class="line">    <span class="type">int</span> nrows, ncols, nnz; <span class="comment">// 行数、列数、非零元数</span></span><br><span class="line">&#125; CSRMatrix;</span><br></pre></td></tr></table></figure></p></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="常考点与解题技巧">3.3.4 408 常考点与解题技巧</h3>
+<div class="note success simple"><p>408 考试中数组与矩阵相关题目主要考察 <strong>计算能力</strong> 和
+<strong>公式应用能力</strong>，需要熟练掌握各种公式和转换方法.</p>
+</div>
+<div class="tabs" id="array-points"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="array-points-1">地址计算技巧</button><button type="button" class="tab " data-href="array-points-2">压缩存储计算</button><button type="button" class="tab " data-href="array-points-3">稀疏矩阵操作</button><button type="button" class="tab " data-href="array-points-4">实际应用场景</button></ul><div class="tab-contents"><div class="tab-item-content active" id="array-points-1"><p><strong>解题步骤</strong></p>
+<ol type="1">
+<li><strong>确认下标范围</strong> 仔细读题，确定下标是从 0 还是 1
+开始</li>
+<li><strong>确定存储方式</strong> 行优先还是列优先 ( 默认行优先 )</li>
+<li><strong>套用公式</strong> 选择正确的地址计算公式</li>
+<li><strong>单位转换</strong> 注意元素大小 <span
+class="math inline">\(L\)</span>，最终结果可能是字节偏移</li>
+</ol>
+<p><strong>常见陷阱</strong></p>
+<ul>
+<li><strong>维度混淆</strong> <span class="math inline">\(m\)</span> 和
+<span class="math inline">\(n\)</span> 写反</li>
+<li><strong>下标偏移</strong> 忘记处理下标从 1 开始的情况</li>
+<li><strong>存储方式</strong> 错误使用行优先/列优先公式</li>
+</ul>
+<p><strong>示例题目</strong> 数组 <code>A[5..10][3..8]</code>，首地址
+1000，<code>int</code> 占 4 字节，求 <code>A[7][5]</code> 地址</p>
+<ul>
+<li>行数 <span class="math inline">\(m = 10-5+1 = 6\)</span>，列数 <span
+class="math inline">\(n = 8-3+1 = 6\)</span></li>
+<li><span class="math inline">\(\text{LOC}(A[7][5]) = 1000 + [(7-5)
+\times 6 + (5-3)] \times 4 = 1000 + (12 + 2) \times 4 =
+1056\)</span></li>
+</ul></div><div class="tab-item-content" id="array-points-2"><p><strong>对称矩阵</strong></p>
+<ul>
+<li><strong>正向计算</strong> 给定 <span
+class="math inline">\((i,j)\)</span> 求 <span
+class="math inline">\(k\)</span></li>
+<li><strong>反向计算</strong> 给定 <span
+class="math inline">\(k\)</span> 求 <span
+class="math inline">\((i,j)\)</span></li>
+<li><strong>关键</strong> 判断 <span class="math inline">\(i \geq
+j\)</span> 还是 <span class="math inline">\(i &lt; j\)</span></li>
+</ul>
+<p><strong>三角矩阵</strong></p>
+<ul>
+<li><strong>注意常数位</strong>
+上/下三角区域的元素映射到常数存储位置</li>
+<li><strong>公式记忆</strong> 上三角矩阵的行优先公式较复杂</li>
+</ul>
+<p><strong>对角矩阵</strong></p>
+<ul>
+<li><strong>带内判断</strong> 先判断 <span class="math inline">\(|i-j|
+\leq b\)</span> 是否成立</li>
+<li><strong>通用公式</strong> 掌握 <span class="math inline">\(k = (i-1)
+\times d + (j - i + b)\)</span></li>
+</ul>
+<p><strong>示例题目</strong> 4 阶对称矩阵，元素按行优先存储在下三角，求
+<code>A[2][3]</code> 的存储位置</p>
+<ul>
+<li><span class="math inline">\(i=2, j=3\)</span>，<span
+class="math inline">\(i &lt; j\)</span>，用对称性 <span
+class="math inline">\(A[2][3] = A[3][2]\)</span></li>
+<li><span class="math inline">\(k = \dfrac{3 \times 2}{2} + 2 - 1 = 3 +
+1 = 4\)</span></li>
+</ul></div><div class="tab-item-content" id="array-points-3"><p><strong>快速转置算法</strong></p>
+<ol type="1">
+<li><strong>统计</strong> <code>num[col]</code> 每列非零元个数</li>
+<li><strong>前缀和</strong> <code>pos[col]</code>
+每列在转置后的起始位置</li>
+<li><strong>放置</strong> 扫描原数组，直接放到目标位置</li>
+</ol>
+<p><strong>算法复杂度分析</strong></p>
+<ul>
+<li><strong>普通转置</strong> <span class="math inline">\(O(n \times
+t)\)</span></li>
+<li><strong>快速转置</strong> <span class="math inline">\(O(n +
+t)\)</span></li>
+<li><strong>十字链表转置</strong> <span
+class="math inline">\(O(t)\)</span></li>
+</ul>
+<p><strong>代码实现要点</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 快速转置核心代码</span></span><br><span class="line">pos[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (col = <span class="number">2</span>; col &lt;= nu; col++) &#123;</span><br><span class="line">    pos[col] = pos[col<span class="number">-1</span>] + num[col<span class="number">-1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-item-content" id="array-points-4"><p><strong>科学计算</strong></p>
+<ul>
+<li><strong>有限元分析</strong> 刚度矩阵通常是对称稀疏矩阵</li>
+<li><strong>电路分析</strong> 导纳矩阵是大型稀疏矩阵</li>
+<li><strong>图像处理</strong> 图像拉普拉斯算子矩阵</li>
+</ul>
+<p><strong>数据处理</strong></p>
+<ul>
+<li><strong>推荐系统</strong> 用户-物品评分矩阵</li>
+<li><strong>文本分析</strong> 文档-词项矩阵</li>
+<li><strong>社交网络</strong> 邻接矩阵</li>
+</ul>
+<p><strong>工程实践建议</strong></p>
+<ul>
+<li><strong>小规模稠密矩阵</strong> 直接使用二维数组</li>
+<li><strong>大规模稀疏矩阵</strong> 根据操作类型选择存储结构</li>
+<li><strong>数值计算</strong> 优先考虑三元组表 + 快速转置</li>
+<li><strong>图算法</strong> 优先考虑十字链表</li>
+</ul>
+<p><strong>性能优化技巧</strong></p>
+<ul>
+<li><strong>缓存友好</strong> 行优先存储更适合 CPU 缓存预取</li>
+<li><strong>内存对齐</strong> 确保数据结构内存对齐以提高访问速度</li>
+<li><strong>批量操作</strong> 对稀疏矩阵尽量使用批量操作减少开销</li>
+</ul>
+<p><strong>现代应用扩展</strong></p>
+<ul>
+<li><strong>GPU 计算</strong> 稀疏矩阵在 GPU 上的高效实现</li>
+<li><strong>分布式存储</strong> 大规模矩阵的分布式存储方案</li>
+<li><strong>压缩感知</strong> 利用矩阵稀疏性进行数据压缩</li>
+</ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
+<h3 id="综合总结与学习建议">3.3.5 综合总结与学习建议</h3>
+<div class="note success simple"><p>数组与特殊矩阵是数据结构中的重要基础，掌握好这部分内容对于理解更复杂的数据结构和算法至关重要.</p>
+</div>
+<div class="tabs" id="summary"><ul class="nav-tabs"><button type="button" class="tab  active" data-href="summary-1">知识体系</button><button type="button" class="tab " data-href="summary-2">学习建议</button><button type="button" class="tab " data-href="summary-3">进阶学习</button></ul><div class="tab-contents"><div class="tab-item-content active" id="summary-1"><p><strong>核心知识点</strong></p>
+<ul>
+<li><strong>数组存储</strong> 地址计算公式、行优先/列优先存储</li>
+<li><strong>特殊矩阵</strong>
+对称矩阵、三角矩阵、对角矩阵的压缩存储</li>
+<li><strong>稀疏矩阵</strong> 三元组表、十字链表等存储方法</li>
+<li><strong>算法复杂度</strong> 各种操作的时空复杂度分析</li>
+</ul>
+<p><strong>知识关联</strong></p>
+<ul>
+<li><strong>与线性表</strong> 数组是线性表的推广</li>
+<li><strong>与图论</strong> 稀疏矩阵与图的邻接矩阵密切相关</li>
+<li><strong>与数值计算</strong> 矩阵运算在科学计算中的核心地位</li>
+<li><strong>与数据库</strong> 稀疏矩阵存储与数据库索引技术类似</li>
+</ul></div><div class="tab-item-content" id="summary-2"><p><strong>理论学习</strong></p>
+<ol type="1">
+<li><strong>公式记忆</strong> 熟练掌握各种地址计算公式</li>
+<li><strong>推导理解</strong> 理解公式背后的数学原理</li>
+<li><strong>对比分析</strong> 对比不同存储方法的优缺点</li>
+</ol>
+<p><strong>实践练习</strong></p>
+<ol type="1">
+<li><strong>代码实现</strong> 动手实现各种矩阵存储结构</li>
+<li><strong>题目练习</strong> 多做 408 真题和模拟题</li>
+<li><strong>性能测试</strong> 测试不同存储结构的性能差异</li>
+</ol>
+<p><strong>考试技巧</strong></p>
+<ol type="1">
+<li><strong>仔细审题</strong> 注意下标范围和存储方式</li>
+<li><strong>分步计算</strong> 复杂题目分步骤计算</li>
+<li><strong>检查验证</strong> 计算结果要回头验证</li>
+</ol></div><div class="tab-item-content" id="summary-3"><p><strong>扩展知识</strong></p>
+<ul>
+<li><strong>分块矩阵</strong> 大规模矩阵的分块存储技术</li>
+<li><strong>稀疏矩阵格式</strong> CSR、CSC、COO 等工业级格式</li>
+<li><strong>并行计算</strong> 矩阵运算的并行化实现</li>
+<li><strong>压缩算法</strong> 基于矩阵稀疏性的数据压缩</li>
+</ul>
+<p><strong>研究方向</strong></p>
+<ul>
+<li><strong>高性能计算</strong> 稀疏矩阵在超级计算机上的优化</li>
+<li><strong>机器学习</strong> 大规模稀疏矩阵在深度学习中的应用</li>
+<li><strong>图神经网络</strong> 图结构与稀疏矩阵的深度融合</li>
+<li><strong>量子计算</strong> 量子态与矩阵表示的关系</li>
 </ul></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div>
 <hr />
 <h2 id="例题精选">3.4 例题精选</h2>
@@ -974,7 +2170,7 @@ class="math inline">\(O(n+t)\)</span> ); 十字链表插删更方便.
   <span class="cd-date" id="eventDate"></span>
 </div>
 <div id="countRight" class="cd-count-right"></div>
-</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC3%E7%AB%A0-%E6%A0%88%E9%98%9F%E5%88%97%E5%92%8C%E6%95%B0%E7%BB%84"><span class="toc-number">1.</span> <span class="toc-text">第3章 栈、队列和数组</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%88-stack"><span class="toc-number">1.1.</span> <span class="toc-text">3.1 栈 ( Stack )</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E4%B8%8E%E7%89%B9%E6%80%A7"><span class="toc-number">1.1.1.</span> <span class="toc-text">3.1.1 定义与特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">1.1.2.</span> <span class="toc-text">3.1.2 基本操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E6%A0%88"><span class="toc-number">1.1.3.</span> <span class="toc-text">3.1.3 顺序栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E6%A0%88"><span class="toc-number">1.1.4.</span> <span class="toc-text">3.1.4 链栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">1.1.5.</span> <span class="toc-text">3.1.5 栈的应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%80%83%E7%82%B9"><span class="toc-number">1.1.6.</span> <span class="toc-text">3.1.6 408 常考点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%9F%E5%88%97-queue"><span class="toc-number">1.2.</span> <span class="toc-text">3.2 队列 ( Queue )</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E4%B8%8E%E7%89%B9%E6%80%A7-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">3.2.1 定义与特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C-1"><span class="toc-number">1.2.2.</span> <span class="toc-text">3.2.2 基本操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E9%98%9F%E5%88%97%E4%B8%8E%E5%81%87%E6%BA%A2%E5%87%BA"><span class="toc-number">1.2.3.</span> <span class="toc-text">3.2.3 顺序队列与假溢出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97"><span class="toc-number">1.2.4.</span> <span class="toc-text">3.2.4 循环队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E9%98%9F%E5%88%97"><span class="toc-number">1.2.5.</span> <span class="toc-text">3.2.5 链队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97"><span class="toc-number">1.2.6.</span> <span class="toc-text">3.2.6 双端队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%9F%E5%88%97%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">1.2.7.</span> <span class="toc-text">3.2.7 队列的应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%80%83%E7%82%B9-1"><span class="toc-number">1.2.8.</span> <span class="toc-text">3.2.8 408 常考点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E4%B8%8E%E7%89%B9%E6%AE%8A%E7%9F%A9%E9%98%B5"><span class="toc-number">1.3.</span> <span class="toc-text">3.3 数组与特殊矩阵</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E7%9A%84%E5%AD%98%E5%82%A8%E4%B8%8E%E5%9C%B0%E5%9D%80%E8%AE%A1%E7%AE%97"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.3.1 数组的存储与地址计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E7%9F%A9%E9%98%B5%E5%8E%8B%E7%BC%A9%E5%AD%98%E5%82%A8"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.3.2 特殊矩阵压缩存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.3.3 稀疏矩阵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%80%83%E7%82%B9-2"><span class="toc-number">1.3.4.</span> <span class="toc-text">3.3.4 408 常考点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98%E7%B2%BE%E9%80%89"><span class="toc-number">1.4.</span> <span class="toc-text">3.4 例题精选</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E7%AB%A0%E7%96%91%E9%9A%BE%E7%82%B9"><span class="toc-number">1.5.</span> <span class="toc-text">3.5 本章疑难点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97%E5%88%A4%E7%A9%BA-%E5%88%A4%E6%BB%A1"><span class="toc-number">1.5.0.1.</span> <span class="toc-text">1. 循环队列判空 &#x2F; 判满</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%88%E4%B8%8E%E9%80%92%E5%BD%92%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">1.5.0.2.</span> <span class="toc-text">2. 栈与递归的关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC%E4%B8%8E%E4%B8%AD%E7%BC%80%E8%BD%AC%E5%90%8E%E7%BC%80"><span class="toc-number">1.5.0.3.</span> <span class="toc-text">3. 后缀表达式求值与中缀转后缀</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E7%9F%A9%E9%98%B5%E5%8E%8B%E7%BC%A9%E4%B8%8B%E6%A0%87%E5%85%AC%E5%BC%8F"><span class="toc-number">1.5.0.4.</span> <span class="toc-text">4. 特殊矩阵压缩下标公式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%81%E5%AD%97%E9%93%BE%E8%A1%A8-vs.-%E4%B8%89%E5%85%83%E7%BB%84"><span class="toc-number">1.5.0.5.</span> <span class="toc-text">5. 十字链表 vs. 三元组</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93"><span class="toc-number">1.6.</span> <span class="toc-text">3.6 本章小结</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/04/01/%E9%AB%98%E6%95%B0-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%95%B0%E5%88%97%E6%9E%81%E9%99%90%E5%85%B3%E7%B3%BB/" title="函数与数列极限关系"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69cfda23df10edaed91080d9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="函数与数列极限关系"/></a><div class="content"><a class="title" href="/2026/04/01/%E9%AB%98%E6%95%B0-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%95%B0%E5%88%97%E6%9E%81%E9%99%90%E5%85%B3%E7%B3%BB/" title="函数与数列极限关系">函数与数列极限关系</a><time datetime="2026-04-01T12:00:27.000Z" title="发表于 2026-04-01 20:00:27">2026-04-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/24/%E9%AB%98%E6%95%B0-%E6%9B%B2%E7%BA%BF%E5%92%8C%E6%9B%B2%E9%9D%A2%E7%A7%AF%E5%88%86/" title="高等数学 第十一章 曲线积分与曲面积分"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69bcf9a40fd75e0c1776d878.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="高等数学 第十一章 曲线积分与曲面积分"/></a><div class="content"><a class="title" href="/2026/03/24/%E9%AB%98%E6%95%B0-%E6%9B%B2%E7%BA%BF%E5%92%8C%E6%9B%B2%E9%9D%A2%E7%A7%AF%E5%88%86/" title="高等数学 第十一章 曲线积分与曲面积分">高等数学 第十一章 曲线积分与曲面积分</a><time datetime="2026-03-24T15:00:27.000Z" title="发表于 2026-03-24 23:00:27">2026-03-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/24/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%841%E5%BC%BA%E5%8C%96-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" title="408-数据结构强化-1-时间复杂度计算"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69c2a41413399d9f5166cfbb.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-数据结构强化-1-时间复杂度计算"/></a><div class="content"><a class="title" href="/2026/03/24/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%841%E5%BC%BA%E5%8C%96-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" title="408-数据结构强化-1-时间复杂度计算">408-数据结构强化-1-时间复杂度计算</a><time datetime="2026-03-24T12:00:27.000Z" title="发表于 2026-03-24 20:00:27">2026-03-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/23/%E7%BA%A7%E6%95%B0%E7%BB%93%E5%90%88%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/" title="级数结合微分方程问题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69bffad8fc068dbbee8bc418.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="级数结合微分方程问题"/></a><div class="content"><a class="title" href="/2026/03/23/%E7%BA%A7%E6%95%B0%E7%BB%93%E5%90%88%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/" title="级数结合微分方程问题">级数结合微分方程问题</a><time datetime="2026-03-23T12:00:27.000Z" title="发表于 2026-03-23 20:00:27">2026-03-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/22/%E9%AB%98%E6%95%B0%E7%AC%AC%E7%AC%AC%E5%8D%81%E4%BA%8C%E7%AB%A0%E6%97%A0%E7%A9%B7%E7%BA%A7%E6%95%B0%E5%81%9A%E9%A2%98%E6%8A%80%E5%B7%A7%E4%B8%93%E9%A2%98/" title="高等数学 第十二章 无穷级数 - 做题技巧专题 ( 求和函数 )"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69baa683b96fa53fd04c5cc1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="高等数学 第十二章 无穷级数 - 做题技巧专题 ( 求和函数 )"/></a><div class="content"><a class="title" href="/2026/03/22/%E9%AB%98%E6%95%B0%E7%AC%AC%E7%AC%AC%E5%8D%81%E4%BA%8C%E7%AB%A0%E6%97%A0%E7%A9%B7%E7%BA%A7%E6%95%B0%E5%81%9A%E9%A2%98%E6%8A%80%E5%B7%A7%E4%B8%93%E9%A2%98/" title="高等数学 第十二章 无穷级数 - 做题技巧专题 ( 求和函数 )">高等数学 第十二章 无穷级数 - 做题技巧专题 ( 求和函数 )</a><time datetime="2026-03-22T15:00:27.000Z" title="发表于 2026-03-22 23:00:27">2026-03-22</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC3%E7%AB%A0-%E6%A0%88%E9%98%9F%E5%88%97%E5%92%8C%E6%95%B0%E7%BB%84"><span class="toc-number">1.</span> <span class="toc-text">第3章 栈、队列和数组</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%88-stack"><span class="toc-number">1.1.</span> <span class="toc-text">3.1 栈 ( Stack )</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E4%B8%8E%E7%89%B9%E6%80%A7"><span class="toc-number">1.1.1.</span> <span class="toc-text">3.1.1 定义与特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">1.1.2.</span> <span class="toc-text">3.1.2 基本操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E6%A0%88"><span class="toc-number">1.1.3.</span> <span class="toc-text">3.1.3 顺序栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E6%A0%88"><span class="toc-number">1.1.4.</span> <span class="toc-text">3.1.4 链栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">1.1.5.</span> <span class="toc-text">3.1.5 栈的应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%80%83%E7%82%B9"><span class="toc-number">1.1.6.</span> <span class="toc-text">3.1.6 408 常考点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%9F%E5%88%97-queue"><span class="toc-number">1.2.</span> <span class="toc-text">3.2 队列 ( Queue )</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E4%B8%8E%E7%89%B9%E6%80%A7-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">3.2.1 定义与特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C-1"><span class="toc-number">1.2.2.</span> <span class="toc-text">3.2.2 基本操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E9%98%9F%E5%88%97%E4%B8%8E%E5%81%87%E6%BA%A2%E5%87%BA"><span class="toc-number">1.2.3.</span> <span class="toc-text">3.2.3 顺序队列与假溢出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97"><span class="toc-number">1.2.4.</span> <span class="toc-text">3.2.4 循环队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E9%98%9F%E5%88%97"><span class="toc-number">1.2.5.</span> <span class="toc-text">3.2.5 链队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97"><span class="toc-number">1.2.6.</span> <span class="toc-text">3.2.6 双端队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%9F%E5%88%97%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">1.2.7.</span> <span class="toc-text">3.2.7 队列的应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%80%83%E7%82%B9-1"><span class="toc-number">1.2.8.</span> <span class="toc-text">3.2.8 408 常考点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E4%B8%8E%E7%89%B9%E6%AE%8A%E7%9F%A9%E9%98%B5"><span class="toc-number">1.3.</span> <span class="toc-text">3.3 数组与特殊矩阵</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E7%9A%84%E5%AD%98%E5%82%A8%E4%B8%8E%E5%9C%B0%E5%9D%80%E8%AE%A1%E7%AE%97"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.3.1 数组的存储与地址计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E7%9F%A9%E9%98%B5%E5%8E%8B%E7%BC%A9%E5%AD%98%E5%82%A8"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.3.2 特殊矩阵压缩存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5%E5%AD%98%E5%82%A8%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.3.3 稀疏矩阵存储方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%80%83%E7%82%B9%E4%B8%8E%E8%A7%A3%E9%A2%98%E6%8A%80%E5%B7%A7"><span class="toc-number">1.3.4.</span> <span class="toc-text">3.3.4 408 常考点与解题技巧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E6%80%BB%E7%BB%93%E4%B8%8E%E5%AD%A6%E4%B9%A0%E5%BB%BA%E8%AE%AE"><span class="toc-number">1.3.5.</span> <span class="toc-text">3.3.5 综合总结与学习建议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98%E7%B2%BE%E9%80%89"><span class="toc-number">1.4.</span> <span class="toc-text">3.4 例题精选</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E7%AB%A0%E7%96%91%E9%9A%BE%E7%82%B9"><span class="toc-number">1.5.</span> <span class="toc-text">3.5 本章疑难点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97%E5%88%A4%E7%A9%BA-%E5%88%A4%E6%BB%A1"><span class="toc-number">1.5.0.1.</span> <span class="toc-text">1. 循环队列判空 &#x2F; 判满</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%88%E4%B8%8E%E9%80%92%E5%BD%92%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">1.5.0.2.</span> <span class="toc-text">2. 栈与递归的关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC%E4%B8%8E%E4%B8%AD%E7%BC%80%E8%BD%AC%E5%90%8E%E7%BC%80"><span class="toc-number">1.5.0.3.</span> <span class="toc-text">3. 后缀表达式求值与中缀转后缀</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E7%9F%A9%E9%98%B5%E5%8E%8B%E7%BC%A9%E4%B8%8B%E6%A0%87%E5%85%AC%E5%BC%8F"><span class="toc-number">1.5.0.4.</span> <span class="toc-text">4. 特殊矩阵压缩下标公式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%81%E5%AD%97%E9%93%BE%E8%A1%A8-vs.-%E4%B8%89%E5%85%83%E7%BB%84"><span class="toc-number">1.5.0.5.</span> <span class="toc-text">5. 十字链表 vs. 三元组</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93"><span class="toc-number">1.6.</span> <span class="toc-text">3.6 本章小结</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/04/01/%E9%AB%98%E6%95%B0-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%95%B0%E5%88%97%E6%9E%81%E9%99%90%E5%85%B3%E7%B3%BB/" title="函数与数列极限关系"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69cfda23df10edaed91080d9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="函数与数列极限关系"/></a><div class="content"><a class="title" href="/2026/04/01/%E9%AB%98%E6%95%B0-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%95%B0%E5%88%97%E6%9E%81%E9%99%90%E5%85%B3%E7%B3%BB/" title="函数与数列极限关系">函数与数列极限关系</a><time datetime="2026-04-01T12:00:27.000Z" title="发表于 2026-04-01 20:00:27">2026-04-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/24/%E9%AB%98%E6%95%B0-%E6%9B%B2%E7%BA%BF%E5%92%8C%E6%9B%B2%E9%9D%A2%E7%A7%AF%E5%88%86/" title="高等数学 第十一章 曲线积分与曲面积分"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69bcf9a40fd75e0c1776d878.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="高等数学 第十一章 曲线积分与曲面积分"/></a><div class="content"><a class="title" href="/2026/03/24/%E9%AB%98%E6%95%B0-%E6%9B%B2%E7%BA%BF%E5%92%8C%E6%9B%B2%E9%9D%A2%E7%A7%AF%E5%88%86/" title="高等数学 第十一章 曲线积分与曲面积分">高等数学 第十一章 曲线积分与曲面积分</a><time datetime="2026-03-24T15:00:27.000Z" title="发表于 2026-03-24 23:00:27">2026-03-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/24/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%841%E5%BC%BA%E5%8C%96-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" title="408-数据结构强化-1-时间复杂度计算"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69c2a41413399d9f5166cfbb.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-数据结构强化-1-时间复杂度计算"/></a><div class="content"><a class="title" href="/2026/03/24/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%841%E5%BC%BA%E5%8C%96-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" title="408-数据结构强化-1-时间复杂度计算">408-数据结构强化-1-时间复杂度计算</a><time datetime="2026-03-24T12:00:27.000Z" title="发表于 2026-03-24 20:00:27">2026-03-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/23/%E7%BA%A7%E6%95%B0%E7%BB%93%E5%90%88%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/" title="级数结合微分方程问题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69bffad8fc068dbbee8bc418.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="级数结合微分方程问题"/></a><div class="content"><a class="title" href="/2026/03/23/%E7%BA%A7%E6%95%B0%E7%BB%93%E5%90%88%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/" title="级数结合微分方程问题">级数结合微分方程问题</a><time datetime="2026-03-23T12:00:27.000Z" title="发表于 2026-03-23 20:00:27">2026-03-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/22/%E9%AB%98%E6%95%B0%E7%AC%AC%E7%AC%AC%E5%8D%81%E4%BA%8C%E7%AB%A0%E6%97%A0%E7%A9%B7%E7%BA%A7%E6%95%B0%E5%81%9A%E9%A2%98%E6%8A%80%E5%B7%A7%E4%B8%93%E9%A2%98/" title="高等数学 第十二章 无穷级数 - 做题技巧专题 ( 求和函数 )"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69baa683b96fa53fd04c5cc1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="高等数学 第十二章 无穷级数 - 做题技巧专题 ( 求和函数 )"/></a><div class="content"><a class="title" href="/2026/03/22/%E9%AB%98%E6%95%B0%E7%AC%AC%E7%AC%AC%E5%8D%81%E4%BA%8C%E7%AB%A0%E6%97%A0%E7%A9%B7%E7%BA%A7%E6%95%B0%E5%81%9A%E9%A2%98%E6%8A%80%E5%B7%A7%E4%B8%93%E9%A2%98/" title="高等数学 第十二章 无穷级数 - 做题技巧专题 ( 求和函数 )">高等数学 第十二章 无穷级数 - 做题技巧专题 ( 求和函数 )</a><time datetime="2026-03-22T15:00:27.000Z" title="发表于 2026-03-22 23:00:27">2026-03-22</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
   if (true) { 
     window.typed = new Typed("#footer-type-tips", {
       strings: ["只要记住你的名字&#44; 不管你在世界的哪个地方&#44; 我一定&#44; 会去见你 !"],
