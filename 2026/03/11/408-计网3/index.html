@@ -54,12 +54,12 @@
   configTitle: 'SPARKLE',
   title: '408-计算机网络-3-数据链路层',
   postAI: '',
-  pageFillDescription: '数据链路层, 总结与速查 ( Cheat Sheet ), 一、数据链路层的功能, 二、组帧与差错控制, 2.1 组帧方法, 2.2 差错控制编码, 三、流量控制与可靠传输机制, 3.2 滑动窗口机制, 四、介质访问控制 ( MAC ), 4.1 ALOHA 协议, 4.2 CSMA 协议, 4.3 CSMA/CD ( 以太网核心 ), 4.4 CSMA/CA ( 无线网络核心 ), 五、局域网基本概念与体系结构, 六、以太网、IEEE 802.11、令牌环, 七、网桥与局域网交换机, 7.1 网桥 ( Bridge )数据链路层本文系统讲解数据链路层的功能组帧差错控制滑动窗口协议介质访问控制局域网技术及交换设备涵盖停等协议的信道利用率计算与的工作细节以太网帧格式及交换机自学习算法数据链路层基本功能封装成帧透明传输差错检测流量控制可靠传输差错控制检错编码奇偶校验循环冗余纠错编码海明码可靠传输协议停等协议回退帧选择重传介质访问控制静态划分信道动态分配信道随机访问轮询令牌环局域网以太网无线局域网令牌环交换设备网桥以太网交换机自学习算法生成树协议总结与速查知识点核心公式结论备注停等信道利用率帧发送时延确认帧发送时延窗口上限序号比特数窗口上限收发窗口相等且各不超过滑动窗口利用率为发送窗口大小最大窗口充分利用确保流水线满载生成多项式余数为则无误附加在帧尾海明码最小距离检位错需纠位错需最小帧长单程传播时延带宽最小帧字节争用期以太网帧结构目源类型数据最小最大交换机自学习源端口构建转发表未知目的则泛洪一数据链路层的功能数据链路层的地位与功能数据链路层位于第二层负责将网络层传来的数据在相邻节点之间的链路上可靠或尽力传输数据链路层的数据单元称为帧五大核心功能封装成帧将网络层的数据报封装成帧在帧头帧尾添加特定标志使接收方能正确识别帧的起始与结束透明传输无论数据字段中含有何种比特组合包括与帧定界符相同的序列都能正确传输解决方案字符填充字节填充或位填充差错检测与纠正信道噪声导致传输错误数据链路层通过冗余编码海明码等检测或纠正帧中的错误流量控制防止发送方速度过快导致接收方缓冲区溢出通过滑动窗口等机制限制发送速率可靠传输通过确认和重传机制确保帧的正确有序交付注意有线以太网不提供可靠传输差错由上层处理无线网络才在链路层保证可靠传输二组帧与差错控制组帧方法四种组帧方法字符计数法帧首部用一个字段指明帧的字节总数接收方读取计数值收满相应字节即为一帧缺点计数字段出错会导致后续帧全部错乱失去同步不实用字节填充的首尾定界符法字符填充法用特殊字节如标识帧的起止若数据中出现与相同的字节则在其前插入转义字符发送方填充接收方去除应用协议采用此方法比特填充法零比特填充用特殊比特串个作帧定界符发送方在数据中每遇到连续个自动在后面插入一个接收方每遇到连续个后的自动删除应用协议采用此方法物理层违规编码法利用物理层编码中的违规信号正常数据不会出现的电平组合作帧定界符应用曼彻斯特编码中高高或低低跳变在正常数据中不出现可用于帧定界差错控制编码奇偶校验码在数据位后附加位校验位使总的个数为奇数奇校验或偶数偶校验缺点只能检测奇数个比特出错不能检测偶数个比特同时出错不能纠错实际网络中很少单独使用循环冗余校验是数据链路层最常用的检错方法检错能力强实现简单硬件移位寄存器原理发送方与接收方事先约定一个生成多项式对应一个位的二进制数最高位和最低位均为设信息帧为位在末尾补个即共位用除以得余数位将余数附加在原始信息末尾构成发送帧共位接收方用除以若余数为则认为无误否则有错帧校验序列即附加在帧尾的冗余校验位就是的余数的检错能力能检测所有奇数个比特错误能检测所有突发长度的突发错误为位数能检测所有位错不能纠错只能检测是否有错无法定位错误位置常用生成多项式用于磁盘以太网采用即为位示例计算过程信息码生成多项式对应发送方补个后用除以模除法即无进位的除法余余数实际逐步计算取前位移下得前导忽略取加入下一位凑位下一位重新用竖式模不对从最高位对齐正确计算逐步仅当最高位为时做最高位移位最高位最高位移最高位余数位发送帧接收方用除以若余数无误海明码海明码是一种能检错且能纠错的线性分组码适合纠正单比特错误基本原理在数据位中插入若干校验位每个校验位负责覆盖特定位置的比特接收方重新计算所有校验位若出错则错误位置各校验位结果组合的二进制值校验位的数量要求若数据有位需要位校验位满足数据位校验位总编码长校验位位置放在编码的第位最小码距与检纠错能力检测位错需最小码距纠正位错需最小码距海明码最小码距为可纠位错检位错若加一位全局奇偶校验位可纠位检位三流量控制与可靠传输机制停等协议基本思路发送方每发送一帧后必须等待接收方的确认收到后才能发送下一帧若超时未收到则重传该帧帧序号停等协议只需位序号和交替用于区分新帧与重传帧防止重复帧被接收方当成新帧信道利用率设为帧的发送时延为单向传播时延为确认帧发送时延通常很小近似为其中当长时延大带宽链路信道利用率极低这就是引入滑动窗口的动机滑动窗口机制滑动窗口的基本思想允许发送方在未收到确认的情况下连续发送多个帧最多可发送窗口大小个未被确认的帧这种方式将单帧的等待时间与多帧的发送时间重叠流水线大幅提升信道利用率信道利用率无差错情况使信道满负荷运行的最小窗口序号空间与窗口大小若帧序号占位则序号空间大小为但收发窗口大小有限制见下文回退帧协议工作原理发送窗口大小接收窗口大小接收方只接受按序到达的帧若收到期望帧发送接收窗口向前滑动若收到非期望帧失序丢弃发送对最后一个正确帧的累积确认出错处理当发现错误超时或收到时发送方必须重传出错帧及其后所有已发帧回退个帧即使后面的帧已正确到达接收方窗口大小限制的原因若序号空间全用会出现以下模糊性发送方发出个帧序号若所有丢失发送方重传序号而接收方已滑窗期待新的序号无法区分是重传帧还是新帧性能分析有差错时设帧出错概率为的有效吞吐率近似出一次错需重传个帧代价较大选择重传协议工作原理发送窗口接收窗口接收方可以接受失序帧并缓存等待缺失的帧到来后再按序向上层交付出错处理出错时只重传出错的那一帧不重传后续已正确接收的帧代价小效率高但需要较大的接收缓冲区窗口大小限制的原因若会出现以下模糊性假设序号发送方发若所有丢失发送方重传接收方已滑窗到接收窗口包含序号无法区分新帧与重传帧三种协议对比考研必考比较维度停等回退帧选择重传发送窗口接收窗口序号位数出错重传只重传出错帧重传出错帧及后续所有帧只重传出错帧接收缓存不需要不需要需要存失序帧信道利用率最低较高最高实现复杂度最简单中等最复杂典型应用早期变体示例滑动窗口信道利用率计算某链路带宽单向传播时延卫星链路帧长求停等协议的信道利用率为使信道利用率达到滑动窗口至少需要多大若序号字段和的最大窗口各为多少解停等信道利用率极低不适合卫星链路最小窗口序号字段序号空间最大窗口最大窗口因窗口信道利用率仍很低需要更大的序号字段如才能充分利用信道四介质访问控制介质访问控制的分类当多个节点共享同一传输介质如无线信道早期以太网总线时需要协调各节点的发送权防止冲突碰撞这就是介质访问控制问题分类静态信道划分预先将信道资源频率时间码型分配给各节点无冲突但资源利用率低如动态信道分配随机访问节点按需竞争发送可能碰撞需碰撞检测避免机制如受控访问通过轮询或令牌机制有序分配信道如令牌环令牌总线协议纯最简单的随机访问协议任何节点有数据就直接发送不监听信道碰撞若两帧在时间上有任何重叠则发生碰撞两帧均损坏检测到碰撞后各节点等待随机时间后重传易受冲突的时间窗口帧长的倍时间内若有其他帧开始发送则冲突最大信道利用率当信道负载时时隙将时间划分为等长时隙帧传输时间各节点只在时隙开始处发送碰撞只发生在同一时隙易受冲突窗口缩短为减半最大信道利用率当时两者对比纯时隙发送时机随时时隙开始处最大利用率实现复杂度低需要时钟同步协议载波监听多路访问在基础上增加先监听载波监听再发送的机制发送前先检测信道是否空闲三种策略坚持信道空闲立即发送概率信道忙持续监听空闲后立即发送缺点多个节点同时等待时信道一空闲就同时发送冲突概率高非坚持信道空闲立即发送信道忙等待随机时间后再检测不持续监听优点减少冲突多个节点等待时间不同缺点信道可能空闲一段时间无人发送浪费坚持信道空闲以概率发送以概率等待一个时隙后再检测信道忙持续监听空闲后以概率发送折衷方案在冲突与利用率之间取得平衡的局限由于传播时延的存在一个节点开始发送后另一个节点可能尚未检测到信道忙仍然发送导致碰撞能减少但不能消除碰撞以太网核心在基础上增加碰撞检测发送过程中持续检测信道一旦检测到碰撞立即停止发送节省信道资源工作流程先听后说边说边听有数据要发送监听信道信道空闲是否信道忙发送数据等待三种策略边发边检测检测到碰撞是否发强化干扰信号发送成功信号停止发送二进制指数退避重新竞争信道争用期冲突窗口最坏情况下碰撞检测需要等待端到端往返传播时延因此将称为争用期或碰撞窗口最小帧长推导重要要保证发送方能在帧发送完毕前检测到碰撞否则碰撞发生后发送方已收手不知道碰撞必须满足以太网示例最大网段长度约经过个中继器单向传播时延约争用期带宽最小帧长这就是以太网最小帧长度字节的来历若数据不足字节需填充至字节帧总长二进制指数退避算法第次碰撞后从中随机选一个整数等待个争用期后重新竞争超过次仍碰撞则报告发送失败关键特性退避时间随冲突次数指数增大减少网络负载高时的持续碰撞碰撞次后丢弃不会无限重试考研计算示例深度理解若发生第次碰撞退避时间从中选取选取的概率是等待时间为个争用期若则从即中选而不是上限截断为无线网络核心无线网络中无法使用碰撞检测原因发送时无线信号的自干扰使接收自身信号困难硬件难以实现全双工检测隐藏节点问题和都在的范围内但和互不可见无法检测彼此是否在发送因此采用碰撞避免尽量不让碰撞发生而非碰撞检测工作机制分布式协调功能帧间间隔最短帧间隔用于等高优先级帧数据帧发送前需等待的最小帧间隔退避机制随机退避避免碰撞发送数据前监听信道是否空闲空闲时间达到后启动随机退避计时器从中随机选为竞争窗口大小退避计时器倒计时仅在信道空闲时递减信道忙时暂停计时器到发送帧若碰撞加倍二进制指数退避重新退避确认机制接收方收到正确的帧后等待后立即发不进行退避保证优先发送发送方收到才认为发送成功否则超时重传机制解决隐藏节点问题可选机制针对长数据帧发送方先发短的帧包含将要传输的数据时长接收方回复帧后所有听到的节点设置虚拟载波监听在此时间内不发送发送方收到后后发数据接收方收后后发交互流程图发送方接收方邻居节点隐藏终端有数据发送请求发送收到或仅收到允许发送设置虚拟载波监听在此期间保持静默数据帧确认帧结束开始竞争信道对比重要比较维度以太网应用场景有线以太网无线局域网碰撞处理检测碰撞立即停止尽量避免碰撞确认机制无有线可靠不需要每帧都需确认退避触发碰撞发生后发送前预防信道监听物理载波检测物理虚拟载波检测最小帧长限制无强制但有开销五局域网基本概念与体系结构局域网的特点覆盖范围小同一建筑或园区一般不超过传输速率高误码率低由单一组织拥有和管理标准体系委员会将数据链路层分为两个子层子层全称功能逻辑链路控制提供统一接口给网络层负责差错控制流量控制介质访问控制负责成帧编址地址介质访问等实际应用中层在网络中基本不用以太网直接使用层向上提供服务地址物理地址位字节烧录在网卡中理论上全球唯一格式十六进制前位厂商标识由分配后位厂商自行分配的设备序号广播地址六以太网令牌环以太网以太网帧格式帧最常用目的源类型数据字节字节字节字节字节字节字段长度说明目的地址接收方物理地址可为广播多播源地址发送方物理地址类型长度表示上层协议类型如数据不足时填充校验覆盖目的到数据字段注意前导码的同步序列的帧开始定界符在物理层处理不计入帧长所以以太网帧的最小字节不含前导码最大传输单元以太网帧的数据字段最大长度为字节称为若数据报长度超过则必须在网络层进行分片以太网的发展历程标准速率介质编码最大距离粗同轴曼彻斯特细同轴曼彻斯特曼彻斯特命名规则速率介质中表示基带传输数字字母表示介质类型无线局域网基本概念基本服务集由一个接入点和若干无线主机站点组成的基本网络单元服务集标识符无线网络的名称人们常说的名字分布式系统连接多个的骨干网络有线以太网扩展服务集由多个通过连接组成的大型无线网络模式无站点直接通信点对点临时网络帧结构简化数据帧包含个地址字段用于支持转发接收方地址发送方地址目的源地址用于中转仅无线分布式系统中使用主要标准版本标准别名频段最大速率关键技术令牌环令牌环工作原理所有站点连成逻辑环形一个特殊的控制帧令牌沿环依次传递只有持有令牌的站点才能发送数据帧发送完毕后将令牌传给下一个站点无冲突信道利用率高负载重时接近时延确定缺点维护令牌令牌丢失或重复复杂实现和配置比以太网复杂速度较慢或现状已基本被以太网取代考研重点是概念与原理的对比令牌环以太网比较以太网令牌环访问控制竞争随机有序令牌轮询轻载性能好低延迟较差需等令牌重载性能差冲突增多好接近利用率故障影响节点故障不影响他人节点故障可能中断全环七网桥与局域网交换机网桥网桥的功能与工作原理网桥工作在第二层数据链路层根据帧的地址进行转发决策网桥的主要功能过滤帧读取帧的目的地址若目的地址在同一网段则不转发过滤否则转发到另一网段转发帧将帧从一个端口转发到另一端口隔离冲突域自学习通过读取帧的源地址动态建立地址表转发表自学习算法收到一帧时记录源地址和来源端口入端口写入转发表超时老化默认查找目的地址若在转发表中且目的端口与来源端口不同转发到对应端口若在转发表中且目的端口与来源端口相同过滤丢弃目的在同侧若不在转发表中泛洪从除来源端口外的所有端口转发网桥中继器路由器中继器网桥路由器工作层次物理层数据链路层网络层地址识别无地址地址冲突域不隔离隔离隔离广播域不隔离不隔离隔离以太网交换机交换机的工作原理交换机本质上是多端口网桥每个端口都有独立的冲突域支持多对节点同时并发通信三种帧转发方式转发方式开始转发时机优点缺点存储转发收到完整帧后可过滤错误帧检验延迟最大直通交换收到目的字节后延迟最小不检测错误帧无碎片转发收到字节后过滤碰撞碎片折衷方案交换机的核心优势每端口独享带宽交换机每端口而集线器所有端口共享支持全双工无冲突不需要同时转发多个帧交换矩阵自学习即插即用无需人工配置冲突域与广播域交换机每个端口独立冲突域彻底消除冲突交换机所有端口同一广播域广播帧仍会泛洪到所有端口路由器每个接口独立广播域路由器不转发广播帧虚拟局域网通过在交换机上配置可以将同一物理交换机的不同端口划分为不同的逻辑广播域实现广播域的隔离标准帧格式在源地址和类型字段之间插入字节字节固定值标识这是一个帧字节包含优先级和范围和保留可用端口类型考研重点端口连接主机只处理无标签帧发送时剥离接收时打上默认端口连接交换机路由器允许多个通过发送时若则剥离否则保留接收时若无则打上有则透传生成树协议为了提高网络可靠性交换机之间通常部署冗余链路但冗余链路会产生环路导致广播风暴广播帧在环路中无限循环消耗全部带宽地址表不稳定同一地址从不同端口出现转发表振荡帧重复目的主机收到同一帧的多份副本解决方案所有交换机交换报文选举出一个根桥每个非根交换机确定到根桥最短路径的根端口每个网段选出一个指定端口其余端口设为阻塞状态不转发数据帧但仍接收网络拓扑形成无环的逻辑树形结构生成树快速生成树协议收敛时间从的缩短到八综合真题解析真题窗口大小判断设滑动窗口协议的帧序号用位二进制表示序号协议的最大发送窗口是多少协议的最大发送窗口和接收窗口各是多少若某时刻的发送方已发帧接收方只正确收到帧此时应如何处理解序号空间最大发送窗口最大发送窗口最大接收窗口接收窗口只接受按序帧接收方正确收到帧发帧到达时若帧损坏接收方丢弃帧发或等超时发送方收到或超时后从帧开始重传回退到重发所有帧包括已发过的和真题最小帧长计算某以太网总线长传播速率数据传输速率求争用期求最小帧长若某帧数据字段仅字节应如何处理解单向传播时延争用期最小帧长取整为字节实际标准取字节是针对更大网络而言数据字段字节帧总长字节字节标准规定应在数据字段后填充字节的无用字节使数据字段达到字节总帧长字节真题交换机自学习过程如图所示交换机有个端口初始转发表为空端口主机端口主机端口主机事件序列向发帧源目的向回帧源目的向发帧源目的请写出每次事件后转发表的变化及交换机的转发行为解向发帧收到帧来自端口源学习记录端口查找目的不在表中泛洪到端口和端口转发表端口向回帧收到帧来自端口源学习记录端口查找目的在表中对应端口与来源端口不同单播转发到端口转发表端口端口向发帧收到帧来自端口源学习记录端口查找目的在表中对应端口与来源端口不同单播转发到端口转发表端口端口端口结论自学习完成后后续通信全部单播无泛洪交换效率最高真题综合信道利用率与窗口协议对比卫星链路带宽单向传播时延帧长帧可忽略求停等协议序号序号的信道利用率若要使信道利用率协议至少需要多少位序号解停等三种协议利用率均极低说明卫星链路必须用大窗口才能充分利用信道使协议需即至少需要位序号此时最大窗口取真题与工作差异分析请分析以下场景说明为什么有线以太网可以使用而无线局域网必须使用解有线以太网使用的条件可以检测碰撞有线介质中节点发送时可以同时监听信道若发送信号与信道上的信号不同说明发生了碰撞电信号叠加可检测信号能量可测碰撞时信号幅度约为正常信号的倍硬件可可靠检测全双工困难但可实现现代以太网交换机环境下已全双工但早期总线以太网是半双工无线局域网不能使用的原因发送功率与接收功率差异极大无线节点发送时自身发出的信号功率远大于接收到的信号信号衰减碰撞检测在硬件上极难实现相当于在打雷时听细雨声隐藏节点问题节点和节点都在接入点的覆盖范围内但和互相不可见障碍物遮挡或距离过远检测信道空闲没听到的信号就发送但同时发送在处发生碰撞和都无法检测到这次碰撞暴露节点问题节点在发送给时检测到信道忙而不发但向发送不会干扰的等待是不必要的浪费碰撞避免过于保守因此采用通过间隔随机退避确认握手来最大程度地避免碰撞的发生而非碰撞后再处理',
+  pageFillDescription: '数据链路层, 总结与速查 ( Cheat Sheet ), 一、数据链路层的功能, 二、组帧与差错控制, 2.1 组帧方法, 2.2 差错控制编码, 三、流量控制与可靠传输机制, 3.2 滑动窗口机制, 四、介质访问控制 ( MAC ), 4.1 ALOHA 协议, 4.2 CSMA 协议, 4.3 CSMA/CD ( 以太网核心 ), 4.4 CSMA/CA ( 无线网络核心 ), 五、局域网基本概念与体系结构, 六、以太网、IEEE 802.11、令牌环, 七、网桥与局域网交换机, 7.1 网桥 ( Bridge )数据链路层本文系统讲解数据链路层的功能组帧差错控制滑动窗口协议介质访问控制局域网技术及交换设备涵盖停等协议的信道利用率计算与的工作细节以太网帧格式及交换机自学习算法数据链路层基本功能封装成帧透明传输差错检测流量控制可靠传输差错控制检错编码奇偶校验循环冗余纠错编码海明码可靠传输协议停等协议回退帧选择重传介质访问控制静态划分信道动态分配信道随机访问轮询令牌环局域网以太网无线局域网令牌环交换设备网桥以太网交换机自学习算法生成树协议总结与速查知识点核心公式结论备注停等信道利用率帧发送时延确认帧发送时延窗口上限序号比特数窗口上限收发窗口相等且各不超过滑动窗口利用率为发送窗口大小最大窗口充分利用确保流水线满载生成多项式余数为则无误附加在帧尾海明码最小距离检位错需纠位错需最小帧长单程传播时延带宽最小帧字节争用期以太网帧结构目源类型数据最小最大交换机自学习源端口构建转发表未知目的则泛洪一数据链路层的功能数据链路层的地位与功能数据链路层位于第二层负责将网络层传来的数据在相邻节点之间的链路上可靠或尽力传输数据链路层的数据单元称为帧五大核心功能封装成帧将网络层的数据报封装成帧在帧头帧尾添加特定标志使接收方能正确识别帧的起始与结束透明传输无论数据字段中含有何种比特组合包括与帧定界符相同的序列都能正确传输解决方案字符填充字节填充或位填充差错检测与纠正信道噪声导致传输错误数据链路层通过冗余编码海明码等检测或纠正帧中的错误流量控制防止发送方速度过快导致接收方缓冲区溢出通过滑动窗口等机制限制发送速率可靠传输通过确认和重传机制确保帧的正确有序交付注意有线以太网不提供可靠传输差错由上层处理无线网络才在链路层保证可靠传输二组帧与差错控制组帧方法四种组帧方法字符计数法帧首部用一个字段指明帧的字节总数接收方读取计数值收满相应字节即为一帧缺点计数字段出错会导致后续帧全部错乱失去同步不实用字节填充的首尾定界符法字符填充法用特殊字节如标识帧的起止若数据中出现与相同的字节则在其前插入转义字符发送方填充接收方去除应用协议采用此方法比特填充法零比特填充用特殊比特串个作帧定界符发送方在数据中每遇到连续个自动在后面插入一个接收方每遇到连续个后的自动删除应用协议采用此方法物理层违规编码法利用物理层编码中的违规信号正常数据不会出现的电平组合作帧定界符应用曼彻斯特编码中高高或低低跳变在正常数据中不出现可用于帧定界差错控制编码奇偶校验码在数据位后附加位校验位使总的个数为奇数奇校验或偶数偶校验缺点只能检测奇数个比特出错不能检测偶数个比特同时出错不能纠错实际网络中很少单独使用循环冗余校验是数据链路层最常用的检错方法检错能力强实现简单硬件移位寄存器原理发送方与接收方事先约定一个生成多项式对应一个位的二进制数最高位和最低位均为设信息帧为位在末尾补个即共位用除以得余数位将余数附加在原始信息末尾构成发送帧共位接收方用除以若余数为则认为无误否则有错帧校验序列即附加在帧尾的冗余校验位就是的余数的检错能力能检测所有奇数个比特错误能检测所有突发长度的突发错误为位数能检测所有位错不能纠错只能检测是否有错无法定位错误位置常用生成多项式用于磁盘以太网采用即为位示例计算过程信息码生成多项式对应发送方补个后用除以模除法即无进位的除法余余数实际逐步计算取前位移下得前导忽略取加入下一位凑位下一位正确计算逐步仅当最高位为时做最高位移位最高位最高位移最高位余数位发送帧接收方用除以若余数无误海明码海明码是一种能检错且能纠错的线性分组码适合纠正单比特错误基本原理在数据位中插入若干校验位每个校验位负责覆盖特定位置的比特接收方重新计算所有校验位若出错则错误位置各校验位结果组合的二进制值校验位的数量要求若数据有位需要位校验位满足数据位校验位总编码长校验位位置放在编码的第位最小码距与检纠错能力检测位错需最小码距纠正位错需最小码距海明码最小码距为可纠位错检位错若加一位全局奇偶校验位可纠位检位三流量控制与可靠传输机制停等协议基本思路发送方每发送一帧后必须等待接收方的确认收到后才能发送下一帧若超时未收到则重传该帧帧序号停等协议只需位序号和交替用于区分新帧与重传帧防止重复帧被接收方当成新帧信道利用率设为帧的发送时延为单向传播时延为确认帧发送时延通常很小近似为其中当长时延大带宽链路信道利用率极低这就是引入滑动窗口的动机滑动窗口机制滑动窗口的基本思想允许发送方在未收到确认的情况下连续发送多个帧最多可发送窗口大小个未被确认的帧这种方式将单帧的等待时间与多帧的发送时间重叠流水线大幅提升信道利用率信道利用率无差错情况使信道满负荷运行的最小窗口序号空间与窗口大小若帧序号占位则序号空间大小为但收发窗口大小有限制见下文回退帧协议工作原理发送窗口大小接收窗口大小接收方只接受按序到达的帧若收到期望帧发送接收窗口向前滑动若收到非期望帧失序丢弃发送对最后一个正确帧的累积确认出错处理当发现错误超时或收到时发送方必须重传出错帧及其后所有已发帧回退个帧即使后面的帧已正确到达接收方窗口大小限制的原因若序号空间全用会出现以下模糊性发送方发出个帧序号若所有丢失发送方重传序号而接收方已滑窗期待新的序号无法区分是重传帧还是新帧性能分析有差错时设帧出错概率为的有效吞吐率近似出一次错需重传个帧代价较大选择重传协议工作原理发送窗口接收窗口接收方可以接受失序帧并缓存等待缺失的帧到来后再按序向上层交付出错处理出错时只重传出错的那一帧不重传后续已正确接收的帧代价小效率高但需要较大的接收缓冲区窗口大小限制的原因若会出现以下模糊性假设序号发送方发若所有丢失发送方重传接收方已滑窗到接收窗口包含序号无法区分新帧与重传帧三种协议对比考研必考比较维度停等回退帧选择重传发送窗口接收窗口序号位数出错重传只重传出错帧重传出错帧及后续所有帧只重传出错帧接收缓存不需要不需要需要存失序帧信道利用率最低较高最高实现复杂度最简单中等最复杂典型应用早期变体示例滑动窗口信道利用率计算某链路带宽单向传播时延卫星链路帧长求停等协议的信道利用率为使信道利用率达到滑动窗口至少需要多大若序号字段和的最大窗口各为多少解停等信道利用率极低不适合卫星链路最小窗口序号字段序号空间最大窗口最大窗口因窗口信道利用率仍很低需要更大的序号字段如才能充分利用信道四介质访问控制介质访问控制的分类当多个节点共享同一传输介质如无线信道早期以太网总线时需要协调各节点的发送权防止冲突碰撞这就是介质访问控制问题分类静态信道划分预先将信道资源频率时间码型分配给各节点无冲突但资源利用率低如动态信道分配随机访问节点按需竞争发送可能碰撞需碰撞检测避免机制如受控访问通过轮询或令牌机制有序分配信道如令牌环令牌总线协议纯最简单的随机访问协议任何节点有数据就直接发送不监听信道碰撞若两帧在时间上有任何重叠则发生碰撞两帧均损坏检测到碰撞后各节点等待随机时间后重传易受冲突的时间窗口帧长的倍时间内若有其他帧开始发送则冲突最大信道利用率当信道负载时时隙将时间划分为等长时隙帧传输时间各节点只在时隙开始处发送碰撞只发生在同一时隙易受冲突窗口缩短为减半最大信道利用率当时两者对比纯时隙发送时机随时时隙开始处最大利用率实现复杂度低需要时钟同步协议载波监听多路访问在基础上增加先监听载波监听再发送的机制发送前先检测信道是否空闲三种策略坚持信道空闲立即发送概率信道忙持续监听空闲后立即发送缺点多个节点同时等待时信道一空闲就同时发送冲突概率高非坚持信道空闲立即发送信道忙等待随机时间后再检测不持续监听优点减少冲突多个节点等待时间不同缺点信道可能空闲一段时间无人发送浪费坚持信道空闲以概率发送以概率等待一个时隙后再检测信道忙持续监听空闲后以概率发送折衷方案在冲突与利用率之间取得平衡的局限由于传播时延的存在一个节点开始发送后另一个节点可能尚未检测到信道忙仍然发送导致碰撞能减少但不能消除碰撞以太网核心在基础上增加碰撞检测发送过程中持续检测信道一旦检测到碰撞立即停止发送节省信道资源工作流程先听后说边说边听有数据要发送监听信道信道空闲是否信道忙发送数据等待三种策略边发边检测检测到碰撞是否发强化干扰信号发送成功信号停止发送二进制指数退避重新竞争信道争用期冲突窗口最坏情况下碰撞检测需要等待端到端往返传播时延因此将称为争用期或碰撞窗口最小帧长推导重要要保证发送方能在帧发送完毕前检测到碰撞否则碰撞发生后发送方已收手不知道碰撞必须满足以太网示例最大网段长度约经过个中继器单向传播时延约争用期带宽最小帧长这就是以太网最小帧长度字节的来历若数据不足字节需填充至字节帧总长二进制指数退避算法第次碰撞后从中随机选一个整数等待个争用期后重新竞争超过次仍碰撞则报告发送失败关键特性退避时间随冲突次数指数增大减少网络负载高时的持续碰撞碰撞次后丢弃不会无限重试考研计算示例深度理解若发生第次碰撞退避时间从中选取选取的概率是等待时间为个争用期若则从即中选而不是上限截断为无线网络核心无线网络中无法使用碰撞检测原因发送时无线信号的自干扰使接收自身信号困难硬件难以实现全双工检测隐藏节点问题和都在的范围内但和互不可见无法检测彼此是否在发送因此采用碰撞避免尽量不让碰撞发生而非碰撞检测工作机制分布式协调功能帧间间隔最短帧间隔用于等高优先级帧数据帧发送前需等待的最小帧间隔退避机制随机退避避免碰撞发送数据前监听信道是否空闲空闲时间达到后启动随机退避计时器从中随机选为竞争窗口大小退避计时器倒计时仅在信道空闲时递减信道忙时暂停计时器到发送帧若碰撞加倍二进制指数退避重新退避确认机制接收方收到正确的帧后等待后立即发不进行退避保证优先发送发送方收到才认为发送成功否则超时重传机制解决隐藏节点问题可选机制针对长数据帧发送方先发短的帧包含将要传输的数据时长接收方回复帧后所有听到的节点设置虚拟载波监听在此时间内不发送发送方收到后后发数据接收方收后后发交互流程图发送方接收方邻居节点隐藏终端有数据发送请求发送收到或仅收到允许发送设置虚拟载波监听在此期间保持静默数据帧确认帧结束开始竞争信道对比重要比较维度以太网应用场景有线以太网无线局域网碰撞处理检测碰撞立即停止尽量避免碰撞确认机制无有线可靠不需要每帧都需确认退避触发碰撞发生后发送前预防信道监听物理载波检测物理虚拟载波检测最小帧长限制无强制但有开销五局域网基本概念与体系结构局域网的特点覆盖范围小同一建筑或园区一般不超过传输速率高误码率低由单一组织拥有和管理标准体系委员会将数据链路层分为两个子层子层全称功能逻辑链路控制提供统一接口给网络层负责差错控制流量控制介质访问控制负责成帧编址地址介质访问等实际应用中层在网络中基本不用以太网直接使用层向上提供服务地址物理地址位字节烧录在网卡中理论上全球唯一格式十六进制前位厂商标识由分配后位厂商自行分配的设备序号广播地址六以太网令牌环以太网以太网帧格式帧最常用目的源类型数据字节字节字节字节字节字节字段长度说明目的地址接收方物理地址可为广播多播源地址发送方物理地址类型长度表示上层协议类型如数据不足时填充校验覆盖目的到数据字段注意前导码的同步序列的帧开始定界符在物理层处理不计入帧长所以以太网帧的最小字节不含前导码最大传输单元以太网帧的数据字段最大长度为字节称为若数据报长度超过则必须在网络层进行分片以太网的发展历程标准速率介质编码最大距离粗同轴曼彻斯特细同轴曼彻斯特曼彻斯特命名规则速率介质中表示基带传输数字字母表示介质类型无线局域网基本概念基本服务集由一个接入点和若干无线主机站点组成的基本网络单元服务集标识符无线网络的名称人们常说的名字分布式系统连接多个的骨干网络有线以太网扩展服务集由多个通过连接组成的大型无线网络模式无站点直接通信点对点临时网络帧结构简化数据帧包含个地址字段用于支持转发接收方地址发送方地址目的源地址用于中转仅无线分布式系统中使用主要标准版本标准别名频段最大速率关键技术令牌环令牌环工作原理所有站点连成逻辑环形一个特殊的控制帧令牌沿环依次传递只有持有令牌的站点才能发送数据帧发送完毕后将令牌传给下一个站点无冲突信道利用率高负载重时接近时延确定缺点维护令牌令牌丢失或重复复杂实现和配置比以太网复杂速度较慢或现状已基本被以太网取代考研重点是概念与原理的对比令牌环以太网比较以太网令牌环访问控制竞争随机有序令牌轮询轻载性能好低延迟较差需等令牌重载性能差冲突增多好接近利用率故障影响节点故障不影响他人节点故障可能中断全环七网桥与局域网交换机网桥网桥的功能与工作原理网桥工作在第二层数据链路层根据帧的地址进行转发决策网桥的主要功能过滤帧读取帧的目的地址若目的地址在同一网段则不转发过滤否则转发到另一网段转发帧将帧从一个端口转发到另一端口隔离冲突域自学习通过读取帧的源地址动态建立地址表转发表自学习算法收到一帧时记录源地址和来源端口入端口写入转发表超时老化默认查找目的地址若在转发表中且目的端口与来源端口不同转发到对应端口若在转发表中且目的端口与来源端口相同过滤丢弃目的在同侧若不在转发表中泛洪从除来源端口外的所有端口转发网桥中继器路由器中继器网桥路由器工作层次物理层数据链路层网络层地址识别无地址地址冲突域不隔离隔离隔离广播域不隔离不隔离隔离以太网交换机交换机的工作原理交换机本质上是多端口网桥每个端口都有独立的冲突域支持多对节点同时并发通信三种帧转发方式转发方式开始转发时机优点缺点存储转发收到完整帧后可过滤错误帧检验延迟最大直通交换收到目的字节后延迟最小不检测错误帧无碎片转发收到字节后过滤碰撞碎片折衷方案交换机的核心优势每端口独享带宽交换机每端口而集线器所有端口共享支持全双工无冲突不需要同时转发多个帧交换矩阵自学习即插即用无需人工配置冲突域与广播域交换机每个端口独立冲突域彻底消除冲突交换机所有端口同一广播域广播帧仍会泛洪到所有端口路由器每个接口独立广播域路由器不转发广播帧虚拟局域网通过在交换机上配置可以将同一物理交换机的不同端口划分为不同的逻辑广播域实现广播域的隔离标准帧格式在源地址和类型字段之间插入字节字节固定值标识这是一个帧字节包含优先级和范围和保留可用端口类型考研重点端口连接主机只处理无标签帧发送时剥离接收时打上默认端口连接交换机路由器允许多个通过发送时若则剥离否则保留接收时若无则打上有则透传生成树协议为了提高网络可靠性交换机之间通常部署冗余链路但冗余链路会产生环路导致广播风暴广播帧在环路中无限循环消耗全部带宽地址表不稳定同一地址从不同端口出现转发表振荡帧重复目的主机收到同一帧的多份副本解决方案所有交换机交换报文选举出一个根桥每个非根交换机确定到根桥最短路径的根端口每个网段选出一个指定端口其余端口设为阻塞状态不转发数据帧但仍接收网络拓扑形成无环的逻辑树形结构生成树快速生成树协议收敛时间从的缩短到八综合真题解析真题窗口大小判断设滑动窗口协议的帧序号用位二进制表示序号协议的最大发送窗口是多少协议的最大发送窗口和接收窗口各是多少若某时刻的发送方已发帧接收方只正确收到帧此时应如何处理解序号空间最大发送窗口最大发送窗口最大接收窗口接收窗口只接受按序帧接收方正确收到帧发帧到达时若帧损坏接收方丢弃帧发或等超时发送方收到或超时后从帧开始重传回退到重发所有帧包括已发过的和真题最小帧长计算某以太网总线长传播速率数据传输速率求争用期求最小帧长若某帧数据字段仅字节应如何处理解单向传播时延争用期最小帧长取整为字节实际标准取字节是针对更大网络而言数据字段字节帧总长字节字节标准规定应在数据字段后填充字节的无用字节使数据字段达到字节总帧长字节真题交换机自学习过程如图所示交换机有个端口初始转发表为空端口主机端口主机端口主机事件序列向发帧源目的向回帧源目的向发帧源目的请写出每次事件后转发表的变化及交换机的转发行为解向发帧收到帧来自端口源学习记录端口查找目的不在表中泛洪到端口和端口转发表端口向回帧收到帧来自端口源学习记录端口查找目的在表中对应端口与来源端口不同单播转发到端口转发表端口端口向发帧收到帧来自端口源学习记录端口查找目的在表中对应端口与来源端口不同单播转发到端口转发表端口端口端口结论自学习完成后后续通信全部单播无泛洪交换效率最高真题综合信道利用率与窗口协议对比卫星链路带宽单向传播时延帧长帧可忽略求停等协议序号序号的信道利用率若要使信道利用率协议至少需要多少位序号解停等三种协议利用率均极低说明卫星链路必须用大窗口才能充分利用信道使协议需即至少需要位序号此时最大窗口取真题与工作差异分析请分析以下场景说明为什么有线以太网可以使用而无线局域网必须使用解有线以太网使用的条件可以检测碰撞有线介质中节点发送时可以同时监听信道若发送信号与信道上的信号不同说明发生了碰撞电信号叠加可检测信号能量可测碰撞时信号幅度约为正常信号的倍硬件可可靠检测全双工困难但可实现现代以太网交换机环境下已全双工但早期总线以太网是半双工无线局域网不能使用的原因发送功率与接收功率差异极大无线节点发送时自身发出的信号功率远大于接收到的信号信号衰减碰撞检测在硬件上极难实现相当于在打雷时听细雨声隐藏节点问题节点和节点都在接入点的覆盖范围内但和互相不可见障碍物遮挡或距离过远检测信道空闲没听到的信号就发送但同时发送在处发生碰撞和都无法检测到这次碰撞暴露节点问题节点在发送给时检测到信道忙而不发但向发送不会干扰的等待是不必要的浪费碰撞避免过于保守因此采用通过间隔随机退避确认握手来最大程度地避免碰撞的发生而非碰撞后再处理',
   isPost: true,
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2026-03-21 20:07:21',
+  postUpdate: '2026-04-09 12:41:23',
   postMainColor: '#445C89',
 }</script><noscript><style type="text/css">
   #nav {
@@ -203,7 +203,7 @@ if (true) {
   document.addEventListener('pjax:send', () => { preloader.initLoading() })
   document.addEventListener('pjax:complete', () => { preloader.endLoading() })
 }</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/sparkle520?tab=repositories" title="github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="github"/><span class="back-menu-item-text">github</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">SPARKLE</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/408/" style="font-size: 1.05rem;">408<sup>22</sup></a><a href="/tags/AOP/" style="font-size: 1.05rem;">AOP<sup>1</sup></a><a href="/tags/Deep-Learning/" style="font-size: 1.05rem;">Deep Learning<sup>1</sup></a><a href="/tags/IoC/" style="font-size: 1.05rem;">IoC<sup>1</sup></a><a href="/tags/JSR303/" style="font-size: 1.05rem;">JSR303<sup>1</sup></a><a href="/tags/Matplotlib/" style="font-size: 1.05rem;">Matplotlib<sup>3</sup></a><a href="/tags/c/" style="font-size: 1.05rem;">c#<sup>2</sup></a><a href="/tags/java/" style="font-size: 1.05rem;">java<sup>4</sup></a><a href="/tags/python/" style="font-size: 1.05rem;">python<sup>5</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 1.05rem;">事务<sup>1</sup></a><a href="/tags/%E4%BA%8C%E6%AC%A1%E5%9E%8B/" style="font-size: 1.05rem;">二次型<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E3%80%82/" style="font-size: 1.05rem;">你的名字。<sup>3</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字同名小说<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%A4%96%E4%BC%A0%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字外传小说<sup>1</sup></a><a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size: 1.05rem;">写作<sup>4</sup></a><a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 1.05rem;">包管理<sup>1</sup></a><a href="/tags/%E5%8D%B7%E7%A7%AF%E5%85%AC%E5%BC%8F/" style="font-size: 1.05rem;">卷积公式<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90/" style="font-size: 1.05rem;">天气之子<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">天气之子同名小说<sup>1</sup></a><a href="/tags/%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">小说<sup>2</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">操作系统<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" style="font-size: 1.05rem;">数据校验<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" style="font-size: 1.05rem;">数据链路层<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 1.05rem;">概率论<sup>2</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 1.05rem;">概率论与数理统计<sup>7</sup></a><a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 1.05rem;">汇编<sup>9</sup></a><a href="/tags/%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80/" style="font-size: 1.05rem;">泰勒展开<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/" style="font-size: 1.05rem;">物理层<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%80%BC/" style="font-size: 1.05rem;">特征值<sup>2</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F/" style="font-size: 1.05rem;">特征向量<sup>2</sup></a><a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">线性代数<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" style="font-size: 1.05rem;">网络体系结构<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" style="font-size: 1.05rem;">网络层<sup>2</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 1.05rem;">英语<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">英语语法<sup>24</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1.05rem;">计算机组成原理<sup>5</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.05rem;">计算机网络<sup>5</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">语法<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">高等代数<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" style="font-size: 1.05rem;">高等数学<sup>21</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
-    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/04/"><span class="card-archive-list-date">四月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">三月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">29</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/02/"><span class="card-archive-list-date">二月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/01/"><span class="card-archive-list-date">一月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/12/"><span class="card-archive-list-date">十二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">15</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/11/"><span class="card-archive-list-date">十一月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/10/"><span class="card-archive-list-date">十月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/09/"><span class="card-archive-list-date">九月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%BD%91/" itemprop="url">计网</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/408/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>408</span></a><a class="article-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>计算机网络</span></a><a class="article-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>数据链路层</span></a></span></div></div><h1 class="post-title" itemprop="name headline">408-计算机网络-3-数据链路层</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-03-11T14:00:00.000Z" title="发表于 2026-03-11 22:00:00">2026-03-11</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-03-21T12:07:21.462Z" title="更新于 2026-03-21 20:07:21">2026-03-21</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">9.1k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>32分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="408-计算机网络-3-数据链路层"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为系守镇"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>系守镇</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2026/03/11/408-%E8%AE%A1%E7%BD%913/#post-comment" tabindex="-1"><span id="twikoo-count"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://pic1.imgdb.cn/item/69a6ec8cf98389e4a9b7ce2e.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2026/03/11/408-%E8%AE%A1%E7%BD%913/"><header><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%BD%91/" itemprop="url">计网</a><a href="/tags/408/" tabindex="-1" itemprop="url">408</a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" tabindex="-1" itemprop="url">计算机网络</a><a href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" tabindex="-1" itemprop="url">数据链路层</a><h1 id="CrawlerTitle" itemprop="name headline">408-计算机网络-3-数据链路层</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">sparkle520</span><time itemprop="dateCreated datePublished" datetime="2026-03-11T14:00:00.000Z" title="发表于 2026-03-11 22:00:00">2026-03-11</time><time itemprop="dateCreated datePublished" datetime="2026-03-21T12:07:21.462Z" title="更新于 2026-03-21 20:07:21">2026-03-21</time></header><h1 id="数据链路层">数据链路层</h1>
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/04/"><span class="card-archive-list-date">四月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">三月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">29</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/02/"><span class="card-archive-list-date">二月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/01/"><span class="card-archive-list-date">一月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/12/"><span class="card-archive-list-date">十二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">15</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/11/"><span class="card-archive-list-date">十一月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/10/"><span class="card-archive-list-date">十月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/09/"><span class="card-archive-list-date">九月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%BD%91/" itemprop="url">计网</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/408/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>408</span></a><a class="article-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>计算机网络</span></a><a class="article-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>数据链路层</span></a></span></div></div><h1 class="post-title" itemprop="name headline">408-计算机网络-3-数据链路层</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-03-11T14:00:00.000Z" title="发表于 2026-03-11 22:00:00">2026-03-11</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-04-09T04:41:23.499Z" title="更新于 2026-04-09 12:41:23">2026-04-09</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">9.1k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>32分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="408-计算机网络-3-数据链路层"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为系守镇"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>系守镇</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2026/03/11/408-%E8%AE%A1%E7%BD%913/#post-comment" tabindex="-1"><span id="twikoo-count"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://pic1.imgdb.cn/item/69a6ec8cf98389e4a9b7ce2e.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2026/03/11/408-%E8%AE%A1%E7%BD%913/"><header><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%BD%91/" itemprop="url">计网</a><a href="/tags/408/" tabindex="-1" itemprop="url">408</a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" tabindex="-1" itemprop="url">计算机网络</a><a href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" tabindex="-1" itemprop="url">数据链路层</a><h1 id="CrawlerTitle" itemprop="name headline">408-计算机网络-3-数据链路层</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">sparkle520</span><time itemprop="dateCreated datePublished" datetime="2026-03-11T14:00:00.000Z" title="发表于 2026-03-11 22:00:00">2026-03-11</time><time itemprop="dateCreated datePublished" datetime="2026-04-09T04:41:23.499Z" title="更新于 2026-04-09 12:41:23">2026-04-09</time></header><h1 id="数据链路层">数据链路层</h1>
 <blockquote>
 <p>本文系统讲解数据链路层的功能、组帧、差错控制、滑动窗口协议、介质访问控制、局域网技术及交换设备，涵盖停-等、GBN、SR
 协议的信道利用率计算，CSMA/CD 与 CSMA/CA
@@ -292,8 +292,8 @@ class="math inline">\(2^{n-1}\)</span></td>
 为发送窗口大小</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>最大窗口 ( 充分利用 )
-</strong></td>
+<td style="text-align: left;"><strong>最大窗口 ( 充分利用
+)</strong></td>
 <td style="text-align: left;"><span class="math inline">\(W \ge 1 +
 2a\)</span>，<span class="math inline">\(a =
 \dfrac{T_p}{T_f}\)</span></td>
@@ -343,9 +343,9 @@ style="text-align: left;">目MAC(6)+源MAC(6)+类型(2)+数据(46~1500)+FCS(4)</
 <div class="note info simple"><p><strong>数据链路层的地位与功能</strong></p>
 <p>数据链路层位于 OSI 第二层，负责将网络层传来的数据在
 <strong>相邻节点之间的链路</strong> 上可靠 ( 或尽力 ) 传输.
-数据链路层的数据单元称为 <strong>帧 ( Frame ) </strong>.</p>
-<p><strong>五大核心功能 :</strong></p>
-<p><strong>1. 封装成帧 ( Framing ) </strong> 将网络层的 IP
+数据链路层的数据单元称为 <strong>帧 ( Frame )</strong>.</p>
+<p><strong>五大核心功能</strong></p>
+<p><strong>1. 封装成帧 ( Framing )</strong> 将网络层的 IP
 数据报封装成帧，在帧头/帧尾添加特定标志，使接收方能正确识别帧的起始与结束.</p>
 <p><strong>2. 透明传输</strong> 无论数据字段中含有何种比特组合 (
 包括与帧定界符相同的序列 ) ，都能正确传输. 解决方案 : 字符填充 (
@@ -353,9 +353,9 @@ style="text-align: left;">目MAC(6)+源MAC(6)+类型(2)+数据(46~1500)+FCS(4)</
 <p><strong>3. 差错检测与纠正</strong>
 信道噪声导致传输错误，数据链路层通过 <strong>冗余编码</strong> (
 CRC、海明码等 ) 检测或纠正帧中的错误.</p>
-<p><strong>4. 流量控制 ( Flow Control ) </strong>
+<p><strong>4. 流量控制 ( Flow Control )</strong>
 防止发送方速度过快导致接收方缓冲区溢出，通过滑动窗口等机制限制发送速率.</p>
-<p><strong>5. 可靠传输 ( Reliable Delivery ) </strong> 通过确认 ( ACK )
+<p><strong>5. 可靠传输 ( Reliable Delivery )</strong> 通过确认 ( ACK )
 和重传 ( ARQ ) 机制，确保帧的正确有序交付. 注意
 <strong>有线以太网不提供可靠传输</strong> ( 差错由上层处理 )
 ，<strong>无线网络 ( 802.11 ) 才在链路层保证可靠传输</strong>.</p>
@@ -370,15 +370,15 @@ CRC、海明码等 ) 检测或纠正帧中的错误.</p>
 <li><strong>缺点</strong> 计数字段出错会导致后续帧全部错乱 ( 失去同步 )
 ，不实用.</li>
 </ul>
-<p><strong>2. 字节填充的首尾定界符法 ( 字符填充法 ) </strong> 用特殊字节
+<p><strong>2. 字节填充的首尾定界符法 ( 字符填充法 )</strong> 用特殊字节
 ( 如 <code>FLAG = 0x7E</code> ) 标识帧的起止. 若数据中出现与 FLAG
-相同的字节，则在其前插入 <strong>转义字符 ESC ( 0x7D ) </strong> (
+相同的字节，则在其前插入 <strong>转义字符 ESC ( 0x7D )</strong> (
 发送方填充，接收方去除 ).</p>
 <ul>
 <li><strong>应用</strong> PPP 协议 ( Point-to-Point Protocol )
 采用此方法.</li>
 </ul>
-<p><strong>3. 比特填充法 ( 零比特填充 ) </strong> 用特殊比特串
+<p><strong>3. 比特填充法 ( 零比特填充 )</strong> 用特殊比特串
 <code>01111110</code> ( 6个1 ) 作帧定界符. 发送方在数据中每遇到连续 5 个
 1，自动在后面插入一个 0; 接收方每遇到连续 5 个 1 后的 0，自动删除.</p>
 <ul>
@@ -392,7 +392,7 @@ CRC、海明码等 ) 检测或纠正帧中的错误.</p>
 </ul>
 </div>
 <h3 id="差错控制编码">2.2 差错控制编码</h3>
-<div class="note info simple"><p><strong>奇偶校验码 ( Parity Check ) </strong></p>
+<div class="note info simple"><p><strong>奇偶校验码 ( Parity Check )</strong></p>
 <p>在数据位后附加 1 位校验位，使总 1 的个数为奇数 ( 奇校验 ) 或偶数 (
 偶校验 ).</p>
 <ul>
@@ -404,7 +404,7 @@ CRC、海明码等 ) 检测或纠正帧中的错误.</p>
 <p>CRC 是数据链路层
 <strong>最常用的检错方法</strong>，检错能力强，实现简单 ( 硬件移位寄存器
 ).</p>
-<p><strong>原理 :</strong></p>
+<p><strong>原理</strong></p>
 <ol type="1">
 <li>发送方与接收方事先约定一个 <strong>生成多项式 <span
 class="math inline">\(G(x)\)</span></strong> ( 对应一个 <span
@@ -426,9 +426,9 @@ class="math inline">\(k+r\)</span> 位 ).</li>
 class="math inline">\(G(x)\)</span>，若余数为 0，则认为无误;
 否则有错.</li>
 </ol>
-<p><strong>FCS ( 帧校验序列 ) </strong> 即附加在帧尾的冗余校验位，就是
+<p><strong>FCS ( 帧校验序列 )</strong> 即附加在帧尾的冗余校验位，就是
 CRC 的余数 <span class="math inline">\(R(x)\)</span>.</p>
-<p><strong>CRC 的检错能力 :</strong></p>
+<p><strong>CRC 的检错能力</strong></p>
 <ul>
 <li>能检测所有 <strong>奇数个比特</strong> 错误.</li>
 <li>能检测所有 <strong>突发长度 <span class="math inline">\(\le
@@ -438,7 +438,7 @@ r\)</span> 的突发错误</strong> ( <span class="math inline">\(r\)</span>
 <li><strong>不能纠错</strong> ( 只能检测是否有错，无法定位错误位置
 ).</li>
 </ul>
-<p><strong>常用生成多项式 :</strong></p>
+<p><strong>常用生成多项式</strong></p>
 <ul>
 <li>CRC-16 : <span class="math inline">\(x^{16}+x^{15}+x^2+1\)</span> (
 用于 USB、磁盘 )</li>
@@ -447,19 +447,19 @@ r\)</span> 的突发错误</strong> ( <span class="math inline">\(r\)</span>
 class="math inline">\(G(x)\)</span> 为 33 位 )</li>
 </ul>
 </div>
-<div class="note success simple"><p><strong>示例 1 ( CRC 计算过程 ) </strong></p>
+<div class="note success simple"><p><strong>示例 1 ( CRC 计算过程 )</strong></p>
 <p>信息码 <span class="math inline">\(M = 10110\)</span>，生成多项式
 <span class="math inline">\(G(x) = x^3+x+1\)</span> ( 对应 <span
 class="math inline">\(1011\)</span>，<span
 class="math inline">\(r=3\)</span> ).</p>
-<p><strong>发送方 :</strong></p>
+<p><strong>发送方</strong></p>
 <p>补 3 个 0 后 : <span class="math inline">\(M \cdot x^3 =
 10110\underline{000}\)</span></p>
 <p>用 <span class="math inline">\(10110000\)</span> 除以 <span
 class="math inline">\(1011\)</span> ( 模 2 除法，即无进位的 XOR 除法 )
 :</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">10110000 ÷ 1011 = 10100 余 100</span><br><span class="line">  1011</span><br><span class="line">  ────</span><br><span class="line">  10000</span><br><span class="line">  1011</span><br><span class="line">  ────</span><br><span class="line">  01100</span><br><span class="line">   1011</span><br><span class="line">   ────</span><br><span class="line">   0111  ← 余数 (FCS)</span><br></pre></td></tr></table></figure>
-<p>实际逐步计算 :</p>
+<p>实际逐步计算</p>
 <ul>
 <li><span class="math inline">\(10110000\)</span>，取前 4 位 <span
 class="math inline">\(1011\)</span>，<span class="math inline">\(1011
@@ -470,26 +470,26 @@ class="math inline">\(00000\)</span>.</li>
 <span class="math inline">\(0\)</span>，凑 4 位 : <span
 class="math inline">\(0000+\)</span>下一位…</li>
 </ul>
-<p>重新用竖式 ( 模2 ) : <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">10110000</span><br><span class="line">1011</span><br><span class="line">────────</span><br><span class="line"> 1000000   (10110000 XOR 10110000? 不对, 从最高位对齐)</span><br></pre></td></tr></table></figure></p>
 <p>正确计算 ( 逐步 XOR，仅当最高位为 1 时做 XOR ) : <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">10110000</span><br><span class="line">1011↓</span><br><span class="line">────</span><br><span class="line"> 0100 00   → 最高位0，移1位</span><br><span class="line">  1000 0   → 最高位1，XOR 1011</span><br><span class="line">  1011↓</span><br><span class="line">  ────</span><br><span class="line">   0110    → 最高位0，移</span><br><span class="line">    110 0  → 最高位1，XOR 1011</span><br><span class="line">    1011</span><br><span class="line">    ────</span><br><span class="line">     111   → 余数 = 111 ( 3位 ) </span><br></pre></td></tr></table></figure></p>
 <p>发送帧 : <span class="math inline">\(T =
 10110\underline{111}\)</span>.</p>
-<p><strong>接收方 :</strong></p>
+<p><strong>接收方</strong></p>
 <p>用 <span class="math inline">\(10110111\)</span> 除以 <span
 class="math inline">\(1011\)</span>，若余数 <span
 class="math inline">\(= 000\)</span>，无误. <span
 class="math inline">\(\checkmark\)</span></p>
 </div>
 <div class="note info simple"><p><strong>海明码 ( Hamming Code )</strong></p>
-<p>海明码是一种<strong>能检错且能纠错</strong>的线性分组码，适合纠正单比特错误.</p>
-<p><strong>基本原理 :</strong></p>
+<p>海明码是一种 <strong>能检错且能纠错</strong>
+的线性分组码，适合纠正单比特错误.</p>
+<p><strong>基本原理</strong></p>
 <p>在数据位中插入若干 <strong>校验位</strong>，每个校验位 <span
 class="math inline">\(P_i\)</span> 负责覆盖特定位置的比特.
 接收方重新计算所有校验位，若出错，则错误位置 =
 各校验位结果组合的二进制值.</p>
-<p><strong>校验位的数量要求 :</strong></p>
+<p><strong>校验位的数量要求</strong></p>
 <p>若数据有 <span class="math inline">\(m\)</span> 位，需要 <span
-class="math inline">\(r\)</span> 位校验位，满足 : <span
+class="math inline">\(r\)</span> 位校验位，满足 <span
 class="math display">\[2^r \ge m + r + 1\]</span></p>
 <table>
 <thead>
@@ -525,10 +525,10 @@ class="math inline">\(m+r\)</span></th>
 </tr>
 </tbody>
 </table>
-<p><strong>校验位位置 :</strong> 放在编码的第 <span
+<p><strong>校验位位置</strong> 放在编码的第 <span
 class="math inline">\(2^0=1, 2^1=2, 2^2=4, 2^3=8, \ldots\)</span>
 位.</p>
-<p><strong>最小码距 ( Hamming Distance ) 与检纠错能力 :</strong></p>
+<p><strong>最小码距 ( Hamming Distance ) 与检纠错能力</strong></p>
 <ul>
 <li>检测 <span class="math inline">\(d\)</span> 位错 : 需最小码距 <span
 class="math inline">\(d_{min} \ge d + 1\)</span>.</li>
@@ -544,12 +544,12 @@ class="math inline">\(d_{min} \ge 2d + 1\)</span>.</li>
 <h3 id="停-等协议-stop-and-wait-sw">3.1 停-等协议 ( Stop-and-Wait, SW
 )</h3>
 <div class="note info simple"><p><strong>基本思路</strong></p>
-<p>发送方每发送一帧后，必须 <strong>等待接收方的确认 ( ACK )
-</strong>，收到 ACK 后才能发送下一帧. 若超时未收到 ACK，则
+<p>发送方每发送一帧后，必须 <strong>等待接收方的确认 ( ACK
+)</strong>，收到 ACK 后才能发送下一帧. 若超时未收到 ACK，则
 <strong>重传</strong> 该帧.</p>
 <p><strong>帧序号</strong> 停-等协议只需 <strong>1 位</strong> 序号 ( 0
 和 1 交替 ) ，用于区分新帧与重传帧 ( 防止重复帧被接收方当成新帧 ).</p>
-<p><strong>信道利用率 :</strong></p>
+<p><strong>信道利用率</strong></p>
 <p>设 <span class="math inline">\(T_f\)</span> 为帧的发送时延，<span
 class="math inline">\(T_p\)</span> 为单向传播时延，<span
 class="math inline">\(T_a\)</span> 为确认帧发送时延 ( 通常很小，近似为 0
@@ -566,17 +566,17 @@ class="math inline">\(T_a\)</span> 为确认帧发送时延 ( 通常很小，近
 <p>允许发送方在未收到确认的情况下，连续发送
 <strong>多个帧</strong>，最多可发送 <span
 class="math inline">\(W\)</span> ( 窗口大小 ) 个未被确认的帧.
-这种方式将单帧的等待时间与多帧的发送时间 <strong>重叠 ( 流水线 )
-</strong>，大幅提升信道利用率.</p>
-<p><strong>信道利用率 ( 无差错情况 ) :</strong></p>
+这种方式将单帧的等待时间与多帧的发送时间 <strong>重叠 ( 流水线
+)</strong>，大幅提升信道利用率.</p>
+<p><strong>信道利用率 ( 无差错情况 )</strong></p>
 <p><span class="math display">\[U = \begin{cases} \dfrac{W \cdot
 T_f}{T_f + 2T_p} = \dfrac{W}{1+2a} &amp; W &lt; 1+2a \\[10pt] 1 &amp; W
 \ge 1+2a \end{cases}\]</span></p>
 <p><strong>使信道满负荷运行</strong> ( <span
-class="math inline">\(U=1\)</span> ) 的最小窗口 : <span
+class="math inline">\(U=1\)</span> ) 的最小窗口 <span
 class="math display">\[W_{min} = 1 + 2a = 1 +
 \frac{2T_p}{T_f}\]</span></p>
-<p><strong>序号空间与窗口大小 :</strong></p>
+<p><strong>序号空间与窗口大小</strong></p>
 <p>若帧序号占 <span class="math inline">\(n\)</span>
 位，则序号空间大小为 <span
 class="math inline">\(2^n\)</span>，但收发窗口大小有限制 ( 见下文 ).</p>
@@ -587,29 +587,29 @@ class="math inline">\(2^n\)</span>，但收发窗口大小有限制 ( 见下文 
 <p>发送窗口大小 <span class="math inline">\(W_s \le 2^n -
 1\)</span>，接收窗口大小 <span class="math inline">\(W_r =
 1\)</span>.</p>
-<p>接收方只接受 <strong>按序到达</strong> 的帧 :</p>
+<p>接收方只接受 <strong>按序到达</strong> 的帧</p>
 <ul>
 <li>若收到期望帧 → 发送 ACK，接收窗口向前滑动.</li>
 <li>若收到非期望帧 ( 失序 ) →
 <strong>丢弃</strong>，发送对最后一个正确帧的 <strong>累积确认 (
-Cumulative ACK ) </strong>.</li>
+Cumulative ACK )</strong>.</li>
 </ul>
-<p><strong>出错处理 :</strong></p>
+<p><strong>出错处理</strong></p>
 <ul>
 <li>当发现错误 ( 超时或收到 NAK ) 时，发送方必须
 <strong>重传出错帧及其后所有已发帧</strong> ( “回退 N 个帧” )
 ，即使后面的帧已正确到达接收方.</li>
 </ul>
 <p><strong>窗口大小限制 <span class="math inline">\(W_s \le 2^n -
-1\)</span> 的原因 :</strong></p>
+1\)</span> 的原因</strong></p>
 <p>若 <span class="math inline">\(W_s = 2^n\)</span> ( 序号空间全用 )
 ，会出现以下模糊性 : 发送方发出 <span class="math inline">\(2^n\)</span>
 个帧 ( 序号 <span class="math inline">\(0 \sim 2^n-1\)</span> ) ，若所有
 ACK 丢失，发送方重传序号 0; 而接收方已滑窗，期待新的序号
 0，<strong>无法区分是重传帧还是新帧</strong>.</p>
-<p><strong>性能分析 ( 有差错时 ) :</strong></p>
+<p><strong>性能分析 ( 有差错时 )</strong></p>
 <p>设帧出错概率为 <span class="math inline">\(p\)</span>，GBN
-的有效吞吐率 : <span class="math display">\[U_{GBN} =
+的有效吞吐率 <span class="math display">\[U_{GBN} =
 \frac{(1-p)}{(1-p)+W_s \cdot p} \cdot U_{no\_error}\]</span></p>
 <p>近似 : 出一次错，需重传 <span class="math inline">\(W_s\)</span>
 个帧，代价较大.</p>
@@ -622,14 +622,14 @@ Repeat, SR )</h3>
 2^{n-1}\)</span>.</p>
 <p>接收方可以 <strong>接受失序帧</strong>
 并缓存，等待缺失的帧到来后，再按序向上层交付.</p>
-<p><strong>出错处理 :</strong></p>
+<p><strong>出错处理</strong></p>
 <ul>
 <li>出错时，只重传
 <strong>出错的那一帧</strong>，不重传后续已正确接收的帧.</li>
 <li>代价小，效率高，但需要较大的接收缓冲区.</li>
 </ul>
 <p><strong>窗口大小限制 <span class="math inline">\(W_s \le
-2^{n-1}\)</span> 的原因 :</strong></p>
+2^{n-1}\)</span> 的原因</strong></p>
 <p>若 <span class="math inline">\(W_s = W_r = 2^n/2 + 1 &gt;
 2^{n-1}\)</span>，会出现以下模糊性 : 假设 <span
 class="math inline">\(n=2\)</span>，序号 <span
@@ -640,7 +640,7 @@ class="math inline">\(0,1,2\)</span>; 接收方已滑窗到 <span
 class="math inline">\(3,0,1\)</span>，<strong>接收窗口包含序号
 0</strong>，无法区分新帧 0 与重传帧 0.</p>
 </div>
-<div class="note warning simple"><p><strong>三种协议对比 ( 考研必考 ) </strong></p>
+<div class="note warning simple"><p><strong>三种协议对比 ( 考研必考 )</strong></p>
 <table>
 <colgroup>
 <col style="width: 25%" />
@@ -718,24 +718,24 @@ class="math inline">\(n\)</span></td>
 </tbody>
 </table>
 </div>
-<div class="note success simple"><p><strong>示例 2 ( 滑动窗口信道利用率计算 ) </strong></p>
+<div class="note success simple"><p><strong>示例 2 ( 滑动窗口信道利用率计算 )</strong></p>
 <p>某链路带宽 <span class="math inline">\(1\
 \text{Mbps}\)</span>，单向传播时延 <span class="math inline">\(270\
 \text{ms}\)</span> ( 卫星链路 ) ，帧长 <span class="math inline">\(1000\
 \text{bit}\)</span>. (1) 求停-等协议的信道利用率. (2) 为使信道利用率达到
 100%，滑动窗口至少需要多大? (3) 若序号字段 3 bit，GBN 和 SR
 的最大窗口各为多少?</p>
-<p><strong>解 :</strong></p>
+<p><strong>解</strong></p>
 <p><span class="math inline">\(T_f = 1000 / 10^6 = 1\
 \text{ms}\)</span>，<span class="math inline">\(T_p = 270\
 \text{ms}\)</span>，<span class="math inline">\(a = T_p/T_f =
 270\)</span>.</p>
-<p><strong>(1)</strong> 停-等信道利用率 : <span
+<p><strong>(1)</strong> 停-等信道利用率 <span
 class="math display">\[U_{SW} = \frac{1}{1+2 \times 270} = \frac{1}{541}
 \approx 0.185\%\]</span></p>
 <p>极低，不适合卫星链路!</p>
-<p><strong>(2)</strong> 最小窗口 : <span class="math display">\[W_{min}
-= 1+2a = 1 + 2 \times 270 = 541\]</span></p>
+<p><strong>(2)</strong> 最小窗口 <span class="math display">\[W_{min} =
+1+2a = 1 + 2 \times 270 = 541\]</span></p>
 <p><strong>(3)</strong> 序号字段 <span
 class="math inline">\(n=3\)</span>，序号空间 <span
 class="math inline">\(= 2^3 = 8\)</span>.</p>
@@ -756,8 +756,8 @@ class="math inline">\(W_{GBN} = 1023 &gt; 541\)</span> )
 <div class="note info simple"><p><strong>介质访问控制的分类</strong></p>
 <p>当多个节点共享同一传输介质 ( 如无线信道、早期以太网总线 )
 时，需要协调各节点的发送权，防止冲突 ( 碰撞 ). 这就是
-<strong>介质访问控制 ( MAC, Medium Access Control ) </strong> 问题.</p>
-<p><strong>分类 :</strong></p>
+<strong>介质访问控制 ( MAC, Medium Access Control )</strong> 问题.</p>
+<p><strong>分类</strong></p>
 <ol type="1">
 <li><strong>静态信道划分</strong> 预先将信道资源 ( 频率/时间/码型 )
 分配给各节点，无冲突，但资源利用率低 ( 如 FDM、TDM、CDMA ).</li>
@@ -772,7 +772,7 @@ ALOHA、CSMA/CD、CSMA/CA ).</li>
 </ol>
 </div>
 <h3 id="aloha-协议">4.1 ALOHA 协议</h3>
-<div class="note info simple"><p><strong>纯 ALOHA ( Pure ALOHA ) </strong></p>
+<div class="note info simple"><p><strong>纯 ALOHA ( Pure ALOHA )</strong></p>
 <p>最简单的随机访问协议 : 任何节点有数据就直接发送，不监听信道.</p>
 <ul>
 <li><strong>碰撞</strong>
@@ -785,7 +785,7 @@ class="math inline">\(2T_f\)</span> ( 帧长的 2
 = \dfrac{1}{2e} \approx 18.4\%\)</span> ( 当信道负载 <span
 class="math inline">\(G = 0.5\)</span> 时 ).</li>
 </ul>
-<p><strong>时隙 ALOHA ( Slotted ALOHA ) </strong></p>
+<p><strong>时隙 ALOHA ( Slotted ALOHA )</strong></p>
 <p>将时间划分为等长时隙 ( = 帧传输时间 ) ，各节点只在
 <strong>时隙开始处</strong> 发送.</p>
 <ul>
@@ -795,7 +795,7 @@ class="math inline">\(T_f\)</span> ( 减半 ).</li>
 = \dfrac{1}{e} \approx 36.8\%\)</span> ( 当 <span
 class="math inline">\(G = 1\)</span> 时 ).</li>
 </ul>
-<p><strong>两者对比 :</strong></p>
+<p><strong>两者对比</strong></p>
 <table>
 <thead>
 <tr>
@@ -830,22 +830,22 @@ class="math inline">\(G = 1\)</span> 时 ).</li>
 )</strong></p>
 <p>在 ALOHA 基础上增加 <strong>先监听</strong> ( 载波监听 ) 再发送的机制
 : 发送前先检测信道是否空闲.</p>
-<p><strong>三种 CSMA 策略 :</strong></p>
-<p><strong>1. 1-坚持 CSMA ( 1-persistent ) </strong></p>
+<p><strong>三种 CSMA 策略</strong></p>
+<p><strong>1. 1-坚持 CSMA ( 1-persistent )</strong></p>
 <ul>
 <li>信道空闲 → 立即发送 ( 概率 1 ).</li>
 <li>信道忙 → 持续监听，空闲后 <strong>立即</strong> 发送.</li>
 <li><strong>缺点</strong>
 多个节点同时等待时，信道一空闲就同时发送，冲突概率高.</li>
 </ul>
-<p><strong>2. 非坚持 CSMA ( non-persistent ) </strong></p>
+<p><strong>2. 非坚持 CSMA ( non-persistent )</strong></p>
 <ul>
 <li>信道空闲 → 立即发送.</li>
 <li>信道忙 → <strong>等待随机时间</strong> 后再检测，不持续监听.</li>
 <li><strong>优点</strong> 减少冲突 ( 多个节点等待时间不同 ).</li>
 <li><strong>缺点</strong> 信道可能空闲一段时间无人发送 ( 浪费 ).</li>
 </ul>
-<p><strong>3. p-坚持 CSMA ( p-persistent ) </strong></p>
+<p><strong>3. p-坚持 CSMA ( p-persistent )</strong></p>
 <ul>
 <li>信道空闲 → 以概率 <span class="math inline">\(p\)</span>
 发送，以概率 <span class="math inline">\(1-p\)</span>
@@ -860,22 +860,22 @@ CSMA 能 <strong>减少</strong> 但不能 <strong>消除</strong> 碰撞.</p>
 </div>
 <h3 id="csmacd-以太网核心">4.3 CSMA/CD ( 以太网核心 )</h3>
 <div class="note info simple"><p><strong>CSMA/CD ( Carrier Sense Multiple Access / Collision Detection
-) </strong></p>
+)</strong></p>
 <p>在 CSMA 基础上增加 <strong>碰撞检测</strong>
 发送过程中持续检测信道，一旦检测到碰撞立即停止发送，节省信道资源.</p>
 <p><strong>工作流程 ( “先听后说，边说边听” ) :</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">有数据要发送</span><br><span class="line">     ↓</span><br><span class="line">  监听信道</span><br><span class="line">     ↓</span><br><span class="line"> 信道空闲?</span><br><span class="line">  ↙      ↘</span><br><span class="line"> 是        否 ( 信道忙 ) </span><br><span class="line"> ↓          ↓</span><br><span class="line">发送数据   等待 ( 三种策略 ) </span><br><span class="line"> ↓</span><br><span class="line">边发边检测</span><br><span class="line"> ↓</span><br><span class="line"> 检测到碰撞?</span><br><span class="line">  ↙        ↘</span><br><span class="line"> 是          否</span><br><span class="line"> ↓           ↓</span><br><span class="line">发强化干扰信号  发送成功</span><br><span class="line"> ( Jam信号，32bit ) </span><br><span class="line"> ↓</span><br><span class="line">停止发送</span><br><span class="line"> ↓</span><br><span class="line">二进制指数退避</span><br><span class="line"> ↓</span><br><span class="line">重新竞争信道</span><br></pre></td></tr></table></figure>
-<p><strong>争用期 ( 冲突窗口 ) :</strong></p>
+<p><strong>争用期 ( 冲突窗口 )</strong></p>
 <p>最坏情况下，碰撞检测需要等待 <span
 class="math inline">\(2T_p\)</span> ( 端到端往返传播时延 ). 因此，将
 <span class="math inline">\(2T_p\)</span> 称为 <strong>争用期</strong>
 或 <strong>碰撞窗口</strong>.</p>
-<p><strong>最小帧长推导 ( 重要 ) :</strong></p>
+<p><strong>最小帧长推导 ( 重要 )</strong></p>
 <p>要保证发送方能在帧发送完毕前检测到碰撞 (
 否则碰撞发生后发送方已”收手”，不知道碰撞 ) ，必须满足 : <span
 class="math display">\[T_f \ge 2T_p \implies \frac{L_{min}}{B} \ge 2T_p
 \implies \boxed{L_{min} = 2T_p \cdot B}\]</span></p>
-<p><strong>10BASE-T 以太网示例 :</strong></p>
+<p><strong>10BASE-T 以太网示例</strong></p>
 <ul>
 <li>最大网段长度约 <span class="math inline">\(2500\ \text{m}\)</span> (
 经过 4 个中继器 ) ，单向传播时延约 <span class="math inline">\(25.6\
@@ -890,8 +890,8 @@ class="math display">\[T_f \ge 2T_p \implies \frac{L_{min}}{B} \ge 2T_p
 <p>这就是以太网最小帧长度 <strong>64 字节</strong> 的来历! 若数据不足 46
 字节，需 <strong>填充至 46 字节</strong> ( 帧总长 = 6+6+2+46+4 = 64 B
 ).</p>
-<p><strong>二进制指数退避算法 ( Truncated Binary Exponential Backoff )
-:</strong></p>
+<p><strong>二进制指数退避算法 ( Truncated Binary Exponential Backoff
+)</strong></p>
 <ol type="1">
 <li>第 <span class="math inline">\(k\)</span> 次碰撞后，从 <span
 class="math inline">\(\{0, 1, 2, \ldots, 2^{\min(k,10)}-1\}\)</span>
@@ -900,13 +900,13 @@ class="math inline">\(\{0, 1, 2, \ldots, 2^{\min(k,10)}-1\}\)</span>
 class="math inline">\(r\)</span> 个争用期 ) 后重新竞争.</li>
 <li>超过 16 次仍碰撞，则报告发送失败.</li>
 </ol>
-<p><strong>关键特性 :</strong></p>
+<p><strong>关键特性</strong></p>
 <ul>
 <li>退避时间 <strong>随冲突次数指数增大</strong> (
 0<sub>1→0</sub>3→0~7→… ) ，减少网络负载高时的持续碰撞.</li>
 <li>碰撞 16 次后丢弃，不会无限重试.</li>
 </ul>
-<p><strong>考研计算示例 ( 深度理解 ) :</strong></p>
+<p><strong>考研计算示例 ( 深度理解 )</strong></p>
 <p>若发生第 3 次碰撞 (<span
 class="math inline">\(k=3\)</span>)，退避时间 <span
 class="math inline">\(r\)</span> 从 <span class="math inline">\(\{0, 1,
@@ -925,8 +925,8 @@ class="math inline">\(r\)</span> 从 <span class="math inline">\(0 \sim
 </div>
 <h3 id="csmaca-无线网络核心">4.4 CSMA/CA ( 无线网络核心 )</h3>
 <div class="note info simple"><p><strong>CSMA/CA ( Carrier Sense Multiple Access / Collision Avoidance
-) </strong></p>
-<p>无线网络中 <strong>无法使用碰撞检测</strong> ( CSMA/CD ) ，原因 :</p>
+)</strong></p>
+<p>无线网络中 <strong>无法使用碰撞检测</strong> ( CSMA/CD ) ，原因</p>
 <ol type="1">
 <li>发送时无线信号的自干扰使接收自身信号困难 ( 硬件难以实现全双工检测
 ).</li>
@@ -935,17 +935,17 @@ class="math inline">\(r\)</span> 从 <span class="math inline">\(0 \sim
 </ol>
 <p>因此 IEEE 802.11 采用 <strong>碰撞避免</strong> ( 尽量不让碰撞发生 )
 而非碰撞检测.</p>
-<p><strong>工作机制 ( DCF 分布式协调功能 ) :</strong></p>
+<p><strong>工作机制 ( DCF 分布式协调功能 )</strong></p>
 <p><strong>1. 帧间间隔 ( IFS, Inter-Frame Space )</strong></p>
 <ul>
-<li><strong>SIFS ( Short IFS ) </strong> 最短帧间隔，用于 ACK、CTS
+<li><strong>SIFS ( Short IFS )</strong> 最短帧间隔，用于 ACK、CTS
 等高优先级帧.</li>
-<li><strong>DIFS ( Distributed IFS ) </strong>
+<li><strong>DIFS ( Distributed IFS )</strong>
 数据帧发送前需等待的最小帧间隔，<span class="math inline">\(&gt;
 SIFS\)</span>.</li>
 </ul>
-<p><strong>2. 退避机制 ( 随机退避，避免碰撞 ) :</strong></p>
-<p>发送数据前 :</p>
+<p><strong>2. 退避机制 ( 随机退避，避免碰撞 )</strong></p>
+<p>发送数据前</p>
 <ol type="1">
 <li>监听信道是否空闲.</li>
 <li>空闲时间达到 <strong>DIFS</strong> 后，启动随机退避计时器 ( 从 <span
@@ -956,20 +956,24 @@ class="math inline">\(CW\)</span> 为竞争窗口大小 ).</li>
 <li>若碰撞，<span class="math inline">\(CW\)</span> 加倍 (
 二进制指数退避 ) ，重新退避.</li>
 </ol>
-<p><strong>3. 确认机制 ( ACK ) :</strong></p>
+<p><strong>3. 确认机制 ( ACK )</strong></p>
 <p>接收方收到正确的帧后，<strong>等待 SIFS 后立即发
 ACK</strong>，不进行退避 ( SIFS &lt; DIFS，保证 ACK 优先发送 ).
 发送方收到 ACK 才认为发送成功; 否则超时重传.</p>
-<p><strong>4. RTS/CTS 机制 ( 解决隐藏节点问题 ) :</strong></p>
-<p>可选机制，针对长数据帧 : 1. 发送方先发短的 <strong>RTS ( Request to
-Send ) </strong> 帧，包含将要传输的数据时长. 2. 接收方回复 <strong>CTS (
-Clear to Send ) </strong> 帧 ( SIFS 后 ) ，所有听到 CTS
-的节点设置<strong>NAV ( Network Allocation Vector，虚拟载波监听 )
-</strong>，在此时间内不发送. 3. 发送方收到 CTS 后 ( SIFS 后 )
-发数据，接收方收后 ( SIFS 后 ) 发 ACK.</p>
-<p><strong>RTS/CTS 交互流程图 ( Mermaid ) :</strong></p>
+<p><strong>4. RTS/CTS 机制 ( 解决隐藏节点问题 )</strong></p>
+<p>可选机制，针对长数据帧</p>
+<ol type="1">
+<li>发送方先发短的 <strong>RTS ( Request to Send )</strong>
+帧，包含将要传输的数据时长.</li>
+<li>接收方回复 <strong>CTS ( Clear to Send )</strong> 帧 ( SIFS 后 )
+，所有听到 CTS 的节点设置<strong>NAV ( Network Allocation
+Vector，虚拟载波监听 )</strong>，在此时间内不发送.</li>
+<li>发送方收到 CTS 后 ( SIFS 后 ) 发数据，接收方收后 ( SIFS 后 ) 发
+ACK.</li>
+</ol>
+<p><strong>RTS/CTS 交互流程图 ( Mermaid )</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">    participant A as 发送方 A</span><br><span class="line">    participant AP as 接收方 B</span><br><span class="line">    participant C as 邻居节点 C ( 隐藏终端 )</span><br><span class="line">    Note over A: 有数据发送</span><br><span class="line">    A-&gt;&gt;AP: RTS ( 请求发送 )</span><br><span class="line">    Note right of C: 收到 RTS 或&lt;br/&gt;仅收到 CTS</span><br><span class="line">    AP--&gt;&gt;A: CTS ( 允许发送 )</span><br><span class="line">    Note right of C: 设置 NAV ( 虚拟载波监听 )&lt;br/&gt;在此期间保持静默</span><br><span class="line">    Note over A,AP: SIFS</span><br><span class="line">    A-&gt;&gt;AP: DATA ( 数据帧 )</span><br><span class="line">    Note over A,AP: SIFS</span><br><span class="line">    AP--&gt;&gt;A: ACK ( 确认帧 )</span><br><span class="line">    Note over C: NAV 结束&lt;br/&gt;开始竞争信道</span><br></pre></td></tr></table></figure>
-<p><strong>CSMA/CD vs CSMA/CA 对比 ( 重要 ) :</strong></p>
+<p><strong>CSMA/CD vs CSMA/CA 对比 ( 重要 )</strong></p>
 <table>
 <thead>
 <tr>
@@ -1022,7 +1026,7 @@ class="math inline">\(10^{-8} \sim 10^{-11}\)</span> ).</li>
 <li>由单一组织拥有和管理.</li>
 </ul>
 <p><strong>IEEE 802 标准体系</strong></p>
-<p>IEEE 802 委员会将数据链路层分为两个子层 :</p>
+<p>IEEE 802 委员会将数据链路层分为两个子层</p>
 <table>
 <colgroup>
 <col style="width: 35%" />
@@ -1054,7 +1058,7 @@ style="text-align: left;">提供统一接口给网络层，负责差错控制、
 </table>
 <p>实际应用中，LLC 层在 TCP/IP 网络中基本不用，以太网直接使用 MAC
 层向上提供服务.</p>
-<p><strong>MAC 地址 ( 物理地址 ) :</strong></p>
+<p><strong>MAC 地址 ( 物理地址 )</strong></p>
 <ul>
 <li>48 位 ( 6 字节 ) ，烧录在网卡 ROM 中 ( 理论上全球唯一 ).</li>
 <li>格式 : <code>XX:XX:XX:XX:XX:XX</code> ( 十六进制 ).</li>
@@ -1067,7 +1071,7 @@ style="text-align: left;">提供统一接口给网络层，负责差错控制、
 <h2 id="六以太网ieee-802.11令牌环">六、以太网、IEEE 802.11、令牌环</h2>
 <h3 id="以太网-ethernet-ieee-802.3">6.1 以太网 ( Ethernet, IEEE 802.3
 )</h3>
-<div class="note info simple"><p><strong>以太网帧格式 ( Ethernet II / DIX 帧，最常用 ) </strong></p>
+<div class="note info simple"><p><strong>以太网帧格式 ( Ethernet II / DIX 帧，最常用 )</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+----------+----------+------+-------------------+-------+</span><br><span class="line">| 目的MAC  | 源MAC    | 类型 |       数据         |  FCS  |</span><br><span class="line">|  6 字节  |  6 字节  | 2字节| 46 ~ 1500 字节    | 4字节 |</span><br><span class="line">+----------+----------+------+-------------------+-------+</span><br><span class="line">          ←─────────────── 64 ~ 1518 字节 ──────────────→</span><br></pre></td></tr></table></figure>
 <table>
 <colgroup>
@@ -1115,11 +1119,11 @@ style="text-align: left;">提供统一接口给网络层，负责差错控制、
 <code>10101010...</code> 同步序列 + 1 B 的 <code>10101011</code>
 帧开始定界符 ) 在物理层处理，不计入帧长. 所以以太网帧的”最小 64
 字节”不含前导码.</p>
-<p><strong>MTU ( 最大传输单元 ) :</strong></p>
+<p><strong>MTU ( 最大传输单元 )</strong></p>
 <p>以太网帧的数据字段最大长度为 <strong>1500 字节</strong>，称为 MTU. 若
-IP 数据报长度超过 MTU，则必须在网络层进行 <strong>分片 ( Fragmentation )
-</strong>.</p>
-<p><strong>以太网的发展历程 :</strong></p>
+IP 数据报长度超过 MTU，则必须在网络层进行 <strong>分片 ( Fragmentation
+)</strong>.</p>
+<p><strong>以太网的发展历程</strong></p>
 <table>
 <thead>
 <tr>
@@ -1182,7 +1186,7 @@ IP 数据报长度超过 MTU，则必须在网络层进行 <strong>分片 ( Frag
 )</h3>
 <div class="note info simple"><p><strong>802.11 基本概念</strong></p>
 <p><strong>基本服务集 ( BSS, Basic Service Set )</strong> 由一个
-<strong>接入点 ( AP ) </strong> 和若干无线主机 ( 站点 )
+<strong>接入点 ( AP )</strong> 和若干无线主机 ( 站点 )
 组成的基本网络单元.</p>
 <p><strong>服务集标识符 ( SSID )</strong> 无线网络的名称 (
 人们常说的”WiFi名字” ).</p>
@@ -1190,18 +1194,18 @@ IP 数据报长度超过 MTU，则必须在网络层进行 <strong>分片 ( Frag
 有线以太网 ).</p>
 <p><strong>扩展服务集 ( ESS )</strong> 由多个 BSS 通过 DS
 连接组成的大型无线网络.</p>
-<p><strong>Ad hoc 模式 ( IBSS ) </strong> 无 AP，站点直接通信 (
+<p><strong>Ad hoc 模式 ( IBSS )</strong> 无 AP，站点直接通信 (
 点对点临时网络 ).</p>
-<p><strong>802.11 帧结构 ( 简化 ) :</strong></p>
+<p><strong>802.11 帧结构 ( 简化 )</strong></p>
 <p>802.11 数据帧包含 <strong>4个地址字段</strong> ( Address 1/2/3/4 )
-，用于支持 AP 转发 :</p>
+，用于支持 AP 转发</p>
 <ul>
 <li><strong>Address 1</strong> 接收方地址 ( RA ).</li>
 <li><strong>Address 2</strong> 发送方地址 ( TA ).</li>
 <li><strong>Address 3</strong> 目的/源地址 ( 用于 DS 中转 ).</li>
 <li><strong>Address 4</strong> 仅 WDS ( 无线分布式系统 ) 中使用.</li>
 </ul>
-<p><strong>主要 802.11 标准版本 :</strong></p>
+<p><strong>主要 802.11 标准版本</strong></p>
 <table>
 <thead>
 <tr>
@@ -1310,9 +1314,9 @@ IP 数据报长度超过 MTU，则必须在网络层进行 <strong>分片 ( Frag
 <h2 id="七网桥与局域网交换机">七、网桥与局域网交换机</h2>
 <h3 id="网桥-bridge">7.1 网桥 ( Bridge )</h3>
 <div class="note info simple"><p><strong>网桥的功能与工作原理</strong></p>
-<p>网桥工作在 <strong>OSI 第二层 ( 数据链路层 ) </strong>，根据帧的
+<p>网桥工作在 <strong>OSI 第二层 ( 数据链路层 )</strong>，根据帧的
 <strong>MAC 地址</strong> 进行转发决策.</p>
-<p><strong>网桥的主要功能 :</strong></p>
+<p><strong>网桥的主要功能</strong></p>
 <ol type="1">
 <li><strong>过滤帧</strong> 读取帧的目的 MAC
 地址，若目的地址在同一网段则 <strong>不转发</strong> ( 过滤 )
@@ -1322,7 +1326,7 @@ IP 数据报长度超过 MTU，则必须在网络层进行 <strong>分片 ( Frag
 <li><strong>自学习</strong> 通过读取帧的源 MAC 地址，动态建立 MAC 地址表
 ( 转发表 ).</li>
 </ol>
-<p><strong>自学习算法 :</strong></p>
+<p><strong>自学习算法</strong></p>
 <ol type="1">
 <li>收到一帧时，记录 <strong>源 MAC 地址</strong> 和
 <strong>来源端口</strong> ( 入端口 ) ，写入转发表 ( 超时老化，默认 300 s
@@ -1333,11 +1337,11 @@ IP 数据报长度超过 MTU，则必须在网络层进行 <strong>分片 ( Frag
 转发到对应端口.</li>
 <li>若在转发表中，且目的端口与来源端口 <strong>相同</strong> → 过滤 (
 丢弃，目的在同侧 ).</li>
-<li>若 <strong>不在转发表</strong> 中 → <strong>泛洪 ( Flood )
-</strong>，从除来源端口外的所有端口转发.</li>
+<li>若 <strong>不在转发表</strong> 中 → <strong>泛洪 ( Flood
+)</strong>，从除来源端口外的所有端口转发.</li>
 </ul></li>
 </ol>
-<p><strong>网桥 vs 中继器 vs 路由器 :</strong></p>
+<p><strong>网桥 vs 中继器 vs 路由器</strong></p>
 <table>
 <thead>
 <tr>
@@ -1381,7 +1385,7 @@ IP 数据报长度超过 MTU，则必须在网络层进行 <strong>分片 ( Frag
 <p>交换机本质上是
 <strong>多端口网桥</strong>，每个端口都有独立的冲突域，支持多对节点
 <strong>同时并发通信</strong>.</p>
-<p><strong>三种帧转发方式 :</strong></p>
+<p><strong>三种帧转发方式</strong></p>
 <table>
 <colgroup>
 <col style="width: 25%" />
@@ -1399,29 +1403,29 @@ IP 数据报长度超过 MTU，则必须在网络层进行 <strong>分片 ( Frag
 </thead>
 <tbody>
 <tr>
-<td style="text-align: center;"><strong>存储转发 ( Store-and-Forward )
-</strong></td>
+<td style="text-align: center;"><strong>存储转发 ( Store-and-Forward
+)</strong></td>
 <td style="text-align: center;">收到完整帧后</td>
 <td style="text-align: center;">可过滤错误帧 ( CRC 检验 )</td>
 <td style="text-align: center;">延迟最大</td>
 </tr>
 <tr>
-<td style="text-align: center;"><strong>直通交换 ( Cut-Through )
-</strong></td>
+<td style="text-align: center;"><strong>直通交换 ( Cut-Through
+)</strong></td>
 <td style="text-align: center;">收到目的 MAC ( 14 字节 ) 后</td>
 <td style="text-align: center;">延迟最小</td>
 <td style="text-align: center;">不检测错误帧</td>
 </tr>
 <tr>
-<td style="text-align: center;"><strong>无碎片转发 ( Fragment-Free )
-</strong></td>
+<td style="text-align: center;"><strong>无碎片转发 ( Fragment-Free
+)</strong></td>
 <td style="text-align: center;">收到 64 字节后</td>
 <td style="text-align: center;">过滤碰撞碎片</td>
 <td style="text-align: center;">折衷方案</td>
 </tr>
 </tbody>
 </table>
-<p><strong>交换机的核心优势 :</strong></p>
+<p><strong>交换机的核心优势</strong></p>
 <ol type="1">
 <li><strong>每端口独享带宽</strong> ( 100 Mbps 交换机每端口 100
 Mbps，而集线器所有端口共享 100 Mbps ).</li>
@@ -1429,7 +1433,7 @@ Mbps，而集线器所有端口共享 100 Mbps ).</li>
 <li><strong>同时转发多个帧</strong> ( 交换矩阵 ).</li>
 <li><strong>自学习，即插即用</strong>，无需人工配置.</li>
 </ol>
-<p><strong>冲突域与广播域 :</strong></p>
+<p><strong>冲突域与广播域</strong></p>
 <ul>
 <li><strong>交换机每个端口 = 独立冲突域</strong> ( 彻底消除冲突 ).</li>
 <li><strong>交换机所有端口 = 同一广播域</strong> (
@@ -1437,20 +1441,20 @@ Mbps，而集线器所有端口共享 100 Mbps ).</li>
 <li><strong>路由器每个接口 = 独立广播域</strong> ( 路由器不转发广播帧
 ).</li>
 </ul>
-<p><strong>VLAN ( 虚拟局域网 ) :</strong></p>
+<p><strong>VLAN ( 虚拟局域网 )</strong></p>
 <p>通过在交换机上配置
 VLAN，可以将同一物理交换机的不同端口划分为不同的逻辑广播域，实现广播域的隔离
 ( IEEE 802.1Q 标准 ).</p>
-<p><strong>802.1Q 帧格式 :</strong></p>
+<p><strong>802.1Q 帧格式</strong></p>
 <p>在源 MAC 地址和类型字段之间插入 <strong>4 字节 Tag</strong>.</p>
 <ul>
 <li><strong>TPID</strong> ( 2 字节 ) : 固定值 0x8100，标识这是一个
 802.1Q 帧.</li>
 <li><strong>TCI</strong> ( 2 字节 ) : 包含优先级 ( PRI ) 、CFI 和
-<strong>VID ( VLAN ID, 12 bit ) </strong>. VID 范围 0~4095 ( 0 和 4095
+<strong>VID ( VLAN ID, 12 bit )</strong>. VID 范围 0~4095 ( 0 和 4095
 保留，可用 1~4094 ).</li>
 </ul>
-<p><strong>端口类型 ( 考研重点 ) :</strong></p>
+<p><strong>端口类型 ( 考研重点 )</strong></p>
 <ul>
 <li><strong>Access 端口</strong> 连接主机，只处理
 <strong>无标签帧</strong>. 发送时剥离 Tag，接收时打上默认 Tag ( PVID
@@ -1470,25 +1474,24 @@ Tag 则打上 PVID，有 Tag 则透传.</li>
 地址从不同端口出现，转发表振荡.</li>
 <li><strong>帧重复</strong> 目的主机收到同一帧的多份副本.</li>
 </ol>
-<p><strong>STP 解决方案 :</strong></p>
+<p><strong>STP 解决方案</strong></p>
 <ol type="1">
-<li>所有交换机交换 <strong>BPDU ( Bridge Protocol Data Unit ) </strong>
-报文，选举出一个 <strong>根桥 ( Root Bridge ) </strong>.</li>
-<li>每个非根交换机确定到根桥最短路径的 <strong>根端口 ( Root Port )
-</strong>.</li>
-<li>每个网段选出一个 <strong>指定端口 ( Designated Port )
-</strong>.</li>
-<li>其余端口设为 <strong>阻塞状态 ( Blocking ) </strong>，不转发数据帧 (
+<li>所有交换机交换 <strong>BPDU ( Bridge Protocol Data Unit )</strong>
+报文，选举出一个 <strong>根桥 ( Root Bridge )</strong>.</li>
+<li>每个非根交换机确定到根桥最短路径的 <strong>根端口 ( Root Port
+)</strong>.</li>
+<li>每个网段选出一个 <strong>指定端口 ( Designated Port )</strong>.</li>
+<li>其余端口设为 <strong>阻塞状态 ( Blocking )</strong>，不转发数据帧 (
 但仍接收 BPDU ).</li>
-<li>网络拓扑形成 <strong>无环的逻辑树形结构 ( 生成树 ) </strong>.</li>
+<li>网络拓扑形成 <strong>无环的逻辑树形结构 ( 生成树 )</strong>.</li>
 </ol>
-<p><strong>RSTP ( 802.1w ) </strong> 快速生成树协议，收敛时间从 STP 的
+<p><strong>RSTP ( 802.1w )</strong> 快速生成树协议，收敛时间从 STP 的
 30~50 s 缩短到 1~2 s.</p>
 </div>
 <hr />
 <h2 id="八综合真题解析-selected-problems">八、综合真题解析 ( Selected
 Problems )</h2>
-<div class="note success simple"><p><strong>真题 1 ( GBN vs SR 窗口大小判断 ) </strong></p>
+<div class="note success simple"><p><strong>真题 1 ( GBN vs SR 窗口大小判断 )</strong></p>
 <p>设滑动窗口协议的帧序号用 4 位二进制表示 ( 序号 <span
 class="math inline">\(0 \sim 15\)</span> ). (1) GBN
 协议的最大发送窗口是多少? (2) SR 协议的最大发送窗口和接收窗口各是多少?
@@ -1510,18 +1513,18 @@ class="math inline">\(= 2^4 = 16\)</span>.</p>
 回退到 4，重发所有帧，包括已发过的 5 和 6 ).</p></li>
 </ol>
 </div>
-<div class="note success simple"><p><strong>真题 2 ( CSMA/CD 最小帧长计算 ) </strong></p>
+<div class="note success simple"><p><strong>真题 2 ( CSMA/CD 最小帧长计算 )</strong></p>
 <p>某以太网总线长 <span class="math inline">\(1\
 \text{km}\)</span>，传播速率 <span class="math inline">\(2 \times 10^8\
 \text{m/s}\)</span>，数据传输速率 <span class="math inline">\(10\
 \text{Mbps}\)</span>. (1) 求争用期. (2) 求最小帧长. (3) 若某帧数据字段仅
 20 字节，应如何处理?</p>
-<p><strong>解 :</strong></p>
+<p><strong>解</strong></p>
 <ol type="1">
 <li><p>单向传播时延 <span class="math inline">\(T_p = 1000 / (2 \times
 10^8) = 5\ \mu\text{s}\)</span>. 争用期 <span class="math inline">\(=
 2T_p = 10\ \mu\text{s}\)</span>.</p></li>
-<li><p>最小帧长 : <span class="math display">\[L_{min} = 2T_p \times B =
+<li><p>最小帧长 <span class="math display">\[L_{min} = 2T_p \times B =
 10 \times 10^{-6} \times 10 \times 10^6 = 100\ \text{bit} = 12.5\
 \text{B}\]</span></p></li>
 </ol>
@@ -1533,14 +1536,14 @@ class="math inline">\(= 2^4 = 16\)</span>.</p>
 46 字节，总帧长 64 字节.</li>
 </ol>
 </div>
-<div class="note success simple"><p><strong>真题 3 ( 交换机自学习过程 ) </strong></p>
-<p>如图所示，交换机有 3 个端口，初始转发表为空 :</p>
+<div class="note success simple"><p><strong>真题 3 ( 交换机自学习过程 )</strong></p>
+<p>如图所示，交换机有 3 个端口，初始转发表为空</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">端口 1 ── 主机 A ( MAC: AA ) </span><br><span class="line">端口 2 ── 主机 B ( MAC: BB ) </span><br><span class="line">端口 3 ── 主机 C ( MAC: CC ) </span><br></pre></td></tr></table></figure>
-<p>事件序列 : ① A 向 C 发帧 ( 源 AA，目的 CC ) ② C 向 A 回帧 ( 源
-CC，目的 AA ) ③ B 向 C 发帧 ( 源 BB，目的 CC )</p>
+<p>事件序列 ① A 向 C 发帧 ( 源 AA，目的 CC ) ② C 向 A 回帧 ( 源 CC，目的
+AA ) ③ B 向 C 发帧 ( 源 BB，目的 CC )</p>
 <p>请写出每次事件后转发表的变化及交换机的转发行为.</p>
-<p><strong>解 :</strong></p>
-<p><strong>① A 向 C 发帧 ( AA → CC ) :</strong></p>
+<p><strong>解</strong></p>
+<p><strong>① A 向 C 发帧 ( AA → CC )</strong></p>
 <ul>
 <li>收到帧，来自端口 1，源 MAC = AA.</li>
 <li><strong>学习</strong> 记录 AA → 端口 1.</li>
@@ -1548,7 +1551,7 @@ CC，目的 AA ) ③ B 向 C 发帧 ( 源 BB，目的 CC )</p>
 3.</li>
 <li>转发表 : <code>{AA: 端口1}</code>.</li>
 </ul>
-<p><strong>② C 向 A 回帧 ( CC → AA ) :</strong></p>
+<p><strong>② C 向 A 回帧 ( CC → AA )</strong></p>
 <ul>
 <li>收到帧，来自端口 3，源 MAC = CC.</li>
 <li><strong>学习</strong> 记录 CC → 端口 3.</li>
@@ -1556,7 +1559,7 @@ CC，目的 AA ) ③ B 向 C 发帧 ( 源 BB，目的 CC )</p>
 <strong>单播转发</strong> 到端口 1.</li>
 <li>转发表 : <code>{AA: 端口1, CC: 端口3}</code>.</li>
 </ul>
-<p><strong>③ B 向 C 发帧 ( BB → CC ) :</strong></p>
+<p><strong>③ B 向 C 发帧 ( BB → CC )</strong></p>
 <ul>
 <li>收到帧，来自端口 2，源 MAC = BB.</li>
 <li><strong>学习</strong> 记录 BB → 端口 2.</li>
@@ -1567,7 +1570,7 @@ CC，目的 AA ) ③ B 向 C 发帧 ( 源 BB，目的 CC )</p>
 <p><strong>结论</strong>
 自学习完成后，后续通信全部单播，无泛洪，交换效率最高.</p>
 </div>
-<div class="note success simple"><p><strong>真题 4 ( 综合 : 信道利用率与窗口协议对比 ) </strong></p>
+<div class="note success simple"><p><strong>真题 4 ( 综合 : 信道利用率与窗口协议对比 )</strong></p>
 <p>卫星链路，带宽 <span class="math inline">\(1\
 \text{Mbps}\)</span>，单向传播时延 <span class="math inline">\(T_p =
 250\ \text{ms}\)</span>，帧长 <span class="math inline">\(L = 1000\
@@ -1578,7 +1581,7 @@ CC，目的 AA ) ③ B 向 C 发帧 ( 源 BB，目的 CC )</p>
 <li>若要使信道利用率 <span class="math inline">\(\ge 80\%\)</span>，SR
 协议至少需要多少位序号?</li>
 </ol>
-<p><strong>解 :</strong></p>
+<p><strong>解</strong></p>
 <p><span class="math inline">\(T_f = L/B = 1000/10^6 = 1\
 \text{ms}\)</span>，<span class="math inline">\(a = T_p/T_f =
 250\)</span>.</p>
@@ -1606,11 +1609,11 @@ class="math inline">\(= 2^9 = 512 &gt; 401\)</span>，<span
 class="math inline">\(U = 512/501 &gt; 1\)</span>，取 <span
 class="math inline">\(U = 100\%\)</span>.</p>
 </div>
-<div class="note success simple"><p><strong>真题 5 ( CSMA/CD 与 CSMA/CA 工作差异分析 ) </strong></p>
+<div class="note success simple"><p><strong>真题 5 ( CSMA/CD 与 CSMA/CA 工作差异分析 )</strong></p>
 <p>请分析以下场景，说明为什么有线以太网可以使用
 CSMA/CD，而无线局域网必须使用 CSMA/CA.</p>
-<p><strong>解 :</strong></p>
-<p><strong>有线以太网使用 CSMA/CD 的条件 :</strong></p>
+<p><strong>解</strong></p>
+<p><strong>有线以太网使用 CSMA/CD 的条件</strong></p>
 <ol type="1">
 <li><strong>可以检测碰撞</strong>
 有线介质中，节点发送时可以同时监听信道，若发送信号与信道上的信号不同，说明发生了碰撞
@@ -1620,7 +1623,7 @@ CSMA/CD，而无线局域网必须使用 CSMA/CA.</p>
 <li><strong>全双工困难但可实现</strong>
 现代以太网交换机环境下已全双工，但早期总线以太网是半双工.</li>
 </ol>
-<p><strong>无线局域网不能使用 CSMA/CD 的原因 :</strong></p>
+<p><strong>无线局域网不能使用 CSMA/CD 的原因</strong></p>
 <ol type="1">
 <li><strong>发送功率与接收功率差异极大</strong>
 无线节点发送时，自身发出的信号功率远大于接收到的信号 ( 信号衰减 )

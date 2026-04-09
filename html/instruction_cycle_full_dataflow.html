@@ -1,0 +1,450 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.root{font-family:sans-serif;color:#2c2c2a;padding:2px 0 12px}
+
+.phase-bar{display:flex;gap:6px;margin-bottom:14px;margin-left:10px;flex-wrap:wrap}
+.ptab{font-size:11px;font-weight:500;padding:5px 12px;border-radius:20px;border:1.5px solid #d3d1c7;background:#fff;color:#888780;cursor:pointer;transition:all .22s;user-select:none;white-space:nowrap;letter-spacing:.01em}
+.ptab:hover{border-color:#85B7EB;color:#185FA5}
+.ptab.active{background:#185FA5;color:#fff;border-color:#185FA5}
+.ptab.done{background:#E1F5EE;color:#085041;border-color:#1D9E75}
+.ptab.optional-tag::after{content:'可选';font-size:9px;margin-left:4px;opacity:.7}
+
+.canvas-wrap{background:#fff;border:0.5px solid #d3d1c7;border-radius:14px;overflow:hidden;position:relative}
+.svg-canvas{width:100%;display:block}
+
+.micro-wrap{margin-top:10px;background:#f8f7f4;border:0.5px solid #d3d1c7;border-radius:12px;padding:12px 14px}
+.micro-head{font-size:10px;font-weight:500;color:#888780;letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px}
+.msteps{display:flex;flex-direction:column;gap:3px}
+.ms{display:flex;align-items:center;gap:9px;padding:5px 8px;border-radius:7px;border:1px solid transparent;font-size:11.5px;font-family:monospace;color:#888780;transition:all .2s}
+.ms .ind{width:5px;height:5px;border-radius:50%;background:#d3d1c7;flex-shrink:0;transition:all .2s}
+.ms.cur{background:#EBF4FF;border-color:#85B7EB;color:#0C447C;font-weight:500}
+.ms.cur .ind{background:#378ADD;width:7px;height:7px}
+.ms.fin{color:#1D9E75}
+.ms.fin .ind{background:#1D9E75}
+
+.desc-wrap{margin-top:10px;background:#fff;border:0.5px solid #d3d1c7;border-radius:12px;padding:11px 15px;font-size:12.5px;color:#444441;line-height:1.7}
+.desc-wrap b{color:#185FA5;font-weight:500}
+.desc-wrap .badge{display:inline-block;font-size:10px;font-weight:500;padding:2px 8px;border-radius:10px;margin-left:5px;vertical-align:middle}
+.badge-r{background:#E6F1FB;color:#0C447C;border:0.5px solid #85B7EB}
+.badge-w{background:#E1F5EE;color:#085041;border:0.5px solid #5DCAA5}
+.badge-n{background:#F1EFE8;color:#5F5E5A;border:0.5px solid #B4B2A9}
+.note{margin-top:8px;padding:7px 11px;background:#FAEEDA;border:0.5px solid #EF9F27;border-radius:8px;font-size:11px;color:#633806;line-height:1.6}
+
+.ctrl-row{display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+.btn{font-size:12px;font-weight:500;padding:6px 16px;border:0.5px solid #b4b2a9;border-radius:8px;background:#fff;cursor:pointer;color:#2c2c2a;transition:background .15s,transform .1s;white-space:nowrap}
+.btn:hover{background:#F1EFE8}
+.btn:active{transform:scale(.97)}
+.btn.pri{background:#185FA5;color:#fff;border-color:#185FA5}
+.btn.pri:hover{background:#0C447C}
+.btn:disabled{opacity:.38;cursor:not-allowed;transform:none}
+.spd-row{display:flex;align-items:center;gap:6px;font-size:11px;color:#888780;margin-left:auto}
+
+.prog-dots{display:flex;gap:5px;align-items:center;margin-top:10px;justify-content:center}
+.pdot{width:7px;height:7px;border-radius:50%;background:#d3d1c7;transition:all .3s}
+.pdot.act{background:#378ADD;width:9px;height:9px}
+.pdot.dn{background:#1D9E75}
+</style>
+
+<div class="root">
+<h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">指令周期四阶段数据流动态演示</h2>
+
+<div class="phase-bar">
+  <div class="ptab optional-tag" id="t0" onclick="jumpPhase(0)">① 取指 FE</div>
+  <div class="ptab optional-tag" id="t1" onclick="jumpPhase(1)">② 间址 IND</div>
+  <div class="ptab optional-tag" id="t2" onclick="jumpPhase(2)">③ 执行 EX</div>
+  <div class="ptab optional-tag" id="t3" onclick="jumpPhase(3)">④ 中断 INT</div>
+</div>
+
+<div class="canvas-wrap">
+<svg class="svg-canvas" id="cvs" viewBox="0 0 640 310" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+    <path d="M2 2L8 5L2 8" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+</defs>
+
+<rect width="640" height="310" fill="#fff"/>
+
+<text x="30" y="22" font-size="10" fill="#B4B2A9" font-family="sans-serif" font-weight="500" letter-spacing="0.08em">控制通路</text>
+<text x="30" y="168" font-size="10" fill="#B4B2A9" font-family="sans-serif" font-weight="500" letter-spacing="0.08em">数据通路</text>
+
+<line x1="20" y1="30" x2="620" y2="30" stroke="#F1EFE8" stroke-width="1"/>
+<line x1="20" y1="176" x2="620" y2="176" stroke="#F1EFE8" stroke-width="1"/>
+
+<rect id="bg-bus-int" x="20" y="96" width="600" height="14" rx="4" fill="#F8F7F4"/>
+<text x="30" y="107" font-size="9" fill="#B4B2A9" font-family="sans-serif" letter-spacing=".06em">内部总线</text>
+
+<rect id="bg-bus-addr" x="20" y="186" width="600" height="14" rx="4" fill="#F8F7F4"/>
+<text x="30" y="197" font-size="9" fill="#B4B2A9" font-family="sans-serif" letter-spacing=".06em">地址总线</text>
+
+<rect id="bg-bus-data" x="20" y="206" width="600" height="14" rx="4" fill="#F8F7F4"/>
+<text x="30" y="217" font-size="9" fill="#B4B2A9" font-family="sans-serif" letter-spacing=".06em">数据总线</text>
+
+<g id="box-pc">
+  <rect x="28" y="38" width="76" height="52" rx="8" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="1"/>
+  <text x="66" y="62" text-anchor="middle" font-size="13" fill="#2c2c2a" font-family="sans-serif" font-weight="500">PC</text>
+  <text x="66" y="77" text-anchor="middle" font-size="9.5" fill="#888780" font-family="sans-serif">程序计数器</text>
+  <text id="v-pc" x="66" y="89" text-anchor="middle" font-size="9" fill="#5F5E5A" font-family="monospace">0x1024</text>
+</g>
+
+<g id="box-mar">
+  <rect x="126" y="38" width="80" height="52" rx="8" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="1"/>
+  <text x="166" y="62" text-anchor="middle" font-size="13" fill="#2c2c2a" font-family="sans-serif" font-weight="500">MAR</text>
+  <text x="166" y="77" text-anchor="middle" font-size="9.5" fill="#888780" font-family="sans-serif">地址寄存器</text>
+  <text id="v-mar" x="166" y="89" text-anchor="middle" font-size="9" fill="#5F5E5A" font-family="monospace">—</text>
+</g>
+
+<g id="box-mem">
+  <rect x="228" y="38" width="80" height="52" rx="8" fill="#EAF3DE" stroke="#C0DD97" stroke-width="1"/>
+  <text x="268" y="62" text-anchor="middle" font-size="13" fill="#27500A" font-family="sans-serif" font-weight="500">主存 M</text>
+  <text x="268" y="77" text-anchor="middle" font-size="9.5" fill="#3B6D11" font-family="sans-serif">Memory</text>
+  <text id="v-mem" x="268" y="89" text-anchor="middle" font-size="9" fill="#3B6D11" font-family="monospace">—</text>
+</g>
+
+<g id="box-mdr">
+  <rect x="330" y="38" width="80" height="52" rx="8" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="1"/>
+  <text x="370" y="62" text-anchor="middle" font-size="13" fill="#2c2c2a" font-family="sans-serif" font-weight="500">MDR</text>
+  <text x="370" y="77" text-anchor="middle" font-size="9.5" fill="#888780" font-family="sans-serif">数据寄存器</text>
+  <text id="v-mdr" x="370" y="89" text-anchor="middle" font-size="9" fill="#5F5E5A" font-family="monospace">—</text>
+</g>
+
+<g id="box-ir">
+  <rect x="432" y="38" width="72" height="52" rx="8" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="1"/>
+  <text x="468" y="62" text-anchor="middle" font-size="13" fill="#2c2c2a" font-family="sans-serif" font-weight="500">IR</text>
+  <text x="468" y="77" text-anchor="middle" font-size="9.5" fill="#888780" font-family="sans-serif">指令寄存器</text>
+  <text id="v-ir" x="468" y="89" text-anchor="middle" font-size="9" fill="#5F5E5A" font-family="monospace">—</text>
+</g>
+
+<g id="box-cu">
+  <rect x="524" y="38" width="88" height="52" rx="8" fill="#EEEDFE" stroke="#AFA9EC" stroke-width="1"/>
+  <text x="568" y="62" text-anchor="middle" font-size="13" fill="#3C3489" font-family="sans-serif" font-weight="500">CU / ID</text>
+  <text x="568" y="77" text-anchor="middle" font-size="9.5" fill="#534AB7" font-family="sans-serif">控制器·译码</text>
+  <text id="v-cu" x="568" y="89" text-anchor="middle" font-size="9" fill="#534AB7" font-family="monospace">空闲</text>
+</g>
+
+<g id="box-rf">
+  <rect x="28" y="226" width="76" height="60" rx="8" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="1"/>
+  <text x="66" y="253" text-anchor="middle" font-size="13" fill="#2c2c2a" font-family="sans-serif" font-weight="500">RF</text>
+  <text x="66" y="267" text-anchor="middle" font-size="9.5" fill="#888780" font-family="sans-serif">寄存器组</text>
+  <text id="v-rf" x="66" y="280" text-anchor="middle" font-size="9" fill="#5F5E5A" font-family="monospace">R1=5 R2=3</text>
+</g>
+
+<g id="box-alu">
+  <rect x="126" y="226" width="80" height="60" rx="8" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="1"/>
+  <text x="166" y="253" text-anchor="middle" font-size="13" fill="#2c2c2a" font-family="sans-serif" font-weight="500">ALU</text>
+  <text x="166" y="267" text-anchor="middle" font-size="9.5" fill="#888780" font-family="sans-serif">算术逻辑单元</text>
+  <text id="v-alu" x="166" y="280" text-anchor="middle" font-size="9" fill="#5F5E5A" font-family="monospace">—</text>
+</g>
+
+<g id="box-acc">
+  <rect x="228" y="226" width="76" height="60" rx="8" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="1"/>
+  <text x="266" y="253" text-anchor="middle" font-size="13" fill="#2c2c2a" font-family="sans-serif" font-weight="500">ACC</text>
+  <text x="266" y="267" text-anchor="middle" font-size="9.5" fill="#888780" font-family="sans-serif">累加器</text>
+  <text id="v-acc" x="266" y="280" text-anchor="middle" font-size="9" fill="#5F5E5A" font-family="monospace">—</text>
+</g>
+
+<g id="box-psw">
+  <rect x="326" y="226" width="76" height="60" rx="8" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="1"/>
+  <text x="364" y="253" text-anchor="middle" font-size="13" fill="#2c2c2a" font-family="sans-serif" font-weight="500">PSW</text>
+  <text x="364" y="267" text-anchor="middle" font-size="9.5" fill="#888780" font-family="sans-serif">程序状态字</text>
+  <text id="v-psw" x="364" y="280" text-anchor="middle" font-size="9" fill="#5F5E5A" font-family="monospace">—</text>
+</g>
+
+<g id="box-sp">
+  <rect x="424" y="226" width="76" height="60" rx="8" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="1"/>
+  <text x="462" y="253" text-anchor="middle" font-size="13" fill="#2c2c2a" font-family="sans-serif" font-weight="500">SP</text>
+  <text x="462" y="267" text-anchor="middle" font-size="9.5" fill="#888780" font-family="sans-serif">堆栈指针</text>
+  <text id="v-sp" x="462" y="280" text-anchor="middle" font-size="9" fill="#5F5E5A" font-family="monospace">0x0FFF</text>
+</g>
+
+<g id="box-vec">
+  <rect x="522" y="226" width="90" height="60" rx="8" fill="#FBEAF0" stroke="#F4C0D1" stroke-width="1"/>
+  <text x="567" y="253" text-anchor="middle" font-size="12" fill="#72243E" font-family="sans-serif" font-weight="500">中断向量</text>
+  <text x="567" y="267" text-anchor="middle" font-size="9.5" fill="#993556" font-family="sans-serif">Vector Table</text>
+  <text id="v-vec" x="567" y="280" text-anchor="middle" font-size="9" fill="#993556" font-family="monospace">0x8000</text>
+</g>
+
+<circle id="pkt" cx="-30" cy="-30" r="6" fill="#378ADD" stroke="#fff" stroke-width="2" opacity="0"/>
+</svg>
+</div>
+
+<div class="micro-wrap">
+  <div class="micro-head" id="mhead">微操作序列</div>
+  <div class="msteps" id="msteps"></div>
+</div>
+
+<div class="desc-wrap" id="desc">请点击上方阶段标签，或使用 <b>自动演示</b> 连续播放全部阶段. </div>
+
+<div class="prog-dots">
+  <div class="pdot" id="pd0"></div>
+  <div class="pdot" id="pd1"></div>
+  <div class="pdot" id="pd2"></div>
+  <div class="pdot" id="pd3"></div>
+</div>
+
+<div class="ctrl-row">
+  <button class="btn pri" id="btn-play" onclick="handlePlay()">自动演示</button>
+  <button class="btn" id="btn-prev" onclick="stepPrev()" disabled>← 上一阶段</button>
+  <button class="btn" id="btn-next" onclick="stepNext()" disabled>下一阶段 →</button>
+  <button class="btn" id="btn-rst" onclick="doReset()">↺ 重置</button>
+  <div class="spd-row">
+    <span>速度</span>
+    <input type="range" min="1" max="4" step="1" value="2" id="spd" style="width:72px">
+    <span id="spd-lbl">中</span>
+  </div>
+</div>
+</div>
+
+<script>
+const SPD_MAP={1:1.8,2:1.1,3:0.65,4:0.35};
+const SPD_NAMES={1:'慢',2:'中',3:'快',4:'极快'};
+const spd=()=>SPD_MAP[document.getElementById('spd').value];
+document.getElementById('spd').addEventListener('input',e=>{
+  document.getElementById('spd-lbl').textContent=SPD_NAMES[e.target.value];
+});
+
+const BOX_CENTERS={
+  'pc':{x:66,y:64},'mar':{x:166,y:64},'mem':{x:268,y:64},
+  'mdr':{x:370,y:64},'ir':{x:468,y:64},'cu':{x:568,y:64},
+  'rf':{x:66,y:256},'alu':{x:166,y:256},'acc':{x:266,y:256},
+  'psw':{x:364,y:256},'sp':{x:462,y:256},'vec':{x:567,y:256},
+};
+
+const DEFAULT_VALS={
+  'pc':'0x1024','mar':'—','mem':'—','mdr':'—','ir':'—','cu':'空闲',
+  'rf':'R1=5 R2=3','alu':'—','acc':'—','psw':'—','sp':'0x0FFF','vec':'0x8000'
+};
+
+const PHASES=[
+{
+  label:'取指周期 (FE)',access:'r',
+  desc:'<b>取指周期</b> : PC 中的指令地址经内部总线送入 MAR，通过地址总线访问主存，主存将指令经数据总线读入 MDR，再转存至 IR. 控制器对操作码译码，PC 自动加一指向下一条指令. <span class="badge badge-r">访存 : 取指令 ( 读 ) </span><div class="note">FE 与 EX 为必选周期，任何指令均会经历这两个阶段. PC 自增可由专用加法器或 ALU 完成. </div>',
+  micro:['PC → Bus → MAR ( 地址送地址寄存器 ) ','1 → R ( 向主存发读命令 ) ','M(MAR) → DataBus → MDR ( 指令读入 MDR ) ','MDR → Bus → IR ( 指令存入指令寄存器 ) ','OP(IR) → ID ( 操作码送控制器译码 ) ','(PC) + 1 → PC ( PC 自动加一 ) '],
+  highlight:['pc','mar','mem','mdr','ir','cu'],
+  vals:{'pc':'0x1025','mar':'0x1024','mem':'ADD R1,R2','mdr':'ADD R1,R2','ir':'ADD R1,R2','cu':'译码中…'},
+  steps:[
+    {from:'pc',to:'mar',bus:'int',val:{}},
+    {from:'mar',to:'mem',bus:'addr',val:{}},
+    {from:'mem',to:'mdr',bus:'data',val:{'v-mem':'ADD R1,R2'}},
+    {from:'mdr',to:'ir',bus:'int',val:{'v-mdr':'ADD R1,R2'}},
+    {from:'ir',to:'cu',bus:'int',val:{'v-ir':'ADD R1,R2'}},
+    {from:'pc',to:'pc',bus:'int',val:{'v-cu':'译码中…','v-pc':'0x1025'}},
+  ]
+},{
+  label:'间址周期 (IND)',access:'r',
+  desc:'<b>间址周期</b> ( 可选，仅间接寻址 )  : IR 中的形式地址 Ad(IR) 送入 MAR，主存根据该地址取出真正的有效地址 EA，经数据总线读入 MDR，再送回 IR 的地址字段，以便执行周期直接用 EA 取操作数. <span class="badge badge-r">访存 : 取有效地址 ( 读 ) </span><div class="note">仅间接寻址指令才有 IND 周期. 直接寻址时此阶段跳过，节省一次访存时间. </div>',
+  micro:['Ad(IR) → Bus → MAR ( 形式地址送 MAR ) ','1 → R ( 向主存发读命令 ) ','M(MAR) → DataBus → MDR ( 有效地址读入 MDR ) ','MDR → Bus → Ad(IR) ( EA 回写 IR 地址字段 ) '],
+  highlight:['ir','mar','mem','mdr'],
+  vals:{'mar':'Ad(IR)','mem':'EA=0x2050','mdr':'0x2050','ir':'EA→Ad'},
+  steps:[
+    {from:'ir',to:'mar',bus:'int',val:{}},
+    {from:'mar',to:'mem',bus:'addr',val:{'v-mar':'Ad(IR)'}},
+    {from:'mem',to:'mdr',bus:'data',val:{'v-mem':'EA=0x2050'}},
+    {from:'mdr',to:'ir',bus:'int',val:{'v-mdr':'0x2050','v-ir':'EA→Ad'}},
+  ]
+},{
+  label:'执行周期 (EX)',access:'n',
+  desc:'<b>执行周期</b> : 寄存器组 RF 将操作数送 ALU，控制器 CU 发出操作控制信号，ALU 完成运算 ( ADD: R1+R2=8 ) ，结果暂存 ACC，标志位更新至 PSW，最终写回目标寄存器. <span class="badge badge-n">访存 : 可能不访存 ( 如 CLA / JMP ) </span><div class="note">执行周期是唯一可能不访存的阶段. CLA 清零、JMP 跳转均不需访存；LAD/STO 指令则需要访存取数或写数. </div>',
+  micro:['RF → Bus → ALU ( 送操作数 R1=5, R2=3 ) ','CU → ALU ( 发出 ADD 控制信号 ) ','ALU 执行运算 ( 5 + 3 = 8 ) ','结果 → ACC ( 暂存累加器 ) ','ACC 标志位 → PSW ( 更新状态字 ) ','ACC → RF ( 结果写回寄存器 R1 ) '],
+  highlight:['rf','alu','acc','psw','cu'],
+  vals:{'alu':'5+3=8','acc':'8','psw':'ZF=0 CF=0','rf':'R1=8','cu':'执行中'},
+  steps:[
+    {from:'rf',to:'alu',bus:'int',val:{}},
+    {from:'cu',to:'alu',bus:'int',val:{'v-cu':'执行中'}},
+    {from:'alu',to:'acc',bus:'int',val:{'v-alu':'5+3=8'}},
+    {from:'acc',to:'psw',bus:'int',val:{'v-acc':'8'}},
+    {from:'acc',to:'rf',bus:'data',val:{'v-psw':'ZF=0 CF=0'}},
+    {from:'rf',to:'rf',bus:'int',val:{'v-rf':'R1=8'}},
+  ]
+},{
+  label:'中断周期 (INT)',access:'w',
+  desc:'<b>中断周期</b> ( 可选 )  : 检测到中断请求且 EINT=1 时进入. SP 减一指向新栈顶，将断点 ( 当前 PC ) 经数据总线压入堆栈，硬件自动关中断，最后将中断向量 ( 服务程序入口地址 ) 装入 PC，转入中断服务程序执行. <span class="badge badge-w">访存 : 保存断点 ( 写 ) </span><div class="note">中断返回时由 IRET 指令将栈中断点弹出恢复至 PC，实现程序续行. </div>',
+  micro:['SP − 1 → SP ( 栈指针减一 ) ','SP → Bus → MAR ( 栈顶地址送 MAR ) ','PC → Bus → MDR ( 断点地址送 MDR ) ','1 → W ( 向主存发写命令 ) ','MDR → DataBus → M(MAR) ( 断点压栈保存 ) ','0 → EINT ( 硬件关中断 ) ','Vector → PC ( 中断服务程序入口→PC ) '],
+  highlight:['sp','mar','mdr','mem','pc','vec'],
+  vals:{'sp':'0x0FFE','mar':'0x0FFE','mdr':'0x1025','mem':'↑PC存入','pc':'0x8000','vec':'→PC'},
+  steps:[
+    {from:'sp',to:'sp',bus:'int',val:{'v-sp':'0x0FFE'}},
+    {from:'sp',to:'mar',bus:'int',val:{}},
+    {from:'pc',to:'mdr',bus:'int',val:{'v-mar':'0x0FFE'}},
+    {from:'mdr',to:'mem',bus:'data',val:{'v-mdr':'0x1025'}},
+    {from:'mem',to:'mem',bus:'data',val:{'v-mem':'↑PC存入'}},
+    {from:'vec',to:'pc',bus:'int',val:{}},
+    {from:'pc',to:'pc',bus:'int',val:{'v-pc':'0x8000'}},
+  ]
+}];
+
+let curPhase=-1,running=false,animId=null;
+
+const ALL_BOXES=['pc','mar','mem','mdr','ir','cu','rf','alu','acc','psw','sp','vec'];
+const BUS_IDS=['bus-int','bus-addr','bus-data'];
+
+function setAttr(id,attr,val){const e=document.getElementById(id);if(e)e.setAttribute(attr,val);}
+function setText(id,val){const e=document.getElementById(id);if(e)e.textContent=val;}
+
+const ACTIVE_FILLS={'pc':'#E6F1FB','mar':'#E6F1FB','mem':'#EAF3DE','mdr':'#E6F1FB','ir':'#E6F1FB','cu':'#EEEDFE','rf':'#E6F1FB','alu':'#E6F1FB','acc':'#E6F1FB','psw':'#E6F1FB','sp':'#E6F1FB','vec':'#FBEAF0'};
+const ACTIVE_STROKES={'pc':'#378ADD','mar':'#378ADD','mem':'#639922','mdr':'#378ADD','ir':'#378ADD','cu':'#7F77DD','rf':'#378ADD','alu':'#378ADD','acc':'#378ADD','psw':'#378ADD','sp':'#378ADD','vec':'#D4537E'};
+const DEFAULT_FILLS={'pc':'#F1EFE8','mar':'#F1EFE8','mem':'#EAF3DE','mdr':'#F1EFE8','ir':'#F1EFE8','cu':'#EEEDFE','rf':'#F1EFE8','alu':'#F1EFE8','acc':'#F1EFE8','psw':'#F1EFE8','sp':'#F1EFE8','vec':'#FBEAF0'};
+const DEFAULT_STROKES={'pc':'#D3D1C7','mar':'#D3D1C7','mem':'#C0DD97','mdr':'#D3D1C7','ir':'#D3D1C7','cu':'#AFA9EC','rf':'#D3D1C7','alu':'#D3D1C7','acc':'#D3D1C7','psw':'#D3D1C7','sp':'#D3D1C7','vec':'#F4C0D1'};
+
+function setBoxState(id,state){
+  const rect=document.querySelector(`#box-${id} rect`);
+  if(!rect) return;
+  if(state==='active'){rect.setAttribute('fill',ACTIVE_FILLS[id]);rect.setAttribute('stroke',ACTIVE_STROKES[id]);rect.setAttribute('stroke-width','2');}
+  else if(state==='done'){rect.setAttribute('fill',DEFAULT_FILLS[id]);rect.setAttribute('stroke',DEFAULT_STROKES[id]);rect.setAttribute('stroke-width','1');}
+  else{rect.setAttribute('fill',DEFAULT_FILLS[id]);rect.setAttribute('stroke',DEFAULT_STROKES[id]);rect.setAttribute('stroke-width','1');}
+}
+
+function setBusState(busKey,state){
+  const id='bg-bus-'+busKey;
+  const el=document.getElementById(id);
+  if(!el) return;
+  if(state==='int')el.setAttribute('fill','#EBF4FF');
+  else if(state==='addr')el.setAttribute('fill','#FFF7ED');
+  else if(state==='data-r')el.setAttribute('fill','#EBF4FF');
+  else if(state==='data-w')el.setAttribute('fill','#E1F5EE');
+  else el.setAttribute('fill','#F8F7F4');
+}
+
+function resetBuses(){['int','addr','data'].forEach(b=>setBusState(b,'off'));}
+
+function clearAll(){
+  ALL_BOXES.forEach(id=>setBoxState(id,'off'));
+  resetBuses();
+  Object.entries(DEFAULT_VALS).forEach(([k,v])=>setText('v-'+k,v));
+}
+
+function applyHighlight(phIdx){
+  const ph=PHASES[phIdx];
+  ALL_BOXES.forEach(id=>setBoxState(id,'off'));
+  ph.highlight.forEach(id=>setBoxState(id,'active'));
+}
+
+function renderMicro(phIdx,activeIdx){
+  const ph=PHASES[phIdx];
+  document.getElementById('mhead').textContent=ph.label+' — 微操作序列';
+  const cont=document.getElementById('msteps');
+  cont.innerHTML='';
+  ph.micro.forEach((txt,i)=>{
+    const d=document.createElement('div');
+    d.className='ms'+(i<activeIdx?' fin':i===activeIdx?' cur':'');
+    d.innerHTML=`<span class="ind"></span>${txt}`;
+    cont.appendChild(d);
+  });
+}
+
+function updateDesc(phIdx){
+  document.getElementById('desc').innerHTML=PHASES[phIdx].desc;
+}
+
+function updateTabs(phIdx){
+  for(let i=0;i<4;i++){
+    const t=document.getElementById('t'+i);
+    t.className='ptab optional-tag'+(i<phIdx?' done':i===phIdx?' active':'');
+  }
+  for(let i=0;i<4;i++){
+    const p=document.getElementById('pd'+i);
+    p.className='pdot'+(i<phIdx?' dn':i===phIdx?' act':'');
+  }
+}
+
+function getSVGPoint(boxId){
+  const c=BOX_CENTERS[boxId];
+  const svg=document.getElementById('cvs');
+  const rect=svg.getBoundingClientRect();
+  const vb=svg.viewBox.baseVal;
+  return{
+    x:rect.left+rect.width*(c.x/vb.width),
+    y:rect.top+rect.height*(c.y/vb.height)
+  };
+}
+
+function animPkt(fromId,toId,busKey,isWrite,cb){
+  const pkt=document.getElementById('pkt');
+  const a=BOX_CENTERS[fromId],b=BOX_CENTERS[toId];
+  setBusState(busKey, busKey==='data'?(isWrite?'data-w':'data-r'):busKey);
+  pkt.setAttribute('cx',a.x);pkt.setAttribute('cy',a.y);
+  pkt.setAttribute('fill',isWrite?'#1D9E75':'#378ADD');
+  pkt.setAttribute('opacity','1');
+  const dur=spd()*600;
+  const start=performance.now();
+  function step(now){
+    const t=Math.min((now-start)/dur,1);
+    const e=t<.5?2*t*t:-1+(4-2*t)*t;
+    pkt.setAttribute('cx',a.x+(b.x-a.x)*e);
+    pkt.setAttribute('cy',a.y+(b.y-a.y)*e);
+    if(t<1){animId=requestAnimationFrame(step);}
+    else{pkt.setAttribute('opacity','0');resetBuses();if(cb)cb();}
+  }
+  animId=requestAnimationFrame(step);
+}
+
+async function runPhase(phIdx){
+  const ph=PHASES[phIdx];
+  curPhase=phIdx;
+  updateTabs(phIdx);
+  applyHighlight(phIdx);
+  updateDesc(phIdx);
+  renderMicro(phIdx,-1);
+  for(let i=0;i<ph.steps.length;i++){
+    if(!running&&arguments[1]!=='manual') return;
+    const s=ph.steps[i];
+    renderMicro(phIdx,i);
+    Object.entries(s.val).forEach(([k,v])=>setText(k,v));
+    const isWrite=ph.access==='w';
+    await new Promise(res=>animPkt(s.from,s.to,s.bus,isWrite,res));
+    await new Promise(res=>setTimeout(res,spd()*180));
+  }
+  renderMicro(phIdx,ph.micro.length);
+  Object.entries(ph.vals).forEach(([k,v])=>setText('v-'+k,v));
+}
+
+async function handlePlay(){
+  if(running){running=false;document.getElementById('btn-play').textContent='自动演示';return;}
+  running=true;
+  document.getElementById('btn-play').textContent='停止';
+  document.getElementById('btn-prev').disabled=true;
+  document.getElementById('btn-next').disabled=true;
+  clearAll();
+  for(let i=0;i<4;i++){
+    if(!running)break;
+    await runPhase(i);
+    await new Promise(res=>setTimeout(res,spd()*500));
+  }
+  running=false;
+  document.getElementById('btn-play').textContent='自动演示';
+  document.getElementById('btn-prev').disabled=curPhase<=0;
+  document.getElementById('btn-next').disabled=curPhase>=3;
+}
+
+function jumpPhase(idx){
+  if(running)return;
+  running=true;
+  runPhase(idx,'manual').then(()=>{
+    running=false;
+    document.getElementById('btn-prev').disabled=idx<=0;
+    document.getElementById('btn-next').disabled=idx>=3;
+  });
+}
+
+function stepPrev(){if(!running&&curPhase>0)jumpPhase(curPhase-1);}
+function stepNext(){if(!running&&curPhase<3)jumpPhase(curPhase+1);}
+
+function doReset(){
+  running=false;
+  if(animId)cancelAnimationFrame(animId);
+  document.getElementById('pkt').setAttribute('opacity','0');
+  resetBuses();
+  clearAll();
+  curPhase=-1;
+  document.getElementById('msteps').innerHTML='';
+  document.getElementById('mhead').textContent='微操作序列';
+  document.getElementById('desc').innerHTML='请点击上方阶段标签，或使用 <b style="color:#185FA5">自动演示</b> 连续播放全部阶段. ';
+  for(let i=0;i<4;i++){
+    document.getElementById('t'+i).className='ptab optional-tag';
+    document.getElementById('pd'+i).className='pdot';
+  }
+  document.getElementById('btn-play').textContent='自动演示';
+  document.getElementById('btn-prev').disabled=true;
+  document.getElementById('btn-next').disabled=true;
+}
+</script>
