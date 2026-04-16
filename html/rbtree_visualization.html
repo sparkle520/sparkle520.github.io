@@ -1,0 +1,682 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{padding:14px;font-family:var(--font-sans,sans-serif);background:linear-gradient(135deg,#f8f7f4 0%,#f0efe8 100%);min-height:100vh}
+.top{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+.ctrl{display:flex;align-items:center;gap:6px;background:#fff;border:0.5px solid #d3d1c7;border-radius:8px;padding:5px 10px;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+label{font-size:12px;color:#73726c}
+select,input[type=number]{font-size:13px;border:none;outline:none;background:transparent;color:#2c2c2a;width:52px}
+button{font-size:12px;font-weight:500;border:0.5px solid #d3d1c7;border-radius:6px;padding:5px 12px;cursor:pointer;background:#fff;color:#2c2c2a;transition:all .15s ease}
+button:hover{background:#f1efe8;box-shadow:0 2px 4px rgba(0,0,0,0.08)}
+button:active{transform:scale(.97)}
+button.ins{background:#2c2c2a;color:#fff;border-color:#2c2c2a}
+button.ins:hover{background:#444;box-shadow:0 2px 8px rgba(44,44,42,0.3)}
+button.del{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+button.del:hover{background:#f7c1c1;box-shadow:0 2px 8px rgba(163,45,45,0.2)}
+.presets{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
+.pb{font-size:11px;padding:3px 9px;border-radius:5px;border:0.5px solid #d3d1c7;cursor:pointer;background:#f1efe8;color:#2c2c2a;transition:all .12s}
+.pb:hover{background:#d3d1c7;transform:translateY(-1px)}
+.log{background:#fff;border:0.5px solid #d3d1c7;border-radius:8px;padding:8px 12px;margin-bottom:10px;min-height:44px;max-height:80px;overflow-y:auto;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.le{font-size:12px;line-height:1.7;padding-left:8px;border-left:3px solid #d3d1c7;margin-bottom:2px;animation:fadeIn 0.3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateX(-5px)}to{opacity:1;transform:translateX(0)}}
+.le.ok{border-color:#639922;color:#3b6d11;background:rgba(99,153,34,0.05)}
+.le.warn{border-color:#ba7517;color:#854f0b;background:rgba(186,117,23,0.05)}
+.le.info{border-color:#378add;color:#185fa5;background:rgba(55,138,221,0.05)}
+.le.rotate{border-color:#7f77dd;color:#3c3489;background:rgba(127,119,221,0.05)}
+.le.recolor{border-color:#d4537e;color:#993556;background:rgba(212,83,126,0.05)}
+.canvas{background:#fff;border:0.5px solid #d3d1c7;border-radius:10px;overflow:hidden;position:relative;box-shadow:0 2px 12px rgba(0,0,0,0.06)}
+#cv{display:block;width:100%}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.li{display:flex;align-items:center;gap:4px;font-size:11px;color:#73726c}
+.ld{width:10px;height:10px;border-radius:50%;box-shadow:0 1px 2px rgba(0,0,0,0.1)}
+</style>
+
+<div class="wrap">
+  <div style="font-size:15px;font-weight:500;margin-bottom:2px">红黑树动画演示</div>
+  <div style="font-size:12px;color:#73726c;margin-bottom:10px">插入修复 · 删除修复 · 左旋右旋 · 颜色翻转 · 带过渡动画</div>
+  <div class="top">
+    <div class="ctrl">
+      <label>键值</label>
+      <input type="number" id="vin" value="10" min="1" max="999">
+    </div>
+    <button class="ins" onclick="act('ins')">插入 ↑</button>
+    <button class="del" onclick="act('del')">删除 ↓</button>
+    <button onclick="resetTree()">重置</button>
+    <div class="ctrl" style="margin-left:auto">
+      <button id="stepBtn" onclick="stepDemo()" disabled style="padding:3px 8px;font-size:11px">▶ 下一步</button>
+      <button id="playBtn" onclick="togglePlay()" disabled style="padding:3px 8px;font-size:11px">▶ 播放</button>
+      <label style="font-size:11px">间隔</label>
+      <select id="speedSel" style="width:45px;font-size:11px">
+        <option value="300">0.3s</option>
+        <option value="500" selected>0.5s</option>
+        <option value="800">0.8s</option>
+        <option value="1000">1.0s</option>
+      </select>
+    </div>
+  </div>
+  <div style="font-size:11px;color:#73726c;margin-bottom:4px">预设序列</div>
+  <div class="presets">
+    <button class="pb" onclick="preset([10,20,30,15,5,25])">插入示例</button>
+    <button class="pb" onclick="preset([41,38,31,12,19,8])">经典示例</button>
+    <button class="pb" onclick="preset([1,2,3,4,5,6,7,8])">顺序插入</button>
+    <button class="pb" onclick="preset([10,20,30,40,50])">大量插入</button>
+  </div>
+  <div class="log" id="log"></div>
+  <div class="canvas"><canvas id="cv"></canvas></div>
+  <div class="legend">
+    <div class="li"><div class="ld" style="background:#1a1a1a;border:1px solid #666"></div>黑色节点</div>
+    <div class="li"><div class="ld" style="background:#d34444;border:1px solid #a32d2d"></div>红色节点</div>
+    <div class="li"><div class="ld" style="background:#e6f1fb;border:1px solid #378add"></div>操作节点</div>
+    <div class="li"><div class="ld" style="background:#eeedfe;border:1px solid #7f77dd"></div>旋转</div>
+    <div class="li"><div class="ld" style="background:#fbeaf0;border:1px solid #d4537e"></div>颜色翻转</div>
+  </div>
+</div>
+
+<script>
+const cv=document.getElementById('cv');
+const ctx=cv.getContext('2d');
+let root=null;
+
+// demo control variables
+let demoQueue=[];
+let isPlaying=false;
+let playTimer=null;
+
+// ── node ──
+function nd(key, color='red'){
+  return {key, color, left:null, right:null, parent:null, hl:null};
+}
+
+const RED='red';
+const BLACK='black';
+
+function isRed(n){return n&&n.color===RED;}
+function isBlack(n){return !n||n.color===BLACK;}
+
+// ── search ──
+function has(n,k){
+  if(!n)return false;
+  if(k===n.key)return true;
+  if(k<n.key)return has(n.left,k);
+  return has(n.right,k);
+}
+
+function find(n,k){
+  if(!n)return null;
+  if(k===n.key)return n;
+  if(k<n.key)return find(n.left,k);
+  return find(n.right,k);
+}
+
+// ── rotations ──
+function leftRotate(x){
+  const y=x.right;
+  x.right=y.left;
+  if(y.left)y.left.parent=x;
+  y.parent=x.parent;
+  if(!x.parent)root=y;
+  else if(x===x.parent.left)x.parent.left=y;
+  else x.parent.right=y;
+  y.left=x;
+  x.parent=y;
+  x.hl='rotate';y.hl='rotate';
+  addLog(`左旋: ${x.key} ↺`, 'rotate');
+}
+
+function rightRotate(y){
+  const x=y.left;
+  y.left=x.right;
+  if(x.right)x.right.parent=y;
+  x.parent=y.parent;
+  if(!y.parent)root=x;
+  else if(y===y.parent.left)y.parent.left=x;
+  else y.parent.right=x;
+  x.right=y;
+  y.parent=x;
+  x.hl='rotate';y.hl='rotate';
+  addLog(`右旋: ${y.key} ↻`, 'rotate');
+}
+
+// ── insert ──
+function insertFixup(z){
+  while(z.parent&&isRed(z.parent)){
+    if(z.parent===z.parent.parent.left){
+      const y=z.parent.parent.right;
+      if(isRed(y)){
+        z.parent.color=BLACK;
+        y.color=BLACK;
+        z.parent.parent.color=RED;
+        z=z.parent.parent;
+        z.hl='recolor';
+        addLog(`颜色翻转: ${z.key}变红, ${z.parent?.key}和${y?.key}变黑`, 'recolor');
+      } else {
+        if(z===z.parent.right){
+          z=z.parent;
+          leftRotate(z);
+        }
+        z.parent.color=BLACK;
+        z.parent.parent.color=RED;
+        rightRotate(z.parent.parent);
+      }
+    } else {
+      const y=z.parent.parent.left;
+      if(isRed(y)){
+        z.parent.color=BLACK;
+        y.color=BLACK;
+        z.parent.parent.color=RED;
+        z=z.parent.parent;
+        z.hl='recolor';
+        addLog(`颜色翻转: ${z.key}变红, ${z.parent?.key}和${y?.key}变黑`, 'recolor');
+      } else {
+        if(z===z.parent.left){
+          z=z.parent;
+          rightRotate(z);
+        }
+        z.parent.color=BLACK;
+        z.parent.parent.color=RED;
+        leftRotate(z.parent.parent);
+      }
+    }
+  }
+  root.color=BLACK;
+}
+
+function ins(k){
+  if(has(root,k)){addLog(`键 ${k} 已存在`, 'warn');return;}
+  
+  let y=null,x=root;
+  while(x){
+    y=x;
+    if(k<x.key)x=x.left;
+    else x=x.right;
+  }
+  
+  const z=nd(k);
+  z.parent=y;
+  
+  if(!y)root=z;
+  else if(k<y.key)y.left=z;
+  else y.right=z;
+  
+  z.hl='ok';
+  addLog(`插入 ${k}`, 'ok');
+  
+  if(z.parent)insertFixup(z);
+  else z.color=BLACK;
+}
+
+// ── delete ──
+function transplant(u,v){
+  if(!u.parent)root=v;
+  else if(u===u.parent.left)u.parent.left=v;
+  else u.parent.right=v;
+  if(v)v.parent=u.parent;
+}
+
+function treeMin(n){
+  while(n.left)n=n.left;
+  return n;
+}
+
+function deleteFixup(x){
+  while(x!==root&&isBlack(x)){
+    if(x===x.parent.left){
+      let w=x.parent.right;
+      if(isRed(w)){
+        w.color=BLACK;
+        x.parent.color=RED;
+        leftRotate(x.parent);
+        w=x.parent.right;
+        w.hl='rotate';
+      }
+      if(isBlack(w.left)&&isBlack(w.right)){
+        w.color=RED;
+        x=x.parent;
+        w.hl='recolor';
+        addLog(`颜色翻转: ${w.key}变红`, 'recolor');
+      } else {
+        if(isBlack(w.right)){
+          w.left.color=BLACK;
+          w.color=RED;
+          rightRotate(w);
+          w=x.parent.right;
+          w.hl='rotate';
+        }
+        w.color=x.parent.color;
+        x.parent.color=BLACK;
+        w.right.color=BLACK;
+        leftRotate(x.parent);
+        x=root;
+      }
+    } else {
+      let w=x.parent.left;
+      if(isRed(w)){
+        w.color=BLACK;
+        x.parent.color=RED;
+        rightRotate(x.parent);
+        w=x.parent.left;
+        w.hl='rotate';
+      }
+      if(isBlack(w.left)&&isBlack(w.right)){
+        w.color=RED;
+        x=x.parent;
+        w.hl='recolor';
+        addLog(`颜色翻转: ${w.key}变红`, 'recolor');
+      } else {
+        if(isBlack(w.left)){
+          w.right.color=BLACK;
+          w.color=RED;
+          leftRotate(w);
+          w=x.parent.left;
+          w.hl='rotate';
+        }
+        w.color=x.parent.color;
+        x.parent.color=BLACK;
+        w.left.color=BLACK;
+        rightRotate(x.parent);
+        x=root;
+      }
+    }
+  }
+  if(x)x.color=BLACK;
+}
+
+function del(k){
+  if(!has(root,k)){addLog(`键 ${k} 不存在`, 'warn');return;}
+  
+  const z=find(root,k);
+  let y=z;
+  let yOriginalColor=y.color;
+  let x=null;
+  
+  z.hl='del';
+  addLog(`删除 ${k}`, 'info');
+  
+  if(!z.left){
+    x=z.right;
+    transplant(z,z.right);
+  } else if(!z.right){
+    x=z.left;
+    transplant(z,z.left);
+  } else {
+    y=treeMin(z.right);
+    yOriginalColor=y.color;
+    x=y.right;
+    if(y.parent===z){
+      if(x)x.parent=y;
+    } else {
+      transplant(y,y.right);
+      y.right=z.right;
+      y.right.parent=y;
+    }
+    transplant(z,y);
+    y.left=z.left;
+    y.left.parent=y;
+    y.color=z.color;
+    y.hl='ok';
+  }
+  
+  if(yOriginalColor===BLACK&&x){
+    deleteFixup(x);
+  }
+}
+
+// ── log ──
+function addLog(msg,type='info'){
+  const p=document.getElementById('log');
+  const d=document.createElement('div');
+  d.className='le '+(type||'info');
+  d.textContent=msg;
+  p.appendChild(d);
+  p.scrollTop=p.scrollHeight;
+}
+
+// ── layout & animation ──
+const R=18, HGAP=40, VGAP=60;
+const PALETTE={
+  null:{fill:'#e6f1fb',stroke:'#378add',text:'#185fa5'},
+  ok:{fill:'#eaf3de',stroke:'#639922',text:'#3b6d11'},
+  rotate:{fill:'#eeedfe',stroke:'#7f77dd',text:'#3c3489'},
+  recolor:{fill:'#fbeaf0',stroke:'#d4537e',text:'#993556'},
+  del:{fill:'#fcebeb',stroke:'#e24b4a',text:'#a32d2d'},
+};
+
+let nodeMap=new Map();
+let animId=null,animStart=null;
+const ANIM_DUR=420;
+let pulsePhase=0;
+
+function subtreeW(n){
+  if(!n)return 0;
+  if(!n.left&&!n.right)return R*2+20;
+  return subtreeW(n.left)+subtreeW(n.right)+HGAP;
+}
+
+function computePos(n,cx,cy,map){
+  if(!n)return;
+  const lw=subtreeW(n.left);
+  const rw=subtreeW(n.right);
+  const nw=Math.max(R*2+20,lw+rw+HGAP);
+  const x=cx-nw/2;
+  
+  const prev=map.get(n)||{x:x,y:cy,w:nw,alpha:0,scale:0.6};
+  map.set(n,{
+    tx:x,ty:cy,tw:nw,
+    px:prev.tx!==undefined?prev.tx:x,
+    py:prev.ty!==undefined?prev.ty:cy,
+    pw:prev.tw||nw,
+    alpha:prev.alpha||0,
+    scale:prev.scale||0.6,
+    hl:n.hl,
+    color:n.color
+  });
+  
+  if(n.left){
+    const leftW=subtreeW(n.left);
+    computePos(n.left,x+leftW/2,cy+VGAP,map);
+  }
+  if(n.right){
+    const rightW=subtreeW(n.right);
+    computePos(n.right,x+nw-rightW/2,cy+VGAP,map);
+  }
+}
+
+function buildMap(){
+  const newMap=new Map();
+  if(!root)return newMap;
+  const w=Math.max(860,subtreeW(root)+80);
+  computePos(root,w/2,50,newMap);
+  return newMap;
+}
+
+function lerp(a,b,t){return a+(b-a)*t;}
+function easeInOut(t){return t<0.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+
+function startAnim(){
+  nodeMap.forEach((v)=>{
+    v.px=v.cx||v.tx;
+    v.py=v.cy||v.ty;
+    v.pw=v.cw||v.tw;
+  });
+  animStart=null;
+  if(animId)cancelAnimationFrame(animId);
+  animId=requestAnimationFrame(frame);
+}
+
+function frame(ts){
+  if(!animStart)animStart=ts;
+  const p=Math.min(1,(ts-animStart)/ANIM_DUR);
+  const ep=easeInOut(p);
+  nodeMap.forEach(v=>{
+    v.cx=lerp(v.px,v.tx,ep);
+    v.cy=lerp(v.py,v.ty,ep);
+    v.cw=lerp(v.pw,v.tw,ep);
+    v.alpha=Math.min(1,lerp(v.alpha||0,1,ep*2));
+    v.scale=lerp(v.scale||0.6,1,ep);
+  });
+  drawScene();
+  if(p<1)animId=requestAnimationFrame(frame);
+  else{animId=null;drawScene();}
+}
+
+function getMaxXY(){
+  let mx=860,my=120;
+  nodeMap.forEach(v=>{
+    mx=Math.max(mx,(v.tx||0)+(v.tw||0)+40);
+    my=Math.max(my,(v.ty||0)+VGAP+40);
+  });
+  return{w:mx,h:my};
+}
+
+// ── draw ──
+function drawScene(){
+  const{w,h}=getMaxXY();
+  const dpr=window.devicePixelRatio||1;
+  if(cv.width!==Math.round(w*dpr)||cv.height!==Math.round(h*dpr)){
+    cv.width=Math.round(w*dpr); cv.height=Math.round(h*dpr);
+    cv.style.width=w+'px'; cv.style.height=h+'px';
+    ctx.scale(dpr,dpr);
+  }
+  ctx.clearRect(0,0,w,h);
+
+  if(!root){
+    ctx.font='13px var(--font-sans,sans-serif)';
+    ctx.fillStyle='#b4b2a9';ctx.textAlign='center';
+    ctx.fillText('（空树）',w/2,h/2);
+    return;
+  }
+
+  // subtle grid background
+  ctx.save();
+  ctx.strokeStyle='rgba(211,209,199,0.2)';
+  ctx.lineWidth=0.5;
+  for(let i=0;i<h;i+=40){
+    ctx.beginPath();ctx.moveTo(0,i);ctx.lineTo(w,i);ctx.stroke();
+  }
+  for(let i=0;i<w;i+=40){
+    ctx.beginPath();ctx.moveTo(i,0);ctx.lineTo(i,h);ctx.stroke();
+  }
+  ctx.restore();
+
+  // edges
+  nodeMap.forEach((v,n)=>{
+    ['left','right'].forEach(dir=>{
+      const child=n[dir];
+      if(!child)return;
+      const cv2=nodeMap.get(child);
+      if(!cv2)return;
+      
+      const x1=(v.cx||v.tx)+(v.cw||v.tw)/2;
+      const y1=(v.cy||v.ty)+R;
+      const childW=subtreeW(child);
+      const x2=(cv2.cx||cv2.tx)+childW/2;
+      const y2=(cv2.cy||cv2.ty);
+      
+      ctx.save();
+      ctx.globalAlpha=(v.alpha||1)*(cv2.alpha||1)*0.8;
+      const gradient=ctx.createLinearGradient(x1,y1,x2,y2);
+      gradient.addColorStop(0,'#d3d1c7');
+      gradient.addColorStop(1,'#b4b2a9');
+      ctx.strokeStyle=gradient;ctx.lineWidth=2;
+      ctx.lineCap='round';
+      ctx.beginPath();ctx.moveTo(x1,y1);
+      ctx.bezierCurveTo(x1,y1+VGAP*0.3,x2,y2-R-10,x2,y2-R);
+      ctx.stroke();
+      ctx.restore();
+    });
+  });
+
+  // nodes
+  pulsePhase=(pulsePhase+0.08)%(Math.PI*2);
+  
+  nodeMap.forEach((v,n)=>{
+    const x=v.cx||v.tx,y=v.cy||v.ty,nw=v.cw||v.tw;
+    const nx=x+nw/2,ny=y+R;
+    const nodeColor=v.color||n.color;
+    const isRedNode=nodeColor===RED;
+    const col=PALETTE[v.hl||n.hl]||PALETTE.null;
+    
+    ctx.save();
+    ctx.globalAlpha=v.alpha||1;
+    const sc=v.scale||1;
+    if(sc!==1){
+      ctx.translate(nx,ny);
+      ctx.scale(sc,sc);
+      ctx.translate(-nx,-ny);
+    }
+    
+    // glow effect
+    if(v.hl&&v.hl!='null'){
+      const pulseIntensity=0.3+0.3*Math.sin(pulsePhase);
+      ctx.shadowColor=col.glow||'rgba(0,0,0,0.2)';
+      ctx.shadowBlur=12+8*pulseIntensity;
+    }
+    
+    // node circle
+    ctx.beginPath();
+    ctx.arc(nx,ny,R,0,Math.PI*2);
+    
+    // fill with gradient
+    const fillGradient=ctx.createRadialGradient(nx-3,ny-3,0,nx,ny,R);
+    const mainColor=isRedNode?'#d34444':'#1a1a1a';
+    const lightColor=isRedNode?'#e86666':'#333';
+    fillGradient.addColorStop(0,lightColor);
+    fillGradient.addColorStop(1,mainColor);
+    ctx.fillStyle=fillGradient;
+    ctx.fill();
+    
+    // stroke
+    ctx.strokeStyle=isRedNode?'#a32d2d':'#666';
+    ctx.lineWidth=2;
+    ctx.stroke();
+    
+    // key text
+    ctx.font='500 14px var(--font-sans,sans-serif)';
+    ctx.fillStyle='#fff';
+    ctx.textAlign='center';
+    ctx.textBaseline='middle';
+    ctx.fillText(String(n.key),nx,ny+0.5);
+    
+    // color indicator dot
+    ctx.beginPath();
+    ctx.arc(nx+R-8,ny-R+8,4,0,Math.PI*2);
+    ctx.fillStyle=isRedNode?'#d34444':'#1a1a1a';
+    ctx.fill();
+    ctx.strokeStyle=isRedNode?'#a32d2d':'#666';
+    ctx.lineWidth=1;
+    ctx.stroke();
+    
+    ctx.restore();
+  });
+  
+  requestAnimationFrame(()=>{pulsePhase=(pulsePhase+0.05)%(Math.PI*2);});
+}
+
+function clearHL(n){
+  if(!n)return;
+  n.hl=null;
+  clearHL(n.left);
+  clearHL(n.right);
+}
+
+function rebuild(){
+  clearHL(root);
+  const newMap=buildMap();
+  newMap.forEach((v,n)=>{
+    const old=nodeMap.get(n);
+    if(old){
+      v.px=old.cx||old.tx;
+      v.py=old.cy||old.ty;
+      v.pw=old.cw||old.tw;
+      v.alpha=old.alpha||1;
+      v.scale=1;
+    } else {
+      v.px=v.tx;
+      v.py=v.ty-20;
+      v.pw=v.tw;
+      v.alpha=0;
+      v.scale=0.5;
+    }
+    v.color=n.color;
+  });
+  nodeMap=newMap;
+  startAnim();
+}
+
+// ── demo control ──
+function getDelay(){return parseInt(document.getElementById('speedSel').value);}
+
+function setDemoButtons(state){
+  document.getElementById('stepBtn').disabled=!state;
+  document.getElementById('playBtn').disabled=!state;
+}
+
+function stepDemo(){
+  if(demoQueue.length===0){
+    setDemoButtons(false);
+    document.getElementById('playBtn').textContent='▶ 播放';
+    isPlaying=false;
+    addLog('演示完成','ok');
+    return;
+  }
+  const {type,value}=demoQueue.shift();
+  executeStep(type,value);
+}
+
+function togglePlay(){
+  if(isPlaying){
+    clearTimeout(playTimer);
+    isPlaying=false;
+    document.getElementById('playBtn').textContent='▶ 播放';
+  } else {
+    isPlaying=true;
+    document.getElementById('playBtn').textContent='⏸ 暂停';
+    playNext();
+  }
+}
+
+function playNext(){
+  if(!isPlaying)return;
+  if(demoQueue.length===0){
+    setDemoButtons(false);
+    document.getElementById('playBtn').textContent='▶ 播放';
+    isPlaying=false;
+    addLog('演示完成','ok');
+    return;
+  }
+  const {type,value}=demoQueue.shift();
+  executeStep(type,value);
+  playTimer=setTimeout(playNext,getDelay()+ANIM_DUR+100);
+}
+
+function executeStep(type,value){
+  if(type==='ins'){
+    ins(value);
+    rebuild();
+  } else if(type==='del'){
+    if(has(root,value)){
+      del(value);
+      rebuild();
+    }
+  }
+}
+
+function startDemo(arr){
+  resetTree();
+  demoQueue=arr.map(v=>({type:'ins',value:v}));
+  setDemoButtons(true);
+  addLog(`开始演示序列 [${arr.join(',')}]`, 'info');
+}
+
+// ── actions ──
+function act(type){
+  const v=parseInt(document.getElementById('vin').value);
+  if(isNaN(v))return;
+  if(type==='ins'){ins(v);rebuild();}
+  else {del(v);rebuild();}
+}
+
+function resetTree(){
+  isPlaying=false;
+  clearTimeout(playTimer);
+  demoQueue=[];
+  setDemoButtons(false);
+  document.getElementById('playBtn').textContent='▶ 播放';
+  
+  root=null;
+  nodeMap.clear();
+  document.getElementById('log').innerHTML='';
+  addLog('红黑树重置完成','info');
+  drawScene();
+}
+
+function preset(arr){
+  startDemo(arr);
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter')act('ins');
+  else if(e.key==='ArrowRight'&&!document.getElementById('stepBtn').disabled)stepDemo();
+});
+
+resetTree();
+</script>

@@ -1,0 +1,569 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{padding:14px;font-family:var(--font-sans,sans-serif);background:linear-gradient(135deg,#f8f7f4 0%,#f0efe8 100%);min-height:100vh}
+.top{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+.ctrl{display:flex;align-items:center;gap:6px;background:#fff;border:0.5px solid #d3d1c7;border-radius:8px;padding:5px 10px;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+label{font-size:12px;color:#73726c}
+select,input[type=number]{font-size:13px;border:none;outline:none;background:transparent;color:#2c2c2a;width:52px}
+button{font-size:12px;font-weight:500;border:0.5px solid #d3d1c7;border-radius:6px;padding:5px 12px;cursor:pointer;background:#fff;color:#2c2c2a;transition:all .15s ease}
+button:hover{background:#f1efe8;box-shadow:0 2px 4px rgba(0,0,0,0.08)}
+button:active{transform:scale(.97)}
+button.ins{background:#2c2c2a;color:#fff;border-color:#2c2c2a}
+button.ins:hover{background:#444;box-shadow:0 2px 8px rgba(44,44,42,0.3)}
+button.del{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+button.del:hover{background:#f7c1c1;box-shadow:0 2px 8px rgba(163,45,45,0.2)}
+.presets{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
+.pb{font-size:11px;padding:3px 9px;border-radius:5px;border:0.5px solid #d3d1c7;cursor:pointer;background:#f1efe8;color:#2c2c2a;transition:all .12s}
+.pb:hover{background:#d3d1c7;transform:translateY(-1px)}
+.log{background:#fff;border:0.5px solid #d3d1c7;border-radius:8px;padding:8px 12px;margin-bottom:10px;min-height:44px;max-height:80px;overflow-y:auto;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.le{font-size:12px;line-height:1.7;padding-left:8px;border-left:3px solid #d3d1c7;margin-bottom:2px;animation:fadeIn 0.3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateX(-5px)}to{opacity:1;transform:translateX(0)}}
+.le.ok{border-color:#639922;color:#3b6d11;background:rgba(99,153,34,0.05)}
+.le.warn{border-color:#ba7517;color:#854f0b;background:rgba(186,117,23,0.05)}
+.le.info{border-color:#378add;color:#185fa5;background:rgba(55,138,221,0.05)}
+.le.split{border-color:#7f77dd;color:#3c3489;background:rgba(127,119,221,0.05)}
+.le.merge{border-color:#d4537e;color:#993556;background:rgba(212,83,126,0.05)}
+.canvas{background:#fff;border:0.5px solid #d3d1c7;border-radius:10px;overflow:hidden;position:relative;box-shadow:0 2px 12px rgba(0,0,0,0.06)}
+#cv{display:block;width:100%}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.li{display:flex;align-items:center;gap:4px;font-size:11px;color:#73726c}
+.ld{width:10px;height:10px;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,0.1)}
+</style>
+
+<div class="wrap">
+  <div style="font-size:15px;font-weight:500;margin-bottom:2px">B 树动画演示</div>
+  <div style="font-size:12px;color:#73726c;margin-bottom:10px">插入分裂 · 删除借键合并 · 全情况覆盖 · 带过渡动画</div>
+  <div class="top">
+    <div class="ctrl">
+      <label>最小度 t</label>
+      <select id="tsel"><option value="2" selected>2</option><option value="3">3</option></select>
+    </div>
+    <div class="ctrl">
+      <label>键值</label>
+      <input type="number" id="vin" value="10" min="1" max="999">
+    </div>
+    <button class="ins" onclick="act('ins')">插入 ↑</button>
+    <button class="del" onclick="act('del')">删除 ↓</button>
+    <button onclick="resetTree()">重置</button>
+    <div class="ctrl" style="margin-left:auto">
+      <button id="stepBtn" onclick="stepDemo()" disabled style="padding:3px 8px;font-size:11px">▶ 下一步</button>
+      <button id="playBtn" onclick="togglePlay()" disabled style="padding:3px 8px;font-size:11px">▶ 播放</button>
+      <label style="font-size:11px">间隔</label>
+      <select id="speedSel" style="width:45px;font-size:11px">
+        <option value="300">0.3s</option>
+        <option value="500" selected>0.5s</option>
+        <option value="800">0.8s</option>
+        <option value="1000">1.0s</option>
+      </select>
+    </div>
+  </div>
+  <div style="font-size:11px;color:#73726c;margin-bottom:4px">预设序列</div>
+  <div class="presets">
+    <button class="pb" onclick="preset([10,20,5,6,12,30,7,17,3])">分裂示例</button>
+    <button class="pb" onclick="preset([1,2,3,4,5,6,7,8,9,10,11,12])">顺序插入</button>
+    <button class="pb" onclick="preset([50,40,60,30,45,55,70,20,35])">合并删除</button>
+    <button class="pb" onclick="preset([10,20,30,40,50,60,70,80,90,100])">大量分裂</button>
+  </div>
+  <div class="log" id="log"></div>
+  <div class="canvas"><canvas id="cv"></canvas></div>
+  <div class="legend">
+    <div class="li"><div class="ld" style="background:#e6f1fb;border:1px solid #378add"></div>普通</div>
+    <div class="li"><div class="ld" style="background:#eaf3de;border:1px solid #639922"></div>插入/操作</div>
+    <div class="li"><div class="ld" style="background:#faeeda;border:1px solid #ba7517"></div>分裂</div>
+    <div class="li"><div class="ld" style="background:#fbeaf0;border:1px solid #d4537e"></div>合并</div>
+    <div class="li"><div class="ld" style="background:#eeedfe;border:1px solid #7f77dd"></div>借键</div>
+    <div class="li"><div class="ld" style="background:#fcebeb;border:1px solid #e24b4a"></div>删除目标</div>
+  </div>
+</div>
+
+<script>
+const cv=document.getElementById('cv');
+const ctx=cv.getContext('2d');
+let T=2,root=null;
+
+// ── node ──
+function nd(leaf=true){return{keys:[],ch:[],leaf,hl:null};}
+
+// ── search ──
+function has(n,k){
+  if(!n)return false;
+  let i=0;while(i<n.keys.length&&k>n.keys[i])i++;
+  if(i<n.keys.length&&n.keys[i]===k)return true;
+  if(n.leaf)return false;
+  return has(n.ch[i],k);
+}
+
+// ── insert ──
+function splitChild(p,i){
+  const y=p.ch[i],z=nd(y.leaf),t=T;
+  const mid=y.keys[t-1];
+  z.keys=y.keys.splice(t);
+  y.keys.splice(t-1,1);
+  if(!y.leaf)z.ch=y.ch.splice(t);
+  p.keys.splice(i,0,mid);
+  p.ch.splice(i+1,0,z);
+  y.hl='split';z.hl='split';p.hl='split';
+  addLog(`分裂：键 ${mid} 上移到父节点`,'split');
+}
+function insNF(n,k){
+  let i=n.keys.length-1;
+  if(n.leaf){
+    n.keys.push(null);
+    while(i>=0&&k<n.keys[i]){n.keys[i+1]=n.keys[i];i--;}
+    n.keys[i+1]=k;n.hl='ok';
+  } else {
+    while(i>=0&&k<n.keys[i])i--;i++;
+    if(n.ch[i].keys.length===2*T-1){splitChild(n,i);if(k>n.keys[i])i++;}
+    insNF(n.ch[i],k);
+  }
+}
+function ins(k){
+  if(!root){root=nd(true);root.keys=[k];root.hl='ok';addLog(`创建根，插入 ${k}`,'ok');return;}
+  if(has(root,k)){addLog(`键 ${k} 已存在`,'warn');return;}
+  if(root.keys.length===2*T-1){
+    const s=nd(false);s.ch=[root];
+    splitChild(s,0);root=s;
+    insNF(root,k);
+    addLog(`根节点满，分裂根 → 树高增加`,'split');
+  } else {
+    insNF(root,k);
+    addLog(`插入 ${k} 完成`,'ok');
+  }
+}
+
+// ── delete ──
+function predKey(n){while(!n.leaf)n=n.ch[n.ch.length-1];return n.keys[n.keys.length-1];}
+function succKey(n){while(!n.leaf)n=n.ch[0];return n.keys[0];}
+function fix(n,i){
+  const child=n.ch[i];
+  const lS=i>0?n.ch[i-1]:null;
+  const rS=i<n.ch.length-1?n.ch[i+1]:null;
+  if(lS&&lS.keys.length>=T){
+    child.keys.unshift(n.keys[i-1]);n.keys[i-1]=lS.keys.pop();
+    if(!lS.leaf)child.ch.unshift(lS.ch.pop());
+    child.hl='borrow';lS.hl='borrow';n.hl='borrow';
+    addLog(`向左兄弟借键`,'info');
+  } else if(rS&&rS.keys.length>=T){
+    child.keys.push(n.keys[i]);n.keys[i]=rS.keys.shift();
+    if(!rS.leaf)child.ch.push(rS.ch.shift());
+    child.hl='borrow';rS.hl='borrow';n.hl='borrow';
+    addLog(`向右兄弟借键`,'info');
+  } else {
+    const li=lS?i-1:i;
+    const left=n.ch[li],right=n.ch[li+1];
+    const sep=n.keys[li];
+    left.keys.push(sep,...right.keys);
+    if(!left.leaf)left.ch.push(...right.ch);
+    n.keys.splice(li,1);n.ch.splice(li+1,1);
+    left.hl='merge';
+    addLog(`合并：键 ${sep} 下移，节点合并`,'merge');
+    if(n===root&&n.keys.length===0){root=left;addLog('根变空，树高减少','merge');}
+  }
+}
+function delFrom(n,k){
+  let i=0;while(i<n.keys.length&&k>n.keys[i])i++;
+  if(i<n.keys.length&&n.keys[i]===k){
+    if(n.leaf){n.keys.splice(i,1);n.hl='ok';addLog(`从叶删除 ${k}`,'ok');}
+    else {
+      const lc=n.ch[i],rc=n.ch[i+1];
+      if(lc.keys.length>=T){const p=predKey(lc);n.keys[i]=p;n.hl='ok';addLog(`前驱 ${p} 替换 ${k}`,'info');delFrom(lc,p);}
+      else if(rc.keys.length>=T){const s=succKey(rc);n.keys[i]=s;n.hl='ok';addLog(`后继 ${s} 替换 ${k}`,'info');delFrom(rc,s);}
+      else{
+        const sep=n.keys[i];
+        lc.keys.push(sep,...rc.keys);
+        if(!lc.leaf)lc.ch.push(...rc.ch);
+        n.keys.splice(i,1);n.ch.splice(i+1,1);
+        lc.hl='merge';
+        addLog(`情况2c合并，${sep} 下移`,'merge');
+        if(n===root&&n.keys.length===0){root=lc;}
+        delFrom(lc,k);
+      }
+    }
+  } else {
+    if(n.leaf){addLog(`键 ${k} 不存在`,'warn');return;}
+    if(n.ch[i].keys.length<T){fix(n,i);delFrom(n,k);}
+    else delFrom(n.ch[i],k);
+  }
+}
+
+// ── log ──
+function addLog(msg,type='info'){
+  const p=document.getElementById('log');
+  const d=document.createElement('div');
+  d.className='le '+(type||'info');
+  d.textContent=msg;
+  p.appendChild(d);
+  p.scrollTop=p.scrollHeight;
+}
+
+// ── layout & animation ──
+const CW=30,CH=28,VGAP=64,PAD=6;
+const PALETTE={
+  null:{fill:'#e6f1fb',stroke:'#378add',text:'#185fa5',glow:'rgba(55,138,221,0.3)'},
+  ok:{fill:'#eaf3de',stroke:'#639922',text:'#3b6d11',glow:'rgba(99,153,34,0.3)'},
+  split:{fill:'#faeeda',stroke:'#ba7517',text:'#854f0b',glow:'rgba(186,117,23,0.4)'},
+  merge:{fill:'#fbeaf0',stroke:'#d4537e',text:'#993556',glow:'rgba(212,83,126,0.3)'},
+  borrow:{fill:'#eeedfe',stroke:'#7f77dd',text:'#3c3489',glow:'rgba(127,119,221,0.3)'},
+  del:{fill:'#fcebeb',stroke:'#e24b4a',text:'#a32d2d',glow:'rgba(226,75,74,0.3)'},
+};
+
+let nodeMap=new Map();
+let animId=null,animStart=null;
+const ANIM_DUR=420;
+let pulsePhase=0;
+
+function subtreeW(n){
+  if(!n)return 0;
+  const nw=n.keys.length*(CW+2)+PAD*2;
+  if(n.leaf)return Math.max(nw,60);
+  const cw=n.ch.reduce((s,c)=>s+subtreeW(c),0)+(n.ch.length-1)*16;
+  return Math.max(nw,cw);
+}
+
+function computePos(n,cx,cy,map){
+  if(!n)return;
+  const nw=n.keys.length*(CW+2)+PAD*2;
+  const prev=map.get(n)||{x:cx-nw/2,y:cy,w:nw,alpha:0,scale:0.6};
+  map.set(n,{
+    tx:cx-nw/2,ty:cy,tw:nw,
+    px:prev.tx!==undefined?prev.tx:cx-nw/2,
+    py:prev.ty!==undefined?prev.ty:cy,
+    pw:prev.tw||nw,
+    alpha:prev.alpha||0,
+    scale:prev.scale||0.6,
+    hl:n.hl
+  });
+  if(!n.leaf){
+    const tot=n.ch.reduce((s,c)=>s+subtreeW(c),0)+(n.ch.length-1)*16;
+    let ox=cx-tot/2;
+    n.ch.forEach(c=>{const sw=subtreeW(c);computePos(c,ox+sw/2,cy+CH+VGAP,map);ox+=sw+16;});
+  }
+}
+
+function buildMap(){
+  const newMap=new Map();
+  if(!root)return newMap;
+  const w=Math.max(860,subtreeW(root)+80);
+  computePos(root,w/2,40,newMap);
+  return newMap;
+}
+
+function lerp(a,b,t){return a+(b-a)*t;}
+function easeInOut(t){return t<0.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+
+function startAnim(){
+  // Snapshot current interpolated positions as "previous"
+  nodeMap.forEach((v)=>{
+    v.px=v.cx||v.tx;
+    v.py=v.cy||v.ty;
+    v.pw=v.cw||v.tw;
+  });
+  animStart=null;
+  if(animId)cancelAnimationFrame(animId);
+  animId=requestAnimationFrame(frame);
+}
+
+function frame(ts){
+  if(!animStart)animStart=ts;
+  const p=Math.min(1,(ts-animStart)/ANIM_DUR);
+  const ep=easeInOut(p);
+  nodeMap.forEach(v=>{
+    v.cx=lerp(v.px,v.tx,ep);
+    v.cy=lerp(v.py,v.ty,ep);
+    v.cw=lerp(v.pw,v.tw,ep);
+    v.alpha=Math.min(1,lerp(v.alpha||0,1,ep*2));
+    v.scale=lerp(v.scale||0.6,1,ep);
+  });
+  drawScene();
+  if(p<1)animId=requestAnimationFrame(frame);
+  else{animId=null;drawScene();}
+}
+
+function getMaxXY(){
+  let mx=860,my=100;
+  nodeMap.forEach(v=>{
+    mx=Math.max(mx,(v.tx||0)+(v.tw||0)+40);
+    my=Math.max(my,(v.ty||0)+CH+40);
+  });
+  return{w:mx,h:my};
+}
+
+// ── draw ──
+function drawScene(){
+  const{w,h}=getMaxXY();
+  const dpr=window.devicePixelRatio||1;
+  if(cv.width!==Math.round(w*dpr)||cv.height!==Math.round(h*dpr)){
+    cv.width=Math.round(w*dpr); cv.height=Math.round(h*dpr);
+    cv.style.width=w+'px'; cv.style.height=h+'px';
+    ctx.scale(dpr,dpr);
+  }
+  ctx.clearRect(0,0,w,h);
+
+  if(!root){
+    ctx.font='13px var(--font-sans,sans-serif)';
+    ctx.fillStyle='#b4b2a9';ctx.textAlign='center';
+    ctx.fillText('（空树）',w/2,h/2);
+    return;
+  }
+
+  // subtle grid background
+  ctx.save();
+  ctx.strokeStyle='rgba(211,209,199,0.2)';
+  ctx.lineWidth=0.5;
+  for(let i=0;i<h;i+=40){
+    ctx.beginPath();ctx.moveTo(0,i);ctx.lineTo(w,i);ctx.stroke();
+  }
+  for(let i=0;i<w;i+=40){
+    ctx.beginPath();ctx.moveTo(i,0);ctx.lineTo(i,h);ctx.stroke();
+  }
+  ctx.restore();
+
+  // edges with gradient
+  nodeMap.forEach((v,n)=>{
+    if(n.leaf)return;
+    n.ch.forEach((c)=>{
+      const cv2=nodeMap.get(c);if(!cv2)return;
+      const x1=(v.cx||v.tx)+(v.cw||v.tw)/2;
+      const y1=(v.cy||v.ty)+CH;
+      const x2=(cv2.cx||cv2.tx)+(cv2.cw||cv2.tw)/2;
+      const y2=(cv2.cy||cv2.ty);
+      ctx.save();
+      ctx.globalAlpha=(v.alpha||1)*(cv2.alpha||1)*0.8;
+      const gradient=ctx.createLinearGradient(x1,y1,x2,y2);
+      gradient.addColorStop(0,'#d3d1c7');
+      gradient.addColorStop(1,'#b4b2a9');
+      ctx.strokeStyle=gradient;ctx.lineWidth=1.5;
+      ctx.lineCap='round';
+      ctx.beginPath();ctx.moveTo(x1,y1);
+      ctx.bezierCurveTo(x1,y1+VGAP*0.45,x2,y2-VGAP*0.45,x2,y2);
+      ctx.stroke();
+      ctx.restore();
+    });
+  });
+
+  // nodes - render with enhanced effects
+  pulsePhase=(pulsePhase+0.08)%(Math.PI*2);
+  
+  nodeMap.forEach((v,n)=>{
+    const x=v.cx||v.tx,y=v.cy||v.ty,nw=v.cw||v.tw;
+    const col=PALETTE[v.hl||n.hl]||PALETTE[null];
+    ctx.save();
+    ctx.globalAlpha=v.alpha||1;
+    const sc=v.scale||1;
+    if(sc!==1){
+      ctx.translate(x+nw/2,y+CH/2);
+      ctx.scale(sc,sc);
+      ctx.translate(-(x+nw/2),-(y+CH/2));
+    }
+    
+    // glow effect for active nodes
+    if(v.hl&&v.hl!='null'){
+      const pulseIntensity=0.3+0.3*Math.sin(pulsePhase);
+      ctx.shadowColor=col.glow;
+      ctx.shadowBlur=12+8*pulseIntensity;
+      ctx.shadowOffsetX=0;
+      ctx.shadowOffsetY=0;
+    }
+    
+    // rect with rounded corners
+    ctx.beginPath();roundRect(ctx,x,y,nw,CH,6);
+    
+    // fill with subtle gradient
+    const fillGradient=ctx.createLinearGradient(x,y,x,y+CH);
+    fillGradient.addColorStop(0,col.fill);
+    fillGradient.addColorStop(1,adjustColor(col.fill,-3));
+    ctx.fillStyle=fillGradient;
+    ctx.fill();
+    
+    // shadow for depth
+    ctx.shadowColor='rgba(0,0,0,0.08)';
+    ctx.shadowBlur=6;
+    ctx.shadowOffsetX=0;
+    ctx.shadowOffsetY=2;
+    
+    // stroke
+    ctx.strokeStyle=col.stroke;
+    ctx.lineWidth=1.5;
+    ctx.stroke();
+    ctx.shadowColor='transparent';
+    
+    // dividers + keys
+    n.keys.forEach((k,ki)=>{
+      const kx=x+PAD+ki*(CW+2);
+      if(ki>0){
+        ctx.beginPath();ctx.moveTo(kx-1,y+4);ctx.lineTo(kx-1,y+CH-4);
+        ctx.strokeStyle=col.stroke;
+        ctx.globalAlpha=(v.alpha||1)*0.35;
+        ctx.lineWidth=0.5;
+        ctx.stroke();
+        ctx.globalAlpha=v.alpha||1;
+      }
+      // key background highlight
+      ctx.beginPath();
+      ctx.roundRect(kx+2,y+4,CW-4,CH-8,3);
+      ctx.fillStyle=adjustColor(col.fill,5);
+      ctx.fill();
+      // key text
+      ctx.font='500 12px var(--font-sans,sans-serif)';
+      ctx.fillStyle=col.text;
+      ctx.textAlign='center';
+      ctx.textBaseline='middle';
+      ctx.fillText(String(k),kx+CW/2,y+CH/2+0.5);
+    });
+    
+    // leaf indicator (single circle for B-tree)
+    if(n.leaf){
+      ctx.beginPath();ctx.arc(x+nw-7,y+7,3,0,Math.PI*2);
+      ctx.fillStyle=col.stroke;ctx.globalAlpha=(v.alpha||1)*0.5;ctx.fill();
+      ctx.globalAlpha=v.alpha||1;
+      // B-tree label
+      ctx.font='9px var(--font-sans,sans-serif)';
+      ctx.fillStyle=col.stroke;
+      ctx.globalAlpha=(v.alpha||1)*0.4;
+      ctx.textAlign='left';
+      ctx.fillText('B',x+4,y+CH-5);
+    }
+    ctx.restore();
+  });
+  
+  // animate pulse
+  requestAnimationFrame(()=>{pulsePhase=(pulsePhase+0.05)%(Math.PI*2);});
+}
+
+function adjustColor(hex,amount){
+  const num=parseInt(hex.replace('#',''),16);
+  const r=Math.min(255,Math.max(0,(num>>16)+amount));
+  const g=Math.min(255,Math.max(0,((num>>8)&0x00FF)+amount));
+  const b=Math.min(255,Math.max(0,(num&0x0000FF)+amount));
+  return `#${(r<<16|g<<8|b).toString(16).padStart(6,'0')}`;
+}
+
+function roundRect(c,x,y,w,h,r){
+  c.moveTo(x+r,y);c.lineTo(x+w-r,y);c.quadraticCurveTo(x+w,y,x+w,y+r);
+  c.lineTo(x+w,y+h-r);c.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+  c.lineTo(x+r,y+h);c.quadraticCurveTo(x,y+h,x,y+h-r);
+  c.lineTo(x,y+r);c.quadraticCurveTo(x,y,x+r,y);
+}
+
+function clearHL(n){if(!n)return;n.hl=null;if(!n.leaf)n.ch.forEach(clearHL);}
+
+function rebuild(){
+  clearHL(root);
+  // preserve existing positions for animation start
+  const newMap=buildMap();
+  // merge: keep px/py from old nodeMap
+  newMap.forEach((v,n)=>{
+    const old=nodeMap.get(n);
+    if(old){v.px=old.cx||old.tx;v.py=old.cy||old.ty;v.pw=old.cw||old.tw;v.alpha=old.alpha||1;v.scale=1;}
+    else{v.px=v.tx;v.py=v.ty-20;v.pw=v.tw;v.alpha=0;v.scale=0.5;}
+  });
+  nodeMap=newMap;
+  startAnim();
+}
+
+// ── demo control ──
+let demoQueue=[];
+let isPlaying=false;
+let playTimer=null;
+
+function getDelay(){return parseInt(document.getElementById('speedSel').value);}
+
+function setDemoButtons(state){
+  document.getElementById('stepBtn').disabled=!state;
+  document.getElementById('playBtn').disabled=!state;
+}
+
+function stepDemo(){
+  if(demoQueue.length===0){
+    setDemoButtons(false);
+    document.getElementById('playBtn').textContent='▶ 播放';
+    isPlaying=false;
+    addLog('演示完成','ok');
+    return;
+  }
+  const {type,value}=demoQueue.shift();
+  executeStep(type,value);
+}
+
+function togglePlay(){
+  if(isPlaying){
+    clearTimeout(playTimer);
+    isPlaying=false;
+    document.getElementById('playBtn').textContent='▶ 播放';
+  } else {
+    isPlaying=true;
+    document.getElementById('playBtn').textContent='⏸ 暂停';
+    playNext();
+  }
+}
+
+function playNext(){
+  if(!isPlaying)return;
+  if(demoQueue.length===0){
+    setDemoButtons(false);
+    document.getElementById('playBtn').textContent='▶ 播放';
+    isPlaying=false;
+    addLog('演示完成','ok');
+    return;
+  }
+  const {type,value}=demoQueue.shift();
+  executeStep(type,value);
+  playTimer=setTimeout(playNext,getDelay()+ANIM_DUR+100);
+}
+
+function executeStep(type,value){
+  if(type==='ins'){
+    ins(value);
+    rebuild();
+  } else if(type==='del'){
+    if(has(root,value)){
+      addLog(`开始删除 ${value}`,'info');
+      delFrom(root,value);
+      rebuild();
+    }
+  }
+}
+
+function startDemo(arr){
+  resetTree();
+  demoQueue=arr.map(v=>({type:'ins',value:v}));
+  setDemoButtons(true);
+  addLog(`开始演示序列 [${arr.join(',')}]`, 'info');
+}
+
+// ── actions ──
+function act(type){
+  const v=parseInt(document.getElementById('vin').value);
+  if(isNaN(v))return;
+  if(type==='ins'){ins(v);rebuild();}
+  else {
+    if(!root||!has(root,v)){addLog(`键 ${v} 不存在`,'warn');return;}
+    addLog(`开始删除 ${v}`,'info');
+    delFrom(root,v);rebuild();
+  }
+}
+function resetTree(){
+  isPlaying=false;
+  clearTimeout(playTimer);
+  demoQueue=[];
+  setDemoButtons(false);
+  document.getElementById('playBtn').textContent='▶ 播放';
+  
+  T=parseInt(document.getElementById('tsel').value);
+  root=null;nodeMap=new Map();
+  document.getElementById('log').innerHTML='';
+  addLog(`重置完成，最小度 t = ${T}，键数范围 [${T-1}, ${2*T-1}]`,'info');
+  nodeMap=buildMap();
+  drawScene();
+}
+function preset(arr){
+  startDemo(arr);
+}
+document.getElementById('tsel').addEventListener('change',resetTree);
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter')act('ins');
+  else if(e.key==='ArrowRight'&&!document.getElementById('stepBtn').disabled)stepDemo();
+});
+resetTree();
+addLog('B树初始化完成，可使用预设序列或手动插入删除','info');
+</script>
