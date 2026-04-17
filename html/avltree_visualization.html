@@ -1,0 +1,636 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{padding:14px;font-family:var(--font-sans,sans-serif);background:#ffffff;min-height:100vh}
+.top{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+.ctrl{display:flex;align-items:center;gap:6px;background:#fff;border:0.5px solid #d3d1c7;border-radius:8px;padding:5px 10px;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+label{font-size:12px;color:#73726c}
+select,input[type=number]{font-size:13px;border:none;outline:none;background:transparent;color:#2c2c2a;width:52px}
+button{font-size:12px;font-weight:500;border:0.5px solid #d3d1c7;border-radius:6px;padding:5px 12px;cursor:pointer;background:#fff;color:#2c2c2a;transition:all .15s ease}
+button:hover{background:#f1efe8;box-shadow:0 2px 4px rgba(0,0,0,0.08)}
+button:active{transform:scale(.97)}
+button.ins{background:#2c2c2a;color:#fff;border-color:#2c2c2a}
+button.ins:hover{background:#444;box-shadow:0 2px 8px rgba(44,44,42,0.3)}
+button.del{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+button.del:hover{background:#f7c1c1;box-shadow:0 2px 8px rgba(163,45,45,0.2)}
+.presets{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
+.pb{font-size:11px;padding:3px 9px;border-radius:5px;border:0.5px solid #d3d1c7;cursor:pointer;background:#f1efe8;color:#2c2c2a;transition:all .12s}
+.pb:hover{background:#d3d1c7;transform:translateY(-1px)}
+.log{background:#fff;border:0.5px solid #d3d1c7;border-radius:8px;padding:8px 12px;margin-bottom:10px;min-height:44px;max-height:80px;overflow-y:auto;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.le{font-size:12px;line-height:1.7;padding-left:8px;border-left:3px solid #d3d1c7;margin-bottom:2px;animation:fadeIn 0.3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateX(-5px)}to{opacity:1;transform:translateX(0)}}
+.le.ok{border-color:#639922;color:#3b6d11;background:rgba(99,153,34,0.05)}
+.le.warn{border-color:#ba7517;color:#854f0b;background:rgba(186,117,23,0.05)}
+.le.info{border-color:#378add;color:#185fa5;background:rgba(55,138,221,0.05)}
+.le.rotate{border-color:#7f77dd;color:#3c3489;background:rgba(127,119,221,0.05)}
+.canvas{background:#fff;border:0.5px solid #d3d1c7;border-radius:10px;overflow:hidden;position:relative;box-shadow:0 2px 12px rgba(0,0,0,0.06)}
+#cv{display:block;width:100%}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.li{display:flex;align-items:center;gap:4px;font-size:11px;color:#73726c}
+.ld{width:10px;height:10px;border-radius:4px;box-shadow:0 1px 2px rgba(0,0,0,0.1)}
+</style>
+
+<div class="wrap">
+  <div style="font-size:15px;font-weight:500;margin-bottom:2px">AVL 树动画演示</div>
+  <div style="font-size:12px;color:#73726c;margin-bottom:10px">插入删除 · LL/RR/LR/RL旋转 · 平衡因子显示 · 带过渡动画</div>
+  <div class="top">
+    <div class="ctrl">
+      <label>键值</label>
+      <input type="number" id="vin" value="10" min="1" max="999">
+    </div>
+    <button class="ins" onclick="act('ins')">插入 ↑</button>
+    <button class="del" onclick="act('del')">删除 ↓</button>
+    <button onclick="resetTree()">重置</button>
+    <div class="ctrl" style="margin-left:auto">
+      <button id="stepBtn" onclick="stepDemo()" disabled style="padding:3px 8px;font-size:11px">▶ 下一步</button>
+      <button id="playBtn" onclick="togglePlay()" disabled style="padding:3px 8px;font-size:11px">▶ 播放</button>
+      <label style="font-size:11px">间隔</label>
+      <select id="speedSel" style="width:45px;font-size:11px">
+        <option value="300">0.3s</option>
+        <option value="500" selected>0.5s</option>
+        <option value="800">0.8s</option>
+        <option value="1000">1.0s</option>
+      </select>
+    </div>
+  </div>
+  <div style="font-size:11px;color:#73726c;margin-bottom:4px">预设序列</div>
+  <div class="presets">
+    <button class="pb" onclick="preset([10,20,30,40,50,25])">LL旋转示例</button>
+    <button class="pb" onclick="preset([50,40,30,20,10,35])">RR旋转示例</button>
+    <button class="pb" onclick="preset([30,20,25])">LR旋转示例</button>
+    <button class="pb" onclick="preset([30,40,35])">RL旋转示例</button>
+    <button class="pb" onclick="preset([1,2,3,4,5,6,7])">连续旋转</button>
+  </div>
+  <div class="log" id="log"></div>
+  <div class="canvas"><canvas id="cv"></canvas></div>
+  <div class="legend">
+    <div class="li"><div class="ld" style="background:#10b981;border-radius:50%"></div>平衡(BF=0)</div>
+    <div class="li"><div class="ld" style="background:#f59e0b;border-radius:50%"></div>轻度不平衡(BF=±1)</div>
+    <div class="li"><div class="ld" style="background:#ef4444;border-radius:50%"></div>严重不平衡(BF=±2)</div>
+    <div class="li"><div class="ld" style="background:#8b5cf6;border-radius:50%"></div>旋转操作</div>
+    <div class="li"><div class="ld" style="background:#10b981;border-radius:50%"></div>新插入</div>
+  </div>
+</div>
+
+<script>
+const cv=document.getElementById('cv');
+const ctx=cv.getContext('2d');
+let root=null;
+
+// demo control variables
+let demoQueue=[];
+let isPlaying=false;
+let playTimer=null;
+
+// ── node ──
+function nd(key){
+  return {key, left:null, right:null, parent:null, height:1, hl:null};
+}
+
+// ── helper functions ──
+function height(n){return n?n.height:0;}
+function getBF(n){return n?height(n.left)-height(n.right):0;}
+function updateHeight(n){
+  if(n)n.height=Math.max(height(n.left),height(n.right))+1;
+}
+
+// ── rotations ──
+function leftRotate(x){
+  const y=x.right;
+  const T2=y.left;
+  
+  y.left=x;
+  x.right=T2;
+  
+  if(T2)T2.parent=x;
+  y.parent=x.parent;
+  x.parent=y;
+  
+  updateHeight(x);
+  updateHeight(y);
+  
+  x.hl='rotate';y.hl='rotate';
+  addLog(`左旋: ${x.key} ↺`, 'rotate');
+  return y;
+}
+
+function rightRotate(y){
+  const x=y.left;
+  const T2=x.right;
+  
+  x.right=y;
+  y.left=T2;
+  
+  if(T2)T2.parent=y;
+  x.parent=y.parent;
+  y.parent=x;
+  
+  updateHeight(y);
+  updateHeight(x);
+  
+  x.hl='rotate';y.hl='rotate';
+  addLog(`右旋: ${y.key} ↻`, 'rotate');
+  return x;
+}
+
+// ── search ──
+function has(n,k){
+  if(!n)return false;
+  if(k===n.key)return true;
+  if(k<n.key)return has(n.left,k);
+  return has(n.right,k);
+}
+
+function find(n,k){
+  if(!n)return null;
+  if(k===n.key)return n;
+  if(k<n.key)return find(n.left,k);
+  return find(n.right,k);
+}
+
+// ── insert ──
+function insertHelper(node,key){
+  if(!node)return nd(key);
+  
+  if(key<node.key){
+    node.left=insertHelper(node.left,key);
+    node.left.parent=node;
+  } else if(key>node.key){
+    node.right=insertHelper(node.right,key);
+    node.right.parent=node;
+  } else {
+    return node;
+  }
+  
+  updateHeight(node);
+  
+  const bf=getBF(node);
+  
+  // LL
+  if(bf>1&&key<node.left.key){
+    return rightRotate(node);
+  }
+  
+  // RR
+  if(bf<-1&&key>node.right.key){
+    return leftRotate(node);
+  }
+  
+  // LR
+  if(bf>1&&key>node.left.key){
+    node.left=leftRotate(node.left);
+    return rightRotate(node);
+  }
+  
+  // RL
+  if(bf<-1&&key<node.right.key){
+    node.right=rightRotate(node.right);
+    return leftRotate(node);
+  }
+  
+  return node;
+}
+
+function ins(k){
+  if(has(root,k)){addLog(`键 ${k} 已存在`, 'warn');return;}
+  
+  root=insertHelper(root,k);
+  const newNode=find(root,k);
+  if(newNode){
+    newNode.hl='ok';
+    addLog(`插入 ${k}`, 'ok');
+  }
+}
+
+// ── delete ──
+function treeMin(n){
+  while(n.left)n=n.left;
+  return n;
+}
+
+function deleteHelper(node,key){
+  if(!node)return null;
+  
+  if(key<node.key){
+    node.left=deleteHelper(node.left,key);
+    if(node.left)node.left.parent=node;
+  } else if(key>node.key){
+    node.right=deleteHelper(node.right,key);
+    if(node.right)node.right.parent=node;
+  } else {
+    if(!node.left||!node.right){
+      const temp=node.left||node.right;
+      return temp;
+    }
+    
+    const temp=treeMin(node.right);
+    node.key=temp.key;
+    node.right=deleteHelper(node.right,temp.key);
+    if(node.right)node.right.parent=node;
+  }
+  
+  if(!node)return null;
+  
+  updateHeight(node);
+  
+  const bf=getBF(node);
+  
+  // LL
+  if(bf>1&&getBF(node.left)>=0){
+    return rightRotate(node);
+  }
+  
+  // LR
+  if(bf>1&&getBF(node.left)<0){
+    node.left=leftRotate(node.left);
+    return rightRotate(node);
+  }
+  
+  // RR
+  if(bf<-1&&getBF(node.right)<=0){
+    return leftRotate(node);
+  }
+  
+  // RL
+  if(bf<-1&&getBF(node.right)>0){
+    node.right=rightRotate(node.right);
+    return leftRotate(node);
+  }
+  
+  return node;
+}
+
+function del(k){
+  if(!has(root,k)){addLog(`键 ${k} 不存在`, 'warn');return;}
+  
+  const delNode=find(root,k);
+  delNode.hl='del';
+  addLog(`删除 ${k}`, 'info');
+  
+  root=deleteHelper(root,k);
+}
+
+// ── log ──
+function addLog(msg,type='info'){
+  const p=document.getElementById('log');
+  const d=document.createElement('div');
+  d.className='le '+(type||'info');
+  d.textContent=msg;
+  p.appendChild(d);
+  p.scrollTop=p.scrollHeight;
+}
+
+// ── layout & animation ──
+const W=52,H=52, HGAP=25, VGAP=75;
+const PALETTE={
+  null:{fill:'#f8fafc',stroke:'#cbd5e1',text:'#334155',glow:'transparent'},
+  ok:{fill:'#ecfdf5',stroke:'#10b981',text:'#065f46',glow:'transparent'},
+  rotate:{fill:'#f5f3ff',stroke:'#8b5cf6',text:'#5b21b6',glow:'transparent'},
+  del:{fill:'#fef2f2',stroke:'#ef4444',text:'#991b1b',glow:'transparent'},
+};
+
+let nodeMap=new Map();
+let animId=null,animStart=null;
+const ANIM_DUR=420;
+let pulsePhase=0;
+
+function subtreeW(n){
+  if(!n)return 0;
+  if(!n.left&&!n.right)return W+20;
+  return subtreeW(n.left)+subtreeW(n.right)+HGAP;
+}
+
+function computePos(n,cx,cy,map){
+  if(!n)return;
+  const lw=subtreeW(n.left);
+  const rw=subtreeW(n.right);
+  const nw=Math.max(W+20,lw+rw+HGAP);
+  const x=cx-nw/2;
+  
+  const bf=getBF(n);
+  const prev=map.get(n)||{x:x,y:cy,w:nw,alpha:0,scale:0.6};
+  map.set(n,{
+    tx:x,ty:cy,tw:nw,
+    px:prev.tx!==undefined?prev.tx:x,
+    py:prev.ty!==undefined?prev.ty:cy,
+    pw:prev.tw||nw,
+    alpha:prev.alpha||0,
+    scale:prev.scale||0.6,
+    hl:n.hl,
+    bf:bf,
+    height:n.height
+  });
+  
+  if(n.left){
+    const leftW=subtreeW(n.left);
+    computePos(n.left,x+leftW/2,cy+H+VGAP,map);
+  }
+  if(n.right){
+    const rightW=subtreeW(n.right);
+    computePos(n.right,x+nw-rightW/2,cy+H+VGAP,map);
+  }
+}
+
+function buildMap(){
+  const newMap=new Map();
+  if(!root)return newMap;
+  const w=Math.max(860,subtreeW(root)+80);
+  computePos(root,w/2,50,newMap);
+  return newMap;
+}
+
+function lerp(a,b,t){return a+(b-a)*t;}
+function easeInOut(t){return t<0.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+
+function startAnim(){
+  nodeMap.forEach((v)=>{
+    v.px=v.cx||v.tx;
+    v.py=v.cy||v.ty;
+    v.pw=v.cw||v.tw;
+  });
+  animStart=null;
+  if(animId)cancelAnimationFrame(animId);
+  animId=requestAnimationFrame(frame);
+}
+
+function frame(ts){
+  if(!animStart)animStart=ts;
+  const p=Math.min(1,(ts-animStart)/ANIM_DUR);
+  const ep=easeInOut(p);
+  nodeMap.forEach(v=>{
+    v.cx=lerp(v.px,v.tx,ep);
+    v.cy=lerp(v.py,v.ty,ep);
+    v.cw=lerp(v.pw,v.tw,ep);
+    v.alpha=Math.min(1,lerp(v.alpha||0,1,ep*2));
+    v.scale=lerp(v.scale||0.6,1,ep);
+  });
+  drawScene();
+  if(p<1)animId=requestAnimationFrame(frame);
+  else{animId=null;drawScene();}
+}
+
+function getMaxXY(){
+  let mx=860,my=140;
+  nodeMap.forEach(v=>{
+    mx=Math.max(mx,(v.tx||0)+(v.tw||0)+80);
+    my=Math.max(my,(v.ty||0)+VGAP+H+60);
+  });
+  return{w:mx,h:my};
+}
+
+function getBFColor(bf){
+  if(bf>=2)return '#ef4444';
+  if(bf<=-2)return '#ef4444';
+  if(bf===1)return '#f59e0b';
+  if(bf===-1)return '#f59e0b';
+  return '#10b981';
+}
+
+// ── draw ──
+function drawScene(){
+  const{w,h}=getMaxXY();
+  const dpr=window.devicePixelRatio||1;
+  if(cv.width!==Math.round(w*dpr)||cv.height!==Math.round(h*dpr)){
+    cv.width=Math.round(w*dpr); cv.height=Math.round(h*dpr);
+    cv.style.width=w+'px'; cv.style.height=h+'px';
+    ctx.scale(dpr,dpr);
+  }
+  ctx.clearRect(0,0,w,h);
+
+  if(!root){
+    ctx.font='14px var(--font-sans,sans-serif)';
+    ctx.fillStyle='#94a3b8';ctx.textAlign='center';
+    ctx.fillText('（空树）',w/2,h/2);
+    return;
+  }
+
+  // subtle grid background
+  ctx.save();
+  ctx.strokeStyle='rgba(226,232,240,0.6)';
+  ctx.lineWidth=0.5;
+  for(let i=0;i<h;i+=50){
+    ctx.beginPath();ctx.moveTo(0,i);ctx.lineTo(w,i);ctx.stroke();
+  }
+  for(let i=0;i<w;i+=50){
+    ctx.beginPath();ctx.moveTo(i,0);ctx.lineTo(i,h);ctx.stroke();
+  }
+  ctx.restore();
+
+  // edges - straight lines
+  nodeMap.forEach((v,n)=>{
+    ['left','right'].forEach(dir=>{
+      const child=n[dir];
+      if(!child)return;
+      const cv2=nodeMap.get(child);
+      if(!cv2)return;
+      
+      const x1=(v.cx||v.tx)+(v.cw||v.tw)/2;
+      const y1=(v.cy||v.ty)+H/2+6;
+      const childW=subtreeW(child);
+      const x2=(cv2.cx||cv2.tx)+childW/2;
+      const y2=(cv2.cy||cv2.ty)+H/2-6;
+      
+      ctx.save();
+      ctx.globalAlpha=(v.alpha||1)*(cv2.alpha||1)*0.85;
+      
+      // straight line
+      ctx.strokeStyle='#94a3b8';
+      ctx.lineWidth=1.5;
+      ctx.lineCap='round';
+      ctx.beginPath();
+      ctx.moveTo(x1,y1);
+      ctx.lineTo(x2,y2);
+      ctx.stroke();
+      
+      ctx.restore();
+    });
+  });
+
+  // nodes
+  nodeMap.forEach((v,n)=>{
+    const x=v.cx||v.tx,y=v.cy||v.ty,nw=v.cw||v.tw;
+    const nx=x+nw/2,ny=y+H/2;
+    const col=PALETTE[v.hl||n.hl]||PALETTE.null;
+    const bfColor=getBFColor(v.bf);
+    const nodeRadius=Math.min(nw,H)/2-1;
+    
+    ctx.save();
+    ctx.globalAlpha=v.alpha||1;
+    const sc=v.scale||1;
+    if(sc!==1){
+      ctx.translate(nx,ny);
+      ctx.scale(sc,sc);
+      ctx.translate(-nx,-ny);
+    }
+    
+    // node circle
+    ctx.beginPath();
+    ctx.arc(nx, ny, nodeRadius, 0, Math.PI*2);
+    ctx.fillStyle=col.fill;
+    ctx.fill();
+    ctx.strokeStyle=col.stroke;
+    ctx.lineWidth=2;
+    ctx.stroke();
+    
+    // key text
+    ctx.font='600 14px var(--font-sans,sans-serif)';
+    ctx.fillStyle=col.text;
+    ctx.textAlign='center';
+    ctx.textBaseline='middle';
+    ctx.fillText(String(n.key),nx,ny);
+    
+    // BF indicator - bottom right
+    ctx.font='bold 10px var(--font-sans,sans-serif)';
+    ctx.fillStyle=bfColor;
+    ctx.textAlign='right';
+    ctx.textBaseline='bottom';
+    ctx.fillText(`${v.bf}`, nx+nodeRadius-4, ny+nodeRadius-3);
+    
+    // height indicator - top left
+    ctx.font='bold 9px var(--font-sans,sans-serif)';
+    ctx.fillStyle='#64748b';
+    ctx.textAlign='left';
+    ctx.textBaseline='top';
+    ctx.fillText(`${v.height}`, nx-nodeRadius+4, ny-nodeRadius+3);
+    
+    ctx.restore();
+  });
+  
+  requestAnimationFrame(()=>{pulsePhase=(pulsePhase+0.05)%(Math.PI*2);});
+}
+
+function adjustColor(hex,amount){
+  const num=parseInt(hex.replace('#',''),16);
+  const r=Math.min(255,Math.max(0,(num>>16)+amount));
+  const g=Math.min(255,Math.max(0,((num>>8)&0x00FF)+amount));
+  const b=Math.min(255,Math.max(0,(num&0x0000FF)+amount));
+  return `#${(r<<16|g<<8|b).toString(16).padStart(6,'0')}`;
+}
+
+function clearHL(n){
+  if(!n)return;
+  n.hl=null;
+  clearHL(n.left);
+  clearHL(n.right);
+}
+
+function rebuild(){
+  clearHL(root);
+  const newMap=buildMap();
+  newMap.forEach((v,n)=>{
+    const old=nodeMap.get(n);
+    if(old){
+      v.px=old.cx||old.tx;
+      v.py=old.cy||old.ty;
+      v.pw=old.cw||old.tw;
+      v.alpha=old.alpha||1;
+      v.scale=1;
+    } else {
+      v.px=v.tx;
+      v.py=v.ty-20;
+      v.pw=v.tw;
+      v.alpha=0;
+      v.scale=0.5;
+    }
+  });
+  nodeMap=newMap;
+  startAnim();
+}
+
+// ── demo control ──
+function getDelay(){return parseInt(document.getElementById('speedSel').value);}
+
+function setDemoButtons(state){
+  document.getElementById('stepBtn').disabled=!state;
+  document.getElementById('playBtn').disabled=!state;
+}
+
+function stepDemo(){
+  if(demoQueue.length===0){
+    setDemoButtons(false);
+    document.getElementById('playBtn').textContent='▶ 播放';
+    isPlaying=false;
+    addLog('演示完成','ok');
+    return;
+  }
+  const {type,value}=demoQueue.shift();
+  executeStep(type,value);
+}
+
+function togglePlay(){
+  if(isPlaying){
+    clearTimeout(playTimer);
+    isPlaying=false;
+    document.getElementById('playBtn').textContent='▶ 播放';
+  } else {
+    isPlaying=true;
+    document.getElementById('playBtn').textContent='⏸ 暂停';
+    playNext();
+  }
+}
+
+function playNext(){
+  if(!isPlaying)return;
+  if(demoQueue.length===0){
+    setDemoButtons(false);
+    document.getElementById('playBtn').textContent='▶ 播放';
+    isPlaying=false;
+    addLog('演示完成','ok');
+    return;
+  }
+  const {type,value}=demoQueue.shift();
+  executeStep(type,value);
+  playTimer=setTimeout(playNext,getDelay()+ANIM_DUR+100);
+}
+
+function executeStep(type,value){
+  if(type==='ins'){
+    ins(value);
+    rebuild();
+  } else if(type==='del'){
+    if(has(root,value)){
+      del(value);
+      rebuild();
+    }
+  }
+}
+
+function startDemo(arr){
+  resetTree();
+  demoQueue=arr.map(v=>({type:'ins',value:v}));
+  setDemoButtons(true);
+  addLog(`开始演示序列 [${arr.join(',')}]`, 'info');
+}
+
+// ── actions ──
+function act(type){
+  const v=parseInt(document.getElementById('vin').value);
+  if(isNaN(v))return;
+  if(type==='ins'){ins(v);rebuild();}
+  else {del(v);rebuild();}
+}
+
+function resetTree(){
+  isPlaying=false;
+  clearTimeout(playTimer);
+  demoQueue=[];
+  setDemoButtons(false);
+  document.getElementById('playBtn').textContent='▶ 播放';
+  
+  root=null;
+  nodeMap.clear();
+  document.getElementById('log').innerHTML='';
+  addLog('AVL树重置完成','info');
+  drawScene();
+}
+
+function preset(arr){
+  startDemo(arr);
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter')act('ins');
+  else if(e.key==='ArrowRight'&&!document.getElementById('stepBtn').disabled)stepDemo();
+});
+
+resetTree();
+</script>

@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图存储结构可视化</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', sans-serif; background: #ffffff; min-height: 100vh; }
+        .wrap { padding: 20px; max-width: 1400px; margin: 0 auto; }
+        
+        .header { text-align: center; margin-bottom: 20px; }
+        .header h1 { color: #1e293b; margin-bottom: 10px; }
+        .header p { color: #64748b; }
+        
+        .tabs { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; }
+        .tab { 
+            padding: 10px 20px; 
+            background: #e2e8f0; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer;
+            font-size: 14px;
+            color: #475569;
+            transition: all 0.3s;
+        }
+        .tab.active { background: #3b82f6; color: white; }
+        .tab:hover { background: #cbd5e1; }
+        .tab.active:hover { background: #2563eb; }
+        
+        .visual-area { 
+            display: flex; 
+            gap: 20px; 
+            flex-wrap: wrap; 
+            justify-content: center;
+            align-items: flex-start;
+        }
+        
+        .canvas-container {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        canvas { 
+            display: block; 
+            border-radius: 8px;
+            background: white;
+        }
+        
+        .control-panel {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            min-width: 280px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .control-panel h3 { color: #1e293b; margin-bottom: 15px; }
+        
+        .btn-group { display: flex; flex-direction: column; gap: 10px; }
+        
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary { background: #3b82f6; color: white; }
+        .btn-primary:hover { background: #2563eb; }
+        
+        .btn-success { background: #22c55e; color: white; }
+        .btn-success:hover { background: #16a34a; }
+        
+        .btn-warning { background: #f59e0b; color: white; }
+        .btn-warning:hover { background: #d97706; }
+        
+        .btn-danger { background: #ef4444; color: white; }
+        .btn-danger:hover { background: #dc2626; }
+        
+        .info-panel {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e0f2fe;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #0369a1;
+        }
+        
+        .info-panel h4 { margin-bottom: 10px; }
+        .info-panel ul { margin-left: 20px; margin-top: 5px; }
+        
+        .graph-display {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .legend {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #64748b;
+        }
+        
+        .legend-item { display: flex; align-items: center; gap: 5px; }
+        .legend-color { width: 20px; height: 20px; border-radius: 4px; }
+        
+        .highlight { animation: pulse 1s infinite; }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .edge-info {
+            margin-top: 15px;
+            padding: 10px;
+            background: #fef3c7;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #92400e;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="header">
+            <h1>图存储结构可视化</h1>
+            <p>邻接矩阵 · 邻接表 · 十字链表 · 邻接多重表</p>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('matrix')">邻接矩阵</button>
+            <button class="tab" onclick="switchTab('adjlist')">邻接表</button>
+            <button class="tab" onclick="switchTab('crosslist')">十字链表</button>
+            <button class="tab" onclick="switchTab('multilist')">邻接多重表</button>
+        </div>
+        
+        <div class="visual-area">
+            <div class="graph-display">
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #3b82f6;"></div>
+                        <span>顶点</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #64748b;"></div>
+                        <span>边/弧</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #22c55e;"></div>
+                        <span>当前访问</span>
+                    </div>
+                </div>
+                <canvas id="graphCanvas" width="400" height="300"></canvas>
+                <div class="edge-info" id="edgeInfo"></div>
+            </div>
+            
+            <div class="canvas-container">
+                <canvas id="storageCanvas" width="500" height="400"></canvas>
+            </div>
+            
+            <div class="control-panel">
+                <h3>操作控制</h3>
+                <div class="btn-group">
+                    <button class="btn btn-success" onclick="loadExample(1)">示例1: 无向图</button>
+                    <button class="btn btn-success" onclick="loadExample(2)">示例2: 有向图</button>
+                    <button class="btn btn-success" onclick="loadExample(3)">示例3: 带权图</button>
+                    <button class="btn btn-warning" onclick="addVertex()">添加顶点</button>
+                    <button class="btn btn-warning" onclick="addEdge()">添加边</button>
+                    <button class="btn btn-danger" onclick="clearGraph()">清空图</button>
+                </div>
+                
+                <div class="info-panel">
+                    <h4>当前图信息</h4>
+                    <div id="graphStats">顶点数: 0 | 边数: 0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 图数据结构
+        class Graph {
+            constructor() {
+                this.vertices = [];
+                this.edges = [];
+                this.directed = false;
+            }
+            
+            addVertex(data) {
+                this.vertices.push(data);
+            }
+            
+            addEdge(from, to, weight = 1) {
+                this.edges.push({ from, to, weight });
+                if (!this.directed) {
+                    this.edges.push({ from: to, to: from, weight });
+                }
+            }
+            
+            getAdjacent(v) {
+                return this.edges
+                    .filter(e => e.from === v)
+                    .map(e => ({ to: e.to, weight: e.weight }));
+            }
+            
+            getInEdges(v) {
+                return this.edges
+                    .filter(e => e.to === v)
+                    .map(e => ({ from: e.from, weight: e.weight }));
+            }
+        }
+        
+        let currentGraph = new Graph();
+        let currentTab = 'matrix';
+        let highlightedEdge = null;
+        
+        // Canvas上下文
+        const graphCanvas = document.getElementById('graphCanvas');
+        const graphCtx = graphCanvas.getContext('2d');
+        const storageCanvas = document.getElementById('storageCanvas');
+        const storageCtx = storageCanvas.getContext('2d');
+        
+        // 加载示例
+        function loadExample(num) {
+            currentGraph = new Graph();
+            
+            if (num === 1) {
+                // 无向图示例
+                currentGraph.directed = false;
+                currentGraph.addVertex('A');
+                currentGraph.addVertex('B');
+                currentGraph.addVertex('C');
+                currentGraph.addVertex('D');
+                currentGraph.addEdge(0, 1);
+                currentGraph.addEdge(0, 2);
+                currentGraph.addEdge(1, 2);
+                currentGraph.addEdge(2, 3);
+            } else if (num === 2) {
+                // 有向图示例
+                currentGraph.directed = true;
+                currentGraph.addVertex('A');
+                currentGraph.addVertex('B');
+                currentGraph.addVertex('C');
+                currentGraph.addVertex('D');
+                currentGraph.addEdge(0, 1);
+                currentGraph.addEdge(0, 2);
+                currentGraph.addEdge(1, 2);
+                currentGraph.addEdge(2, 3);
+                currentGraph.addEdge(3, 1);
+            } else if (num === 3) {
+                // 带权图示例
+                currentGraph.directed = false;
+                currentGraph.addVertex('A');
+                currentGraph.addVertex('B');
+                currentGraph.addVertex('C');
+                currentGraph.addVertex('D');
+                currentGraph.addEdge(0, 1, 5);
+                currentGraph.addEdge(0, 2, 3);
+                currentGraph.addEdge(1, 2, 2);
+                currentGraph.addEdge(2, 3, 4);
+            }
+            
+            updateStats();
+            render();
+        }
+        
+        // 添加顶点
+        function addVertex() {
+            const label = String.fromCharCode(65 + currentGraph.vertices.length);
+            currentGraph.addVertex(label);
+            updateStats();
+            render();
+        }
+        
+        // 添加边
+        function addEdge() {
+            if (currentGraph.vertices.length < 2) return;
+            const from = Math.floor(Math.random() * currentGraph.vertices.length);
+            let to = Math.floor(Math.random() * currentGraph.vertices.length);
+            while (to === from) {
+                to = Math.floor(Math.random() * currentGraph.vertices.length);
+            }
+            currentGraph.addEdge(from, to, Math.floor(Math.random() * 10) + 1);
+            updateStats();
+            render();
+        }
+        
+        // 清空图
+        function clearGraph() {
+            currentGraph = new Graph();
+            highlightedEdge = null;
+            updateStats();
+            render();
+        }
+        
+        // 更新统计信息
+        function updateStats() {
+            const uniqueEdges = currentGraph.directed 
+                ? currentGraph.edges.length 
+                : currentGraph.edges.length / 2;
+            document.getElementById('graphStats').innerHTML = 
+                `顶点数: ${currentGraph.vertices.length} | 边数: ${uniqueEdges} | ${currentGraph.directed ? '有向图' : '无向图'}`;
+        }
+        
+        // 切换标签
+        function switchTab(tab) {
+            currentTab = tab;
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelector(`[onclick="switchTab('${tab}')"]`).classList.add('active');
+            render();
+        }
+        
+        // 渲染图
+        function render() {
+            renderGraph();
+            if (currentTab === 'matrix') renderAdjacencyMatrix();
+            else if (currentTab === 'adjlist') renderAdjacencyList();
+            else if (currentTab === 'crosslist') renderCrossList();
+            else if (currentTab === 'multilist') renderMultiList();
+        }
+        
+        // 渲染图结构
+        function renderGraph() {
+            const ctx = graphCtx;
+            ctx.clearRect(0, 0, graphCanvas.width, graphCanvas.height);
+            
+            const n = currentGraph.vertices.length;
+            if (n === 0) return;
+            
+            // 计算顶点位置（圆形布局）
+            const centerX = graphCanvas.width / 2;
+            const centerY = graphCanvas.height / 2;
+            const radius = Math.min(centerX, centerY) - 40;
+            
+            const positions = [];
+            for (let i = 0; i < n; i++) {
+                const angle = (2 * Math.PI * i) / n - Math.PI / 2;
+                positions.push({
+                    x: centerX + radius * Math.cos(angle),
+                    y: centerY + radius * Math.sin(angle)
+                });
+            }
+            
+            // 绘制边
+            ctx.strokeStyle = '#64748b';
+            ctx.lineWidth = 2;
+            const drawnEdges = new Set();
+            
+            currentGraph.edges.forEach(edge => {
+                const key = currentGraph.directed 
+                    ? `${edge.from}-${edge.to}` 
+                    : `${Math.min(edge.from, edge.to)}-${Math.max(edge.from, edge.to)}`;
+                
+                if (drawnEdges.has(key)) return;
+                drawnEdges.add(key);
+                
+                const from = positions[edge.from];
+                const to = positions[edge.to];
+                
+                ctx.beginPath();
+                ctx.moveTo(from.x, from.y);
+                
+                if (currentGraph.directed) {
+                    // 绘制有向边（带箭头）
+                    const dx = to.x - from.x;
+                    const dy = to.y - from.y;
+                    const len = Math.sqrt(dx * dx + dy * dy);
+                    const unitX = dx / len;
+                    const unitY = dy / len;
+                    const arrowSize = 10;
+                    
+                    // 线段终点（留出箭头空间）
+                    const endX = to.x - 15 * unitX;
+                    const endY = to.y - 15 * unitY;
+                    
+                    ctx.lineTo(endX, endY);
+                    ctx.stroke();
+                    
+                    // 绘制箭头
+                    ctx.beginPath();
+                    ctx.moveTo(to.x, to.y);
+                    ctx.lineTo(endX - arrowSize * unitY, endY + arrowSize * unitX);
+                    ctx.moveTo(to.x, to.y);
+                    ctx.lineTo(endX + arrowSize * unitY, endY - arrowSize * unitX);
+                    ctx.stroke();
+                } else {
+                    ctx.lineTo(to.x, to.y);
+                    ctx.stroke();
+                }
+                
+                // 绘制边权
+                if (edge.weight !== 1) {
+                    const midX = (from.x + to.x) / 2;
+                    const midY = (from.y + to.y) / 2;
+                    ctx.fillStyle = '#22c55e';
+                    ctx.font = 'bold 12px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(edge.weight.toString(), midX, midY - 5);
+                }
+            });
+            
+            // 绘制顶点
+            positions.forEach((pos, i) => {
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, 25, 0, Math.PI * 2);
+                ctx.fillStyle = '#3b82f6';
+                ctx.fill();
+                ctx.strokeStyle = '#1d4ed8';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 16px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(currentGraph.vertices[i], pos.x, pos.y);
+            });
+        }
+        
+        // 渲染邻接矩阵
+        function renderAdjacencyMatrix() {
+            const ctx = storageCtx;
+            ctx.clearRect(0, 0, storageCanvas.width, storageCanvas.height);
+            
+            const n = currentGraph.vertices.length;
+            if (n === 0) {
+                ctx.fillStyle = '#64748b';
+                ctx.font = '14px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('请添加顶点', storageCanvas.width / 2, storageCanvas.height / 2);
+                return;
+            }
+            
+            const cellSize = Math.min(40, (storageCanvas.width - 60) / (n + 1));
+            const startX = 50;
+            const startY = 50;
+            
+            // 绘制列标签
+            ctx.fillStyle = '#3b82f6';
+            ctx.font = 'bold 14px sans-serif';
+            ctx.textAlign = 'center';
+            for (let i = 0; i < n; i++) {
+                ctx.fillText(currentGraph.vertices[i], startX + (i + 1) * cellSize, startY - 10);
+            }
+            
+            // 绘制行标签和矩阵
+            ctx.strokeStyle = '#cbd5e1';
+            ctx.lineWidth = 1;
+            
+            for (let i = 0; i < n; i++) {
+                // 行标签
+                ctx.fillText(currentGraph.vertices[i], startX - 20, startY + i * cellSize + cellSize / 2);
+                
+                for (let j = 0; j < n; j++) {
+                    const x = startX + (j + 1) * cellSize;
+                    const y = startY + i * cellSize;
+                    
+                    // 绘制单元格
+                    ctx.strokeRect(x, y, cellSize, cellSize);
+                    
+                    // 查找边
+                    const edge = currentGraph.edges.find(e => e.from === i && e.to === j);
+                    if (edge) {
+                        ctx.fillStyle = '#22c55e';
+                        ctx.font = 'bold 14px sans-serif';
+                        ctx.fillText(edge.weight.toString(), x + cellSize / 2, y + cellSize / 2 + 5);
+                    }
+                }
+            }
+            
+            // 标题
+            ctx.fillStyle = '#1e293b';
+            ctx.font = 'bold 16px sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText('邻接矩阵', 20, 30);
+        }
+        
+        // 渲染邻接表
+        function renderAdjacencyList() {
+            const ctx = storageCtx;
+            ctx.clearRect(0, 0, storageCanvas.width, storageCanvas.height);
+            
+            const n = currentGraph.vertices.length;
+            if (n === 0) {
+                ctx.fillStyle = '#64748b';
+                ctx.font = '14px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('请添加顶点', storageCanvas.width / 2, storageCanvas.height / 2);
+                return;
+            }
+            
+            const vBoxWidth = 60;
+            const vBoxHeight = 40;
+            const eBoxWidth = 50;
+            const eBoxHeight = 30;
+            const spacing = 20;
+            const startX = 40;
+            const startY = 50;
+            
+            // 标题
+            ctx.fillStyle = '#1e293b';
+            ctx.font = 'bold 16px sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText('邻接表', 20, 30);
+            
+            let currentY = startY;
+            
+            for (let i = 0; i < n; i++) {
+                const adj = currentGraph.getAdjacent(i);
+                
+                // 顶点框
+                ctx.fillStyle = '#3b82f6';
+                ctx.fillRect(startX, currentY, vBoxWidth, vBoxHeight);
+                ctx.strokeStyle = '#1d4ed8';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(startX, currentY, vBoxWidth, vBoxHeight);
+                
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 16px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(currentGraph.vertices[i], startX + vBoxWidth / 2, currentY + vBoxHeight / 2);
+                
+                // 箭头
+                ctx.strokeStyle = '#64748b';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(startX + vBoxWidth, currentY + vBoxHeight / 2);
+                ctx.lineTo(startX + vBoxWidth + 15, currentY + vBoxHeight / 2);
+                ctx.stroke();
+                
+                // 边节点
+                let currentX = startX + vBoxWidth + 30;
+                adj.forEach((edge, idx) => {
+                    // 边框
+                    ctx.fillStyle = '#f59e0b';
+                    ctx.fillRect(currentX, currentY + 5, eBoxWidth, eBoxHeight);
+                    ctx.strokeStyle = '#d97706';
+                    ctx.lineWidth = 2;
+                    ctx.strokeRect(currentX, currentY + 5, eBoxWidth, eBoxHeight);
+                    
+                    // 边信息
+                    ctx.fillStyle = 'white';
+                    ctx.font = '12px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(currentGraph.vertices[edge.to], currentX + eBoxWidth / 2, currentY + 18);
+                    if (edge.weight !== 1) {
+                        ctx.fillText(`(${edge.weight})`, currentX + eBoxWidth / 2, currentY + 32);
+                    }
+                    
+                    // 下一个指针
+                    if (idx < adj.length - 1) {
+                        ctx.beginPath();
+                        ctx.moveTo(currentX + eBoxWidth, currentY + vBoxHeight / 2);
+                        ctx.lineTo(currentX + eBoxWidth + 15, currentY + vBoxHeight / 2);
+                        ctx.stroke();
+                    }
+                    
+                    currentX += eBoxWidth + 25;
+                });
+                
+                currentY += vBoxHeight + spacing;
+                if (currentY > storageCanvas.height - 50) break;
+            }
+        }
+        
+        // 渲染十字链表
+        function renderCrossList() {
+            const ctx = storageCtx;
+            ctx.clearRect(0, 0, storageCanvas.width, storageCanvas.height);
+            
+            const n = currentGraph.vertices.length;
+            if (n === 0) {
+                ctx.fillStyle = '#64748b';
+                ctx.font = '14px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('请添加顶点', storageCanvas.width / 2, storageCanvas.height / 2);
+                return;
+            }
+            
+            // 标题
+            ctx.fillStyle = '#1e293b';
+            ctx.font = 'bold 16px sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText('十字链表 (有向图)', 20, 30);
+            
+            const vBoxWidth = 80;
+            const vBoxHeight = 50;
+            const aBoxWidth = 100;
+            const aBoxHeight = 40;
+            const spacing = 25;
+            const startX = 40;
+            const startY = 60;
+            
+            // 顶点数组
+            for (let i = 0; i < n; i++) {
+                const y = startY + i * (vBoxHeight + spacing);
+                
+                // 顶点框
+                ctx.fillStyle = '#3b82f6';
+                ctx.fillRect(startX, y, vBoxWidth, vBoxHeight);
+                ctx.strokeStyle = '#1d4ed8';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(startX, y, vBoxWidth, vBoxHeight);
+                
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 16px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(currentGraph.vertices[i], startX + vBoxWidth / 2, y + vBoxHeight / 2);
+                
+                // 入弧/出弧标签
+                ctx.fillStyle = '#64748b';
+                ctx.font = '10px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('入弧', startX + vBoxWidth + 5, y + 15);
+                ctx.fillText('出弧', startX + vBoxWidth + 5, y + 35);
+                
+                // 绘制出弧链
+                const outEdges = currentGraph.getAdjacent(i);
+                let currentX = startX + vBoxWidth + 50;
+                outEdges.forEach((edge, idx) => {
+                    ctx.fillStyle = '#8b5cf6';
+                    ctx.fillRect(currentX, y + 10, aBoxWidth, aBoxHeight);
+                    ctx.strokeStyle = '#7c3aed';
+                    ctx.lineWidth = 2;
+                    ctx.strokeRect(currentX, y + 10, aBoxWidth, aBoxHeight);
+                    
+                    ctx.fillStyle = 'white';
+                    ctx.font = '11px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(`→ ${currentGraph.vertices[edge.to]}`, currentX + aBoxWidth / 2, y + 28);
+                    
+                    if (idx < outEdges.length - 1) {
+                        ctx.strokeStyle = '#64748b';
+                        ctx.beginPath();
+                        ctx.moveTo(currentX + aBoxWidth, y + 30);
+                        ctx.lineTo(currentX + aBoxWidth + 15, y + 30);
+                        ctx.stroke();
+                    }
+                    currentX += aBoxWidth + 20;
+                });
+            }
+            
+            // 绘制入弧链（简化显示）
+            ctx.fillStyle = '#64748b';
+            ctx.font = '12px sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText('入弧链:', 20, startY + n * (vBoxHeight + spacing) + 30);
+            
+            for (let i = 0; i < n; i++) {
+                const inEdges = currentGraph.getInEdges(i);
+                if (inEdges.length > 0) {
+                    const froms = inEdges.map(e => currentGraph.vertices[e.from]).join(', ');
+                    ctx.fillText(`  ${currentGraph.vertices[i]}: ← ${froms}`, 20, startY + n * (vBoxHeight + spacing) + 50 + i * 20);
+                }
+            }
+        }
+        
+        // 渲染邻接多重表
+        function renderMultiList() {
+            const ctx = storageCtx;
+            ctx.clearRect(0, 0, storageCanvas.width, storageCanvas.height);
+            
+            const n = currentGraph.vertices.length;
+            if (n === 0) {
+                ctx.fillStyle = '#64748b';
+                ctx.font = '14px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('请添加顶点', storageCanvas.width / 2, storageCanvas.height / 2);
+                return;
+            }
+            
+            // 标题
+            ctx.fillStyle = '#1e293b';
+            ctx.font = 'bold 16px sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText('邻接多重表 (无向图)', 20, 30);
+            
+            const vBoxWidth = 60;
+            const vBoxHeight = 40;
+            const eBoxWidth = 80;
+            const eBoxHeight = 50;
+            const spacing = 25;
+            const startX = 40;
+            const startY = 60;
+            
+            // 获取唯一边
+            const uniqueEdges = new Map();
+            currentGraph.edges.forEach(edge => {
+                const key = `${Math.min(edge.from, edge.to)}-${Math.max(edge.from, edge.to)}`;
+                if (!uniqueEdges.has(key)) {
+                    uniqueEdges.set(key, edge);
+                }
+            });
+            
+            // 顶点数组
+            for (let i = 0; i < n; i++) {
+                const y = startY + i * (vBoxHeight + spacing);
+                
+                // 顶点框
+                ctx.fillStyle = '#3b82f6';
+                ctx.fillRect(startX, y, vBoxWidth, vBoxHeight);
+                ctx.strokeStyle = '#1d4ed8';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(startX, y, vBoxWidth, vBoxHeight);
+                
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 16px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(currentGraph.vertices[i], startX + vBoxWidth / 2, y + vBoxHeight / 2);
+                
+                // 边链
+                const adj = currentGraph.getAdjacent(i);
+                let currentX = startX + vBoxWidth + 20;
+                adj.forEach((edge, idx) => {
+                    // 边节点
+                    ctx.fillStyle = '#22c55e';
+                    ctx.fillRect(currentX, y + 5, eBoxWidth, eBoxHeight);
+                    ctx.strokeStyle = '#16a34a';
+                    ctx.lineWidth = 2;
+                    ctx.strokeRect(currentX, y + 5, eBoxWidth, eBoxHeight);
+                    
+                    // 边信息
+                    ctx.fillStyle = 'white';
+                    ctx.font = '11px sans-serif';
+                    ctx.textAlign = 'center';
+                    const other = edge.from === i ? edge.to : edge.from;
+                    ctx.fillText(`${currentGraph.vertices[i]}-${currentGraph.vertices[other]}`, currentX + eBoxWidth / 2, y + 22);
+                    if (edge.weight !== 1) {
+                        ctx.fillText(`w=${edge.weight}`, currentX + eBoxWidth / 2, y + 38);
+                    }
+                    
+                    // 下一个指针
+                    if (idx < adj.length - 1) {
+                        ctx.strokeStyle = '#64748b';
+                        ctx.lineWidth = 2;
+                        ctx.beginPath();
+                        ctx.moveTo(currentX + eBoxWidth, y + vBoxHeight / 2);
+                        ctx.lineTo(currentX + eBoxWidth + 15, y + vBoxHeight / 2);
+                        ctx.stroke();
+                    }
+                    currentX += eBoxWidth + 20;
+                });
+            }
+            
+            // 边节点说明
+            ctx.fillStyle = '#64748b';
+            ctx.font = '12px sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText('注: 每条边仅存储一次，通过双指针链入两个顶点的边表', 20, startY + n * (vBoxHeight + spacing) + 30);
+        }
+        
+        // 初始化
+        loadExample(1);
+    </script>
+</body>
+</html>
