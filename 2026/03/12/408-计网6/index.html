@@ -1,0 +1,3059 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>408-计算机网络-6-应用层 | SPARKLE</title><meta name="keywords" content="408,计算机网络,应用层"><meta name="author" content="sparkle520"><meta name="copyright" content="sparkle520"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="408-计算机网络-6-应用层"><meta name="application-name" content="408-计算机网络-6-应用层"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="408-计算机网络-6-应用层"><meta property="og:url" content="http://example.com/2026/03/12/408-%E8%AE%A1%E7%BD%916/index.html"><meta property="og:site_name" content="SPARKLE"><meta property="og:description" content="应用层  本文系统讲解应用层核心协议 : 网络应用模型 ( C&amp;#x2F;S 与 P2P ) 、DNS 域名系统 ( 域名空间、服务器、解析过程 ) 、FTP 文件传输协议 ( 工作原理、控制&amp;#x2F;数据连接 ) 、电子邮件系统 ( SMTP&amp;#x2F;POP3&amp;#x2F;IMAP ) 与 MIME、以及万维网与 HTTP"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://pic1.imgdb.cn/item/69a6f223f98389e4a9b7cf25.png"><meta property="article:author" content="sparkle520"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://pic1.imgdb.cn/item/69a6f223f98389e4a9b7cf25.png"><meta name="description" content="应用层  本文系统讲解应用层核心协议 : 网络应用模型 ( C&amp;#x2F;S 与 P2P ) 、DNS 域名系统 ( 域名空间、服务器、解析过程 ) 、FTP 文件传输协议 ( 工作原理、控制&amp;#x2F;数据连接 ) 、电子邮件系统 ( SMTP&amp;#x2F;POP3&amp;#x2F;IMAP ) 与 MIME、以及万维网与 HTTP"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2026/03/12/408-%E8%AE%A1%E7%BD%916/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走! 再看看嘛!","backTitle":"♪(^∇^*)欢迎肥来!"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情!","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦!","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: 'https://sparkle521.xyz',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":4000,"accessToken":"","mailMd5":""},
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: {"mode":"api","api":"https://img2color-go.vercel.app/api?img=","cover_change":true},
+  authorStatus: {"skills":["(❤ ω ❤)"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: sparkle520","link":"链接: ","source":"来源: SPARKLE","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#883ced","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'SPARKLE',
+  title: '408-计算机网络-6-应用层',
+  postAI: '',
+  pageFillDescription: '应用层, 总结与速查 ( Cheat Sheet ), 一、网络应用模型, 6.1.1 客户/服务器模型, 6.1.2 P2P 模型, 二、域名系统 DNS, 6.2.1 层次域名空间, 6.2.2 域名服务器, 6.2.3 域名解析过程, 三、文件传输协议 FTP, 6.3.1 FTP 工作原理, 6.3.2 控制连接与数据连接, 四、电子邮件, 6.4.1 电子邮件系统的组成结构, 6.4.2 电子邮件格式与 MIME, 6.4.3 SMTP 与 POP3、IMAP, 五、万维网, 6.5.1 万维网的概念与组成结构, 6.5.2 超文本传输协议 HTTP应用层本文系统讲解应用层核心协议网络应用模型与域名系统域名空间服务器解析过程文件传输协议工作原理控制数据连接电子邮件系统与以及万维网与协议应用层网络应用模型客户服务器模型服务器客户机集中管理可扩展性差模型对等连接分散化高扩展性资源丰富域名系统层次域名空间根域名顶级域名二级域名域名服务器根服务器顶级域名服务器权威域名服务器本地域名服务器解析过程递归查询迭代查询文件传输协议控制连接端口携带命令数据连接端口主动被动模式电子邮件发送协议端口接收协议端口高级接收端口多媒体扩展万维网总结与速查知识点核心结论备注模型服务器提供资源客户请求服务集中管理但扩展性差模型节点既请求又提供服务高扩展性但管理复杂端口查询区域传输递归迭代查询层次根顶级权威本地域名服务器分布式数据库控制连接端口携带命令响应数据连接端口主动模式传输文件数据被动模式服务器开放随机端口给客户端连接穿越防火墙发送邮件端口仅传输位拉取邮件端口简单但功能有限在线查看邮件端口支持选择性下载多用途互联网邮件扩展支持多媒体编码转换超文本传输端口无状态无连接请求方法核心服务器生成存储在客户端状态保持一网络应用模型客户服务器模型客户服务器模型概述客户服务器模型是网络应用中最早出现也是最经典的架构模式在该模型中网络中的节点被分为两类服务器提供计算资源数据存储或服务的节点通常具有固定的公开的地址持续运行等待客户请求客户机主动发起请求的节点通常是用户终端设备如手机临时连接到服务器使用其提供的服务工作流程客户机服务器客户机请求服务处理请求返回结果请求服务返回结果服务器的特性特性说明被动等待服务器不主动发起连接总是等待客户请求永久地址服务器通常具有固定的公网地址持续运行服务器程序通常小时运行集中管理所有资源和服务由服务器集中管理和分配可扩展性差当客户数量激增时服务器可能成为瓶颈客户机的特性特性说明主动发起客户机主动向服务器发送请求临时连接客户机可以在需要时连接通信结束后断开本地处理尽可能在本地完成计算减少网络流量不直接通信客户机之间通常不直接通信需通过服务器中转典型应用应用服务器角色客户端角色浏览服务器浏览器电子邮件邮件服务器邮件客户端文件下载服务器文件服务器下载工具数据库数据库服务器数据库客户端模型的优点集中管理便于对资源访问权限进行控制和数据管理安全性高通过服务器统一管理安全策略可靠性强服务器通常具备高可靠性硬件和冗余机制易于扩展可以在服务器端增加硬件提升性能模型的缺点服务器瓶颈大量客户同时访问时服务器压力大单点故障服务器崩溃则所有客户无法使用扩展性差无法应对爆发式增长成本高需要购置和维护专用服务器设备模型模型概述对等网络模型是一种分散化的网络架构模型在网络中每个节点称为既可以是服务的请求者也可以是服务的提供者节点之间直接共享资源和服务无需依赖中心化的服务器与模型的核心区别维度模型模型架构集中式分散式角色服务器客户机所有节点对等资源位置服务器分散在各个节点通信方式客户服务器任意节点之间扩展性差受服务器限制好节点越多资源越丰富可靠性单点故障去中心化无单点故障工作流程节点节点节点节点节点请求文件资源返回我有但需从获取直接向请求返回文件块同时向请求文件块返回文件块的优势优势说明高扩展性每个新节点同时带来新的资源资源与需求同步增长成本分摊没有昂贵的服务器资源由所有节点共同提供抗攻击无中心化目标难以通过摧毁服务器来瘫痪网络高可靠性节点冗余个别节点故障不影响整体服务负载均衡流量分散到多个节点避免单点拥塞的挑战挑战说明管理复杂分散化导致资源管理版权管理困难安全威胁节点行为不可控可能传播恶意软件一致性难数据分散更新同步困难性能不稳定节点随时可能离开导致下载中断典型应用应用说明文件共享协议支持断点续传多源下载电驴电骡分布式文件共享早期语音视频通话区块链等加密货币依赖网络实现去中心化星际文件系统分布式存储协议混合模型在实际应用中许多系统采用混合架构中心服务器负责用户认证索引服务元数据存储网络负责实际数据传输例如微信即采用混合模型登录认证服务器是结构但消息传输采用直连或中继二域名系统层次域名空间域名系统概述域名系统是的核心基础设施之一负责将人类可读的域名如转换为机器可识别的地址如采用分布式数据库架构层次化地管理全球的域名映射关系域名的层次结构域名采用树形层次结构从右到左级别递减各部分用点号分隔二级域名注册人自定义子域主机名顶级域名根域名根域名是树的最顶层用表示通常省略全球共有组根域名服务器由不同组织运营根服务器知道所有顶级域名服务器的信息顶级域名类别示例说明国家顶级域名按国家地区划分通用顶级域名通用类别基础设施域名用于反向域名解析新顶级域名近年新增二级域名由注册人向域名管理机构申请获得例如中的是二级域名二级域名以下还可以划分子域形成更细的层次完整域名的结构示例二级域名三级域名子域主机名子域域名命名规则每个部分由英文字母数字和连字符组成不区分大小写每个部分不超过个字符完整域名长度不超过个字符不能以连字符开头或结尾域名服务器域名服务器分类系统包含多种类型的域名服务器它们各司其职层次分明服务器类型作用管辖范围根域名服务器知道所有顶级域名服务器的位置管理顶级域名顶级域名服务器管理该下的所有二级域名如等权威域名服务器存放域名的最终映射记录负责特定域名的最终解析本地域名服务器递归解析本地域名或转发请求企业网络常设根域名服务器全球共组不是台编号为根服务器地址相对固定变化极小所有递归解析都从根服务器开始顶级域名服务器类型示例管理者通用非营利中国日本权威域名服务器权威意味着对外正式发布权威服务器的记录被认为是最权威的答案分为主服务器存放原始数据可读写从服务器从主服务器同步数据只读本地域名服务器也称递归服务器特点离用户最近通常在同一或企业网络缓存域名解析结果提高效率可以配置为递归查询或迭代查询模式域名解析流程图客户端本地域名服务器检查缓存有缓存直接返回结果无缓存查询根服务器根服务器返回地址查询服务器服务器返回权威地址查询权威服务器权威服务器返回域名解析过程域名解析类型查询分为两种查询方式查询类型说明特点递归查询客户端将查询请求完全交给服务器服务器负责全程查询并返回最终结果对客户端简单但服务器负载重迭代查询服务器返回最佳答案如下一个应查询的服务器地址客户端自行继续查询负载分散但客户端实现复杂实际解析过程递归迭代混合大多数系统采用递归查询迭代查询的混合模式客户端本地域名服务器递归查询要求返回最终结果本地域名服务器根权威服务器迭代查询获取最佳答案完整解析示例查询的地址步骤查询方向说明客户端本地域名服务器发送查询请求本地域名服务器检查缓存若已有记录且未过期直接返回本地域名服务器根服务器迭代查询服务器地址根服务器返回告知服务器地址列表本地域名服务器服务器查询的权威服务器服务器返回告知的权威服务器地址本地域名服务器权威服务器查询的权威服务器返回返回本地域名服务器客户端返回最终解析结果本地域名服务器缓存结果时间内再次查询直接返回缓存机制解析结果会被缓存以提高性能每条记录有值指示缓存有效期缓存可能造成的问题更新延迟域名变更后依赖缓存的客户端可能仍解析到旧缓存投毒恶意服务器返回伪造的记录记录类型记录类型作用字段示例域名地址域名地址域名别名邮件交换服务器域名服务器文本信息等用于验证垃圾邮件过滤域名反向查询用于邮件服务器验证等协议端口场景端口协议域名查询客户端向服务器查询区域传输主从服务器同步数据响应超过字节大响应必须用三文件传输协议工作原理概述文件传输协议是上历史最悠久应用最广泛的文件传输协议之一采用客户端服务器架构基于协议实现可靠的文件传输的工作模式使用控制连接数据连接的双连接模式连接类型端口作用生命周期控制连接服务器端传输命令和响应整个会话期间保持数据连接或动态服务器端传输实际文件数据按需建立传输完毕关闭控制连接控制连接使用协议交互命令命令以文本形式传输位典型命令响应码积极初步积极完成积极中间错误永久错误数据连接数据连接根据传输模式和服务器角色不同使用不同端口模式服务器端口数据流向说明主动模式服务器主动连接客户端客户端需开放端口防火墙不友好被动模式动态客户端主动连接服务器服务器开放随机端口对客户端友好主动模式工作流程客户端服务器控制连接命令告知客户端端口服务器从端口主动连接客户端通过数据连接传输文件被动模式工作流程客户端服务器控制连接命令服务器开放随机端口并告知客户端主动连接服务器端口通过数据连接传输文件文件传输类型类型说明适用场景文本模式自动转换换行符传输纯文本文件二进制模式原样传输传输图片视频可执行文件等专用字符编码大型机特殊场景命令示例命令说明指定用户名指定密码列出目录内容下载文件上传文件删除文件切换工作目录显示当前目录退出响应码响应码含义示例数据连接已打开传输开始文件状态正常即将打开数据连接命令成功服务就绪用户登录成功用户名正确需要密码无法打开数据连接语法错误文件不可用控制连接与数据连接控制连接详解控制连接是会话的管理通道始终保持开放状态特性使用端口服务器端客户端使用随机高端口连接基于协议交互文本命令全双工可同时发送命令和接收响应带外传输命令响应与数据分离不同于的请求响应控制连接命令分类类别命令说明访问控制用户登录退出传输参数数据连接配置文件操作文件操作命令目录操作目录管理命令数据连接详解数据连接是实际传输文件的通道按需建立和关闭特性临时性每传输一个文件或文件列表建立一次传输完毕关闭端口不固定主动模式服务器用被动模式服务器用随机高端口可传输文件内容目录列表数据连接建立规则模式数据连接发起方服务器端口客户端端口主动模式服务器客户端客户端指定高端口被动模式客户端服务器高端口服务器随机开放客户端随机高端口两种模式的对比维度主动模式被动模式服务器端口固定动态随机防火墙影响服务器主动连接可能受阻客户端主动连接更易穿透影响客户端需端口映射对友好安全性较低服务器主动连接外部较高匿名某些服务器允许匿名登录用户名密码通常用电子邮件地址代替常用于公开软件仓库开源项目发布与对比维度协议端口控制连接模式双连接控制数据单连接请求响应状态保持有状态维持会话无状态传输方向双向上传下载主要是下载断点续传支持命令支持首部目录遍历支持命令不支持四电子邮件电子邮件系统的组成结构电子邮件系统概述电子邮件是上最古老最重要的应用之一与传统邮件类似电子邮件系统包含发送方接收方邮件服务器三个核心组件以及多种协议协同工作电子邮件系统的核心组件发送方发送方邮件客户端发送方邮件服务器接收方邮件服务器接收方服务器邮箱存储服务器邮箱管理接收方邮件客户端接收方邮件客户端邮件发送组件组件全称作用邮件用户代理用户撰写阅读邮件的客户端软件如邮件传输代理负责在服务器之间转发邮件如邮件投递代理将邮件投递给收件人的邮箱存储如邮件协议栈协议方向端口作用发送发送邮件接收下载邮件到本地接收在线查看邮件同步编码邮件内容格式支持多媒体邮件发送流程以发送邮件给为例使用如撰写邮件填写收件人通过将邮件发送到的邮件服务器的邮件服务器通过查询获取的记录的邮件服务器通过将邮件发送到的邮件服务器的邮件服务器存储邮件等待来取使用通过从服务器拉取邮件电子邮件格式与电子邮件格式早期电子邮件格式由规定邮件分为首部和正文两部分中间以空行分隔邮件首部字段字段说明示例发件人邮箱收件人邮箱抄送密送隐藏副本不出现在其他收件人眼中邮件主题项目计划书发送时间唯一标识回复地址邮件正文规定邮件正文只能是位字符每行不超过个字符纯文本格式不支持多媒体多用途互联网邮件扩展扩展了的限制支持多媒体内容图片音频视频非字符如中文日文通过编码复杂结构多部分邮件嵌套核心字段字段说明示例版本内容类型传输编码类型类型子类型说明纯文本图片音频视频应用数据多部分邮件编码方式编码方式说明适用场景原始无需编码纯英文文本位字符保留少量非字符二进制特殊协议传输可打印字符编码少量非如中文位块编码大量二进制数据图片附件编码示例原始字节即分成位块编码查表得到多部分邮件类型说明典型用途多个独立部分带附件的邮件同一内容的多种表示邮件同时有和版本并行显示的多部分需同时显示的多个部分相关部分邮件中内嵌图片带附件邮件结构示例项目文档你好请查收附件中的文档编码的数据与简单邮件传输协议是电子邮件发送的核心协议负责邮件从客户端到服务器以及服务器之间的传输特性特性说明传输协议可靠连接默认端口服务器间客户端到服务器传输格式位邮件正文工作模式存储转发之间中继认证可选工作流程直连模式发送方发送方接收方连接连接邮件内容首部正文结束符命令命令说明示例标识发送方主机认证发件人收件人邮件正文开始后发送邮件内容关闭连接邮局协议是邮件接收协议让用户从邮件服务器下载邮件到本地特性说明传输协议默认端口明文加密工作模式拉取客户端主动从服务器下载默认行为下载后删除服务器端邮件可配置保留同步性差本地邮件与服务器不同步工作流程客户端服务器连接邮件首部正文命令命令说明指定用户名指定密码查看邮件统计列出邮件指定邮件下载指定邮件删除指定邮件查看邮件首部前行退出互联网邮件访问协议是比更高级的邮件接收协议支持在线查看和管理特性说明传输协议默认端口明文加密工作模式在线邮件保留在服务器本地只缓存视图默认行为保留服务器端邮件同步性强多客户端同步访问同一邮箱对比维度邮件位置服务器长期存储本地下载后可能删除多设备同步支持不支持文件夹支持支持服务器端组织不支持选择性读取支持只读取邮件首部部分内容需下载完整邮件附件处理可选择下载全部下载网络依赖必须在线下载后可离线适用场景多设备访问企业邮箱单设备离线使用五万维网万维网的概念与组成结构万维网概述万维网是上最庞大的应用系统由于年在欧洲核子研究中心发明通过超文本标记语言组织信息通过超文本传输协议传输数据的核心组成组件说明示例超文本标记语言描述网页结构超文本传输协议规范浏览器与服务器通信统一资源定位符标识网上资源位置浏览器客户端软件解析并展示服务器存储和提供网页内容统一资源定位符是互联网上资源的标准地址格式协议主机名路径查询字符串锚点组成说明示例协议访问资源使用的协议主机名服务器域名或地址端口服务器端口号可省略默认默认路径资源在服务器上的位置查询字符串传递给程序的参数锚点页面内跳转位置工作流程用户浏览器服务器用户输入或点击链接解析域名建立连接默认发送请求服务器处理请求读取文件执行脚本查询数据库返回响应浏览器解析请求嵌入资源图片渲染页面关闭连接或保持复用系统的三层架构层次说明技术表示层用户界面渲染业务逻辑层处理请求执行逻辑数据层存储和管理数据超文本传输协议协议概述超文本传输协议是万维网的核心协议定义了浏览器客户端与服务器之间的通信格式和规则是无状态无连接的应用层协议版本演进版本年份主要特性极简协议只支持引入首部状态码支持多种请求方法持久连接管道化缓存控制多路复用头部压缩服务器推送基于消除队头阻塞主要特性特性说明持久连接连接可复用避免重复三次握手管道化客户端可连续发送多个请求需按序响应分块传输支持流式响应边生成边传输虚拟主机一台服务器托管多个网站首部报文结构报文分为请求报文和响应报文请求报文格式请求行方法路径协议版本请求首部请求首部请求首部请求体可选响应报文格式状态行协议版本状态码状态描述响应首部响应首部响应首部响应体请求方法方法语义幂等安全说明获取资源仅读取不修改资源提交数据创建资源提交表单上传资源替换指定资源删除资源删除指定资源获取首部与类似但无响应体查询能力查询支持的方法部分更新修改资源的部分字段幂等多次执行结果相同安全不修改资源状态码类别含义典型状态码信息性成功重定向客户端错误服务器错误常见状态码详解状态码说明典型场景请求成功成功处理成功资源已创建创建新资源无内容成功永久移动域名迁移浏览器自动跳转新临时移动临时重定向未修改缓存有效使用本地缓存请求语法错误参数错误格式错误未认证需要登录无权限登录了但无权访问资源不存在页面接口不存在服务器内部错误代码异常网关错误上游服务器故障服务不可用服务器过载维护首部字段分类类别示例说明通用首部请求响应都可用请求首部仅请求中使用响应首部仅响应中使用实体首部描述实体数据机制是服务器在客户端存储的小型数据片段用于状态保持浏览器服务器首次请求无响应首部浏览器存储后续请求首部服务器识别用户的属性属性说明的名称和值过期时间时间有效期秒有效路径默认有效域名禁止访问防仅传输跨站策略缓存机制机制说明首部强制缓存命中则直接使用本地缓存协商缓存向服务器验证资源是否更新不缓存每次都从服务器获取提供加密传输特性说明端口加密证书服务器需申请证书握手握手建立安全通道',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-05-02 18:00:06',
+  postMainColor: '#ec5759',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.min.css"><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/sparkle520?tab=repositories" title="github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="github"/><span class="back-menu-item-text">github</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">SPARKLE</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/408/" style="font-size: 1.05rem;">408<sup>25</sup></a><a href="/tags/AOP/" style="font-size: 1.05rem;">AOP<sup>1</sup></a><a href="/tags/Deep-Learning/" style="font-size: 1.05rem;">Deep Learning<sup>1</sup></a><a href="/tags/IoC/" style="font-size: 1.05rem;">IoC<sup>1</sup></a><a href="/tags/JSR303/" style="font-size: 1.05rem;">JSR303<sup>1</sup></a><a href="/tags/Matplotlib/" style="font-size: 1.05rem;">Matplotlib<sup>3</sup></a><a href="/tags/c/" style="font-size: 1.05rem;">c#<sup>2</sup></a><a href="/tags/java/" style="font-size: 1.05rem;">java<sup>4</sup></a><a href="/tags/python/" style="font-size: 1.05rem;">python<sup>5</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 1.05rem;">事务<sup>1</sup></a><a href="/tags/%E4%BA%8C%E6%AC%A1%E5%9E%8B/" style="font-size: 1.05rem;">二次型<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E3%80%82/" style="font-size: 1.05rem;">你的名字。<sup>3</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字同名小说<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%A4%96%E4%BC%A0%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字外传小说<sup>1</sup></a><a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size: 1.05rem;">写作<sup>4</sup></a><a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 1.05rem;">包管理<sup>1</sup></a><a href="/tags/%E5%8D%B7%E7%A7%AF%E5%85%AC%E5%BC%8F/" style="font-size: 1.05rem;">卷积公式<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90/" style="font-size: 1.05rem;">天气之子<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">天气之子同名小说<sup>1</sup></a><a href="/tags/%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">小说<sup>2</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">操作系统<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" style="font-size: 1.05rem;">数据校验<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" style="font-size: 1.05rem;">数据链路层<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 1.05rem;">概率论<sup>2</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 1.05rem;">概率论与数理统计<sup>7</sup></a><a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 1.05rem;">汇编<sup>9</sup></a><a href="/tags/%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80/" style="font-size: 1.05rem;">泰勒展开<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/" style="font-size: 1.05rem;">物理层<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%80%BC/" style="font-size: 1.05rem;">特征值<sup>2</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F/" style="font-size: 1.05rem;">特征向量<sup>2</sup></a><a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">线性代数<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" style="font-size: 1.05rem;">网络体系结构<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" style="font-size: 1.05rem;">网络层<sup>2</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 1.05rem;">英语<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">英语语法<sup>24</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1.05rem;">计算机组成原理<sup>6</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.05rem;">计算机网络<sup>7</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">语法<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">高等代数<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" style="font-size: 1.05rem;">高等数学<sup>22</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/04/"><span class="card-archive-list-date">四月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">三月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">31</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/02/"><span class="card-archive-list-date">二月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/01/"><span class="card-archive-list-date">一月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/12/"><span class="card-archive-list-date">十二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">15</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/11/"><span class="card-archive-list-date">十一月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/10/"><span class="card-archive-list-date">十月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/09/"><span class="card-archive-list-date">九月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%BD%91/" itemprop="url">计网</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/408/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>408</span></a><a class="article-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>计算机网络</span></a><a class="article-meta__tags" href="/tags/%E5%BA%94%E7%94%A8%E5%B1%82/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>应用层</span></a></span></div></div><h1 class="post-title" itemprop="name headline">408-计算机网络-6-应用层</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-03-11T16:00:00.000Z" title="发表于 2026-03-12 00:00:00">2026-03-12</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-05-02T10:00:06.728Z" title="更新于 2026-05-02 18:00:06">2026-05-02</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">9.7k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>37分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="408-计算机网络-6-应用层"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为系守镇"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>系守镇</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2026/03/12/408-%E8%AE%A1%E7%BD%916/#post-comment" tabindex="-1"><span id="twikoo-count"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://pic1.imgdb.cn/item/69a6f223f98389e4a9b7cf25.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2026/03/12/408-%E8%AE%A1%E7%BD%916/"><header><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%BD%91/" itemprop="url">计网</a><a href="/tags/408/" tabindex="-1" itemprop="url">408</a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" tabindex="-1" itemprop="url">计算机网络</a><a href="/tags/%E5%BA%94%E7%94%A8%E5%B1%82/" tabindex="-1" itemprop="url">应用层</a><h1 id="CrawlerTitle" itemprop="name headline">408-计算机网络-6-应用层</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">sparkle520</span><time itemprop="dateCreated datePublished" datetime="2026-03-11T16:00:00.000Z" title="发表于 2026-03-12 00:00:00">2026-03-12</time><time itemprop="dateCreated datePublished" datetime="2026-05-02T10:00:06.728Z" title="更新于 2026-05-02 18:00:06">2026-05-02</time></header><h1 id="应用层">应用层</h1>
+<blockquote>
+<p>本文系统讲解应用层核心协议 : 网络应用模型 ( C/S 与 P2P ) 、DNS
+域名系统 ( 域名空间、服务器、解析过程 ) 、FTP 文件传输协议 (
+工作原理、控制/数据连接 ) 、电子邮件系统 ( SMTP/POP3/IMAP ) 与
+MIME、以及万维网与 HTTP 协议.</p>
+</blockquote>
+<div class="mermaid-wrap"><pre class="mermaid-src" hidden>
+  %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;primaryColor&#39;: &#39;#883ced&#39;, &#39;primaryTextColor&#39;: &#39;#fff&#39;, &#39;primaryBorderColor&#39;: &#39;#883ced&#39;, &#39;lineColor&#39;: &#39;#06B6D4&#39;, &#39;fontFamily&#39;: &#39;Arial&#39;, &#39;fontSize&#39;: &#39;14px&#39;, &#39;mindmapPadding&#39;: &#39;8px&#39;, &#39;maxEdges&#39;: &#39;200&#39; }}}%%
+mindmap
+  root((应用层))
+    网络应用模型
+      客户&#x2F;服务器模型
+        服务器
+        客户机
+        集中管理
+        可扩展性差
+      P2P模型
+        对等连接
+        分散化
+        高扩展性
+        资源丰富
+    域名系统DNS
+      层次域名空间
+        根域名
+        顶级域名
+        二级域名
+      域名服务器
+        根服务器
+        顶级域名服务器
+        权威域名服务器
+        本地域名服务器
+      解析过程
+        递归查询
+        迭代查询
+    文件传输协议FTP
+      控制连接
+        端口21
+        携带命令
+      数据连接
+        端口20
+        主动&#x2F;被动模式
+    电子邮件
+      SMTP
+        发送协议
+        端口25
+      POP3
+        接收协议
+        端口110
+      IMAP
+        高级接收
+        端口143
+      MIME
+        多媒体扩展
+    万维网WWW
+      URL
+      HTTP
+      HTML
+  </pre></div>
+<h3 id="总结与速查-cheat-sheet">总结与速查 ( Cheat Sheet )</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">知识点</th>
+<th style="text-align: left;">核心结论</th>
+<th style="text-align: left;">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>C/S 模型</strong></td>
+<td style="text-align: left;">服务器提供资源，客户请求服务</td>
+<td style="text-align: left;">集中管理，但扩展性差</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>P2P 模型</strong></td>
+<td style="text-align: left;">节点既请求又提供服务</td>
+<td style="text-align: left;">高扩展性，但管理复杂</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>DNS 端口</strong></td>
+<td style="text-align: left;">UDP 53 ( 查询 ) / TCP 53 ( 区域传输 )</td>
+<td style="text-align: left;">递归/迭代查询</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>DNS 层次</strong></td>
+<td style="text-align: left;">根→顶级 ( TLD ) →权威→本地域名服务器</td>
+<td style="text-align: left;">分布式数据库</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>FTP 控制连接</strong></td>
+<td style="text-align: left;">TCP 端口 21</td>
+<td style="text-align: left;">携带命令/响应</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>FTP 数据连接</strong></td>
+<td style="text-align: left;">TCP 端口 20 ( 主动模式 )</td>
+<td style="text-align: left;">传输文件数据</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>FTP 被动模式</strong></td>
+<td style="text-align: left;">服务器开放随机端口给客户端连接</td>
+<td style="text-align: left;">穿越防火墙</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SMTP</strong></td>
+<td style="text-align: left;">发送邮件，TCP 端口 25</td>
+<td style="text-align: left;">仅传输 7 位 ASCII</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>POP3</strong></td>
+<td style="text-align: left;">拉取邮件，TCP 端口 110</td>
+<td style="text-align: left;">简单但功能有限</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>IMAP</strong></td>
+<td style="text-align: left;">在线查看邮件，TCP 端口 143</td>
+<td style="text-align: left;">支持选择性下载</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>MIME</strong></td>
+<td style="text-align: left;">多用途互联网邮件扩展</td>
+<td style="text-align: left;">支持多媒体、编码转换</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>HTTP</strong></td>
+<td style="text-align: left;">超文本传输，TCP 端口 80/443</td>
+<td style="text-align: left;">无状态，无连接</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>HTTP 请求方法</strong></td>
+<td style="text-align: left;">GET/POST/PUT/DELETE/HEAD</td>
+<td style="text-align: left;">RESTful 核心</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Cookie</strong></td>
+<td style="text-align: left;">服务器生成，存储在客户端</td>
+<td style="text-align: left;">状态保持</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="一网络应用模型">一、网络应用模型</h2>
+<h3 id="客户服务器模型">6.1.1 客户/服务器模型</h3>
+<div class="note info simple"><p><strong>客户/服务器模型概述</strong></p>
+<p>客户/服务器 ( Client/Server, C/S )
+模型是网络应用中最早出现也是最经典的架构模式.
+在该模型中，网络中的节点被分为两类 :</p>
+<ul>
+<li><strong>服务器 ( Server )</strong> :
+提供计算资源、数据存储或服务的节点，通常具有固定的、公开的 IP
+地址，持续运行，等待客户请求.</li>
+<li><strong>客户机 ( Client )</strong> :
+主动发起请求的节点，通常是用户终端设备 ( 如 PC、手机 )
+，临时连接到服务器，使用其提供的服务.</li>
+</ul>
+<p><strong>工作流程</strong></p>
+<div class="mermaid-wrap">
+<pre class="mermaid-src" hidden>
+  %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;actorBkg&#39;: &#39;#ECECFF&#39;, &#39;actorBorder&#39;: &#39;#CCCCFF&#39;, &#39;actorTextColor&#39;: &#39;#333&#39;, &#39;noteBkgColor&#39;: &#39;#FEFCE8&#39;, &#39;noteBorderColor&#39;: &#39;#FDE047&#39;, &#39;noteTextColor&#39;: &#39;#854D0E&#39;, &#39;actorLineColor&#39;: &#39;#CCCCFF&#39;, &#39;messageLineColor&#39;: &#39;#666&#39;, &#39;signalColor&#39;: &#39;#333&#39;, &#39;sequenceNumberColor&#39;: &#39;#fff&#39; }}}%%
+sequenceDiagram
+    participant A as 客户机 A
+    participant S as 服务器
+    participant B as 客户机 B
+
+    A-&gt;&gt;+S: ① 请求服务
+    S-&gt;&gt;S: ② 处理请求
+    S-&gt;&gt;-A: ③ 返回结果
+    B-&gt;&gt;+S: ④ 请求服务
+    S-&gt;&gt;-B: ⑤ 返回结果
+  </pre>
+</div>
+<p><strong>服务器的特性</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">特性</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>被动等待</strong></td>
+<td
+style="text-align: left;">服务器不主动发起连接，总是等待客户请求</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>永久地址</strong></td>
+<td style="text-align: left;">服务器通常具有固定的公网 IP 地址</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>持续运行</strong></td>
+<td style="text-align: left;">服务器程序通常 24 小时运行</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>集中管理</strong></td>
+<td style="text-align: left;">所有资源和服务由服务器集中管理和分配</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>可扩展性差</strong></td>
+<td style="text-align: left;">当客户数量激增时，服务器可能成为瓶颈</td>
+</tr>
+</tbody>
+</table>
+<p><strong>客户机的特性</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">特性</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>主动发起</strong></td>
+<td style="text-align: left;">客户机主动向服务器发送请求</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>临时连接</strong></td>
+<td
+style="text-align: left;">客户机可以在需要时连接，通信结束后断开</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>本地处理</strong></td>
+<td style="text-align: left;">尽可能在本地完成计算，减少网络流量</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>不直接通信</strong></td>
+<td
+style="text-align: left;">客户机之间通常不直接通信，需通过服务器中转</td>
+</tr>
+</tbody>
+</table>
+<p><strong>典型应用</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">应用</th>
+<th style="text-align: left;">服务器角色</th>
+<th style="text-align: left;">客户端角色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Web 浏览</strong></td>
+<td style="text-align: left;">Web 服务器 ( Apache, Nginx )</td>
+<td style="text-align: left;">浏览器</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>电子邮件</strong></td>
+<td style="text-align: left;">邮件服务器</td>
+<td style="text-align: left;">邮件客户端</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>文件下载</strong></td>
+<td style="text-align: left;">FTP 服务器 / 文件服务器</td>
+<td style="text-align: left;">下载工具</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>数据库</strong></td>
+<td style="text-align: left;">数据库服务器 ( MySQL, Oracle )</td>
+<td style="text-align: left;">数据库客户端</td>
+</tr>
+</tbody>
+</table>
+<p><strong>C/S 模型的优点</strong></p>
+<ul>
+<li><strong>集中管理</strong> :
+便于对资源访问权限进行控制和数据管理</li>
+<li><strong>安全性高</strong> : 通过服务器统一管理安全策略</li>
+<li><strong>可靠性强</strong> :
+服务器通常具备高可靠性硬件和冗余机制</li>
+<li><strong>易于扩展</strong> : 可以在服务器端增加硬件提升性能</li>
+</ul>
+<p><strong>C/S 模型的缺点</strong></p>
+<ul>
+<li><strong>服务器瓶颈</strong> : 大量客户同时访问时服务器压力大</li>
+<li><strong>单点故障</strong> : 服务器崩溃则所有客户无法使用</li>
+<li><strong>扩展性差</strong> : 无法应对爆发式增长</li>
+<li><strong>成本高</strong> : 需要购置和维护专用服务器设备</li>
+</ul>
+</div>
+<hr />
+<h3 id="p2p-模型">6.1.2 P2P 模型</h3>
+<div class="note info simple"><p><strong>P2P 模型概述</strong></p>
+<p>对等网络 ( Peer-to-Peer, P2P ) 模型是一种分散化的网络架构模型. 在 P2P
+网络中，每个节点 ( 称为 <strong>peer</strong> )
+既可以是服务的请求者，也可以是服务的提供者.
+节点之间直接共享资源和服务，无需依赖中心化的服务器.</p>
+<p><strong>与 C/S 模型的核心区别</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">维度</th>
+<th style="text-align: left;">C/S 模型</th>
+<th style="text-align: left;">P2P 模型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>架构</strong></td>
+<td style="text-align: left;">集中式</td>
+<td style="text-align: left;">分散式</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>角色</strong></td>
+<td style="text-align: left;">服务器 + 客户机</td>
+<td style="text-align: left;">所有节点对等</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>资源位置</strong></td>
+<td style="text-align: left;">服务器</td>
+<td style="text-align: left;">分散在各个节点</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>通信方式</strong></td>
+<td style="text-align: left;">客户 ↔︎ 服务器</td>
+<td style="text-align: left;">任意节点之间</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>扩展性</strong></td>
+<td style="text-align: left;">差 ( 受服务器限制 )</td>
+<td style="text-align: left;">好 ( 节点越多资源越丰富 )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>可靠性</strong></td>
+<td style="text-align: left;">单点故障</td>
+<td style="text-align: left;">去中心化，无单点故障</td>
+</tr>
+</tbody>
+</table>
+<p><strong>工作流程</strong></p>
+<div class="mermaid-wrap">
+<pre class="mermaid-src" hidden>
+  %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;actorBkg&#39;: &#39;#ECECFF&#39;, &#39;actorBorder&#39;: &#39;#CCCCFF&#39;, &#39;actorTextColor&#39;: &#39;#333&#39;, &#39;noteBkgColor&#39;: &#39;#FEFCE8&#39;, &#39;noteBorderColor&#39;: &#39;#FDE047&#39;, &#39;noteTextColor&#39;: &#39;#854D0E&#39;, &#39;actorLineColor&#39;: &#39;#CCCCFF&#39;, &#39;messageLineColor&#39;: &#39;#666&#39;, &#39;signalColor&#39;: &#39;#333&#39;, &#39;sequenceNumberColor&#39;: &#39;#fff&#39; }}}%%
+sequenceDiagram
+    participant A as 节点 A
+    participant B as 节点 B
+    participant C as 节点 C
+    participant D as 节点 D
+    participant E as 节点 E
+
+    A-&gt;&gt;+B: ① 请求文件&#x2F;资源
+    B--&gt;&gt;-A: ② 返回 : 我有，但需从 D 获取
+    A-&gt;&gt;+D: ③ 直接向 D 请求
+    D--&gt;&gt;A: ④ 返回文件块 1&#x2F;2
+    A-&gt;&gt;+E: ⑤ 同时向 E 请求文件块 2&#x2F;2
+    E--&gt;&gt;A: ⑥ 返回文件块 2&#x2F;2
+  </pre>
+</div>
+<p><strong>P2P 的优势</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">优势</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>高扩展性</strong></td>
+<td
+style="text-align: left;">每个新节点同时带来新的资源，资源与需求同步增长</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>成本分摊</strong></td>
+<td
+style="text-align: left;">没有昂贵的服务器，资源由所有节点共同提供</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>抗攻击</strong></td>
+<td
+style="text-align: left;">无中心化目标，难以通过摧毁服务器来瘫痪网络</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>高可靠性</strong></td>
+<td style="text-align: left;">节点冗余，个别节点故障不影响整体服务</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>负载均衡</strong></td>
+<td style="text-align: left;">流量分散到多个节点，避免单点拥塞</td>
+</tr>
+</tbody>
+</table>
+<p><strong>P2P 的挑战</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">挑战</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>管理复杂</strong></td>
+<td style="text-align: left;">分散化导致资源管理、版权管理困难</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>安全威胁</strong></td>
+<td style="text-align: left;">节点行为不可控，可能传播恶意软件</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>一致性难</strong></td>
+<td style="text-align: left;">数据分散，更新同步困难</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>性能不稳定</strong></td>
+<td style="text-align: left;">节点随时可能离开，导致下载中断</td>
+</tr>
+</tbody>
+</table>
+<p><strong>典型 P2P 应用</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">应用</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>BitTorrent</strong></td>
+<td style="text-align: left;">P2P
+文件共享协议，支持断点续传、多源下载</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>eDonkey/eMule</strong></td>
+<td style="text-align: left;">电驴/电骡，分布式文件共享</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Skype ( 早期 )</strong></td>
+<td style="text-align: left;">P2P 语音/视频通话</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>区块链</strong></td>
+<td style="text-align: left;">Bitcoin 等加密货币依赖 P2P
+网络实现去中心化</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>IPFS</strong></td>
+<td style="text-align: left;">星际文件系统，分布式存储协议</td>
+</tr>
+</tbody>
+</table>
+<p><strong>混合 P2P 模型</strong></p>
+<p>在实际应用中，许多系统采用 <strong>C/S + P2P 混合架构</strong> :</p>
+<ul>
+<li><strong>中心服务器</strong> 负责 :
+用户认证、索引服务、元数据存储</li>
+<li><strong>P2P 网络</strong> 负责 : 实际数据传输</li>
+</ul>
+<p>例如 : <strong>QQ、微信</strong> 即采用混合模型 : 登录认证服务器是
+C/S 结构，但消息传输采用 P2P 直连或中继.</p>
+</div>
+<hr />
+<h2 id="二域名系统-dns">二、域名系统 DNS</h2>
+<h3 id="层次域名空间">6.2.1 层次域名空间</h3>
+<div class="note info simple"><p><strong>域名系统概述</strong></p>
+<p>域名系统 ( Domain Name System, DNS ) 是 Internet
+的核心基础设施之一，负责将人类可读的域名 ( 如
+<code>www.example.com</code> ) 转换为机器可识别的 IP 地址 ( 如
+<code>93.184.216.34</code> ) . DNS
+采用分布式数据库架构，层次化地管理全球的域名映射关系.</p>
+<p><strong>域名的层次结构</strong></p>
+<p>域名采用树形层次结构，从右到左级别递减，各部分用点号分隔 :</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">www.example.com</span><br><span class="line">└──┬──┘ └───┬──┘</span><br><span class="line">   │        └── 二级域名 ( 注册人自定义 ) </span><br><span class="line">   └── 子域/主机名</span><br><span class="line">              └── 顶级域名 ( TLD ) </span><br></pre></td></tr></table></figure>
+<p><strong>根域名</strong></p>
+<ul>
+<li>根域名是 DNS 树的最顶层，用 <code>.</code> 表示 ( 通常省略 )</li>
+<li>全球共有 <strong>13 组</strong> 根域名服务器 ( A~M )
+，由不同组织运营</li>
+<li>根服务器知道所有顶级域名服务器的信息</li>
+</ul>
+<p><strong>顶级域名 ( Top-Level Domain, TLD )</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">类别</th>
+<th style="text-align: left;">示例</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>国家顶级域名 ( ccTLD
+)</strong></td>
+<td
+style="text-align: left;"><code>.cn</code>、<code>.jp</code>、<code>.uk</code></td>
+<td style="text-align: left;">按国家/地区划分</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>通用顶级域名 ( gTLD
+)</strong></td>
+<td
+style="text-align: left;"><code>.com</code>、<code>.org</code>、<code>.net</code></td>
+<td style="text-align: left;">通用类别</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>基础设施域名</strong></td>
+<td style="text-align: left;"><code>.arpa</code></td>
+<td style="text-align: left;">用于反向域名解析</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>新顶级域名</strong></td>
+<td
+style="text-align: left;"><code>.app</code>、<code>.xyz</code>、<code>.io</code></td>
+<td style="text-align: left;">近年新增</td>
+</tr>
+</tbody>
+</table>
+<p><strong>二级域名</strong></p>
+<ul>
+<li>由注册人向域名管理机构申请获得</li>
+<li>例如 : <code>example.com</code> 中的 <code>example</code>
+是二级域名</li>
+<li>二级域名以下还可以划分子域，形成更细的层次</li>
+</ul>
+<p><strong>完整域名的结构示例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mail.server.example.com</span><br><span class="line">└─┘ └─────┘ └──────┘</span><br><span class="line"> │       │        └─ 二级域名</span><br><span class="line"> │       └─ 三级域名/子域</span><br><span class="line"> └─ 主机名/子域</span><br></pre></td></tr></table></figure>
+<p><strong>域名命名规则</strong></p>
+<ul>
+<li>每个部分由英文字母 ( a-z ) 、数字 ( 0-9 ) 和连字符 ( - ) 组成</li>
+<li>不区分大小写</li>
+<li>每个部分不超过 63 个字符</li>
+<li>完整域名长度不超过 255 个字符</li>
+<li>不能以连字符开头或结尾</li>
+</ul>
+</div>
+<hr />
+<h3 id="域名服务器">6.2.2 域名服务器</h3>
+<div class="note info simple"><p><strong>域名服务器分类</strong></p>
+<p>DNS 系统包含多种类型的域名服务器，它们各司其职、层次分明 :</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">服务器类型</th>
+<th style="text-align: left;">作用</th>
+<th style="text-align: left;">管辖范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>根域名服务器</strong></td>
+<td style="text-align: left;">知道所有顶级域名服务器的位置</td>
+<td style="text-align: left;">管理顶级域名 ( TLD )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>顶级域名服务器</strong></td>
+<td style="text-align: left;">管理该 TLD 下的所有二级域名</td>
+<td style="text-align: left;">如 .com、.cn、.org 等</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>权威域名服务器</strong></td>
+<td style="text-align: left;">存放域名→IP 的最终映射 ( DNS 记录 )</td>
+<td style="text-align: left;">负责特定域名的最终解析</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>本地域名服务器</strong></td>
+<td style="text-align: left;">递归解析本地域名或转发请求</td>
+<td style="text-align: left;">ISP、企业网络常设</td>
+</tr>
+</tbody>
+</table>
+<p><strong>根域名服务器</strong></p>
+<ul>
+<li>全球共 <strong>13 组</strong> ( 不是 13 台 ) ，编号为 A~M</li>
+<li>根服务器 IP 地址相对固定 ( 变化极小 )</li>
+<li>所有递归解析都从根服务器开始</li>
+</ul>
+<p><strong>顶级域名服务器</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">TLD 类型</th>
+<th style="text-align: left;">示例</th>
+<th style="text-align: left;">管理者</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">.com、.net、.edu</td>
+<td style="text-align: left;">通用</td>
+<td style="text-align: left;">Verisign</td>
+</tr>
+<tr>
+<td style="text-align: left;">.org</td>
+<td style="text-align: left;">非营利</td>
+<td style="text-align: left;">Public Interest Registry</td>
+</tr>
+<tr>
+<td style="text-align: left;">.cn</td>
+<td style="text-align: left;">中国</td>
+<td style="text-align: left;">CNNIC</td>
+</tr>
+<tr>
+<td style="text-align: left;">.jp</td>
+<td style="text-align: left;">日本</td>
+<td style="text-align: left;">JPNIC</td>
+</tr>
+</tbody>
+</table>
+<p><strong>权威域名服务器</strong></p>
+<ul>
+<li><strong>权威 ( Authoritative )</strong> 意味着”对外正式发布”</li>
+<li>权威服务器的 DNS 记录被认为是最权威的答案</li>
+<li>分为 :
+<ul>
+<li><strong>主 ( Master/Primary ) 服务器</strong> : 存放原始 DNS
+数据，可读写</li>
+<li><strong>从 ( Slave/Secondary ) 服务器</strong> :
+从主服务器同步数据，只读</li>
+</ul></li>
+</ul>
+<p><strong>本地域名服务器</strong></p>
+<ul>
+<li>也称 <strong>递归服务器 ( Resolver )</strong></li>
+<li>特点 :
+<ul>
+<li>离用户最近 ( 通常在同一 ISP 或企业网络 )</li>
+<li>缓存域名解析结果，提高效率</li>
+<li>可以配置为递归查询或迭代查询模式</li>
+</ul></li>
+</ul>
+<p><strong>域名解析流程图</strong></p>
+<div class="mermaid-wrap">
+<pre class="mermaid-src" hidden>
+  %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;primaryColor&#39;: &#39;#883ced&#39;, &#39;primaryTextColor&#39;: &#39;#fff&#39;, &#39;primaryBorderColor&#39;: &#39;#883ced&#39;, &#39;lineColor&#39;: &#39;#06B6D4&#39;, &#39;nodeBorder&#39;: &#39;#883ced&#39;, &#39;clusterBkg&#39;: &#39;#f3e8ff&#39;, &#39;titleColor&#39;: &#39;#333&#39;, &#39;edgeLabelBackground&#39;: &#39;#fff&#39; }}}%%
+flowchart TD
+    A[客户端] --&gt; B[本地域名服务器]
+    B --&gt; C{检查缓存}
+    C --&gt;|有缓存| Z[直接返回结果]
+    C --&gt;|无缓存| D[查询根服务器]
+    D --&gt; E[根服务器返回TLD地址]
+    E --&gt; F[查询TLD服务器]
+    F --&gt; G[TLD服务器返回权威地址]
+    G --&gt; H[查询权威服务器]
+    H --&gt; I[权威服务器返回IP]
+    I --&gt; Z
+  </pre>
+</div>
+</div>
+<hr />
+<h3 id="域名解析过程">6.2.3 域名解析过程</h3>
+<div class="note info simple"><p><strong>域名解析类型</strong></p>
+<p>DNS 查询分为两种查询方式 :</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">查询类型</th>
+<th style="text-align: left;">说明</th>
+<th style="text-align: left;">特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>递归查询</strong></td>
+<td style="text-align: left;">DNS 客户端将查询请求完全交给 DNS
+服务器，服务器负责全程查询并返回最终结果</td>
+<td style="text-align: left;">对客户端简单，但服务器负载重</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>迭代查询</strong></td>
+<td style="text-align: left;">DNS 服务器返回最佳答案 (
+如下一个应查询的服务器地址 ) ，客户端自行继续查询</td>
+<td style="text-align: left;">负载分散，但客户端实现复杂</td>
+</tr>
+</tbody>
+</table>
+<p><strong>实际解析过程 ( 递归 + 迭代混合 )</strong></p>
+<p>大多数 DNS 系统采用 <strong>递归查询 + 迭代查询</strong> 的混合模式
+:</p>
+<ol type="1">
+<li><strong>客户端 → 本地域名服务器</strong> : 递归查询 (
+要求返回最终结果 )</li>
+<li><strong>本地域名服务器 → 根/TLD/权威服务器</strong> : 迭代查询 (
+获取最佳答案 )</li>
+</ol>
+<p><strong>完整解析示例</strong></p>
+<p>查询 <code>www.example.com</code> 的 IP 地址 :</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">步骤</th>
+<th style="text-align: left;">查询方向</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">客户端 → 本地域名服务器</td>
+<td style="text-align: left;">发送 <code>www.example.com</code>
+查询请求</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">本地域名服务器检查缓存</td>
+<td style="text-align: left;">若已有记录且未过期，直接返回</td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td style="text-align: left;">本地域名服务器 → 根服务器</td>
+<td style="text-align: left;">迭代查询 <code>.com</code> TLD
+服务器地址</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">根服务器返回</td>
+<td style="text-align: left;">告知 <code>.com</code> TLD
+服务器地址列表</td>
+</tr>
+<tr>
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">本地域名服务器 → TLD 服务器</td>
+<td style="text-align: left;">查询 <code>example.com</code>
+的权威服务器</td>
+</tr>
+<tr>
+<td style="text-align: center;">6</td>
+<td style="text-align: left;">TLD 服务器返回</td>
+<td style="text-align: left;">告知 <code>example.com</code>
+的权威服务器地址</td>
+</tr>
+<tr>
+<td style="text-align: center;">7</td>
+<td style="text-align: left;">本地域名服务器 → 权威服务器</td>
+<td style="text-align: left;">查询 <code>www.example.com</code> 的
+IP</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td style="text-align: left;">权威服务器返回</td>
+<td style="text-align: left;">返回 <code>www.example.com</code> →
+<code>93.184.216.34</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">9</td>
+<td style="text-align: left;">本地域名服务器 → 客户端</td>
+<td style="text-align: left;">返回最终解析结果</td>
+</tr>
+<tr>
+<td style="text-align: center;">10</td>
+<td style="text-align: left;">本地域名服务器缓存结果</td>
+<td style="text-align: left;">TTL 时间内再次查询直接返回</td>
+</tr>
+</tbody>
+</table>
+<p><strong>DNS 缓存机制</strong></p>
+<ul>
+<li>DNS 解析结果会被缓存以提高性能</li>
+<li>每条记录有 <strong>TTL ( Time To Live )</strong>
+值，指示缓存有效期</li>
+<li>缓存可能造成的问题 :
+<ul>
+<li><strong>更新延迟</strong> : 域名 IP
+变更后，依赖缓存的客户端可能仍解析到旧 IP</li>
+<li><strong>缓存投毒</strong> : 恶意 DNS 服务器返回伪造的 DNS 记录</li>
+</ul></li>
+</ul>
+<p><strong>DNS 记录类型</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">记录类型</th>
+<th style="text-align: left;">作用</th>
+<th style="text-align: left;">字段示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>A</strong></td>
+<td style="text-align: left;">域名 → IPv4 地址</td>
+<td
+style="text-align: left;"><code>example.com. IN A 93.184.216.34</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>AAAA</strong></td>
+<td style="text-align: left;">域名 → IPv6 地址</td>
+<td
+style="text-align: left;"><code>example.com. IN AAAA 2606:2800:220:1</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CNAME</strong></td>
+<td style="text-align: left;">域名别名</td>
+<td
+style="text-align: left;"><code>www.example.com. IN CNAME example.com.</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>MX</strong></td>
+<td style="text-align: left;">邮件交换服务器</td>
+<td
+style="text-align: left;"><code>example.com. IN MX 10 mail.example.com.</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>NS</strong></td>
+<td style="text-align: left;">域名服务器</td>
+<td
+style="text-align: left;"><code>example.com. IN NS ns1.example.com.</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TXT</strong></td>
+<td style="text-align: left;">文本信息 ( SPF 等 )</td>
+<td style="text-align: left;">用于验证、垃圾邮件过滤</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>PTR</strong></td>
+<td style="text-align: left;">IP → 域名 ( 反向查询 )</td>
+<td style="text-align: left;">用于邮件服务器验证等</td>
+</tr>
+</tbody>
+</table>
+<p><strong>DNS 协议端口</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">场景</th>
+<th style="text-align: center;">端口</th>
+<th style="text-align: left;">协议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>域名查询</strong></td>
+<td style="text-align: center;">UDP 53</td>
+<td style="text-align: left;">客户端向服务器查询</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>区域传输</strong></td>
+<td style="text-align: center;">TCP 53</td>
+<td style="text-align: left;">主从服务器同步数据</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>响应超过 512 字节</strong></td>
+<td style="text-align: center;">TCP 53</td>
+<td style="text-align: left;">大响应必须用 TCP</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h2 id="三文件传输协议-ftp">三、文件传输协议 FTP</h2>
+<h3 id="ftp-工作原理">6.3.1 FTP 工作原理</h3>
+<div class="note info simple"><p><strong>FTP 概述</strong></p>
+<p>文件传输协议 ( File Transfer Protocol, FTP ) 是 Internet
+上历史最悠久、应用最广泛的文件传输协议之一. FTP 采用
+<strong>客户端/服务器架构</strong>，基于 TCP 协议实现可靠的文件传输.</p>
+<p><strong>FTP 的工作模式</strong></p>
+<p>FTP 使用 <strong>控制连接 + 数据连接</strong> 的双连接模式 :</p>
+<table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 29%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">连接类型</th>
+<th style="text-align: center;">端口</th>
+<th style="text-align: left;">作用</th>
+<th style="text-align: left;">生命周期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>控制连接</strong></td>
+<td style="text-align: center;">21 ( 服务器端 )</td>
+<td style="text-align: left;">传输命令和响应</td>
+<td style="text-align: left;">整个 FTP 会话期间保持</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>数据连接</strong></td>
+<td style="text-align: center;">20 或动态 ( 服务器端 )</td>
+<td style="text-align: left;">传输实际文件数据</td>
+<td style="text-align: left;">按需建立，传输完毕关闭</td>
+</tr>
+</tbody>
+</table>
+<p><strong>控制连接</strong></p>
+<ul>
+<li>控制连接使用 <strong>Telnet 协议</strong> 交互命令</li>
+<li>命令以 ASCII 文本形式传输 ( 7 位 )</li>
+<li>典型命令 : USER、PASS、LIST、RETR、STOR、QUIT</li>
+<li>响应码 : 1xx ( 积极初步 ) 、2xx ( 积极完成 ) 、3xx ( 积极中间 )
+、4xx/5xx ( 错误 ) 、5xx ( 永久错误 )</li>
+</ul>
+<p><strong>数据连接</strong></p>
+<p>数据连接根据传输模式和服务器角色不同，使用不同端口 :</p>
+<table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 29%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">模式</th>
+<th style="text-align: center;">服务器端口</th>
+<th style="text-align: left;">数据流向</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>主动模式 ( PORT )</strong></td>
+<td style="text-align: center;">20</td>
+<td style="text-align: left;">服务器主动连接客户端</td>
+<td style="text-align: left;">客户端需开放端口，防火墙不友好</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>被动模式 ( PASV )</strong></td>
+<td style="text-align: center;">动态</td>
+<td style="text-align: left;">客户端主动连接服务器</td>
+<td style="text-align: left;">服务器开放随机端口，对客户端友好</td>
+</tr>
+</tbody>
+</table>
+<p><strong>主动模式 ( PORT ) 工作流程</strong></p>
+<div class="mermaid-wrap">
+<pre class="mermaid-src" hidden>
+  %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;actorBkg&#39;: &#39;#ECECFF&#39;, &#39;actorBorder&#39;: &#39;#CCCCFF&#39;, &#39;actorTextColor&#39;: &#39;#333&#39;, &#39;noteBkgColor&#39;: &#39;#FEFCE8&#39;, &#39;noteBorderColor&#39;: &#39;#FDE047&#39;, &#39;noteTextColor&#39;: &#39;#854D0E&#39;, &#39;actorLineColor&#39;: &#39;#CCCCFF&#39;, &#39;messageLineColor&#39;: &#39;#666&#39;, &#39;signalColor&#39;: &#39;#333&#39;, &#39;sequenceNumberColor&#39;: &#39;#fff&#39; }}}%%
+sequenceDiagram
+    participant C as 客户端
+    participant S as FTP 服务器
+
+    C-&gt;&gt;S: ① 控制连接 : TCP 1034 → 21
+    C-&gt;&gt;S: ② PORT 命令 : 告知客户端端口 1035
+    S-&gt;&gt;S: ③ 服务器从端口 20 主动连接客户端 1035
+    Note over C,S: ④ 通过数据连接 ( 20 → 1035 ) 传输文件
+  </pre>
+</div>
+<p><strong>被动模式 ( PASV ) 工作流程</strong></p>
+<div class="mermaid-wrap">
+<pre class="mermaid-src" hidden>
+  %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;actorBkg&#39;: &#39;#ECECFF&#39;, &#39;actorBorder&#39;: &#39;#CCCCFF&#39;, &#39;actorTextColor&#39;: &#39;#333&#39;, &#39;noteBkgColor&#39;: &#39;#FEFCE8&#39;, &#39;noteBorderColor&#39;: &#39;#FDE047&#39;, &#39;noteTextColor&#39;: &#39;#854D0E&#39;, &#39;actorLineColor&#39;: &#39;#CCCCFF&#39;, &#39;messageLineColor&#39;: &#39;#666&#39;, &#39;signalColor&#39;: &#39;#333&#39;, &#39;sequenceNumberColor&#39;: &#39;#fff&#39; }}}%%
+sequenceDiagram
+    participant C as 客户端
+    participant S as FTP 服务器
+
+    C-&gt;&gt;S: ① 控制连接 : TCP 1034 → 21
+    C-&gt;&gt;S: ② PASV 命令
+    S--&gt;&gt;C: ③ 服务器开放随机端口 60432 并告知
+    C-&gt;&gt;S: ④ 客户端主动连接服务器 60432 端口
+    Note over C,S: ⑤ 通过数据连接传输文件
+  </pre>
+</div>
+<p><strong>FTP 文件传输类型</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">类型</th>
+<th style="text-align: left;">说明</th>
+<th style="text-align: left;">适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>ASCII</strong></td>
+<td style="text-align: left;">文本模式，自动转换换行符</td>
+<td style="text-align: left;">传输纯文本文件</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Binary</strong></td>
+<td style="text-align: left;">二进制模式，原样传输</td>
+<td style="text-align: left;">传输图片、视频、可执行文件等</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>EBCDIC</strong></td>
+<td style="text-align: left;">专用字符编码 ( IBM 大型机 )</td>
+<td style="text-align: left;">特殊场景</td>
+</tr>
+</tbody>
+</table>
+<p><strong>FTP 命令示例</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">命令</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>USER &lt;username&gt;</code></td>
+<td style="text-align: left;">指定用户名</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>PASS &lt;password&gt;</code></td>
+<td style="text-align: left;">指定密码</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>LIST</code></td>
+<td style="text-align: left;">列出目录内容</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>RETR &lt;filename&gt;</code></td>
+<td style="text-align: left;">下载文件</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>STOR &lt;filename&gt;</code></td>
+<td style="text-align: left;">上传文件</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>DELE &lt;filename&gt;</code></td>
+<td style="text-align: left;">删除文件</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>CWD &lt;directory&gt;</code></td>
+<td style="text-align: left;">切换工作目录</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>PWD</code></td>
+<td style="text-align: left;">显示当前目录</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>QUIT</code></td>
+<td style="text-align: left;">退出 FTP</td>
+</tr>
+</tbody>
+</table>
+<p><strong>FTP 响应码</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">响应码</th>
+<th style="text-align: left;">含义</th>
+<th style="text-align: left;">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>125</strong></td>
+<td style="text-align: left;">数据连接已打开，传输开始</td>
+<td
+style="text-align: left;"><code>125 Data connection open; transfer starting.</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>150</strong></td>
+<td style="text-align: left;">文件状态正常，即将打开数据连接</td>
+<td
+style="text-align: left;"><code>150 File status okay; about to open data connection.</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>200</strong></td>
+<td style="text-align: left;">命令成功</td>
+<td style="text-align: left;"><code>200 Command okay.</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>220</strong></td>
+<td style="text-align: left;">服务就绪</td>
+<td
+style="text-align: left;"><code>220 Microsoft FTP Service</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>230</strong></td>
+<td style="text-align: left;">用户登录成功</td>
+<td
+style="text-align: left;"><code>230 User logged in, proceed.</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>331</strong></td>
+<td style="text-align: left;">用户名正确，需要密码</td>
+<td
+style="text-align: left;"><code>331 Password required for username.</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>425</strong></td>
+<td style="text-align: left;">无法打开数据连接</td>
+<td
+style="text-align: left;"><code>425 Cannot open data connection.</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>500</strong></td>
+<td style="text-align: left;">语法错误</td>
+<td style="text-align: left;"><code>500 Unknown command.</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>550</strong></td>
+<td style="text-align: left;">文件不可用</td>
+<td
+style="text-align: left;"><code>550 The system cannot find the file specified.</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="控制连接与数据连接">6.3.2 控制连接与数据连接</h3>
+<div class="note info simple"><p><strong>控制连接详解</strong></p>
+<p>控制连接是 FTP 会话的管理通道，始终保持开放状态 :</p>
+<p><strong>特性</strong></p>
+<ul>
+<li>使用 TCP 端口 <strong>21</strong> ( 服务器端 )</li>
+<li>客户端使用随机高端口连接</li>
+<li>基于 <strong>Telnet 协议</strong> 交互 ( ASCII 文本命令 )</li>
+<li><strong>全双工</strong> : 可同时发送命令和接收响应</li>
+<li><strong>带外传输</strong> : 命令/响应与数据分离 ( 不同于 HTTP
+的请求/响应 )</li>
+</ul>
+<p><strong>控制连接命令分类</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">类别</th>
+<th style="text-align: left;">命令</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>访问控制</strong></td>
+<td style="text-align: left;">USER, PASS, QUIT, REIN</td>
+<td style="text-align: left;">用户登录/退出</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>传输参数</strong></td>
+<td style="text-align: left;">PORT, PASV, TYPE, STRU, MODE</td>
+<td style="text-align: left;">数据连接配置</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>文件操作</strong></td>
+<td style="text-align: left;">RETR, STOR, APPE, DELE, RNFR/RNTO, LIST,
+NLST</td>
+<td style="text-align: left;">文件操作命令</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>目录操作</strong></td>
+<td style="text-align: left;">CWD, PWD, CDUP, MKD, RMD</td>
+<td style="text-align: left;">目录管理命令</td>
+</tr>
+</tbody>
+</table>
+<p><strong>数据连接详解</strong></p>
+<p>数据连接是实际传输文件的通道，按需建立和关闭 :</p>
+<p><strong>特性</strong> : - <strong>临时性</strong> : 每传输一个文件 (
+或文件列表 ) 建立一次，传输完毕关闭 - <strong>端口不固定</strong> : -
+主动模式 : 服务器用 <strong>20</strong> - 被动模式 : 服务器用
+<strong>随机高端口</strong> - 可传输 :
+<strong>文件内容、目录列表</strong></p>
+<p><strong>数据连接建立规则</strong></p>
+<table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 29%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">模式</th>
+<th style="text-align: center;">数据连接发起方</th>
+<th style="text-align: left;">服务器端口</th>
+<th style="text-align: left;">客户端端口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>主动模式 ( PORT )</strong></td>
+<td style="text-align: center;">服务器 ( 20 ) → 客户端</td>
+<td style="text-align: left;">20</td>
+<td style="text-align: left;">客户端指定 ( 高端口 )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>被动模式 ( PASV )</strong></td>
+<td style="text-align: center;">客户端 → 服务器 ( 高端口 )</td>
+<td style="text-align: left;">服务器随机开放</td>
+<td style="text-align: left;">客户端随机 ( 高端口 )</td>
+</tr>
+</tbody>
+</table>
+<p><strong>两种模式的对比</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">维度</th>
+<th style="text-align: left;">主动模式 ( PORT )</th>
+<th style="text-align: left;">被动模式 ( PASV )</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>服务器端口</strong></td>
+<td style="text-align: left;">固定 20</td>
+<td style="text-align: left;">动态 ( 随机 )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>防火墙影响</strong></td>
+<td style="text-align: left;">服务器主动连接可能受阻</td>
+<td style="text-align: left;">客户端主动连接更易穿透</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>NAT 影响</strong></td>
+<td style="text-align: left;">客户端需端口映射</td>
+<td style="text-align: left;">对 NAT 友好</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>安全性</strong></td>
+<td style="text-align: left;">较低 ( 服务器主动连接外部 )</td>
+<td style="text-align: left;">较高</td>
+</tr>
+</tbody>
+</table>
+<p><strong>匿名 FTP</strong></p>
+<ul>
+<li>某些 FTP 服务器允许 <strong>匿名登录</strong> ( 用户名
+<code>anonymous</code> )</li>
+<li>密码通常用电子邮件地址代替</li>
+<li>常用于公开软件仓库、开源项目发布</li>
+</ul>
+<p><strong>FTP 与 HTTP 对比</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">维度</th>
+<th style="text-align: left;">FTP</th>
+<th style="text-align: left;">HTTP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>协议端口</strong></td>
+<td style="text-align: left;">21 ( 控制 )</td>
+<td style="text-align: left;">80/443</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>连接模式</strong></td>
+<td style="text-align: left;">双连接 ( 控制+数据 )</td>
+<td style="text-align: left;">单连接 ( 请求/响应 )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>状态保持</strong></td>
+<td style="text-align: left;">有状态 ( 维持会话 )</td>
+<td style="text-align: left;">无状态</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>传输方向</strong></td>
+<td style="text-align: left;">双向 ( 上传/下载 )</td>
+<td style="text-align: left;">主要是下载</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>断点续传</strong></td>
+<td style="text-align: left;">支持 ( REST 命令 )</td>
+<td style="text-align: left;">支持 ( Range 首部 )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>目录遍历</strong></td>
+<td style="text-align: left;">支持 ( LIST 命令 )</td>
+<td style="text-align: left;">不支持</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h2 id="四电子邮件">四、电子邮件</h2>
+<h3 id="电子邮件系统的组成结构">6.4.1 电子邮件系统的组成结构</h3>
+<div class="note info simple"><p><strong>电子邮件系统概述</strong></p>
+<p>电子邮件 ( Email ) 是 Internet 上最古老、最重要的应用之一.
+与传统邮件类似，电子邮件系统包含
+<strong>发送方、接收方、邮件服务器</strong>
+三个核心组件，以及多种协议协同工作.</p>
+<p><strong>电子邮件系统的核心组件</strong></p>
+<div class="mermaid-wrap">
+<pre class="mermaid-src" hidden>
+  %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;primaryColor&#39;: &#39;#883ced&#39;, &#39;primaryTextColor&#39;: &#39;#333&#39;, &#39;primaryBorderColor&#39;: &#39;#883ced&#39;, &#39;lineColor&#39;: &#39;#883ced&#39;, &#39;nodeBorder&#39;: &#39;#883ced&#39;, &#39;clusterBkg&#39;: &#39;#faf5ff&#39;, &#39;clusterBorder&#39;: &#39;#883ced&#39;, &#39;titleColor&#39;: &#39;#333&#39;, &#39;edgeLabelBackground&#39;: &#39;#fff&#39;, &#39;fontFamily&#39;: &#39;Arial&#39;, &#39;fontSize&#39;: &#39;13px&#39; }}}%%
+flowchart TB
+    subgraph sender[发送方]
+        A[发送方邮件客户端&lt;br&#x2F;&gt;MUA] --&gt;|SMTP| B[发送方邮件服务器&lt;br&#x2F;&gt;MTA]
+    end
+
+    B --&gt;|SMTP TCP 25| C[接收方邮件服务器&lt;br&#x2F;&gt;MTA + MDA]
+
+    subgraph receiver[接收方]
+        C --&gt;|POP3| D[POP3 服务器&lt;br&#x2F;&gt;邮箱存储]
+        C --&gt;|IMAP| E[IMAP 服务器&lt;br&#x2F;&gt;邮箱管理]
+        D --&gt; F[接收方邮件客户端]
+        E --&gt; G[接收方邮件客户端]
+    end
+
+    style A fill:#e1f5fe, stroke:#0288d1, stroke-width:2px, rx:6px
+    style B fill:#e1f5fe, stroke:#0288d1, stroke-width:2px, rx:6px
+    style C fill:#fff3e0, stroke:#ff9800, stroke-width:2px, rx:6px
+    style D fill:#e8f5e9, stroke:#4caf50, stroke-width:2px, rx:6px
+    style E fill:#e8f5e9, stroke:#4caf50, stroke-width:2px, rx:6px
+    style sender fill:#e1f5fe, stroke:#0288d1, stroke-width:2px, rx:12px
+    style receiver fill:#e8f5e9, stroke:#4caf50, stroke-width:2px, rx:12px
+  </pre>
+</div>
+<p><strong>邮件发送组件 ( MUA / MTA / MDA )</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">组件</th>
+<th style="text-align: left;">全称</th>
+<th style="text-align: left;">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>MUA</strong></td>
+<td style="text-align: left;">Mail User Agent ( 邮件用户代理 )</td>
+<td style="text-align: left;">用户撰写、阅读邮件的客户端软件 ( 如
+Outlook、Foxmail )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>MTA</strong></td>
+<td style="text-align: left;">Mail Transfer Agent ( 邮件传输代理 )</td>
+<td style="text-align: left;">负责在服务器之间转发邮件 ( 如
+Sendmail、Postfix )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>MDA</strong></td>
+<td style="text-align: left;">Mail Delivery Agent ( 邮件投递代理 )</td>
+<td style="text-align: left;">将邮件投递给收件人的邮箱存储 ( 如 procmail
+)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>邮件协议栈</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">协议</th>
+<th style="text-align: left;">方向</th>
+<th style="text-align: center;">端口</th>
+<th style="text-align: left;">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>SMTP</strong></td>
+<td style="text-align: left;">发送</td>
+<td style="text-align: center;">TCP 25/587</td>
+<td style="text-align: left;">MUA→MTA、MTA→MTA 发送邮件</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>POP3</strong></td>
+<td style="text-align: left;">接收</td>
+<td style="text-align: center;">TCP 110</td>
+<td style="text-align: left;">MTA→MUA 下载邮件到本地</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>IMAP</strong></td>
+<td style="text-align: left;">接收</td>
+<td style="text-align: center;">TCP 143</td>
+<td style="text-align: left;">MTA→MUA 在线查看邮件 ( 同步 )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>MIME</strong></td>
+<td style="text-align: left;">编码</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: left;">邮件内容格式 ( 支持多媒体 )</td>
+</tr>
+</tbody>
+</table>
+<p><strong>邮件发送流程</strong></p>
+<p>以 Alice 发送邮件给 Bob 为例 :</p>
+<ol type="1">
+<li>Alice 使用 MUA ( 如 Outlook ) 撰写邮件，填写收件人
+<code>bob@example.com</code></li>
+<li>MUA 通过 <strong>SMTP</strong> 将邮件发送到 Alice 的邮件服务器 (
+<code>mail.alice.com</code> )</li>
+<li>Alice 的邮件服务器通过 <strong>DNS 查询</strong> 获取
+<code>example.com</code> 的 MX 记录</li>
+<li>Alice 的邮件服务器通过 <strong>SMTP</strong> 将邮件发送到 Bob
+的邮件服务器 ( <code>mail.example.com</code> )</li>
+<li>Bob 的邮件服务器存储邮件，等待 Bob 来取</li>
+<li>Bob 使用 MUA 通过 <strong>POP3/IMAP</strong> 从服务器
+<strong>拉取</strong> 邮件</li>
+</ol>
+</div>
+<hr />
+<h3 id="电子邮件格式与-mime">6.4.2 电子邮件格式与 MIME</h3>
+<div class="note info simple"><p><strong>电子邮件格式 ( RFC 822 )</strong></p>
+<p>早期电子邮件格式由 RFC 822 规定，邮件分为 <strong>首部 ( Header
+)</strong> 和 <strong>正文 ( Body )</strong> 两部分，中间以空行分隔.</p>
+<p><strong>邮件首部字段</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">字段</th>
+<th style="text-align: left;">说明</th>
+<th style="text-align: left;">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>From</strong></td>
+<td style="text-align: left;">发件人邮箱</td>
+<td
+style="text-align: left;"><code>From: Alice &lt;alice@example.com&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>To</strong></td>
+<td style="text-align: left;">收件人邮箱</td>
+<td
+style="text-align: left;"><code>To: Bob &lt;bob@example.com&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Cc</strong></td>
+<td style="text-align: left;">抄送</td>
+<td style="text-align: left;"><code>Cc: charlie@example.com</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Bcc</strong></td>
+<td style="text-align: left;">密送</td>
+<td style="text-align: left;">( 隐藏副本，不出现在其他收件人眼中 )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Subject</strong></td>
+<td style="text-align: left;">邮件主题</td>
+<td style="text-align: left;"><code>Subject: 项目计划书</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Date</strong></td>
+<td style="text-align: left;">发送时间</td>
+<td
+style="text-align: left;"><code>Date: Wed, 01 May 2026 10:30:00 +0800</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Message-ID</strong></td>
+<td style="text-align: left;">唯一标识</td>
+<td
+style="text-align: left;"><code>&lt;12345@example.com&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Reply-To</strong></td>
+<td style="text-align: left;">回复地址</td>
+<td
+style="text-align: left;"><code>Reply-To: alice@gmail.com</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>邮件正文</strong></p>
+<ul>
+<li>RFC 822 规定邮件正文只能是 <strong>7 位 ASCII 字符</strong></li>
+<li>每行不超过 1000 个字符</li>
+<li>纯文本格式，不支持多媒体</li>
+</ul>
+<p><strong>MIME ( 多用途互联网邮件扩展 )</strong></p>
+<p>MIME ( Multipurpose Internet Mail Extensions ) 扩展了 RFC 822
+的限制，支持 :</p>
+<ul>
+<li><strong>多媒体内容</strong> : 图片、音频、视频</li>
+<li><strong>非 ASCII 字符</strong> : 如中文、日文 ( 通过 Base64 编码
+)</li>
+<li><strong>复杂结构</strong> : 多部分邮件、嵌套</li>
+</ul>
+<p><strong>MIME 核心字段</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">字段</th>
+<th style="text-align: left;">说明</th>
+<th style="text-align: left;">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>MIME-Version</strong></td>
+<td style="text-align: left;">MIME 版本</td>
+<td style="text-align: left;"><code>MIME-Version: 1.0</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Content-Type</strong></td>
+<td style="text-align: left;">内容类型</td>
+<td
+style="text-align: left;"><code>Content-Type: text/plain; charset=UTF-8</code></td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><strong>Content-Transfer-Encoding</strong></td>
+<td style="text-align: left;">传输编码</td>
+<td
+style="text-align: left;"><code>Content-Transfer-Encoding: base64</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Content-Type 类型</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">类型</th>
+<th style="text-align: left;">子类型</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>text</strong></td>
+<td style="text-align: left;">plain, html</td>
+<td style="text-align: left;">纯文本、HTML</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>image</strong></td>
+<td style="text-align: left;">jpeg, gif, png</td>
+<td style="text-align: left;">图片</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>audio</strong></td>
+<td style="text-align: left;">mp3, wav</td>
+<td style="text-align: left;">音频</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>video</strong></td>
+<td style="text-align: left;">mp4, avi</td>
+<td style="text-align: left;">视频</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>application</strong></td>
+<td style="text-align: left;">pdf, zip, octet-stream</td>
+<td style="text-align: left;">应用数据</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>multipart</strong></td>
+<td style="text-align: left;">mixed, alternative, parallel</td>
+<td style="text-align: left;">多部分邮件</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Content-Transfer-Encoding 编码方式</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">编码方式</th>
+<th style="text-align: left;">说明</th>
+<th style="text-align: left;">适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>7bit</strong></td>
+<td style="text-align: left;">原始 ASCII，无需编码</td>
+<td style="text-align: left;">纯英文文本</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>8bit</strong></td>
+<td style="text-align: left;">8 位字符 ( 保留 )</td>
+<td style="text-align: left;">少量非 ASCII 字符</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>binary</strong></td>
+<td style="text-align: left;">二进制</td>
+<td style="text-align: left;">特殊协议传输</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>quoted-printable</strong></td>
+<td style="text-align: left;">可打印字符编码</td>
+<td style="text-align: left;">少量非 ASCII ( 如中文 )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>base64</strong></td>
+<td style="text-align: left;">6 位块编码</td>
+<td style="text-align: left;">大量二进制数据 ( 图片、附件 )</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Base64 编码示例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">原始 ( 3 字节 ) :    0x24 0x48 0x6C   ( 即 &quot;$Hl&quot; ) </span><br><span class="line">                    ↓ 分成 6 位块</span><br><span class="line">Base64 编码:       J S H b   ( 查表得到 ) </span><br></pre></td></tr></table></figure>
+<p><strong>多部分邮件 ( Multipart )</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">类型</th>
+<th style="text-align: left;">说明</th>
+<th style="text-align: left;">典型用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>multipart/mixed</strong></td>
+<td style="text-align: left;">多个独立部分</td>
+<td style="text-align: left;">带附件的邮件</td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><strong>multipart/alternative</strong></td>
+<td style="text-align: left;">同一内容的多种表示</td>
+<td style="text-align: left;">邮件同时有 Plain 和 HTML 版本</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>multipart/parallel</strong></td>
+<td style="text-align: left;">并行显示的多部分</td>
+<td style="text-align: left;">需同时显示的多个部分</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>multipart/related</strong></td>
+<td style="text-align: left;">相关部分</td>
+<td style="text-align: left;">HTML 邮件中内嵌图片</td>
+</tr>
+</tbody>
+</table>
+<p><strong>带附件邮件结构示例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">From: Alice &lt;alice@example.com&gt;</span><br><span class="line">To: Bob &lt;bob@example.com&gt;</span><br><span class="line">Subject: 项目文档</span><br><span class="line">MIME-Version: 1.0</span><br><span class="line">Content-Type: multipart/mixed; boundary=&quot;----=_Part_123&quot;</span><br><span class="line"></span><br><span class="line">------=_Part_123</span><br><span class="line">Content-Type: text/plain; charset=UTF-8</span><br><span class="line"></span><br><span class="line">你好 Bob，请查收附件中的文档. </span><br><span class="line"></span><br><span class="line">------=_Part_123</span><br><span class="line">Content-Type: application/pdf; name=&quot;report.pdf&quot;</span><br><span class="line">Content-Transfer-Encoding: base64</span><br><span class="line">Content-Disposition: attachment; filename=&quot;report.pdf&quot;</span><br><span class="line"></span><br><span class="line">JVBERi0xLjQKJe... ( Base64 编码的 PDF 数据 ) </span><br><span class="line">------=_Part_123--</span><br></pre></td></tr></table></figure>
+</div>
+<hr />
+<h3 id="smtp-与-pop3imap">6.4.3 SMTP 与 POP3、IMAP</h3>
+<div class="note info simple"><p><strong>SMTP ( 简单邮件传输协议 )</strong></p>
+<p>SMTP
+是电子邮件发送的核心协议，负责邮件从客户端到服务器、以及服务器之间的传输.</p>
+<p><strong>SMTP 特性</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">特性</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>传输协议</strong></td>
+<td style="text-align: left;">TCP ( 可靠连接 )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>默认端口</strong></td>
+<td style="text-align: left;">25 ( 服务器间 ) 、587 ( 客户端到服务器
+)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>传输格式</strong></td>
+<td style="text-align: left;">7 位 ASCII ( 邮件正文 )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>工作模式</strong></td>
+<td style="text-align: left;">存储-转发 ( MTA 之间中继 )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>认证</strong></td>
+<td style="text-align: left;">可选 ( SMTP Auth )</td>
+</tr>
+</tbody>
+</table>
+<p><strong>SMTP 工作流程 ( 直连模式 )</strong></p>
+<div class="mermaid-wrap">
+<pre class="mermaid-src" hidden>
+  %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;actorBkg&#39;: &#39;#ECECFF&#39;, &#39;actorBorder&#39;: &#39;#CCCCFF&#39;, &#39;actorTextColor&#39;: &#39;#333&#39;, &#39;noteBkgColor&#39;: &#39;#FEFCE8&#39;, &#39;noteBorderColor&#39;: &#39;#FDE047&#39;, &#39;noteTextColor&#39;: &#39;#854D0E&#39;, &#39;actorLineColor&#39;: &#39;#CCCCFF&#39;, &#39;messageLineColor&#39;: &#39;#666&#39;, &#39;signalColor&#39;: &#39;#333&#39;, &#39;sequenceNumberColor&#39;: &#39;#fff&#39; }}}%%
+sequenceDiagram
+    participant MUA as 发送方 MUA
+    participant MTA1 as 发送方 MTA
+    participant MTA2 as 接收方 MTA
+
+    MUA-&gt;&gt;MTA1: ① TCP 连接 ( 25 ) 
+    MTA1--&gt;&gt;MUA: ② 220 Mail Server Ready
+    MUA-&gt;&gt;MTA1: ③ EHLO client.example.com
+    MTA1-&gt;&gt;MTA2: ④ TCP 连接 ( 25 ) 
+    MTA2--&gt;&gt;MTA1: ⑤ 220 Mail Server Ready
+    MTA1-&gt;&gt;MTA2: ⑥ EHLO mail.example.com
+    MTA2--&gt;&gt;MTA1: ⑦ 250 OK
+    MTA1-&gt;&gt;MTA2: ⑧ MAIL FROM:&lt;alice@example.com&gt;
+    MTA2--&gt;&gt;MTA1: ⑨ 250 OK
+    MUA-&gt;&gt;MTA1: ⑩ AUTH LOGIN
+    MTA1--&gt;&gt;MUA: ⑪ 235 Authentication successful
+    MUA-&gt;&gt;MTA1: ⑫ MAIL FROM:&lt;alice@example.com&gt;
+    MUA-&gt;&gt;MTA1: ⑬ RCPT TO:&lt;bob@target.com&gt;
+    MUA-&gt;&gt;MTA1: ⑭ DATA
+    MTA1--&gt;&gt;MUA: ⑮ 354 Start mail input
+    MUA-&gt;&gt;MTA1: ⑯ 邮件内容 ( 首部+正文 ) 
+    MUA-&gt;&gt;MTA1: . ( 结束符 ) 
+    MTA1-&gt;&gt;MTA2: ⑰ MAIL FROM + RCPT TO + DATA
+    MTA2--&gt;&gt;MTA1: ⑰ 250 OK: Message accepted
+    MUA-&gt;&gt;MTA1: ⑱ QUIT
+    MTA1--&gt;&gt;MUA: ⑲ QUIT
+  </pre>
+</div>
+<p><strong>SMTP 命令</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">命令</th>
+<th style="text-align: left;">说明</th>
+<th style="text-align: left;">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>HELO/EHLO</code></td>
+<td style="text-align: left;">标识发送方主机</td>
+<td style="text-align: left;"><code>EHLO mail.example.com</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>AUTH</code></td>
+<td style="text-align: left;">认证</td>
+<td style="text-align: left;"><code>AUTH LOGIN</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>MAIL FROM</code></td>
+<td style="text-align: left;">发件人</td>
+<td
+style="text-align: left;"><code>MAIL FROM:&lt;alice@example.com&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>RCPT TO</code></td>
+<td style="text-align: left;">收件人</td>
+<td
+style="text-align: left;"><code>RCPT TO:&lt;bob@example.com&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>DATA</code></td>
+<td style="text-align: left;">邮件正文开始</td>
+<td style="text-align: left;"><code>DATA</code> 后发送邮件内容</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>QUIT</code></td>
+<td style="text-align: left;">关闭连接</td>
+<td style="text-align: left;"><code>QUIT</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>POP3 ( 邮局协议 v3 )</strong></p>
+<p>POP3 是邮件 <strong>接收</strong> 协议，让用户从邮件服务器
+<strong>下载</strong> 邮件到本地.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">特性</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>传输协议</strong></td>
+<td style="text-align: left;">TCP</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>默认端口</strong></td>
+<td style="text-align: left;">110 ( 明文 ) 、995 ( POP3S 加密 )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>工作模式</strong></td>
+<td style="text-align: left;"><strong>拉取 ( Pull )</strong> :
+客户端主动从服务器下载</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>默认行为</strong></td>
+<td style="text-align: left;">下载后 <strong>删除</strong> 服务器端邮件
+( 可配置保留 )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>同步性</strong></td>
+<td style="text-align: left;"><strong>差</strong> :
+本地邮件与服务器不同步</td>
+</tr>
+</tbody>
+</table>
+<p><strong>POP3 工作流程</strong></p>
+<div class="mermaid-wrap">
+<pre class="mermaid-src" hidden>
+  %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;actorBkg&#39;: &#39;#ECECFF&#39;, &#39;actorBorder&#39;: &#39;#CCCCFF&#39;, &#39;actorTextColor&#39;: &#39;#333&#39;, &#39;noteBkgColor&#39;: &#39;#FEFCE8&#39;, &#39;noteBorderColor&#39;: &#39;#FDE047&#39;, &#39;noteTextColor&#39;: &#39;#854D0E&#39;, &#39;actorLineColor&#39;: &#39;#CCCCFF&#39;, &#39;messageLineColor&#39;: &#39;#666&#39;, &#39;signalColor&#39;: &#39;#333&#39;, &#39;sequenceNumberColor&#39;: &#39;#fff&#39; }}}%%
+sequenceDiagram
+    participant C as 客户端
+    participant S as POP3 服务器
+
+    C-&gt;&gt;S: ① TCP 连接 ( 110 ) 
+    S--&gt;&gt;C: ② +OK POP3 server ready
+    C-&gt;&gt;S: ③ USER alice@example.com
+    S--&gt;&gt;C: ④ +OK User accepted
+    C-&gt;&gt;S: ⑤ PASS password123
+    S--&gt;&gt;C: ⑥ +OK Logged in
+    C-&gt;&gt;S: ⑦ LIST
+    S--&gt;&gt;C: ⑧ +OK 2 messages (1534 octets)
+    C-&gt;&gt;S: ⑨ RETR 1
+    S--&gt;&gt;C: ⑩ +OK 512 octets ( 邮件首部 + 正文 ) 
+    C-&gt;&gt;S: ⑪ DELE 1
+    S--&gt;&gt;C: ⑫ +OK Message 1 deleted
+    C-&gt;&gt;S: ⑬ QUIT
+    S--&gt;&gt;C: ⑭ +OK POP3 server signing off
+  </pre>
+</div>
+<p><strong>POP3 命令</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">命令</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>USER &lt;username&gt;</code></td>
+<td style="text-align: left;">指定用户名</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>PASS &lt;password&gt;</code></td>
+<td style="text-align: left;">指定密码</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>STAT</code></td>
+<td style="text-align: left;">查看邮件统计</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>LIST [msg]</code></td>
+<td style="text-align: left;">列出邮件/指定邮件</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>RETR &lt;msg&gt;</code></td>
+<td style="text-align: left;">下载指定邮件</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>DELE &lt;msg&gt;</code></td>
+<td style="text-align: left;">删除指定邮件</td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><code>TOP &lt;msg&gt; &lt;n&gt;</code></td>
+<td style="text-align: left;">查看邮件首部 + 前 n 行</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>QUIT</code></td>
+<td style="text-align: left;">退出</td>
+</tr>
+</tbody>
+</table>
+<p><strong>IMAP ( 互联网邮件访问协议 )</strong></p>
+<p>IMAP 是比 POP3 更高级的邮件接收协议，支持
+<strong>在线查看和管理</strong>.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">特性</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>传输协议</strong></td>
+<td style="text-align: left;">TCP</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>默认端口</strong></td>
+<td style="text-align: left;">143 ( 明文 ) 、993 ( IMAPS 加密 )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>工作模式</strong></td>
+<td style="text-align: left;"><strong>在线 ( On-line )</strong> :
+邮件保留在服务器，本地只缓存视图</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>默认行为</strong></td>
+<td style="text-align: left;"><strong>保留</strong> 服务器端邮件</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>同步性</strong></td>
+<td style="text-align: left;"><strong>强</strong> :
+多客户端同步访问同一邮箱</td>
+</tr>
+</tbody>
+</table>
+<p><strong>IMAP vs POP3 对比</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">维度</th>
+<th style="text-align: left;">IMAP</th>
+<th style="text-align: left;">POP3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>邮件位置</strong></td>
+<td style="text-align: left;">服务器 ( 长期存储 )</td>
+<td style="text-align: left;">本地 ( 下载后可能删除 )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>多设备同步</strong></td>
+<td style="text-align: left;">支持</td>
+<td style="text-align: left;">不支持</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>文件夹支持</strong></td>
+<td style="text-align: left;">支持 ( 服务器端组织 )</td>
+<td style="text-align: left;">不支持</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>选择性读取</strong></td>
+<td style="text-align: left;">支持 ( 只读取邮件首部/部分内容 )</td>
+<td style="text-align: left;">需下载完整邮件</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>附件处理</strong></td>
+<td style="text-align: left;">可选择下载</td>
+<td style="text-align: left;">全部下载</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>网络依赖</strong></td>
+<td style="text-align: left;">必须在线</td>
+<td style="text-align: left;">下载后可离线</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>适用场景</strong></td>
+<td style="text-align: left;">多设备访问、企业邮箱</td>
+<td style="text-align: left;">单设备、离线使用</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h2 id="五万维网">五、万维网</h2>
+<h3 id="万维网的概念与组成结构">6.5.1 万维网的概念与组成结构</h3>
+<div class="note info simple"><p><strong>万维网概述</strong></p>
+<p>万维网 ( World Wide Web, WWW ) 是 Internet 上最庞大的应用系统，由 Tim
+Berners-Lee 于 1989 年在欧洲核子研究中心 ( CERN ) 发明. WWW 通过
+<strong>超文本标记语言 ( HTML )</strong> 组织信息，通过
+<strong>超文本传输协议 ( HTTP )</strong> 传输数据.</p>
+<p><strong>WWW 的核心组成</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">组件</th>
+<th style="text-align: left;">说明</th>
+<th style="text-align: left;">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>HTML</strong></td>
+<td style="text-align: left;">超文本标记语言，描述网页结构</td>
+<td style="text-align: left;"><code>&lt;html&gt;</code>,
+<code>&lt;head&gt;</code>, <code>&lt;body&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>HTTP</strong></td>
+<td
+style="text-align: left;">超文本传输协议，规范浏览器与服务器通信</td>
+<td style="text-align: left;">HTTP/1.1, HTTP/2, HTTP/3</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>URL</strong></td>
+<td style="text-align: left;">统一资源定位符，标识网上资源位置</td>
+<td
+style="text-align: left;"><code>https://www.example.com:443/path</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Web 浏览器</strong></td>
+<td style="text-align: left;">客户端软件，解析 HTML 并展示</td>
+<td style="text-align: left;">Chrome, Firefox, Safari</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Web 服务器</strong></td>
+<td style="text-align: left;">存储和提供网页内容</td>
+<td style="text-align: left;">Apache, Nginx, IIS</td>
+</tr>
+</tbody>
+</table>
+<p><strong>URL ( 统一资源定位符 )</strong></p>
+<p>URL 是互联网上资源的标准地址格式 :</p>
+<div class="mermaid-wrap">
+<pre class="mermaid-src" hidden>
+  %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;primaryColor&#39;: &#39;#883ced&#39;, &#39;primaryTextColor&#39;: &#39;#333&#39;, &#39;primaryBorderColor&#39;: &#39;#883ced&#39;, &#39;lineColor&#39;: &#39;#883ced&#39;, &#39;nodeBorder&#39;: &#39;#883ced&#39;, &#39;clusterBkg&#39;: &#39;#faf5ff&#39;, &#39;clusterBorder&#39;: &#39;#883ced&#39;, &#39;titleColor&#39;: &#39;#333&#39;, &#39;edgeLabelBackground&#39;: &#39;#fff&#39;, &#39;fontFamily&#39;: &#39;Arial&#39;, &#39;fontSize&#39;: &#39;13px&#39; }}}%%
+flowchart LR
+    A[协议&lt;br&#x2F;&gt;scheme] --&gt; B[主机名&lt;br&#x2F;&gt;host]
+    B --&gt; C[路径&lt;br&#x2F;&gt;path]
+    C --&gt; D[查询字符串&lt;br&#x2F;&gt;query]
+    C --&gt; E[锚点&lt;br&#x2F;&gt;fragment]
+
+    style A fill:#e3f2fd, stroke:#2196f3, stroke-width:2px, rx:8px
+    style B fill:#fff3e0, stroke:#ff9800, stroke-width:2px, rx:8px
+    style C fill:#e8f5e9, stroke:#4caf50, stroke-width:2px, rx:8px
+    style D fill:#fce4ec, stroke:#ec407a, stroke-width:2px, rx:8px
+    style E fill:#e1bee7, stroke:#8e24aa, stroke-width:2px, rx:8px
+  </pre>
+</div>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">组成</th>
+<th style="text-align: left;">说明</th>
+<th style="text-align: left;">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>协议/Scheme</strong></td>
+<td style="text-align: left;">访问资源使用的协议</td>
+<td style="text-align: left;"><code>http://</code>,
+<code>https://</code>, <code>ftp://</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>主机名 ( Host )</strong></td>
+<td style="text-align: left;">服务器域名或 IP 地址</td>
+<td style="text-align: left;"><code>www.example.com</code>,
+<code>192.168.1.1</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>端口 ( Port )</strong></td>
+<td style="text-align: left;">服务器端口号 ( 可省略 )</td>
+<td style="text-align: left;"><code>:8080</code> ( HTTP 默认 80，HTTPS
+默认 443 )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>路径 ( Path )</strong></td>
+<td style="text-align: left;">资源在服务器上的位置</td>
+<td style="text-align: left;"><code>/news/2026/article.html</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>查询字符串 ( Query )</strong></td>
+<td style="text-align: left;">传递给程序的参数</td>
+<td style="text-align: left;"><code>?id=123&amp;name=alice</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>锚点 ( Fragment )</strong></td>
+<td style="text-align: left;">页面内跳转位置</td>
+<td style="text-align: left;"><code>#section3</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Web 工作流程</strong></p>
+<div class="mermaid-wrap">
+<pre class="mermaid-src" hidden>
+  %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;actorBkg&#39;: &#39;#ECECFF&#39;, &#39;actorBorder&#39;: &#39;#CCCCFF&#39;, &#39;actorTextColor&#39;: &#39;#333&#39;, &#39;noteBkgColor&#39;: &#39;#FEFCE8&#39;, &#39;noteBorderColor&#39;: &#39;#FDE047&#39;, &#39;noteTextColor&#39;: &#39;#854D0E&#39;, &#39;actorLineColor&#39;: &#39;#CCCCFF&#39;, &#39;messageLineColor&#39;: &#39;#666&#39;, &#39;signalColor&#39;: &#39;#333&#39;, &#39;sequenceNumberColor&#39;: &#39;#fff&#39; }}}%%
+sequenceDiagram
+    participant B as 用户 ( 浏览器 ) 
+    participant S as Web 服务器
+
+    B-&gt;&gt;B: ① 用户输入 URL 或点击链接
+    B-&gt;&gt;S: ② DNS 解析 : 域名 → IP
+    B-&gt;&gt;S: ③ 建立 TCP 连接 ( HTTP 默认 80&#x2F;443 ) 
+    B-&gt;&gt;S: ④ 发送 HTTP 请求&lt;br&#x2F;&gt;GET &#x2F;index.html HTTP&#x2F;1.1&lt;br&#x2F;&gt;Host: www.example.com
+    S-&gt;&gt;S: ⑤ 服务器处理请求&lt;br&#x2F;&gt;读取文件 &#x2F; 执行脚本 &#x2F; 查询数据库
+    S--&gt;&gt;B: ⑥ 返回 HTTP 响应&lt;br&#x2F;&gt;HTTP&#x2F;1.1 200 OK&lt;br&#x2F;&gt;Content-Type: text&#x2F;html&lt;br&#x2F;&gt;&lt;html&gt;...&lt;&#x2F;html&gt;
+    B-&gt;&gt;B: ⑦ 浏览器解析 HTML&lt;br&#x2F;&gt;请求嵌入资源 ( CSS&#x2F;JS&#x2F;图片 ) &lt;br&#x2F;&gt;渲染页面
+    B-&gt;&gt;S: ⑧ 关闭 TCP 连接 ( 或保持复用 ) 
+  </pre>
+</div>
+<p><strong>Web 系统的三层架构</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">层次</th>
+<th style="text-align: left;">说明</th>
+<th style="text-align: left;">技术</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>表示层</strong></td>
+<td style="text-align: left;">用户界面，HTML 渲染</td>
+<td style="text-align: left;">HTML, CSS, JavaScript</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>业务逻辑层</strong></td>
+<td style="text-align: left;">处理请求，执行逻辑</td>
+<td style="text-align: left;">PHP, Java, Python, Node.js</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>数据层</strong></td>
+<td style="text-align: left;">存储和管理数据</td>
+<td style="text-align: left;">MySQL, PostgreSQL, MongoDB</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="超文本传输协议-http">6.5.2 超文本传输协议 HTTP</h3>
+<div class="note info simple"><p><strong>HTTP 协议概述</strong></p>
+<p>超文本传输协议 ( HyperText Transfer Protocol, HTTP )
+是万维网的核心协议，定义了浏览器 ( 客户端 ) 与 Web
+服务器之间的通信格式和规则. HTTP 是 <strong>无状态、无连接</strong>
+的应用层协议.</p>
+<p><strong>HTTP 版本演进</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">版本</th>
+<th style="text-align: center;">年份</th>
+<th style="text-align: left;">主要特性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>HTTP/0.9</strong></td>
+<td style="text-align: center;">1991</td>
+<td style="text-align: left;">极简协议，只支持 GET</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>HTTP/1.0</strong></td>
+<td style="text-align: center;">1996</td>
+<td style="text-align: left;">引入首部、状态码，支持多种请求方法</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>HTTP/1.1</strong></td>
+<td style="text-align: center;">1999</td>
+<td style="text-align: left;">持久连接 ( Keep-Alive )
+、管道化、缓存控制</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>HTTP/2</strong></td>
+<td style="text-align: center;">2015</td>
+<td style="text-align: left;">多路复用、头部压缩、服务器推送</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>HTTP/3</strong></td>
+<td style="text-align: center;">2022</td>
+<td style="text-align: left;">基于 QUIC ( UDP ) ，消除队头阻塞</td>
+</tr>
+</tbody>
+</table>
+<p><strong>HTTP/1.1 主要特性</strong></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">特性</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>持久连接 ( Persistent Connection
+)</strong></td>
+<td style="text-align: left;">TCP 连接可复用，避免重复三次握手</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>管道化 ( Pipelining
+)</strong></td>
+<td style="text-align: left;">客户端可连续发送多个请求 ( 需按序响应
+)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>分块传输 ( Chunked Transfer
+)</strong></td>
+<td style="text-align: left;">支持流式响应，边生成边传输</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>虚拟主机 ( Virtual Hosting
+)</strong></td>
+<td style="text-align: left;">一台服务器托管多个网站 ( Host 首部 )</td>
+</tr>
+</tbody>
+</table>
+<p><strong>HTTP 报文结构</strong></p>
+<p>HTTP 报文分为 <strong>请求报文</strong> 和 <strong>响应报文</strong>
+:</p>
+<p><strong>请求报文格式</strong> :</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GET /path HTTP/1.1           # 请求行：方法 路径 协议版本</span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>www.example.com        # 请求首部</span><br><span class="line"><span class="attribute">User-Agent</span><span class="punctuation">: </span>Mozilla/5.0      # 请求首部</span><br><span class="line"><span class="attribute">Accept</span><span class="punctuation">: </span>text/html...         # 请求首部</span><br><span class="line"></span><br><span class="line">username=alice&amp;password=123456  # 请求体（可选）</span><br></pre></td></tr></table></figure>
+<hr />
+<p><strong>响应报文格式</strong> :</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">HTTP/1.1</span> <span class="number">200</span> OK              # 状态行：协议版本 状态码 状态描述</span><br><span class="line"><span class="attribute">Date</span><span class="punctuation">: </span>Wed, 02 May 2026 12:00:00 GMT  # 响应首部</span><br><span class="line"><span class="attribute">Server</span><span class="punctuation">: </span>Apache                # 响应首部</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>text/html       # 响应首部</span><br><span class="line"></span><br><span class="line"><span class="language-gherkin"><span class="variable">&lt;html&gt;</span>...<span class="variable">&lt;/html&gt;</span>             <span class="comment"># 响应体</span></span></span><br></pre></td></tr></table></figure>
+<p><strong>HTTP 请求方法</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">方法</th>
+<th style="text-align: left;">语义</th>
+<th style="text-align: center;">幂等</th>
+<th style="text-align: center;">安全</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>GET</strong></td>
+<td style="text-align: left;">获取资源</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: left;">仅读取，不修改资源</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>POST</strong></td>
+<td style="text-align: left;">提交数据</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: left;">创建资源、提交表单</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>PUT</strong></td>
+<td style="text-align: left;">上传资源</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: left;">替换指定资源</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>DELETE</strong></td>
+<td style="text-align: left;">删除资源</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: left;">删除指定资源</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>HEAD</strong></td>
+<td style="text-align: left;">获取首部</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: left;">与 GET 类似，但无响应体</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>OPTIONS</strong></td>
+<td style="text-align: left;">查询能力</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: left;">查询支持的 HTTP 方法</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>PATCH</strong></td>
+<td style="text-align: left;">部分更新</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: left;">修改资源的部分字段</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>幂等 ( Idempotent )</strong> : 多次执行结果相同. <strong>安全
+( Safe )</strong> : 不修改资源.</p>
+</blockquote>
+<p><strong>HTTP 状态码</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">类别</th>
+<th style="text-align: left;">含义</th>
+<th style="text-align: left;">典型状态码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>1xx</strong></td>
+<td style="text-align: left;">信息性</td>
+<td style="text-align: left;">100 Continue, 101 Switching Protocols</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>2xx</strong></td>
+<td style="text-align: left;">成功</td>
+<td style="text-align: left;">200 OK, 201 Created, 204 No Content</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>3xx</strong></td>
+<td style="text-align: left;">重定向</td>
+<td style="text-align: left;">301 Moved Permanently, 302 Found, 304 Not
+Modified</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>4xx</strong></td>
+<td style="text-align: left;">客户端错误</td>
+<td style="text-align: left;">400 Bad Request, 401 Unauthorized, 403
+Forbidden, 404 Not Found</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>5xx</strong></td>
+<td style="text-align: left;">服务器错误</td>
+<td style="text-align: left;">500 Internal Server Error, 502 Bad
+Gateway, 503 Service Unavailable</td>
+</tr>
+</tbody>
+</table>
+<p><strong>常见状态码详解</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">状态码</th>
+<th style="text-align: left;">说明</th>
+<th style="text-align: left;">典型场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>200 OK</strong></td>
+<td style="text-align: left;">请求成功</td>
+<td style="text-align: left;">GET 成功、POST 处理成功</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>201 Created</strong></td>
+<td style="text-align: left;">资源已创建</td>
+<td style="text-align: left;">POST 创建新资源</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>204 No Content</strong></td>
+<td style="text-align: left;">无内容</td>
+<td style="text-align: left;">DELETE 成功</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>301 Moved
+Permanently</strong></td>
+<td style="text-align: left;">永久移动</td>
+<td style="text-align: left;">域名迁移，浏览器自动跳转新 URL</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>302 Found</strong></td>
+<td style="text-align: left;">临时移动</td>
+<td style="text-align: left;">临时重定向</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>304 Not Modified</strong></td>
+<td style="text-align: left;">未修改</td>
+<td style="text-align: left;">缓存有效，使用本地缓存</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>400 Bad Request</strong></td>
+<td style="text-align: left;">请求语法错误</td>
+<td style="text-align: left;">参数错误、格式错误</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>401 Unauthorized</strong></td>
+<td style="text-align: left;">未认证</td>
+<td style="text-align: left;">需要登录</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>403 Forbidden</strong></td>
+<td style="text-align: left;">无权限</td>
+<td style="text-align: left;">登录了但无权访问</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>404 Not Found</strong></td>
+<td style="text-align: left;">资源不存在</td>
+<td style="text-align: left;">页面/接口不存在</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>500 Internal Server
+Error</strong></td>
+<td style="text-align: left;">服务器内部错误</td>
+<td style="text-align: left;">代码异常</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>502 Bad Gateway</strong></td>
+<td style="text-align: left;">网关错误</td>
+<td style="text-align: left;">上游服务器故障</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>503 Service
+Unavailable</strong></td>
+<td style="text-align: left;">服务不可用</td>
+<td style="text-align: left;">服务器过载、维护</td>
+</tr>
+</tbody>
+</table>
+<p><strong>HTTP 首部字段分类</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">类别</th>
+<th style="text-align: left;">示例</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>通用首部</strong></td>
+<td style="text-align: left;">Date, Cache-Control, Connection</td>
+<td style="text-align: left;">请求/响应都可用</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>请求首部</strong></td>
+<td style="text-align: left;">Host, User-Agent, Accept, Cookie</td>
+<td style="text-align: left;">仅请求中使用</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>响应首部</strong></td>
+<td style="text-align: left;">Server, Last-Modified, Set-Cookie</td>
+<td style="text-align: left;">仅响应中使用</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>实体首部</strong></td>
+<td style="text-align: left;">Content-Type, Content-Length,
+Content-Encoding</td>
+<td style="text-align: left;">描述实体数据</td>
+</tr>
+</tbody>
+</table>
+<p><strong>HTTP Cookie 机制</strong></p>
+<p>Cookie 是服务器在客户端存储的小型数据片段，用于
+<strong>状态保持</strong> :</p>
+<div class="mermaid-wrap">
+<pre class="mermaid-src" hidden>
+  %%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: { &#39;actorBkg&#39;: &#39;#ECECFF&#39;, &#39;actorBorder&#39;: &#39;#CCCCFF&#39;, &#39;actorTextColor&#39;: &#39;#333&#39;, &#39;noteBkgColor&#39;: &#39;#FEFCE8&#39;, &#39;noteBorderColor&#39;: &#39;#FDE047&#39;, &#39;noteTextColor&#39;: &#39;#854D0E&#39;, &#39;actorLineColor&#39;: &#39;#CCCCFF&#39;, &#39;messageLineColor&#39;: &#39;#666&#39;, &#39;signalColor&#39;: &#39;#333&#39;, &#39;sequenceNumberColor&#39;: &#39;#fff&#39; }}}%%
+sequenceDiagram
+    participant B as 浏览器
+    participant S as 服务器
+
+    B-&gt;&gt;S: ① 首次请求 ( 无 Cookie ) 
+    S--&gt;&gt;B: ② 响应首部 : Set-Cookie: session&#x3D;abc123
+    Note over B: ③ 浏览器存储 Cookie
+    B-&gt;&gt;S: ④ 后续请求首部 : Cookie: session&#x3D;abc123
+    S-&gt;&gt;S: ⑤ 服务器识别用户 session
+  </pre>
+</div>
+<p><strong>Cookie 的属性</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">属性</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Name=Value</strong></td>
+<td style="text-align: left;">Cookie 的名称和值</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Expires</strong></td>
+<td style="text-align: left;">过期时间 ( UTC 时间 )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Max-Age</strong></td>
+<td style="text-align: left;">有效期 ( 秒 )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Path</strong></td>
+<td style="text-align: left;">有效路径 ( 默认 / )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Domain</strong></td>
+<td style="text-align: left;">有效域名</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>HttpOnly</strong></td>
+<td style="text-align: left;">禁止 JavaScript 访问 ( 防 XSS )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Secure</strong></td>
+<td style="text-align: left;">仅 HTTPS 传输</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SameSite</strong></td>
+<td style="text-align: left;">跨站策略 ( Strict/Lax/None )</td>
+</tr>
+</tbody>
+</table>
+<p><strong>HTTP 缓存机制</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">机制</th>
+<th style="text-align: left;">说明</th>
+<th style="text-align: left;">首部</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>强制缓存</strong></td>
+<td style="text-align: left;">命中则直接使用本地缓存</td>
+<td style="text-align: left;">Cache-Control: max-age=3600</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>协商缓存</strong></td>
+<td style="text-align: left;">向服务器验证资源是否更新</td>
+<td style="text-align: left;">Last-Modified / ETag</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>不缓存</strong></td>
+<td style="text-align: left;">每次都从服务器获取</td>
+<td style="text-align: left;">Cache-Control: no-cache</td>
+</tr>
+</tbody>
+</table>
+<p><strong>HTTPS ( HTTP Secure )</strong></p>
+<p>HTTPS = HTTP + TLS/SSL，提供加密传输 :</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">特性</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>端口</strong></td>
+<td style="text-align: left;">443</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>加密</strong></td>
+<td style="text-align: left;">TLS 1.2 / 1.3</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>证书</strong></td>
+<td style="text-align: left;">服务器需申请 CA 证书</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>握手</strong></td>
+<td style="text-align: left;">TLS 握手建立安全通道</td>
+</tr>
+</tbody>
+</table>
+</div>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">sparkle520</div><div class="post-copyright__author_desc">我一直都在寻找着什么</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="http://example.com/2026/03/12/408-%E8%AE%A1%E7%BD%916/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('http://example.com/2026/03/12/408-%E8%AE%A1%E7%BD%916/')">408-计算机网络-6-应用层</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="http://example.com/2026/03/12/408-%E8%AE%A1%E7%BD%916/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=408-计算机网络-6-应用层&amp;url=http://example.com/2026/03/12/408-%E8%AE%A1%E7%BD%916/&amp;pic=https://pic1.imgdb.cn/item/69a6f223f98389e4a9b7cf25.png" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">SPARKLE</a>! </span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/408/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>408<span class="tagsPageCount">25</span></a><a class="post-meta__box__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>计算机网络<span class="tagsPageCount">7</span></a><a class="post-meta__box__tags" href="/tags/%E5%BA%94%E7%94%A8%E5%B1%82/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>应用层<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://pic1.imgdb.cn/item/69872af342b1cbeca1f88f3d.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/03/11/408-%E8%AE%A1%E7%BD%914/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69a6f223f98389e4a9b7cf25.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">408-计算机网络-4-网络层</div></div></a></div><div class="next-post pull-right"><a href="/2026/03/12/%E6%A6%82%E7%BB%9F1/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/67a092fbd0e0a243d4f9b7e9.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">概统 第一章 随机事件及其概率</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2026/03/09/408-%E8%AE%A1%E7%BD%911/" title="408-计算机网络-1-计算机网络概述与体系结构"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69a6e54af98389e4a9b7cc06.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-09</div><div class="title">408-计算机网络-1-计算机网络概述与体系结构</div></div></a></div><div><a href="/2026/03/10/408-%E8%AE%A1%E7%BD%912/" title="408-计算机网络-2-物理层"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69a6eadbf98389e4a9b7cdf6.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-10</div><div class="title">408-计算机网络-2-物理层</div></div></a></div><div><a href="/2026/03/11/408-%E8%AE%A1%E7%BD%913/" title="408-计算机网络-3-数据链路层"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69a6ec8cf98389e4a9b7ce2e.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-11</div><div class="title">408-计算机网络-3-数据链路层</div></div></a></div><div><a href="/2026/03/11/408-%E8%AE%A1%E7%BD%914/" title="408-计算机网络-4-网络层"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69a6f223f98389e4a9b7cf25.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-11</div><div class="title">408-计算机网络-4-网络层</div></div></a></div><div><a href="/2026/03/11/408-%E8%AE%A1%E7%BD%915/" title="408-计算机网络-5-传输层"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69a6f223f98389e4a9b7cf25.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-11</div><div class="title">408-计算机网络-5-传输层</div></div></a></div><div><a href="/2025/12/22/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F1/" title="408-操作系统-1-计算机系统概述"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492a76c154427986d991c5.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-22</div><div class="title">408-操作系统-1-计算机系统概述</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/671cfe2fd29ded1a8c5ffb0b.png" alt="status"/></div></div><div class="author-info__description">不管你在<strong style="color:white">这个世界</strong>的哪个地方，我一定<strong style="color:white">会</strong>，再次去<strong style="color:white">见</strong>你的!</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">sparkle520</h1><div class="author-info__desc">我一直都在寻找着什么</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/sparkle520" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/34882250" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">Hello World! 欢迎来到我的博客~</div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://pic.imgdb.cn/item/66c487f1d9c307b7e9ba5c7a.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://pic.imgdb.cn/item/66c487ebd9c307b7e9ba5725.png) center center / 100% no-repeat"></div></div></div></div><div class="card-widget card-countdown"><div class="item-headline"><i></i><span></span></div><div class="item-content"><div class="cd-count-left">
+  <span class="cd-text">距离</span>
+  <span class="cd-name" id="eventName"></span>
+  <span class="cd-time" id="daysUntil"></span>
+  <span class="cd-date" id="eventDate"></span>
+</div>
+<div id="countRight" class="cd-count-right"></div>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82"><span class="toc-number">1.</span> <span class="toc-text">应用层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E9%80%9F%E6%9F%A5-cheat-sheet"><span class="toc-number">1.0.1.</span> <span class="toc-text">总结与速查 ( Cheat Sheet )</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">一、网络应用模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">6.1.1 客户&#x2F;服务器模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p2p-%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.2.</span> <span class="toc-text">6.1.2 P2P 模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9F-dns"><span class="toc-number">1.2.</span> <span class="toc-text">二、域名系统 DNS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%82%E6%AC%A1%E5%9F%9F%E5%90%8D%E7%A9%BA%E9%97%B4"><span class="toc-number">1.2.1.</span> <span class="toc-text">6.2.1 层次域名空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.2.2.</span> <span class="toc-text">6.2.2 域名服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E8%BF%87%E7%A8%8B"><span class="toc-number">1.2.3.</span> <span class="toc-text">6.2.3 域名解析过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE-ftp"><span class="toc-number">1.3.</span> <span class="toc-text">三、文件传输协议 FTP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ftp-%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">1.3.1.</span> <span class="toc-text">6.3.1 FTP 工作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E8%BF%9E%E6%8E%A5%E4%B8%8E%E6%95%B0%E6%8D%AE%E8%BF%9E%E6%8E%A5"><span class="toc-number">1.3.2.</span> <span class="toc-text">6.3.2 控制连接与数据连接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6"><span class="toc-number">1.4.</span> <span class="toc-text">四、电子邮件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BB%84%E6%88%90%E7%BB%93%E6%9E%84"><span class="toc-number">1.4.1.</span> <span class="toc-text">6.4.1 电子邮件系统的组成结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E6%A0%BC%E5%BC%8F%E4%B8%8E-mime"><span class="toc-number">1.4.2.</span> <span class="toc-text">6.4.2 电子邮件格式与 MIME</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#smtp-%E4%B8%8E-pop3imap"><span class="toc-number">1.4.3.</span> <span class="toc-text">6.4.3 SMTP 与 POP3、IMAP</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E4%B8%87%E7%BB%B4%E7%BD%91"><span class="toc-number">1.5.</span> <span class="toc-text">五、万维网</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%87%E7%BB%B4%E7%BD%91%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%BB%84%E6%88%90%E7%BB%93%E6%9E%84"><span class="toc-number">1.5.1.</span> <span class="toc-text">6.5.1 万维网的概念与组成结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE-http"><span class="toc-number">1.5.2.</span> <span class="toc-text">6.5.2 超文本传输协议 HTTP</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/04/21/%E9%AB%98%E6%95%B0-%E5%BE%AE%E5%88%86%E4%B8%AD%E5%80%BC%E5%AE%9A%E7%90%86%E8%AF%81%E6%98%8E/" title="高数-微分中值定理证明 笔记"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69e78f6b5e7b2d92c4b993f6.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="高数-微分中值定理证明 笔记"/></a><div class="content"><a class="title" href="/2026/04/21/%E9%AB%98%E6%95%B0-%E5%BE%AE%E5%88%86%E4%B8%AD%E5%80%BC%E5%AE%9A%E7%90%86%E8%AF%81%E6%98%8E/" title="高数-微分中值定理证明 笔记">高数-微分中值定理证明 笔记</a><time datetime="2026-04-21T12:00:27.000Z" title="发表于 2026-04-21 20:00:27">2026-04-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/04/17/408-%E8%AE%A1%E7%BB%846/" title="408-计算机组成原理-6-总线和输入/输出系统"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69872af342b1cbeca1f88f3d.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-计算机组成原理-6-总线和输入/输出系统"/></a><div class="content"><a class="title" href="/2026/04/17/408-%E8%AE%A1%E7%BB%846/" title="408-计算机组成原理-6-总线和输入/输出系统">408-计算机组成原理-6-总线和输入/输出系统</a><time datetime="2026-04-17T15:00:27.000Z" title="发表于 2026-04-17 23:00:27">2026-04-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/04/01/%E9%AB%98%E6%95%B0-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%95%B0%E5%88%97%E6%9E%81%E9%99%90%E5%85%B3%E7%B3%BB/" title="函数与数列极限关系"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69cfda23df10edaed91080d9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="函数与数列极限关系"/></a><div class="content"><a class="title" href="/2026/04/01/%E9%AB%98%E6%95%B0-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%95%B0%E5%88%97%E6%9E%81%E9%99%90%E5%85%B3%E7%B3%BB/" title="函数与数列极限关系">函数与数列极限关系</a><time datetime="2026-04-01T12:00:27.000Z" title="发表于 2026-04-01 20:00:27">2026-04-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/24/%E9%AB%98%E6%95%B0-%E6%9B%B2%E7%BA%BF%E5%92%8C%E6%9B%B2%E9%9D%A2%E7%A7%AF%E5%88%86/" title="高等数学 第十一章 曲线积分与曲面积分"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69bcf9a40fd75e0c1776d878.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="高等数学 第十一章 曲线积分与曲面积分"/></a><div class="content"><a class="title" href="/2026/03/24/%E9%AB%98%E6%95%B0-%E6%9B%B2%E7%BA%BF%E5%92%8C%E6%9B%B2%E9%9D%A2%E7%A7%AF%E5%88%86/" title="高等数学 第十一章 曲线积分与曲面积分">高等数学 第十一章 曲线积分与曲面积分</a><time datetime="2026-03-24T15:00:27.000Z" title="发表于 2026-03-24 23:00:27">2026-03-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/24/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%841%E5%BC%BA%E5%8C%96-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" title="408-数据结构强化-1-时间复杂度计算"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69c2a41413399d9f5166cfbb.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-数据结构强化-1-时间复杂度计算"/></a><div class="content"><a class="title" href="/2026/03/24/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%841%E5%BC%BA%E5%8C%96-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" title="408-数据结构强化-1-时间复杂度计算">408-数据结构强化-1-时间复杂度计算</a><time datetime="2026-03-24T12:00:27.000Z" title="发表于 2026-03-24 20:00:27">2026-03-24</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  if (true) { 
+    window.typed = new Typed("#footer-type-tips", {
+      strings: ["只要记住你的名字&#44; 不管你在世界的哪个地方&#44; 我一定&#44; 会去见你 !"],
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50
+    })
+  } else {
+    document.getElementById("footer-type-tips").innerHTML = '只要记住你的名字&#44; 不管你在世界的哪个地方&#44; 我一定&#44; 会去见你 !'
+  }
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.cbd.int/typed.js@2.1.0/dist/typed.umd.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/sparkle520" title="sparkle">sparkle</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">120</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">74</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">10</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/sparkle520?tab=repositories" title="github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="github"/><span class="back-menu-item-text">github</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/408/" style="font-size: 0.88rem;">408<sup>25</sup></a><a href="/tags/AOP/" style="font-size: 0.88rem;">AOP<sup>1</sup></a><a href="/tags/Deep-Learning/" style="font-size: 0.88rem;">Deep Learning<sup>1</sup></a><a href="/tags/IoC/" style="font-size: 0.88rem;">IoC<sup>1</sup></a><a href="/tags/JSR303/" style="font-size: 0.88rem;">JSR303<sup>1</sup></a><a href="/tags/Matplotlib/" style="font-size: 0.88rem;">Matplotlib<sup>3</sup></a><a href="/tags/c/" style="font-size: 0.88rem;">c#<sup>2</sup></a><a href="/tags/java/" style="font-size: 0.88rem;">java<sup>4</sup></a><a href="/tags/python/" style="font-size: 0.88rem;">python<sup>5</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 0.88rem;">事务<sup>1</sup></a><a href="/tags/%E4%BA%8C%E6%AC%A1%E5%9E%8B/" style="font-size: 0.88rem;">二次型<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E3%80%82/" style="font-size: 0.88rem;">你的名字。<sup>3</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">你的名字同名小说<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%A4%96%E4%BC%A0%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">你的名字外传小说<sup>1</sup></a><a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size: 0.88rem;">写作<sup>4</sup></a><a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 0.88rem;">包管理<sup>1</sup></a><a href="/tags/%E5%8D%B7%E7%A7%AF%E5%85%AC%E5%BC%8F/" style="font-size: 0.88rem;">卷积公式<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90/" style="font-size: 0.88rem;">天气之子<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">天气之子同名小说<sup>1</sup></a><a href="/tags/%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">小说<sup>2</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 0.88rem;">操作系统<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" style="font-size: 0.88rem;">数据校验<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" style="font-size: 0.88rem;">数据链路层<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 0.88rem;">概率论<sup>2</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 0.88rem;">概率论与数理统计<sup>7</sup></a><a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 0.88rem;">汇编<sup>9</sup></a><a href="/tags/%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80/" style="font-size: 0.88rem;">泰勒展开<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/" style="font-size: 0.88rem;">物理层<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%80%BC/" style="font-size: 0.88rem;">特征值<sup>2</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F/" style="font-size: 0.88rem;">特征向量<sup>2</sup></a><a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 0.88rem;">线性代数<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" style="font-size: 0.88rem;">网络体系结构<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" style="font-size: 0.88rem;">网络层<sup>2</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 0.88rem;">英语<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95/" style="font-size: 0.88rem;">英语语法<sup>24</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 0.88rem;">计算机组成原理<sup>6</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 0.88rem;">计算机网络<sup>7</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 0.88rem;">语法<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/" style="font-size: 0.88rem;">高等代数<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" style="font-size: 0.88rem;">高等数学<sup>22</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script async src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.cbd.int/mathjax@3.2.2/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.cbd.int/mermaid@10.9.1/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  anzhiyu.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://sparkle521.xyz',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://cdn.cbd.int/twikoo@1.6.25/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://sparkle521.xyz',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"><script async src="/js/anzhiyu/comment_barrage.js"></script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://sparkle521.xyz',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.cbd.int/twikoo@1.6.25/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script async data-pjax src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.1/bubble/bubble.js"></script><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script>const notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));</script><script src="/custom/countdown.js"></script><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

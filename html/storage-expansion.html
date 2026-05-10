@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主存容量扩展示意图</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            font-size: 28px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+        .card h2 {
+            color: #883ced;
+            margin-bottom: 20px;
+            font-size: 20px;
+            border-bottom: 3px solid #883ced;
+            padding-bottom: 10px;
+        }
+        .card h3 {
+            color: #333;
+            margin: 15px 0 10px;
+            font-size: 16px;
+        }
+        .card p, .card ul {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+        .card ul {
+            padding-left: 20px;
+        }
+        .mermaid-wrap {
+            text-align: center;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+        .mermaid-wrap svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .formula {
+            background: #f0f0ff;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            font-size: 14px;
+            color: #666;
+            margin: 10px 0;
+        }
+        .highlight {
+            background: linear-gradient(135deg, #883ced 0%, #a855f7 100%);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        table th {
+            background: #f0f0ff;
+            color: #883ced;
+            font-weight: 600;
+        }
+        table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        .example-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .example-box strong {
+            color: #e65100;
+        }
+    </style>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#883ced',
+                primaryTextColor: '#333',
+                primaryBorderColor: '#883ced',
+                lineColor: '#883ced',
+                nodeBorder: '#883ced',
+                fontFamily: 'Arial',
+                fontSize: '14px'
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 主存容量扩展示意图</h1>
+
+        <!-- 核心公式 -->
+        <div class="card">
+            <h2>核心公式与扩展方式</h2>
+            <div class="formula">
+                总芯片数 = 设计总容量 / 单片容量 = (设计字数 × 设计字长) / (单片字数 × 单片字长)
+            </div>
+            <table>
+                <tr>
+                    <th>扩展方式</th>
+                    <th>目的</th>
+                    <th>连接特点</th>
+                    <th>芯片数量计算</th>
+                </tr>
+                <tr>
+                    <td><span class="highlight">位扩展</span></td>
+                    <td>增加字长（位数）</td>
+                    <td>地址线并联，数据线分段，片选线并联</td>
+                    <td>设计字长 / 单片字长</td>
+                </tr>
+                <tr>
+                    <td><span class="highlight">字扩展</span></td>
+                    <td>增加字数（容量）</td>
+                    <td>地址线（低位）并联，数据线并联，片选线（高位）译码</td>
+                    <td>设计字数 / 单片字数</td>
+                </tr>
+                <tr>
+                    <td><span class="highlight">字位同时扩展</span></td>
+                    <td>增加字长和字数</td>
+                    <td>结合上述两种方式</td>
+                    <td>位扩展数 × 字扩展数</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 位扩展 -->
+        <div class="card">
+            <h2>🔹 例1：位扩展（增加字长）</h2>
+            <div class="example-box">
+                <strong>题目：</strong>用 1K×4 位芯片组成 1K×8 位存储器<br>
+                <strong>分析：</strong>字数 1K 不变，字长 4→8 位（翻倍）<br>
+                <strong>计算：</strong>(1K×8位)/(1K×4位) = <strong>2 片</strong>
+            </div>
+            <h3>连接方式：</h3>
+            <ul>
+                <li><strong>地址线 (A₀~A₉)：</strong>2片芯片并联（同时接收相同地址）</li>
+                <li><strong>数据线 (D₀~D₇)：</strong>芯片1接低4位(D₀~D₃)，芯片2接高4位(D₄~D₇)</li>
+                <li><strong>片选线 (CS̅)：</strong>2片芯片并联（同时工作）</li>
+            </ul>
+            <div class="mermaid-wrap">
+                <pre class="mermaid">
+                    flowchart TB
+                        classDef default fill:#F1F5F9,stroke:#334155,stroke-width:2px,color:#1E293B,rx:5,ry:5;
+                        classDef proc fill:#E0F2FE,stroke:#0284C7,stroke-width:2px,color:#0369A1,rx:5,ry:5;
+                        classDef data fill:#F59E0B,stroke:#B45309,stroke-width:2px,color:#FFFFFF,rx:5,ry:5;
+                        classDef phys fill:#94A3B8,stroke:#475569,stroke-width:2px,color:#FFFFFF,rx:5,ry:5;
+
+                        addr[地址线 A0-A9]:::phys
+                        cs[片选 CS]:::phys
+
+                        subgraph Mem ["存储器 1K x 8"]
+                            direction LR
+                            chip1[芯片1<br/>1K x 4]:::proc
+                            chip2[芯片2<br/>1K x 4]:::proc
+                        end
+
+                        data[数据总线 D0-D7]:::data
+
+                        addr --> chip1
+                        addr --> chip2
+                        cs --> chip1
+                        cs --> chip2
+
+                        chip1 <-->|D0-D3| data
+                        chip2 <-->|D4-D7| data
+                </pre>
+            </div>
+        </div>
+
+        <!-- 字扩展 -->
+        <div class="card">
+            <h2>🔹 例2：字扩展（增加容量）</h2>
+            <div class="example-box">
+                <strong>题目：</strong>用 1K×8 位芯片组成 2K×8 位存储器<br>
+                <strong>分析：</strong>字长 8 位不变，字数 1K→2K（翻倍）<br>
+                <strong>计算：</strong>(2K×8位)/(1K×8位) = <strong>2 片</strong>
+            </div>
+            <h3>连接方式：</h3>
+            <ul>
+                <li><strong>数据线 (D₀~D₇)：</strong>2片芯片并联（分时传输数据）</li>
+                <li><strong>地址线 (A₀~A₉)：</strong>作为片内地址，并联到2片芯片</li>
+                <li><strong>片选线：</strong>最高位地址 A₁₀ 作为片选信号
+                    <ul>
+                        <li>A₁₀=0 选中芯片1（0~1K-1）</li>
+                        <li>A₁₀=1 选中芯片2（1K~2K-1）</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="mermaid-wrap">
+                <pre class="mermaid">
+                    flowchart TB
+                        classDef default fill:#F1F5F9,stroke:#334155,stroke-width:2px,color:#1E293B,rx:5,ry:5;
+                        classDef proc fill:#E0F2FE,stroke:#0284C7,stroke-width:2px,color:#0369A1,rx:5,ry:5;
+                        classDef code fill:#22D3EE,stroke:#0E7490,stroke-width:2px,color:#FFFFFF,rx:5,ry:5;
+                        classDef data fill:#F59E0B,stroke:#B45309,stroke-width:2px,color:#FFFFFF,rx:5,ry:5;
+                        classDef phys fill:#94A3B8,stroke:#475569,stroke-width:2px,color:#FFFFFF,rx:5,ry:5;
+
+                        addr_low[低位地址 A0-A9]:::phys
+                        addr_high[高位地址 A10]:::phys
+
+                        decoder[译码器<br/>1-2 Decoder]:::code
+
+                        subgraph Mem ["存储器 2K x 8"]
+                            direction TB
+                            chip1[芯片1<br/>0K-1K]:::proc
+                            chip2[芯片2<br/>1K-2K]:::proc
+                        end
+
+                        data[数据线 D0-D7]:::data
+
+                        addr_low --> chip1
+                        addr_low --> chip2
+
+                        addr_high --> decoder
+                        decoder -->|CS0| chip1
+                        decoder -->|CS1| chip2
+
+                        chip1 <--> data
+                        chip2 <--> data
+                </pre>
+            </div>
+        </div>
+
+        <!-- 字位同时扩展 -->
+        <div class="card">
+            <h2>🔹 例3：字位同时扩展（综合考点）</h2>
+            <div class="example-box">
+                <strong>题目：</strong>用 16K×8 位芯片组成 64K×32 位存储器<br>
+                <strong>分析：</strong>
+                <ul>
+                    <li>位扩展：8→32位，需 32/8 = 4片并联（组成1组）</li>
+                    <li>字扩展：16K→64K，需 64/16 = 4组</li>
+                </ul>
+                <strong>计算：</strong>(64K×32位)/(16K×8位) = 4×4 = <strong>16 片</strong>
+            </div>
+            <h3>连接方式：</h3>
+            <ul>
+                <li><strong>分组：</strong>将16片芯片分为4组，每组4片</li>
+                <li><strong>数据线：</strong>每组内的4片分别连接 D₀₋₇, D₈₋₁₅, D₁₆₋₂₃, D₂₄₋₃₁</li>
+                <li><strong>地址线：</strong>
+                    <ul>
+                        <li>低14位 (A₀~A₁₃)：并联到所有芯片（片内地址 2¹⁴=16K）</li>
+                        <li>高2位 (A₁₄, A₁₅)：接2-4译码器，产生4个片选信号</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="mermaid-wrap">
+                <pre class="mermaid">
+                    flowchart TB
+                        classDef default fill:#F1F5F9,stroke:#334155,stroke-width:2px,color:#1E293B,rx:5,ry:5;
+                        classDef proc fill:#E0F2FE,stroke:#0284C7,stroke-width:2px,color:#0369A1,rx:5,ry:5;
+                        classDef code fill:#22D3EE,stroke:#0E7490,stroke-width:2px,color:#FFFFFF,rx:5,ry:5;
+                        classDef data fill:#F59E0B,stroke:#B45309,stroke-width:2px,color:#FFFFFF,rx:5,ry:5;
+                        classDef phys fill:#94A3B8,stroke:#475569,stroke-width:2px,color:#FFFFFF,rx:5,ry:5;
+
+                        AddrLow[地址 A0-A13]:::phys
+                        AddrHigh[地址 A14-A15]:::phys
+                        Data[数据 D0-D31]:::data
+
+                        Decoder[2-4 译码器]:::code
+                        AddrHigh --> Decoder
+
+                        subgraph Group0 [Group 0 : 0-16K]
+                            direction LR
+                            G0_Chips[4片芯片位扩展]:::proc
+                        end
+
+                        subgraph Group1 [Group 1 : 16K-32K]
+                            direction LR
+                            G1_Chips[4片芯片位扩展]:::proc
+                        end
+
+                        subgraph Group2 [Group 2 : 32K-48K]
+                            direction LR
+                            G2_Chips[4片芯片位扩展]:::proc
+                        end
+
+                        subgraph Group3 [Group 3 : 48K-64K]
+                            direction LR
+                            G3_Chips[4片芯片位扩展]:::proc
+                        end
+
+                        AddrLow --> Group0 & Group1 & Group2 & Group3
+                        Data <--> Group0 & Group1 & Group2 & Group3
+
+                        Decoder --"CS0"--> Group0
+                        Decoder --"CS1"--> Group1
+                        Decoder --"CS2"--> Group2
+                        Decoder --"CS3"--> Group3
+                </pre>
+            </div>
+        </div>
+
+        <!-- 总结表格 -->
+        <div class="card">
+            <h2>📊 扩展方式总结对比</h2>
+            <table>
+                <tr>
+                    <th>特性</th>
+                    <th>位扩展</th>
+                    <th>字扩展</th>
+                    <th>字位同时扩展</th>
+                </tr>
+                <tr>
+                    <td><strong>目的</strong></td>
+                    <td>增加字长（数据位）</td>
+                    <td>增加存储容量（存储单元数）</td>
+                    <td>同时增加字长和容量</td>
+                </tr>
+                <tr>
+                    <td><strong>数据线连接</strong></td>
+                    <td>分摊（各芯片接不同位）</td>
+                    <td>并联（接相同位）</td>
+                    <td>分组后分摊</td>
+                </tr>
+                <tr>
+                    <td><strong>地址线连接</strong></td>
+                    <td>并联（全接）</td>
+                    <td>低位并联，高位用于译码</td>
+                    <td>低位并联，高位用于译码</td>
+                </tr>
+                <tr>
+                    <td><strong>片选信号</strong></td>
+                    <td>同时选中（CS连在一起）</td>
+                    <td>轮流选中（CS接译码器输出）</td>
+                    <td>组内同时，组间轮流</td>
+                </tr>
+                <tr>
+                    <td><strong>工作方式</strong></td>
+                    <td>所有芯片同时读写</td>
+                    <td>某一时刻仅有一个芯片工作</td>
+                    <td>某一时刻仅有一组芯片工作</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

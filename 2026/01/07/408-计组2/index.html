@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>408-计算机组成原理-2-数据的表示和运算 | SPARKLE</title><meta name="keywords" content="408,计算机组成原理"><meta name="author" content="sparkle520"><meta name="copyright" content="sparkle520"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="408-计算机组成原理-2-数据的表示和运算"><meta name="application-name" content="408-计算机组成原理-2-数据的表示和运算"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="408-计算机组成原理-2-数据的表示和运算"><meta property="og:url" content="http://example.com/2026/01/07/408-%E8%AE%A1%E7%BB%842/index.html"><meta property="og:site_name" content="SPARKLE"><meta property="og:description" content="第2章 数据的表示和运算 2.1 数制与编码 2.1.1 进位计数制及其相互转换 进位计数制的核心概念 在进位计数制中，每个数位所代表的数值等于该位的数字乘以一个固定的常数，这个常数称为 位权. 设基数为 \(r\) ( \(r\) 进制 )，则数 \(N\) 可表示为 \[ N &amp;#x3D;"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://pic1.imgdb.cn/item/695e4a10c1cee4b048c4e0a1.png"><meta property="article:author" content="sparkle520"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://pic1.imgdb.cn/item/695e4a10c1cee4b048c4e0a1.png"><meta name="description" content="第2章 数据的表示和运算 2.1 数制与编码 2.1.1 进位计数制及其相互转换 进位计数制的核心概念 在进位计数制中，每个数位所代表的数值等于该位的数字乘以一个固定的常数，这个常数称为 位权. 设基数为 \(r\) ( \(r\) 进制 )，则数 \(N\) 可表示为 \[ N &amp;#x3D;"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2026/01/07/408-%E8%AE%A1%E7%BB%842/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>408-计算机组成原理-2-数据的表示和运算 | SPARKLE</title><meta name="keywords" content="408,计算机组成原理"><meta name="author" content="sparkle520"><meta name="copyright" content="sparkle520"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="408-计算机组成原理-2-数据的表示和运算"><meta name="application-name" content="408-计算机组成原理-2-数据的表示和运算"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="408-计算机组成原理-2-数据的表示和运算"><meta property="og:url" content="http://example.com/2026/01/07/408-%E8%AE%A1%E7%BB%842/index.html"><meta property="og:site_name" content="SPARKLE"><meta property="og:description" content="第2章 数据的表示和运算 总结与速查 ( Cheat Sheet ) 一、进制转换核心        转换方向 方法     任意进制 → 十进制 按权展开 : \(\sum k_i \times r^i\)   十进制 → 任意进制 整数部分除基取余 ("><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://pic1.imgdb.cn/item/695e4a10c1cee4b048c4e0a1.png"><meta property="article:author" content="sparkle520"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://pic1.imgdb.cn/item/695e4a10c1cee4b048c4e0a1.png"><meta name="description" content="第2章 数据的表示和运算 总结与速查 ( Cheat Sheet ) 一、进制转换核心        转换方向 方法     任意进制 → 十进制 按权展开 : \(\sum k_i \times r^i\)   十进制 → 任意进制 整数部分除基取余 ("><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2026/01/07/408-%E8%AE%A1%E7%BB%842/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
   linkPageTop: undefined,
   peoplecanvas: undefined,
   postHeadAiDescription: undefined,
@@ -54,12 +54,12 @@
   configTitle: 'SPARKLE',
   title: '408-计算机组成原理-2-数据的表示和运算',
   postAI: '',
-  pageFillDescription: '第2章 数据的表示和运算, 2.1 数制与编码, 2.1.1 进位计数制及其相互转换, 进位计数制的核心概念, 进制转换方法, 2.1.2 定点数的编码表示, 定点数的概念, 真值与机器数, 四种常见编码方式, ( 1 ) 原码 ( True Form ), ( 2 ) 反码 ( Ones’ Complement ), ( 3 ) 补码 ( Two’s Complement ), ( 4 ) 移码 ( Excess Code ), 2.1.3 整数的表示, 有符号整数 ( Signed Integer ), 类型转换示例, 2.2 运算方法和运算电路, 2.2.1 基本运算部件, 一位全加器 ( FA ), 带标志加法器, 算术逻辑单元 ( ALU ), 并行加法器示例 ( 4 位 ), 2.2.2 定点数的移位运算, 算术移位 ( Arithmetic Shift ), 逻辑移位 ( Logical Shift ), 循环移位 ( Cyclic Shift ), 2.2.3 定点数的加减运算 ( 补码 ), 运算公式, 溢出判断 ( Overflow Check ), 2.2.4 定点数的乘除运算, 乘法运算电路, 两种除法算法对比, 恢复余数法基本流程, 加减交替法 ( 不恢复余数法 ), 除法运算电路, 关键要点总结, 除法与乘法的对比, 2.3 浮点数的表示与运算, 2.3.1 浮点数的基本格式, IEEE 754 标准格式, 单精度浮点数的存储结构, 规格化浮点数的特点, 补充  原码与补码的规格化对比, 阶码的移码表示, 非规格化数的计算与示例, 浮点数的表示范围与溢出, 数轴表示图解, 溢出与下溢, 单精度浮点数的关键值, 定点数与浮点数的对比, 2.3.3 浮点数的加减运算, 浮点数表示的局限性, 2.3.4 大小端存储示例, 2.3.4 C语言中的浮点数类型, 类型对比, 2.3.5 数据的大小端与对齐存储, 1. 大端与小端模式 ( Endianness ), 大端/小端存储对比表, 2. 内存对齐 ( Memory Alignment )第章数据的表示和运算数制与编码进位计数制及其相互转换进位计数制的核心概念在进位计数制中每个数位所代表的数值等于该位的数字乘以一个固定的常数这个常数称为位权设基数为进制则数可表示为基数每个数位上允许使用的数码个数如十进制为基数为位权数码在不同位置上的倍率值如十进制个位权十位权常见进制对照表十进制二进制八进制十六进制进制转换方法任意进制十进制方法按权展开相加法将每一位的数码乘以其对应的位权然后相加例将二进制数转换为十进制十进制任意进制方法整数部分除基取余小数部分乘基取整整数部分除以基数取余数直到商为逆序排列余数小数部分乘以基数取整数直到小数部分为或达到精度要求顺序排列整数例将转换为二进制整数部分逆序结果小数部分取整取整取整顺序结果最终结果二进制八进制十六进制利用和的关系可以进行快速分组转换二转八以小数点为界向左右每位一组不足补二转十六以小数点为界向左右每位一组不足补例将二进制转换为十六进制分组结果定点数的编码表示定点数的概念定点数是指小数点位置固定不变的数在计算机中小数点通常固定在数值位的最高位之前定点小数或最低位之后定点整数定点整数小数点隐含在最低位之后表示纯整数定点小数小数点隐含在符号位之后数值位之前表示纯小数例定点整数位补码为定点小数位补码为真值与机器数真值带有正负号的数是机器数所代表的实际数值例机器数把符号数字化的数是数字在计算机中的二进制表示形式通常用表示正表示负例表示表示四种常见编码方式原码定义用最高位表示符号正负其余位表示数值的绝对值特点直观易于人理解但有两种表示和加减运算复杂范围位整数小数反码定义正数的反码与原码相同负数的反码是在原码基础上符号位不变数值位按位取反特点仍有两种表示主要用于原码转补码的中间过渡范围同原码补码定义正数的补码与原码相同负数的补码是其反码末位加特点有唯一表示补补能多表示一个最小负数如位表示符号位参与运算减法可转换为加法范围位整数小数移码定义在补码的基础上将符号位取反通常用于表示浮点数的阶码特点保持了数据的大小顺序便于比较大小有唯一表示范围同补码编码表示对比表以位整数为例编码类型定义简述正数负数零的表示表示范围位原码符号位绝对值不同反码负数符号位不变数值取反不同补码负数反码唯一移码补码符号位取反唯一注补码是现代计算机存储整数的通用格式其核心优势是消除了原码反码中和的重复编码因此能多表示一位负数如位补码可表示原码反码仅能表示到移码主要用于浮点数的阶码部分方便比较大小特殊值位原码和反码无法表示原码反码因存在重复的编码负数范围仅到位补码中该值的编码为是补码多出来的唯一负数整数的表示无符号整数定义整个寄存器的位数全部用于表示数值没有符号位通常用于表示内存地址计数等非负数编码方式直接使用二进制真值表示表示范围位位位有符号整数定义最高位为符号位正负其余位为数值位编码方式现代计算机普遍采用补码表示表示范围位位位为什么补码负数范围比正数多因为补码中只有一种表示节省下来的原码的被用来表示最小负数例如位补码人为定义无对应的原码反码常见字长整数范围对照表字长类型最小值最大值典型语言类型位无符号有符号位无符号有符号位无符号亿有符号亿亿语言中的整数类型及类型转换语言整数类型按字节数区分类型转换分为符号扩展有符号数和零扩展无符号数类型转换示例有符号数更长位数符号扩展规则保持数值不变用符号位填充新增的高位例位补码位结果的机器数为真值仍为无符号数更长位数零扩展规则保持数值不变用填充新增的高位例位位结果的机器数为真值仍为长位数短位数截断规则直接丢弃高位保留低位可能导致数值改变例十进制结果保留低位真值为有符号数无符号数同位数规则位模式不变仅改变解释方式例补码结果的机器数仍为但被解释为无符号数真值变为运算方法和运算电路基本运算部件计算机的运算核心是算术逻辑单元其基础是加法器一位全加器全加器是实现两个位二进制数及来自低位的进位输入相加的逻辑电路输入加数加数低位进位输出本位和向高位进位逻辑方程串行进位加法器原理将个全加器串联进位信号从低位向高位逐级传递特点结构简单但高位的计算必须等待低位进位产生延迟大延迟与位数成正比并行进位加法器原理利用超前进位逻辑同时生成各位的进位信号不依赖低位运算结果特点运算速度快延迟小延迟恒定但电路结构复杂带标志加法器功能在进行运算如加减时除了输出结果还能生成标志信息状态字四大标志位有符号数溢出判断表示溢出逻辑最高位进位次高位进位结果符号即结果的最高位零标志结果全为时无符号数进位借位进位输出加减控制信号加法减法即借位算术逻辑单元功能核心部件能进行算术运算加减乘除和逻辑运算与或非异或结构由加法器多路选择器累加器等组成通过操作控制信号选择具体功能并行加法器示例位计算二进制串行进位第位算完进位传给第位直到第位耗时较长并行进位电路直接根据和的输入瞬间计算出所有位的进位一次性输出结果定点数的移位运算移位运算通过改变数据位的位置来改变数值大小或调整数据结构主要分为算术移位逻辑移位和循环移位算术移位对象有符号数移位过程中符号位保持不变规则不同编码方式的填充规则不同重点编码方式符号位左移右移备注原码不变补补无论正负空位都补反码不变补补正数补负数补与符号位一致补码不变补补左移补右移补符号位注表示符号位的值正数为负数为溢出风险左移若最高有效位被移出如正数高位移出负数高位移出则发生溢出结果出错右移可能会丢失精度低位被移出示例位补码以为例右移位符号位是高位补精度丢失左移位低位补逻辑移位对象无符号数规则整体移位无论左移右移空位一律补应用比如颜色值的提取位掩码操作例右移位循环移位功能移出的位不丢失而是补到另一端适合高低字节互换大小端转换或加密算法分类不带进位移出的位直接填补空位带进位移出的位进入进位标志位原的值填补空位大循环定点数的加减运算补码补码运算的核心优势在于减法变加法且符号位参与运算硬件电路实现简单运算公式加法补补补减法补补补求补的方法将补连同符号位按位取反末位加加减运算电路计算机内部使用同一套电路完成加法和减法关键在于引入控制信号和门核心组件位加法器个异或门控制信号执行加法执行减法工作原理输入数据经过异或门加法原始值进位输入结果减法按位取反进位输入末位加结果补溢出判断溢出指运算结果超出了机器数所能表示的范围如位补码范围方法判据说明一位符号位法同号相加结果异号则溢出正正负上溢负负正下溢进位判断法符号位进位最高数值位进位则溢出双符号位法模补码正无溢出负无溢出正溢出上溢负溢出下溢注操作数的符号位在补码表示中符号位为表示正数表示负数操作数的符号位同上加法结果的符号位的逻辑非即符号位的取反变变的逻辑非的逻辑非溢出标志表示发生溢出表示无溢出符号位的进位即从最高数值位最高数据位产生的进位进入符号位最高数值位的进位有时也称为从次高位进入最高数值位的进位视具体实现而定在进位判断法中通常指与符号位相关的两个相邻进位信号异或运算如果两个操作数不同结果为相同则为双符号位使用模补码表示其中是高符号位是低符号位用于更精确地检测溢出类型正无溢出负无溢出正溢出上溢负溢出下溢双符号位法存储时仅需位运算时才扩展为位运算示例例加法位补补相加结果舍弃最高进位得无溢出例减法与溢出相当于补补补相加结果判断符号位法正正负故发生正溢出双符号位法扩展为表示正溢出定点数的乘除运算定点乘法乘法运算主要分为原码一位乘法和补码一位乘法算法比较项目原码一位乘法补码一位乘法算法符号位单独处理参与运算双符号位或单符号位移位规则逻辑移位补算术移位补符号位部分积初始为初始为操作数绝对值运算补码运算移位次数次为数值位数次加法次数次次最后可能多加一次例原码一位乘法初始设置被乘数乘数符号位正数预期结果详细计算步骤表格步骤当前位从低到高操作部分积变化部分积结果说明初始化部分积清零第步最低位为不加右移位逻辑右移移出第步次低位为执行加法右移位右移移出第步最高位为执行加法右移位最终右移移出最终结果符号数值算法要点总结符号位单独处理从低位到高位依次检查乘数的每一位条件累加若部分积若部分积不变右移操作每步操作后部分积逻辑右移位移出位保留迭代次数等于乘数的位数本例为次结果位数位位位本例位乘法运算电路该图是无符号数乘法运算的硬件逻辑核心组件及作用被乘数寄存器存储被乘数位位乘法核心部件对乘积寄存器和被乘数做无符号加法结果送回进位位存储加法产生的进位乘积寄存器初始置存储部分积位存储乘数位共位存完整乘积计数器初值为每循环一次减控制乘法循环次数控制逻辑接收移出的最低位决定是否将被乘数加到部分积上运算流程初始化置初值循环操作共次对和做无符号加法结果送回进位存到进位位寄存器寄存器同步逻辑右移进位移入的最高位的最低位移出送控制逻辑判断计数器减直到乘法指令的溢出判断位字长计算机分有符号数型和无符号数型两种场景有符号数型若乘积高位的每一位都相同且等于乘积低位的符号位不溢出否则溢出无符号数型若乘积的高位全为不溢出否则溢出定点除法除法运算是乘法的逆运算用于求解商和余数定点除法主要分为恢复余数法和加减交替法不恢复余数法两种除法算法对比比较项目原码恢复余数法原码加减交替法核心思想试减不够减则恢复余数试减不够减直接左移相当于商的符号单独处理单独处理上商规则余数上上余数与除数同号上异号上恢复操作需要余数时执行不需要直接在下一步调整运算步数次移位最多次加法次移位次加法效率较低需恢复步骤较高省去恢复适用场景原码运算逻辑简单补码运算硬件效率高恢复余数法基本流程算法步骤以原码为例初始化余数寄存器被除数除数寄存器商寄存器计数器操作数位数迭代过程重复次试减判断若商上左移位若商上恢复余数然后左移位计数器减确定符号商的符号余数的符号余数符号与被除数相同输出结果商和余数加减交替法不恢复余数法核心优化当余数为负时不立即恢复加回而是在下一次左移后加数学等价性优势减少一次加法操作提高效率上商规则余数与除数同号商上执行减法余数与除数异号商上执行加法示例补码除法初始数据被除数补位含符号位除数补预期结果商余数详细计算过程步骤操作余数商说明初始化余数为被除数第步与异号余数商上左移左移后准备下一次第步与异号余数商上左移继续第步与异号余数商上不再移位最后一步最终商的符号修正商补码余数除法运算电路电路组成除数寄存器存储除数位位执行加减运算余数商寄存器位双功能寄存器高位存储余数低位存储商控制逻辑与计数器控制迭代次数和上商操作工作流程与进行加减运算根据结果符号判断上商或寄存器整体左移位重复次后输出最终商和余数关键要点总结除法运算要点符号处理商的符号余数符号恢复不恢复恢复余数法逻辑清晰但效率较低加减交替法省去恢复步骤减少次加法上商规则原码余数上补码余数与除数同号上硬件优化采用左移代替右移商从低位逐位生成溢出检测若则发生溢出商超出表示范围除法与乘法的对比特性乘法除法结果位数位位商位余数运算方向从低位到高位累加从高位到低位试商移位方式部分积右移余数左移复杂度较简单只需加法较复杂需判断和调整硬件实现加法器移位器加法器移位器比较逻辑浮点数的表示与运算浮点数的基本格式浮点数的通用表示形式其中符号位表示正数表示负数尾数有效数字部分表示精度基数隐含二进制浮点数中为阶码指数部分表示数值范围为什么叫浮点因为小数点的位置可以浮动小数点右移小数点左移通过调整指数小数点可以在数值中移动从而表示不同量级的数浮点数的表示标准浮点数是计算机中表示实数的一种方式能够表示非常大或非常小的数克服了定点数表示范围受限的问题标准格式定义了两种常用的浮点数格式参数单精度双精度总位数位位符号位位位阶码位位尾数位位阶码偏移值表示范围有效数字约位十进制约位十进制单精度浮点数的存储结构真值公式其中符号位尾数阶码位单精度浮点数符号位阶码尾数符号定义正数负数移码规则规格化隐含最高位样式定义位域分布图解符号阶码移码尾数原码字段名称位数作用备注符号位决定数值的正负为正为负阶码决定数值的大小范围采用移码表示偏置值为尾数决定数值的精度隐含最高位实际精度位规格化浮点数的特点规格化表示浮点数采用科学计数法要求尾数满足即二进制形式为隐含位技术由于规格化后最高位必为这个不需要存储位尾数实际表示位精度隐含的位存储这样可以多获得位精度示例存储位实际值位补充原码与补码的规格化对比在计算机内部浮点数尾数除了使用原码如外也可以使用补码表示两者的规格化判据不同码制符号位数值最高位判据异或规格化范围形式示例原码正负补码补码补码规格化的核心原则补码规格化的标志是符号位与数值最高位不同为什么补码正数是非规格化需左移直到同原码补码负数绝对值较小是非规格化需左移直到绝对值变大特例补是规格化数满足开头且没有对应的原码规格化形式原码无法表示注意补不满足符号位与数值位不同因此在补码规则下通常视为非规格化数需左移一位变成即阶码的移码表示阶码采用移码表示而非补码单精度偏移值存储值实际指数表示范围实际存储为什么用移码便于比较大小移码天然有序避免使用符号位简化硬件比较电路实际指数移码表示十进制移码表示二进制补充整数移码移码在定点整数中移码通常用于表示有符号数其偏置值为而在浮点数标准中为了更均衡地表示指数范围偏置值取比较项目标准整数移码位阶码位偏置值计算公式移真移真真值的表示表示范围除去全全全含义最小数机器零非规格化数全含义最大数无穷大为什么偏置值是而不是主要目的是为了扩大正指数的范围从而能表示更大的数值若有效指数范围为若有效指数范围为显然比大能表示的绝对值更大的数虽然牺牲了一个负指数位但通常大数的范围更重要特殊值判定当阶码为全或全时表示特殊数值阶码尾数数值类型含义备注零符号位决定或非规格化数极其接近的小数用于填补与最小规格化数之间的空隙任意规格化数常规数值计算公式无穷大溢出时产生符号位决定或非法运算结果如示例单精度浮点数表示十进制数转换过程转二进制合并规格化提取分量符号正数阶码尾数补齐位最终存储样式位域填充图解尾数数制转换规格化计算字段拼接将十进制数的整数部分和小数部分分别转换为二进制整数部分小数部分合并结果移动小数点使整数位仅保留位且为形式移位操作左移位确定参数真实指数尾数部分去掉整数位的根据单精度标准计算三个字段符号位正数阶码移码表示需加偏置值尾数取规格化后的有效数字补足位后补个将按顺序拼合为位机器数二进制结构十六进制表示非规格化数的计算与示例当阶码为全即且尾数不为时浮点数处于非规格化状态此时为了平滑过渡到规定阶码隐含值而不是单精度双精度尾数隐含位隐含整数位为即真值公式为什么要用为了实现平滑下溢最小的规格化数最大的非规格化数两者实现了无缝衔接计算示例若单精度浮点数机器码为十六进制正数全非规格化二进制计算浮点数的表示范围与溢出浮点数的表示范围是不连续的存在溢出和下溢两个概念数轴表示图解浮点数在数轴上的分布如下所示节点样式定义结构定义负数区域负上溢负规格化范围负下溢正数区域正下溢正规格化范围正上溢跨子图连接应用样式溢出与下溢上溢正上溢数值大于最大正数结果记为负上溢数值小于最小负数结果记为后果通常视为异常或错误下溢数值绝对值太小介于最大负数和最小正数之间即之间不含处理结果记为机器零或者使用非规格化数提高精度后果精度丢失但通常不报错注计算机中的下溢通常指绝对值过小趋近于而非数值过小趋近于负无穷趋近于负无穷属于负上溢单精度浮点数的关键值描述阶码存储尾数存储实际值近似十进制最大正数全最小正规格化数全最大非规格化数全最小正非规格化数定点数与浮点数的对比定点数与浮点数是计算机中表示实数的两种基本方法它们在范围精度和实现复杂度上各有优劣比较维度定点数浮点数小数点位置固定不变隐含在特定位置浮动由阶码决定数值范围较小受位数限制很大受阶码限制精度特性绝对精度固定均匀分布相对精度固定稀疏分布数值越大越稀疏运算复杂度简单类似整数运算复杂需对阶规格化舍入溢出处理容易溢出报错不易溢出上溢出为下溢出为硬件成本低高需专门的典型应用嵌入式控制金融计算精度要求绝对固定科学计算图形处理通用计算机核心区别总结定点数就像一把普通尺子刻度间距是固定的能测量的最大长度有限浮点数就像一把皮尺测量小物体时刻度很密精度高测量大物体时刻度变稀精度低但能测量的范围非常大浮点数的加减运算浮点数加减运算比定点数复杂硬件上需通过专门的浮点运算单元完成核心流程可概括为步法对阶尾数加减规格化舍入判溢出节点定义开始运算对阶小阶向大阶看齐尾数右移尾数加减需规格化右规尾数右移阶码左规尾数左移阶码舍入舍入就近舍入溢出检查阶码是否越界上溢置为下溢置为输出结果逻辑连线尾数溢出尾数过小完成无需规格化正常样式定义现代化配色应用样式对阶尾数加减规格化舍入溢出判断目的使两个操作数的阶码相同以便尾数直接相加减规则小阶向大阶看齐设则将的阶码增大至同时的尾数右移每右移一位阶码加为什么小向大看齐小阶尾数右移丢弃的是低位数据仅影响精度若大阶尾数左移丢弃的是高位有效数据会产生巨大误差操作对阶后的尾数进行定点加减运算注意浮点数尾数通常采用补码或原码表示运算时需包含隐含的规格化数结果可能出现临时溢出如这不代表最终溢出后续通过右规解决目的保证结果符合的格式右规触发条件尾数运算结果绝对值双符号位不等操作尾数右移位阶码加示例右规左规触发条件尾数运算结果绝对值最高有效位不是操作尾数逐位左移阶码逐位减直到最高位为示例左规目的当尾数位数超过寄存器长度时需舍弃多余位并保证精度舍入法类似于四舍五入舍弃位最高位为直接舍去舍弃位最高位为尾数末位加恒置法无论舍弃位是什么直接将尾数末位恒置为默认就近舍入舍入到最近的偶数判断根据最终阶码判断结果是否合法上溢如单精度触发场景右规时阶码加导致超过最大值两个大数相乘指数相加导致阶码过大处理抛出异常硬件中断或置为下溢如单精度触发场景左规时阶码减导致小于最小值两个小数相乘指数相加导致阶码过小处理通常置为机器零或非规格化数注意只有右规可能导致上溢只有左规可能导致下溢尾数溢出可以通过右规解决不算真正的溢出阶码上溢才是真正的溢出详细运算示例格式转换对阶小阶向大阶看齐变为尾数右移位尾数相加的尾数的尾数结果规格化右规尾数需要右规尾数右移位阶码结果最终结果检查阶码在允许范围内无溢出浮点数表示的局限性精度陷阱与注意事项大数吃小数当极大数与极小数相加时如由于对阶时小数尾数右移过多被截断导致小数被忽略不满足结合律编写代码时应尽量避免相差巨大的数直接运算十进制小数无法精确表示如在二进制是无限循环小数存储时必然存在误差禁止使用进行等值比较应使用大小端存储示例以字节为例大端模式地址存地址存地址存地址存小端模式地址存地址存地址存地址存语言中的浮点数类型语言中浮点数对应标准核心类型为和类型对比类型对应标准字节数有效十进制位数示例存储单精度位实际存储为近似值双精度位实际存储为近似值精度问题示例语言中的原因和无法用二进制精确表示存储时存在舍入误差相加后的近似值与的近似值不相等数据的大小端与对齐存储大端与小端模式字节序指多字节数据如在内存地址中的排列顺序模式英文名存储规则典型应用大端模式高位字节存低地址符合人类阅读习惯网络协议虚拟机小端模式低位字节存低地址高位在后现代主流记忆口诀小小低小端模式小低位字节存低地址图解内存布局设变量字节存放在地址处大端小端存储对比表内存地址大端模式小端模式最高位字节最低位字节最低位字节最高位字节代码检测语言若低地址为则为小端内存对齐访问内存通常以字为单位如字节或字节若数据未对齐可能需要进行两次访存并进行拼接严重影响效率核心原则以空间换时间对齐规则默认情况起始地址应是该变量类型大小的整数倍如需存放在的倍数地址结构体总大小应是其最大成员大小的整数倍示例分析内存布局对比假设起始地址为偏移总大小紧凑存储不对齐对齐存储字节对齐填充字节无实际含义仅用于占位对齐优化建议在定义结构体时将相同类型的成员放在一起或按从大到小顺序定义可减少填充浪费',
+  pageFillDescription: '第2章 数据的表示和运算, 总结与速查 ( Cheat Sheet ), 2.1 数制与编码, 2.1.1 进位计数制及其相互转换, 进位计数制的核心概念, 进制转换方法, 2.1.2 定点数的编码表示, 定点数的概念, 真值与机器数, 四种常见编码方式, ( 1 ) 原码 ( True Form ), ( 2 ) 反码 ( Ones’ Complement ), ( 3 ) 补码 ( Two’s Complement ), ( 4 ) 移码 ( Excess Code ), 无符号数通解, 补码通解 ( 核心 ), 补码条件通解公式, 2.1.3 整数的表示, 有符号整数 ( Signed Integer ), 类型转换示例, 2.2 运算方法和运算电路, 2.2.1 基本运算部件, 一位全加器 ( FA ), 带标志加法器, 算术逻辑单元 ( ALU ), 并行加法器示例 ( 4 位 ), 2.2.2 定点数的移位运算, 算术移位 ( Arithmetic Shift ), 逻辑移位 ( Logical Shift ), 循环移位 ( Cyclic Shift ), 2.2.3 定点数的加减运算 ( 补码 ), 运算公式, 溢出判断 ( Overflow Check ), 2.2.4 定点数的乘除运算, 乘法运算电路, 两种除法算法对比, 恢复余数法基本流程, 加减交替法 ( 不恢复余数法 ), 除法运算电路, 关键要点总结, 除法与乘法的对比, 2.3 浮点数的表示与运算, 2.3.1 浮点数的基本格式, IEEE 754 标准格式, 单精度浮点数的存储结构, 规格化浮点数的特点, 补充  原码与补码的规格化对比, 阶码的移码表示, 非规格化数的计算与示例, 浮点数的表示范围与溢出, 数轴表示图解, 溢出与下溢, 单精度浮点数的关键值, 定点数与浮点数的对比, 2.3.3 浮点数的加减运算, 浮点数表示的局限性, 2.3.4 大小端存储示例, 2.3.4 C语言中的浮点数类型, 类型对比, 2.3.5 数据的大小端与对齐存储, 1. 大端与小端模式 ( Endianness ), 大端/小端存储对比表, 2. 内存对齐 ( Memory Alignment )第章数据的表示和运算总结与速查一进制转换核心转换方向方法任意进制十进制按权展开十进制任意进制整数部分除基取余逆序小数部分乘基取整顺序二进制八进制每位分组二进制十六进制每位分组二四种码制对比位定点整数码制负数范围特点原码直观但加减运算复杂反码仅用于原码补码的过渡补码唯一计算机通用格式减法变加法移码唯一保持大小顺序用于浮点阶码补码为什么范围不对称因为只有一种表示节省下来的用来表示三补码快速计算口算必杀原码补码负数口诀从右往左找第一个左边所有位取反右边不变示例原码找第一个左边取反右边不变补码第位第位第位无超出范围补码真值按权展开一步到位口诀符号位权值为其余位权值为直接求和真值示例补码按权展开结果四定点数表示范围类型位数范围说明无符号整数位例位有符号整数补码位例位定点小数补码位小数点在符号位之后五移位运算规则码制算术左移算术右移逻辑左移逻辑右移原码低位补高位补低位补高位补反码高位补符号位高位补符号位高位补高位补补码低位补高位补符号位低位补高位补算术右移溢出判断算术左移若最高数值位被移出后与符号位不同则溢出正溢出算术右移不会溢出但可能丢失精度六补码加减运算与溢出判断补码加法直接相加符号位参与运算舍弃最高位进位补码减法补补补其中补取反三种溢出判断方法方法判据公式溢出条件一位符号位同号相加结果异号进位判断法符号位进位最高位进位双符号位法模补码正溢出负溢出运算结果符号位一位符号位法进位判断法双符号位正正正无无无负负负无无无正正负溢出溢出正溢出负负正溢出溢出负溢出七定点数乘法对比项原码一位乘法算法补码乘法符号处理单独处理符号位参与运算操作数绝对值补码移位方式逻辑右移算术右移判断依据仅看乘数当前位看与迭代次数次次最多次加法算法规则操作右移加补右移加补右移右移八定点数除法加减交替法步骤操作符号位单独确定余数商若余数与除数同号上商下一步减除数若余数与除数异号上商下一步加除数上商后余数左移位重复共步为位数九浮点数单精度格式位字段位数说明符号位正负阶码移码表示偏置值实际指数尾数原码表示隐含最高位规格化数特殊值速查含义公式非规格化数任意规格化数典型值对照十进制单精度二进制十六进制近似值表示范围类型最小值最大值正规格化数正非规格化数十浮点加减运算五步法步骤操作说明对阶小阶向大阶看齐尾数右移位右移尾数加减得到未规格化的结果规格化右规尾数右移位阶码或左规尾数左移阶码减小舍入舍入或就近舍入保证精度判溢出阶码超出溢出非规格化十一语言类型转换转换类型转换规则示例短长有符号有符号符号扩展高位补符号位扩展短长无符号无符号零扩展高位补长短截断丢弃高位同位宽有符号无符号位模式不变解释改变易错点有符号转无符号先转扩展再改变解释方式负数的无符号表示是一个很大的正数截断可能改变数值符号数制与编码进位计数制及其相互转换进位计数制的核心概念在进位计数制中每个数位所代表的数值等于该位的数字乘以一个固定的常数这个常数称为位权设基数为进制则数可表示为基数每个数位上允许使用的数码个数如十进制为基数为位权数码在不同位置上的倍率值如十进制个位权十位权常见进制对照表十进制二进制八进制十六进制进制转换方法任意进制十进制方法按权展开相加法将每一位的数码乘以其对应的位权然后相加例将二进制数转换为十进制十进制任意进制方法整数部分除基取余小数部分乘基取整整数部分除以基数取余数直到商为逆序排列余数小数部分乘以基数取整数直到小数部分为或达到精度要求顺序排列整数例将转换为二进制整数部分逆序结果小数部分取整取整取整顺序结果最终结果二进制八进制十六进制利用和的关系可以进行快速分组转换二转八以小数点为界向左右每位一组不足补二转十六以小数点为界向左右每位一组不足补例将二进制转换为十六进制分组结果定点数的编码表示定点数的概念定点数是指小数点位置固定不变的数在计算机中小数点通常固定在数值位的最高位之前定点小数或最低位之后定点整数定点整数小数点隐含在最低位之后表示纯整数定点小数小数点隐含在符号位之后数值位之前表示纯小数例定点整数位补码为定点小数位补码为真值与机器数真值带有正负号的数是机器数所代表的实际数值例机器数把符号数字化的数是数字在计算机中的二进制表示形式通常用表示正表示负例表示表示四种常见编码方式原码定义用最高位表示符号正负其余位表示数值的绝对值特点直观易于人理解但有两种表示和加减运算复杂范围位整数小数反码定义正数的反码与原码相同负数的反码是在原码基础上符号位不变数值位按位取反特点仍有两种表示主要用于原码转补码的中间过渡范围同原码补码定义正数的补码与原码相同负数的补码是其反码末位加快速求补码技巧对于负数有一种比反码更快的口算方法从右往左找到第一个该位左边所有位取反右边保持不变以位为例原码从右往左第一个在最低位第位该位左边全部取反右边不变结果以位为例原码从右往左第一个在第位左边取反右边不变结果原理反码时进位会一直传递到第一个为止等价于第一个左边取反补码快速还原真值技巧给定一个补码可以直接按权展开算出真值无需先转原码最高位符号位的权值为其余各位的权值为正的以位补码为例以位补码为例注越少越好算正数同理符号位为退化为普通二进制按权展开口诀符号位当负权其余照常加一步到位出真值特点有唯一表示补补能多表示一个最小负数如位表示符号位参与运算减法可转换为加法范围位整数小数移码定义在补码的基础上将符号位取反通常用于表示浮点数的阶码特点保持了数据的大小顺序便于比较大小有唯一表示范围同补码编码表示对比表以位整数为例编码类型定义简述正数负数零的表示表示范围位原码符号位绝对值不同反码负数符号位不变数值取反不同补码负数反码唯一移码补码符号位取反唯一各编码取值范围汇总位编码类型整数最小值整数最大值小数最小值小数最大值原码反码补码移码常见位数取值范围速查位数原码反码补码移码位位位由条件确定位模式通解与推导补码按权展开公式位为符号位无符号数通解位无符号数范围条件通解说明最高位必须为最高位必须为且有限制确定区间补码通解核心位补码为符号位范围分别讨论符号位负数时由于当所以时恒成立对任意非负数时需要即各位加权和补码条件通解公式条件情况通解恒成立其余位任意且且若则可继续讨论不可能负数不成立需保证加权和简化口诀先看负数一定成立时再看与的关系必须为且最高数据位必须能产生的值例题位补码求满足的条件解析位数据位范围情况分析结果负数成立非负成立答案任意负数或任意非负数全体数都满足因为范围上限例题位补码求满足的条件解析范围情况分析结果负数成立非负需若则答案任意或且例题位补码求满足的条件解析范围情况分析结果负数不成立非负最大只能到不成立答案无解位补码最大只能表示无法注补码是现代计算机存储整数的通用格式其核心优势是消除了原码反码中和的重复编码因此能多表示一位负数如位补码可表示原码反码仅能表示到移码主要用于浮点数的阶码部分方便比较大小特殊值位原码和反码无法表示原码反码因存在重复的编码负数范围仅到位补码中该值的编码为是补码多出来的唯一负数整数的表示无符号整数定义整个寄存器的位数全部用于表示数值没有符号位通常用于表示内存地址计数等非负数编码方式直接使用二进制真值表示表示范围位位位有符号整数定义最高位为符号位正负其余位为数值位编码方式现代计算机普遍采用补码表示表示范围位位位为什么补码负数范围比正数多因为补码中只有一种表示节省下来的原码的被用来表示最小负数例如位补码人为定义无对应的原码反码常见字长整数范围对照表字长类型最小值最大值典型语言类型位无符号有符号位无符号有符号位无符号亿有符号亿亿语言中的整数类型及类型转换语言整数类型按字节数区分类型转换分为符号扩展有符号数和零扩展无符号数类型转换示例有符号数更长位数符号扩展规则保持数值不变用符号位填充新增的高位例位补码位结果的机器数为真值仍为无符号数更长位数零扩展规则保持数值不变用填充新增的高位例位位结果的机器数为真值仍为长位数短位数截断规则直接丢弃高位保留低位可能导致数值改变例十进制结果保留低位真值为有符号数无符号数同位数规则位模式不变仅改变解释方式例补码结果的机器数仍为但被解释为无符号数真值变为运算方法和运算电路基本运算部件计算机的运算核心是算术逻辑单元其基础是加法器一位全加器全加器是实现两个位二进制数及来自低位的进位输入相加的逻辑电路输入加数加数低位进位输出本位和向高位进位逻辑方程串行进位加法器原理将个全加器串联进位信号从低位向高位逐级传递特点结构简单但高位的计算必须等待低位进位产生延迟大延迟与位数成正比并行进位加法器原理利用超前进位逻辑同时生成各位的进位信号不依赖低位运算结果特点运算速度快延迟小延迟恒定但电路结构复杂带标志加法器程序状态字是计算机中用于存储算术运算结果状态的一组标志位通常为一个或多个寄存器带标志加法器在完成算术运算的同时会自动更新中的各个标志位供后续指令如条件跳转指令查询使用四大标志位详解带标志加法器在完成加减运算后会生成四个核心标志位组成标志位名称含义适用场景溢出标志有符号数运算符号标志有符号数运算零标志通用进位借位标志无符号数运算功能在进行运算如加减时除了输出结果还能生成标志信息状态字通过标志位可以判断运算结果的各种状态为条件转移指令提供依据四大标志位溢出标志作用判断有符号数运算是否溢出触发条件当两个有符号数运算结果超出可表示范围时置逻辑表达式其中为最高位进位为次高位进位判断规则发生溢出结果不正确未溢出结果正确溢出与进位的区别场景判断依据关注运算溢出有符号数进位无符号数示例位补码运算操作数结果溢出溢出未溢出溢出发生的本质当正数正数负数或负数负数正数时必然溢出符号标志作用记录运算结果的符号位即结果的最高位逻辑表达式判断规则结果为正数或零结果为负数注意只反映结果的符号位不判断结果是否正确溢出时可能与实际结果不符示例运算结果最高位零标志作用判断运算结果是否为零逻辑表达式当且仅当即所有位都为时判断规则结果为零结果非零示例运算结果应用场景常用于循环终止条件如后跳转和零值检测进位借位标志作用判断无符号数运算是否产生进位或借位逻辑表达式其中为进位输出为加减控制信号判断规则无符号运算产生进位加法或借位减法无进位借位加法无进位输出结果未超出无符号范围有进位输出结果超出无符号范围实际值结果减法即加负数的补码时无借位时有借位示例位无符号数运算操作数结果实际含义溢出实际正确无借位借位实际四大标志位综合示例以位补码运算计算超出范围标志位计算过程结果说明溢出正正负结果为负数非零无进位无符号运算正确结论在无符号位表示中结果为未溢出但在有符号补码中结果为溢出此时提示有符号溢出提示无符号运算正确算术逻辑单元功能核心部件能进行算术运算加减乘除和逻辑运算与或非异或结构由加法器多路选择器累加器等组成通过操作控制信号选择具体功能并行加法器示例位计算二进制串行进位第位算完进位传给第位直到第位耗时较长并行进位电路直接根据和的输入瞬间计算出所有位的进位一次性输出结果定点数的移位运算移位运算通过改变数据位的位置来改变数值大小或调整数据结构主要分为算术移位逻辑移位和循环移位算术移位对象有符号数移位过程中符号位保持不变规则不同编码方式的填充规则不同重点编码方式符号位左移右移备注原码不变补补无论正负空位都补反码不变补补正数补负数补与符号位一致补码不变补补左移补右移补符号位注表示符号位的值正数为负数为溢出风险左移若最高有效位被移出如正数高位移出负数高位移出则发生溢出结果出错右移可能会丢失精度低位被移出示例位补码以为例右移位符号位是高位补精度丢失左移位低位补逻辑移位对象无符号数规则整体移位无论左移右移空位一律补应用比如颜色值的提取位掩码操作例右移位循环移位功能移出的位不丢失而是补到另一端适合高低字节互换大小端转换或加密算法分类不带进位移出的位直接填补空位带进位移出的位进入进位标志位原的值填补空位大循环定点数的加减运算补码补码运算的核心优势在于减法变加法且符号位参与运算硬件电路实现简单运算公式加法补补补减法补补补求补的方法将补连同符号位按位取反末位加加减运算电路计算机内部使用同一套电路完成加法和减法关键在于引入控制信号和门核心组件位加法器个异或门控制信号执行加法执行减法工作原理输入数据经过异或门加法原始值进位输入结果减法按位取反进位输入末位加结果补溢出判断溢出指运算结果超出了机器数所能表示的范围如位补码范围方法判据说明一位符号位法同号相加结果异号则溢出正正负上溢负负正下溢进位判断法符号位进位最高数值位进位则溢出双符号位法模补码正无溢出负无溢出正溢出上溢负溢出下溢注操作数的符号位在补码表示中符号位为表示正数表示负数操作数的符号位同上加法结果的符号位的逻辑非即符号位的取反变变的逻辑非的逻辑非溢出标志表示发生溢出表示无溢出符号位的进位即从最高数值位最高数据位产生的进位进入符号位最高数值位的进位有时也称为从次高位进入最高数值位的进位视具体实现而定在进位判断法中通常指与符号位相关的两个相邻进位信号异或运算如果两个操作数不同结果为相同则为双符号位使用模补码表示其中是高符号位是低符号位用于更精确地检测溢出类型正无溢出负无溢出正溢出上溢负溢出下溢双符号位法存储时仅需位运算时才扩展为位运算示例例加法位补补相加结果舍弃最高进位得无溢出例减法与溢出相当于补补补相加结果判断符号位法正正负故发生正溢出双符号位法扩展为表示正溢出定点数的乘除运算定点乘法乘法运算主要分为原码一位乘法和补码一位乘法算法比较项目原码一位乘法补码一位乘法算法符号位单独处理参与运算双符号位或单符号位移位规则逻辑移位补算术移位补符号位部分积初始为初始为操作数绝对值运算补码运算移位次数次为数值位数次加法次数次次最后可能多加一次例原码一位乘法初始设置被乘数乘数符号位正数预期结果详细计算步骤表格步骤当前位从低到高操作部分积变化部分积结果说明初始化部分积清零第步最低位为不加右移位逻辑右移移出第步次低位为执行加法右移位右移移出第步最高位为执行加法右移位最终右移移出最终结果符号数值算法要点总结符号位单独处理从低位到高位依次检查乘数的每一位条件累加若部分积若部分积不变右移操作每步操作后部分积逻辑右移位移出位保留迭代次数等于乘数的位数本例为次结果位数位位位本例位乘法运算电路该图是无符号数乘法运算的硬件逻辑核心组件及作用被乘数寄存器存储被乘数位位乘法核心部件对乘积寄存器和被乘数做无符号加法结果送回进位位存储加法产生的进位乘积寄存器初始置存储部分积位存储乘数位共位存完整乘积计数器初值为每循环一次减控制乘法循环次数控制逻辑接收移出的最低位决定是否将被乘数加到部分积上运算流程初始化置初值循环操作共次对和做无符号加法结果送回进位存到进位位寄存器寄存器同步逻辑右移进位移入的最高位的最低位移出送控制逻辑判断计数器减直到乘法指令的溢出判断位字长计算机分有符号数型和无符号数型两种场景有符号数型若乘积高位的每一位都相同且等于乘积低位的符号位不溢出否则溢出无符号数型若乘积的高位全为不溢出否则溢出定点除法除法运算是乘法的逆运算用于求解商和余数定点除法主要分为恢复余数法和加减交替法不恢复余数法两种除法算法对比比较项目原码恢复余数法原码加减交替法核心思想试减不够减则恢复余数试减不够减直接左移相当于商的符号单独处理单独处理上商规则余数上上余数与除数同号上异号上恢复操作需要余数时执行不需要直接在下一步调整运算步数次移位最多次加法次移位次加法效率较低需恢复步骤较高省去恢复适用场景原码运算逻辑简单补码运算硬件效率高恢复余数法基本流程算法步骤以原码为例初始化余数寄存器被除数除数寄存器商寄存器计数器操作数位数迭代过程重复次试减判断若商上左移位若商上恢复余数然后左移位计数器减确定符号商的符号余数的符号余数符号与被除数相同输出结果商和余数加减交替法不恢复余数法核心优化当余数为负时不立即恢复加回而是在下一次左移后加数学等价性优势减少一次加法操作提高效率上商规则余数与除数同号商上执行减法余数与除数异号商上执行加法示例补码除法初始数据被除数补位含符号位除数补预期结果商余数详细计算过程步骤操作余数商说明初始化余数为被除数第步与异号余数商上左移左移后准备下一次第步与异号余数商上左移继续第步与异号余数商上不再移位最后一步最终商的符号修正商补码余数除法运算电路电路组成除数寄存器存储除数位位执行加减运算余数商寄存器位双功能寄存器高位存储余数低位存储商控制逻辑与计数器控制迭代次数和上商操作工作流程与进行加减运算根据结果符号判断上商或寄存器整体左移位重复次后输出最终商和余数关键要点总结除法运算要点符号处理商的符号余数符号恢复不恢复恢复余数法逻辑清晰但效率较低加减交替法省去恢复步骤减少次加法上商规则原码余数上补码余数与除数同号上硬件优化采用左移代替右移商从低位逐位生成溢出检测若则发生溢出商超出表示范围除法与乘法的对比特性乘法除法结果位数位位商位余数运算方向从低位到高位累加从高位到低位试商移位方式部分积右移余数左移复杂度较简单只需加法较复杂需判断和调整硬件实现加法器移位器加法器移位器比较逻辑浮点数的表示与运算浮点数的基本格式浮点数的通用表示形式其中符号位表示正数表示负数尾数有效数字部分表示精度基数隐含二进制浮点数中为阶码指数部分表示数值范围为什么叫浮点因为小数点的位置可以浮动小数点右移小数点左移通过调整指数小数点可以在数值中移动从而表示不同量级的数浮点数的表示标准浮点数是计算机中表示实数的一种方式能够表示非常大或非常小的数克服了定点数表示范围受限的问题标准格式定义了两种常用的浮点数格式参数单精度双精度总位数位位符号位位位阶码位位尾数位位阶码偏移值表示范围有效数字约位十进制约位十进制单精度浮点数的存储结构真值公式其中符号位尾数阶码位单精度浮点数符号位阶码尾数符号定义正数负数移码规则规格化隐含最高位样式定义位域分布图解符号阶码移码尾数原码字段名称位数作用备注符号位决定数值的正负为正为负阶码决定数值的大小范围采用移码表示偏置值为尾数决定数值的精度隐含最高位实际精度位规格化浮点数的特点规格化表示浮点数采用科学计数法要求尾数满足即二进制形式为隐含位技术由于规格化后最高位必为这个不需要存储位尾数实际表示位精度隐含的位存储这样可以多获得位精度示例存储位实际值位补充原码与补码的规格化对比在计算机内部浮点数尾数除了使用原码如外也可以使用补码表示两者的规格化判据不同码制符号位数值最高位判据异或规格化范围形式示例原码正负补码补码补码规格化的核心原则补码规格化的标志是符号位与数值最高位不同为什么补码正数是非规格化需左移直到同原码补码负数绝对值较小是非规格化需左移直到绝对值变大特例补是规格化数满足开头且没有对应的原码规格化形式原码无法表示注意补不满足符号位与数值位不同因此在补码规则下通常视为非规格化数需左移一位变成即阶码的移码表示阶码采用移码表示而非补码单精度偏移值存储值实际指数表示范围实际存储为什么用移码便于比较大小移码天然有序避免使用符号位简化硬件比较电路实际指数移码表示十进制移码表示二进制补充整数移码移码在定点整数中移码通常用于表示有符号数其偏置值为而在浮点数标准中为了更均衡地表示指数范围偏置值取比较项目标准整数移码位阶码位偏置值计算公式移真移真真值的表示表示范围除去全全全含义最小数机器零非规格化数全含义最大数无穷大为什么偏置值是而不是主要目的是为了扩大正指数的范围从而能表示更大的数值若有效指数范围为若有效指数范围为显然比大能表示的绝对值更大的数虽然牺牲了一个负指数位但通常大数的范围更重要特殊值判定当阶码为全或全时表示特殊数值阶码尾数数值类型含义备注零符号位决定或非规格化数极其接近的小数用于填补与最小规格化数之间的空隙任意规格化数常规数值计算公式无穷大溢出时产生符号位决定或非法运算结果如示例单精度浮点数表示十进制数转换过程转二进制合并规格化提取分量符号正数阶码尾数补齐位最终存储样式位域填充图解尾数数制转换规格化计算字段拼接将十进制数的整数部分和小数部分分别转换为二进制整数部分小数部分合并结果移动小数点使整数位仅保留位且为形式移位操作左移位确定参数真实指数尾数部分去掉整数位的根据单精度标准计算三个字段符号位正数阶码移码表示需加偏置值尾数取规格化后的有效数字补足位后补个将按顺序拼合为位机器数二进制结构十六进制表示非规格化数的计算与示例当阶码为全即且尾数不为时浮点数处于非规格化状态此时为了平滑过渡到规定阶码隐含值而不是单精度双精度尾数隐含位隐含整数位为即真值公式为什么要用为了实现平滑下溢最小的规格化数最大的非规格化数两者实现了无缝衔接计算示例若单精度浮点数机器码为十六进制正数全非规格化二进制计算浮点数的表示范围与溢出浮点数的表示范围是不连续的存在溢出和下溢两个概念数轴表示图解浮点数在数轴上的分布如下所示节点样式定义结构定义负数区域负上溢负规格化范围负下溢正数区域正下溢正规格化范围正上溢跨子图连接应用样式溢出与下溢上溢正上溢数值大于最大正数结果记为负上溢数值小于最小负数结果记为后果通常视为异常或错误下溢数值绝对值太小介于最大负数和最小正数之间即之间不含处理结果记为机器零或者使用非规格化数提高精度后果精度丢失但通常不报错注计算机中的下溢通常指绝对值过小趋近于而非数值过小趋近于负无穷趋近于负无穷属于负上溢单精度浮点数的关键值描述阶码存储尾数存储实际值近似十进制最大正数全最小正规格化数全最大非规格化数全最小正非规格化数定点数与浮点数的对比定点数与浮点数是计算机中表示实数的两种基本方法它们在范围精度和实现复杂度上各有优劣比较维度定点数浮点数小数点位置固定不变隐含在特定位置浮动由阶码决定数值范围较小受位数限制很大受阶码限制精度特性绝对精度固定均匀分布相对精度固定稀疏分布数值越大越稀疏运算复杂度简单类似整数运算复杂需对阶规格化舍入溢出处理容易溢出报错不易溢出上溢出为下溢出为硬件成本低高需专门的典型应用嵌入式控制金融计算精度要求绝对固定科学计算图形处理通用计算机核心区别总结定点数就像一把普通尺子刻度间距是固定的能测量的最大长度有限浮点数就像一把皮尺测量小物体时刻度很密精度高测量大物体时刻度变稀精度低但能测量的范围非常大浮点数的加减运算浮点数加减运算比定点数复杂硬件上需通过专门的浮点运算单元完成核心流程可概括为步法对阶尾数加减规格化舍入判溢出节点定义开始运算对阶小阶向大阶看齐尾数右移尾数加减需规格化右规尾数右移阶码左规尾数左移阶码舍入舍入就近舍入溢出检查阶码是否越界上溢置为下溢置为输出结果逻辑连线尾数溢出尾数过小完成无需规格化正常样式定义现代化配色应用样式对阶尾数加减规格化舍入溢出判断目的使两个操作数的阶码相同以便尾数直接相加减规则小阶向大阶看齐设则将的阶码增大至同时的尾数右移每右移一位阶码加为什么小向大看齐小阶尾数右移丢弃的是低位数据仅影响精度若大阶尾数左移丢弃的是高位有效数据会产生巨大误差操作对阶后的尾数进行定点加减运算注意浮点数尾数通常采用补码或原码表示运算时需包含隐含的规格化数结果可能出现临时溢出如这不代表最终溢出后续通过右规解决目的保证结果符合的格式右规触发条件尾数运算结果绝对值双符号位不等操作尾数右移位阶码加示例右规左规触发条件尾数运算结果绝对值最高有效位不是操作尾数逐位左移阶码逐位减直到最高位为示例左规目的当尾数位数超过寄存器长度时需舍弃多余位并保证精度舍入法类似于四舍五入舍弃位最高位为直接舍去舍弃位最高位为尾数末位加恒置法无论舍弃位是什么直接将尾数末位恒置为默认就近舍入舍入到最近的偶数判断根据最终阶码判断结果是否合法上溢如单精度触发场景右规时阶码加导致超过最大值两个大数相乘指数相加导致阶码过大处理抛出异常硬件中断或置为下溢如单精度触发场景左规时阶码减导致小于最小值两个小数相乘指数相加导致阶码过小处理通常置为机器零或非规格化数注意只有右规可能导致上溢只有左规可能导致下溢尾数溢出可以通过右规解决不算真正的溢出阶码上溢才是真正的溢出详细运算示例格式转换对阶小阶向大阶看齐变为尾数右移位尾数相加的尾数的尾数结果规格化右规尾数需要右规尾数右移位阶码结果最终结果检查阶码在允许范围内无溢出浮点数表示的局限性精度陷阱与注意事项大数吃小数当极大数与极小数相加时如由于对阶时小数尾数右移过多被截断导致小数被忽略不满足结合律编写代码时应尽量避免相差巨大的数直接运算十进制小数无法精确表示如在二进制是无限循环小数存储时必然存在误差禁止使用进行等值比较应使用大小端存储示例以字节为例大端模式地址存地址存地址存地址存小端模式地址存地址存地址存地址存语言中的浮点数类型语言中浮点数对应标准核心类型为和类型对比类型对应标准字节数有效十进制位数示例存储单精度位实际存储为近似值双精度位实际存储为近似值精度问题示例语言中的原因和无法用二进制精确表示存储时存在舍入误差相加后的近似值与的近似值不相等数据的大小端与对齐存储大端与小端模式字节序指多字节数据如在内存地址中的排列顺序模式英文名存储规则典型应用大端模式高位字节存低地址符合人类阅读习惯网络协议虚拟机小端模式低位字节存低地址高位在后现代主流记忆口诀小小低小端模式小低位字节存低地址图解内存布局设变量字节存放在地址处大端小端存储对比表内存地址大端模式小端模式最高位字节最低位字节最低位字节最高位字节代码检测语言若低地址为则为小端内存对齐访问内存通常以字为单位如字节或字节若数据未对齐可能需要进行两次访存并进行拼接严重影响效率核心原则以空间换时间对齐规则默认情况起始地址应是该变量类型大小的整数倍如需存放在的倍数地址结构体总大小应是其最大成员大小的整数倍示例分析内存布局对比假设起始地址为偏移总大小紧凑存储不对齐对齐存储字节对齐填充字节无实际含义仅用于占位对齐优化建议在定义结构体时将相同类型的成员放在一起或按从大到小顺序定义可减少填充浪费',
   isPost: true,
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2026-03-21 17:47:21',
+  postUpdate: '2026-05-10 20:40:54',
   postMainColor: '#ff7096',
 }</script><noscript><style type="text/css">
   #nav {
@@ -202,8 +202,800 @@ setTimeout(function(){preloader.endLoading();},10000)
 if (true) {
   document.addEventListener('pjax:send', () => { preloader.initLoading() })
   document.addEventListener('pjax:complete', () => { preloader.endLoading() })
-}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/sparkle520?tab=repositories" title="github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="github"/><span class="back-menu-item-text">github</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">SPARKLE</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/408/" style="font-size: 1.05rem;">408<sup>23</sup></a><a href="/tags/AOP/" style="font-size: 1.05rem;">AOP<sup>1</sup></a><a href="/tags/Deep-Learning/" style="font-size: 1.05rem;">Deep Learning<sup>1</sup></a><a href="/tags/IoC/" style="font-size: 1.05rem;">IoC<sup>1</sup></a><a href="/tags/JSR303/" style="font-size: 1.05rem;">JSR303<sup>1</sup></a><a href="/tags/Matplotlib/" style="font-size: 1.05rem;">Matplotlib<sup>3</sup></a><a href="/tags/c/" style="font-size: 1.05rem;">c#<sup>2</sup></a><a href="/tags/java/" style="font-size: 1.05rem;">java<sup>4</sup></a><a href="/tags/python/" style="font-size: 1.05rem;">python<sup>5</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 1.05rem;">事务<sup>1</sup></a><a href="/tags/%E4%BA%8C%E6%AC%A1%E5%9E%8B/" style="font-size: 1.05rem;">二次型<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E3%80%82/" style="font-size: 1.05rem;">你的名字。<sup>3</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字同名小说<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%A4%96%E4%BC%A0%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字外传小说<sup>1</sup></a><a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size: 1.05rem;">写作<sup>4</sup></a><a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 1.05rem;">包管理<sup>1</sup></a><a href="/tags/%E5%8D%B7%E7%A7%AF%E5%85%AC%E5%BC%8F/" style="font-size: 1.05rem;">卷积公式<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90/" style="font-size: 1.05rem;">天气之子<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">天气之子同名小说<sup>1</sup></a><a href="/tags/%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">小说<sup>2</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">操作系统<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" style="font-size: 1.05rem;">数据校验<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" style="font-size: 1.05rem;">数据链路层<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 1.05rem;">概率论<sup>2</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 1.05rem;">概率论与数理统计<sup>7</sup></a><a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 1.05rem;">汇编<sup>9</sup></a><a href="/tags/%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80/" style="font-size: 1.05rem;">泰勒展开<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/" style="font-size: 1.05rem;">物理层<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%80%BC/" style="font-size: 1.05rem;">特征值<sup>2</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F/" style="font-size: 1.05rem;">特征向量<sup>2</sup></a><a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">线性代数<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" style="font-size: 1.05rem;">网络体系结构<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" style="font-size: 1.05rem;">网络层<sup>2</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 1.05rem;">英语<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">英语语法<sup>24</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1.05rem;">计算机组成原理<sup>6</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.05rem;">计算机网络<sup>5</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">语法<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">高等代数<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" style="font-size: 1.05rem;">高等数学<sup>21</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
-    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/04/"><span class="card-archive-list-date">四月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">三月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">29</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/02/"><span class="card-archive-list-date">二月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/01/"><span class="card-archive-list-date">一月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/12/"><span class="card-archive-list-date">十二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">15</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/11/"><span class="card-archive-list-date">十一月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/10/"><span class="card-archive-list-date">十月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/09/"><span class="card-archive-list-date">九月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%BB%84/" itemprop="url">计组</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/408/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>408</span></a><a class="article-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>计算机组成原理</span></a></span></div></div><h1 class="post-title" itemprop="name headline">408-计算机组成原理-2-数据的表示和运算</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-01-07T15:00:27.000Z" title="发表于 2026-01-07 23:00:27">2026-01-07</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-03-21T09:47:21.354Z" title="更新于 2026-03-21 17:47:21">2026-03-21</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">11.7k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>45分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="408-计算机组成原理-2-数据的表示和运算"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为系守镇"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>系守镇</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2026/01/07/408-%E8%AE%A1%E7%BB%842/#post-comment" tabindex="-1"><span id="twikoo-count"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://pic1.imgdb.cn/item/695e4a10c1cee4b048c4e0a1.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2026/01/07/408-%E8%AE%A1%E7%BB%842/"><header><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%BB%84/" itemprop="url">计组</a><a href="/tags/408/" tabindex="-1" itemprop="url">408</a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" tabindex="-1" itemprop="url">计算机组成原理</a><h1 id="CrawlerTitle" itemprop="name headline">408-计算机组成原理-2-数据的表示和运算</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">sparkle520</span><time itemprop="dateCreated datePublished" datetime="2026-01-07T15:00:27.000Z" title="发表于 2026-01-07 23:00:27">2026-01-07</time><time itemprop="dateCreated datePublished" datetime="2026-03-21T09:47:21.354Z" title="更新于 2026-03-21 17:47:21">2026-03-21</time></header><h1 id="第2章-数据的表示和运算">第2章 数据的表示和运算</h1>
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/sparkle520?tab=repositories" title="github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="github"/><span class="back-menu-item-text">github</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">SPARKLE</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/408/" style="font-size: 1.05rem;">408<sup>25</sup></a><a href="/tags/AOP/" style="font-size: 1.05rem;">AOP<sup>1</sup></a><a href="/tags/Deep-Learning/" style="font-size: 1.05rem;">Deep Learning<sup>1</sup></a><a href="/tags/IoC/" style="font-size: 1.05rem;">IoC<sup>1</sup></a><a href="/tags/JSR303/" style="font-size: 1.05rem;">JSR303<sup>1</sup></a><a href="/tags/Matplotlib/" style="font-size: 1.05rem;">Matplotlib<sup>3</sup></a><a href="/tags/c/" style="font-size: 1.05rem;">c#<sup>2</sup></a><a href="/tags/java/" style="font-size: 1.05rem;">java<sup>4</sup></a><a href="/tags/python/" style="font-size: 1.05rem;">python<sup>5</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 1.05rem;">事务<sup>1</sup></a><a href="/tags/%E4%BA%8C%E6%AC%A1%E5%9E%8B/" style="font-size: 1.05rem;">二次型<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E3%80%82/" style="font-size: 1.05rem;">你的名字。<sup>3</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字同名小说<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%A4%96%E4%BC%A0%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">你的名字外传小说<sup>1</sup></a><a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size: 1.05rem;">写作<sup>4</sup></a><a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 1.05rem;">包管理<sup>1</sup></a><a href="/tags/%E5%8D%B7%E7%A7%AF%E5%85%AC%E5%BC%8F/" style="font-size: 1.05rem;">卷积公式<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90/" style="font-size: 1.05rem;">天气之子<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">天气之子同名小说<sup>1</sup></a><a href="/tags/%E5%B0%8F%E8%AF%B4/" style="font-size: 1.05rem;">小说<sup>2</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">操作系统<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" style="font-size: 1.05rem;">数据校验<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" style="font-size: 1.05rem;">数据链路层<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 1.05rem;">概率论<sup>2</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 1.05rem;">概率论与数理统计<sup>7</sup></a><a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 1.05rem;">汇编<sup>9</sup></a><a href="/tags/%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80/" style="font-size: 1.05rem;">泰勒展开<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/" style="font-size: 1.05rem;">物理层<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%80%BC/" style="font-size: 1.05rem;">特征值<sup>2</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F/" style="font-size: 1.05rem;">特征向量<sup>2</sup></a><a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">线性代数<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" style="font-size: 1.05rem;">网络体系结构<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" style="font-size: 1.05rem;">网络层<sup>2</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 1.05rem;">英语<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">英语语法<sup>24</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1.05rem;">计算机组成原理<sup>6</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.05rem;">计算机网络<sup>7</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 1.05rem;">语法<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/" style="font-size: 1.05rem;">高等代数<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" style="font-size: 1.05rem;">高等数学<sup>22</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/04/"><span class="card-archive-list-date">四月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">三月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">31</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/02/"><span class="card-archive-list-date">二月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/01/"><span class="card-archive-list-date">一月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/12/"><span class="card-archive-list-date">十二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">15</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/11/"><span class="card-archive-list-date">十一月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/10/"><span class="card-archive-list-date">十月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/09/"><span class="card-archive-list-date">九月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%BB%84/" itemprop="url">计组</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/408/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>408</span></a><a class="article-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>计算机组成原理</span></a></span></div></div><h1 class="post-title" itemprop="name headline">408-计算机组成原理-2-数据的表示和运算</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-01-07T15:00:27.000Z" title="发表于 2026-01-07 23:00:27">2026-01-07</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-05-10T12:40:54.771Z" title="更新于 2026-05-10 20:40:54">2026-05-10</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">15.4k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>60分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="408-计算机组成原理-2-数据的表示和运算"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为系守镇"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>系守镇</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2026/01/07/408-%E8%AE%A1%E7%BB%842/#post-comment" tabindex="-1"><span id="twikoo-count"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://pic1.imgdb.cn/item/695e4a10c1cee4b048c4e0a1.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2026/01/07/408-%E8%AE%A1%E7%BB%842/"><header><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%BB%84/" itemprop="url">计组</a><a href="/tags/408/" tabindex="-1" itemprop="url">408</a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" tabindex="-1" itemprop="url">计算机组成原理</a><h1 id="CrawlerTitle" itemprop="name headline">408-计算机组成原理-2-数据的表示和运算</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">sparkle520</span><time itemprop="dateCreated datePublished" datetime="2026-01-07T15:00:27.000Z" title="发表于 2026-01-07 23:00:27">2026-01-07</time><time itemprop="dateCreated datePublished" datetime="2026-05-10T12:40:54.771Z" title="更新于 2026-05-10 20:40:54">2026-05-10</time></header><h1 id="第2章-数据的表示和运算">第2章 数据的表示和运算</h1>
+<h3 id="总结与速查-cheat-sheet">总结与速查 ( Cheat Sheet )</h3>
+<p><strong>一、进制转换核心</strong></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">转换方向</th>
+<th style="text-align: left;">方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">任意进制 → 十进制</td>
+<td style="text-align: left;">按权展开 : <span
+class="math inline">\(\sum k_i \times r^i\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">十进制 → 任意进制</td>
+<td style="text-align: left;">整数部分除基取余 ( 逆序 )
+，小数部分乘基取整 ( 顺序 )</td>
+</tr>
+<tr>
+<td style="text-align: left;">二进制 ↔︎ 八进制</td>
+<td style="text-align: left;">每 3 位分组</td>
+</tr>
+<tr>
+<td style="text-align: left;">二进制 ↔︎ 十六进制</td>
+<td style="text-align: left;">每 4 位分组</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>二、四种码制对比 ( 8 位定点整数 ) </strong></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">码制</th>
+<th style="text-align: center;">+5</th>
+<th style="text-align: center;">-5</th>
+<th style="text-align: center;">+0</th>
+<th style="text-align: center;">-0</th>
+<th style="text-align: center;">负数范围</th>
+<th style="text-align: left;">特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">原码</td>
+<td style="text-align: center;"><span
+class="math inline">\(00000101\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(10000101\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(00000000\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(10000000\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-127 \sim
+-1\)</span></td>
+<td style="text-align: left;">直观，但加减运算复杂</td>
+</tr>
+<tr>
+<td style="text-align: left;">反码</td>
+<td style="text-align: center;"><span
+class="math inline">\(00000101\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(11111010\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(00000000\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(11111111\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-127 \sim
+-1\)</span></td>
+<td style="text-align: left;">仅用于原码→补码的过渡</td>
+</tr>
+<tr>
+<td style="text-align: left;">补码</td>
+<td style="text-align: center;"><span
+class="math inline">\(00000101\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(11111011\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(00000000\)</span></td>
+<td style="text-align: center;">唯一</td>
+<td style="text-align: center;"><span class="math inline">\(-128 \sim
+-1\)</span></td>
+<td
+style="text-align: left;"><strong>计算机通用格式</strong>，减法变加法</td>
+</tr>
+<tr>
+<td style="text-align: left;">移码</td>
+<td style="text-align: center;"><span
+class="math inline">\(10000101\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(01111011\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(10000000\)</span></td>
+<td style="text-align: center;">唯一</td>
+<td style="text-align: center;"><span class="math inline">\(-128 \sim
+-1\)</span></td>
+<td style="text-align: left;">保持大小顺序，用于浮点阶码</td>
+</tr>
+</tbody>
+</table>
+<p><strong>补码为什么范围不对称?</strong> 因为 <span
+class="math inline">\(0\)</span> 只有一种表示，节省下来的 <span
+class="math inline">\(10000000\)</span> 用来表示 <span
+class="math inline">\(-128\)</span>.</p>
+<hr />
+<p><strong>三、补码快速计算 ( 口算必杀 ) </strong></p>
+<p><strong>3.1 原码 → 补码 ( 负数 ) </strong></p>
+<blockquote>
+<p>口诀 : 从右往左找第一个 1，左边所有位取反，右边不变.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">示例</th>
+<th style="text-align: center;">原码</th>
+<th style="text-align: center;">找第一个 1</th>
+<th style="text-align: center;">左边取反</th>
+<th style="text-align: center;">右边不变</th>
+<th style="text-align: center;">补码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span
+class="math inline">\(-5\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(10000101\)</span></td>
+<td style="text-align: center;">第 0 位</td>
+<td style="text-align: center;"><span
+class="math inline">\(1111010\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(11111011\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span
+class="math inline">\(-12\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(10001100\)</span></td>
+<td style="text-align: center;">第 2 位</td>
+<td style="text-align: center;"><span
+class="math inline">\(11110\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(100\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(11110100\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span
+class="math inline">\(-1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(10000001\)</span></td>
+<td style="text-align: center;">第 0 位</td>
+<td style="text-align: center;"><span
+class="math inline">\(1111111\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(11111111\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span
+class="math inline">\(-128\)</span></td>
+<td style="text-align: center;">无 ( 超出范围 )</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span
+class="math inline">\(10000000\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>3.2 补码 → 真值 ( 按权展开，一步到位 ) </strong></p>
+<blockquote>
+<p>口诀 : 符号位权值为 <span
+class="math inline">\(-2^{n-1}\)</span>，其余位权值为 <span
+class="math inline">\(+2^i\)</span>，直接求和.</p>
+</blockquote>
+<p><span class="math display">\[
+\text{真值} = -2^{n-1} \times b_{n-1} + \sum_{i=0}^{n-2} b_i \times 2^i
+\]</span></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">示例</th>
+<th style="text-align: center;">补码</th>
+<th style="text-align: center;">按权展开</th>
+<th style="text-align: center;">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span
+class="math inline">\(11111011\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-128 +
+64+32+16+8+2+1 = -5\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span
+class="math inline">\(10100110\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-128 +
+32+4+2 = -90\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span
+class="math inline">\(10000000\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-128 + 0 =
+-128\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span
+class="math inline">\(01111011\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(0 +
+64+32+16+8+2+1 = 123\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>四、定点数表示范围</strong></p>
+<table>
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 27%" />
+<col style="width: 27%" />
+<col style="width: 22%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">类型</th>
+<th style="text-align: center;">位数</th>
+<th style="text-align: center;">范围</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">无符号整数</td>
+<td style="text-align: center;"><span class="math inline">\(n\)</span>
+位</td>
+<td style="text-align: center;"><span class="math inline">\(0 \sim 2^n -
+1\)</span></td>
+<td style="text-align: left;">例 : 8 位 <span class="math inline">\(0
+\sim 255\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">有符号整数 ( 补码 )</td>
+<td style="text-align: center;"><span class="math inline">\(n\)</span>
+位</td>
+<td style="text-align: center;"><span class="math inline">\(-2^{n-1}
+\sim 2^{n-1}-1\)</span></td>
+<td style="text-align: left;">例 : 8 位 <span class="math inline">\(-128
+\sim 127\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">定点小数 ( 补码 )</td>
+<td style="text-align: center;"><span class="math inline">\(n\)</span>
+位</td>
+<td style="text-align: center;"><span class="math inline">\(-1 \sim
+1-2^{-(n-1)}\)</span></td>
+<td style="text-align: left;">小数点在符号位之后</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>五、移位运算规则</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">码制</th>
+<th style="text-align: center;">算术左移</th>
+<th style="text-align: center;">算术右移</th>
+<th style="text-align: center;">逻辑左移</th>
+<th style="text-align: center;">逻辑右移</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">原码</td>
+<td style="text-align: center;">低位补 0</td>
+<td style="text-align: center;">高位补 0</td>
+<td style="text-align: center;">低位补 0</td>
+<td style="text-align: center;">高位补 0</td>
+</tr>
+<tr>
+<td style="text-align: left;">反码</td>
+<td style="text-align: center;">高位补符号位</td>
+<td style="text-align: center;">高位补符号位</td>
+<td style="text-align: center;">高位补 0</td>
+<td style="text-align: center;">高位补 0</td>
+</tr>
+<tr>
+<td style="text-align: left;">补码</td>
+<td style="text-align: center;">低位补 0</td>
+<td style="text-align: center;">高位补符号位</td>
+<td style="text-align: center;">低位补 0</td>
+<td style="text-align: center;">高位补 1 ( 算术右移 )</td>
+</tr>
+</tbody>
+</table>
+<p><strong>溢出判断</strong></p>
+<ul>
+<li><strong>算术左移</strong> : 若最高数值位被移出后与符号位不同，则溢出
+( 正溢出 )</li>
+<li><strong>算术右移</strong> : 不会溢出，但可能丢失精度</li>
+</ul>
+<hr />
+<p><strong>六、补码加减运算与溢出判断</strong></p>
+<p><strong>6.1 补码加法</strong></p>
+<p>直接相加，符号位参与运算，舍弃最高位进位.</p>
+<p><strong>6.2 补码减法</strong></p>
+<p><span class="math inline">\([A-B]_补 = [A]_补 +
+[-B]_补\)</span>，其中 <span class="math inline">\([-B]_补\)</span> =
+取反 <span class="math inline">\(+1\)</span>.</p>
+<p><strong>6.3 三种溢出判断方法</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">方法</th>
+<th style="text-align: left;">判据公式</th>
+<th style="text-align: left;">溢出条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">一位符号位</td>
+<td style="text-align: left;"><span class="math inline">\(V = A_s B_s
+\overline{S_s} + \overline{A_s} \overline{B_s} S_s\)</span></td>
+<td style="text-align: left;">同号相加，结果异号</td>
+</tr>
+<tr>
+<td style="text-align: left;">进位判断法</td>
+<td style="text-align: left;"><span class="math inline">\(V = C_{sign}
+\oplus C_{data}\)</span></td>
+<td style="text-align: left;">符号位进位 ⊕ 最高位进位 = 1</td>
+</tr>
+<tr>
+<td style="text-align: left;">双符号位法</td>
+<td style="text-align: left;">模 4 补码</td>
+<td style="text-align: left;"><span class="math inline">\(S_1S_0 =
+01\)</span> → 正溢出; <span class="math inline">\(S_1S_0 = 10\)</span> →
+负溢出</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">运算</th>
+<th style="text-align: center;">结果符号位</th>
+<th style="text-align: center;">一位符号位法</th>
+<th style="text-align: center;">进位判断法</th>
+<th style="text-align: center;">双符号位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">正+正</td>
+<td style="text-align: center;">正</td>
+<td style="text-align: center;">无</td>
+<td style="text-align: center;"><span class="math inline">\(C_{sign}=0,
+C_{data}=0\)</span> → 无</td>
+<td style="text-align: center;"><span class="math inline">\(00\)</span>
+→ 无</td>
+</tr>
+<tr>
+<td style="text-align: left;">负+负</td>
+<td style="text-align: center;">负</td>
+<td style="text-align: center;">无</td>
+<td style="text-align: center;"><span class="math inline">\(C_{sign}=1,
+C_{data}=1\)</span> → 无</td>
+<td style="text-align: center;"><span class="math inline">\(11\)</span>
+→ 无</td>
+</tr>
+<tr>
+<td style="text-align: left;">正+正</td>
+<td style="text-align: center;">负</td>
+<td style="text-align: center;"><strong>溢出</strong></td>
+<td style="text-align: center;"><span class="math inline">\(C_{sign}=0,
+C_{data}=1\)</span> → <strong>溢出</strong></td>
+<td style="text-align: center;"><span class="math inline">\(01\)</span>
+→ <strong>正溢出</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">负+负</td>
+<td style="text-align: center;">正</td>
+<td style="text-align: center;"><strong>溢出</strong></td>
+<td style="text-align: center;"><span class="math inline">\(C_{sign}=1,
+C_{data}=0\)</span> → <strong>溢出</strong></td>
+<td style="text-align: center;"><span class="math inline">\(10\)</span>
+→ <strong>负溢出</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>七、定点数乘法</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">对比项</th>
+<th style="text-align: left;">原码一位乘法</th>
+<th style="text-align: left;">Booth 算法 ( 补码乘法 )</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">符号处理</td>
+<td style="text-align: left;">单独处理 <span class="math inline">\(S =
+x_s \oplus y_s\)</span></td>
+<td style="text-align: left;">符号位参与运算</td>
+</tr>
+<tr>
+<td style="text-align: left;">操作数</td>
+<td style="text-align: left;">绝对值</td>
+<td style="text-align: left;">补码</td>
+</tr>
+<tr>
+<td style="text-align: left;">移位方式</td>
+<td style="text-align: left;">逻辑右移</td>
+<td style="text-align: left;">算术右移</td>
+</tr>
+<tr>
+<td style="text-align: left;">判断依据</td>
+<td style="text-align: left;">仅看乘数当前位 <span
+class="math inline">\(y_i\)</span></td>
+<td style="text-align: left;">看 <span
+class="math inline">\(y_i\)</span> 与 <span
+class="math inline">\(y_{i-1}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">迭代次数</td>
+<td style="text-align: left;"><span class="math inline">\(n\)</span>
+次</td>
+<td style="text-align: left;"><span class="math inline">\(n\)</span> 次
+( 最多 <span class="math inline">\(n+1\)</span> 次加法 )</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Booth 算法规则 : </strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="math inline">\(y_i
+y_{i-1}\)</span></th>
+<th style="text-align: left;">操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(00\)</span></td>
+<td style="text-align: left;">右移</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(01\)</span></td>
+<td style="text-align: left;">加 <span
+class="math inline">\([x]_补\)</span>，右移</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(10\)</span></td>
+<td style="text-align: left;">加 <span
+class="math inline">\([-x]_补\)</span>，右移</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(11\)</span></td>
+<td style="text-align: left;">右移</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>八、定点数除法 ( 加减交替法 ) </strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">步骤</th>
+<th style="text-align: left;">操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">符号位单独确定 <span
+class="math inline">\(Q_s = x_s \oplus y_s\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">余数 <span class="math inline">\(R =
+|x|\)</span>，商 <span class="math inline">\(Q = 0\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">若余数与除数同号 → 上商
+1，下一步减除数</td>
+</tr>
+<tr>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">若余数与除数异号 → 上商
+0，下一步加除数</td>
+</tr>
+<tr>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">上商后余数左移 1 位</td>
+</tr>
+<tr>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">重复 3~5，共 <span
+class="math inline">\(n\)</span> 步 ( <span
+class="math inline">\(n\)</span> 为位数 )</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>九、IEEE 754 浮点数</strong></p>
+<p><strong>9.1 单精度格式 ( 32 位 ) </strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">字段</th>
+<th style="text-align: center;">位数</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">S ( 符号位 )</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">0 正 1 负</td>
+</tr>
+<tr>
+<td style="text-align: left;">E ( 阶码 )</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: left;">移码表示，偏置值 127，实际指数 <span
+class="math inline">\(= E-127\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">M ( 尾数 )</td>
+<td style="text-align: center;">23</td>
+<td style="text-align: left;">原码表示，隐含最高位 1 ( 规格化数 )</td>
+</tr>
+</tbody>
+</table>
+<p><strong>9.2 特殊值速查</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">E</th>
+<th style="text-align: center;">M</th>
+<th style="text-align: left;">含义</th>
+<th style="text-align: left;">公式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: left;">±0</td>
+<td style="text-align: left;"><span
+class="math inline">\(0\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">≠0</td>
+<td style="text-align: left;">非规格化数</td>
+<td style="text-align: left;"><span class="math inline">\((-1)^S \times
+0.M \times 2^{-126}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">1~254</td>
+<td style="text-align: center;">任意</td>
+<td style="text-align: left;">规格化数</td>
+<td style="text-align: left;"><span class="math inline">\((-1)^S \times
+1.M \times 2^{E-127}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">255</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: left;">±∞</td>
+<td style="text-align: left;">—</td>
+</tr>
+<tr>
+<td style="text-align: center;">255</td>
+<td style="text-align: center;">≠0</td>
+<td style="text-align: left;">NaN</td>
+<td style="text-align: left;">—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>9.3 典型值对照</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">十进制</th>
+<th style="text-align: left;">IEEE 754 单精度 ( 二进制 )</th>
+<th style="text-align: center;">十六进制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1.0</td>
+<td style="text-align: left;"><span class="math inline">\(0\ 01111111\
+00000000000000000000000\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(0x3F800000\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">-1.0</td>
+<td style="text-align: left;"><span class="math inline">\(1\ 01111111\
+00000000000000000000000\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(0xBF800000\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: left;"><span class="math inline">\(0\ 01111110\
+00000000000000000000000\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(0x3F000000\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">3.14</td>
+<td style="text-align: left;">近似值</td>
+<td style="text-align: center;"><span
+class="math inline">\(0x40490FD0\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>9.4 表示范围</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">类型</th>
+<th style="text-align: left;">最小值</th>
+<th style="text-align: left;">最大值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">正规格化数</td>
+<td style="text-align: left;"><span class="math inline">\(1.0 \times
+2^{-126} \approx 1.18 \times 10^{-38}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\((2-2^{-23})
+\times 2^{127} \approx 3.4 \times 10^{38}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">正非规格化数</td>
+<td style="text-align: left;"><span class="math inline">\(2^{-149}
+\approx 1.4 \times 10^{-45}\)</span></td>
+<td style="text-align: left;">—</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>十、浮点加减运算五步法</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">步骤</th>
+<th style="text-align: left;">操作</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">1. 对阶</td>
+<td style="text-align: left;">小阶向大阶看齐，尾数右移 <span
+class="math inline">\(k\)</span> 位</td>
+<td style="text-align: left;"><span class="math inline">\(\Delta E = E_x
+- E_y\)</span>，<span class="math inline">\(y\)</span> 右移</td>
+</tr>
+<tr>
+<td style="text-align: left;">2. 尾数加减</td>
+<td style="text-align: left;"><span class="math inline">\(M_x \pm
+M_y\)</span></td>
+<td style="text-align: left;">得到未规格化的结果</td>
+</tr>
+<tr>
+<td style="text-align: left;">3. 规格化</td>
+<td style="text-align: left;">右规 : 尾数 ≥ 2，右移 1 位，阶码 +1</td>
+<td style="text-align: left;">或左规 : 尾数 &lt;
+0.5，左移，阶码减小</td>
+</tr>
+<tr>
+<td style="text-align: left;">4. 舍入</td>
+<td style="text-align: left;">0 舍 1 入 或 就近舍入</td>
+<td style="text-align: left;">保证精度</td>
+</tr>
+<tr>
+<td style="text-align: left;">5. 判溢出</td>
+<td style="text-align: left;">阶码超出 <span
+class="math inline">\([1,254]\)</span> → 溢出</td>
+<td style="text-align: left;"><span class="math inline">\(E &gt;
+254\)</span> → ∞，<span class="math inline">\(E &lt; 1\)</span> →
+非规格化</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>十一、C 语言类型转换</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">转换类型</th>
+<th style="text-align: left;">转换规则</th>
+<th style="text-align: left;">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">短→长 ( 有符号→有符号 )</td>
+<td style="text-align: left;">符号扩展，高位补符号位</td>
+<td style="text-align: left;"><span class="math inline">\(0xFFF0 \to
+0xFFFFFFFO\)</span> ( -16 扩展 )</td>
+</tr>
+<tr>
+<td style="text-align: left;">短→长 ( 无符号→无符号 )</td>
+<td style="text-align: left;">零扩展，高位补 0</td>
+<td style="text-align: left;"><span class="math inline">\(0xFFF0 \to
+0x0000FFF0\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">长→短</td>
+<td style="text-align: left;">截断，丢弃高位</td>
+<td style="text-align: left;"><span class="math inline">\(0x000100F0 \to
+0x00F0\)</span> ( 240 )</td>
+</tr>
+<tr>
+<td style="text-align: left;">同位宽有符号↔︎无符号</td>
+<td style="text-align: left;">位模式不变，解释改变</td>
+<td style="text-align: left;"><span class="math inline">\(0xFFFF = -1 =
+65535\)</span> ( unsigned )</td>
+</tr>
+</tbody>
+</table>
+<p><strong>易错点</strong></p>
+<ul>
+<li>有符号转无符号 : 先转扩展，再改变解释方式</li>
+<li>负数的无符号表示是一个很大的正数</li>
+<li>截断可能改变数值符号</li>
+</ul>
 <h2 id="数制与编码">2.1 数制与编码</h2>
 <h3 id="进位计数制及其相互转换">2.1.1 进位计数制及其相互转换</h3>
 <h4 id="进位计数制的核心概念">进位计数制的核心概念</h4>
@@ -401,6 +1193,61 @@ class="math inline">\(-0\)</span> )，加减运算复杂.</li>
 <ul>
 <li><strong>定义</strong> 正数的补码与原码相同; <strong>负数</strong>
 的补码是其反码末位加 1.</li>
+</ul>
+<div class="note info simple"><p><strong>快速求补码技巧</strong></p>
+<p>对于负数，有一种比”反码+1”更快的口算方法</p>
+<p><strong>从右往左找到第一个
+1，该位左边所有位取反，右边保持不变.</strong></p>
+<p>以 8 位 <span class="math inline">\(-5\)</span> 为例</p>
+<ul>
+<li>原码 : <span class="math inline">\(10000101\)</span></li>
+<li>从右往左，第一个 1 在最低位 ( 第 0 位 )</li>
+<li>该位左边全部取反 : <span
+class="math inline">\(1111101\)</span>，右边不变 : <span
+class="math inline">\(1\)</span></li>
+<li>结果 : <span class="math inline">\(11111011\)</span></li>
+</ul>
+<p>以 8 位 <span class="math inline">\(-12\)</span> 为例</p>
+<ul>
+<li>原码 : <span class="math inline">\(10001100\)</span></li>
+<li>从右往左，第一个 1 在第 2 位</li>
+<li>左边取反 : <span class="math inline">\(11110\)</span>，右边不变 :
+<span class="math inline">\(100\)</span></li>
+<li>结果 : <span class="math inline">\(11110100\)</span></li>
+</ul>
+<p><strong>原理</strong> : 反码+1 时，进位会一直传递到第一个 0
+为止，等价于”第一个 1 左边取反”.</p>
+</div>
+<div class="note info simple"><p><strong>补码快速还原真值技巧</strong></p>
+<p>给定一个补码，可以 <strong>直接按权展开</strong>
+算出真值，无需先转原码</p>
+<p><strong>最高位 ( 符号位 ) 的权值为 <span
+class="math inline">\(-2^{n-1}\)</span>，其余各位的权值为正的 <span
+class="math inline">\(2^i\)</span>.</strong></p>
+<p>以 8 位补码 <span class="math inline">\(11111011\)</span> 为例</p>
+<p><span class="math display">\[
+\begin{aligned}
+11111011_2 &amp;= -1 \times 2^7 + 1 \times 2^6 + 1 \times 2^5 + 1 \times
+2^4 + 1 \times 2^3 + 0 \times 2^2 + 1 \times 2^1 + 1 \times 2^0 \\
+&amp;= -128 + 64 + 32 + 16 + 8 + 0 + 2 + 1 \\
+&amp;= -5
+\end{aligned}
+\]</span></p>
+<p>以 8 位补码 <span class="math inline">\(10100110\)</span> 为例</p>
+<p><span class="math display">\[
+\begin{aligned}
+10100110_2 &amp;= -1 \times 2^7 + 0 \times 2^6 + 1 \times 2^5 + 0 \times
+2^4 + 0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 0 \times 2^0 \\
+&amp;= -128 + 0 + 32 + 0 + 0 + 4 + 2 + 0 \\
+&amp;= -90
+\end{aligned}
+\]</span></p>
+<p><strong>注</strong> : 1 越少越好算.</p>
+<p><strong>正数同理</strong>，符号位为 0，<span class="math inline">\(-0
+\times 2^{n-1} = 0\)</span>，退化为普通二进制按权展开.</p>
+<p><strong>口诀</strong> : 符号位当负权，其余照常加，一步到位出真值.</p>
+</div>
+<ul>
 <li><strong>特点</strong>
 <ul>
 <li><strong>0 有唯一表示</strong> ( <span class="math inline">\([+0]_补
@@ -493,6 +1340,370 @@ class="math inline">\(01111011\)</span></td>
 </tr>
 </tbody>
 </table>
+<p><strong>各编码取值范围汇总 ( <span class="math inline">\(n+1\)</span>
+位 )</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">编码类型</th>
+<th style="text-align: center;">整数最小值</th>
+<th style="text-align: center;">整数最大值</th>
+<th style="text-align: center;">小数最小值</th>
+<th style="text-align: center;">小数最大值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>原码</strong></td>
+<td style="text-align: center;"><span
+class="math inline">\(-(2^n-1)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(2^n-1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(-(1-2^{-n})\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(1-2^{-n}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>反码</strong></td>
+<td style="text-align: center;"><span
+class="math inline">\(-(2^n-1)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(2^n-1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(-(1-2^{-n})\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(1-2^{-n}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>补码</strong></td>
+<td style="text-align: center;"><span
+class="math inline">\(-2^n\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(2^n-1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(-1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(1-2^{-n}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>移码</strong></td>
+<td style="text-align: center;"><span
+class="math inline">\(-2^n\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(2^n-1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(-1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(1-2^{-n}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>常见位数取值范围速查</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">位数</th>
+<th style="text-align: center;">原码/反码</th>
+<th style="text-align: center;">补码/移码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>8位</strong></td>
+<td style="text-align: center;"><span class="math inline">\(-127 \sim
+127\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-128 \sim
+127\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>16位</strong></td>
+<td style="text-align: center;"><span class="math inline">\(-32,767 \sim
+32,767\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-32,768 \sim
+32,767\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>32位</strong></td>
+<td style="text-align: center;"><span
+class="math inline">\(-2,147,483,647 \sim 2,147,483,647\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(-2,147,483,648 \sim 2,147,483,647\)</span></td>
+</tr>
+</tbody>
+</table>
+<h4 id="由条件确定位模式-通解与推导">由条件确定位模式 ( 通解与推导
+)</h4>
+<p><strong>补码按权展开公式</strong> ( <span
+class="math inline">\(n+1\)</span> 位，<span
+class="math inline">\(x_0\)</span> 为符号位 ) : <span
+class="math display">\[x = -x_0 \cdot 2^n + \sum_{i=1}^{n} x_i \cdot
+2^{n-i}\]</span></p>
+<hr />
+<h5 id="无符号数通解">无符号数通解</h5>
+<p><span class="math inline">\(n\)</span> 位无符号数 <span
+class="math inline">\(x = x_1x_2...x_n\)</span>，范围 <span
+class="math inline">\(0 \sim 2^n-1\)</span> :</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">条件</th>
+<th style="text-align: left;">通解</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="math inline">\(x &lt;
+2^k\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(x_1 =
+0\)</span></td>
+<td style="text-align: left;">最高位必须为 0</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\(x \geq
+2^k\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(x_1 =
+1\)</span></td>
+<td style="text-align: left;">最高位必须为 1</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\(2^m \leq x
+&lt; 2^k\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(x_1 =
+1\)</span> 且 <span class="math inline">\(x_2...x_n\)</span> 有限制</td>
+<td style="text-align: left;">确定区间</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h5 id="补码通解-核心">补码通解 ( 核心 )</h5>
+<p><span class="math inline">\(n+1\)</span> 位补码 <span
+class="math inline">\(x = x_0x_1...x_n\)</span> ( <span
+class="math inline">\(x_0\)</span> 为符号位 ) ，范围 <span
+class="math inline">\(-2^n \sim 2^n-1\)</span> :</p>
+<p><strong>分别讨论符号位</strong></p>
+<p><strong>( 1 ) <span class="math inline">\(x_0 = 1\)</span> ( 负数 )
+时</strong> <span class="math display">\[x \in [-2^n, -1]\]</span> 由于
+<span class="math inline">\(-2^n &lt; -1 &lt; 0 &lt; 2^k\)</span> ( 当
+<span class="math inline">\(k \geq 0\)</span> ) ，所以 : <span
+class="math display">\[x_0 = 1 时，x &lt; 2^k 恒成立 ( 对任意 k \geq 0 )
+\]</span></p>
+<p><strong>( 2 ) <span class="math inline">\(x_0 = 0\)</span> ( 非负数 )
+时</strong> <span class="math display">\[x = \sum_{i=1}^{n} x_i \cdot
+2^{n-i} \in [0, 2^n-1]\]</span></p>
+<p>需要 <span class="math inline">\(x &lt; 2^k\)</span>，即各位加权和
+<span class="math inline">\(&lt; 2^k\)</span>.</p>
+<hr />
+<h5 id="补码条件通解公式">补码条件通解公式</h5>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">条件</th>
+<th style="text-align: left;">情况</th>
+<th style="text-align: left;">通解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="math inline">\(x &lt;
+2^k\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(x_0 =
+1\)</span></td>
+<td style="text-align: left;"><strong>恒成立</strong>，其余位任意</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><span class="math inline">\(x_0 =
+0\)</span> 且 <span class="math inline">\(n \geq k\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(x_1 =
+0\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><span class="math inline">\(x_0 =
+0\)</span> 且 <span class="math inline">\(n = k\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(x_1 =
+0\)</span> ( 若 <span class="math inline">\(x_1=1\)</span> 则 <span
+class="math inline">\(x \geq 2^{k-1}\)</span>，可继续讨论 )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\(x \geq
+2^k\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(x_0 =
+1\)</span></td>
+<td style="text-align: left;"><strong>不可能</strong> ( 负数 <span
+class="math inline">\(\geq 2^k\)</span> 不成立 )</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><span class="math inline">\(x_0 =
+0\)</span></td>
+<td style="text-align: left;">需保证加权和 <span
+class="math inline">\(\geq 2^k\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>简化口诀</strong></p>
+<ul>
+<li><span class="math inline">\(x &lt; 2^k\)</span> : 先看 <span
+class="math inline">\(x_0 = 1\)</span> ( 负数一定成立 ) ，<span
+class="math inline">\(x_0 = 0\)</span> 时再看 <span
+class="math inline">\(n\)</span> 与 <span
+class="math inline">\(k\)</span> 的关系</li>
+<li><span class="math inline">\(x \geq 2^k\)</span> : <span
+class="math inline">\(x_0\)</span> 必须为 <span
+class="math inline">\(0\)</span>，且最高数据位 ( <span
+class="math inline">\(x_1\)</span> ) 必须能产生 <span
+class="math inline">\(\geq 2^k\)</span> 的值</li>
+</ul>
+<hr />
+<p><strong>例题</strong> : <span class="math inline">\(x =
+x_0x_1x_2x_3x_4\)</span> ( 5位补码 ) ，求满足 <span
+class="math inline">\(x &lt; 16\)</span> 的条件.</p>
+<p><strong>解析</strong></p>
+<ul>
+<li><span class="math inline">\(n = 4\)</span> ( 4位数据位 ) ，范围
+<span class="math inline">\(-16 \sim 15\)</span></li>
+<li><span class="math inline">\(x &lt; 16 = 2^4\)</span></li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 28%" />
+<col style="width: 35%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">情况</th>
+<th style="text-align: left;">分析</th>
+<th style="text-align: center;">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span class="math inline">\(x_0 =
+1\)</span> ( 负数 )</td>
+<td style="text-align: left;"><span class="math inline">\(-16 \leq x
+\leq -1 &lt; 16\)</span></td>
+<td style="text-align: center;"><span
+style="color:green">成立</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math inline">\(x_0 =
+0\)</span> ( 非负 )</td>
+<td style="text-align: left;"><span class="math inline">\(0 \leq x \leq
+15 &lt; 16\)</span></td>
+<td style="text-align: center;"><span
+style="color:green">成立</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>答案</strong> : <span class="math inline">\(x_0 = 1\)</span>
+( 任意负数 ) ，或 <span class="math inline">\(x_0 = 0\)</span> (
+任意非负数 ) → <strong>全体数都满足！</strong> ( 因为范围上限 15 &lt; 16
+)</p>
+<hr />
+<p><strong>例题</strong> : <span class="math inline">\(x =
+x_0x_1x_2x_3x_4\)</span> ( 5位补码 ) ，求满足 <span
+class="math inline">\(x &lt; 8\)</span> 的条件.</p>
+<p><strong>解析</strong></p>
+<ul>
+<li><span class="math inline">\(n = 4\)</span>，范围 <span
+class="math inline">\(-16 \sim 15\)</span>，<span
+class="math inline">\(k = 3\)</span> ( <span class="math inline">\(2^3 =
+8\)</span> )</li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">情况</th>
+<th style="text-align: center;">分析</th>
+<th style="text-align: center;">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span class="math inline">\(x_0 =
+1\)</span> ( 负数 )</td>
+<td style="text-align: center;"><span class="math inline">\(-16 \leq x
+\leq -1 &lt; 8\)</span></td>
+<td style="text-align: center;"><span
+style="color:green">成立</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math inline">\(x_0 =
+0\)</span> ( 非负 )</td>
+<td style="text-align: center;"><span class="math inline">\(0 \leq x
+\leq 15\)</span>，需 <span class="math inline">\(x &lt; 8\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x_1 =
+0\)</span> ( 若 <span class="math inline">\(x_1=1\)</span> 则 <span
+class="math inline">\(x \geq 8\)</span> )</td>
+</tr>
+</tbody>
+</table>
+<p><strong>答案</strong> : <span class="math inline">\(x_0 = 1\)</span>
+( 任意 ) ，或 <span class="math inline">\(x_0 = 0\)</span> 且 <span
+class="math inline">\(x_1 = 0\)</span></p>
+<hr />
+<p><strong>例题</strong> : <span class="math inline">\(x =
+x_0x_1x_2x_3\)</span> ( 4位补码 ) ，求满足 <span class="math inline">\(x
+\geq 8\)</span> 的条件.</p>
+<p><strong>解析</strong></p>
+<ul>
+<li><span class="math inline">\(n = 3\)</span>，范围 <span
+class="math inline">\(-8 \sim 7\)</span>，<span class="math inline">\(k
+= 3\)</span> ( <span class="math inline">\(2^3 = 8\)</span> )</li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">情况</th>
+<th style="text-align: center;">分析</th>
+<th style="text-align: center;">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span class="math inline">\(x_0 =
+1\)</span> ( 负数 )</td>
+<td style="text-align: center;"><span class="math inline">\(-8 \leq x
+\leq -1\)</span></td>
+<td style="text-align: center;"><span
+style="color:red">不成立</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math inline">\(x_0 =
+0\)</span> ( 非负 )</td>
+<td style="text-align: center;"><span class="math inline">\(0 \leq x
+\leq 7\)</span>，最大只能到 7</td>
+<td style="text-align: center;"><span
+style="color:red">不成立</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>答案</strong> : <strong>无解</strong> ( 4位补码最大只能表示
+7，无法 <span class="math inline">\(\geq 8\)</span> )</p>
 <div class="note sparkle simple"><p><strong>注</strong></p>
 <ul>
 <li><strong>补码</strong>
@@ -728,34 +1939,407 @@ Look-ahead Carry Adder )</h4>
 </ul>
 <p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/6960ca3a14866864fecc7a08.png" alt="图 0-3" width="600" height="auto" style="display: block; margin: 0 auto;"></p>
 <h4 id="带标志加法器">带标志加法器</h4>
+<div class="note info simple"><p><strong>PSW ( Program Status Word，程序状态字 ) </strong></p>
+<p>PSW
+是计算机中用于存储算术运算结果状态的一组标志位，通常为一个或多个寄存器.
+带标志加法器在完成算术运算的同时，会自动更新 PSW
+中的各个标志位，供后续指令 ( 如条件跳转指令 ) 查询使用.</p>
+<p><strong>四大标志位详解</strong></p>
+<p>带标志加法器在完成加/减运算后，会生成四个核心标志位，组成 PSW</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">标志位</th>
+<th style="text-align: left;">名称</th>
+<th style="text-align: left;">含义</th>
+<th style="text-align: left;">适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>OF</strong></td>
+<td style="text-align: left;">Overflow Flag</td>
+<td style="text-align: left;">溢出标志</td>
+<td style="text-align: left;">有符号数运算</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>SF</strong></td>
+<td style="text-align: left;">Sign Flag</td>
+<td style="text-align: left;">符号标志</td>
+<td style="text-align: left;">有符号数运算</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>ZF</strong></td>
+<td style="text-align: left;">Zero Flag</td>
+<td style="text-align: left;">零标志</td>
+<td style="text-align: left;">通用</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>CF</strong></td>
+<td style="text-align: left;">Carry Flag</td>
+<td style="text-align: left;">进位/借位标志</td>
+<td style="text-align: left;">无符号数运算</td>
+</tr>
+</tbody>
+</table>
+</div>
 <ul>
 <li><strong>功能</strong> 在进行运算 ( 如加/减 ) 时，除了输出结果 <span
 class="math inline">\(F\)</span>，还能生成 <strong>标志信息</strong> (
-PSW 状态字 ).</li>
-<li><strong>四大标志位</strong>
+PSW 状态字 ). 通过标志位，CPU
+可以判断运算结果的各种状态，为条件转移指令提供依据.</li>
+</ul>
+<p><strong>四大标志位</strong></p>
+<div class="note warning simple"><p><strong>1. OF ( Overflow Flag，溢出标志 ) </strong></p>
 <ul>
-<li><strong>OF ( Overflow )</strong> <strong>有符号数</strong> 溢出判断.
-<span class="math inline">\(OF=1\)</span> 表示溢出.
+<li><strong>作用</strong> :
+判断<strong>有符号数</strong>运算是否溢出</li>
+<li><strong>触发条件</strong> : 当两个有符号数运算结果超出可表示范围时置
+1</li>
+<li><strong>逻辑表达式</strong> :</li>
+</ul>
+<p><span class="math display">\[OF = C_n \oplus C_{n-1}\]</span></p>
+<p>其中 <span class="math inline">\(C_n\)</span>
+为<strong>最高位进位</strong>，<span
+class="math inline">\(C_{n-1}\)</span> 为<strong>次高位进位</strong></p>
 <ul>
-<li>逻辑 : <span class="math inline">\(OF = C_n \oplus C_{n-1}\)</span>
-( 最高位进位 <span class="math inline">\(\oplus\)</span> 次高位进位
-).</li>
-</ul></li>
-<li><strong>SF ( Sign )</strong> 结果符号. 即结果的最高位， <span
-class="math inline">\(SF = F_{n-1}\)</span>.</li>
-<li><strong>ZF ( Zero )</strong> 零标志. 结果全为0时 <span
-class="math inline">\(ZF=1\)</span>.</li>
-<li><strong>CF ( Carry )</strong> <strong>无符号数</strong> 进位/借位.
-<span class="math inline">\(CF = C_{out} \oplus C_{in}\)</span> (
-进位输出 <span class="math inline">\(\oplus\)</span> 加减控制信号 ).
+<li><strong>判断规则</strong> :
 <ul>
-<li>加法 (<span class="math inline">\(C_{in}=0\)</span>): <span
-class="math inline">\(CF = C_{out}\)</span>.</li>
-<li>减法 (<span class="math inline">\(C_{in}=1\)</span>): <span
-class="math inline">\(CF = C_{out} \oplus 1\)</span> ( 即借位 ).</li>
-</ul></li>
+<li><span class="math inline">\(OF = 1\)</span> :
+发生<strong>溢出</strong> ( 结果不正确 )</li>
+<li><span class="math inline">\(OF = 0\)</span> : 未溢出 ( 结果正确
+)</li>
 </ul></li>
 </ul>
+<p><strong>溢出与进位的区别</strong> :</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">场景</th>
+<th style="text-align: left;">判断依据</th>
+<th style="text-align: left;">关注运算</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>溢出 ( OF ) </strong></td>
+<td style="text-align: left;"><span class="math inline">\(C_n \oplus
+C_{n-1}\)</span></td>
+<td style="text-align: left;">有符号数</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>进位 ( CF ) </strong></td>
+<td style="text-align: left;"><span class="math inline">\(C_{out} \oplus
+C_{in}\)</span></td>
+<td style="text-align: left;">无符号数</td>
+</tr>
+</tbody>
+</table>
+<p><strong>示例 ( 8 位补码 ) </strong> :</p>
+<table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 26%" />
+<col style="width: 26%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">运算</th>
+<th style="text-align: center;">操作数</th>
+<th style="text-align: center;">结果</th>
+<th style="text-align: center;">OF</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="math inline">\(127 +
+3\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(01111111 +
+00000011\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(10000010\)</span> (-126)</td>
+<td style="text-align: center;">1 ( 溢出 )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\(-128 -
+1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(10000000 +
+11111111\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(01111111\)</span> (127)</td>
+<td style="text-align: center;">1 ( 溢出 )</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\(100 +
+27\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(01100100 +
+00011011\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(01111111\)</span> (127)</td>
+<td style="text-align: center;">0 ( 未溢出 )</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>溢出发生的本质</strong> : 当正数 + 正数 = 负数，或负数 + 负数
+= 正数时，必然溢出.</p>
+</blockquote>
+</div>
+<div class="note success simple"><p><strong>2. SF ( Sign Flag，符号标志 ) </strong></p>
+<ul>
+<li><strong>作用</strong> :
+记录运算结果的<strong>符号位</strong>，即结果的最高位</li>
+<li><strong>逻辑表达式</strong></li>
+</ul>
+<p><span class="math display">\[SF = F_{n-1}\]</span></p>
+<ul>
+<li><strong>判断规则</strong>
+<ul>
+<li><span class="math inline">\(SF = 0\)</span> :
+结果为<strong>正数</strong>或零</li>
+<li><span class="math inline">\(SF = 1\)</span> :
+结果为<strong>负数</strong></li>
+</ul></li>
+</ul>
+<blockquote>
+<p><strong>注意</strong> : SF 只反映结果的符号位，不判断结果是否正确 (
+溢出时 SF 可能与实际结果不符 ).</p>
+</blockquote>
+<p><strong>示例</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">运算</th>
+<th style="text-align: center;">结果 <span
+class="math inline">\(F\)</span></th>
+<th style="text-align: center;">最高位 <span
+class="math inline">\(F_{n-1}\)</span></th>
+<th style="text-align: center;">SF</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="math inline">\(5 +
+3\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(00001000\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(0\)</span></td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\(-5 -
+1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(11111010\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(1\)</span></td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="note info simple"><p><strong>3. ZF ( Zero Flag，零标志 ) </strong></p>
+<ul>
+<li><strong>作用</strong> : 判断运算结果是否为零</li>
+<li><strong>逻辑表达式</strong></li>
+</ul>
+<p><span class="math display">\[ZF = 1 \quad \text{当且仅当} \quad F =
+0\]</span></p>
+<p>即所有位都为 0 时 ZF = 1</p>
+<ul>
+<li><strong>判断规则</strong>
+<ul>
+<li><span class="math inline">\(ZF = 1\)</span> :
+结果为<strong>零</strong></li>
+<li><span class="math inline">\(ZF = 0\)</span> :
+结果<strong>非零</strong></li>
+</ul></li>
+</ul>
+<p><strong>示例</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">运算</th>
+<th style="text-align: center;">结果 <span
+class="math inline">\(F\)</span></th>
+<th style="text-align: center;">ZF</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="math inline">\(5 -
+5\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(00000000\)</span></td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\(10 -
+9\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(00000001\)</span></td>
+<td style="text-align: center;">0</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>应用场景</strong> : ZF 常用于循环终止条件 ( 如
+<code>cmp a, b</code> 后 <code>JE</code> 跳转 ) 和零值检测.</p>
+</blockquote>
+</div>
+<div class="note warning simple"><p><strong>4. CF ( Carry Flag，进位/借位标志 ) </strong></p>
+<ul>
+<li><strong>作用</strong> : 判断 <strong>无符号数</strong>
+运算是否产生进位或借位</li>
+<li><strong>逻辑表达式</strong></li>
+</ul>
+<p><span class="math display">\[CF = C_{out} \oplus C_{in}\]</span></p>
+<p>其中 <span class="math inline">\(C_{out}\)</span> 为进位输出，<span
+class="math inline">\(C_{in}\)</span> 为加减控制信号</p>
+<ul>
+<li><strong>判断规则</strong>
+<ul>
+<li><span class="math inline">\(CF = 1\)</span> :
+无符号运算产生<strong>进位</strong> ( 加法 ) 或<strong>借位</strong> (
+减法 )</li>
+<li><span class="math inline">\(CF = 0\)</span> : 无进位/借位</li>
+</ul></li>
+</ul>
+<p><strong>加法 ( <span class="math inline">\(C_{in} = 0\)</span>
+)</strong></p>
+<p><span class="math display">\[CF = C_{out}\]</span></p>
+<ul>
+<li>无进位输出 → <span class="math inline">\(CF = 0\)</span> (
+结果未超出无符号范围 )</li>
+<li>有进位输出 → <span class="math inline">\(CF = 1\)</span> (
+结果超出无符号范围，实际值 = 结果 + <span
+class="math inline">\(2^n\)</span> )</li>
+</ul>
+<p><strong>减法 ( <span class="math inline">\(C_{in} =
+1\)</span>，即加负数的补码 )</strong></p>
+<p><span class="math display">\[CF = C_{out} \oplus 1 =
+\overline{C_{out}}\]</span></p>
+<ul>
+<li><span class="math inline">\(C_{out} = 1\)</span> 时 <span
+class="math inline">\(CF = 0\)</span> ( 无借位 )</li>
+<li><span class="math inline">\(C_{out} = 0\)</span> 时 <span
+class="math inline">\(CF = 1\)</span> ( 有借位 )</li>
+</ul>
+<p><strong>示例 ( 8 位无符号数 )</strong></p>
+<table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">运算</th>
+<th style="text-align: center;">操作数</th>
+<th style="text-align: center;">结果</th>
+<th style="text-align: center;">CF</th>
+<th style="text-align: center;">实际含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="math inline">\(250 +
+10\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(11111010 +
+00001010\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(00000100\)</span> (4)</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">溢出，实际 <span
+class="math inline">\(250 + 10 = 260 = 4 + 256\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\(100 -
+50\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(01100100 +
+11001110\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(00110010\)</span> (50)</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">正确，无借位</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\(50 -
+100\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(00110010 +
+10011100\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(11101110\)</span> (238)</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">借位，实际 <span
+class="math inline">\(50 - 100 = -50\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>四大标志位综合示例</strong></p>
+<p>以 8 位补码运算 <span class="math inline">\(A = 65\)</span>，<span
+class="math inline">\(B = 70\)</span>，计算 <span
+class="math inline">\(A + B\)</span></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  01000001  (A = +65)</span><br><span class="line">+ 01000110  (B = +70)</span><br><span class="line">──────────</span><br><span class="line">  10000111  (F = -121，超出范围！)</span><br></pre></td></tr></table></figure>
+<table>
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 22%" />
+<col style="width: 27%" />
+<col style="width: 22%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">标志位</th>
+<th style="text-align: left;">计算过程</th>
+<th style="text-align: center;">结果</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>OF</strong></td>
+<td style="text-align: left;"><span class="math inline">\(C_n \oplus
+C_{n-1} = 0 \oplus 1 = 1\)</span></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">溢出！正+正=负</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>SF</strong></td>
+<td style="text-align: left;"><span class="math inline">\(F_{7} =
+1\)</span></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">结果为负数</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>ZF</strong></td>
+<td style="text-align: left;"><span class="math inline">\(F \neq
+0\)</span></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: left;">非零</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>CF</strong></td>
+<td style="text-align: left;"><span class="math inline">\(C_{out} \oplus
+C_{in} = 0 \oplus 0 = 0\)</span></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: left;">无进位 ( 无符号运算正确 )</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>结论</strong> : <span class="math inline">\(65 + 70 =
+135\)</span>，在无符号 8 位表示中结果为 <span
+class="math inline">\(135\)</span> ( 未溢出 ); 但在有符号补码中，结果为
+<span class="math inline">\(-121\)</span> ( 溢出 ). 此时 <strong>OF =
+1</strong> 提示有符号溢出，<strong>CF = 0</strong>
+提示无符号运算正确.</p>
+</blockquote>
 <h4 id="算术逻辑单元-alu">算术逻辑单元 ( ALU )</h4>
 <ul>
 <li><strong>功能</strong> 核心部件，能进行算术运算 ( 加减乘除 )
@@ -2968,14 +4552,15 @@ style="color:#94a3b8">pad</span></td>
   input.setSelectionRange(0, 99999);
   document.execCommand("copy");
   document.body.removeChild(input);
-}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">SPARKLE</a>! </span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/408/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>408<span class="tagsPageCount">23</span></a><a class="post-meta__box__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>计算机组成原理<span class="tagsPageCount">6</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://pic1.imgdb.cn/item/69872af342b1cbeca1f88f3d.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/01/03/%E7%BA%BF%E4%BB%A31/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69590ed6da3df73ea1bd16f5.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">线性代数-1-线性空间与线性变换</div></div></a></div><div class="next-post pull-right"><a href="/2026/01/12/%E8%8B%B1%E8%AF%AD%E4%BB%8E%E5%8F%A5%E7%AE%80%E5%8C%96/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/6964b36351d5e4e5d5707e53.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">英语从句简化</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2025/12/31/408-%E8%AE%A1%E7%BB%841/" title="408-计算机组成原理-1-计算机系统概述"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/6954ea8a8801094e3ab4fd8b.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-31</div><div class="title">408-计算机组成原理-1-计算机系统概述</div></div></a></div><div><a href="/2026/01/26/408-%E8%AE%A1%E7%BB%844/" title="408-计算机组成原理-4-指令系统"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69872ac742b1cbeca1f88f3a.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-01-26</div><div class="title">408-计算机组成原理-4-指令系统</div></div></a></div><div><a href="/2026/01/26/408-%E8%AE%A1%E7%BB%845/" title="408-计算机组成原理-5-中央处理器"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69872af342b1cbeca1f88f3d.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-01-26</div><div class="title">408-计算机组成原理-5-中央处理器</div></div></a></div><div><a href="/2026/01/14/408-%E8%AE%A1%E7%BB%843/" title="408-计算机组成原理-3-存储系统"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69677a4999f37a647f58e412.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-01-14</div><div class="title">408-计算机组成原理-3-存储系统</div></div></a></div><div><a href="/2026/04/17/408-%E8%AE%A1%E7%BB%846/" title="408-计算机组成原理-6-总线和输入&#x2F;输出系统"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69872af342b1cbeca1f88f3d.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-04-17</div><div class="title">408-计算机组成原理-6-总线和输入&#x2F;输出系统</div></div></a></div><div><a href="/2025/12/22/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F1/" title="408-操作系统-1-计算机系统概述"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492a76c154427986d991c5.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-22</div><div class="title">408-操作系统-1-计算机系统概述</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/671cfe2fd29ded1a8c5ffb0b.png" alt="status"/></div></div><div class="author-info__description">不管你在<strong style="color:white">这个世界</strong>的哪个地方，我一定<strong style="color:white">会</strong>，再次去<strong style="color:white">见</strong>你的!</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">sparkle520</h1><div class="author-info__desc">我一直都在寻找着什么</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/sparkle520" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/34882250" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">Hello World! 欢迎来到我的博客~</div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://pic.imgdb.cn/item/66c487f1d9c307b7e9ba5c7a.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://pic.imgdb.cn/item/66c487ebd9c307b7e9ba5725.png) center center / 100% no-repeat"></div></div></div></div><div class="card-widget card-countdown"><div class="item-headline"><i></i><span></span></div><div class="item-content"><div class="cd-count-left">
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">SPARKLE</a>! </span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/408/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>408<span class="tagsPageCount">25</span></a><a class="post-meta__box__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>计算机组成原理<span class="tagsPageCount">6</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://pic1.imgdb.cn/item/69872af342b1cbeca1f88f3d.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/01/03/%E7%BA%BF%E4%BB%A31/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69590ed6da3df73ea1bd16f5.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">线性代数-1-线性空间与线性变换</div></div></a></div><div class="next-post pull-right"><a href="/2026/01/12/%E8%8B%B1%E8%AF%AD%E4%BB%8E%E5%8F%A5%E7%AE%80%E5%8C%96/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/6964b36351d5e4e5d5707e53.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">英语从句简化</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2025/12/31/408-%E8%AE%A1%E7%BB%841/" title="408-计算机组成原理-1-计算机系统概述"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/6954ea8a8801094e3ab4fd8b.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-31</div><div class="title">408-计算机组成原理-1-计算机系统概述</div></div></a></div><div><a href="/2026/01/26/408-%E8%AE%A1%E7%BB%844/" title="408-计算机组成原理-4-指令系统"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69872ac742b1cbeca1f88f3a.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-01-26</div><div class="title">408-计算机组成原理-4-指令系统</div></div></a></div><div><a href="/2026/01/26/408-%E8%AE%A1%E7%BB%845/" title="408-计算机组成原理-5-中央处理器"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69872af342b1cbeca1f88f3d.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-01-26</div><div class="title">408-计算机组成原理-5-中央处理器</div></div></a></div><div><a href="/2026/01/14/408-%E8%AE%A1%E7%BB%843/" title="408-计算机组成原理-3-存储系统"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69677a4999f37a647f58e412.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-01-14</div><div class="title">408-计算机组成原理-3-存储系统</div></div></a></div><div><a href="/2026/04/17/408-%E8%AE%A1%E7%BB%846/" title="408-计算机组成原理-6-总线和输入&#x2F;输出系统"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69872af342b1cbeca1f88f3d.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-04-17</div><div class="title">408-计算机组成原理-6-总线和输入&#x2F;输出系统</div></div></a></div><div><a href="/2025/12/22/408-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F1/" title="408-操作系统-1-计算机系统概述"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69492a76c154427986d991c5.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-22</div><div class="title">408-操作系统-1-计算机系统概述</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/65b6b29c871b83018af70c9a.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic.imgdb.cn/item/671cfe2fd29ded1a8c5ffb0b.png" alt="status"/></div></div><div class="author-info__description">不管你在<strong style="color:white">这个世界</strong>的哪个地方，我一定<strong style="color:white">会</strong>，再次去<strong style="color:white">见</strong>你的!</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">sparkle520</h1><div class="author-info__desc">我一直都在寻找着什么</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/sparkle520" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/34882250" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">Hello World! 欢迎来到我的博客~</div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://pic.imgdb.cn/item/66c487f1d9c307b7e9ba5c7a.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://pic.imgdb.cn/item/66c487ebd9c307b7e9ba5725.png) center center / 100% no-repeat"></div></div></div></div><div class="card-widget card-countdown"><div class="item-headline"><i></i><span></span></div><div class="item-content"><div class="cd-count-left">
   <span class="cd-text">距离</span>
   <span class="cd-name" id="eventName"></span>
   <span class="cd-time" id="daysUntil"></span>
   <span class="cd-date" id="eventDate"></span>
 </div>
 <div id="countRight" class="cd-count-right"></div>
-</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC2%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E8%BF%90%E7%AE%97"><span class="toc-number">1.</span> <span class="toc-text">第2章 数据的表示和运算</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%88%B6%E4%B8%8E%E7%BC%96%E7%A0%81"><span class="toc-number">1.1.</span> <span class="toc-text">2.1 数制与编码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E4%BD%8D%E8%AE%A1%E6%95%B0%E5%88%B6%E5%8F%8A%E5%85%B6%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.1.1.</span> <span class="toc-text">2.1.1 进位计数制及其相互转换</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E4%BD%8D%E8%AE%A1%E6%95%B0%E5%88%B6%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">进位计数制的核心概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2%E6%96%B9%E6%B3%95"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">进制转换方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%BB%E6%84%8F%E8%BF%9B%E5%88%B6-to-%E5%8D%81%E8%BF%9B%E5%88%B6"><span class="toc-number">1.1.1.2.1.</span> <span class="toc-text">( 1 ) 任意进制 \(\to\) 十进制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8D%81%E8%BF%9B%E5%88%B6-to-%E4%BB%BB%E6%84%8F%E8%BF%9B%E5%88%B6"><span class="toc-number">1.1.1.2.2.</span> <span class="toc-text">( 2 ) 十进制 \(\to\) 任意进制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6-leftrightarrow-%E5%85%AB%E8%BF%9B%E5%88%B6%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6"><span class="toc-number">1.1.1.2.3.</span> <span class="toc-text">( 3 ) 二进制 \(\leftrightarrow\) 八进制&#x2F;十六进制</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%82%B9%E6%95%B0%E7%9A%84%E7%BC%96%E7%A0%81%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.1.2.</span> <span class="toc-text">2.1.2 定点数的编码表示</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%82%B9%E6%95%B0%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">定点数的概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9C%9F%E5%80%BC%E4%B8%8E%E6%9C%BA%E5%99%A8%E6%95%B0"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">真值与机器数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%BC%96%E7%A0%81%E6%96%B9%E5%BC%8F"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">四种常见编码方式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8E%9F%E7%A0%81-true-form"><span class="toc-number">1.1.2.3.1.</span> <span class="toc-text">( 1 ) 原码 ( True Form )</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%8D%E7%A0%81-ones-complement"><span class="toc-number">1.1.2.3.2.</span> <span class="toc-text">( 2 ) 反码 ( Ones’ Complement )</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A1%A5%E7%A0%81-twos-complement"><span class="toc-number">1.1.2.3.3.</span> <span class="toc-text">( 3 ) 补码 ( Two’s Complement )</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%A7%BB%E7%A0%81-excess-code"><span class="toc-number">1.1.2.3.4.</span> <span class="toc-text">( 4 ) 移码 ( Excess Code )</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B4%E6%95%B0%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.1.3.</span> <span class="toc-text">2.1.3 整数的表示</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A0%E7%AC%A6%E5%8F%B7%E6%95%B4%E6%95%B0-unsigned-integer"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">无符号整数 ( Unsigned Integer
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC2%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E8%BF%90%E7%AE%97"><span class="toc-number">1.</span> <span class="toc-text">第2章 数据的表示和运算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E9%80%9F%E6%9F%A5-cheat-sheet"><span class="toc-number">1.0.1.</span> <span class="toc-text">总结与速查 ( Cheat Sheet )</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%88%B6%E4%B8%8E%E7%BC%96%E7%A0%81"><span class="toc-number">1.1.</span> <span class="toc-text">2.1 数制与编码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E4%BD%8D%E8%AE%A1%E6%95%B0%E5%88%B6%E5%8F%8A%E5%85%B6%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.1.1.</span> <span class="toc-text">2.1.1 进位计数制及其相互转换</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E4%BD%8D%E8%AE%A1%E6%95%B0%E5%88%B6%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">进位计数制的核心概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2%E6%96%B9%E6%B3%95"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">进制转换方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%BB%E6%84%8F%E8%BF%9B%E5%88%B6-to-%E5%8D%81%E8%BF%9B%E5%88%B6"><span class="toc-number">1.1.1.2.1.</span> <span class="toc-text">( 1 ) 任意进制 \(\to\) 十进制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8D%81%E8%BF%9B%E5%88%B6-to-%E4%BB%BB%E6%84%8F%E8%BF%9B%E5%88%B6"><span class="toc-number">1.1.1.2.2.</span> <span class="toc-text">( 2 ) 十进制 \(\to\) 任意进制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6-leftrightarrow-%E5%85%AB%E8%BF%9B%E5%88%B6%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6"><span class="toc-number">1.1.1.2.3.</span> <span class="toc-text">( 3 ) 二进制 \(\leftrightarrow\) 八进制&#x2F;十六进制</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%82%B9%E6%95%B0%E7%9A%84%E7%BC%96%E7%A0%81%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.1.2.</span> <span class="toc-text">2.1.2 定点数的编码表示</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%82%B9%E6%95%B0%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">定点数的概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9C%9F%E5%80%BC%E4%B8%8E%E6%9C%BA%E5%99%A8%E6%95%B0"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">真值与机器数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%BC%96%E7%A0%81%E6%96%B9%E5%BC%8F"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">四种常见编码方式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8E%9F%E7%A0%81-true-form"><span class="toc-number">1.1.2.3.1.</span> <span class="toc-text">( 1 ) 原码 ( True Form )</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%8D%E7%A0%81-ones-complement"><span class="toc-number">1.1.2.3.2.</span> <span class="toc-text">( 2 ) 反码 ( Ones’ Complement )</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A1%A5%E7%A0%81-twos-complement"><span class="toc-number">1.1.2.3.3.</span> <span class="toc-text">( 3 ) 补码 ( Two’s Complement )</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%A7%BB%E7%A0%81-excess-code"><span class="toc-number">1.1.2.3.4.</span> <span class="toc-text">( 4 ) 移码 ( Excess Code )</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%B1%E6%9D%A1%E4%BB%B6%E7%A1%AE%E5%AE%9A%E4%BD%8D%E6%A8%A1%E5%BC%8F-%E9%80%9A%E8%A7%A3%E4%B8%8E%E6%8E%A8%E5%AF%BC"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">由条件确定位模式 ( 通解与推导
+)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%97%A0%E7%AC%A6%E5%8F%B7%E6%95%B0%E9%80%9A%E8%A7%A3"><span class="toc-number">1.1.2.4.1.</span> <span class="toc-text">无符号数通解</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A1%A5%E7%A0%81%E9%80%9A%E8%A7%A3-%E6%A0%B8%E5%BF%83"><span class="toc-number">1.1.2.4.2.</span> <span class="toc-text">补码通解 ( 核心 )</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A1%A5%E7%A0%81%E6%9D%A1%E4%BB%B6%E9%80%9A%E8%A7%A3%E5%85%AC%E5%BC%8F"><span class="toc-number">1.1.2.4.3.</span> <span class="toc-text">补码条件通解公式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B4%E6%95%B0%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.1.3.</span> <span class="toc-text">2.1.3 整数的表示</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A0%E7%AC%A6%E5%8F%B7%E6%95%B4%E6%95%B0-unsigned-integer"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">无符号整数 ( Unsigned Integer
 )</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%89%E7%AC%A6%E5%8F%B7%E6%95%B4%E6%95%B0-signed-integer"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">有符号整数 ( Signed Integer )</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#c%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E6%95%B4%E6%95%B0%E7%B1%BB%E5%9E%8B%E5%8F%8A%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.1.4.</span> <span class="toc-text">2.1.4
 C语言中的整数类型及类型转换</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">类型转换示例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E7%AE%97%E6%96%B9%E6%B3%95%E5%92%8C%E8%BF%90%E7%AE%97%E7%94%B5%E8%B7%AF"><span class="toc-number">1.2.</span> <span class="toc-text">2.2 运算方法和运算电路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E8%BF%90%E7%AE%97%E9%83%A8%E4%BB%B6"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.2.1 基本运算部件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%BD%8D%E5%85%A8%E5%8A%A0%E5%99%A8-fa"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">一位全加器 ( FA )</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%B2%E8%A1%8C%E8%BF%9B%E4%BD%8D%E5%8A%A0%E6%B3%95%E5%99%A8-ripple-carry-adder"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">串行进位加法器 ( Ripple Carry
 Adder )</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B6%E8%A1%8C%E8%BF%9B%E4%BD%8D%E5%8A%A0%E6%B3%95%E5%99%A8-look-ahead-carry-adder"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">并行进位加法器 (
@@ -2984,7 +4569,7 @@ Implementation )</span></a></li><li class="toc-item toc-level-4"><a class="toc-l
 Multiplication )</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B9%98%E6%B3%95%E8%BF%90%E7%AE%97%E7%94%B5%E8%B7%AF"><span class="toc-number">1.2.4.1.1.</span> <span class="toc-text">乘法运算电路</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%82%B9%E9%99%A4%E6%B3%95-fixed-point-division"><span class="toc-number">1.2.4.2.</span> <span class="toc-text">定点除法 ( Fixed-point Division
 )</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%A4%E7%A7%8D%E9%99%A4%E6%B3%95%E7%AE%97%E6%B3%95%E5%AF%B9%E6%AF%94"><span class="toc-number">1.2.4.2.1.</span> <span class="toc-text">两种除法算法对比</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%81%A2%E5%A4%8D%E4%BD%99%E6%95%B0%E6%B3%95%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B"><span class="toc-number">1.2.4.2.2.</span> <span class="toc-text">恢复余数法基本流程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8A%A0%E5%87%8F%E4%BA%A4%E6%9B%BF%E6%B3%95-%E4%B8%8D%E6%81%A2%E5%A4%8D%E4%BD%99%E6%95%B0%E6%B3%95"><span class="toc-number">1.2.4.2.3.</span> <span class="toc-text">加减交替法 ( 不恢复余数法 )</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%99%A4%E6%B3%95%E8%BF%90%E7%AE%97%E7%94%B5%E8%B7%AF"><span class="toc-number">1.2.4.2.4.</span> <span class="toc-text">除法运算电路</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E8%A6%81%E7%82%B9%E6%80%BB%E7%BB%93"><span class="toc-number">1.2.4.2.5.</span> <span class="toc-text">关键要点总结</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%99%A4%E6%B3%95%E4%B8%8E%E4%B9%98%E6%B3%95%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="toc-number">1.2.4.2.6.</span> <span class="toc-text">除法与乘法的对比</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9A%84%E8%A1%A8%E7%A4%BA%E4%B8%8E%E8%BF%90%E7%AE%97"><span class="toc-number">1.3.</span> <span class="toc-text">2.3 浮点数的表示与运算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.3.1.</span> <span class="toc-text">2.3.1 浮点数的基本格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9A%84%E8%A1%A8%E7%A4%BA-ieee-754-%E6%A0%87%E5%87%86"><span class="toc-number">1.3.2.</span> <span class="toc-text">2.3.2 浮点数的表示 ( IEEE 754 标准
 )</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ieee-754-%E6%A0%87%E5%87%86%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">IEEE 754 标准格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E7%B2%BE%E5%BA%A6%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">单精度浮点数的存储结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%84%E6%A0%BC%E5%8C%96%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">规格化浮点数的特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A5%E5%85%85-%E5%8E%9F%E7%A0%81%E4%B8%8E%E8%A1%A5%E7%A0%81%E7%9A%84%E8%A7%84%E6%A0%BC%E5%8C%96%E5%AF%B9%E6%AF%94"><span class="toc-number">1.3.2.4.</span> <span class="toc-text">补充 : 原码与补码的规格化对比</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B6%E7%A0%81%E7%9A%84%E7%A7%BB%E7%A0%81%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.3.2.5.</span> <span class="toc-text">阶码的移码表示</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A5%E5%85%85-%E6%95%B4%E6%95%B0%E7%A7%BB%E7%A0%81-vs-ieee-754-%E7%A7%BB%E7%A0%81"><span class="toc-number">1.3.2.6.</span> <span class="toc-text">补充 : 整数移码 vs IEEE 754
-移码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%9E%E8%A7%84%E6%A0%BC%E5%8C%96%E6%95%B0%E7%9A%84%E8%AE%A1%E7%AE%97%E4%B8%8E%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.3.2.7.</span> <span class="toc-text">非规格化数的计算与示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9A%84%E8%A1%A8%E7%A4%BA%E8%8C%83%E5%9B%B4%E4%B8%8E%E6%BA%A2%E5%87%BA"><span class="toc-number">1.3.2.8.</span> <span class="toc-text">浮点数的表示范围与溢出</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%95%B0%E8%BD%B4%E8%A1%A8%E7%A4%BA%E5%9B%BE%E8%A7%A3"><span class="toc-number">1.3.2.8.1.</span> <span class="toc-text">数轴表示图解</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%BA%A2%E5%87%BA%E4%B8%8E%E4%B8%8B%E6%BA%A2"><span class="toc-number">1.3.2.8.2.</span> <span class="toc-text">溢出与下溢</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8D%95%E7%B2%BE%E5%BA%A6%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9A%84%E5%85%B3%E9%94%AE%E5%80%BC"><span class="toc-number">1.3.2.8.3.</span> <span class="toc-text">单精度浮点数的关键值</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%82%B9%E6%95%B0%E4%B8%8E%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="toc-number">1.3.2.9.</span> <span class="toc-text">定点数与浮点数的对比</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9A%84%E5%8A%A0%E5%87%8F%E8%BF%90%E7%AE%97"><span class="toc-number">1.3.3.</span> <span class="toc-text">2.3.3 浮点数的加减运算</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%E7%9A%84%E5%B1%80%E9%99%90%E6%80%A7"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">浮点数表示的局限性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%A7%E5%B0%8F%E7%AB%AF%E5%AD%98%E5%82%A8%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.3.4.</span> <span class="toc-text">2.3.4 大小端存储示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#c%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E6%B5%AE%E7%82%B9%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.3.5.</span> <span class="toc-text">2.3.4 C语言中的浮点数类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E5%AF%B9%E6%AF%94"><span class="toc-number">1.3.5.1.</span> <span class="toc-text">类型对比</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A4%A7%E5%B0%8F%E7%AB%AF%E4%B8%8E%E5%AF%B9%E9%BD%90%E5%AD%98%E5%82%A8"><span class="toc-number">1.3.6.</span> <span class="toc-text">2.3.5 数据的大小端与对齐存储</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%A7%E7%AB%AF%E4%B8%8E%E5%B0%8F%E7%AB%AF%E6%A8%A1%E5%BC%8F-endianness"><span class="toc-number">1.3.6.1.</span> <span class="toc-text">1. 大端与小端模式 ( Endianness )</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%A7%E7%AB%AF%E5%B0%8F%E7%AB%AF%E5%AD%98%E5%82%A8%E5%AF%B9%E6%AF%94%E8%A1%A8"><span class="toc-number">1.3.7.</span> <span class="toc-text">大端&#x2F;小端存储对比表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90-memory-alignment"><span class="toc-number">1.3.7.1.</span> <span class="toc-text">2. 内存对齐 ( Memory Alignment )</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/04/17/408-%E8%AE%A1%E7%BB%846/" title="408-计算机组成原理-6-总线和输入/输出系统"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69872af342b1cbeca1f88f3d.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-计算机组成原理-6-总线和输入/输出系统"/></a><div class="content"><a class="title" href="/2026/04/17/408-%E8%AE%A1%E7%BB%846/" title="408-计算机组成原理-6-总线和输入/输出系统">408-计算机组成原理-6-总线和输入/输出系统</a><time datetime="2026-04-17T15:00:27.000Z" title="发表于 2026-04-17 23:00:27">2026-04-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/04/01/%E9%AB%98%E6%95%B0-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%95%B0%E5%88%97%E6%9E%81%E9%99%90%E5%85%B3%E7%B3%BB/" title="函数与数列极限关系"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69cfda23df10edaed91080d9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="函数与数列极限关系"/></a><div class="content"><a class="title" href="/2026/04/01/%E9%AB%98%E6%95%B0-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%95%B0%E5%88%97%E6%9E%81%E9%99%90%E5%85%B3%E7%B3%BB/" title="函数与数列极限关系">函数与数列极限关系</a><time datetime="2026-04-01T12:00:27.000Z" title="发表于 2026-04-01 20:00:27">2026-04-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/24/%E9%AB%98%E6%95%B0-%E6%9B%B2%E7%BA%BF%E5%92%8C%E6%9B%B2%E9%9D%A2%E7%A7%AF%E5%88%86/" title="高等数学 第十一章 曲线积分与曲面积分"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69bcf9a40fd75e0c1776d878.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="高等数学 第十一章 曲线积分与曲面积分"/></a><div class="content"><a class="title" href="/2026/03/24/%E9%AB%98%E6%95%B0-%E6%9B%B2%E7%BA%BF%E5%92%8C%E6%9B%B2%E9%9D%A2%E7%A7%AF%E5%88%86/" title="高等数学 第十一章 曲线积分与曲面积分">高等数学 第十一章 曲线积分与曲面积分</a><time datetime="2026-03-24T15:00:27.000Z" title="发表于 2026-03-24 23:00:27">2026-03-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/24/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%841%E5%BC%BA%E5%8C%96-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" title="408-数据结构强化-1-时间复杂度计算"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69c2a41413399d9f5166cfbb.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-数据结构强化-1-时间复杂度计算"/></a><div class="content"><a class="title" href="/2026/03/24/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%841%E5%BC%BA%E5%8C%96-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" title="408-数据结构强化-1-时间复杂度计算">408-数据结构强化-1-时间复杂度计算</a><time datetime="2026-03-24T12:00:27.000Z" title="发表于 2026-03-24 20:00:27">2026-03-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/23/%E7%BA%A7%E6%95%B0%E7%BB%93%E5%90%88%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/" title="级数结合微分方程问题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69bffad8fc068dbbee8bc418.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="级数结合微分方程问题"/></a><div class="content"><a class="title" href="/2026/03/23/%E7%BA%A7%E6%95%B0%E7%BB%93%E5%90%88%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/" title="级数结合微分方程问题">级数结合微分方程问题</a><time datetime="2026-03-23T12:00:27.000Z" title="发表于 2026-03-23 20:00:27">2026-03-23</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+移码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%9E%E8%A7%84%E6%A0%BC%E5%8C%96%E6%95%B0%E7%9A%84%E8%AE%A1%E7%AE%97%E4%B8%8E%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.3.2.7.</span> <span class="toc-text">非规格化数的计算与示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9A%84%E8%A1%A8%E7%A4%BA%E8%8C%83%E5%9B%B4%E4%B8%8E%E6%BA%A2%E5%87%BA"><span class="toc-number">1.3.2.8.</span> <span class="toc-text">浮点数的表示范围与溢出</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%95%B0%E8%BD%B4%E8%A1%A8%E7%A4%BA%E5%9B%BE%E8%A7%A3"><span class="toc-number">1.3.2.8.1.</span> <span class="toc-text">数轴表示图解</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%BA%A2%E5%87%BA%E4%B8%8E%E4%B8%8B%E6%BA%A2"><span class="toc-number">1.3.2.8.2.</span> <span class="toc-text">溢出与下溢</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8D%95%E7%B2%BE%E5%BA%A6%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9A%84%E5%85%B3%E9%94%AE%E5%80%BC"><span class="toc-number">1.3.2.8.3.</span> <span class="toc-text">单精度浮点数的关键值</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%82%B9%E6%95%B0%E4%B8%8E%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="toc-number">1.3.2.9.</span> <span class="toc-text">定点数与浮点数的对比</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9A%84%E5%8A%A0%E5%87%8F%E8%BF%90%E7%AE%97"><span class="toc-number">1.3.3.</span> <span class="toc-text">2.3.3 浮点数的加减运算</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%E7%9A%84%E5%B1%80%E9%99%90%E6%80%A7"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">浮点数表示的局限性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%A7%E5%B0%8F%E7%AB%AF%E5%AD%98%E5%82%A8%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.3.4.</span> <span class="toc-text">2.3.4 大小端存储示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#c%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E6%B5%AE%E7%82%B9%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.3.5.</span> <span class="toc-text">2.3.4 C语言中的浮点数类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E5%AF%B9%E6%AF%94"><span class="toc-number">1.3.5.1.</span> <span class="toc-text">类型对比</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A4%A7%E5%B0%8F%E7%AB%AF%E4%B8%8E%E5%AF%B9%E9%BD%90%E5%AD%98%E5%82%A8"><span class="toc-number">1.3.6.</span> <span class="toc-text">2.3.5 数据的大小端与对齐存储</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%A7%E7%AB%AF%E4%B8%8E%E5%B0%8F%E7%AB%AF%E6%A8%A1%E5%BC%8F-endianness"><span class="toc-number">1.3.6.1.</span> <span class="toc-text">1. 大端与小端模式 ( Endianness )</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%A7%E7%AB%AF%E5%B0%8F%E7%AB%AF%E5%AD%98%E5%82%A8%E5%AF%B9%E6%AF%94%E8%A1%A8"><span class="toc-number">1.3.7.</span> <span class="toc-text">大端&#x2F;小端存储对比表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90-memory-alignment"><span class="toc-number">1.3.7.1.</span> <span class="toc-text">2. 内存对齐 ( Memory Alignment )</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/04/21/%E9%AB%98%E6%95%B0-%E5%BE%AE%E5%88%86%E4%B8%AD%E5%80%BC%E5%AE%9A%E7%90%86%E8%AF%81%E6%98%8E/" title="高数-微分中值定理证明 笔记"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69e78f6b5e7b2d92c4b993f6.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="高数-微分中值定理证明 笔记"/></a><div class="content"><a class="title" href="/2026/04/21/%E9%AB%98%E6%95%B0-%E5%BE%AE%E5%88%86%E4%B8%AD%E5%80%BC%E5%AE%9A%E7%90%86%E8%AF%81%E6%98%8E/" title="高数-微分中值定理证明 笔记">高数-微分中值定理证明 笔记</a><time datetime="2026-04-21T12:00:27.000Z" title="发表于 2026-04-21 20:00:27">2026-04-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/04/17/408-%E8%AE%A1%E7%BB%846/" title="408-计算机组成原理-6-总线和输入/输出系统"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69872af342b1cbeca1f88f3d.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-计算机组成原理-6-总线和输入/输出系统"/></a><div class="content"><a class="title" href="/2026/04/17/408-%E8%AE%A1%E7%BB%846/" title="408-计算机组成原理-6-总线和输入/输出系统">408-计算机组成原理-6-总线和输入/输出系统</a><time datetime="2026-04-17T15:00:27.000Z" title="发表于 2026-04-17 23:00:27">2026-04-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/04/01/%E9%AB%98%E6%95%B0-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%95%B0%E5%88%97%E6%9E%81%E9%99%90%E5%85%B3%E7%B3%BB/" title="函数与数列极限关系"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69cfda23df10edaed91080d9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="函数与数列极限关系"/></a><div class="content"><a class="title" href="/2026/04/01/%E9%AB%98%E6%95%B0-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%95%B0%E5%88%97%E6%9E%81%E9%99%90%E5%85%B3%E7%B3%BB/" title="函数与数列极限关系">函数与数列极限关系</a><time datetime="2026-04-01T12:00:27.000Z" title="发表于 2026-04-01 20:00:27">2026-04-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/24/%E9%AB%98%E6%95%B0-%E6%9B%B2%E7%BA%BF%E5%92%8C%E6%9B%B2%E9%9D%A2%E7%A7%AF%E5%88%86/" title="高等数学 第十一章 曲线积分与曲面积分"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69bcf9a40fd75e0c1776d878.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="高等数学 第十一章 曲线积分与曲面积分"/></a><div class="content"><a class="title" href="/2026/03/24/%E9%AB%98%E6%95%B0-%E6%9B%B2%E7%BA%BF%E5%92%8C%E6%9B%B2%E9%9D%A2%E7%A7%AF%E5%88%86/" title="高等数学 第十一章 曲线积分与曲面积分">高等数学 第十一章 曲线积分与曲面积分</a><time datetime="2026-03-24T15:00:27.000Z" title="发表于 2026-03-24 23:00:27">2026-03-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/24/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%841%E5%BC%BA%E5%8C%96-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" title="408-数据结构强化-1-时间复杂度计算"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://pic1.imgdb.cn/item/69c2a41413399d9f5166cfbb.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="408-数据结构强化-1-时间复杂度计算"/></a><div class="content"><a class="title" href="/2026/03/24/408-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%841%E5%BC%BA%E5%8C%96-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" title="408-数据结构强化-1-时间复杂度计算">408-数据结构强化-1-时间复杂度计算</a><time datetime="2026-03-24T12:00:27.000Z" title="发表于 2026-03-24 20:00:27">2026-03-24</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
   if (true) { 
     window.typed = new Typed("#footer-type-tips", {
       strings: ["只要记住你的名字&#44; 不管你在世界的哪个地方&#44; 我一定&#44; 会去见你 !"],
@@ -3006,7 +4591,7 @@ if (true) {
   }
 } else {
   subtitleType()
-}</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/sparkle520" title="sparkle">sparkle</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">117</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">71</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">10</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/sparkle520?tab=repositories" title="github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="github"/><span class="back-menu-item-text">github</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/408/" style="font-size: 0.88rem;">408<sup>23</sup></a><a href="/tags/AOP/" style="font-size: 0.88rem;">AOP<sup>1</sup></a><a href="/tags/Deep-Learning/" style="font-size: 0.88rem;">Deep Learning<sup>1</sup></a><a href="/tags/IoC/" style="font-size: 0.88rem;">IoC<sup>1</sup></a><a href="/tags/JSR303/" style="font-size: 0.88rem;">JSR303<sup>1</sup></a><a href="/tags/Matplotlib/" style="font-size: 0.88rem;">Matplotlib<sup>3</sup></a><a href="/tags/c/" style="font-size: 0.88rem;">c#<sup>2</sup></a><a href="/tags/java/" style="font-size: 0.88rem;">java<sup>4</sup></a><a href="/tags/python/" style="font-size: 0.88rem;">python<sup>5</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 0.88rem;">事务<sup>1</sup></a><a href="/tags/%E4%BA%8C%E6%AC%A1%E5%9E%8B/" style="font-size: 0.88rem;">二次型<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E3%80%82/" style="font-size: 0.88rem;">你的名字。<sup>3</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">你的名字同名小说<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%A4%96%E4%BC%A0%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">你的名字外传小说<sup>1</sup></a><a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size: 0.88rem;">写作<sup>4</sup></a><a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 0.88rem;">包管理<sup>1</sup></a><a href="/tags/%E5%8D%B7%E7%A7%AF%E5%85%AC%E5%BC%8F/" style="font-size: 0.88rem;">卷积公式<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90/" style="font-size: 0.88rem;">天气之子<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">天气之子同名小说<sup>1</sup></a><a href="/tags/%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">小说<sup>2</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 0.88rem;">操作系统<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" style="font-size: 0.88rem;">数据校验<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" style="font-size: 0.88rem;">数据链路层<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 0.88rem;">概率论<sup>2</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 0.88rem;">概率论与数理统计<sup>7</sup></a><a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 0.88rem;">汇编<sup>9</sup></a><a href="/tags/%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80/" style="font-size: 0.88rem;">泰勒展开<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/" style="font-size: 0.88rem;">物理层<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%80%BC/" style="font-size: 0.88rem;">特征值<sup>2</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F/" style="font-size: 0.88rem;">特征向量<sup>2</sup></a><a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 0.88rem;">线性代数<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" style="font-size: 0.88rem;">网络体系结构<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" style="font-size: 0.88rem;">网络层<sup>2</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 0.88rem;">英语<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95/" style="font-size: 0.88rem;">英语语法<sup>24</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 0.88rem;">计算机组成原理<sup>6</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 0.88rem;">计算机网络<sup>5</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 0.88rem;">语法<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/" style="font-size: 0.88rem;">高等代数<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" style="font-size: 0.88rem;">高等数学<sup>21</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script async src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+}</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/sparkle520" title="sparkle">sparkle</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">120</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">74</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">10</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/sparkle520?tab=repositories" title="github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="github"/><span class="back-menu-item-text">github</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/408/" style="font-size: 0.88rem;">408<sup>25</sup></a><a href="/tags/AOP/" style="font-size: 0.88rem;">AOP<sup>1</sup></a><a href="/tags/Deep-Learning/" style="font-size: 0.88rem;">Deep Learning<sup>1</sup></a><a href="/tags/IoC/" style="font-size: 0.88rem;">IoC<sup>1</sup></a><a href="/tags/JSR303/" style="font-size: 0.88rem;">JSR303<sup>1</sup></a><a href="/tags/Matplotlib/" style="font-size: 0.88rem;">Matplotlib<sup>3</sup></a><a href="/tags/c/" style="font-size: 0.88rem;">c#<sup>2</sup></a><a href="/tags/java/" style="font-size: 0.88rem;">java<sup>4</sup></a><a href="/tags/python/" style="font-size: 0.88rem;">python<sup>5</sup></a><a href="/tags/%E4%BA%8B%E5%8A%A1/" style="font-size: 0.88rem;">事务<sup>1</sup></a><a href="/tags/%E4%BA%8C%E6%AC%A1%E5%9E%8B/" style="font-size: 0.88rem;">二次型<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E3%80%82/" style="font-size: 0.88rem;">你的名字。<sup>3</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">你的名字同名小说<sup>1</sup></a><a href="/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E5%A4%96%E4%BC%A0%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">你的名字外传小说<sup>1</sup></a><a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size: 0.88rem;">写作<sup>4</sup></a><a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 0.88rem;">包管理<sup>1</sup></a><a href="/tags/%E5%8D%B7%E7%A7%AF%E5%85%AC%E5%BC%8F/" style="font-size: 0.88rem;">卷积公式<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90/" style="font-size: 0.88rem;">天气之子<sup>1</sup></a><a href="/tags/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90%E5%90%8C%E5%90%8D%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">天气之子同名小说<sup>1</sup></a><a href="/tags/%E5%B0%8F%E8%AF%B4/" style="font-size: 0.88rem;">小说<sup>2</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 0.88rem;">操作系统<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" style="font-size: 0.88rem;">数据校验<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" style="font-size: 0.88rem;">数据链路层<sup>1</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 0.88rem;">概率论<sup>2</sup></a><a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 0.88rem;">概率论与数理统计<sup>7</sup></a><a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 0.88rem;">汇编<sup>9</sup></a><a href="/tags/%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80/" style="font-size: 0.88rem;">泰勒展开<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/" style="font-size: 0.88rem;">物理层<sup>1</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%80%BC/" style="font-size: 0.88rem;">特征值<sup>2</sup></a><a href="/tags/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F/" style="font-size: 0.88rem;">特征向量<sup>2</sup></a><a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 0.88rem;">线性代数<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" style="font-size: 0.88rem;">网络体系结构<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" style="font-size: 0.88rem;">网络层<sup>2</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 0.88rem;">英语<sup>1</sup></a><a href="/tags/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%95/" style="font-size: 0.88rem;">英语语法<sup>24</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 0.88rem;">计算机组成原理<sup>6</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 0.88rem;">计算机网络<sup>7</sup></a><a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 0.88rem;">语法<sup>1</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0/" style="font-size: 0.88rem;">高等代数<sup>2</sup></a><a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" style="font-size: 0.88rem;">高等数学<sup>22</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script async src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
   window.MathJax = {
     tex: {
       inlineMath: [['$', '$'], ['\\(', '\\)']],
